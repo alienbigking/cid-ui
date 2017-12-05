@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-breadcrumb separator="/" separator-class="separatorClass">
-            <el-breadcrumb-item><i class="el-icon-star-off" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
+            <el-breadcrumb-item><i class="home" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
             <el-breadcrumb-item>活动管理</el-breadcrumb-item>
             <el-breadcrumb-item>活动列表</el-breadcrumb-item>
             <el-breadcrumb-item>活动详情</el-breadcrumb-item>
@@ -18,6 +18,14 @@ export default {
 }
 </script>
 <style lang="scss">
+.home{
+    background: url('../../assets/images/home.png') no-repeat;
+    background-size: cover;
+    display: inline-block;
+    height: 14px;
+    width: 14px;
+    background-position: center;
+}
 .el-breadcrumb{
     height: 40px;
     background: #fff;

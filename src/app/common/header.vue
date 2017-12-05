@@ -6,8 +6,8 @@
             <i class="collaspse"></i>
         </div>
         <ul class="header-right">
-            <li><router-link to="/index"><i class="el-icon-setting"></i></router-link></li>
-            <li><el-badge is-dot><router-link to="/index"><i class="el-icon-message"></i></router-link></el-badge></li>
+            <li><router-link to="/index"><i class="setting"></i></router-link></li>
+            <li><el-badge is-dot><router-link to="/index"><i class="message"></i></router-link></el-badge></li>
             <li><router-link to="/index"><img src="../../assets/images/avatar.png" alt="">    </router-link></li>
             <li><router-link to="/index">管理员</router-link></li>
             <li><router-link to="/index"><i class="power"></i></router-link></li>
@@ -33,14 +33,7 @@ export default {
     display: block;
     cursor: pointer;
 }
-.power{
-    background: url('../../assets/images/power.png') no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 18px;
-    width: 18px;
-    display: block;
-}
+
 .header-left{
     display: flex;
     align-items: center;
@@ -64,14 +57,29 @@ export default {
         margin-left: 20px;
         i{
             display: block;
-            height: 20px;
-            width: 20px;
-            font-size: 20px;
+            height: 16px;
+            width: 16px;
+            font-size: 16px;
             // background: #fff;
         }
         a{
             color: #fff;
             font-size: 12px;
+        }
+        .setting{
+            background: url('../../assets/images/setting.png') no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .message{
+            background: url('../../assets/images/message.png') no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+        .power{
+            background: url('../../assets/images/power.png') no-repeat;
+            background-size: cover;
+            background-position: center;
         }
     }
 }
