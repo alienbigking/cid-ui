@@ -14,10 +14,10 @@
 	 2. 其他文件夹--按功能划分
 
 ### 项目运行
- 3. 克隆项目到本地--- git clone 项目地址
- 4. 进入项目文件夹--- cd 项目文件夹
- 5. 安装依赖---  npm install （如果报错，请试一下cnpm install）
- 6. 项目运行--- npm run dev
+ 1. 克隆项目到本地--- git clone 项目地址
+ 2. 进入项目文件夹--- cd 项目文件夹
+ 3. 安装依赖---  npm install （如果报错，请试一下cnpm install）
+ 4. 项目运行--- npm run dev
 
 ### 注意事项
  1.  npm run build前请确保项目代码中没有console.log(注释掉就行)
