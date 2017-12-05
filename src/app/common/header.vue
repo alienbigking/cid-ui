@@ -3,14 +3,14 @@
         <div class="header-left">
             <i class="logo_img"></i>
             <span class="fs-16">罪犯数据库</span>
-            <i class="el-icon-menu"></i>
+            <i class="collaspse"></i>
         </div>
         <ul class="header-right">
             <li><router-link to="/index"><i class="el-icon-setting"></i></router-link></li>
             <li><el-badge is-dot><router-link to="/index"><i class="el-icon-message"></i></router-link></el-badge></li>
             <li><router-link to="/index"><img src="../../assets/images/avatar.png" alt="">    </router-link></li>
             <li><router-link to="/index">管理员</router-link></li>
-            <li><router-link to="/index"><i class="el-icon-remove-outline"></i></router-link></li>
+            <li><router-link to="/index"><i class="power"></i></router-link></li>
         </ul>
     </el-header>
 </template>
@@ -24,6 +24,23 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.collaspse{
+    background: url('../../assets/images/menu.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 12px;
+    width: 16px;
+    display: block;
+    cursor: pointer;
+}
+.power{
+    background: url('../../assets/images/power.png') no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 18px;
+    width: 18px;
+    display: block;
+}
 .header-left{
     display: flex;
     align-items: center;

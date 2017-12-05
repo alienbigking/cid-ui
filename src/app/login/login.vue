@@ -1,7 +1,7 @@
 <template>
-    <header>
+    <div>
         this is login
-    </header>
+    </div>
 </template>
 <script>
 export default {

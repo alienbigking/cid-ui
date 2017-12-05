@@ -40,6 +40,11 @@ let routes = [
                         path: '/punishmentExcution/jianxing/add',
                         name: '新增监区',
                         component: resolve => require(['@/app/punishment-excution/jianxing/add'], resolve)
+                    },
+                    {
+                        path: '/punishmentExcution/jianxing/add2',
+                        name: '新增监区2',
+                        component: resolve => require(['@/app/punishment-excution/jianxing/add'], resolve)
                     }
                 ]
             }
