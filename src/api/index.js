@@ -2,6 +2,7 @@ import axios from 'axios'
 import resCode from './resCode'
 
 let state = ''
+const baseUrl = '127.0.0.1'
 
 const handleApiErr = (res) => {
     let prev = resCode[res.status === 200 ? res.data.code : res.status]
@@ -35,8 +36,14 @@ axios.interceptors.response.use(
 )
 
 export const apiList = {
-    api: params => {
+    otherType: params => { // 其他请求方式
         let str = params.method === 'get' ? 'params' : 'data'
         return axios({ method: params.method, url: `${ params.url }`, [str]: params.options }).then(res => res)
+    },
+    testGet: params => { // get请求
+        return axios.get(`${ baseUrl }/testUrl`, { params: params }).then(res => res)
+    },
+    testPost: params => { // post请求
+        return axios.post(`${ baseUrl }/testUrl`, params).then(res => res)
     }
 }

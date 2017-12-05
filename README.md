@@ -1,13 +1,13 @@
 ### 项目说明
 
  1. src目录结构说明：
-      1. api--接口文件以及错误码处理
-	  2. app--项目源代码
-	  3.  assets--静态资源（包括图片，样式）
-	  4. components--公共组件（可跨项目）
-	  5. router--路由文件（一级路由component是main，二级路由component是third）
-	  6. store--vuex文件夹
-	  7. utils--工具类
+     1.api--接口文件以及错误码处理
+     2.app--项目源代码
+     3.assets--静态资源（包括图片，样式）
+     4.components--公共组件（可跨项目）
+     5.router--路由文件（一级路由component是main，二级路由component是third）
+     6.store--vuex文件夹
+     7.utils--工具类
 
  2. app目录结构说明
 	 1. common--页面公共组件（页头、页尾、侧边栏、面包屑等）
