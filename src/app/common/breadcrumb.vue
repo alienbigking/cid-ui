@@ -2,9 +2,7 @@
     <div>
         <el-breadcrumb separator="/" separator-class="separatorClass">
             <el-breadcrumb-item><i class="home" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
-            <el-breadcrumb-item>活动管理</el-breadcrumb-item>
-            <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-            <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+            <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" v-if="item.name">{{ item.name }}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 </template>
@@ -12,8 +10,22 @@
 export default {
     data() {
         return {
-            // loginState: true
+            breadcrumbs: []
         }
+    },
+    methods: {
+        render() {
+            let breadcrumbs = this.$route.matched
+            this.breadcrumbs = breadcrumbs
+        }
+    },
+    watch: {
+        $route(to, from) {
+            this.breadcrumbs = to.matched
+        }
+    },
+    mounted() {
+        this.render()
     }
 }
 </script>

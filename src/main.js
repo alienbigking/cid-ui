@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import routes from './router'
 import Router from 'vue-router'
+import store from './store/'
 import ElementUI from 'element-ui'
 import components from './components'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -37,6 +38,7 @@ router.beforeEach((to, from, next) => {
 new Vue({
     el: '#app',
     router,
+    store,
     template: '<App/>',
     components: { App }
 })

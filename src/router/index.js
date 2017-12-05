@@ -11,7 +11,7 @@ let routes = [
             {
                 path: '/',
                 name: '登录',
-                component: resolve => require(['@/app/login/login'], resolve),
+                component: resolve => require(['@/app/user/login'], resolve),
                 alias: '/index'
             }
         ]
@@ -21,7 +21,7 @@ let routes = [
         // hidden: true
         component: main,
         name: '刑罚执行',
-        icon: 'menu-icon el-icon-setting',
+        icon: 'menu-icon setting',
         children: [
             {
                 path: '/punishmentExcution/reciver-management',
@@ -37,16 +37,37 @@ let routes = [
                 component: third,
                 children: [
                     {
-                        path: '/punishmentExcution/jianxing/add',
-                        name: '新增监区',
-                        component: resolve => require(['@/app/punishment-excution/jianxing/add'], resolve)
+                        path: '/punishmentExcution/jianxing/add1',
+                        name: '刑罚变动',
+                        component: resolve => require(['@/app/test/test'], resolve)
                     },
                     {
                         path: '/punishmentExcution/jianxing/add2',
-                        name: '新增监区2',
-                        component: resolve => require(['@/app/punishment-excution/jianxing/add'], resolve)
+                        name: '监区办理',
+                        component: resolve => require(['@/app/test/test'], resolve)
+                    },
+                    {
+                        path: '/punishmentExcution/jianxing/add3',
+                        name: '其他处理',
+                        component: resolve => require(['@/app/test/test'], resolve)
                     }
                 ]
+            },
+            {
+                path: '/punishmentExcution/outer',
+                name: '监外执行',
+                meta: {
+                    deep: true
+                },
+                component: resolve => require(['@/app/test/test'], resolve)
+            },
+            {
+                path: '/punishmentExcution/goout',
+                name: '出监管理',
+                meta: {
+                    deep: true
+                },
+                component: resolve => require(['@/app/test/test'], resolve)
             }
         ]
     },
@@ -54,28 +75,33 @@ let routes = [
         path: '/punishmentExcution1',
         // hidden: true
         component: main,
-        name: '刑罚执行1',
-        icon: 'menu-icon el-icon-setting',
+        name: '办公助理',
+        icon: 'menu-icon setting',
         children: [
             {
-                path: '/punishmentExcution/reciver-management1',
+                path: '/punishmentExcution1/reciver-management1',
                 name: '收监管理1',
                 meta: {
                     deep: true
                 },
-                component: resolve => require(['@/app/punishment-excution/reciver-management'], resolve)
-            },
+                component: resolve => require(['@/app/test/test'], resolve)
+            }
+        ]
+    },
+    {
+        path: '/punishmentExcution2',
+        // hidden: true
+        component: main,
+        name: '档案管理',
+        icon: 'menu-icon setting',
+        children: [
             {
-                path: '/punishmentExcution/jianxing1',
-                name: '减刑假释1',
-                component: third,
-                children: [
-                    {
-                        path: '/punishmentExcution/jianxing/add1',
-                        name: '新增监区1',
-                        component: resolve => require(['@/app/punishment-excution/jianxing/add'], resolve)
-                    }
-                ]
+                path: '/punishmentExcution2/reciver-management1',
+                name: '收监管理2',
+                meta: {
+                    deep: true
+                },
+                component: resolve => require(['@/app/test/test'], resolve)
             }
         ]
     }

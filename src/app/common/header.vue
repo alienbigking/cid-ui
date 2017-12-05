@@ -1,9 +1,9 @@
 <template>
-    <el-header style="height: 46px;">
+    <el-header style="height: 47px;">
         <div class="header-left">
             <i class="logo_img"></i>
             <span class="fs-16">罪犯数据库</span>
-            <i class="collaspse"></i>
+            <i class="collaspse" @click="handleCollapse"></i>
         </div>
         <ul class="header-right">
             <li><router-link to="/index"><i class="setting"></i></router-link></li>
@@ -15,11 +15,22 @@
     </el-header>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 export default {
     data() {
         return {
             // loginState: true
         }
+    },
+    computed: {
+        ...mapGetters([
+            'collaspsed'
+        ])
+    },
+    methods: {
+        ...mapActions([
+            'handleCollapse'
+        ])
     }
 }
 </script>
@@ -65,11 +76,6 @@ export default {
         a{
             color: #fff;
             font-size: 12px;
-        }
-        .setting{
-            background: url('../../assets/images/setting.png') no-repeat;
-            background-size: cover;
-            background-position: center;
         }
         .message{
             background: url('../../assets/images/message.png') no-repeat;
