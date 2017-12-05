@@ -12,6 +12,7 @@ const handleApiErr = (res) => {
 
 axios.interceptors.request.use(
     config => {
+        console.log(config)
         state = history.state
         return config
     },

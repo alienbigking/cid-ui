@@ -22,7 +22,7 @@ import vHeader from './header'
 import vFooter from './footer'
 import vAside from './sidebar'
 import vBreadcrumb from './breadcrumb'
-import { apiList as api } from '../api/index'
+import { apiList as api } from '@/api/'
 export default {
     data() {
         return {
