@@ -8,7 +8,7 @@
         <ul class="header-right">
             <li><router-link to="/index"><i class="setting"></i></router-link></li>
             <li><el-badge is-dot><router-link to="/index"><i class="message"></i></router-link></el-badge></li>
-            <li><router-link to="/index"><img src="../../assets/images/avatar.png" alt="">    </router-link></li>
+            <li><router-link to="/index"><img src="../../assets/images/avatar.png" alt=""></router-link></li>
             <li><router-link to="/index">管理员</router-link></li>
             <li><router-link to="/index"><i class="power"></i></router-link></li>
         </ul>

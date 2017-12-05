@@ -61,6 +61,9 @@ export default {
         .el-menu-item{
             color: #d1d1d1;
         }
+        .is-active{
+            color: #fff;
+        }
     }
     .first{
         border-top: 1px solid #303b40;
@@ -68,21 +71,15 @@ export default {
             background: #29B0A3;
             color: #fff;
             &>.el-submenu__title:hover{
-                background: #29B0A3;
+                background: transparent;
             }
         }
     }
     .second{
         background: #202a2f;
-        &.is-active{
-            color: #409EFF;
-        }
     }
     .third{
         background: #13191c;
-        &.is-active{
-            color: #409EFF;
-        }
     }
 }
 .avatar{
