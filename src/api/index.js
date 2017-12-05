@@ -2,7 +2,7 @@ import axios from 'axios'
 import resCode from './resCode'
 
 let state = ''
-const baseUrl = '127.0.0.1'
+const baseUrl = '/baseUrl'
 
 const handleApiErr = (res) => {
     let prev = resCode[res.status === 200 ? res.data.code : res.status]
@@ -13,7 +13,6 @@ const handleApiErr = (res) => {
 
 axios.interceptors.request.use(
     config => {
-        console.log(config)
         state = history.state
         return config
     },

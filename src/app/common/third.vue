@@ -1,7 +1,7 @@
 <template>
     <div>
         <transition name="router-fade" mode="out-in">
-            <router-view></router-view>
+            <router-view :api="api"></router-view>
         </transition>
     </div>
 </template>
@@ -9,9 +9,9 @@
 export default {
     data() {
         return {
-            // loginState: true
         }
-    }
+    },
+    props: ['api']
 }
 </script>
 <style lang="scss" scoped>

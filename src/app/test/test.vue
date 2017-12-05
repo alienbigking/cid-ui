@@ -26,6 +26,9 @@ export default {
     methods: {
         render() {
             // console.log(123)
+            this.api.testGet().then(res => {
+                console.log(res)
+            })
         }
     },
     mounted() {
