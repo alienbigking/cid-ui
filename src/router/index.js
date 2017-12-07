@@ -10,9 +10,30 @@ let routes = [
         children: [
             {
                 path: '/',
-                name: '登录',
+                name: '主页',
                 component: resolve => require(['@/app/user/login'], resolve),
                 alias: '/index'
+            },
+            {
+                path: '/login',
+                name: '登录',
+                meta: {
+                    noSide: true
+                },
+                component: resolve => require(['@/app/user/login'], resolve)
+            }
+        ]
+    },
+    {
+        path: '/user',
+        component: main,
+        hidden: true,
+        name: '用户',
+        children: [
+            {
+                path: '/user/pwd_modification',
+                name: '修改密码',
+                component: resolve => require(['@/app/user/pwd_modification'], resolve)
             }
         ]
     },

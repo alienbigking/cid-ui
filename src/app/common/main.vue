@@ -3,15 +3,15 @@
         <el-container class="flex-column">
             <v-header></v-header>
             <el-container>
-                <v-aside></v-aside>
+                <v-aside v-if="!$route.meta||!$route.meta.noSide"></v-aside>
                 <el-container class="flex-column">
-                    <v-breadcrumb></v-breadcrumb>
-                    <el-main>
+                    <v-breadcrumb v-if="!$route.meta||!$route.meta.noSide"></v-breadcrumb>
+                    <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
                         <transition name="router-fade" mode="out-in">
                             <router-view :api="api"></router-view>
                         </transition>
                     </el-main>
-                    <v-footer></v-footer>
+                    <v-footer v-if="!$route.meta||!$route.meta.noSide"></v-footer>
                 </el-container>
             </el-container>
         </el-container>
