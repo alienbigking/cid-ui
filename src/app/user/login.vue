@@ -122,7 +122,7 @@ export default {
                 .form-input-submit{
                     margin:10px 0 0 0;
                     button{
-                        width:292px;
+                        width:291px;
                         background-color:#516671;
                     }
                 }
