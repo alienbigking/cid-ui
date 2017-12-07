@@ -9,7 +9,7 @@ module.exports = {
         // Paths
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
-        port: 1234, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+        port: 7777, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         proxyTable: {
             '/baseUrl': {
                 target: '127.0.1.1',

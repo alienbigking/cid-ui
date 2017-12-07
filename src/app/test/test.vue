@@ -10,7 +10,10 @@
                     // 或者在src/api/index文件中添加接口，post请求和get请求已写好示例，其他请求可以自行封装也可调用otherType，参数中加入配置即可
                 })
             </pre>
+            <el-input v-model="value" @change="handleChange"></el-input>
+
         </div>
+        <my-form :formItems="formModel"></my-form>
     </div>
 </template>
 <script>
@@ -18,20 +21,37 @@ import vText from './components/text'
 export default {
     data() {
         return {
+            value: '',
+            formModel: {
+                name: {
+                    type: 'input',
+                    label: '姓名',
+                    rules: ['required', 'validateContent']
+                },
+                phone: {
+                    type: 'input',
+                    value: 'haha',
+                    label: '联系方式'
+                }
+            }
             // loginState: true
         }
     },
     props: ['api'],
     components: { vText },
     methods: {
+        handleChange(e) {
+            console.log(e)
+        },
         render() {
             // console.log(123)
-            this.api.testGet().then(res => {
+            this.api.testGet({ id: 1 }).then(res => {
                 console.log(res)
             })
         }
     },
     mounted() {
+        // console.log(this.api)
         this.render()
     }
 }

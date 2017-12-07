@@ -9,7 +9,8 @@ export default {
     hideRemind: ({ commit }) => {
         commit(types.HIDEREMIND)
     },
-    handleCollapse: ({ commit }) => {
+    handleCollapse: ({ commit }, aaa) => {
+        console.log(aaa, arguments, commit)
         commit(types.HANDLECOLLAPSE)
     }
 }

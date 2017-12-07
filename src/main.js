@@ -14,7 +14,8 @@ Vue.use(Router)
 Vue.use(ElementUI)
 
 Object.keys(components).forEach(item => {
-    // fff
+    let name = item.replace(/(\w)/, (v) => v.toUpperCase())
+    Vue.component(`my${ name }`, components[item])
 })
 window.router = new Router({
     routes,
