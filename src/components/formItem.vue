@@ -9,6 +9,7 @@
                 <el-input
                     :placeholder="'请输入'+options.label"
                     :type="options.type"
+                    :disabled="options.disabled"
                     v-model="options.value"
                     @change="handleChange(attribute, $event)" auto-complete="off">
                         <i slot="prefix" v-if="options.prefix" :class="options.prefix"></i>
@@ -50,21 +51,17 @@ export default {
 <style lang="scss" scoped>
 .commonForm{
     /deep/ .el-form-item{
-        width: 100%;
+        // width: 100%;
+        // min-width: 360px;
+        /deep/ .el-form-item__label{
+            color: #333;
+        }
         &.is-error /deep/ .el-input__inner{
             border-color: #d8dce5;
         }
         /deep/ .el-input__inner{
             padding: 0 10px;
             height: 36px;
-        }
-        /deep/ .el-form-item__content{
-            width: calc(100% - 120px);
-        }
-        &.noLable{
-            .el-form-item__content{
-                width: 100%;
-            }
         }
         /deep/ .el-input__prefix, .el-input__suffix{
             left: 0;
@@ -75,6 +72,10 @@ export default {
         }
         .el-input--prefix .el-input__inner{
             padding-left: 30px;
+        }
+        /deep/ .el-input.is-disabled .el-input__inner{
+            color: #999;
+            background: #F2F2F2;
         }
     }
 }

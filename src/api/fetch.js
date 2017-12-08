@@ -38,15 +38,27 @@ class http {
         const header = this.setHeader()
         const params = {
             method: method,
-            baseURL: '127.0.0.1',
+            // baseURL: 'http://10.10.10.140:8080',
+            baseURL: 'http://10.10.10.116:8080',
             headers: header,
             withCredentials: true,
-            [options]: data
+            // [options]: data,
+            url: url
         }
+        params[options] = data
+        params.auth = {
+            username: 'cid',
+            password: '25d5e2e9b0ed47bbb9d4b82f4abc8c09'
+        }
+        console.log(params)
         return axios(params).then(res => res)
     }
     static setHeader() {
-        const header = {}
+        const header = { 'Content-Type': 'application/x-www-form-urlencoded' }
+        if (sessionStorage.getItem('access_token')) {
+            header.common = header.common || {}
+            header.common['Authorization'] = `Bearer ${ sessionStorage.getItem('access_token') }`
+        }
         return header
     }
     static get(url, data) {

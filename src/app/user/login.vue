@@ -14,25 +14,36 @@ export default {
     data() {
         return {
             formModel: {
-                password: {
-                    type: 'password',
+                username: {
+                    type: 'input',
                     label: '用户名',
                     prefix: 'user',
-                    rules: ['required', '6-']
+                    rules: ['required']
                 },
-                checkpassword: {
+                password: {
                     type: 'password',
-                    label: '确认密码',
+                    label: '密码',
                     prefix: 'lock',
-                    rules: ['required', '6-', 'checkSame']
+                    rules: ['required', '6-']
                 }
             }
         }
     },
+    props: ['api'],
     methods: {
         onSubmit(e) {
             if (!e) return
-            console.log(e)
+            // console.log(e)
+            let params = new URLSearchParams()
+            Object.keys(e).forEach(key => {
+                params.append(key, e[key])
+            })
+            params.append('grant_type', 'password')
+            this.api.login(params).then(res => {
+                if (!res) return
+                sessionStorage.setItem('access_token', res.access_token)
+                sessionStorage.setItem('refresh_token', res.refresh_token)
+            })
         }
     }
 }

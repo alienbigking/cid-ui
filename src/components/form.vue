@@ -1,12 +1,13 @@
 <template>
-    <el-form :ref="name" v-if="flag" :inline="inline" :rules="rules" :model="formData" :label-width="labelWidth">
+    <el-form :ref="name" v-if="flag" :inline="inline" :rules="rules" :model="formData" :label-width="labelWidth" :label-position="labelPosition" :class="formClass">
         <formItem @on-Change="handleChange" v-for="(item, key, index) in formItems" :key="index" :options="item" :attribute="key">
         </formItem>
-        <el-form-item style="display: block;" :label-width="labelWidth">
-            <span slot="label"></span>
+        <div class="el-form-item el-form-item-div">
+            <slot name="btnBefore"></slot>
             <el-button type="primary" @click="onSubmit(name)" :class="buttonClass">{{ btnText }}</el-button>
-            <el-button v-if="showCancel">取消</el-button>
-        </el-form-item>
+            <el-button v-if="showCancel" @click="onCancel(name)">{{ cancelText }}</el-button>
+            <el-button v-if="showRest" @click="onRest(name)">重置</el-button>
+        </div>
     </el-form>
 </template>
 <script>
@@ -35,7 +36,20 @@ let limit = value => {
 }
 export default {
     props: {
+        cancelText: {
+            type: String,
+            default: '取消'
+        },
+        formClass: String,
+        labelPosition: {
+            type: String,
+            default: 'right'
+        },
         showCancel: {
+            type: Boolean,
+            default: false
+        },
+        showRest: {
             type: Boolean,
             default: false
         },
@@ -137,6 +151,13 @@ export default {
                     this.$emit('on-submit', this.formData)
                 }
             })
+        },
+        onCancel(formName) {
+            this.$refs[formName].clearValidate()
+            this.$emit('on-cancel')
+        },
+        onRest(formName) {
+            this.$refs[formName].resetFields()
         }
     },
     mounted() {
@@ -145,4 +166,16 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.el-form-item-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 0;
+    /deep/ button{
+        height: 36px;
+        font-size: 12px;
+        margin-left: 0;
+        margin-right: 22px;
+    }
+}
 </style>

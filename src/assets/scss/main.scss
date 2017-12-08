@@ -50,27 +50,38 @@
 .fs-16{
     font-size: 16px;
 }
-
-
-
-
-%mt1{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right:10px;
-    top: 50%;
-    transform: translateY(-50%);
+.labelInTop{
+    .commonForm{
+        .el-form-item__label{
+            display: block;
+            line-height: 12px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .el-form-item .el-form-item__content{
+            width: 100%;
+        }
+    }
 }
-.form-input-middle .eye-open{
-    @extend %mt1;
-    background: url(../../assets/images/eye-open.png) 0 0 no-repeat;
-    background-size: 20px 20px;
-
-}
-.eye-close{
-    @extend %mt1;
-    background: url(../../assets/images/eye-close.png) 0 0 no-repeat;
-    background-size: 20px 20px;
+.commonForm{
+    .el-input__inner{
+        font-size: 12px;
+    }
+    .el-form-item{
+        &.w50{
+            margin-right: 0;
+            padding-right: 20px;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        &.noLable{
+            width: 100%;
+            .el-form-item__content{
+                width: 100%;
+            }
+        }
+    }
+    .el-form-item__content{
+        width: calc(100% - 120px);
+    }
 }
