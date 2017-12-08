@@ -4,15 +4,42 @@
         </formItem>
         <el-form-item style="display: block;" :label-width="labelWidth">
             <span slot="label"></span>
-            <el-button type="primary" @click="onSubmit(name)">{{ btnText }}</el-button>
-            <el-button>取消</el-button>
+            <el-button type="primary" @click="onSubmit(name)" :class="buttonClass">{{ btnText }}</el-button>
+            <el-button v-if="showCancel">取消</el-button>
         </el-form-item>
     </el-form>
 </template>
 <script>
 import formItem from './formItem'
+let limit = value => {
+    let min = parseInt(value.split('-')[0]),
+        max = parseInt(value.split('-')[1]),
+        message
+    if (min === max) {
+        message = `请输入${ min }个字符`
+    }
+    else if (min && max) {
+        message = `请输入${ min }到${ max }个字符`
+    }
+    else if (min && !max) {
+        message = `请输入${ min }个以上字符`
+    }
+    else if (!min && max) {
+        message = `请输入${ max }个以下字符`
+    }
+    return {
+        min: min,
+        max: max,
+        message: message
+    }
+}
 export default {
     props: {
+        showCancel: {
+            type: Boolean,
+            default: false
+        },
+        buttonClass: String,
         formItems: Object,
         name: {
             type: String,
@@ -75,11 +102,14 @@ export default {
         addRules(prop, rules, item) {
             let arr = [], setting = {}
             rules.forEach((rule, index) => {
-                setting = {
-                    trigger: 'change blur',
-                    message: this.message[rule].message.replace('*', item.label)
+                if (rule.indexOf('-') > -1) arr.push(limit(rule))
+                else {
+                    setting = {
+                        trigger: 'change blur',
+                        message: this.message[rule].message.replace('*', item.label)
+                    }
+                    arr.push(Object.assign({}, this.message[rule], setting))
                 }
-                arr.push(Object.assign({}, this.message[rule], setting))
             })
             return arr
         },

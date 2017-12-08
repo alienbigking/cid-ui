@@ -1,9 +1,21 @@
 <template>
     <span class="commonForm">
-        <el-form-item :class="options.class" :label="options.label" :prop="attribute" :required="options.rules && options.rules.indexOf('required') > -1">
+        <el-form-item
+            :class="((options.prepend || options.prefix) ? 'noLable' : '') + (options.class ? options.class : '')"
+            :prop="attribute"
+            :required="options.rules && options.rules.indexOf('required') > -1"
+            :label="(options.prepend || options.prefix) ? '' : options.label">
             <template v-if="options.type === 'input' || options.type === 'password'">
-                <el-input :type="options.type" v-model="options.value" @change="handleChange(attribute, $event)" auto-complete="off"></el-input>
-                <span v-if="options.other" :class="options.other.class" @click="options.other.func"></span>
+                <el-input
+                    :placeholder="'请输入'+options.label"
+                    :type="options.type"
+                    v-model="options.value"
+                    @change="handleChange(attribute, $event)" auto-complete="off">
+                        <i slot="prefix" v-if="options.prefix" :class="options.prefix"></i>
+                        <i slot="prepend" v-if="options.prepend" :class="options.prepend"></i>
+                        <i slot="suffix" v-if="options.suffix" :class="options.suffix.class" @click="options.suffix.func"></i>
+                        <i slot="append" v-if="options.append" :class="options.append.class" @click="options.append.func"></i>
+                </el-input>
             </template>
             <!-- <template v-if="options.type === 'password'">
                 <el-input type="password" v-model="options.value" @change="handleChange(attribute, $event)"></el-input>
@@ -38,7 +50,7 @@ export default {
 <style lang="scss" scoped>
 .commonForm{
     /deep/ .el-form-item{
-        width: 480px;
+        width: 100%;
         &.is-error /deep/ .el-input__inner{
             border-color: #d8dce5;
         }
@@ -48,6 +60,21 @@ export default {
         }
         /deep/ .el-form-item__content{
             width: calc(100% - 120px);
+        }
+        &.noLable{
+            .el-form-item__content{
+                width: 100%;
+            }
+        }
+        /deep/ .el-input__prefix, .el-input__suffix{
+            left: 0;
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .el-input--prefix .el-input__inner{
+            padding-left: 30px;
         }
     }
 }

@@ -1,23 +1,8 @@
 <template>
-    <div id="login" :span="24">
+    <div class="login" :span="24">
         <div class="login-box" :span="6">
             <div class="login-logo"></div>
-            <el-form class="login-input" :model="ruleForm" :rules="rules" ref="ruleForm">
-                <el-form-item class="form-input-user" prop="userName">
-                    <el-input type="text" class="el-input-inner" placeholder="请输入用户名" v-model="ruleForm.userName" />
-                    <span class="user"></span>
-                </el-form-item>
-                <el-form-item class="form-input-pwd" prop="password">
-                    <el-input type="password" class="el-input-inner" placeholder="请输入密码" v-model="ruleForm.password" />
-                    <span class="lock"></span>
-                </el-form-item>
-                <el-form-item class="form-input-remember">
-                    <el-checkbox label="记住我"></el-checkbox>
-                </el-form-item>
-                 <el-form-item class="form-input-submit">
-                    <el-button type="info"  @click="submitForm('ruleForm')">登录</el-button>
-                </el-form-item>    
-            </el-form>
+            <my-form class="login-input" :inline="false" :formItems="formModel" @on-submit="onSubmit" labelWidth="0" btnText="登录" buttonClass="form-input-submit"></my-form>
         </div>
         <div class="login-foot">
             <span>Copyright &copy; 2006-2017 罪犯数据库</span>
@@ -28,59 +13,49 @@
 export default {
     data() {
         return {
-            ruleForm: {
-                userName: '',
-                password: ''
-            },
-            rules: {
-                userName: [
-                    { required: true, message: '用户名不能为空', trigger: 'blur' }
-                ],
-                password: [
-                    { required: true, message: '密码不能为空', trigger: 'blur' },
-                    { min: 6, message: '密码必须大于6位', trigger: 'blur' }
-                ]
+            formModel: {
+                userName: {
+                    type: 'input',
+                    label: '用户名',
+                    prefix: 'user',
+                    rules: ['required']
+                },
+                password: {
+                    type: 'password',
+                    label: '密码',
+                    prefix: 'lock',
+                    rules: ['required', '6-']
+                }
             }
         }
     },
     methods: {
-        submitForm(formName) {
-            this.$refs[formName].validate((valid) => {
-                if (valid) {
-                    alert('submit!')
-                }
-                else {
-                    alert('error submit!!')
-                    return false
-                }
-            })
+        onSubmit(e) {
+            if (!e) return
+            console.log(e)
         }
     }
 }
 </script>
 <style lang="scss" scoped>
     %mt1{
-        display: inline-block;
+        display: block;
         width: 16px;
         height: 18px;
-        position: absolute;
-        left:10px;
-        top: 50%;
-        transform: translateY(-50%);
     }
-    .user{
-        @extend %mt1;
-        background: url(../../assets/images/user.png) 0 0 no-repeat;
-        background-size: 16px 18px;
-    }
-    .lock{
-        @extend %mt1;
-        background: url(../../assets/images/lock.png) 0 0 no-repeat;
-        background-size: 12px 18px;
-    }
-    #login{
+    .el-main>.login{
         background:url(../../assets/images/background.png) 0 0 no-repeat;
         background-size:cover;
+        /deep/ .user{
+            @extend %mt1;
+            background: url(../../assets/images/user.png) 0 0 no-repeat;
+            background-size: 16px 18px;
+        }
+        /deep/ .lock{
+            @extend %mt1;
+            background: url(../../assets/images/lock.png) 0 0 no-repeat;
+            background-size: 12px 18px;
+        }
         .login-box{
             width: 322px;
             height: 362px;
@@ -119,12 +94,12 @@ export default {
                     font-size:14px;
                     color:#999;
                 }
-                .form-input-submit{
+                /deep/ .form-input-submit{
                     margin:10px 0 0 0;
-                    button{
+                    // button{
                         width:292px;
                         background-color:#516671;
-                    }
+                    // }
                 }
             }
         }
@@ -137,6 +112,5 @@ export default {
             left:50%;
             transform: translateX(-50%);
         }
-    }       
+    }
 </style>
-
