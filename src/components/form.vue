@@ -86,7 +86,7 @@ export default {
         onSubmit(formName) {
             this.$refs[formName].validate((valid) => {
                 if (!valid) {
-                    console.log('not submit')
+                    this.$emit('on-submit', false)
                 }
                 else {
                     this.$emit('on-submit', this.formData)

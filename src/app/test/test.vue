@@ -10,14 +10,13 @@
                     // 或者在src/api/index文件中添加接口，post请求和get请求已写好示例，其他请求可以自行封装也可调用otherType，参数中加入配置即可
                 })
             </pre>
-            <el-input v-model="value" @change="handleChange"></el-input>
-
         </div>
-        <my-form :formItems="formModel"></my-form>
+        <my-form :formItems="formModel" @on-submit="onSubmit"></my-form>
     </div>
 </template>
 <script>
 import vText from './components/text'
+import { removeEmpty } from '@/utils/helper'
 export default {
     data() {
         return {
@@ -30,11 +29,9 @@ export default {
                 },
                 phone: {
                     type: 'input',
-                    value: 'haha',
                     label: '联系方式'
                 }
             }
-            // loginState: true
         }
     },
     props: ['api'],
@@ -48,6 +45,11 @@ export default {
             this.api.testGet({ id: 1 }).then(res => {
                 console.log(res)
             })
+        },
+        onSubmit(e) {
+            if (!e) return
+            // 需要的信息都保存在e里面了
+            console.log(e, Object.assign({}, removeEmpty(e)))
         }
     },
     mounted() {

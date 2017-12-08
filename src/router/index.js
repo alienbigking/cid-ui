@@ -10,7 +10,7 @@ let routes = [
         children: [
             {
                 path: '/',
-                name: '登录',
+                name: '主页',
                 component: resolve => require(['@/app/user/login'], resolve),
                 alias: '/index'
             },
