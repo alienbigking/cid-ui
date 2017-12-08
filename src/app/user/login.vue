@@ -14,17 +14,17 @@ export default {
     data() {
         return {
             formModel: {
-                userName: {
-                    type: 'input',
-                    label: '用户名',
-                    prefix: 'user',
-                    rules: ['required']
-                },
                 password: {
                     type: 'password',
-                    label: '密码',
-                    prefix: 'lock',
+                    label: '用户名',
+                    prefix: 'user',
                     rules: ['required', '6-']
+                },
+                checkpassword: {
+                    type: 'password',
+                    label: '确认密码',
+                    prefix: 'lock',
+                    rules: ['required', '6-', 'checkSame']
                 }
             }
         }

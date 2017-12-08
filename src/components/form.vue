@@ -60,14 +60,24 @@ export default {
     },
     data() {
         var validateContent = (rule, value, callback) => {
-            var reg = /^[a-zA-Z0-9]+$/
-            if (value && !reg.test(value)) {
-                callback(new Error('请输入字母/数字/下划线'))
+                console.log(this.formData)
+                var reg = /^[a-zA-Z0-9]+$/
+                if (value && !reg.test(value)) {
+                    callback(new Error('请输入字母/数字/下划线'))
+                }
+                else {
+                    callback()
+                }
+            },
+            validateCheckSame = (rule, value, callback) => {
+                let field = rule.fullField.substring(rule.fullField.indexOf('check') + 5)
+                if (value !== this.formData[field]) {
+                    callback(new Error('两次*不一致!'))
+                }
+                else {
+                    callback()
+                }
             }
-            else {
-                callback()
-            }
-        }
         return {
             flag: false,
             formData: {},
@@ -77,9 +87,13 @@ export default {
                     required: true,
                     message: '请输入*'
                 },
-                validateContent: {
+                content: {
                     validator: validateContent,
                     message: ''
+                },
+                checkSame: {
+                    validator: validateCheckSame,
+                    message: '两次*不一致!'
                 }
             }
         }
@@ -100,13 +114,14 @@ export default {
             this.flag = true
         },
         addRules(prop, rules, item) {
-            let arr = [], setting = {}
+            let arr = [], setting = {}, check
             rules.forEach((rule, index) => {
                 if (rule.indexOf('-') > -1) arr.push(limit(rule))
                 else {
+                    check = prop.indexOf('check') > -1 ? prop.substring(prop.indexOf('check') + 5) : prop
                     setting = {
                         trigger: 'change blur',
-                        message: this.message[rule].message.replace('*', item.label)
+                        message: this.message[rule].message.replace('*', this.formItems[check].label)
                     }
                     arr.push(Object.assign({}, this.message[rule], setting))
                 }
