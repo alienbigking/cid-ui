@@ -10,7 +10,7 @@
             <li><el-badge is-dot><router-link to="/index"><i class="message"></i></router-link></el-badge></li>
             <li><router-link to="/index"><img src="../../assets/images/avatar.png" alt=""></router-link></li>
             <li><router-link to="/index">管理员</router-link></li>
-            <li><router-link to="/index"><i class="power"></i></router-link></li>
+            <li @click="logout"><i class="power"></i></li>
         </ul>
     </el-header>
 </template>
@@ -33,6 +33,11 @@ export default {
         ]),
         test() {
             this.handleCollapse({ index: 123, order: 222 })
+        },
+        // 注销
+        logout() {
+            window.sessionStorage.removeItem('access_token')
+            this.$router.push('/login')
         }
     }
 }
