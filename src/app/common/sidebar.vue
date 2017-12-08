@@ -12,11 +12,11 @@
         </div>
         <el-menu class="base" router text-color="#d1d1d1" active-text-color="#fff" :default-active="$route.path" unique-opened :collapse="collaspsed">
             <template v-for="(item, index) in $router.options.routes" v-if="!item.hidden">
-                <el-submenu :index="item.path" v-if="item.children && item.children.length>0" class="first" @mouseover.native="showMenu(index,true)">
+                <el-submenu :index="item.path" v-if="item.children && item.children.length>0" class="first" @mouseenter.native="showMenu(index,item.name)">
                     <li class="menuText" :style="collaspsed ? 'display: block' : 'display: none'">{{ menuText }}</li>
                     <template slot="title"><i :class="item.icon"></i><span>{{item.name}}</span></template>
                     <template v-for="child in item.children">
-                        <el-submenu :index="child.path" v-if="child.children && child.children.length>0" class="second" @mouseover.prevent="showMenu(index,false)">
+                        <el-submenu :index="child.path" v-if="child.children && child.children.length>0" class="second">
                             <template slot="title">
                                 <i :class="child.icon"></i>
                                 <span>{{child.name}}</span>
@@ -58,6 +58,7 @@ export default {
     },
     methods: {
         showMenu(e, status) {
+            // console.log(status)
             let menuText = this.$router.options.routes[e].name
             this.menuText = menuText
         }

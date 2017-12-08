@@ -22,15 +22,20 @@
     .second{
         &>.el-menu{
             left: -1px;
-            top: 38px;
+            // top: 38px;
             margin-left: 0;
+            position: relative;
             border: 0;
+            // transition: all 0 linear;
             border-left: 1px solid #536067;
             display: block !important;
             border-radius: 0;
         }
         .el-icon-arrow-right:before{
             content: "\E603";
+        }
+
+        .el-menu--collapse .el-submenu .el-menu{
         }
     }
     .third{

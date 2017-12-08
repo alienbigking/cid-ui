@@ -3,7 +3,7 @@
         <div class="header-left">
             <i class="logo_img"></i>
             <span class="fs-16">罪犯数据库</span>
-            <i class="collaspse" @click="handleCollapse"></i>
+            <i class="collaspse" @click="test"></i>
         </div>
         <ul class="header-right">
             <li><router-link to="/index"><i class="setting"></i></router-link></li>
@@ -30,7 +30,10 @@ export default {
     methods: {
         ...mapActions([
             'handleCollapse'
-        ])
+        ]),
+        test() {
+            this.handleCollapse({ index: 123, order: 222 })
+        }
     }
 }
 </script>
