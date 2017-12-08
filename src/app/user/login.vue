@@ -74,6 +74,7 @@ export default {
             .login-input{
                 width:292px;
                 margin:0 auto;
+                margin-top:46px;
                 .form-input-user{
                     margin-top:38px;
                     & /deep/ .el-input__inner{

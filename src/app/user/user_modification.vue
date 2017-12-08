@@ -4,7 +4,9 @@
             <div class="um-title">
                 <p>修改个人信息</p>
             </div>
-            <el-form class="um-form" :model="ruleForm" :rules="rules" ref="ruleForm">
+            <my-form class="um-form" :inline="false" :formItems="formModel" labelWidth="120px" btnText="登录" buttonClass="form-input-submit"></my-form>
+
+            <!-- <el-form class="um-form" :model="ruleForm" :rules="rules" ref="ruleForm">
                 <div class="form">
                     <div class="form-left">
                         <el-form-item label="用户名" class="item" prop="username">
@@ -30,7 +32,7 @@
                     </div>
                     <div style="clear:both;"></div>
                 </div>
-            </el-form>
+            </el-form> -->
         </div>
         <!--修改密码模块-->
         <div class="um-modifyPassword">
@@ -45,18 +47,38 @@
     export default {
         data() {
             return {
-                ruleForm: {
-                    username: 'zzzzz', // 用户名
-                    createdTime: '', // 创建时间
-                    name: '', // 姓名
-                    lastUpdatedTime: '' // 最后更新时间
-                },
-                rules: {
-                    name: [
-                        { required: true, message: '姓名不能为空', trigger: 'blur' }
-                    ]
+                formModel: {
+                    userName: {
+                        type: 'input',
+                        label: '用户名'
+                    },
+                    createdTime: {
+                        type: 'input',
+                        label: '创建时间'
+                    },
+                    name: {
+                        type: 'input',
+                        label: '姓名'
+                    },
+                    lastUpdatedTime: {
+                        type: 'input',
+                        label: '最后更新时间'
+                    }
                 }
             }
+            // return {
+            //     ruleForm: {
+            //         username: 'zzzzz', // 用户名
+            //         createdTime: '', // 创建时间
+            //         name: '', // 姓名
+            //         lastUpdatedTime: '' // 最后更新时间
+            //     },
+            //     rules: {
+            //         name: [
+            //             { required: true, message: '姓名不能为空', trigger: 'blur' }
+            //         ]
+            //     }
+            // }
         },
         methods: {
             submitForm(formName) {
