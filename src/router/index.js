@@ -34,6 +34,11 @@ let routes = [
                 path: '/user/pwd_modification',
                 name: '修改密码',
                 component: resolve => require(['@/app/user/pwd_modification'], resolve)
+            },
+            {
+                path: '/user/user_modification',
+                name: '修改用户明细',
+                component: resolve => require(['@/app/user/user_modification'], resolve)
             }
         ]
     },
