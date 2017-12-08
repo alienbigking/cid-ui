@@ -28,15 +28,25 @@ export default {
                     rules: ['required', 'validateContent']
                 },
                 phone: {
-                    type: 'input',
-                    label: '联系方式'
+                    type: 'password',
+                    label: '联系方式',
+                    other: {
+                        class: 'eye-open',
+                        func: this.isShow
+                    }
                 }
-            }
+            },
+            isShowPwd: false
         }
     },
     props: ['api'],
     components: { vText },
     methods: {
+        isShow() {
+            this.isShowPwd = !this.isShowPwd
+            this.formModel.phone.type = this.isShowPwd ? 'input' : 'password'
+            this.formModel.phone.other.class = this.isShowPwd ? 'eye-open' : 'eye-close'
+        },
         handleChange(e) {
             console.log(e)
         },

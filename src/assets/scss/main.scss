@@ -50,3 +50,27 @@
 .fs-16{
     font-size: 16px;
 }
+
+
+
+
+%mt1{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right:10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.form-input-middle .eye-open{
+    @extend %mt1;
+    background: url(../../assets/images/eye-open.png) 0 0 no-repeat;
+    background-size: 20px 20px;
+
+}
+.eye-close{
+    @extend %mt1;
+    background: url(../../assets/images/eye-close.png) 0 0 no-repeat;
+    background-size: 20px 20px;
+}
