@@ -10,57 +10,25 @@
                 </div>
             </div>
         </div>
-        <el-menu class="base" router text-color="#d1d1d1" active-text-color="#fff" :default-active="$route.path" unique-opened :collapse="collaspsed">
-            <template v-for="(item, index) in $router.options.routes" v-if="!item.hidden">
-                <el-submenu :index="item.path" v-if="item.children && item.children.length>0" class="first" @mouseenter.native="showMenu(index,item.name)">
-                    <li class="menuText" :style="collaspsed ? 'display: block' : 'display: none'">{{ menuText }}</li>
-                    <template slot="title"><i :class="item.icon"></i><span>{{item.name}}</span></template>
-                    <template v-for="child in item.children">
-                        <el-submenu :index="child.path" v-if="child.children && child.children.length>0" class="second">
-                            <template slot="title">
-                                <i :class="child.icon"></i>
-                                <span>{{child.name}}</span>
-                            </template>
-                            <template v-for="third in child.children">
-                                <el-menu-item :index="third.path" class="third">
-                                    <i :class="third.icon"></i>
-                                    <span>{{third.name}}</span>
-                                </el-menu-item>
-                            </template>
-                        </el-submenu>
-                        <el-menu-item :index="child.path" v-else class="second">
-                            <i :class="child.icon"></i>
-                            <span>{{child.name}}</span>
-                        </el-menu-item>
-                    </template>
-                </el-submenu>
-                <el-menu-item :index="item.path" v-else class="el-menu-each">
-                    <i :class="item.icon"></i>
-                    <span>{{item.name}}</span>
-                </el-menu-item>
-            </template>
-        </el-menu>
+        <the-menu></the-menu>
     </el-aside>
 </template>
 <script>
-import { mapGetters } from "vuex";
+import { default as theMenu } from "./the-menu";
+// import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      menuText: ""
-      // loginState: true
+      menuText: "",
+      collaspsed: false
     };
   },
-  computed: {
-    ...mapGetters(["collaspsed"])
+  components: {
+    "the-menu": theMenu
   },
-  methods: {
-    showMenu(e, status) {
-      // console.log(status)
-      let menuText = this.$router.options.routes[e].name;
-      this.menuText = menuText;
-    }
-  }
+  computed: {},
+  methods: {}
 };
 </script>
 <style lang="scss" scoped>

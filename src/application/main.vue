@@ -8,7 +8,7 @@
                     <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"></the-breadcrumb>
                     <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
                         <transition name="router-fade" mode="out-in">
-                            <router-view :api="apiList"></router-view>
+                            <router-view></router-view>
                         </transition>
                     </el-main>
                     <the-footer v-if="!$route.meta||!$route.meta.noSide"></the-footer>
