@@ -6,7 +6,6 @@ export default [
     {
         path: '/',
         component: main,
-        name: 'main',
         children: [
             {
                 path: '/',

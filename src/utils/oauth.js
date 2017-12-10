@@ -1,0 +1,18 @@
+export default {
+    config(axios) {
+        axios.interceptors.request.use(
+            config => {
+                config.baseURL = 'http://localhost:8080/';
+                config.withCredentials = true;
+                const tokenStorage = localStorage.getItem('TOKEN');
+                if (tokenStorage) {
+                    const token = JSON.parse(tokenStorage);
+                    config.headers.Authorization = `Bearer ${token.access_token}`;
+                }
+                return config;
+            },
+            error => {
+                return Promise.reject(error);
+            });
+    }
+};

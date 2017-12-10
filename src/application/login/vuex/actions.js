@@ -6,5 +6,8 @@ export default {
         authService.login(user).then(token => {
             commit(types.SET_TOKEN, { token: token });
         });
+    },
+    logout({ commit }) {
+        commit(types.REMOVE_TOKEN);
     }
 };
