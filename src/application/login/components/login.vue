@@ -15,7 +15,7 @@
                     <el-checkbox label="记住我"></el-checkbox>
                 </el-form-item>
                  <el-form-item class="form-input-submit">
-                    <el-button type="info"  @click="onSubmit">登录</el-button>
+                    <el-button type="info" @click="onSubmit">登录</el-button>
                 </el-form-item>
             </el-form>
         </div>
