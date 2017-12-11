@@ -57,7 +57,7 @@ export default [
         collapse: true,
         children: [
             {
-                index: '1-1',
+                index: '2-1',
                 name: '收监管理',
                 path: 'dashboard',
                 collapse: true
@@ -107,7 +107,7 @@ export default [
         collapse: true,
         children: [
             {
-                index: '1-1',
+                index: '3-1',
                 name: '收监管理',
                 path: 'dashboard',
                 collapse: true
