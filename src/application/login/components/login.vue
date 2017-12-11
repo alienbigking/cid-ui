@@ -13,7 +13,7 @@
                   <span class="lock"></span>
               </el-form-item>
               <el-form-item class="form-input-remember">
-                  <el-checkbox label="记住我" v-model="remember"></el-checkbox>
+                  <el-checkbox label="记住我"></el-checkbox>
               </el-form-item>
                 <el-form-item class="form-input-submit">
                   <el-button type="info"  @click="onSubmit('ruleForm')">登录</el-button>
@@ -36,7 +36,6 @@ export default {
         username: "",
         password: ""
       },
-      remember: false, // 记住我
       rules: {
         username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
         password: [
@@ -51,7 +50,7 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.login(this.user, this.remember);
+          this.login(this.user);
           this.$router.push('dashboard');
         } else {
             alert('error submit!!');

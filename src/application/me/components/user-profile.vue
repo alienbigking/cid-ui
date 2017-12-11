@@ -1,17 +1,17 @@
 <template>
-  <div style="border:0;background:#f5f5f5;">
-    <div class="user_modification">
+  <div>
+    <div class="user_modification card">
       <div class="um-title">
           <p>修改个人信息</p>
       </div>
-      <el-form class="um-form" :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form class="um-form" :model="userProfile" :rules="rules" ref="ruleForm">
         <div class="form">
           <div class="form-left">
             <el-form-item label="用户名" class="item" prop="username">
-              <el-input disabled v-model="ruleForm.username"></el-input>
+              <el-input disabled v-model="userProfile.username"></el-input>
             </el-form-item>
             <el-form-item label="创建时间" class="item" prop="createdTime" style="margin-top:24px;">
-              <el-input disabled v-model="ruleForm.createdTime"></el-input>
+              <el-input disabled v-model="userProfile.createdTime"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button class="btn-return" @click="goBack">返回</el-button>
@@ -19,10 +19,10 @@
           </div>
           <div class="form-right">
             <el-form-item label="姓名" class="item" prop="name">
-              <el-input v-model="ruleForm.name"></el-input>
+              <el-input v-model="userProfile.name"></el-input>
             </el-form-item>
             <el-form-item label="最后更新时间" class="item" prop="lastUpdatedTime" style="margin-top:24px;">
-              <el-input disabled v-model="ruleForm.lastUpdatedTime"></el-input>
+              <el-input disabled v-model="userProfile.lastUpdatedTime"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary" class="btn-confirm" @click="submitForm('ruleForm')">保存</el-button>                            
@@ -33,7 +33,7 @@
       </el-form>
     </div>
     <!--修改密码模块-->
-    <div class="um-modifyPassword">
+    <div class="um-modifyPassword card">
       <p class="">修改密码</p>
       <p>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</p>
       <router-link class="modififyPassword" to="pwdModification">修改</router-link>
@@ -42,11 +42,12 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      ruleForm: {
-        username: 'zzzzz', // 用户名
+      userProfile: {
+        username: '', // 用户名
         createdTime: '', // 创建时间
         name: '', // 姓名
         lastUpdatedTime: '' // 最后更新时间
@@ -58,10 +59,15 @@ export default {
       }
     };
   },
+  created() {
+    this.getMyProfile(this.userProfile);
+  },
   methods: {
+    ...mapActions(["getMyProfile", "updateMyProfile"]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.updateMyProfile(this.userProfile);
           this.$router.push('dashboard');
         } else {
           alert('error submit!!');
@@ -79,9 +85,6 @@ export default {
 
 <style lang="scss" scoped>
   .user_modification{
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background:white;
     .el-input{
       width:98%;
     }
@@ -128,14 +131,11 @@ export default {
     }
   }
   .um-modifyPassword{
-    background:white;
     margin-top:20px;
     padding:20px 22px 20px 20px;
     font-size: 14px;
     color: #333;
     height: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
     >p{
       display:inline-block;
       &:nth-child(2){

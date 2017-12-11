@@ -4,17 +4,17 @@
       <div class="um-title">
         <p>修改密码</p>
       </div>
-      <el-form class="um-form" :model="ruleForm" :rules="rules" ref="ruleForm">
+      <el-form class="um-form" :model="userPassword" :rules="rules" ref="ruleForm">
           <div class="form-box">
               <el-form-item class="form-input-top" prop="oldPassword">
-                  <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="ruleForm.oldPassword" />
+                  <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
               </el-form-item>
               <el-form-item class="form-input-middle" prop="newPassword">
-                  <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="ruleForm.newPassword" />
+                  <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword" />
                   <span :class="isShowPwd?'eye-open':'eye-close'" @click="isShow"></span>
               </el-form-item>
-              <el-form-item class="form-input-bottom" prop="newPassword_again">
-                  <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="ruleForm.newPassword_again" />
+              <el-form-item class="form-input-bottom" prop="checkPassword">
+                  <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword" />
                   <span :class="isShowPwd_again?'eye-open':'eye-close'" @click="isShow_again"></span>
               </el-form-item>
               <el-form-item class="form-btn">
@@ -28,13 +28,33 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请输入密码'));
+      } else {
+        if (this.userPassword.checkPassword !== '') {
+          this.$refs.ruleForm.validateField('checkPassword');
+        }
+        callback();
+      }
+    };
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.userPassword.newPassword) {
+        callback(new Error('两次输入密码不一致!'));
+      } else {
+        callback();
+      }
+    };
     return {
-      ruleForm: {
+      userPassword: {
         oldPassword: '',
         newPassword: '',
-        newPassword_again: ''
+        checkPassword: ''
       },
       rules: {
         oldPassword: [
@@ -42,10 +62,12 @@ export default {
           { min: 6, message: '密码必须大于6位', trigger: 'blur' }
         ],
         newPassword: [
+          { validator: validatePass, trigger: 'blur' },
           { required: true, message: '密码不能为空', trigger: 'blur' },
           { min: 6, message: '密码必须大于6位', trigger: 'blur' }
         ],
-        newPassword_again: [
+        checkPassword: [
+          { validator: validatePass2, trigger: 'blur' },
           { required: true, message: '密码不能为空', trigger: 'blur' },
           { min: 6, message: '密码必须大于6位', trigger: 'blur' }
         ]
@@ -55,9 +77,11 @@ export default {
     };
   },
   methods: {
+    ...mapActions(["updateMyPassword"]),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
+          this.updateMyPassword(this.userPassword);
           alert('submit!');
         } else {
           alert('error submit!!');
@@ -108,6 +132,8 @@ export default {
     }
   }
   .pwd_modification{
+    border: 1px solid #ddd;
+    border-radius:3px;
     .um-title{
       padding:20px;
       border-bottom:1px solid #DDD;
