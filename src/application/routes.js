@@ -1,6 +1,7 @@
 import { routes as login } from './login';
 import { routes as dashboard } from './dashboard';
 import { routes as userProfile } from './me';
+import { routes as tenant } from './tenant';
 import main from './main';
 
 export default [
@@ -16,5 +17,6 @@ export default [
             ...userProfile
         ]
     },
-    ...login
+    ...login,
+    ...tenant
 ];

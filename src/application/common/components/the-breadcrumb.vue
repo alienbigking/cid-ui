@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-breadcrumb separator="/" separator-class="separatorClass">
-            <el-breadcrumb-item><i class="home" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
+            <el-breadcrumb-item><i class="iconfont icon-home" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
             <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" v-if="item.name">{{ item.name }}</el-breadcrumb-item>
         </el-breadcrumb>
     </div>
@@ -30,13 +30,8 @@ export default {
 };
 </script>
 <style lang="scss">
-.home {
-  background: url("../../../assets/images/home.png") no-repeat;
-  background-size: cover;
-  display: inline-block;
-  height: 14px;
-  width: 14px;
-  background-position: center;
+.icon-home {
+  font-size: 14px;
 }
 .el-breadcrumb {
   height: 40px;

@@ -1,11 +1,11 @@
 <template>
-    <el-aside :width="collaspsed ? '55px' : '260px'" :class="collaspsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
-        <div class="avatar" :class="collaspsed ? 'avatar-collapsed' : ''">
+    <el-aside :width="collapsed ? '55px' : '260px'" :class="collapsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
+        <div class="avatar" :class="collapsed ? 'avatar-collapsed' : ''">
             <img src="../../../assets/images/avatar.png" alt="">
             <div class="avatar-right">
                 <span>管理员</span>
                 <div class="">
-                    <i class="address"></i>
+                    <i class="el-icon-location"></i>
                     <span>管理员</span>
                 </div>
             </div>
@@ -15,19 +15,20 @@
 </template>
 <script>
 import { default as theMenu } from "./the-menu";
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      menuText: "",
-      collaspsed: false
+      menuText: ""
     };
   },
   components: {
     "the-menu": theMenu
   },
-  computed: {},
+  computed: {
+      ...mapGetters(["collapsed"])
+  },
   methods: {}
 };
 </script>
@@ -36,58 +37,6 @@ export default {
   background: #263238;
   color: #fff;
   transition: all 0.2s linear;
-  .base {
-    border-right: 0;
-    transition: all 0s linear;
-    background: #263238;
-  }
-  .address {
-    background: url("../../../assets/images/address.png") no-repeat;
-    background-size: cover;
-    background-position: center;
-    height: 12px;
-    width: 10px;
-    display: inline-block;
-    vertical-align: baseline;
-  }
-  .first {
-    &.is-opened {
-      background: #29b0a3;
-      & > .el-submenu__title {
-        &:hover {
-          background: transparent;
-        }
-      }
-    }
-    .second:last-child {
-      border-bottom: 1px solid #303b40;
-    }
-  }
-  .second {
-    background: #202a2f;
-    &.is-active {
-      background: #182125;
-    }
-    &.is-opened {
-      .third:last-child {
-        border-bottom: 1px solid #303b40;
-      }
-    }
-  }
-  .third {
-    background: #182125;
-    &.is-active {
-      background: #13191c;
-    }
-  }
-  .menuText {
-    height: 43px;
-    line-height: 43px;
-    padding-left: 20px;
-    font-size: 14px;
-    background: #29b0a3;
-    color: #fff;
-  }
 }
 .avatar {
   display: flex;
@@ -108,6 +57,7 @@ export default {
       margin-bottom: 10px;
     }
     i {
+        // font-size: 12px;
       margin-right: 6px;
     }
   }

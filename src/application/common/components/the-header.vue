@@ -1,21 +1,21 @@
 <template>
     <el-header style="height: 47px;">
         <div class="header-left">
-            <i class="logo_img"></i>
+            <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
             <span class="fs-16">罪犯数据库</span>
             <i class="collaspse" @click="test"></i>
         </div>
         <ul class="header-right">
-            <li><router-link to="/index"><i class="setting"></i></router-link></li>
-            <li><el-badge is-dot><router-link to="/index"><i class="message"></i></router-link></el-badge></li>
-            <li><router-link to="/index"><img src="../../../assets/images/avatar.png" alt=""></router-link></li>
-            <li><router-link to="/index">管理员</router-link></li>
-            <li @click="logout"><i class="power"></i></li>
+            <li><router-link to="/index"><i class="iconfont icon-shezhi"></i></router-link></li>
+            <li><el-badge is-dot><router-link to="/index"><i class="iconfont icon-xiaoxizhongxin"></i></router-link></el-badge></li>
+            <li class="hasImg"><router-link to="/index"><img src="../../../assets/images/avatar.png" alt=""><span>管理员</span></router-link></li>
+            <!-- <li><router-link to="/index">管理员</router-link></li> -->
+            <li @click="logout"><i class="iconfont icon-tuichu"></i></li>
         </ul>
     </el-header>
 </template>
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -23,12 +23,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["collaspsed"])
+    // ...mapGetters(["collapsed"])
   },
   methods: {
     ...mapActions(["handleCollapse"]),
     test() {
-      this.handleCollapse({ index: 123, order: 222 });
+      this.handleCollapse();
     },
     // 注销
     logout() {
@@ -52,15 +52,6 @@ export default {
 .header-left {
   display: flex;
   align-items: center;
-  .logo_img {
-    display: inline-block;
-    vertical-align: middle;
-    height: 20px;
-    width: 22px;
-    background: url("../../../assets/images/logo-fff.png") no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
   .fs-16 {
     margin: 0 142px 0 10px;
   }
@@ -69,28 +60,25 @@ export default {
   display: flex;
   align-items: center;
   li {
-    margin-left: 20px;
-    i {
-      display: block;
-      height: 16px;
-      width: 16px;
-      font-size: 16px;
-      // background: #fff;
+        margin-left: 20px;
+        i {
+          display: block;
+          height: 16px;
+          width: 16px;
+          font-size: 16px;
+          // background: #fff;
+        }
+        a {
+          color: #fff;
+          font-size: 12px;
+        }
+        img{
+            margin-right: 7px;
+        }
     }
-    a {
-      color: #fff;
-      font-size: 12px;
+    li.hasImg a{
+        display: flex;
+        align-items: center;
     }
-    .message {
-      background: url("../../../assets/images/message.png") no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-    .power {
-      background: url("../../../assets/images/power.png") no-repeat;
-      background-size: cover;
-      background-position: center;
-    }
-  }
 }
 </style>
