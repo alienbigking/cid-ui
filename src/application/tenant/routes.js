@@ -10,6 +10,10 @@ export default [
                 path: '/tenant/detail',
                 component: components.tenantDetail,
                 name: '租户明细'
+            },
+            {
+                path: '/tenant/dashboard',
+                redirect: { name: 'dashboard' }
             }
         ]
     }

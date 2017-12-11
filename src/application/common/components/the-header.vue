@@ -3,7 +3,7 @@
         <div class="header-left">
             <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
             <span class="fs-16">罪犯数据库</span>
-            <i class="collaspse" @click="test"></i>
+            <i class="iconfont icon-caidan" @click="test"></i>
         </div>
         <ul class="header-right">
             <li><router-link to="/index"><i class="iconfont icon-shezhi"></i></router-link></li>
@@ -39,13 +39,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.collaspse {
-  background: url("../../../assets/images/menu.png") no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 12px;
-  width: 16px;
-  display: block;
+.icon-caidan {
   cursor: pointer;
 }
 
