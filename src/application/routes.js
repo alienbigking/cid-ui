@@ -1,5 +1,6 @@
 import { routes as login } from './login';
 import { routes as dashboard } from './dashboard';
+import { routes as userProfile } from './me';
 import main from './main';
 
 export default [
@@ -11,7 +12,8 @@ export default [
                 path: '/',
                 redirect: { name: 'dashboard' }
             },
-            ...dashboard
+            ...dashboard,
+            ...userProfile
         ]
     },
     ...login
