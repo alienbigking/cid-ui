@@ -25,6 +25,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .el-badge__content{
+        border: 0;
+    }
 }
 .aside{
     .el-submenu .el-menu-item{
@@ -54,11 +57,14 @@
         .el-submenu__title{
             color: #d1d1d1;
             height: 38px;
+            padding-left: 47px !important;
             line-height: 38px;
         }
         &.is-opened .el-submenu__title{
             color: #fffefe;
         }
+    }
+    .third{
     }
 }
 .menu-icon{

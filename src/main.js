@@ -9,6 +9,7 @@ import { default as errorHandler } from './utils/error-handler';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/style.scss';
+import './assets/fonts/iconfont.css';
 
 Vue.config.productionTip = false;
 
