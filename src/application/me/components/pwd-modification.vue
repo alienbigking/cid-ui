@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="pwd_modification">
+    <div class="pwd_modification card">
       <div class="um-title">
         <p>修改密码</p>
       </div>
@@ -132,16 +132,6 @@ export default {
     }
   }
   .pwd_modification{
-    border: 1px solid #ddd;
-    border-radius:3px;
-    .um-title{
-      padding:20px;
-      border-bottom:1px solid #DDD;
-      p{
-        font-size:14px;
-        color: #333;
-      }
-    }
     .um-form{
       .form-box{
         width:340px;
