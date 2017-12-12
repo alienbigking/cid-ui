@@ -87,6 +87,22 @@
                 }
             }
         }
+        &.el-form-item-div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 0;
+            width: 100%;
+            padding-right: 20px;
+            button{
+                height: 36px;
+                font-size: 12px;
+                margin-left: 0;
+                &+button{
+                    margin-left: 22px;
+                }
+            }
+        }
     }
     .el-textarea{
         .el-textarea__inner{

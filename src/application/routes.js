@@ -17,6 +17,10 @@ export default [
             ...userProfile
         ]
     },
+    {
+        path: '*',
+        redirect: { name: 'dashboard' }
+    },
     ...login,
     ...tenant
 ];

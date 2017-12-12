@@ -2,25 +2,25 @@
     <div class="login" :span="24">
       <single-header></single-header>
       <div class="login-box" :span="6">
-          <div class="login-logo"></div>
+          <i class="iconfont icon-yunshujukuRDS"></i>
           <el-form class="login-input" :model="user" :rules="rules" ref="ruleForm">
-              <el-form-item class="form-input-user" prop="username">
+              <el-form-item class="noLable form-input-user" prop="username">
                   <el-input type="text" class="el-input-inner" placeholder="请输入用户名" v-model="user.username" />
                   <span class="user"></span>
               </el-form-item>
-              <el-form-item class="form-input-pwd" prop="password">
+              <el-form-item class="noLable form-input-pwd" prop="password">
                   <el-input type="password" class="el-input-inner" placeholder="请输入密码" v-model="user.password" />
                   <span class="lock"></span>
               </el-form-item>
               <el-form-item class="form-input-remember">
                   <el-checkbox label="记住我"></el-checkbox>
               </el-form-item>
-                <el-form-item class="form-input-submit">
+                <div class="form-input-submit">
                   <el-button type="info"  @click="onSubmit('ruleForm')">登录</el-button>
-              </el-form-item>
+              </div>
           </el-form>
       </div>
-      <single-footer></single-footer>   
+      <single-footer></single-footer>
     </div>
 </template>
 <script>
@@ -87,52 +87,47 @@ export default {
     @extend %mt1;
     background: url(../../../assets/images/lock.png) 0 0 no-repeat;
     background-size: 12px 18px;
-  } 
+  }
   .login{
     width:100%;
     height:100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background:url(../../../assets/images/background.png) 0 0 no-repeat;
     background-size:cover;
     .login-box{
-      width: 322px;
-      height: 362px;
+        margin-top: 168px;
+        width: 322px;
+        padding-top: 36px;
+        box-sizing: content-box;
       background:url(../../../assets/images/login.png) 0 0 no-repeat;
-      position: absolute;
-      top:50%;
-      left:50%;
-      transform: translate(-50%,-50%);
-      .login-logo{
-        margin:0 auto;
-        margin-top:36px;
-        width: 72px;
-        height: 63px;
-        background:url(../../../assets/images/login-logo.png) 0 0 no-repeat
+      background-size: 100% 100%;
+      background-position: center;
+      .icon-yunshujukuRDS{
+          color: #37474F;
+          font-size: 72px;
+          display: block;
+          text-align: center;
       }
       .login-input{
-          width:292px;
-          margin:0 auto;
-          .form-input-user{
-            margin-top:38px;
+          padding: 0 15px;
+          margin-top: 38px;
             & /deep/ .el-input__inner{
-              font-size:12px;
               color:#999999;
               padding-left:32px;
             }
-          }
-          .form-input-pwd{
-            margin:20px 0 5px 0;
-            & /deep/ .el-input__inner{
-              font-size:12px;
-              color:#999999;
-              padding-left:32px;
-            }
-          }
-          .form-input-remember /deep/ .el-checkbox__label{
-            font-size:14px;
-            color:#999;
+          .form-input-remember{
+              margin-top: -5px;
+              /deep/ .el-form-item__content{
+               font-size:14px;
+               line-height: 1;
+               color:#999;
+             }
           }
           .form-input-submit{
-            margin:10px 0 0 0;
+              margin-bottom: 37px;
             button{
               width:292px;
               background-color:#516671;

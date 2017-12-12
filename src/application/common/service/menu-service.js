@@ -46,7 +46,7 @@ export default [
             {
                 index: '1-4',
                 name: '出监管理',
-                path: 'dashboard',
+                path: '/tenant/new',
                 collapse: true
             }
         ]

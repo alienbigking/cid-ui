@@ -1,27 +1,27 @@
 <template>
   <div>
-    <div class="pwd_modification card">
+    <div class="card">
       <div class="um-title">
         <p>修改密码</p>
       </div>
-      <el-form class="um-form" :model="userPassword" :rules="rules" ref="ruleForm">
-          <div class="form-box">
-              <el-form-item class="form-input-top" prop="oldPassword">
+      <el-form class="w340" :model="userPassword" :rules="rules" ref="ruleForm">
+          <!-- <div class="form-box"> -->
+              <el-form-item class="noLable" prop="oldPassword">
                   <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
               </el-form-item>
-              <el-form-item class="form-input-middle" prop="newPassword">
+              <el-form-item class="noLable" prop="newPassword">
                   <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword" />
                   <span :class="isShowPwd?'eye-open':'eye-close'" @click="isShow"></span>
               </el-form-item>
-              <el-form-item class="form-input-bottom" prop="checkPassword">
+              <el-form-item class="noLable" prop="checkPassword">
                   <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword" />
                   <span :class="isShowPwd_again?'eye-open':'eye-close'" @click="isShow_again"></span>
               </el-form-item>
-              <el-form-item class="form-btn">
-                  <el-button class="btn-return" @click="goBack">返回</el-button>
-                  <el-button type="primary" class="btn-confirm" @click="submitForm('ruleForm')">确认</el-button>
-              </el-form-item>
-          </div>
+              <div class="form-btn">
+                  <el-button @click="goBack">返回</el-button>
+                  <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+              </div>
+          <!-- </div> -->
       </el-form>
     </div>
   </div>
@@ -110,7 +110,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped type="text/css">
+<style lang="scss" scoped>
   %mt1{
     display: inline-block;
     width: 20px;
@@ -123,12 +123,12 @@ export default {
   .eye-open{
     @extend %mt1;
     background: url(../../../assets/images/eye-open.png) 0 0 no-repeat;
-    background-size: 20px 20px; 
+    background-size: 20px 20px;
   }
   .eye-close{
     @extend %mt1;
     background: url(../../../assets/images/eye-close.png) 0 0 no-repeat;
-    background-size: 20px 20px;   
+    background-size: 20px 20px;
   }
   .el-input-inner /deep/ .el-input__inner{
     padding-right:35px;
@@ -138,35 +138,18 @@ export default {
       background: #ffffff;
     }
   }
-  .pwd_modification{
-    .um-form{
-      .form-box{
-        width:340px;
-        margin:0 auto;
-        .form-input-top{
-          padding-top:30px;
-          margin-bottom:20px;
-        }
-        .form-input-middle{
-          margin-bottom:20px;
-          position: relative;
-        }
-        .form-input-bottom{
-          margin-bottom:30px;
-          position: relative;
-        }
-        .form-btn{
-          width:340px;
-          margin-bottom:30px;
-          .btn-return{
-            width:160px;
+  .w340{
+      width: 400px;
+      padding: 30px;
+      margin: auto;
+      .form-btn{
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          /deep/ button{
+              width: 160px;
+              // margin: 0;
           }
-          .btn-confirm{
-            width:160px;
-            margin-left:12px;
-          }
-        }
       }
-    }
   }
 </style>
