@@ -62,16 +62,16 @@ export default {
   created() {
     this.getMyProfile();
   },
-  computed: {
-    userProfile: {
-      get() {
-        return this.$store.state.userProfile;
-      },
-      set(value) {
-        this.$store.commit('getMyProfile', value);
-      }
-    }
-  },
+  // computed: {
+  //   userProfile: {
+  //     get() {
+  //       return this.$store.state.userProfile;
+  //     },
+  //     set(value) {
+  //       this.$store.commit('getMyProfile', value);
+  //     }
+  //   }
+  // },
   methods: {
     ...mapActions(["getMyProfile", "updateMyProfile"]),
     submitForm(formName) {
