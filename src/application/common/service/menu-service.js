@@ -40,7 +40,7 @@ export default [
             {
                 index: '1-3',
                 name: '监外执行',
-                path: 'dashboard',
+                path: '/tenant/list',
                 collapse: true
             },
             {
