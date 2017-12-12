@@ -68,6 +68,30 @@
                 width: 100%;
             }
         }
+        &.textarea{
+            .el-textarea{
+                height: 134px;
+            }
+            .el-form-item__content{
+                // height: 100%;
+            }
+        }
+        &.hasButton{
+            width: 100%;
+            padding-right: 20px;
+            .el-form-item__content{
+                display: flex;
+                justify-content: flex-end;
+                button{
+                    width: 76px;
+                }
+            }
+        }
+    }
+    .el-textarea{
+        .el-textarea__inner{
+            height: 100%;
+        }
     }
     .el-form-item__content{
         width: calc(100% - 120px);
@@ -78,7 +102,7 @@
     flex-wrap: wrap;
     align-items: center;
     // .commonForm{
-        .el-form-item__label,.el-select{
+        .el-form-item__label{
             display: block;
             line-height: 12px;
             font-size: 12px;

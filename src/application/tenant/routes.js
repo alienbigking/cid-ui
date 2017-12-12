@@ -9,7 +9,12 @@ export default [
             {
                 path: '/tenant/detail',
                 component: components.tenantDetail,
-                name: '租户明细'
+                name: '监区明细'
+            },
+            {
+                path: '/tenant/list',
+                component: components.tenantList,
+                name: '查询监区'
             },
             {
                 path: '/tenant/new',

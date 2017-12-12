@@ -13,6 +13,13 @@
           <el-option label="区域二" value="beijing"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item class="w100 textarea" label="监区描述">
+        <el-input type="textarea" resize="none"></el-input>
+      </el-form-item>
+      <el-form-item class="hasButton">
+          <el-button>返回</el-button>
+          <el-button type="primary">新增</el-button>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -27,7 +34,11 @@ export default {
 .labelInTop{
   padding-left: 20px;
   padding-top: 20px;
+  .w100{
+      width: 100%;
+      padding-right: 20px;
+  }
+
 }
 
 </style>
-
