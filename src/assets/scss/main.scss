@@ -51,20 +51,7 @@
 .fs-16{
     font-size: 16px;
 }
-.labelInTop{
-    .commonForm{
-        .el-form-item__label{
-            display: block;
-            line-height: 12px;
-            font-size: 12px;
-            margin-bottom: 10px;
-        }
-        .el-form-item .el-form-item__content{
-            width: 100%;
-        }
-    }
-}
-.commonForm{
+.el-form{
     .el-input__inner{
         font-size: 12px;
     }
@@ -85,4 +72,23 @@
     .el-form-item__content{
         width: calc(100% - 120px);
     }
+}
+.labelInTop{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    // .commonForm{
+        .el-form-item__label,.el-select{
+            display: block;
+            line-height: 12px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            color:#333;
+        }
+        .el-form-item{
+            .el-form-item__content{
+                width: 100%;
+            }
+        }
+    // }
 }

@@ -12,6 +12,11 @@ export default [
                 name: '租户明细'
             },
             {
+                path: '/tenant/new',
+                component: components.tenantNew,
+                name: '新增监区'
+            },
+            {
                 path: '/tenant/dashboard',
                 redirect: { name: 'dashboard' }
             }
