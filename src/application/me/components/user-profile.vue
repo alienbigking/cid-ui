@@ -88,16 +88,8 @@ export default {
     .el-input{
       width:98%;
     }
-    .um-title{
-      padding:20px;
-      border-bottom:1px solid #DDD;
-      p{
-          font-size:14px;
-          color: #333;
-      }
-    }
     .um-form{
-      margin:26px 5px 0 21px;
+      margin:26px 15px 0 21px;
       .form{
         & /deep/ .el-input__inner{
           font-size:12px;
