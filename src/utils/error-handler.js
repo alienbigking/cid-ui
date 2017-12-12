@@ -13,6 +13,9 @@ export default {
                                 path: 'login',
                                 query: { redirect: router.currentRoute.fullPath }
                             });
+                            break;
+                        case 400:
+                            console.log(400);
                     }
                 }
                 return Promise.reject(error);

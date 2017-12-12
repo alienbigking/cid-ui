@@ -68,9 +68,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.updateMyProfile(this.userProfile);
-          this.$router.push('dashboard');
         } else {
-          alert('error submit!!');
+          console.log('error submit!!');
           return false;
         }
       });

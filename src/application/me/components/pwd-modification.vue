@@ -81,10 +81,17 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.updateMyPassword(this.userPassword);
-          alert('submit!');
+          this.updateMyPassword(this.userPassword).then(res => {
+            if (res) {
+              this.$message.error('修改失败');
+              return false;
+            } else {
+              this.$message.success('修改成功');
+            }
+          });
         } else {
-          alert('error submit!!');
+          console.log('error submit!!');
+          this.$message.error('修改失败');
           return false;
         }
       });

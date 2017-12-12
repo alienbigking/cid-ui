@@ -13,6 +13,10 @@ export default {
             }
         }).then(response => {
             return response.data;
+        }).catch(err => {
+            if (err) {
+                return false;
+            }
         });
     }
 };

@@ -32,7 +32,7 @@ export default {
     },
     // 注销
     logout() {
-      window.sessionStorage.removeItem("access_token");
+      window.localStorage.removeItem("TOKEN");
       this.$router.push("/login");
     }
   }

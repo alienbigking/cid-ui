@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username: "admin",
+        password: "Password@1"
       },
       rules: {
         username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
@@ -50,10 +50,17 @@ export default {
     onSubmit(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.login(this.user);
-          this.$router.push('dashboard');
+          this.login(this.user).then(res => {
+            if (res) {
+              this.$message.error('登录失败');
+              return false;
+            } else {
+              this.$router.push('userProfile');
+              this.$message.success('登录成功');
+            }
+          });
         } else {
-            alert('error submit!!');
+            this.$message.error('登录失败');
             return false;
         }
       });
