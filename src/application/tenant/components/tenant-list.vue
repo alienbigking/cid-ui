@@ -56,7 +56,8 @@
     </div>
 </template>
 <script>
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
     data() {
@@ -67,28 +68,14 @@ export default {
                 place: ''
             },
             searching: false,
-            tableData: [
-                {
-                    name: '十一监区',
-                    prePrison: '十二监区',
-                    id: 123,
-                    makeDate: '2019-10-11 12:12:12',
-                    updateDate: '2012-12-12 12:12:12'
-                },
-                {
-                    name: '十一监区',
-                    prePrison: '十二监区',
-                    id: 32345,
-                    makeDate: '2019-10-12 12:12:12',
-                    updateDate: '2012-12-11 12:12:12'
-                }
-            ],
+            tableData: _.cloneDeep(this.$store.state.tenant.tenantList),
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
         };
     },
     methods: {
+        ...mapActions(["getTenantList"]),
         handleSearch(e) {
             this.searching = true;
             console.log(this.filter.name);
@@ -105,6 +92,10 @@ export default {
             done(); // 关闭对话框
         },
         render() {
+            this.getTenantList().then(res => {
+                if (!res) return false;
+                this.tableData = res;
+            });
             // 获取租户列表
         }
     },
