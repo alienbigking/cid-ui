@@ -5,17 +5,26 @@
           <p>修改个人信息</p>
       </div>
       <el-form class="labelInTop" :model="userProfile" :rules="rules" ref="ruleForm">
-            <el-form-item label="用户名" class="w50" prop="username">
-              <!-- <el-input disabled v-model="userProfile.username"></el-input> -->
+            <el-form-item class="w50">
+              <div class="custom-label">用户名</div>
+              <div class="custom-inp">
+                <span class="custom-content">{{userProfile.username}}</span>
+              </div>
             </el-form-item>
             <el-form-item label="姓名" class="w50" prop="name">
                 <el-input v-model="userProfile.name"></el-input>
             </el-form-item>
-            <el-form-item label="创建时间" class="w50" prop="createdTime">
-              <!-- <el-input disabled v-model="userProfile.createdTime"></el-input> -->
+            <el-form-item class="w50">
+              <div class="custom-label">创建时间</div>
+              <div class="custom-inp">
+                <span class="custom-content">{{userProfile.createdTime}}</span>
+              </div>
             </el-form-item>
-            <el-form-item label="最后更新时间" class="w50" prop="lastUpdatedTime">
-              <!-- <el-input disabled v-model="userProfile.lastUpdatedTime"></el-input> -->
+            <el-form-item class="w50">
+              <div class="custom-label">最后更新时间</div>
+              <div class="custom-inp">
+                <span class="custom-content">{{userProfile.lastUpdatedTime}}</span>
+              </div>
             </el-form-item>
 
             <div class="el-form-item el-form-item-div">
