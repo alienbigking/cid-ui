@@ -1,17 +1,22 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查询租户</span>
+            <span class="um-title">查询监区</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="租户名称" v-model="filter.name"></el-input>
+                    <el-input placeholder="监区名称" v-model="filter.name"></el-input>
+                    <el-input placeholder="编号" v-model="filter.id"></el-input>
+                    <el-select placeholder="十二监区" v-model="filter.place"></el-select>
                     <el-button class="searchbtn">查询</el-button>
                 </div>
-                <!-- <el-button type="primary">新增监区</el-button> -->
+                <el-button type="primary">新增监区</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="tableData" border :header-row-class-name="getHeaderClass">
-                  <el-table-column prop="name" label="租户名称">
+                  <el-table-column prop="name" label="监区名称">
+
+                  </el-table-column>
+                  <el-table-column prop="prePrison" label="上级监区">
 
                   </el-table-column>
                   <el-table-column prop="id" label="编号">

@@ -1,11 +1,11 @@
 <template>
     <div>
         <div class="card">
-            <span class="um-title">十一监舍 - 明细</span>
+            <span class="um-title">十一监区 - 明细</span>
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>上级监舍：</label><span>十二监舍</span>
+                        <label>上级监区：</label><span>十二监区</span>
                     </el-col>
                     <el-col :span="12">
                         <label>编号：</label><span> 934389</span>
@@ -23,7 +23,7 @@
         </div>
         <div class="card padding20">
             <div class="form-container">
-                <label class="title">监舍描述：</label>
+                <label class="title">监区描述：</label>
                 <div>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 </div>

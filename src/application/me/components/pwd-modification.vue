@@ -10,12 +10,14 @@
                   <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
               </el-form-item>
               <el-form-item class="noLable" prop="newPassword">
-                  <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword" />
-                  <span :class="isShowPwd?'eye-open':'eye-close'" @click="isShow"></span>
+                  <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
+                      <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
+                  </el-input>
               </el-form-item>
               <el-form-item class="noLable" prop="checkPassword">
-                  <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword" />
-                  <span :class="isShowPwd_again?'eye-open':'eye-close'" @click="isShow_again"></span>
+                  <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
+                    <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
+                  </el-input>
               </el-form-item>
               <div class="form-btn">
                   <el-button @click="goBack">返回</el-button>
@@ -111,27 +113,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  %mt1{
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right:10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .eye-open{
-    @extend %mt1;
-    background: url(../../../assets/images/eye-open.png) 0 0 no-repeat;
-    background-size: 20px 20px;
-  }
-  .eye-close{
-    @extend %mt1;
-    background: url(../../../assets/images/eye-close.png) 0 0 no-repeat;
-    background-size: 20px 20px;
-  }
   .el-input-inner /deep/ .el-input__inner{
-    padding-right:35px;
+    padding-right:36px;
     background: #F5F5F5;
     font-size:12px;
     &:focus{
@@ -148,8 +131,11 @@ export default {
           align-items: center;
           /deep/ button{
               width: 160px;
-              // margin: 0;
           }
+      }
+      .iconfont{
+          font-size: 20px;
+          color: #666;
       }
   }
 </style>
