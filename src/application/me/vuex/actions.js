@@ -2,15 +2,15 @@ import * as types from './mutation-types';
 import { default as userService } from '../service/user-service';
 
 export default {
-    getMyProfile({ commit }, userProfile) {
-        userService.getMyProfile(userProfile).then(userProfile => {
+    getMyProfile({ commit, state }) {
+        return userService.getMyProfile().then(userProfile => {
             commit(types.SET_USER_PROFILE, { userProfile: userProfile });
         });
     },
-    updateMyProfile({ commit }, userProfile) {
-        userService.updateMyProfile(userProfile);
+    updateMyProfile({ commit, state }) {
+        return userService.updateMyProfile(state.userProfile);
     },
     updateMyPassword({ commit }, userPassword) {
-        userService.updateMyPassword(userPassword);
+        return userService.updateMyPassword(userPassword);
     }
 };

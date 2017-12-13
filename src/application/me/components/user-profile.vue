@@ -41,48 +41,42 @@
 
 <script>
 import { mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
   data() {
     return {
-      userProfile: {
-        username: '', // 用户名
-        createdTime: '', // 创建时间
-        name: '', // 姓名
-        lastUpdatedTime: '' // 最后更新时间
-      },
+      userProfile: _.cloneDeep(this.$store.state.me.userProfile),
       rules: {
-        name: [
-          { required: true, message: '姓名不能为空', trigger: 'blur' }
-        ]
+        name: [{ required: true, message: "姓名不能为空", trigger: "blur" }]
       }
     };
   },
   created() {
-    this.getMyProfile();
+    this.getMyProfile().then(() => {
+      this.userProfile = _.cloneDeep(this.$store.state.me.userProfile);
+    });
   },
-  // computed: {
-  //   userProfile: {
-  //     get() {
-  //       return this.$store.state.userProfile;
-  //     },
-  //     set(value) {
-  //       this.$store.commit('getMyProfile', value);
-  //     }
-  //   }
-  // },
+  watch: {
+    userProfile: {
+      handler: _.debounce(function(userProfile) {
+        this.$store.commit("updateUserProfile", userProfile);
+      }, 500),
+      deep: true
+    }
+  },
   methods: {
     ...mapActions(["getMyProfile", "updateMyProfile"]),
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          this.updateMyProfile(this.userProfile);
+          this.updateMyProfile();
         } else {
-          console.log('error submit!!');
+          console.log("error submit!!");
           return false;
         }
       });
     },
-    // 返回上一级
     goBack() {
       this.$router.go(-1);
     }
@@ -91,29 +85,28 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .card{
-    .labelInTop{
-      margin:26px 0 0 21px;
-    }
+.card {
+  .labelInTop {
+    margin: 26px 0 0 21px;
   }
-  .um-modifyPassword{
-    padding:20px 22px 20px 20px;
-    font-size: 14px;
-    color: #333;
-    line-height: 1;
-    p{
-      display:inline-block;
-      margin-right:40px;
-
-    }
-    span{
-          font-size: 12px;
-          color: #999;
-    }
-    .modififyPassword{
-      float: right;
-      font-size:12px;
-      color:#2196f3;
-    }
+}
+.um-modifyPassword {
+  padding: 20px 22px 20px 20px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+  p {
+    display: inline-block;
+    margin-right: 40px;
   }
+  span {
+    font-size: 12px;
+    color: #999;
+  }
+  .modififyPassword {
+    float: right;
+    font-size: 12px;
+    color: #2196f3;
+  }
+}
 </style>
