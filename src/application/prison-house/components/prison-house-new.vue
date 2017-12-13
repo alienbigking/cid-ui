@@ -11,7 +11,6 @@
         <el-input type="textarea" resize="none"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button>返回</el-button>
           <el-button type="primary">新增</el-button>
       </el-form-item>
     </el-form>

@@ -104,7 +104,6 @@ export default {
     isShow_again() {
       this.isShowPwd_again = !this.isShowPwd_again;
     },
-    // 返回上一级
     goBack() {
       this.$router.go(-1);
     }
