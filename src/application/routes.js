@@ -2,6 +2,8 @@ import { routes as login } from './login';
 import { routes as dashboard } from './dashboard';
 import { routes as userProfile } from './me';
 import { routes as tenant } from './tenant';
+import { routes as prisonHouse } from './prison-house';
+import { routes as prisonArea } from './prison-area';
 import main from './main';
 
 export default [
@@ -22,5 +24,7 @@ export default [
         redirect: { name: 'dashboard' }
     },
     ...login,
-    ...tenant
+    ...tenant,
+    ...prisonHouse,
+    ...prisonArea
 ];

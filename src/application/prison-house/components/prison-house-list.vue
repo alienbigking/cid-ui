@@ -1,17 +1,16 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查询租户</span>
+            <span class="um-title">查询监舍</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="租户名称" v-model="filter.name"></el-input>
+                    <el-input placeholder="监区名称" v-model="filter.name"></el-input>
                     <el-button class="searchbtn">查询</el-button>
                 </div>
-                <!-- <el-button type="primary">新增监区</el-button> -->
             </div>
             <template>
                 <el-table class="my_table" :data="tableData" border :header-row-class-name="getHeaderClass">
-                  <el-table-column prop="name" label="租户名称">
+                  <el-table-column prop="name" label="监舍名称">
 
                   </el-table-column>
                   <el-table-column prop="id" label="编号">
@@ -63,21 +62,17 @@ export default {
     data() {
         return {
             filter: {
-                name: '',
-                id: '',
-                place: ''
+                name: ''
             },
             tableData: [
                 {
                     name: '十一监区',
-                    prePrison: '十二监区',
                     id: 123,
                     makeDate: '2019-10-11 12:12:12',
                     updateDate: '2012-12-12 12:12:12'
                 },
                 {
                     name: '十一监区',
-                    prePrison: '十二监区',
                     id: 32345,
                     makeDate: '2019-10-12 12:12:12',
                     updateDate: '2012-12-11 12:12:12'
@@ -113,7 +108,7 @@ export default {
 .container{
     height: 100%;
     .card{
-        // height: 100%;
+        height: 100%;
     }
     /deep/ .el-dialog__body{
         color: #333;
@@ -139,12 +134,6 @@ export default {
             width: 76px;
             background: #FCFCFC;
             color: #666;
-            &+button{
-                margin-left: 20px;
-                color: #fff;
-                background: #085EB5;
-                border-color: #085EB5;
-            }
         }
     }
     /deep/ .el-table__body-wrapper{

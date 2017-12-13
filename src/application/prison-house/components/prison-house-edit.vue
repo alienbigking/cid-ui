@@ -1,17 +1,18 @@
 <template>
   <div class="card">
     <div class="um-title">
-      <p>新增租户</p>
+      <p>修改监舍</p>
     </div>
     <el-form class="labelInTop">
-      <el-form-item class="w50" label="租户名称" >
+      <el-form-item class="w50" label="监舍名称" >
         <el-input></el-input>
       </el-form-item>
-      <el-form-item class="w100 textarea" label="租户描述">
+      <el-form-item class="w100 textarea" label="监舍描述">
         <el-input type="textarea" resize="none"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button type="primary">新增</el-button>
+          <el-button>返回</el-button>
+          <el-button type="primary">修改</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -19,11 +20,7 @@
 
 <script>
 export default {
-    data() {
-        return {
-            choosed: ''
-        };
-    }
+
 };
 </script>
 
@@ -35,7 +32,6 @@ export default {
       width: 100%;
       padding-right: 20px;
   }
-
 }
 
 </style>

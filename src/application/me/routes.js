@@ -4,11 +4,11 @@ export default [
   {
     path: '/userProfile',
     component: components.userProfile,
-    name: 'userProfile'
+    name: '修改个人信息'
   },
   {
     path: '/pwdModification',
     component: components.pwdModification,
-    name: 'pwdModification'
+    name: '修改密码'
   }
 ];

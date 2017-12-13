@@ -1,16 +1,23 @@
 <template>
   <div class="card">
     <div class="um-title">
-      <p>新增租户</p>
+      <p>新增监区</p>
     </div>
     <el-form class="labelInTop">
-      <el-form-item class="w50" label="租户名称" >
+      <el-form-item class="w50" label="监区名称" >
         <el-input></el-input>
       </el-form-item>
-      <el-form-item class="w100 textarea" label="租户描述">
+      <el-form-item class="w50" label="上级监区">
+        <el-select placeholder="十二监区" v-model="prePrison">
+          <el-option label="区域一" value="shanghai"></el-option>
+          <el-option label="区域二" value="beijing"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w100 textarea" label="监区描述">
         <el-input type="textarea" resize="none"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
+          <el-button>返回</el-button>
           <el-button type="primary">新增</el-button>
       </el-form-item>
     </el-form>
@@ -21,7 +28,7 @@
 export default {
     data() {
         return {
-            choosed: ''
+            prePrison: ''
         };
     }
 };
