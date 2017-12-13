@@ -4,13 +4,12 @@
             <span class="um-title">查询租户</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="租户名称" v-model="filter.name"></el-input>
-                    <el-button class="searchbtn">查询</el-button>
+                    <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
+                    <el-button class="searchbtn" :loading="searching" @click="handleSearch">查询</el-button>
                 </div>
-                <!-- <el-button type="primary">新增监区</el-button> -->
             </div>
             <template>
-                <el-table class="my_table" :data="tableData" border :header-row-class-name="getHeaderClass">
+                <el-table class="my_table" :data="tableData" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="租户名称">
 
                   </el-table-column>
@@ -67,6 +66,7 @@ export default {
                 id: '',
                 place: ''
             },
+            searching: false,
             tableData: [
                 {
                     name: '十一监区',
@@ -83,15 +83,16 @@ export default {
                     updateDate: '2012-12-11 12:12:12'
                 }
             ],
-            getHeaderClass(row, rowIndex) {
-                return 'tableHeader';
-            },
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
         };
     },
     methods: {
+        handleSearch(e) {
+            this.searching = true;
+            console.log(this.filter.name);
+        },
         handleCurrentChange(e) {
             console.log(e);
         },
@@ -102,19 +103,20 @@ export default {
         handleDelete(done) {
             // 执行删除操作
             done(); // 关闭对话框
+        },
+        render() {
+            // 获取租户列表
         }
     },
-  created() {
-    // this.$router.push('login');
-  }
+    created() {
+        // this.$router.push('login');
+        this.render();
+    }
 };
 </script>
 <style lang="scss" scoped>
 .container{
     height: 100%;
-    .card{
-        // height: 100%;
-    }
     /deep/ .el-dialog__body{
         color: #333;
         text-align: center;
@@ -151,26 +153,7 @@ export default {
         overflow: inherit;
     }
 }
-.filters{
-    padding: 20px 20px 23px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .filter{
-        display: inline-flex;
-        align-items: center;
-    }
-    .el-input,.el-select{
-        width: 176px;
-        margin-right: 20px;
-    }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
-    }
-}
+
 .cell{
     button:nth-child(1){
         color: #2196f3;
