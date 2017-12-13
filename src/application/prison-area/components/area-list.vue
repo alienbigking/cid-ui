@@ -12,52 +12,35 @@
                 <el-button type="primary">新增监区</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="tableData" border :header-row-class-name="getHeaderClass">
-                  <el-table-column prop="name" label="监区名称">
-
-                  </el-table-column>
-                  <el-table-column prop="prePrison" label="上级监区">
-
-                  </el-table-column>
-                  <el-table-column prop="id" label="编号">
-
-                  </el-table-column>
-                  <el-table-column prop="makeDate" label="创建时间" sortable>
-
-                  </el-table-column>
-                  <el-table-column prop="updateDate" label="最后更新时间" sortable>
-
-                  </el-table-column>
+                <el-table class="my_table" :data="tableData" border header-row-class-name="tableHeader">
+                  <el-table-column prop="name" label="监区名称"> </el-table-column>
+                  <el-table-column prop="prePrison" label="上级监区"> </el-table-column>
+                  <el-table-column prop="id" label="编号"> </el-table-column>
+                  <el-table-column prop="makeDate" label="创建时间" sortable> </el-table-column>
+                  <el-table-column prop="updateDate" label="最后更新时间" sortable> </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
-                    <template slot-scope="scope">
-                      <el-button type="text">修改</el-button>
-                      <el-button type="text">明细</el-button>
-                      <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
-                    </template>
-                  </el-table-column>
+                      <template slot-scope="scope">
+                          <el-button type="text">修改</el-button>
+                          <el-button type="text">明细</el-button>
+                          <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
+                      </template>
+                    </el-table-column>
                 </el-table>
                 <div class="pagination-box">
                     <span>共1201条信息</span>
-                    <el-pagination
-                      @current-change="handleCurrentChange"
-                      :current-page.sync="currentPage"
-                      :page-size="100"
-                      layout="prev, pager, next, jumper"
-                      :total="1000">
+                    <el-pagination layout="prev, pager, next, jumper" @current-change="handleCurrentChange"
+                        :current-page.sync="currentPage" :page-size="100" :total="1000">
                     </el-pagination>
                 </div>
             </template>
         </div>
-        <el-dialog
-            width="400px" :center="true" custom-class="noPadding"
-          :visible.sync="deleteFlag"
-          :before-close="handleDelete">
-          <i class="iconfont icon-tishishuoming"></i>
-          <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteFlag = false">取 消</el-button>
-            <el-button type="primary" @click="deleteFlag = false">确 定</el-button>
-          </span>
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag" :before-close="handleDelete">
+            <i class="iconfont icon-tishishuoming"></i>
+            <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="deleteFlag = false">取 消</el-button>
+                <el-button type="primary" @click="deleteFlag = false">确 定</el-button>
+            </span>
         </el-dialog>
     </div>
 </template>
@@ -88,9 +71,6 @@ export default {
                     updateDate: '2012-12-11 12:12:12'
                 }
             ],
-            getHeaderClass(row, rowIndex) {
-                return 'tableHeader';
-            },
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
@@ -117,9 +97,6 @@ export default {
 <style lang="scss" scoped>
 .container{
     height: 100%;
-    .card{
-        // height: 100%;
-    }
     /deep/ .el-dialog__body{
         color: #333;
         text-align: center;
@@ -154,26 +131,6 @@ export default {
     }
     /deep/ .el-table__body-wrapper{
         overflow: inherit;
-    }
-}
-.filters{
-    padding: 20px 20px 23px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .filter{
-        display: inline-flex;
-        align-items: center;
-    }
-    .el-input,.el-select{
-        width: 176px;
-        margin-right: 20px;
-    }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
     }
 }
 .cell{

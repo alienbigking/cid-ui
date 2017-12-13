@@ -33,18 +33,10 @@
         .el-icon-arrow-right:before{
             content: "\E603";
         }
-
-        .el-menu--collapse .el-submenu .el-menu{
-        }
     }
     .third{
         padding-left: 36px !important;
     }
-}
-.setting{
-    background: url('../../assets/images/setting.png') no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 .fs-16{
     font-size: 16px;
@@ -54,27 +46,30 @@
         font-size: 12px;
     }
     .el-form-item{
-        &.w50{
+        &.w50{ // 并排的表单
             margin-right: 0;
             padding-right: 20px;
             width: 50%;
             box-sizing: border-box;
         }
-        &.noLable{
+        &.w100{ // 独占一行的表单
+            margin-right: 0;
+            padding-right: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        &.noLable{ // 没有label的表单
             width: 100%;
             .el-form-item__content{
                 width: 100%;
             }
         }
-        &.textarea{
+        &.textarea{ // 有文本域的表单
             .el-textarea{
                 height: 134px;
             }
-            .el-form-item__content{
-                // height: 100%;
-            }
         }
-        &.hasButton{
+        &.hasButton{ // 有两个按钮且按钮位于右侧，按钮为76px宽的表单
             width: 100%;
             padding-right: 20px;
             .el-form-item__content{
@@ -85,7 +80,7 @@
                 }
             }
         }
-        &.el-form-item-div{
+        &.el-form-item-div{ // 有两个按钮的表单，按钮位于中间，两按钮上的字数相等，按钮间相隔22px
             display: flex;
             justify-content: center;
             align-items: center;
@@ -101,17 +96,27 @@
                 }
             }
         }
+        &.the-disabled{ // 不可修改的表单
+            .el-input__inner{
+                background: #F2F2F2;
+                border: 1px solid #DDDDDD;
+                cursor: not-allowed;
+                color: #999;
+                height: 36px;
+                vertical-align: top;
+            }
+        }
     }
     .el-textarea{
         .el-textarea__inner{
             height: 100%;
         }
     }
-    .el-form-item__content{
+    .el-form-item__content{ // 当有标签且标签与输入框在同一行时输入框的宽度
         width: calc(100% - 120px);
     }
 }
-.labelInTop{
+.labelInTop{ // lable在输入框上面的表单
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -180,21 +185,23 @@
         display: none;
     }
 }
-.custom-label{
-    line-height: 12px;
-    font-size: 12px;
-    margin-bottom: 10px;
-    color: #333;
-}
-.custom-inp{
-    width:100%;
-    height: 34px;
-    border:1px solid #d8dce5;
-    border-radius:4px;
-    background:#f2f2f2;
-    .custom-content{
-        display:block;
-        line-height: 36px;
-        padding-left:15px;
+.filters{ // 筛选框
+    padding: 20px 20px 23px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .filter{
+        display: inline-flex;
+        align-items: center;
+    }
+    .el-input,.el-select{
+        width: 176px;
+        margin-right: 20px;
+    }
+    .searchbtn{
+        background: #29b0a3;
+        color: #fff;
+        width: 100px;
+        border: 0;
     }
 }
