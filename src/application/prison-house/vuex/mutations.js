@@ -1,9 +1,10 @@
-// import * as types from './mutation-types';
-
 import * as types from './mutation-types';
 
 export default {
-    [types.GET_PRISON_HOUSE_LIST](state, { prisonHouseList }) {
-        state.prisonHouseList = prisonHouseList;
+    [types.SET_PRISON_HOUSE](state, { prisonHouse }) {
+        state.prisonHouse = prisonHouse;
+    },
+    [types.SET_PRISON_HOUSES](state, prisonHouses) {
+        state.prisonHouses = prisonHouses;
     }
 };

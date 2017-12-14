@@ -8,7 +8,7 @@
         <ul class="header-right">
             <li><router-link to="/index"><i class="iconfont icon-shezhi"></i></router-link></li>
             <li><el-badge is-dot><router-link to="/index"><i class="iconfont icon-xiaoxizhongxin"></i></router-link></el-badge></li>
-            <li class="hasImg"><router-link to="/userProfile"><img src="../../../assets/images/avatar.png" alt=""><span>管理员</span></router-link></li>
+            <li class="hasImg"><router-link to="/me"><img src="../../../assets/images/avatar.png" alt=""><span>管理员</span></router-link></li>
             <!-- <li><router-link to="/index">管理员</router-link></li> -->
             <li @click="logout"><i class="iconfont icon-tuichu"></i></li>
         </ul>

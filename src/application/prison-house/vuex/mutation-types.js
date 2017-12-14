@@ -1,1 +1,2 @@
-export const GET_PRISON_HOUSE_LIST = 'getPrisonHouseList';
+export const SET_PRISON_HOUSE = 'setPrisonHouse';
+export const SET_PRISON_HOUSES = 'setPrisonHouses';

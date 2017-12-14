@@ -1,1 +1,2 @@
-// export const SET_TOKEN = 'SET_TOKEN';
+export const SET_PRISON_AREA = 'setPrisonArea';
+export const SET_PRISON_AREAS = 'setPrisonAreas';

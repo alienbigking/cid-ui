@@ -5,10 +5,10 @@
     </div>
     <el-form class="labelInTop">
       <el-form-item class="w50" label="监舍名称" >
-        <el-input></el-input>
+        <el-input v-model="prisonHouse.name"></el-input>
       </el-form-item>
       <el-form-item class="w100 textarea" label="监舍描述">
-        <el-input type="textarea" resize="none" v-model="ddd"></el-input>
+        <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
           <el-button>返回</el-button>
@@ -19,11 +19,30 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
   data() {
     return {
-      ddd: 'fdsfds'
+      prisonHouse: _.cloneDeep(this.$store.state.prisonHouse.prisonHouse)
     };
+  },
+  created() {
+    this.getPrisonHouse().then(() => {
+      this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
+    });
+  },
+  watch: {
+    prisonHouse: {
+      handler: _.debounce(function(prisonHouse) {
+        this.$store.commit("updatePrisonHouse", prisonHouse);
+      }, 500),
+      deep: true
+    }
+  },
+  methods: {
+    ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ])
   }
 };
 </script>

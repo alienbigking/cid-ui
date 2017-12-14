@@ -1,9 +1,9 @@
 import { routes as login } from './login';
 import { routes as dashboard } from './dashboard';
-import { routes as userProfile } from './me';
+import { routes as me } from './me';
 import { routes as tenant } from './tenant';
-import { routes as prisonHouse } from './prison-house';
 import { routes as prisonArea } from './prison-area';
+import { routes as prisonHouse } from './prison-house';
 import main from './main';
 
 export default [
@@ -16,15 +16,15 @@ export default [
                 redirect: { name: 'dashboard' }
             },
             ...dashboard,
-            ...userProfile
+            ...me,
+            ...tenant,
+            ...prisonArea,
+            ...prisonHouse
         ]
     },
     {
         path: '*',
         redirect: { name: 'dashboard' }
     },
-    ...login,
-    ...tenant,
-    ...prisonHouse,
-    ...prisonArea
+    ...login
 ];

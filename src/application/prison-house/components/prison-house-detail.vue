@@ -5,18 +5,15 @@
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>上级监舍：</label><span>十二监舍</span>
+                        <label>编号：</label><span> {{prisonHouse.id}}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>编号：</label><span> 934389</span>
+                        <label>创建时间：</label><span> {{prisonHouse.createdTime}}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>创建时间：</label><span>2010-10-10 12:12:12</span>
-                    </el-col>
-                    <el-col :span="12">
-                        <label>最后更新时间：</label><span>2010-10-10 12:12:12</span>
+                        <label>最后更新时间：</label><span> {{prisonHouse.lastUpdatedTime}}</span>
                     </el-col>
                 </el-row>
             </div>
@@ -25,7 +22,7 @@
             <div class="form-container">
                 <label class="title">监舍描述：</label>
                 <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    {{prisonHouse.description}}
                 </div>
             </div>
             <el-button>返回</el-button>
@@ -34,22 +31,19 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   data() {
     return {
-      user: {
-        username: "",
-        password: ""
-      }
+      prisonHouse: _.cloneDeep(this.$store.state.prisonHouse.prisonHouse)
     };
   },
   methods: {
-    ...mapActions(["login"]),
-    onSubmit() {
-       this.login(this.user);
-       this.$router.push('dashboard');
-    }
+    ...mapActions(["getPrisonHouse"])
+  },
+  created() {
+    this.getPrisonHouse();
   }
 };
 </script>

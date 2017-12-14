@@ -14,6 +14,8 @@ export default {
                                 query: { redirect: router.currentRoute.fullPath }
                             });
                             break;
+                        case 500:
+                            return '服务器内部错误';
                         case 400:
                             console.log(400);
                     }
