@@ -6,5 +6,8 @@ export default {
     },
     [types.SET_PRISON_HOUSES](state, prisonHouses) {
         state.prisonHouses = prisonHouses;
+    },
+    [types.UPDATE__PRISON_HOUSE](state, prisonHouse) {
+        Object.assign(state.prisonHouses, prisonHouse);
     }
 };

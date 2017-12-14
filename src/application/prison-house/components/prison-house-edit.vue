@@ -11,8 +11,8 @@
         <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button>返回</el-button>
-          <el-button type="primary">修改</el-button>
+          <el-button @click="goBack">返回</el-button>
+          <el-button type="primary" @click="modification">修改</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -29,7 +29,7 @@ export default {
     };
   },
   created() {
-    this.getPrisonHouse().then(() => {
+    this.getPrisonHouse(this.$route.params.id).then(() => {
       this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
     });
   },
@@ -42,7 +42,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ])
+    ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ]),
+    modification() {
+      this.updatePrisonHouse(this.prisonHouse);
+    },
+    goBack() {
+        this.$router.go(-1);
+    }
   }
 };
 </script>

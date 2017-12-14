@@ -12,8 +12,8 @@ export default {
             commit(types.SET_PRISON_AREAS, { prisonAreas: prisonAreas });
         });
     },
-    addPrisonArea({ commit, state }) {
-        return prisonAreaService.addPrisonTenant(state.prisonArea);
+    addPrisonArea({ commit, state }, data) {
+        return prisonAreaService.add(data);
     },
     updatePrisonArea({ commit, state }) {
         return prisonAreaService.updatePrisonTenant(state.prisonArea);
