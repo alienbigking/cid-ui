@@ -12,11 +12,11 @@ export default {
             commit(types.SET_PRISON_AREAS, prisonAreas);
         });
     },
-    addPrisonArea({ commit, state }, data) {
-        return prisonAreaService.add(data);
+    addPrisonArea({ commit, state }) {
+        return prisonAreaService.add(state.prisonArea);
     },
     updatePrisonArea({ commit, state }) {
-        return prisonAreaService.updatePrisonTenant(state.prisonArea);
+        return prisonAreaService.update(state.prisonArea);
     },
     deletePrisonArea({ commit }, id) {
         return prisonAreaService.delete(id);
