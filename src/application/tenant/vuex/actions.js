@@ -12,11 +12,11 @@ export default {
             commit(types.SET_TENANTS, tenants);
         });
     },
-    addTenant({ commit, state }, tenant) {
-        return tenantService.addTenant(tenant);
+    addPrisonTenant({ commit, state }, tenant) {
+        return tenantService.addPrisonTenant(tenant);
     },
-    updateTenant({ commit, state }, tenant) {
-        return tenantService.updateTenant(tenant);
+    updatePrisonTenant({ commit, state }, tenant) {
+        return tenantService.updatePrisonTenant(tenant);
     },
     deleteTenant({ commit }, id) {
         return tenantService.delete(id);

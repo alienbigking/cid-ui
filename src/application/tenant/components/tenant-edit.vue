@@ -39,7 +39,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["getTenant", "updateTenant"]),
+        ...mapActions(["getTenant", "updatePrisonTenant"]),
         goBack() {
            this.$router.push(`/tenant/list`);
         },
@@ -53,7 +53,7 @@ export default {
                         description: e.description,
                         code: e.code
                     };
-                    this.updateTenant(params).then(res => {
+                    this.updatePrisonTenant(params).then(res => {
                         this.editing = false;
                         this.$message.success('修改成功');
                         this.$router.push(`/tenant/list`);

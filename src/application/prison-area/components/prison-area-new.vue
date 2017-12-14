@@ -71,7 +71,7 @@ export default {
     created() {
         this.render();
     }
-  }
+  };
 </script>
 
 <style lang="scss" scoped>

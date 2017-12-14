@@ -2,27 +2,27 @@ import * as components from './components';
 
 export default [
     {
-        path: '/prisonHouse/detail/:id',
-        component: components.prisonHouseDetail,
+        path: '/tenant/detail/:id',
+        component: components.tenantDetail,
         name: '租户明细'
     },
     {
-        path: '/prisonHouse/list',
-        component: components.prisonHouseList,
+        path: '/tenant/list',
+        component: components.tenantList,
         name: '查询租户'
     },
     {
-        path: '/prisonHouse/new',
-        component: components.prisonHouseNew,
+        path: '/tenant/new',
+        component: components.tenantNew,
         name: '新增租户'
     },
     {
-        path: '/prisonHouse/edit/:id',
-        component: components.prisonHouseEdit,
+        path: '/tenant/edit/:id',
+        component: components.tenantEdit,
         name: '修改租户'
     },
     {
-        path: '/prisonHouse/dashboard',
+        path: '/tenant/dashboard',
         redirect: { name: 'dashboard' }
     }
 ];
