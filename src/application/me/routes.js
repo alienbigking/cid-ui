@@ -2,12 +2,12 @@ import * as components from './components';
 
 export default [
   {
-    path: '/userProfile',
+    path: '/me',
     component: components.userProfile,
     name: '修改个人信息'
   },
   {
-    path: '/pwdModification',
+    path: '/me/password',
     component: components.pwdModification,
     name: '修改密码'
   }

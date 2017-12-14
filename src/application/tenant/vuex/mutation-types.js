@@ -1,2 +1,2 @@
-export const GET_TENANT_LIST = 'getTenantList';
-export const UPDATE_USER_PROFILE = 'updateUserProfile';
+export const SET_TENANT = 'setTenant';
+export const SET_TENANTS = 'setTenants';
