@@ -7,8 +7,9 @@ export default {
             commit(types.SET_TENANT, { tenant: tenant });
         });
     },
-    getAll({ commit, state }) {
-        return tenantService.getAll().then(tenants => {
+    getAllTenant({ commit, state }, params) {
+        console.log(params);
+        return tenantService.getAll(params).then(tenants => {
             commit(types.SET_TENANTS, { tenants: tenants });
         });
     },

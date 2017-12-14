@@ -42,6 +42,20 @@
     font-size: 16px;
 }
 .el-form{
+    &.el-form--label-top{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        .el-form-item__label{
+            line-height: 1;
+            font-size: 12px;
+            margin-bottom: 12px;
+            color:#333;
+        }
+        .el-form-item__content{
+            width: 100%;
+        }
+    }
     .el-input__inner{
         font-size: 12px;
     }
@@ -104,6 +118,7 @@
                 color: #999;
                 height: 36px;
                 vertical-align: top;
+                line-height: 36px;
             }
         }
     }
@@ -132,6 +147,9 @@
             width: 100%;
         }
     }
+}
+.formPadding{
+    padding: 20px 0 20px 20px;
 }
 .el-table{
     th,td{

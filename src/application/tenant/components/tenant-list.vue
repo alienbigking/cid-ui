@@ -63,9 +63,12 @@ export default {
     data() {
         return {
             filter: {
-                name: '',
-                id: '',
-                place: ''
+                name: ''
+            },
+            pagination: {
+                page: 0,
+                size: 10,
+                sort: ''
             },
             searching: false,
             tableData: _.cloneDeep(this.$store.state.tenant.tenantList),
@@ -75,7 +78,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["getTenantList"]),
+        ...mapActions(["getAllTenant"]),
         handleSearch(e) {
             this.searching = true;
             console.log(this.filter.name);
@@ -92,9 +95,13 @@ export default {
             done(); // 关闭对话框
         },
         render() {
-            this.getTenantList().then(res => {
-                if (!res) return false;
-                this.tableData = res;
+            let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
+                if (item || item === 0) result[key] = item;
+            });
+            this.getAllTenant(params).then(res => {
+                console.log(res);
+                // if (!res) return false;
+                // this.tableData = res;
             });
             // 获取租户列表
         }

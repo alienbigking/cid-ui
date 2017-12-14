@@ -6,8 +6,8 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/tenants`).then(response => {
+    getAll(e) {
+        return axios.get(`api/tenants`, { params: e }).then(response => {
             return response.data;
         });
     },
