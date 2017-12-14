@@ -11,10 +11,10 @@ export default {
             return response.data;
         });
     },
-    addPrisonTenant(tenant) {
+    addTenant(tenant) {
         return axios.post('api/tenants/prison-tenants', tenant);
     },
-    updatePrisonTenant(tenant) {
+    updateTenant(tenant) {
         return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant);
     },
     delete(id) {

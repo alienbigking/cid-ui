@@ -35,15 +35,16 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["getAllTenant"]),
+        ...mapActions(["addTenant"]),
         handleAdd(e) {
             this.$refs["formName"].validate((valid) => {
                 if (valid) {
                     let params = _.transform(e, (result, item, key) => {
                         if (item || item === 0) result[key] = item;
                     });
-                    console.log(params);
-                    this.getAllTenant();
+                    this.addTenant(params).then(res => {
+                        console.log(res);
+                    });
                     // this.getAllTenant(params).then(res => {
                     //     console.log(res);
                     //     // if (!res) return false;

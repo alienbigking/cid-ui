@@ -13,13 +13,13 @@
                   <el-table-column prop="name" label="租户名称">
 
                   </el-table-column>
-                  <el-table-column prop="id" label="编号">
+                  <el-table-column prop="code" label="编号">
 
                   </el-table-column>
-                  <el-table-column prop="makeDate" label="创建时间" sortable>
+                  <el-table-column prop="createdTime" label="创建时间" sortable>
 
                   </el-table-column>
-                  <el-table-column prop="updateDate" label="最后更新时间" sortable>
+                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
 
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
@@ -31,26 +31,23 @@
                   </el-table-column>
                 </el-table>
                 <div class="pagination-box">
-                    <span>共1201条信息</span>
+                    <span>共{{ totalElements }}条信息</span>
                     <el-pagination
                       @current-change="handleCurrentChange"
                       :current-page.sync="currentPage"
-                      :page-size="100"
+                      :page-size="pagination.size"
                       layout="prev, pager, next, jumper"
-                      :total="1000">
+                      :total="totalElements">
                     </el-pagination>
                 </div>
             </template>
         </div>
-        <el-dialog
-            width="400px" :center="true" custom-class="noPadding"
-          :visible.sync="deleteFlag"
-          :before-close="handleDelete">
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="deleteFlag = false">取 消</el-button>
-            <el-button type="primary" @click="deleteFlag = false">确 定</el-button>
+            <el-button type="primary" @click="handleDelete" :loading="deleting">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -68,20 +65,22 @@ export default {
             pagination: {
                 page: 0,
                 size: 10,
-                sort: ''
+                sort: 'createdTime,asc'
             },
+            totalElements: 0,
             searching: false,
-            tableData: _.cloneDeep(this.$store.state.tenant.tenantList),
+            deleting: false,
+            tableData: _.cloneDeep(this.$store.state.tenant.tenants.content),
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
         };
     },
     methods: {
-        ...mapActions(["getAllTenant"]),
+        ...mapActions(["getAllTenants", "deleteTenant"]),
         handleSearch(e) {
             this.searching = true;
-            console.log(this.filter.name);
+            this.render();
         },
         handleCurrentChange(e) {
             console.log(e);
@@ -90,24 +89,29 @@ export default {
             this.deleteItem = item;
             this.deleteFlag = true;
         },
-        handleDelete(done) {
+        handleDelete() {
+            this.deleting = true;
+            this.deleteTenant(this.deleteItem.id).then(res => {
+                this.$message.success("删除成功");
+                this.deleting = false;
+                this.deleteFlag = false;
+                this.render();
+            });
             // 执行删除操作
-            done(); // 关闭对话框
         },
         render() {
             let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
                 if (item || item === 0) result[key] = item;
             });
-            this.getAllTenant(params).then(res => {
-                console.log(res);
-                // if (!res) return false;
-                // this.tableData = res;
+            this.getAllTenants(params).then(res => {
+                this.tableData = this.$store.state.tenant.tenants.content;
+                this.totalElements = this.$store.state.tenant.tenants.totalElements;
+                this.currentPage = this.$store.state.tenant.tenants.number + 1;
+                this.searching = false;
             });
-            // 获取租户列表
         }
     },
     created() {
-        // this.$router.push('login');
         this.render();
     }
 };
