@@ -56,7 +56,8 @@
     </div>
 </template>
 <script>
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
     data() {
@@ -64,20 +65,21 @@ export default {
             filter: {
                 name: ''
             },
-            tableData: [
-                {
-                    name: '十一监区',
-                    id: 123,
-                    makeDate: '2019-10-11 12:12:12',
-                    updateDate: '2012-12-12 12:12:12'
-                },
-                {
-                    name: '十一监区',
-                    id: 32345,
-                    makeDate: '2019-10-12 12:12:12',
-                    updateDate: '2012-12-11 12:12:12'
-                }
-            ],
+            // tableData: [
+            //     {
+            //         name: '十一监舍',
+            //         id: 123,
+            //         makeDate: '2019-10-11 12:12:12',
+            //         updateDate: '2012-12-12 12:12:12'
+            //     },
+            //     {
+            //         name: '十一监舍',
+            //         id: 32345,
+            //         makeDate: '2019-10-12 12:12:12',
+            //         updateDate: '2012-12-11 12:12:12'
+            //     }
+            // ],
+            tableData: _.cloneDeep(this.$store.state.tenant.tenantList),
             getHeaderClass(row, rowIndex) {
                 return 'tableHeader';
             },
@@ -87,6 +89,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(["getPrisonHouseList"]),
         handleCurrentChange(e) {
             console.log(e);
         },
@@ -100,7 +103,10 @@ export default {
         }
     },
   created() {
-    // this.$router.push('login');
+    this.getPrisonHouseList().then(res => {
+        if (!res) return false;
+        this.tableData = res;
+    });
   }
 };
 </script>

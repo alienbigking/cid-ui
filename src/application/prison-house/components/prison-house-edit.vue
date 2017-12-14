@@ -8,7 +8,7 @@
         <el-input></el-input>
       </el-form-item>
       <el-form-item class="w100 textarea" label="监舍描述">
-        <el-input type="textarea" resize="none"></el-input>
+        <el-input type="textarea" resize="none" v-model="ddd"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
           <el-button>返回</el-button>
@@ -20,7 +20,11 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      ddd: 'fdsfds'
+    };
+  }
 };
 </script>
 

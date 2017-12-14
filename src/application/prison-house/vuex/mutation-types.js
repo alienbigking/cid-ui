@@ -1,1 +1,1 @@
-// export const SET_TOKEN = 'SET_TOKEN';
+export const GET_PRISON_HOUSE_LIST = 'getPrisonHouseList';
