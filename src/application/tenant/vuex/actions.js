@@ -2,12 +2,12 @@ import * as types from './mutation-types';
 import { default as tenantService } from '../service/tenant-service';
 
 export default {
-    get({ commit, state }) {
+    getTenant({ commit, state }) {
         return tenantService.get().then(tenant => {
             commit(types.SET_TENANT, { tenant: tenant });
         });
     },
-    getAll({ commit, state }) {
+    getAllTenants({ commit, state }) {
         return tenantService.getAll().then(tenants => {
             commit(types.SET_TENANTS, { tenants: tenants });
         });
@@ -18,7 +18,7 @@ export default {
     updatePrisonTenant({ commit, state }) {
         return tenantService.updatePrisonTenant(state.tenant);
     },
-    delete({ commit }, id) {
+    deleteTenant({ commit }, id) {
         return tenantService.delete(id);
     }
 };
