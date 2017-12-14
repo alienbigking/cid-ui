@@ -9,7 +9,7 @@ export default {
     },
     getAllPrisonAreas({ commit, state }) {
         return prisonAreaService.getAll().then(prisonAreas => {
-            commit(types.SET_PRISON_AREAS, { prisonAreas: prisonAreas });
+            commit(types.SET_PRISON_AREAS, prisonAreas);
         });
     },
     addPrisonArea({ commit, state }) {

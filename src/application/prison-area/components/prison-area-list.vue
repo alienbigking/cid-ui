@@ -87,11 +87,14 @@ export default {
         handleDelete(done) {
             // 执行删除操作
             done(); // 关闭对话框
+        },
+        render() {
+            console.log(13);
         }
     },
-  created() {
-    // this.$router.push('login');
-  }
+    created() {
+        this.render();
+    }
 };
 </script>
 <style lang="scss" scoped>

@@ -2,7 +2,7 @@ import * as components from './components';
 
 export default [
     {
-        path: '/tenant/detail',
+        path: '/tenant/detail/:id',
         component: components.tenantDetail,
         name: '租户明细'
     },
@@ -17,7 +17,7 @@ export default [
         name: '新增租户'
     },
     {
-        path: '/tenant/edit',
+        path: '/tenant/edit/:id',
         component: components.tenantEdit,
         name: '修改租户'
     },
