@@ -36,7 +36,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["addTenant"]),
+        ...mapActions(["addPrisonTenant"]),
         handleAdd(e) {
             this.$refs["formName"].validate((valid) => {
                 if (valid) {
@@ -44,7 +44,7 @@ export default {
                     let params = _.transform(e, (result, item, key) => {
                         if (item || item === 0) result[key] = item;
                     });
-                    this.addTenant(params).then(res => {
+                    this.addPrisonTenant(params).then(res => {
                         this.adding = false;
                         this.$router.push("/tenant/list");
                     });
