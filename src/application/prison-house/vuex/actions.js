@@ -12,11 +12,11 @@ export default {
             commit(types.SET_PRISON_HOUSES, { prisonHouses: prisonHouses });
         });
     },
-    addPrisonHouse({ commit, state }) {
-        return prisonHouseService.addPrisonTenant(state.prisonHouse);
+    addPrisonHouse({ commit, state }, prisonHouse) {
+        return prisonHouseService.add(prisonHouse);
     },
     updatePrisonHouse({ commit, state }) {
-        return prisonHouseService.updatePrisonTenant(state.prisonHouse);
+        return prisonHouseService.update(state.prisonHouse);
     },
     deletePrisonHouse({ commit }, id) {
         return prisonHouseService.delete(id);

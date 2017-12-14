@@ -34,7 +34,7 @@
     <div class="um-modifyPassword card">
       <p>修改密码</p>
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
-      <router-link class="modififyPassword" to="pwdModification">修改</router-link>
+      <router-link class="modififyPassword" to="/me/password">修改</router-link>
     </div>
   </div>
 </template>

@@ -16,10 +16,10 @@
                   <el-table-column prop="id" label="编号">
 
                   </el-table-column>
-                  <el-table-column prop="makeDate" label="创建时间" sortable>
+                  <el-table-column prop="createdTime" label="创建时间" sortable>
 
                   </el-table-column>
-                  <el-table-column prop="updateDate" label="最后更新时间" sortable>
+                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
 
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
@@ -56,7 +56,8 @@
     </div>
 </template>
 <script>
-// import { mapActions } from "vuex";
+import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
     data() {
@@ -64,20 +65,7 @@ export default {
             filter: {
                 name: ''
             },
-            tableData: [
-                {
-                    name: '十一监区',
-                    id: 123,
-                    makeDate: '2019-10-11 12:12:12',
-                    updateDate: '2012-12-12 12:12:12'
-                },
-                {
-                    name: '十一监区',
-                    id: 32345,
-                    makeDate: '2019-10-12 12:12:12',
-                    updateDate: '2012-12-11 12:12:12'
-                }
-            ],
+            tableData: _.cloneDeep(this.$store.state.prisonHouse.prisonHouses),
             getHeaderClass(row, rowIndex) {
                 return 'tableHeader';
             },
@@ -87,6 +75,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(["getAllPrisonHouses"]),
         handleCurrentChange(e) {
             console.log(e);
         },
@@ -100,7 +89,7 @@ export default {
         }
     },
   created() {
-    // this.$router.push('login');
+    this.getAllPrisonHouses();
   }
 };
 </script>
