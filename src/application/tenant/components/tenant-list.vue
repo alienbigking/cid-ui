@@ -5,6 +5,7 @@
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="handleSearch">查询</el-button>
                 </div>
             </div>
@@ -24,8 +25,8 @@
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
-                      <el-button type="text">修改</el-button>
-                      <el-button type="text">明细</el-button>
+                      <el-button type="text" @click="goPage('/tenant/edit/' + scope.row.id)">修改</el-button>
+                      <el-button type="text" @click="goPage('/tenant/detail/' + scope.row.id)">明细</el-button>
                       <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                   </el-table-column>
@@ -60,7 +61,8 @@ export default {
     data() {
         return {
             filter: {
-                name: ''
+                name: '',
+                code: ''
             },
             pagination: {
                 page: 0,
@@ -83,7 +85,11 @@ export default {
             this.render();
         },
         handleCurrentChange(e) {
-            console.log(e);
+            this.pagination.page = e - 1;
+            this.render();
+        },
+        goPage(e) {
+            this.$router.push(e);
         },
         showDelete(e, item) {
             this.deleteItem = item;
@@ -97,9 +103,9 @@ export default {
                 this.deleteFlag = false;
                 this.render();
             });
-            // 执行删除操作
         },
         render() {
+            // 去除对象中的空属性
             let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
                 if (item || item === 0) result[key] = item;
             });

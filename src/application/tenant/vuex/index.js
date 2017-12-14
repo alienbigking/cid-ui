@@ -2,8 +2,8 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    tenants: { content: [] },
-    tenant: {}
+    prisonHouses: { content: [] },
+    prisonHouse: {}
 };
 
 export default {

@@ -33,18 +33,10 @@ export default {
       this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
     });
   },
-  watch: {
-    prisonHouse: {
-      handler: _.debounce(function(prisonHouse) {
-        this.$store.commit("updatePrisonHouse", prisonHouse);
-      }, 500),
-      deep: true
-    }
-  },
   methods: {
     ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ]),
     modification() {
-      this.updatePrisonHouse(this.prisonHouse);
+      this.updatePrisonHouse();
     },
     goBack() {
         this.$router.go(-1);
