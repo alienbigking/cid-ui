@@ -6,15 +6,15 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/tenants`).then(response => {
+    getAll(e) {
+        return axios.get(`api/tenants`, { params: e }).then(response => {
             return response.data;
         });
     },
-    addPrisonTenant(tenant) {
+    addTenant(tenant) {
         return axios.post('api/tenants/prison-tenants', tenant);
     },
-    updatePrisonTenant(tenant) {
+    updateTenant(tenant) {
         return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant);
     },
     delete(id) {

@@ -47,7 +47,7 @@
             font-size: 12px;
         }
         .pagination-box{
-            padding: 20px 45px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -61,6 +61,7 @@
             }
             .el-pagination{
                 width: 512px;
+                text-align: right;
             }
         }
         .el-input__prefix, .el-input__suffix{

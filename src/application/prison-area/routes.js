@@ -3,22 +3,22 @@ import * as components from './components';
 export default [
     {
         path: '/prison-area/detail',
-        component: components.areaDetail,
+        component: components.prisonAreaDetail,
         name: '监区明细'
     },
     {
         path: '/prison-area/list',
-        component: components.areaList,
+        component: components.prisonAreaList,
         name: '查询监区'
     },
     {
         path: '/prison-area/new',
-        component: components.areaNew,
+        component: components.prisonAreaNew,
         name: '新增监区'
     },
     {
         path: '/prison-area/edit',
-        component: components.areaEdit,
+        component: components.prisonAreaEdit,
         name: '修改监区'
     },
     {

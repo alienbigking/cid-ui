@@ -7,13 +7,13 @@ export default {
             commit(types.SET_PRISON_AREA, { prisonArea: prisonArea });
         });
     },
-    getAllPrisonArea({ commit, state }) {
+    getAllPrisonAreas({ commit, state }) {
         return prisonAreaService.getAll().then(prisonAreas => {
             commit(types.SET_PRISON_AREAS, { prisonAreas: prisonAreas });
         });
     },
-    addPrisonArea({ commit, state }, prisonArea) {
-        return prisonAreaService.add(prisonArea);
+    addPrisonArea({ commit, state }) {
+        return prisonAreaService.addPrisonTenant(state.prisonArea);
     },
     updatePrisonArea({ commit, state }) {
         return prisonAreaService.updatePrisonTenant(state.prisonArea);

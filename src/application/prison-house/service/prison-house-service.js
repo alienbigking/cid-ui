@@ -6,8 +6,8 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/prison-houses`).then(response => {
+    getAll(e = { name: "house" }) {
+        return axios.get(`api/prison-houses`, { params: e }).then(response => {
             return response.data;
         });
     },
