@@ -5,7 +5,6 @@ export default {
         state.prisonArea = prisonArea;
     },
     [types.SET_PRISON_AREAS](state, prisonAreas) {
-        console.log(prisonAreas);
         state.prisonAreas = prisonAreas;
     }
 };
