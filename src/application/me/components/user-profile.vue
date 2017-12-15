@@ -71,6 +71,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           this.updateMyProfile();
+          this.$message.success("修改成功");
         } else {
           console.log("error submit!!");
           return false;

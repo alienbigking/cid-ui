@@ -5,25 +5,23 @@
         <p>修改密码</p>
       </div>
       <el-form class="w340" :model="userPassword" :rules="rules" ref="ruleForm">
-          <!-- <div class="form-box"> -->
-              <el-form-item class="noLable" prop="oldPassword">
-                  <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
-              </el-form-item>
-              <el-form-item class="noLable" prop="newPassword">
-                  <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
-                      <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
-                  </el-input>
-              </el-form-item>
-              <el-form-item class="noLable" prop="checkPassword">
-                  <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
-                    <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
-                  </el-input>
-              </el-form-item>
-              <div class="form-btn">
-                  <el-button @click="goBack">返回</el-button>
-                  <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
-              </div>
-          <!-- </div> -->
+          <el-form-item class="noLable" prop="oldPassword">
+              <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
+          </el-form-item>
+          <el-form-item class="noLable" prop="newPassword">
+              <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
+                  <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
+              </el-input>
+          </el-form-item>
+          <el-form-item class="noLable" prop="checkPassword">
+              <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
+                <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
+              </el-input>
+          </el-form-item>
+          <div class="form-btn">
+              <el-button @click="goBack">返回</el-button>
+              <el-button type="primary" @click="submitForm('ruleForm')">确认</el-button>
+          </div>
       </el-form>
     </div>
   </div>

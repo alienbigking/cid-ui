@@ -80,6 +80,7 @@ export default {
         ...mapActions(["getAllPrisonHouses", "deletePrisonHouse"]),
         handleSearch(e) {
             this.searching = true;
+            this.pagination.page = 0;
             this.render();
         },
         handleCurrentChange(e) {
@@ -105,6 +106,7 @@ export default {
                 if (item || item === 0) result[key] = item;
             });
             this.getAllPrisonHouses(params).then(res => {
+                console.log(this.$store.state.prisonHouse.prisonHouses.content);
                 this.tableData = this.$store.state.prisonHouse.prisonHouses.content;
                 this.totalElements = this.$store.state.prisonHouse.prisonHouses.totalElements;
                 this.currentPage = this.$store.state.prisonHouse.prisonHouses.number + 1;
