@@ -15,7 +15,11 @@ export default {
         return axios.post('api/tenants/prison-tenants', tenant);
     },
     updatePrisonTenant(tenant) {
-        return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant);
+        return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant).then(res => {
+            // console.log(res)
+        }).catch(err => {
+            console.log(err);
+        });
     },
     delete(id) {
         return axios.delete(`api/tenants/${id}`);

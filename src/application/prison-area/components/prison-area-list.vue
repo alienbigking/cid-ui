@@ -121,7 +121,7 @@ export default {
         }
     },
     created() {
-        this.getAllPrisonAreasByJail(_.merge({ jailId: "13427caf-e07b-11e7-b5c5-525400c79e4e" }, this.pagination)).then(res => {
+        this.getAllPrisonAreasByJail("4090d2ba-e157-11e7-b5c5-525400c79e4e").then(res => {
             this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
             this.getting = false;
         });

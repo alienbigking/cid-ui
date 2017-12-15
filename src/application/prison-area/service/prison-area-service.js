@@ -11,8 +11,8 @@ export default {
             return response.data;
         });
     },
-    getByJail(jailId, params) {
-        return axios.get(`api/prison-areas/get-by-jail/${jailId}`, { params: params }).then(response => {
+    getByJail(jailId) {
+        return axios.get(`api/prison-areas/get-by-jail/${jailId}`).then(response => {
             return response.data;
         });
     },
