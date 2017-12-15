@@ -1,21 +1,4 @@
 <template>
-  <!-- <div class="card">
-    <div class="um-title">
-      <p>修改监舍</p>
-    </div>
-    <el-form class="labelInTop">
-      <el-form-item class="w50" label="监舍名称" >
-        <el-input v-model="prisonHouse.name"></el-input>
-      </el-form-item>
-      <el-form-item class="w100 textarea" label="监舍描述">
-        <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
-      </el-form-item>
-      <el-form-item class="hasButton">
-          <el-button @click="goBack">返回</el-button>
-          <el-button type="primary" @click="modification">修改</el-button>
-      </el-form-item>
-    </el-form>
-  </div> -->
   <div>
       <div class="card">
           <span class="um-title">修改监舍</span>
@@ -54,14 +37,15 @@ export default {
   },
   methods: {
     ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ]),
-   onSubmit(e) {
+    onSubmit(e) {
       this.$refs["formName"].validate((valid) => {
           if (valid) {
             let params = {
                 id: this.prisonHouseId,
-                jailId: "13428048-e07b-11e7-b5c5-525400c79e4e",
+                // jailId: "13428048-e07b-11e7-b5c5-525400c79e4e",
                 name: e.name,
                 description: e.description
+
             };
             console.log(params);
             this.updatePrisonHouse(params).then(res => {
@@ -70,7 +54,7 @@ export default {
             });
           }
       });
-   },
+    },
     goBack() {
         this.$router.go(-1);
     }

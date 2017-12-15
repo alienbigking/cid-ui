@@ -2,8 +2,8 @@ import * as types from './mutation-types';
 import { default as prisonAreaService } from '../service/prison-area-service';
 
 export default {
-    getPrisonArea({ commit, state }) {
-        return prisonAreaService.get().then(prisonArea => {
+    getPrisonArea({ commit, state }, id) {
+        return prisonAreaService.get(id).then(prisonArea => {
             commit(types.SET_PRISON_AREA, { prisonArea: prisonArea });
         });
     },
