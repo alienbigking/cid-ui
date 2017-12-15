@@ -7,16 +7,23 @@ export default {
             commit(types.SET_PRISON_AREA, { prisonArea: prisonArea });
         });
     },
-    getAllPrisonAreas({ commit, state }) {
-        return prisonAreaService.getAll().then(prisonAreas => {
+    getAllPrisonAreas({ commit, state }, params) {
+        return prisonAreaService.getAll(params).then(prisonAreas => {
             commit(types.SET_PRISON_AREAS, prisonAreas);
+        });
+    },
+    getAllPrisonAreasByJail({ commit, state }, params) {
+        let jailId = params.jailId;
+        delete params.jailId;
+        return prisonAreaService.getByJail(jailId, params).then(prisonAreas => {
+            commit(types.SET_PRISON_AREAS_JAILID, prisonAreas);
         });
     },
     addPrisonArea({ commit, state }, prisonArea) {
         return prisonAreaService.add(prisonArea);
     },
     updatePrisonArea({ commit, state }) {
-        return prisonAreaService.updatePrisonTenant(state.prisonArea);
+        return prisonAreaService.update(state.prisonArea);
     },
     deletePrisonArea({ commit }, id) {
         return prisonAreaService.delete(id);

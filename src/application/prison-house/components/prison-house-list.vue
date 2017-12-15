@@ -4,16 +4,16 @@
             <span class="um-title">查询监舍</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="监区名称" v-model="filter.name"></el-input>
-                    <el-button class="searchbtn">查询</el-button>
+                    <el-input placeholder="监舍名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
+                    <el-button class="searchbtn" :loading="searching" @click="handleSearch">查询</el-button>
                 </div>
             </div>
             <template>
-                <el-table class="my_table" :data="tableData" border :header-row-class-name="getHeaderClass">
+                <el-table class="my_table" :data="tableData" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="监舍名称">
 
                   </el-table-column>
-                  <el-table-column prop="id" label="编号">
+                  <el-table-column prop="code" label="编号">
 
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
@@ -24,33 +24,30 @@
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
-                      <el-button type="text">修改</el-button>
-                      <el-button type="text">明细</el-button>
+                      <el-button type="text" @click="goEdit(scope.row.id)">修改</el-button>
+                      <el-button type="text" @click="goDetail(scope.row.id)">明细</el-button>
                       <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
                 <div class="pagination-box">
-                    <span>共1201条信息</span>
+                    <span>共{{ totalElements }}条信息</span>
                     <el-pagination
                       @current-change="handleCurrentChange"
                       :current-page.sync="currentPage"
-                      :page-size="100"
+                      :page-size="pagination.size"
                       layout="prev, pager, next, jumper"
-                      :total="1000">
+                      :total="totalElements">
                     </el-pagination>
                 </div>
             </template>
         </div>
-        <el-dialog
-            width="400px" :center="true" custom-class="noPadding"
-          :visible.sync="deleteFlag"
-          :before-close="handleDelete">
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
             <el-button @click="deleteFlag = false">取 消</el-button>
-            <el-button type="primary" @click="deleteFlag = false">确 定</el-button>
+            <el-button type="primary" @click="handleDelete" :loading="deleting">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -65,17 +62,26 @@ export default {
             filter: {
                 name: ''
             },
-            tableData: _.cloneDeep(this.$store.state.prisonHouse.prisonHouses),
-            getHeaderClass(row, rowIndex) {
-                return 'tableHeader';
+            pagination: {
+                page: 0,
+                size: 10,
+                sort: 'createdTime,asc'
             },
+            totalElements: 0,
+            searching: false,
+            deleting: false,
+            tableData: _.cloneDeep(this.$store.state.prisonHouse.prisonHouses.content),
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
         };
     },
     methods: {
-        ...mapActions(["getAllPrisonHouses"]),
+        ...mapActions(["getAllPrisonHouses", "deletePrisonHouse"]),
+        handleSearch(e) {
+            this.searching = true;
+            this.render();
+        },
         handleCurrentChange(e) {
             console.log(e);
         },
@@ -83,22 +89,42 @@ export default {
             this.deleteItem = item;
             this.deleteFlag = true;
         },
-        handleDelete(done) {
+        handleDelete() {
+            this.deleting = true;
+            this.deletePrisonHouse(this.deleteItem.id).then(res => {
+                this.$message.success("删除成功");
+                this.deleting = false;
+                this.deleteFlag = false;
+                this.render();
+            });
             // 执行删除操作
-            done(); // 关闭对话框
+        },
+        render() {
+            let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
+                if (item || item === 0) result[key] = item;
+            });
+            this.getAllPrisonHouses(params).then(res => {
+                this.tableData = this.$store.state.prisonHouse.prisonHouses.content;
+                this.totalElements = this.$store.state.prisonHouse.prisonHouses.totalElements;
+                this.currentPage = this.$store.state.prisonHouse.prisonHouses.number + 1;
+                this.searching = false;
+            });
+        },
+        goDetail(e) {
+            this.$router.push('/prison-house/detail/' + e);
+        },
+        goEdit(e) {
+            this.$router.push('/prison-house/edit/' + e);
         }
     },
-  created() {
-    this.getAllPrisonHouses();
-  }
+    created() {
+        this.render();
+    }
 };
 </script>
 <style lang="scss" scoped>
 .container{
     height: 100%;
-    .card{
-        height: 100%;
-    }
     /deep/ .el-dialog__body{
         color: #333;
         text-align: center;
@@ -123,32 +149,19 @@ export default {
             width: 76px;
             background: #FCFCFC;
             color: #666;
+            &+button{
+                margin-left: 20px;
+                color: #fff;
+                background: #085EB5;
+                border-color: #085EB5;
+            }
         }
     }
     /deep/ .el-table__body-wrapper{
         overflow: inherit;
     }
 }
-.filters{
-    padding: 20px 20px 23px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .filter{
-        display: inline-flex;
-        align-items: center;
-    }
-    .el-input,.el-select{
-        width: 176px;
-        margin-right: 20px;
-    }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
-    }
-}
+
 .cell{
     button:nth-child(1){
         color: #2196f3;

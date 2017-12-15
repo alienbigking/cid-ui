@@ -13,10 +13,10 @@
                 </el-select>
             </el-form-item>
             <el-form-item class="w100 textarea" label="监区描述">
-                <el-input type="textarea" resize="none"></el-input>
+                <el-input v-model="area.description" type="textarea" :maxlength="255" resize="none"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
-                <el-button>返回</el-button>
+                <el-button @click="goBack">返 回</el-button>
                 <el-button type="primary" :loading="adding" @click="handleAdd(area)">新增</el-button>
             </el-form-item>
           </el-form>
@@ -43,6 +43,9 @@ export default {
     },
     methods: {
         ...mapActions(["getAllPrisonAreas", "addPrisonArea"]),
+        goBack() {
+           this.$router.push(`/prison-area/list`);
+        },
         handleAdd(e) {
             this.$refs["formName"].validate((valid) => {
                 if (valid) {
@@ -52,13 +55,13 @@ export default {
                     });
                     this.addPrisonArea(params).then(res => {
                         this.adding = false;
-                        this.$router.push("/prisonArea/list");
+                        this.$router.push("/prison-area/list");
                     });
                 }
             });
         },
         render() {
-            this.getAllPrisonAreas().then(res => {
+            this.getAllPrisonAreas({ jailId: "6d51de60-de2a-11e7-aeba-20474713e5e2" }).then(res => {
                 this.areaList = this.$store.state.prisonArea.prisonAreas.content;
                 this.getting = false;
             });
@@ -67,7 +70,7 @@ export default {
     created() {
         this.render();
     }
-};
+  };
 </script>
 
 <style lang="scss" scoped>

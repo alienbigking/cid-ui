@@ -25,7 +25,7 @@
                     {{prisonHouse.description}}
                 </div>
             </div>
-            <el-button>返回</el-button>
+            <el-button @click="goBack">返回</el-button>
         </div>
     </div>
 </template>
@@ -40,10 +40,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["getPrisonHouse"])
+    ...mapActions(["getPrisonHouse"]),
+    goBack() {
+        this.$router.go(-1);
+    }
   },
   created() {
-    this.getPrisonHouse();
+    this.getPrisonHouse(this.$route.params.id).then(() => {
+      this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
+    });
   }
 };
 </script>

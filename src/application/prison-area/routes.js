@@ -2,7 +2,7 @@ import * as components from './components';
 
 export default [
     {
-        path: '/prison-area/detail',
+        path: '/prison-area/detail/:id',
         component: components.prisonAreaDetail,
         name: '监区明细'
     },
@@ -17,7 +17,7 @@ export default [
         name: '新增监区'
     },
     {
-        path: '/prison-area/edit',
+        path: '/prison-area/edit/:id',
         component: components.prisonAreaEdit,
         name: '修改监区'
     },

@@ -3,7 +3,8 @@ import mutations from './mutations';
 
 const state = {
     prisonAreas: { content: [] },
-    prisonArea: {}
+    prisonArea: {},
+    prisonAreasJail: { content: [] }
 };
 
 export default {

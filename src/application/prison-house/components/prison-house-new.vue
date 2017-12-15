@@ -27,6 +27,7 @@ export default {
   data() {
     return {
       prisonHouse: {
+        jailId: "13428048-e07b-11e7-b5c5-525400c79e4e",
         code: "tnt00000008",
         name: "一监舍",
         description: "123456789"
@@ -39,6 +40,7 @@ export default {
       console.log(this.prisonHouse);
       this.addPrisonHouse(this.prisonHouse).then(res => {
         console.log(res);
+        this.$message.success("新增成功");
       });
     }
   }
