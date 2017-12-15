@@ -23,6 +23,10 @@ export default {
         return axios.put(`api/prison-areas/${prisonArea.id}`, prisonArea);
     },
     delete(id) {
-        return axios.delete(`api/prison-areas/${id}`);
+        return axios.delete(`api/prison-areas/${id}`).then(response => {
+            return response.data;
+        }).catch(err => {
+            if (err) return "删除失败";
+        });
     }
 };

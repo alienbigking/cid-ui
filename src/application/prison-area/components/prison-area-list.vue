@@ -6,7 +6,7 @@
                 <div class="filter">
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
-                    <el-select v-model="filter.parentPrisonArea.id" clearable :loading="getting">
+                    <el-select v-model="filter.parentPrisonAreaId" clearable :loading="getting">
                         <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button class="searchbtn" @click="handleSearch">查询</el-button>
@@ -60,7 +60,7 @@ export default {
             filter: {
                 name: '',
                 code: '',
-                parentPrisonArea: { id: '' }
+                parentPrisonAreaId: ''
             },
             pagination: {
                 page: 0,
@@ -99,6 +99,12 @@ export default {
         handleDelete(done) {
             this.deleting = true;
             this.deletePrisonArea(this.deleteItem.id).then(res => {
+                if (res) {
+                    this.$message.error(res);
+                    this.deleteFlag = false;
+                    this.deleting = false;
+                    return;
+                }
                 this.$message.success("删除成功");
                 this.deleting = false;
                 this.deleteFlag = false;
@@ -107,9 +113,7 @@ export default {
         },
         render() {
             let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
-                if (_.isObject(item) && item.id) {
-                    result[key] = item;
-                } else if ((item && !_.isObject(item)) || item === 0) {
+                if (item || item === 0) {
                     result[key] = item;
                 }
             });
