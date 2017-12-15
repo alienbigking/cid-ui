@@ -1,22 +1,22 @@
 <template>
     <div>
         <div class="card">
-            <span class="um-title">十一监区 - 明细</span>
+            <span class="um-title">{{prisonArea.name}} - 明细</span>
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>上级监区：</label><span>十二监区</span>
+                        <label>上级监区：</label><span>{{prisonArea.parentPrisonArea &&prisonArea.parentPrisonArea.name}}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>编号：</label><span> 934389</span>
+                        <label>编号：</label><span> {{prisonArea.id}}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>创建时间：</label><span>2010-10-10 12:12:12</span>
+                        <label>创建时间：</label><span>{{prisonArea.createdTime}}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span>2010-10-10 12:12:12</span>
+                        <label>最后更新时间：</label><span>{{prisonArea.lastUpdatedTime}}</span>
                     </el-col>
                 </el-row>
             </div>
@@ -25,7 +25,7 @@
             <div class="form-container">
                 <label class="title">监区描述：</label>
                 <div>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    {{prisonArea.description}}
                 </div>
             </div>
             <el-button @click="goBack">返 回</el-button>
@@ -34,25 +34,24 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   data() {
     return {
-      user: {
-        username: "",
-        password: ""
-      }
+      prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea)
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions(["getPrisonArea"]),
     goBack() {
-       this.$router.push(`/prison-area/list`);
-   },
-    onSubmit() {
-       this.login(this.user);
-       this.$router.push('dashboard');
+        this.$router.go(-1);
     }
+  },
+  created() {
+    this.getPrisonArea(this.$route.params.id).then(() => {
+      this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
+    });
   }
 };
 </script>

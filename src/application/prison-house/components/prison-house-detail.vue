@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="card">
-            <span class="um-title">十一监舍 - 明细</span>
+            <span class="um-title">{{prisonHouse.name}} - 明细</span>
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">

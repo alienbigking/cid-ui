@@ -83,7 +83,8 @@ export default {
             this.render();
         },
         handleCurrentChange(e) {
-            console.log(e);
+            this.pagination.page = e - 1;
+            this.render();
         },
         showDelete(e, item) {
             this.deleteItem = item;

@@ -1,15 +1,17 @@
 <template>
     <el-aside :width="collapsed ? '55px' : '260px'" :class="collapsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
-        <div class="avatar" :class="collapsed ? 'avatar-collapsed' : ''">
-            <img src="../../../assets/images/avatar.png" alt="">
-            <div class="avatar-right">
-                <span>管理员</span>
-                <div class="">
-                    <i class="el-icon-location"></i>
+        <router-link to="/dashboard">
+          <div class="avatar" :class="collapsed ? 'avatar-collapsed' : ''">
+              <img src="../../../assets/images/avatar.png" alt="">
+                <div class="avatar-right">
                     <span>管理员</span>
+                    <div class="">
+                        <i class="el-icon-location"></i>
+                        <span>管理员</span>
+                    </div>
                 </div>
-            </div>
-        </div>
+          </div>
+        </router-link>
         <the-menu></the-menu>
     </el-aside>
 </template>
