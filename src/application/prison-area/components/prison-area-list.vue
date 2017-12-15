@@ -5,7 +5,7 @@
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
-                    <el-input placeholder="组织机构代码" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
                     <el-select v-model="filter.parentPrisonArea.id" clearable :loading="getting">
                         <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
