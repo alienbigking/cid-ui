@@ -42,10 +42,8 @@ export default {
           if (valid) {
             let params = {
                 id: this.prisonHouseId,
-                // jailId: "13428048-e07b-11e7-b5c5-525400c79e4e",
                 name: e.name,
                 description: e.description
-
             };
             console.log(params);
             this.updatePrisonHouse(params).then(res => {

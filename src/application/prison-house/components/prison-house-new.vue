@@ -27,10 +27,10 @@ export default {
   data() {
     return {
       prisonHouse: {
-        jailId: "13428048-e07b-11e7-b5c5-525400c79e4e",
-        code: "tnt00000008",
-        name: "一监舍",
-        description: "123456789"
+        jailId: "4090d2ba-e157-11e7-b5c5-525400c79e4e",
+        code: "",
+        name: "",
+        description: ""
       }
     };
   },
@@ -39,8 +39,8 @@ export default {
     add() {
       console.log(this.prisonHouse);
       this.addPrisonHouse(this.prisonHouse).then(res => {
-        console.log(res);
         this.$message.success("新增成功");
+        this.$router.push(`/prison-house/list`);
       });
     }
   }
