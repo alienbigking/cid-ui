@@ -82,10 +82,8 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           this.updateMyPassword(this.userPassword).then(res => {
-            if (res.status !== 204) {
+            if (!res) {
               this.$message.error('修改失败');
-              console.log(res);
-              return false;
             } else {
               this.$message.success('修改成功');
             }

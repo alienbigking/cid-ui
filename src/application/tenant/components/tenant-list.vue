@@ -111,6 +111,7 @@ export default {
                 if (item || item === 0) result[key] = item;
             });
             this.getAllTenants(params).then(res => {
+                console.log(this.$store.state.tenant.tenants.content);
                 this.tableData = this.$store.state.tenant.tenants.content;
                 this.totalElements = this.$store.state.tenant.tenants.totalElements;
                 this.currentPage = this.$store.state.tenant.tenants.number + 1;

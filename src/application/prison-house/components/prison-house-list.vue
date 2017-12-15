@@ -5,6 +5,7 @@
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="监舍名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="handleSearch">查询</el-button>
                 </div>
             </div>
@@ -60,7 +61,8 @@ export default {
     data() {
         return {
             filter: {
-                name: ''
+                name: '',
+                code: ''
             },
             pagination: {
                 page: 0,

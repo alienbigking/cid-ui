@@ -11,6 +11,12 @@ export default {
         return userService.updateMyProfile(state.userProfile);
     },
     updateMyPassword({ commit }, userPassword) {
-        return userService.updateMyPassword(userPassword);
+        return userService.updateMyPassword(userPassword).then(res => {
+            if (res) {
+               console.log(111);
+            } else {
+                return 'error';
+            }
+        });
     }
 };
