@@ -40,12 +40,12 @@
                 </div>
             </template>
         </div>
-        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag" :before-close="handleDelete">
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag">
             <i class="iconfont icon-tishishuoming"></i>
             <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
             <span slot="footer" class="dialog-footer">
                 <el-button @click="deleteFlag = false">取 消</el-button>
-                <el-button type="primary" @click="deleteFlag = false">确 定</el-button>
+                <el-button type="primary" @click="handleDelete" :loading="deleting">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -71,6 +71,7 @@ export default {
             areaList: [],
             getting: true,
             searching: false,
+            deleting: false,
             tableData: [],
             currentPage: 1,
             deleteFlag: false,
@@ -78,7 +79,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["getAllPrisonAreas", "getAllPrisonAreasByJail"]),
+        ...mapActions(["getAllPrisonAreas", "getAllPrisonAreasByJail", "deletePrisonArea"]),
         handleSearch(e) {
             this.searching = true;
             this.render();
@@ -95,8 +96,13 @@ export default {
             this.deleteFlag = true;
         },
         handleDelete(done) {
-            // 执行删除操作
-            done(); // 关闭对话框
+            this.deleting = true;
+            this.deletePrisonArea(this.deleteItem.id).then(res => {
+                this.$message.success("删除成功");
+                this.deleting = false;
+                this.deleteFlag = false;
+                this.render();
+            });
         },
         render() {
             let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {

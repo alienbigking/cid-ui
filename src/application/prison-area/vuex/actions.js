@@ -2,8 +2,8 @@ import * as types from './mutation-types';
 import { default as prisonAreaService } from '../service/prison-area-service';
 
 export default {
-    getPrisonArea({ commit, state }) {
-        return prisonAreaService.get().then(prisonArea => {
+    getPrisonArea({ commit, state }, params) {
+        return prisonAreaService.get(params).then(prisonArea => {
             commit(types.SET_PRISON_AREA, { prisonArea: prisonArea });
         });
     },
@@ -22,8 +22,8 @@ export default {
     addPrisonArea({ commit, state }, prisonArea) {
         return prisonAreaService.add(prisonArea);
     },
-    updatePrisonArea({ commit, state }) {
-        return prisonAreaService.update(state.prisonArea);
+    updatePrisonArea({ commit, state }, prisonArea) {
+        return prisonAreaService.update(prisonArea);
     },
     deletePrisonArea({ commit }, id) {
         return prisonAreaService.delete(id);
