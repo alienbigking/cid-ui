@@ -5,7 +5,7 @@
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
-                    <el-input placeholder="组织机构代码" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
                     <el-select v-model="filter.parentPrisonArea.id" clearable :loading="getting">
                         <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
@@ -121,7 +121,7 @@ export default {
         }
     },
     created() {
-        this.getAllPrisonAreasByJail(_.merge({ jailId: "13427caf-e07b-11e7-b5c5-525400c79e4e" }, this.pagination)).then(res => {
+        this.getAllPrisonAreasByJail("4090d2ba-e157-11e7-b5c5-525400c79e4e").then(res => {
             this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
             this.getting = false;
         });

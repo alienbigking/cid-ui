@@ -33,7 +33,7 @@ export default {
                 name: '',
                 parentPrisonArea: { id: '' },
                 description: '',
-                jailId: "13427caf-e07b-11e7-b5c5-525400c79e4e"
+                jailId: "4090d2ba-e157-11e7-b5c5-525400c79e4e"
             },
             rules: {},
             adding: false,
@@ -42,7 +42,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["getAllPrisonAreas", "addPrisonArea"]),
+        ...mapActions(["getAllPrisonAreasByJail", "addPrisonArea"]),
         goBack() {
            this.$router.push(`/prison-area/list`);
         },
@@ -53,6 +53,7 @@ export default {
                     let params = _.transform(e, (result, item, key) => {
                         if (item || item === 0) result[key] = item;
                     });
+                    if (!params.parentPrisonArea.id) delete params.parentPrisonArea;
                     this.addPrisonArea(params).then(res => {
                         this.adding = false;
                         this.$router.push("/prison-area/list");
@@ -61,7 +62,7 @@ export default {
             });
         },
         render() {
-            this.getAllPrisonAreas({ jailId: "6d51de60-de2a-11e7-aeba-20474713e5e2" }).then(res => {
+            this.getAllPrisonAreasByJail("6d51de60-de2a-11e7-aeba-20474713e5e2").then(res => {
                 this.areaList = this.$store.state.prisonArea.prisonAreas.content;
                 this.getting = false;
             });

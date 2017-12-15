@@ -13,9 +13,9 @@ export default {
         });
     },
     getAllPrisonAreasByJail({ commit, state }, params) {
-        let jailId = params.jailId;
-        delete params.jailId;
-        return prisonAreaService.getByJail(jailId, params).then(prisonAreas => {
+        // let jailId = params.jailId;
+        // delete params.jailId;
+        return prisonAreaService.getByJail(params).then(prisonAreas => {
             commit(types.SET_PRISON_AREAS_JAILID, prisonAreas);
         });
     },
