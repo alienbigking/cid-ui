@@ -15,8 +15,8 @@ export default {
     addPrisonHouse({ commit, state }, prisonHouse) {
         return prisonHouseService.add(prisonHouse);
     },
-    updatePrisonHouse({ commit, state }) {
-        return prisonHouseService.update(state.prisonHouse);
+    updatePrisonHouse({ commit, state }, prisonHouse) {
+        return prisonHouseService.update(prisonHouse);
     },
     deletePrisonHouse({ commit }, id) {
         return prisonHouseService.delete(id);
