@@ -82,6 +82,7 @@ export default {
         ...mapActions(["getAllTenants", "deleteTenant"]),
         handleSearch(e) {
             this.searching = true;
+            this.pagination.page = 0;
             this.render();
         },
         handleCurrentChange(e) {
