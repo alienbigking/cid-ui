@@ -20,9 +20,5 @@ export default [
         path: '/prison-house/edit/:id',
         component: components.prisonHouseEdit,
         name: '修改监舍'
-    },
-    {
-        path: '/prison-house/dashboard',
-        redirect: { name: 'dashboard' }
     }
 ];
