@@ -5,7 +5,6 @@ export default {
                 return response;
             },
             error => {
-                console.log(error);
                 if (error.response) {
                     switch (error.response.status) {
                         case 401:
