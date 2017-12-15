@@ -4,32 +4,38 @@
             <span class="um-title">查询监区</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="监区名称" v-model="filter.name"></el-input>
-                    <el-input placeholder="编号" v-model="filter.id"></el-input>
-                    <el-select placeholder="十二监区" v-model="filter.place"></el-select>
-                    <el-button class="searchbtn">查询</el-button>
+                    <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="组织机构代码" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
+                    <el-select v-model="filter.parentPrisonArea.id" clearable :loading="getting">
+                        <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
+                    </el-select>
+                    <el-button class="searchbtn" @click="handleSearch">查询</el-button>
                 </div>
-                <el-button type="primary">新增监区</el-button>
+                <el-button type="primary" @click="goPage('/prison-area/new')">新增监区</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="tableData" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="监区名称"> </el-table-column>
-                  <el-table-column prop="prePrison" label="上级监区"> </el-table-column>
+                  <el-table-column prop="parentPrisonArea.name" label="上级监区"> </el-table-column>
                   <el-table-column prop="id" label="编号"> </el-table-column>
-                  <el-table-column prop="makeDate" label="创建时间" sortable> </el-table-column>
-                  <el-table-column prop="updateDate" label="最后更新时间" sortable> </el-table-column>
+                  <el-table-column prop="createdTime" label="创建时间" sortable> </el-table-column>
+                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable> </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                       <template slot-scope="scope">
-                          <el-button type="text">修改</el-button>
-                          <el-button type="text">明细</el-button>
+                          <el-button type="text" @click="goPage('/prison-area/edit/' + scope.row.id)">修改</el-button>
+                          <el-button type="text" @click="goPage('/prison-area/detail/' + scope.row.id)">明细</el-button>
                           <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
                       </template>
                     </el-table-column>
                 </el-table>
                 <div class="pagination-box">
-                    <span>共1201条信息</span>
-                    <el-pagination layout="prev, pager, next, jumper" @current-change="handleCurrentChange"
-                        :current-page.sync="currentPage" :page-size="100" :total="1000">
+                    <span>共{{ totalElements }}条信息</span>
+                    <el-pagination
+                      @current-change="handleCurrentChange"
+                      :current-page.sync="currentPage"
+                      :page-size="pagination.size"
+                      layout="prev, pager, next, jumper"
+                      :total="totalElements">
                     </el-pagination>
                 </div>
             </template>
@@ -46,39 +52,43 @@
 </template>
 <script>
 // import { mapActions } from "vuex";
-
+import { mapActions } from "vuex";
+import _ from "lodash";
 export default {
     data() {
         return {
             filter: {
                 name: '',
-                id: '',
-                place: ''
+                code: '',
+                parentPrisonArea: { id: '' }
             },
-            tableData: [
-                {
-                    name: '十一监区',
-                    prePrison: '十二监区',
-                    id: 123,
-                    makeDate: '2019-10-11 12:12:12',
-                    updateDate: '2012-12-12 12:12:12'
-                },
-                {
-                    name: '十一监区',
-                    prePrison: '十二监区',
-                    id: 32345,
-                    makeDate: '2019-10-12 12:12:12',
-                    updateDate: '2012-12-11 12:12:12'
-                }
-            ],
+            pagination: {
+                page: 0,
+                size: 10,
+                sort: 'createdTime,asc'
+            },
+            totalElements: 0,
+            areaList: [],
+            getting: true,
+            searching: false,
+            tableData: [],
             currentPage: 1,
             deleteFlag: false,
             deleteItem: {}
         };
     },
     methods: {
+        ...mapActions(["getAllPrisonAreas", "getAllPrisonAreasByJail"]),
+        handleSearch(e) {
+            this.searching = true;
+            this.render();
+        },
+        goPage(e) {
+            this.$router.push(e);
+        },
         handleCurrentChange(e) {
-            console.log(e);
+            this.pagination.page = e - 1;
+            this.render();
         },
         showDelete(e, item) {
             this.deleteItem = item;
@@ -89,10 +99,26 @@ export default {
             done(); // 关闭对话框
         },
         render() {
-            console.log(13);
+            let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
+                if (_.isObject(item) && item.id) {
+                    result[key] = item;
+                } else if ((item && !_.isObject(item)) || item === 0) {
+                    result[key] = item;
+                }
+            });
+            this.getAllPrisonAreas(params).then(res => {
+                this.tableData = this.$store.state.prisonArea.prisonAreas.content;
+                this.totalElements = this.$store.state.prisonArea.prisonAreas.totalElements;
+                this.currentPage = this.$store.state.prisonArea.prisonAreas.number + 1;
+                this.searching = false;
+            });
         }
     },
     created() {
+        this.getAllPrisonAreasByJail(_.merge({ jailId: "13427caf-e07b-11e7-b5c5-525400c79e4e" }, this.pagination)).then(res => {
+            this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
+            this.getting = false;
+        });
         this.render();
     }
 };

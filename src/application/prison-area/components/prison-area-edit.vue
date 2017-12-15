@@ -17,7 +17,7 @@
         <el-input type="textarea" resize="none"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button>返回</el-button>
+          <el-button @click="goBack">返 回</el-button>
           <el-button type="primary">确认</el-button>
       </el-form-item>
     </el-form>
@@ -30,6 +30,11 @@ export default {
         return {
             prePrison: ''
         };
+    },
+    methods: {
+        goBack() {
+           this.$router.push(`/prison-area/list`);
+        }
     }
 };
 </script>

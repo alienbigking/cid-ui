@@ -6,8 +6,13 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/prison-areas`).then(response => {
+    getAll(params) {
+        return axios.get(`api/prison-areas`, { params: params }).then(response => {
+            return response.data;
+        });
+    },
+    getByJail(jailId, params) {
+        return axios.get(`api/prison-areas/get-by-jail/${jailId}`, { params: params }).then(response => {
             return response.data;
         });
     },
