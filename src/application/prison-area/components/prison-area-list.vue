@@ -82,6 +82,7 @@ export default {
         ...mapActions(["getAllPrisonAreas", "getAllPrisonAreasByJail", "deletePrisonArea"]),
         handleSearch(e) {
             this.searching = true;
+            this.pagination.page = 0;
             this.render();
         },
         goPage(e) {
