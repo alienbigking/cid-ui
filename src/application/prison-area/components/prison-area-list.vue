@@ -51,7 +51,7 @@
     </div>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 import _ from "lodash";
 
 export default {
