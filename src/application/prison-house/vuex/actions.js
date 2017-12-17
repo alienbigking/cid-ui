@@ -7,6 +7,11 @@ export default {
             commit(types.SET_PRISON_HOUSE, prisonHouse);
         });
     },
+    getAllPrisonHouses({ commit, state }) {
+        return prisonHouseService.getAll().then(prisonHouses => {
+            commit(types.SET_ALL_PRISON_HOUSES, prisonHouses);
+        });
+    },
     getPagedPrisonHouses({ commit, state }, params) {
         return prisonHouseService.getPaged(params).then(pagedPrisonHouses => {
             commit(types.SET_PAGED_PRISON_HOUSES, pagedPrisonHouses);

@@ -6,8 +6,8 @@ export default {
             return response.data;
         });
     },
-    getAll(e) {
-        return axios.get(`api/tenants`, { params: e }).then(response => {
+    getPaged(params) {
+        return axios.get(`api/tenants`, { params: params }).then(response => {
             return response.data;
         });
     },
@@ -15,11 +15,7 @@ export default {
         return axios.post('api/tenants/prison-tenants', tenant);
     },
     updatePrisonTenant(tenant) {
-        return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant).then(res => {
-            // console.log(res)
-        }).catch(err => {
-            console.log(err);
-        });
+        return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant);
     },
     delete(id) {
         return axios.delete(`api/tenants/${id}`);

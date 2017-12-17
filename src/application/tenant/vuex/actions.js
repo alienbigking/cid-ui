@@ -7,16 +7,16 @@ export default {
             commit(types.SET_TENANT, tenant);
         });
     },
-    getAllTenants({ commit, state }, params) {
-        return tenantService.getAll(params).then(tenants => {
-            commit(types.SET_TENANTS, tenants);
+    getPagedTenants({ commit, state }, params) {
+        return tenantService.getPaged(params).then(tenants => {
+            commit(types.SET_PAGED_TENANTS, tenants);
         });
     },
-    addPrisonTenant({ commit, state }, tenant) {
-        return tenantService.addPrisonTenant(tenant);
+    addPrisonTenant({ commit, state }) {
+        return tenantService.addPrisonTenant(state.tenant);
     },
-    updatePrisonTenant({ commit, state }, tenant) {
-        return tenantService.updatePrisonTenant(tenant);
+    updatePrisonTenant({ commit, state }) {
+        return tenantService.updatePrisonTenant(state.tenant);
     },
     deleteTenant({ commit }, id) {
         return tenantService.delete(id);

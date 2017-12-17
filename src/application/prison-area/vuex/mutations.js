@@ -12,8 +12,5 @@ export default {
     },
     [types.SET_PAGED_PRISON_AREAS](state, pagedPrisonAreas) {
         state.pagedPrisonAreas = pagedPrisonAreas;
-    },
-    [types.UPDATE_PAGED_PRISON_AREAS](state, pagedPrisonAreas) {
-        Object.assign(state.pagedPrisonAreas, pagedPrisonAreas);
     }
 };
