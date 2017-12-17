@@ -4,7 +4,7 @@
       <div class="um-title">
           <p>修改个人信息</p>
       </div>
-      <el-form class="labelInTop" :model="userProfile" :rules="rules" ref="ruleForm">
+      <el-form class="labelInTop" :model="userProfile" :rules="rules" ref="form">
           <el-form-item label="用户名" class="w50 the-disabled">
               <span class="el-input__inner">{{ userProfile.username }}</span>
           </el-form-item>
@@ -23,7 +23,7 @@
 
           <div class="el-form-item el-form-item-div">
             <el-button class="btn-return" @click="goBack">返回</el-button>
-            <el-button type="primary" class="btn-confirm" @click="submitForm('ruleForm')">保存</el-button>
+            <el-button type="primary" class="btn-confirm" @click="submit">保存</el-button>
           </div>
           <!-- </div> -->
           <!-- <div style="clear:both;"></div> -->
@@ -67,14 +67,16 @@ export default {
   },
   methods: {
     ...mapActions(["getMyProfile", "updateMyProfile"]),
-    submitForm(formName) {
-      this.$refs[formName].validate(valid => {
+    submit() {
+      this.$refs["form"].validate(valid => {
         if (valid) {
-          this.updateMyProfile();
-          this.$message.success("修改成功");
-        } else {
-          console.log("error submit!!");
-          return false;
+          this.updateMyProfile()
+            .then(() => {
+              this.$message.success("修改成功");
+            })
+            .catch(() => {
+              this.$message.success("修改失败");
+            });
         }
       });
     },

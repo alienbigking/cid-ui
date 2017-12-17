@@ -15,9 +15,8 @@ export default {
                             });
                             break;
                         case 500:
-                            return '服务器内部错误';
-                        case 400:
-                            console.log(400);
+                            // TODO:跳转到错误页面
+                            break;
                     }
                 }
                 return Promise.reject(error);

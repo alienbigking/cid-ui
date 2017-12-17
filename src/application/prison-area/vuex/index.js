@@ -2,9 +2,9 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    prisonAreas: { content: [] },
-    prisonArea: {},
-    prisonAreasJail: { content: [] }
+    allPrisonAreas: [],
+    pagedPrisonAreas: { content: [] },
+    prisonArea: {}
 };
 
 export default {

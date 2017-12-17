@@ -6,8 +6,13 @@ export default {
             return response.data;
         });
     },
-    getAll(e = { name: "house" }) {
-        return axios.get(`api/prison-houses`, { params: e }).then(response => {
+    getAll() {
+        return axios.get(`api/prison-houses/all`).then(response => {
+            return response.data;
+        });
+    },
+    getPaged(params) {
+        return axios.get(`api/prison-houses`, { params: params }).then(response => {
             return response.data;
         });
     },

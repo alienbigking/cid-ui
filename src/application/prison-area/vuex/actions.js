@@ -4,19 +4,17 @@ import { default as prisonAreaService } from '../service/prison-area-service';
 export default {
     getPrisonArea({ commit, state }, params) {
         return prisonAreaService.get(params).then(prisonArea => {
-            commit(types.SET_PRISON_AREA, { prisonArea: prisonArea });
+            commit(types.SET_PRISON_AREA, prisonArea);
         });
     },
-    getAllPrisonAreas({ commit, state }, params) {
-        return prisonAreaService.getAll(params).then(prisonAreas => {
-            commit(types.SET_PRISON_AREAS, prisonAreas);
+    getAllPrisonAreas({ commit, state }) {
+        return prisonAreaService.getAll().then(prisonAreas => {
+            commit(types.SET_ALL_PRISON_AREAS, prisonAreas);
         });
     },
-    getAllPrisonAreasByJail({ commit, state }, params) {
-        // let jailId = params.jailId;
-        // delete params.jailId;
-        return prisonAreaService.getByJail(params).then(prisonAreas => {
-            commit(types.SET_PRISON_AREAS_JAILID, prisonAreas);
+    getPagedPrisonAreas({ commit, state }, params) {
+        return prisonAreaService.getPaged(params).then(prisonAreas => {
+            commit(types.SET_PAGED_PRISON_AREAS, prisonAreas);
         });
     },
     addPrisonArea({ commit, state }, prisonArea) {

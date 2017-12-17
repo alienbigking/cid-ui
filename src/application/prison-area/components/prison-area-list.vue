@@ -51,140 +51,146 @@
     </div>
 </template>
 <script>
-// import { mapActions } from "vuex";
 import { mapActions } from "vuex";
 import _ from "lodash";
+
 export default {
-    data() {
-        return {
-            filter: {
-                name: '',
-                code: '',
-                parentPrisonAreaId: ''
-            },
-            pagination: {
-                page: 0,
-                size: 10,
-                sort: 'createdTime,asc'
-            },
-            totalElements: 0,
-            areaList: [],
-            getting: true,
-            searching: false,
-            deleting: false,
-            tableData: [],
-            currentPage: 1,
-            deleteFlag: false,
-            deleteItem: {}
-        };
+  data() {
+    return {
+      filter: {
+        name: "",
+        code: "",
+        parentPrisonAreaId: ""
+      },
+      pagination: {
+        page: 0,
+        size: 10,
+        sort: "createdTime,asc"
+      },
+      totalElements: 0,
+      areaList: [],
+      getting: true,
+      searching: false,
+      deleting: false,
+      tableData: [],
+      currentPage: 1,
+      deleteFlag: false,
+      deleteItem: {}
+    };
+  },
+  methods: {
+    ...mapActions([
+      "getAllPrisonAreas",
+      "getPagedPrisonAreas",
+      "deletePrisonArea"
+    ]),
+    handleSearch(e) {
+      this.searching = true;
+      this.pagination.page = 0;
+      this.render();
     },
-    methods: {
-        ...mapActions(["getAllPrisonAreas", "getAllPrisonAreasByJail", "deletePrisonArea"]),
-        handleSearch(e) {
-            this.searching = true;
-            this.pagination.page = 0;
-            this.render();
-        },
-        goPage(e) {
-            this.$router.push(e);
-        },
-        handleCurrentChange(e) {
-            this.pagination.page = e - 1;
-            this.render();
-        },
-        showDelete(e, item) {
-            this.deleteItem = item;
-            this.deleteFlag = true;
-        },
-        handleDelete(done) {
-            this.deleting = true;
-            this.deletePrisonArea(this.deleteItem.id).then(res => {
-                if (res) {
-                    this.$message.error(res);
-                    this.deleteFlag = false;
-                    this.deleting = false;
-                    return;
-                }
-                this.$message.success("删除成功");
-                this.deleting = false;
-                this.deleteFlag = false;
-                this.render();
-            });
-        },
-        render() {
-            let params = _.transform(Object.assign({}, this.filter, this.pagination), (result, item, key) => {
-                if (item || item === 0) {
-                    result[key] = item;
-                }
-            });
-            this.getAllPrisonAreas(params).then(res => {
-                this.tableData = this.$store.state.prisonArea.prisonAreas.content;
-                this.totalElements = this.$store.state.prisonArea.prisonAreas.totalElements;
-                this.currentPage = this.$store.state.prisonArea.prisonAreas.number + 1;
-                this.searching = false;
-            });
+    goPage(e) {
+      this.$router.push(e);
+    },
+    handleCurrentChange(e) {
+      this.pagination.page = e - 1;
+      this.render();
+    },
+    showDelete(e, item) {
+      this.deleteItem = item;
+      this.deleteFlag = true;
+    },
+    handleDelete(done) {
+      this.deleting = true;
+      this.deletePrisonArea(this.deleteItem.id).then(res => {
+        if (res) {
+          this.$message.error(res);
+          this.deleteFlag = false;
+          this.deleting = false;
+          return;
         }
-    },
-    created() {
-        this.getAllPrisonAreasByJail("4090d2ba-e157-11e7-b5c5-525400c79e4e").then(res => {
-            this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
-            this.getting = false;
-        });
+        this.$message.success("删除成功");
+        this.deleting = false;
+        this.deleteFlag = false;
         this.render();
+      });
+    },
+    render() {
+      let params = _.transform(
+        Object.assign({}, this.filter, this.pagination),
+        (result, item, key) => {
+          if (item || item === 0) {
+            result[key] = item;
+          }
+        }
+      );
+      this.getPagedPrisonAreas(params).then(res => {
+        this.tableData = this.$store.state.prisonArea.prisonAreas.content;
+        this.totalElements = this.$store.state.prisonArea.prisonAreas.totalElements;
+        this.currentPage = this.$store.state.prisonArea.prisonAreas.number + 1;
+        this.searching = false;
+      });
     }
+  },
+  created() {
+    this.getAllPrisonAreas().then(res => {
+      this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
+      this.getting = false;
+    });
+    this.render();
+  }
 };
 </script>
 <style lang="scss" scoped>
-.container{
-    height: 100%;
-    /deep/ .el-dialog__body{
-        color: #333;
-        text-align: center;
-        padding-bottom: 0;
-        b{
-            font-weight: bold;
-        }
-        .icon-tishishuoming{
-            color: #E82E21;
-            font-size: 80px;
-            display: block;
-            line-height: 80px;
-            margin-bottom: 27px;
-            &+span{
-                line-height: 1;
-            }
-        }
+.container {
+  height: 100%;
+  /deep/ .el-dialog__body {
+    color: #333;
+    text-align: center;
+    padding-bottom: 0;
+    b {
+      font-weight: bold;
     }
-    /deep/ .el-dialog__footer{
-        padding-top: 30px;
-        button{
-            width: 76px;
-            background: #FCFCFC;
-            color: #666;
-            &+button{
-                margin-left: 20px;
-                color: #fff;
-                background: #085EB5;
-                border-color: #085EB5;
-            }
-        }
+    .icon-tishishuoming {
+      color: #e82e21;
+      font-size: 80px;
+      display: block;
+      line-height: 80px;
+      margin-bottom: 27px;
+      & + span {
+        line-height: 1;
+      }
     }
-    /deep/ .el-table__body-wrapper{
-        overflow: inherit;
-    }
-}
-.cell{
-    button:nth-child(1){
-        color: #2196f3;
-    }
-    button:nth-child(2){
-        color: #29b0a3;
+  }
+  /deep/ .el-dialog__footer {
+    padding-top: 30px;
+    button {
+      width: 76px;
+      background: #fcfcfc;
+      color: #666;
+      & + button {
         margin-left: 20px;
+        color: #fff;
+        background: #085eb5;
+        border-color: #085eb5;
+      }
     }
-    button:nth-child(3){
-        color: #F44336;
-        margin-left: 20px;
-    }
+  }
+  /deep/ .el-table__body-wrapper {
+    overflow: inherit;
+  }
 }
-
+.cell {
+  button:nth-child(1) {
+    color: #2196f3;
+  }
+  button:nth-child(2) {
+    color: #29b0a3;
+    margin-left: 20px;
+  }
+  button:nth-child(3) {
+    color: #f44336;
+    margin-left: 20px;
+  }
+}
 </style>

@@ -6,13 +6,13 @@ export default {
             return response.data;
         });
     },
-    getAll(params) {
-        return axios.get(`api/prison-areas`, { params: params }).then(response => {
+    getAll() {
+        return axios.get(`api/prison-areas/all`).then(response => {
             return response.data;
         });
     },
-    getByJail(jailId) {
-        return axios.get(`api/prison-areas/get-by-jail/${jailId}`).then(response => {
+    getPaged(params) {
+        return axios.get(`api/prison-areas`, { params: params }).then(response => {
             return response.data;
         });
     },
@@ -23,10 +23,6 @@ export default {
         return axios.put(`api/prison-areas/${prisonArea.id}`, prisonArea);
     },
     delete(id) {
-        return axios.delete(`api/prison-areas/${id}`).then(response => {
-            return response.data;
-        }).catch(err => {
-            if (err) return "删除失败";
-        });
+        return axios.delete(`api/prison-areas/${id}`);
     }
 };

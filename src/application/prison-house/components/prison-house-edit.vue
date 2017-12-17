@@ -2,7 +2,7 @@
   <div>
       <div class="card">
           <span class="um-title">修改监舍</span>
-          <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="formName" label-position="top">
+          <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="form" label-position="top">
               <el-form-item label="监舍名称" class="w50">
                   <el-input v-model="prisonHouse.name"></el-input>
               </el-form-item>
@@ -11,7 +11,7 @@
               </el-form-item>
               <el-form-item class="hasButton">
                   <el-button @click="goBack">返 回</el-button>
-                  <el-button type="primary" @click="onSubmit(prisonHouse)">确 认</el-button>
+                  <el-button type="primary" @click="submit">确 认</el-button>
               </el-form-item>
           </el-form>
       </div>
@@ -30,44 +30,48 @@ export default {
     };
   },
   created() {
-    this.prisonHouseId = this.$route.params.id;
     this.getPrisonHouse(this.$route.params.id).then(() => {
       this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
     });
   },
+  watch: {
+    prisonHouse: {
+      handler: _.debounce(function(prisonHouse) {
+        this.$store.commit("updatePrisonHouse", prisonHouse);
+      }, 500),
+      deep: true
+    }
+  },
   methods: {
-    ...mapActions([ "updatePrisonHouse", "getPrisonHouse" ]),
-    onSubmit(e) {
-      this.$refs["formName"].validate((valid) => {
-          if (valid) {
-            let params = {
-                id: this.prisonHouseId,
-                name: e.name,
-                description: e.description
-            };
-            console.log(params);
-            this.updatePrisonHouse(params).then(res => {
-                this.$message.success('修改成功');
-                this.$router.push(`/prison-house/list`);
+    ...mapActions(["getPrisonHouse", "updatePrisonHouse"]),
+    submit() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          this.updatePrisonHouse()
+            .then(res => {
+              this.$message.success("修改成功");
+              this.$router.push(`/prison-house/list`);
+            })
+            .catch(() => {
+              this.$message.success("修改失败");
             });
-          }
+        }
       });
     },
     goBack() {
-        this.$router.go(-1);
+      this.$router.go(-1);
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.labelInTop{
+.labelInTop {
   padding-left: 20px;
   padding-top: 20px;
-  .w100{
-      width: 100%;
-      padding-right: 20px;
+  .w100 {
+    width: 100%;
+    padding-right: 20px;
   }
 }
-
 </style>

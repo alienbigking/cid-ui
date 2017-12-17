@@ -1,7 +1,7 @@
 import * as types from './mutation-types';
 
 export default {
-    [types.SET_USER_PROFILE](state, { userProfile }) {
+    [types.SET_USER_PROFILE](state, userProfile) {
         state.userProfile = userProfile;
     },
     [types.UPDATE_USER_PROFILE](state, userProfile) {

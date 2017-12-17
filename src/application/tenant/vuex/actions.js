@@ -4,7 +4,7 @@ import { default as tenantService } from '../service/tenant-service';
 export default {
     getTenant({ commit, state }, id) {
         return tenantService.get(id).then(tenant => {
-            commit(types.SET_TENANT, { tenant: tenant });
+            commit(types.SET_TENANT, tenant);
         });
     },
     getAllTenants({ commit, state }, params) {

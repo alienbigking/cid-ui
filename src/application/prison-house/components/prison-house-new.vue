@@ -3,7 +3,7 @@
     <div class="um-title">
       <p>新增监舍</p>
     </div>
-    <el-form class="labelInTop">
+    <el-form :model="prisonHouse" :rules="rules" ref="form" class="labelInTop">
       <el-form-item class="w50" label="监舍名称" >
         <el-input v-model="prisonHouse.name"></el-input>
       </el-form-item>
@@ -14,7 +14,7 @@
         <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button type="primary" @click="add">新增</el-button>
+          <el-button type="primary" @click="submit">新增</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -22,25 +22,41 @@
 
 <script>
 import { mapActions } from "vuex";
+import _ from "lodash";
 
 export default {
   data() {
     return {
       prisonHouse: {
-        jailId: "4090d2ba-e157-11e7-b5c5-525400c79e4e",
         code: "",
         name: "",
         description: ""
-      }
+      },
+      rules: {}
     };
+  },
+  watch: {
+    prisonHouse: {
+      handler: _.debounce(function(prisonHouse) {
+        this.$store.commit("updatePrisonHouse", prisonHouse);
+      }, 500),
+      deep: true
+    }
   },
   methods: {
     ...mapActions(["addPrisonHouse"]),
-    add() {
-      console.log(this.prisonHouse);
-      this.addPrisonHouse(this.prisonHouse).then(res => {
-        this.$message.success("新增成功");
-        this.$router.push(`/prison-house/list`);
+    submit() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          this.addPrisonHouse()
+            .then(res => {
+              this.$message.success("新增成功");
+              this.$router.push(`/prison-house/list`);
+            })
+            .catch(() => {
+              this.$message.success("新增失败");
+            });
+        }
       });
     }
   }
@@ -48,13 +64,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.labelInTop{
+.labelInTop {
   padding-left: 20px;
   padding-top: 20px;
-  .w100{
-      width: 100%;
-      padding-right: 20px;
+  .w100 {
+    width: 100%;
+    padding-right: 20px;
   }
 }
-
 </style>

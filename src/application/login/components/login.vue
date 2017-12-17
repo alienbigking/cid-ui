@@ -25,11 +25,11 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import singleFooter from './single-footer';
-import singleHeader from './single-header';
+import singleFooter from "./single-footer";
+import singleHeader from "./single-header";
 
 export default {
-    components: { singleFooter, singleHeader },
+  components: { singleFooter, singleHeader },
   data() {
     return {
       user: {
@@ -48,20 +48,11 @@ export default {
   methods: {
     ...mapActions(["login"]),
     onSubmit(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          this.login(this.user).then(res => {
-            if (res) {
-              this.$message.error('登录失败');
-              return false;
-            } else {
-              this.$router.push('userProfile');
-              this.$message.success('登录成功');
-            }
+          this.login(this.user).catch(() => {
+            this.$message.success("登陆失败");
           });
-        } else {
-            this.$message.error('登录失败');
-            return false;
         }
       });
     }
@@ -69,71 +60,71 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-  %mt1{
-    display: inline-block;
-    width: 16px;
-    height: 18px;
-    position: absolute;
-    left:10px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  .user{
-    @extend %mt1;
-    background: url(../../../assets/images/user.png) 0 0 no-repeat;
-    background-size: 16px 18px;
-  }
-  .lock{
-    @extend %mt1;
-    background: url(../../../assets/images/lock.png) 0 0 no-repeat;
-    background-size: 12px 18px;
-  }
-  .login{
-    width:100%;
-    height:100%;
-    overflow-y: scroll;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background:url(../../../assets/images/background.png) 0 0 no-repeat;
-    background-size:cover;
-    .login-box{
-        margin-top: 168px;
-        width: 322px;
-        padding-top: 36px;
-        box-sizing: content-box;
-      background:url(../../../assets/images/login.png) 0 0 no-repeat;
-      background-size: 100% 100%;
-      background-position: center;
-      .icon-yunshujukuRDS{
-          color: #37474F;
-          font-size: 72px;
-          display: block;
-          text-align: center;
+%mt1 {
+  display: inline-block;
+  width: 16px;
+  height: 18px;
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.user {
+  @extend %mt1;
+  background: url(../../../assets/images/user.png) 0 0 no-repeat;
+  background-size: 16px 18px;
+}
+.lock {
+  @extend %mt1;
+  background: url(../../../assets/images/lock.png) 0 0 no-repeat;
+  background-size: 12px 18px;
+}
+.login {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url(../../../assets/images/background.png) 0 0 no-repeat;
+  background-size: cover;
+  .login-box {
+    margin-top: 168px;
+    width: 322px;
+    padding-top: 36px;
+    box-sizing: content-box;
+    background: url(../../../assets/images/login.png) 0 0 no-repeat;
+    background-size: 100% 100%;
+    background-position: center;
+    .icon-yunshujukuRDS {
+      color: #37474f;
+      font-size: 72px;
+      display: block;
+      text-align: center;
+    }
+    .login-input {
+      padding: 0 15px;
+      margin-top: 38px;
+      & /deep/ .el-input__inner {
+        color: #999999;
+        padding-left: 32px;
       }
-      .login-input{
-          padding: 0 15px;
-          margin-top: 38px;
-            & /deep/ .el-input__inner{
-              color:#999999;
-              padding-left:32px;
-            }
-          .form-input-remember{
-              margin-top: -5px;
-              /deep/ .el-form-item__content{
-               font-size:14px;
-               line-height: 1;
-               color:#999;
-             }
-          }
-          .form-input-submit{
-              margin-bottom: 37px;
-            button{
-              width:292px;
-              background-color:#516671;
-            }
-          }
+      .form-input-remember {
+        margin-top: -5px;
+        /deep/ .el-form-item__content {
+          font-size: 14px;
+          line-height: 1;
+          color: #999;
+        }
+      }
+      .form-input-submit {
+        margin-bottom: 37px;
+        button {
+          width: 292px;
+          background-color: #516671;
+        }
       }
     }
   }
+}
 </style>

@@ -12,10 +12,6 @@ export default {
     updateMyPassword(userPassword) {
         return axios.put('api/users/me/password', userPassword).then(response => {
             return response.data;
-        }).catch(err => {
-            if (err) {
-                return 'error';
-            }
         });
     }
 };
