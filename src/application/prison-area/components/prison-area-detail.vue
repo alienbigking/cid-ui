@@ -28,75 +28,72 @@
                     {{prisonArea.description}}
                 </div>
             </div>
-            <el-button @click="goBack">返 回</el-button>
+            <el-button @click="onBack">返 回</el-button>
         </div>
     </div>
 </template>
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea)
-    };
+  computed: {
+    ...mapState({
+      prisonArea: state => state.prisonArea.prisonArea
+    })
+  },
+  created() {
+    this.getPrisonArea(this.$route.params.id);
   },
   methods: {
     ...mapActions(["getPrisonArea"]),
-    goBack() {
-        this.$router.go(-1);
+    onBack() {
+      this.$router.go(-1);
     }
-  },
-  created() {
-    this.getPrisonArea(this.$route.params.id).then(() => {
-      this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
-    });
   }
 };
 </script>
 <style lang="scss" scoped>
-.form-container{
+.form-container {
+  box-sizing: border-box;
+  width: 100%;
+  position: relative;
+  padding: 20px 20px 20px 41px;
+  font-size: 14px;
+  label {
+    font-weight: bold;
+    color: #333;
+    display: inline-block;
+    width: 148px;
     box-sizing: border-box;
-    width: 100%;
-    position: relative;
-    padding: 20px 20px 20px 41px;
-    font-size: 14px;
-    label{
-        font-weight: bold;
-        color: #333;
-        display: inline-block;
-        width: 148px;
-        box-sizing: border-box;
+  }
+  span {
+    display: inline-block;
+    border-bottom: 1px solid #ddd;
+    box-sizing: border-box;
+    padding-bottom: 19px;
+    padding-top: 20px;
+    width: calc(100% - 148px);
+    color: #333;
+  }
+  .el-row .el-col-12:first-child {
+    span {
+      width: calc(100% - 198px);
     }
-    span{
-        display: inline-block;
-        border-bottom: 1px solid #ddd;
-        box-sizing: border-box;
-        padding-bottom: 19px;
-        padding-top: 20px;
-        width: calc(100% - 148px);
-        color: #333;
+  }
+  .title {
+    display: block;
+    margin-bottom: 10px;
+    & + div {
+      line-height: 24px;
     }
-    .el-row .el-col-12:first-child{
-        span{
-            width: calc(100% - 198px);
-        }
-    }
-    .title{
-        display: block;
-        margin-bottom: 10px;
-        &+div{
-            line-height: 24px;
-        }
-    }
+  }
 }
-.padding20{
-    padding-bottom: 20px;
-    padding-right: 20px;
-    overflow: hidden;
-    button{
-        float: right;
-    }
+.padding20 {
+  padding-bottom: 20px;
+  padding-right: 20px;
+  overflow: hidden;
+  button {
+    float: right;
+  }
 }
 </style>

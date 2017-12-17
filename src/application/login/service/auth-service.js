@@ -11,6 +11,8 @@ export default {
                 username: 'cid',
                 password: '25d5e2e9b0ed47bbb9d4b82f4abc8c09'
             }
+        }).then(response => {
+            return response.data;
         });
     }
 };

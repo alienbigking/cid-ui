@@ -3,7 +3,7 @@
       <single-header></single-header>
       <div class="login-box" :span="6">
           <i class="iconfont icon-yunshujukuRDS"></i>
-          <el-form class="login-input" :model="user" :rules="rules" ref="ruleForm">
+          <el-form class="login-input" :model="user" :rules="rules" ref="form">
               <el-form-item class="noLable form-input-user" prop="username">
                   <el-input type="text" class="el-input-inner" placeholder="请输入用户名" v-model="user.username" />
                   <span class="user"></span>
@@ -16,7 +16,7 @@
                   <el-checkbox label="记住我"></el-checkbox>
               </el-form-item>
                 <div class="form-input-submit">
-                  <el-button type="info"  @click="onSubmit('ruleForm')">登录</el-button>
+                  <el-button type="info" @click="onSubmit">登录</el-button>
               </div>
           </el-form>
       </div>
@@ -47,12 +47,16 @@ export default {
   },
   methods: {
     ...mapActions(["login"]),
-    onSubmit(formName) {
-      this.$refs[formName].validate(valid => {
+    onSubmit() {
+      this.$refs["form"].validate(valid => {
         if (valid) {
-          this.login(this.user).catch(() => {
-            this.$message.success("登陆失败");
-          });
+          this.login(this.user)
+            .then(() => {
+              this.$router.push("/dashboard");
+            })
+            .catch(() => {
+              this.$message.error("登陆失败");
+            });
         }
       });
     }

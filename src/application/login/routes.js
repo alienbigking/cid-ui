@@ -4,6 +4,6 @@ export default [
     {
         path: '/login',
         component: components.login,
-        name: 'login'
+        name: '登陆'
     }
 ];

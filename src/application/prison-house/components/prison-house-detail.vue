@@ -25,7 +25,7 @@
                     {{prisonHouse.description}}
                 </div>
             </div>
-            <el-button @click="goBack">返回</el-button>
+            <el-button @click="onBack">返回</el-button>
         </div>
     </div>
 </template>
@@ -43,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions(["getPrisonHouse"]),
-    goBack() {
+    onBack() {
       this.$router.go(-1);
     }
   }

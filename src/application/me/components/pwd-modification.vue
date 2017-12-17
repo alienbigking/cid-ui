@@ -86,7 +86,7 @@ export default {
               this.$message.success("修改成功");
             })
             .catch(() => {
-              this.$message.success("修改失败");
+              this.$message.error("修改失败");
             });
         }
       });

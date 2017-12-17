@@ -13,7 +13,7 @@ export default [
         children: [
             {
                 path: '/',
-                redirect: { name: 'dashboard' }
+                redirect: { name: '信息面板' }
             },
             ...dashboard,
             ...me,
@@ -22,9 +22,9 @@ export default [
             ...prisonHouse
         ]
     },
-    {
-        path: '*',
-        redirect: { name: 'dashboard' }
-    },
+    // {
+    //     path: '*',
+    //     redirect: { name: 'dashboard' }
+    // },
     ...login
 ];

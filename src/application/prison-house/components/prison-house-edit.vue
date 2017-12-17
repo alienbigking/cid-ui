@@ -10,8 +10,8 @@
                   <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
               </el-form-item>
               <el-form-item class="hasButton">
-                  <el-button @click="goBack">返 回</el-button>
-                  <el-button type="primary" @click="submit">确 认</el-button>
+                  <el-button @click="onBack">返 回</el-button>
+                  <el-button type="primary" @click="onSubmit">确 认</el-button>
               </el-form-item>
           </el-form>
       </div>
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     ...mapActions(["getPrisonHouse", "updatePrisonHouse"]),
-    submit() {
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.updatePrisonHouse()
@@ -53,12 +53,12 @@ export default {
               this.$router.push(`/prison-house/list`);
             })
             .catch(() => {
-              this.$message.success("修改失败");
+              this.$message.error("修改失败");
             });
         }
       });
     },
-    goBack() {
+    onBack() {
       this.$router.go(-1);
     }
   }

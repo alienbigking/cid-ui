@@ -4,12 +4,12 @@
             <span class="um-title">查询监区</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="handleSearch"></el-input>
-                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="handleSearch"></el-input>
+                    <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.parentPrisonAreaId" clearable :loading="getting">
                         <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
-                    <el-button class="searchbtn" @click="handleSearch">查询</el-button>
+                    <el-button class="searchbtn" @click="onSearch">查询</el-button>
                 </div>
                 <el-button type="primary" @click="goPage('/prison-area/new')">新增监区</el-button>
             </div>
@@ -22,16 +22,16 @@
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable> </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                       <template slot-scope="scope">
-                          <el-button type="text" @click="goPage('/prison-area/edit/' + scope.row.id)">修改</el-button>
-                          <el-button type="text" @click="goPage('/prison-area/detail/' + scope.row.id)">明细</el-button>
-                          <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
+                          <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
+                          <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
+                          <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
                       </template>
                     </el-table-column>
                 </el-table>
                 <div class="pagination-box">
                     <span>共{{ totalElements }}条信息</span>
                     <el-pagination
-                      @current-change="handleCurrentChange"
+                      @current-change="onPageChange"
                       :current-page.sync="currentPage"
                       :page-size="pagination.size"
                       layout="prev, pager, next, jumper"
@@ -40,12 +40,12 @@
                 </div>
             </template>
         </div>
-        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag">
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
             <i class="iconfont icon-tishishuoming"></i>
             <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
             <span slot="footer" class="dialog-footer">
-                <el-button @click="deleteFlag = false">取 消</el-button>
-                <el-button type="primary" @click="handleDelete" :loading="deleting">确 定</el-button>
+                <el-button @click="deleteDialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
             </span>
         </el-dialog>
     </div>
@@ -57,87 +57,74 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      filter: {
-        name: "",
-        code: "",
-        parentPrisonAreaId: ""
-      },
+      filter: {},
       pagination: {
         page: 0,
         size: 10,
         sort: "createdTime,asc"
       },
-      totalElements: 0,
-      areaList: [],
-      getting: true,
+      currentPage: 1,
       searching: false,
       deleting: false,
-      tableData: [],
-      currentPage: 1,
-      deleteFlag: false,
+      deleteDialogVisible: false,
       deleteItem: {}
     };
   },
-  methods: {
-    ...mapActions([
-      "getAllPrisonAreas",
-      "getPagedPrisonAreas",
-      "deletePrisonArea"
-    ]),
-    handleSearch(e) {
-      this.searching = true;
-      this.pagination.page = 0;
-      this.render();
-    },
-    goPage(e) {
-      this.$router.push(e);
-    },
-    handleCurrentChange(e) {
-      this.pagination.page = e - 1;
-      this.render();
-    },
-    showDelete(e, item) {
-      this.deleteItem = item;
-      this.deleteFlag = true;
-    },
-    handleDelete(done) {
-      this.deleting = true;
-      this.deletePrisonArea(this.deleteItem.id).then(res => {
-        if (res) {
-          this.$message.error(res);
-          this.deleteFlag = false;
-          this.deleting = false;
-          return;
-        }
-        this.$message.success("删除成功");
-        this.deleting = false;
-        this.deleteFlag = false;
-        this.render();
-      });
-    },
-    render() {
-      let params = _.transform(
-        Object.assign({}, this.filter, this.pagination),
-        (result, item, key) => {
-          if (item || item === 0) {
-            result[key] = item;
-          }
-        }
-      );
-      this.getPagedPrisonAreas(params).then(res => {
-        this.tableData = this.$store.state.prisonArea.prisonAreas.content;
-        this.totalElements = this.$store.state.prisonArea.prisonAreas.totalElements;
-        this.currentPage = this.$store.state.prisonArea.prisonAreas.number + 1;
-        this.searching = false;
-      });
-    }
+  computed: {
+    ...mapState({
+      pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas
+    })
   },
   created() {
-    this.getAllPrisonAreas().then(res => {
-      this.areaList = this.$store.state.prisonArea.prisonAreasJail.content;
-      this.getting = false;
-    });
-    this.render();
+    this.search();
+  },
+  methods: {
+    ...mapActions(["getPagedPrisonAreas", "deletePrisonArea"]),
+    onSearch() {
+      this.searching = true;
+      this.pagination.page = 0;
+      this.search();
+    },
+    onPageChange(page) {
+      this.pagination.page = page - 1;
+      this.search();
+    },
+    onView(id) {
+      this.$router.push(`/prison-area/detail/${id}`);
+    },
+    onEdit(id) {
+      this.$router.push(`/prison-area/edit/${id}`);
+    },
+    onDelete(item) {
+      this.deleteItem = item;
+      this.deleteDialogVisible = true;
+    },
+    onDeleteConfirm() {
+      this.deleting = true;
+      this.deletePrisonArea(this.deleteItem.id)
+        .then(res => {
+          this.deleting = false;
+          this.deleteDialogVisible = false;
+          this.$message.success("删除成功");
+          this.search();
+        })
+        .catch(() => {
+          this.$message.error("删除失败");
+        });
+    },
+    search() {
+      let params = Object.assign({}, this.getFilter(), this.pagination);
+      this.getPagedPrisonAreas(params).then(() => {
+        this.searching = false;
+      });
+    },
+    getFilter() {
+      return _.transform(this.filter, (result, value, key) => {
+        if (value) {
+          result[key] = value;
+        }
+      });
+    }
   }
 };
 </script>

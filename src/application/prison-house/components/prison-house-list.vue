@@ -21,9 +21,9 @@
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
-                      <el-button type="text" @click="goEdit(scope.row.id)">修改</el-button>
-                      <el-button type="text" @click="goDetail(scope.row.id)">明细</el-button>
-                      <el-button type="text" @click="showDelete(scope.$index, scope.row)">删除</el-button>
+                      <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
+                      <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
+                      <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -39,12 +39,12 @@
                 </div>
             </template>
         </div>
-        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteFlag">
+        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteFlag = false">取 消</el-button>
-            <el-button type="primary" @click="handleDelete" :loading="deleting">确 定</el-button>
+            <el-button @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -56,20 +56,16 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      filter: {
-        name: "",
-        code: ""
-      },
+      filter: {},
       pagination: {
         page: 0,
         size: 10,
         sort: "createdTime,asc"
       },
-      // totalElements: 0,
+      currentPage: 1,
       searching: false,
       deleting: false,
-      currentPage: 1,
-      deleteFlag: false,
+      deleteDialogVisible: false,
       deleteItem: {}
     };
   },
@@ -88,40 +84,44 @@ export default {
       this.pagination.page = 0;
       this.search();
     },
-    onPageChange(e) {
-      this.pagination.page = e - 1;
+    onPageChange(page) {
+      this.pagination.page = page - 1;
       this.search();
     },
-    showDelete(e, item) {
-      this.deleteItem = item;
-      this.deleteFlag = true;
+    onView(id) {
+      this.$router.push(`/prison-house/detail/${id}`);
     },
-    handleDelete() {
+    onEdit(id) {
+      this.$router.push(`/prison-house/edit/${id}`);
+    },
+    onDelete(item) {
+      this.deleteItem = item;
+      this.deleteDialogVisible = true;
+    },
+    onDeleteConfirm() {
       this.deleting = true;
       this.deletePrisonHouse(this.deleteItem.id)
         .then(res => {
-          this.$message.success("删除成功");
           this.deleting = false;
-          this.deleteFlag = false;
+          this.deleteDialogVisible = false;
+          this.$message.success("删除成功");
           this.search();
         })
         .catch(() => {
-          this.$message.success("删除失败");
+          this.$message.error("删除失败");
         });
     },
-    goDetail(e) {
-      this.$router.push("/prison-house/detail/" + e);
-    },
-    goEdit(e) {
-      this.$router.push("/prison-house/edit/" + e);
-    },
     search() {
-      let params = Object.assign({}, this.filter, this.pagination);
-      params = _.transform(params, (result, value, key) => {
-        if (value || value === 0) result[key] = value;
-      });
+      let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonHouses(params).then(() => {
         this.searching = false;
+      });
+    },
+    getFilter() {
+      return _.transform(this.filter, (result, value, key) => {
+        if (value) {
+          result[key] = value;
+        }
       });
     }
   }

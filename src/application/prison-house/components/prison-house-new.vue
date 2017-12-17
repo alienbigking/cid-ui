@@ -14,7 +14,7 @@
         <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button type="primary" @click="submit">新增</el-button>
+          <el-button type="primary" @click="onSubmit">新增</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -27,11 +27,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      prisonHouse: {
-        code: "",
-        name: "",
-        description: ""
-      },
+      prisonHouse: {},
       rules: {}
     };
   },
@@ -45,7 +41,7 @@ export default {
   },
   methods: {
     ...mapActions(["addPrisonHouse"]),
-    submit() {
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.addPrisonHouse()
@@ -54,7 +50,7 @@ export default {
               this.$router.push(`/prison-house/list`);
             })
             .catch(() => {
-              this.$message.success("新增失败");
+              this.$message.error("新增失败");
             });
         }
       });

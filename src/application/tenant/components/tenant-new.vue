@@ -24,41 +24,40 @@
 import { mapActions } from "vuex";
 import _ from "lodash";
 export default {
-    data() {
-        return {
-            tenant: {
-                name: '',
-                code: '',
-                description: ''
-            },
-            rules: {},
-            adding: false
-        };
-    },
-    methods: {
-        ...mapActions(["addPrisonTenant"]),
-        handleAdd(e) {
-            this.$refs["formName"].validate((valid) => {
-                if (valid) {
-                    this.adding = true;
-                    let params = _.transform(e, (result, item, key) => {
-                        if (item || item === 0) result[key] = item;
-                    });
-                    this.addPrisonTenant(params).then(res => {
-                        this.adding = false;
-                        this.$router.push("/tenant/list");
-                    });
-                    // this.getAllTenant(params).then(res => {
-                    //     console.log(res);
-                    //     // if (!res) return false;
-                    //     // this.tableData = res;
-                    // });
-                }
+  data() {
+    return {
+      tenant: {},
+      rules: {}
+    };
+  },
+  watch: {
+    tenant: {
+      handler: _.debounce(function(tenant) {
+        this.$store.commit("updateTenant", tenant);
+      }, 500),
+      deep: true
+    }
+  },
+  methods: {
+    ...mapActions(["addTenant"]),
+    onSubmit() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          this.addTenant()
+            .then(res => {
+              this.$message.success("新增成功");
+              this.$router.push(`/prison-tenant/list`);
+            })
+            .catch(() => {
+              this.$message.error("新增失败");
             });
         }
+      });
     }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+
 </style>

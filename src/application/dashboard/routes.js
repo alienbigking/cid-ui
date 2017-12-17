@@ -4,6 +4,6 @@ export default [
     {
         path: '/dashboard',
         component: components.dashboard,
-        name: 'dashboard'
+        name: '信息面板'
     }
 ];

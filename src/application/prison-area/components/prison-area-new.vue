@@ -30,54 +30,34 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      prisonArea: {
-        name: "",
-        parentPrisonArea: { id: "" },
-        description: ""
-      },
-      rules: {},
-      adding: false,
-      areaList: [],
-      getting: true
+      prisonArea: {},
+      rules: {}
     };
   },
   watch: {
     prisonArea: {
       handler: _.debounce(function(prisonArea) {
-        this.$store.commit("updatePrisonHouse", prisonArea);
+        this.$store.commit("updatePrisonArea", prisonArea);
       }, 500),
       deep: true
     }
   },
   methods: {
-    ...mapActions(["getAllPrisonAreas", "addPrisonArea"]),
-    goBack() {
-      this.$router.push(`/prison-area/list`);
-    },
-    submit() {
+    ...mapActions(["addPrisonArea"]),
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.adding = true;
-          //   let params = _.transform(e, (result, item, key) => {
-          //     if (item || item === 0) result[key] = item;
-          //   });
-          //   if (!params.parentPrisonArea.id) delete params.parentPrisonArea;
-          this.addPrisonArea().then(res => {
-            this.adding = false;
-            this.$router.push("/prison-area/list");
-          });
+          this.addPrisonArea()
+            .then(res => {
+              this.$message.success("新增成功");
+              this.$router.push(`/prison-area/list`);
+            })
+            .catch(() => {
+              this.$message.error("新增失败");
+            });
         }
       });
-    },
-    render() {
-      this.getAllPrisonAreas().then(res => {
-        this.areaList = this.$store.state.prisonArea.allPrisonAreas;
-        this.getting = false;
-      });
     }
-  },
-  created() {
-    this.render();
   }
 };
 </script>
