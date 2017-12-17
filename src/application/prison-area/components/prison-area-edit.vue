@@ -3,18 +3,18 @@
         <div class="um-title">
             <p>修改监区</p>
         </div>
-        <el-form class="formPadding" :model="area" :rules="rules" ref="form" label-position="top">
+        <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="监区名称" >
-                <el-input v-model="area.name"></el-input>
+                <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
             <el-form-item class="w50 the-disabled" label="上级监区">
                 <!-- <el-select  v-model="area.parentPrisonArea.id" value-key="id" clearable :loading="getting">
                     <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select> -->
-                <span class="el-input__inner">{{  area.parentPrisonArea.name }}</span>
+                <span class="el-input__inner">{{  prisonArea.parentPrisonAreaName }}</span>
             </el-form-item>
             <el-form-item class="w100 textarea" label="监区描述">
-                <el-input :maxlength="255" type="textarea" resize="none" v-model="area.description"></el-input>
+                <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonArea.description"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
                 <el-button @click="onBack">返 回</el-button>

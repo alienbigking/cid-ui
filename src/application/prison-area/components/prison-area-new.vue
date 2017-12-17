@@ -8,7 +8,7 @@
                 <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
             <el-form-item class="w50" label="上级监区">
-                <el-select v-model="prisonArea.parentPrisonArea.id" clearable :loading="getting">
+                <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="getting">
                     <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </el-form-item>

@@ -14,9 +14,9 @@
                 <el-button type="primary" @click="goPage('/prison-area/new')">新增监区</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="tableData" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedPrisonAreas.content" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="监区名称"> </el-table-column>
-                  <el-table-column prop="parentPrisonArea.name" label="上级监区"> </el-table-column>
+                  <el-table-column prop="parentPrisonAreaName" label="上级监区"> </el-table-column>
                   <el-table-column prop="id" label="编号"> </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable> </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable> </el-table-column>
@@ -29,13 +29,13 @@
                     </el-table-column>
                 </el-table>
                 <div class="pagination-box">
-                    <span>共{{ totalElements }}条信息</span>
+                    <span>共{{ pagedPrisonAreas.totalElements }}条信息</span>
                     <el-pagination
                       @current-change="onPageChange"
                       :current-page.sync="currentPage"
                       :page-size="pagination.size"
                       layout="prev, pager, next, jumper"
-                      :total="totalElements">
+                      :total="pagedPrisonAreas.totalElements">
                     </el-pagination>
                 </div>
             </template>

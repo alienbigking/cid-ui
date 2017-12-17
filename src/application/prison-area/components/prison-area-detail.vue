@@ -5,7 +5,7 @@
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>上级监区：</label><span>{{prisonArea.parentPrisonArea && prisonArea.parentPrisonArea.name}}</span>
+                        <label>上级监区：</label><span>{{prisonArea.parentPrisonAreaName}}</span>
                     </el-col>
                     <el-col :span="12">
                         <label>编号：</label><span> {{prisonArea.id}}</span>
