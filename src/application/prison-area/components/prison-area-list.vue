@@ -64,6 +64,7 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
+      getting: false,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,

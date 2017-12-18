@@ -34,7 +34,7 @@ export default {
           { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
         ],
         code: [
-          { required: true, message: "请输入组织结构代码", trigger: "blur" }
+          { required: true, message: "请输入组织机构代码", trigger: "blur" }
         ],
         description: [
           { max: 255, message: '255 个字符以内', trigger: 'blur' }
