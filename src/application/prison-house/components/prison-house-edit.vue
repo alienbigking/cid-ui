@@ -3,15 +3,18 @@
       <div class="card">
           <span class="um-title">修改监舍</span>
           <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="form" label-position="top">
-              <el-form-item label="监舍名称" class="w50" prop="name" >
+              <el-form-item label="编码" class="w50" prop="code" >
+                  <el-input v-model="prisonHouse.code"></el-input>
+              </el-form-item>
+              <el-form-item label="名称" class="w50" prop="name" >
                   <el-input v-model="prisonHouse.name"></el-input>
               </el-form-item>
-              <el-form-item class="w100 textarea" label="监舍描述" prop="description" >
+              <el-form-item class="w100 textarea" label="描述" prop="description" >
                   <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
               </el-form-item>
               <el-form-item class="hasButton">
                   <el-button @click="onBack">返 回</el-button>
-                  <el-button type="primary" @click="onSubmit">确 认</el-button>
+                  <el-button type="primary" :loading="saving" @click="onSubmit">确 认</el-button>
               </el-form-item>
           </el-form>
       </div>
@@ -27,6 +30,7 @@ export default {
     return {
       prisonHouse: _.cloneDeep(this.$store.state.prisonHouse.prisonHouse),
       rules: {
+        code: [{ required: true, message: "请输入组织结构代码", trigger: "blur" }],
         name: [
           { required: true, message: "请输入监舍名称", trigger: "blur" },
           { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
@@ -34,7 +38,8 @@ export default {
         description: [
           { max: 255, message: '255 个字符以内', trigger: 'blur' }
         ]
-      }
+      },
+      saving: false
     };
   },
   created() {
@@ -55,8 +60,10 @@ export default {
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.saving = true;
           this.updatePrisonHouse()
             .then(res => {
+              this.saving = false;
               this.$message.success("修改成功");
               this.$router.push(`/prison-house/list`);
             })
@@ -74,12 +81,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.labelInTop {
-  padding-left: 20px;
-  padding-top: 20px;
-  .w100 {
-    width: 100%;
-    padding-right: 20px;
-  }
-}
+
 </style>

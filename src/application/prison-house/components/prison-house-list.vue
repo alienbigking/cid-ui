@@ -4,16 +4,17 @@
             <span class="um-title">查询监舍</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
+                <el-button type="primary" @click="onNew">新增监舍</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonHouses.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="name" label="监舍名称">
-                  </el-table-column>
                   <el-table-column prop="code" label="编号">
+                  </el-table-column>
+                  <el-table-column prop="name" label="监舍名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                   </el-table-column>
@@ -96,6 +97,9 @@ export default {
     onDelete(item) {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
+    },
+    onNew() {
+      this.$router.push(`/prison-house/new`);
     },
     onDeleteConfirm() {
       this.deleting = true;

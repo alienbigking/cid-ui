@@ -4,16 +4,17 @@
             <span class="um-title">查询租户</span>
             <div class="filters">
                 <div class="filter">
+                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>                  
                     <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
+                <el-button type="primary" @click="onNew">新增租户</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedTenants.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="name" label="名称">
-                  </el-table-column>
                   <el-table-column prop="code" label="编号">
+                  </el-table-column>
+                  <el-table-column prop="name" label="名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                   </el-table-column>
@@ -80,7 +81,6 @@ export default {
   methods: {
     ...mapActions(["getPagedTenants", "deleteTenant"]),
     onSearch() {
-      this.searching = true;
       this.pagination.page = 0;
       this.search();
     },
@@ -98,6 +98,9 @@ export default {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
     },
+    onNew() {
+      this.$router.push(`/tenant/new`);
+    },
     onDeleteConfirm() {
       this.deleting = true;
       this.deleteTenant(this.deleteItem.id)
@@ -112,6 +115,7 @@ export default {
         });
     },
     search() {
+      this.searching = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedTenants(params).then(() => {
         this.searching = false;

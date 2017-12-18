@@ -12,6 +12,7 @@
           </el-form-item>
           <el-form-item class="w50" label="上级监区" prop="parentPrisonAreaId">
             <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="gettingAllPrisonAreas">
+              <el-option value="">无</el-option>
               <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
@@ -90,12 +91,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.labelInTop {
-  padding-left: 20px;
-  padding-top: 20px;
-  .w100 {
-    width: 100%;
-    padding-right: 20px;
-  }
-}
+
 </style>

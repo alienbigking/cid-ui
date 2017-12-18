@@ -3,13 +3,13 @@
         <div class="card">
             <span class="um-title">修改租户</span>
             <el-form class="formPadding" :model="tenant" :rules="rules" ref="form" label-position="top">
-                <el-form-item label="编码" class="w50">
+                <el-form-item label="编号" class="w50">
                     <el-input v-model="tenant.code"></el-input>
                 </el-form-item>
                 <el-form-item label="名称" class="w50">
                     <el-input v-model="tenant.name"></el-input>
                 </el-form-item>
-                <el-form-item class="w100 textarea" label="租户描述">
+                <el-form-item class="w100 textarea" label="描述">
                     <el-input :maxlength="255" type="textarea" resize="none" v-model="tenant.description"></el-input>
                 </el-form-item>
                 <el-form-item class="hasButton">
@@ -77,12 +77,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.labelInTop {
-  padding-left: 20px;
-  padding-top: 20px;
-  .w100 {
-    width: 100%;
-    padding-right: 20px;
-  }
-}
+
 </style>

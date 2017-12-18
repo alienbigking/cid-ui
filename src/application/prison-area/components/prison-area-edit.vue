@@ -4,6 +4,9 @@
             <p>修改监区</p>
         </div>
         <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
+            <el-form-item class="w50" label="编码" prop="code" >
+                <el-input v-model="prisonArea.code"></el-input>
+            </el-form-item>
             <el-form-item class="w50" label="名称" prop="name" >
                 <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
@@ -30,6 +33,7 @@ export default {
     return {
       prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea),
       rules: {
+        code: [{ required: true, message: "请输入组织结构代码", trigger: "blur" }],
         name: [
           { required: true, message: "请输入监区名称", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
