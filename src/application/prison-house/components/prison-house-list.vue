@@ -80,7 +80,6 @@ export default {
   methods: {
     ...mapActions(["getPagedPrisonHouses", "deletePrisonHouse"]),
     onSearch() {
-      this.searching = true;
       this.pagination.page = 0;
       this.search();
     },
@@ -112,6 +111,7 @@ export default {
         });
     },
     search() {
+      this.searching = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonHouses(params).then(() => {
         this.searching = false;

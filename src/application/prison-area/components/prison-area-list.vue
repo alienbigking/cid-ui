@@ -6,13 +6,13 @@
                 <div class="filter">
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
-                    <el-select v-model="filter.parentPrisonAreaId" clearable :loading="getting">
+                    <el-select v-model="filter.parentPrisonAreaId" clearable :loading="gettingPrisonAreas">
                         <el-option value="">全部</el-option>
                         <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button class="searchbtn" @click="onSearch">查询</el-button>
                 </div>
-                <el-button type="primary" @click="goPage('/prison-area/new')">新增监区</el-button>
+                <el-button type="primary" @click="onNew">新增监区</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonAreas.content" border header-row-class-name="tableHeader">
@@ -65,7 +65,7 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
-      getting: false,
+      gettingPrisonAreas: false,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -80,7 +80,7 @@ export default {
   },
   created() {
     this.getAllPrisonAreas().then(() => {
-      this.getting = false;
+      this.gettingPrisonAreas = false;
       this.search();
     });
   },
@@ -122,11 +122,6 @@ export default {
           this.$message.error("删除失败");
         });
     },
-    getAll() {
-        this.getAllPrisonAreas().then(() => {
-            this.getting = false;
-        });
-    },
     search() {
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonAreas(params).then(() => {
@@ -140,8 +135,8 @@ export default {
         }
       });
     },
-    goPage(e) {
-      this.$router.push(e);
+    onNew() {
+      this.$router.push(`/prison-area/new`);
     }
   }
 };
