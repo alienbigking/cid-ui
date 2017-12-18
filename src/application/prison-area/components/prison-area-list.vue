@@ -73,15 +73,22 @@ export default {
   },
   computed: {
     ...mapState({
-      pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas,
-      allPrisonAreas: state => state.prisonArea.allPrisonAreas
+      allPrisonAreas: state => state.prisonArea.allPrisonAreas,
+      pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas
     })
   },
   created() {
-    this.search();
+    this.getAllPrisonAreas().then(() => {
+      this.getting = false;
+      this.search();
+    });
   },
   methods: {
-    ...mapActions(["getPagedPrisonAreas", "deletePrisonArea", "getAllPrisonAreas"]),
+    ...mapActions([
+      "getAllPrisonAreas",
+      "getPagedPrisonAreas",
+      "deletePrisonArea"
+    ]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;

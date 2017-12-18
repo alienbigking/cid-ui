@@ -52,13 +52,13 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.getAllPrisonAreas().then(() => {
+      this.getting = false;
+    });
+  },
   methods: {
     ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),
-    getAll() {
-      this.getAllPrisonAreas().then(() => {
-        this.getting = false;
-      });
-    },
     onBack() {
       this.$router.go(-1);
     },
@@ -76,9 +76,6 @@ export default {
         }
       });
     }
-  },
-  created() {
-    this.getAll();
   }
 };
 </script>

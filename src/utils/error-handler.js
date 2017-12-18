@@ -14,6 +14,12 @@ export default {
                                 query: { redirect: router.currentRoute.fullPath }
                             });
                             break;
+                        case 403:
+                            // TODO:跳转到403页面
+                            break;
+                        case 404:
+                            // TODO:跳转到404页面
+                            break;
                         case 500:
                             // TODO:跳转到错误页面
                             break;
