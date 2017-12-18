@@ -89,10 +89,10 @@ export default {
       this.search();
     },
     onView(id) {
-      this.$router.push(`/prison-tenant/detail/${id}`);
+      this.$router.push(`/tenant/detail/${id}`);
     },
     onEdit(id) {
-      this.$router.push(`/prison-tenant/edit/${id}`);
+      this.$router.push(`/tenant/edit/${id}`);
     },
     onDelete(item) {
       this.deleteItem = item;

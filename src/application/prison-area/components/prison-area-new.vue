@@ -12,7 +12,7 @@
             </el-form-item>
             <el-form-item class="w50" label="上级监区" prop="parentPrisonAreaId">
                 <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="getting">
-                    <el-option v-for="(item, index) in prisonArea" :key="index" :label="item.name" :value="item.id"></el-option>
+                    <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item class="w100 textarea" label="监区描述" prop="description">
@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import _ from "lodash";
 
 export default {
   data() {
     return {
       prisonArea: {},
-      getting: false,
+      getting: true,
       adding: false,
       rules: {
         name: [
@@ -50,6 +50,11 @@ export default {
       }
     };
   },
+  computed: {
+    ...mapState({
+      allPrisonAreas: state => state.prisonArea.allPrisonAreas
+    })
+  },
   watch: {
     prisonArea: {
       handler: _.debounce(function(prisonArea) {
@@ -64,7 +69,10 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getAllPrisonAreas", "addPrisonArea"]),
+    ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),
+    onBack() {
+      this.$router.go(-1);
+    },
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
@@ -79,9 +87,6 @@ export default {
             });
         }
       });
-    },
-    onBack() {
-      this.$router.go(-1);
     }
   }
 };

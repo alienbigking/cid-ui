@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username: "prs0001",
+        password: "Password@1"
       },
       rules: {
         username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],

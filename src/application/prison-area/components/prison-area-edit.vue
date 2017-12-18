@@ -8,9 +8,6 @@
                 <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
             <el-form-item class="w50 the-disabled" label="上级监区" prop="parentPrisonAreaName">
-                <!-- <el-select  v-model="area.parentPrisonArea.id" value-key="id" clearable :loading="getting">
-                    <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
-                </el-select> -->
                 <span class="el-input__inner">{{  prisonArea.parentPrisonAreaName }}</span>
             </el-form-item>
             <el-form-item class="w100 textarea" label="监区描述" prop="description">
@@ -36,18 +33,17 @@ export default {
         name: [
             { required: true, message: "请输入监区名称", trigger: "blur" },
             { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
-          ],
-        parentPrisonAreaName: [
-          { required: true, message: "请选择上级监区", trigger: "blur" }
         ],
         description: [
           { max: 255, message: '255 个字符以内', trigger: 'blur' }
         ]
-      }
+      },
+      editing: false
     };
   },
   created() {
     this.getPrisonArea(this.$route.params.id).then(() => {
+      console.log(this.$route.params.id);
       this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
     });
   },
