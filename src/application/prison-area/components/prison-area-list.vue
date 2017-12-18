@@ -7,7 +7,7 @@
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.parentPrisonAreaId" clearable :loading="getting">
-                        <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
+                        <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button class="searchbtn" @click="onSearch">查询</el-button>
                 </div>
@@ -64,6 +64,7 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
+      getting: false,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -72,14 +73,15 @@ export default {
   },
   computed: {
     ...mapState({
-      pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas
+      pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas,
+      allPrisonAreas: state => state.prisonArea.allPrisonAreas
     })
   },
   created() {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedPrisonAreas", "deletePrisonArea"]),
+    ...mapActions(["getPagedPrisonAreas", "deletePrisonArea", "getAllPrisonAreas"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -110,6 +112,11 @@ export default {
         })
         .catch(() => {
           this.$message.error("删除失败");
+        });
+    },
+    getAll() {
+        this.getAllPrisonAreas().then(() => {
+            this.getting = false;
         });
     },
     search() {
