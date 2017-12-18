@@ -8,9 +8,6 @@
           <el-form-item label="用户名" class="w50 the-disabled">
               <span class="el-input__inner">{{ userProfile.username }}</span>
           </el-form-item>
-          <!-- <el-form-item label="用户名" class="w50" prop="username">
-            <el-input disabled v-model="userProfile.username"></el-input>
-          </el-form-item> -->
           <el-form-item label="姓名" class="w50" prop="name">
               <el-input v-model="userProfile.name"></el-input>
           </el-form-item>
@@ -25,12 +22,8 @@
             <el-button class="btn-return" @click="goBack">返回</el-button>
             <el-button type="primary" class="btn-confirm" @click="submit">保存</el-button>
           </div>
-          <!-- </div> -->
-          <!-- <div style="clear:both;"></div> -->
-        <!-- </div> -->
       </el-form>
     </div>
-    <!--修改密码模块-->
     <div class="um-modifyPassword card">
       <p>修改密码</p>
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
