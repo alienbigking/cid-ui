@@ -9,7 +9,7 @@
             </el-form-item>
             <el-form-item class="w50" label="上级监区">
                 <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="getting">
-                    <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
+                    <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item class="w100 textarea" label="监区描述">
@@ -17,7 +17,7 @@
             </el-form-item>
             <el-form-item class="hasButton">
                 <el-button @click="goBack">返 回</el-button>
-                <el-button type="primary" :loading="adding" @click="submit">新增</el-button>
+                <el-button type="primary" :loading="adding" @click="onSubmit">新增</el-button>
             </el-form-item>
           </el-form>
     </div>
@@ -42,8 +42,13 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.getAllPrisonAreas().then(() => {
+      this.getting = false;
+    });
+  },
   methods: {
-    ...mapActions(["addPrisonArea"]),
+    ...mapActions(["getAllPrisonAreas", "addPrisonArea"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {

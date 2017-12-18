@@ -7,7 +7,7 @@
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.parentPrisonAreaId" clearable :loading="getting">
-                        <el-option v-for="(item, index) in areaList" :key="index" :label="item.name" :value="item.id"></el-option>
+                        <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button class="searchbtn" @click="onSearch">查询</el-button>
                 </div>
@@ -72,14 +72,22 @@ export default {
   },
   computed: {
     ...mapState({
+      allPrisonAreas: state => state.prisonArea.allPrisonAreas,
       pagedPrisonAreas: state => state.prisonArea.pagedPrisonAreas
     })
   },
   created() {
-    this.search();
+    this.getAllPrisonAreas().then(() => {
+      this.getting = false;
+      this.search();
+    });
   },
   methods: {
-    ...mapActions(["getPagedPrisonAreas", "deletePrisonArea"]),
+    ...mapActions([
+      "getAllPrisonAreas",
+      "getPagedPrisonAreas",
+      "deletePrisonArea"
+    ]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
