@@ -22,9 +22,5 @@ export default [
             ...prisonHouse
         ]
     },
-    // {
-    //     path: '*',
-    //     redirect: { name: 'dashboard' }
-    // },
     ...login
 ];
