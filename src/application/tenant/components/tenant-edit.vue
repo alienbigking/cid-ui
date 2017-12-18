@@ -79,12 +79,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.labelInTop {
-  padding-left: 20px;
-  padding-top: 20px;
-  .w100 {
-    width: 100%;
-    padding-right: 20px;
-  }
-}
 </style>
