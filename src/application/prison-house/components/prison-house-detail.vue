@@ -66,11 +66,12 @@ export default {
   span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
     padding-bottom: 19px;
     padding-top: 20px;
     width: calc(100% - 148px);
     color: #333;
+    height: 14px;
+    vertical-align: middle;
   }
   .el-row .el-col-12:first-child {
     span {
