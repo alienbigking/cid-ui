@@ -4,13 +4,13 @@
       <p>新增监舍</p>
     </div>
     <el-form :model="prisonHouse" :rules="rules" ref="form" class="labelInTop">
-      <el-form-item class="w50" label="监舍名称" >
+      <el-form-item class="w50" label="监舍名称" prop="name" >
         <el-input v-model="prisonHouse.name"></el-input>
       </el-form-item>
-      <el-form-item class="w50" label="组织机构代码" >
+      <el-form-item class="w50" label="组织机构代码" prop="code" >
         <el-input v-model="prisonHouse.code"></el-input>
       </el-form-item>
-      <el-form-item class="w100 textarea" label="监舍描述">
+      <el-form-item class="w100 textarea" label="监舍描述" prop="description" >
         <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
@@ -28,7 +28,18 @@ export default {
   data() {
     return {
       prisonHouse: {},
-      rules: {}
+      rules: {
+        name: [
+          { required: true, message: "请输入监舍名称", trigger: "blur" },
+          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: "请输入组织结构代码", trigger: "blur" }
+        ],
+        description: [
+          { min: 5, max: 255, message: '长度在 5 到 255 个字符', trigger: 'blur' }
+        ]
+      }
     };
   },
   watch: {

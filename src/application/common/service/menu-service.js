@@ -12,50 +12,12 @@ export default [
                 path: '/prison-area/list',
                 collapse: true
             },
-            // {
-            //     index: '1-2',
-            //     name: '监区明细',
-            //     path: '/prison-area/detail',
-            //     collapse: true
-            // },
-
-            // {
-            //     index: '1-3',
-            //     name: '减刑假释',
-            //     collapse: true,
-            //     children: [
-            //         {
-            //             index: '1-3-1',
-            //             name: '刑罚变动',
-            //             path: 'login',
-            //             collapse: false
-            //         },
-            //         {
-            //             index: '1-3-2',
-            //             name: '监区办理',
-            //             path: 'login',
-            //             collapse: false
-            //         },
-            //         {
-            //             index: '1-3-3',
-            //             name: '其他处理',
-            //             path: 'login',
-            //             collapse: false
-            //         }
-            //     ]
-            // },
             {
                 index: '1-4',
                 name: '新增监区',
                 path: '/prison-area/new',
                 collapse: true
             }
-            // {
-            //     index: '3-5',
-            //     name: '修改监区',
-            //     path: '/prison-area/edit',
-            //     collapse: true
-            // }
         ]
     },
     {
