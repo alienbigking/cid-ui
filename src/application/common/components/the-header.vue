@@ -30,7 +30,7 @@ export default {
     // 注销
     logout() {
       window.localStorage.removeItem("TOKEN");
-      this.$message.success("已登出")
+      this.$message.success("已登出");
       this.$router.push("/login");
     }
   }

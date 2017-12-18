@@ -33,7 +33,7 @@ export default {
 .icon-home {
   font-size: 14px;
 }
-.el-breadcrumb {
+.el-container .el-breadcrumb {
   height: 40px;
   background: #fff;
   line-height: 40px;
