@@ -2,7 +2,7 @@ export default {
     config(axios) {
         axios.interceptors.request.use(
             config => {
-                config.baseURL = 'http://localhost:8080/';
+                config.baseURL = 'http://10.10.10.140:8080/cid-development/';
                 config.withCredentials = true;
                 const tokenStorage = localStorage.getItem('TOKEN');
                 if (tokenStorage) {
