@@ -4,18 +4,18 @@
             <p>新增监区</p>
         </div>
         <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w50" label="监区名称" >
-              <el-input v-model="prisonArea.name"></el-input>
-          </el-form-item>
-          <el-form-item class="w50" label="组织机构代码" >
-              <el-input v-model="prisonArea.code"></el-input>
-          </el-form-item>
-            <el-form-item class="w50" label="上级监区">
+            <el-form-item class="w50" label="监区名称" prop="name">
+                <el-input v-model="prisonArea.name"></el-input>
+            </el-form-item>
+            <el-form-item class="w50" label="机构代码" prop="code">
+                <el-input v-model="prisonArea.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w50" label="上级监区" prop="parentPrisonAreaId">
                 <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="getting">
                     <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item class="w100 textarea" label="监区描述">
+            <el-form-item class="w100 textarea" label="监区描述" prop="description">
                 <el-input v-model="prisonArea.description" type="textarea" :maxlength="255" resize="none"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
@@ -34,9 +34,20 @@ export default {
   data() {
     return {
       prisonArea: {},
-      rules: {},
       getting: true,
-      adding: false
+      adding: false,
+      rules: {
+        name: [
+          { required: true, message: "请输入监区名称", trigger: "blur" },
+          { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+        ],
+        code: [
+          { required: true, message: "请输入组织机构代码", trigger: "blur" }
+        ],
+        description: [
+          { max: 255, message: '255 个字符以内', trigger: 'blur' }
+        ]
+      }
     };
   },
   computed: {
@@ -69,6 +80,7 @@ export default {
             .then(res => {
               this.$message.success("新增成功");
               this.$router.push(`/prison-area/list`);
+              this.adding = false;
             })
             .catch(() => {
               this.$message.error("新增失败");
