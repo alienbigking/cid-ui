@@ -11,7 +11,7 @@
             </div>
             <template>
                 <el-table class="my_table" :data="pagedTenants.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="name" label="租户名称">
+                  <el-table-column prop="name" label="名称">
                   </el-table-column>
                   <el-table-column prop="code" label="编号">
                   </el-table-column>

@@ -4,18 +4,18 @@
             <p>修改监区</p>
         </div>
         <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="监区名称" prop="name" >
+            <el-form-item class="w50" label="名称" prop="name" >
                 <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
             <el-form-item class="w50 the-disabled" label="上级监区" prop="parentPrisonAreaName">
                 <span class="el-input__inner">{{  prisonArea.parentPrisonAreaName }}</span>
             </el-form-item>
-            <el-form-item class="w100 textarea" label="监区描述" prop="description">
+            <el-form-item class="w100 textarea" label="描述" prop="description">
                 <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonArea.description"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
                 <el-button @click="onBack">返 回</el-button>
-                <el-button type="primary" :loading="editing" @click="onSubmit">确认</el-button>
+                <el-button type="primary" :loading="saving" @click="onSubmit">确认</el-button>
             </el-form-item>
         </el-form>
     </div>
@@ -31,19 +31,16 @@ export default {
       prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea),
       rules: {
         name: [
-            { required: true, message: "请输入监区名称", trigger: "blur" },
-            { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+          { required: true, message: "请输入监区名称", trigger: "blur" },
+          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ],
-        description: [
-          { max: 255, message: '255 个字符以内', trigger: 'blur' }
-        ]
+        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
       },
-      editing: false
+      saving: false
     };
   },
   created() {
     this.getPrisonArea(this.$route.params.id).then(() => {
-      console.log(this.$route.params.id);
       this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
     });
   },
@@ -60,8 +57,10 @@ export default {
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.saving = true;
           this.updatePrisonArea()
             .then(res => {
+              this.saving = false;
               this.$message.success("修改成功");
               this.$router.push(`/prison-area/list`);
             })
