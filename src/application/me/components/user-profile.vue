@@ -4,7 +4,7 @@
       <div class="um-title">
           <p>修改个人信息</p>
       </div>
-      <el-form class="labelInTop" :model="userProfile" :rules="rules" ref="form">
+      <el-form class="formPadding" :model="userProfile" :rules="rules" ref="form" label-position="top">
           <el-form-item label="用户名" class="w50 the-disabled">
               <span class="el-input__inner">{{ userProfile.username }}</span>
           </el-form-item>
@@ -81,11 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
-  .labelInTop {
-    margin: 26px 0 0 21px;
-  }
-}
 .um-modifyPassword {
   padding: 20px 22px 20px 20px;
   font-size: 14px;
