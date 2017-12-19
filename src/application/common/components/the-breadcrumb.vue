@@ -29,30 +29,37 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .icon-home {
   font-size: 14px;
 }
 .el-container .el-breadcrumb {
-  height: 40px;
+  height: 41px;
   background: #fff;
   line-height: 40px;
   font-size: 12px;
   border-bottom: 1px solid #ddd;
   padding: 0 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: stretch;
 }
-.el-breadcrumb__inner,
-.el-breadcrumb__inner a {
+/deep/ .el-breadcrumb__item{
+  overflow: hidden;
+  // line-height: 40px;
+}
+/deep/ .el-breadcrumb__inner,
+/deep/ .el-breadcrumb__inner a {
   color: #333;
   font-weight: normal;
 }
-.el-breadcrumb__item:last-child .el-breadcrumb__inner,
-.el-breadcrumb__item:last-child .el-breadcrumb__inner a,
-.el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover,
-.el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+/deep/ .el-breadcrumb__item:last-child .el-breadcrumb__inner,
+/deep/ .el-breadcrumb__item:last-child .el-breadcrumb__inner a,
+/deep/ .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover,
+/deep/ .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
   color: #999;
 }
-.separatorClass {
+/deep/ .separatorClass {
   margin: 0 10px;
   &:after {
     content: "/";

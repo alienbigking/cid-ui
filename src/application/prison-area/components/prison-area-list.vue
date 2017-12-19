@@ -16,7 +16,7 @@
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonAreas.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="code" label="编号"> </el-table-column>                  
+                  <el-table-column prop="code" label="编号"> </el-table-column>
                   <el-table-column prop="name" label="监区名称"> </el-table-column>
                   <el-table-column prop="parentPrisonAreaName" label="上级监区"> </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable> </el-table-column>
@@ -62,7 +62,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,asc"
+        sort: "createdTime,desc"
       },
       currentPage: 1,
       gettingPrisonAreas: false,

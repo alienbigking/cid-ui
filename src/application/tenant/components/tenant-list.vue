@@ -4,7 +4,7 @@
             <span class="um-title">查询租户</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>                  
+                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
@@ -61,7 +61,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,asc"
+        sort: "createdTime,desc"
       },
       currentPage: 1,
       searching: false,
@@ -112,6 +112,7 @@ export default {
         })
         .catch(() => {
           this.$message.error("删除失败");
+          this.deleting = false;
         });
     },
     search() {

@@ -61,7 +61,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,asc"
+        sort: "createdTime,desc"
       },
       currentPage: 1,
       searching: false,

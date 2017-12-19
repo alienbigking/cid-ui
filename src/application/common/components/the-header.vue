@@ -39,6 +39,7 @@ export default {
 <style lang="scss" scoped>
 .icon-caidan {
   cursor: pointer;
+  font-size: 20px;
 }
 
 .header-left {

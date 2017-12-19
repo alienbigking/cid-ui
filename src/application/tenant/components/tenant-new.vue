@@ -60,6 +60,7 @@ export default {
             })
             .catch(() => {
               this.$message.error("新增失败");
+              this.saving = false;
             });
         }
       });
