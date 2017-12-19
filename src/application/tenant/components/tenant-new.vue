@@ -28,7 +28,10 @@ export default {
     return {
       tenant: {},
       rules: {
-        code: [{ required: true, message: "请输入组织结构代码", trigger: "blur" }],
+        code: [
+          { required: true, message: "请输入编号", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+        ],
         name: [
           { required: true, message: "请输入租户名称", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }

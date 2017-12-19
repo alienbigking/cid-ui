@@ -3,7 +3,7 @@
       <div class="card">
           <span class="um-title">修改监舍</span>
           <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="form" label-position="top">
-              <el-form-item label="编码" class="w50" prop="code" >
+              <el-form-item label="编号" class="w50" prop="code" >
                   <el-input v-model="prisonHouse.code"></el-input>
               </el-form-item>
               <el-form-item label="名称" class="w50" prop="name" >
@@ -30,7 +30,10 @@ export default {
     return {
       prisonHouse: _.cloneDeep(this.$store.state.prisonHouse.prisonHouse),
       rules: {
-        code: [{ required: true, message: "请输入组织结构代码", trigger: "blur" }],
+        code: [
+          { required: true, message: "请输入组织结构代码", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+        ],
         name: [
           { required: true, message: "请输入监舍名称", trigger: "blur" },
           { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }

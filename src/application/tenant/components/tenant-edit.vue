@@ -3,13 +3,13 @@
         <div class="card">
             <span class="um-title">修改租户</span>
             <el-form class="formPadding" :model="tenant" :rules="rules" ref="form" label-position="top">
-                <el-form-item label="编号" class="w50">
+                <el-form-item label="编号" class="w50" prop="code">
                     <el-input v-model="tenant.code"></el-input>
                 </el-form-item>
-                <el-form-item label="名称" class="w50">
+                <el-form-item label="名称" class="w50" prop="name">
                     <el-input v-model="tenant.name"></el-input>
                 </el-form-item>
-                <el-form-item class="w100 textarea" label="描述">
+                <el-form-item class="w100 textarea" label="描述" prop="description">
                     <el-input :maxlength="255" type="textarea" resize="none" v-model="tenant.description"></el-input>
                 </el-form-item>
                 <el-form-item class="hasButton">
@@ -29,7 +29,10 @@ export default {
     return {
       tenant: _.cloneDeep(this.$store.state.tenant.tenant),
       rules: {
-        code: [{ required: true, message: "请输入组织结构代码", trigger: "blur" }],
+        code: [
+          { required: true, message: "请输入编号", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+        ],
         name: [
           { required: true, message: "请输入租户名称", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }

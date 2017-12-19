@@ -7,7 +7,6 @@
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="监区名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.parentPrisonAreaId" clearable :loading="gettingPrisonAreas">
-                        <el-option value="">全部</el-option>
                         <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
                     <el-button class="searchbtn" @click="onSearch">查询</el-button>

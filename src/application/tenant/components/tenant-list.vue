@@ -4,7 +4,7 @@
             <span class="um-title">查询租户</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="组织机构编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>                  
+                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>                  
                     <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
