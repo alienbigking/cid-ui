@@ -72,7 +72,7 @@ export default {
   },
   computed: {
     ...mapState({
-      pagedTenants: state => state.tenant.pagedTenants
+      pagedTenants: state => state.criminal.pagedTenants
     })
   },
   created() {
@@ -90,17 +90,17 @@ export default {
       this.search();
     },
     onView(id) {
-      this.$router.push(`/tenant/detail/${id}`);
+      this.$router.push(`/criminal/detail/${id}`);
     },
     onEdit(id) {
-      this.$router.push(`/tenant/edit/${id}`);
+      this.$router.push(`/criminal/edit/${id}`);
     },
     onDelete(item) {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
     },
     onNew() {
-      this.$router.push(`/tenant/new`);
+      this.$router.push(`/criminal/new`);
     },
     onDeleteConfirm() {
       this.deleting = true;
