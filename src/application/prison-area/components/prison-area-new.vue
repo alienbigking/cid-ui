@@ -4,7 +4,7 @@
             <p>新增监区</p>
         </div>
         <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w50" label="编码" prop="code">
+          <el-form-item class="w50" label="编号" prop="code">
             <el-input v-model="prisonArea.code"></el-input>
           </el-form-item>
           <el-form-item class="w50" label="名称" prop="name">
@@ -12,7 +12,6 @@
           </el-form-item>
           <el-form-item class="w50" label="上级监区" prop="parentPrisonAreaId">
             <el-select v-model="prisonArea.parentPrisonAreaId" clearable :loading="gettingAllPrisonAreas">
-              <el-option value="">无</el-option>
               <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
             </el-select>
           </el-form-item>
@@ -38,7 +37,10 @@ export default {
       gettingAllPrisonAreas: true,
       saving: false,
       rules: {
-        code: [{ required: true, message: "请输入组织机构代码", trigger: "blur" }],
+        code: [
+          { required: true, message: "请输入组织机构代码", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+        ],
         name: [
           { required: true, message: "请输入监区名称", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }

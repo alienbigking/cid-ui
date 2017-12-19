@@ -4,8 +4,8 @@
             <span class="um-title">查询监舍</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="编码" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
-                    <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="监舍名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
                 <el-button type="primary" @click="onNew">新增监舍</el-button>
