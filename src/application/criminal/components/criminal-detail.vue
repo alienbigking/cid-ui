@@ -195,12 +195,36 @@
         犯罪记录
         <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
       </div>
+      <div class="list-box" v-if="recordShow">
+        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
+          <el-table-column prop="a" label="类别"> </el-table-column>
+          <el-table-column prop="s" label="开始日期"> </el-table-column>
+          <el-table-column prop="d" label="截至日期"> </el-table-column>
+          <el-table-column prop="f" label="罪名"> </el-table-column>
+          <el-table-column prop="g" label="判处日期"> </el-table-column>
+          <el-table-column prop="h" label="刑期"> </el-table-column>
+          <el-table-column prop="j" label="关押"> </el-table-column>
+          <el-table-column prop="k" label="备注"> </el-table-column>
+        </el-table>
+      </div>
   </div>
   <!-- 简历 -->
   <div class="card">
       <div class="title" @click="isShowResume">
         简历
         <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
+      </div>
+      <div class="list-box" v-if="resumeShow">
+        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
+          <el-table-column prop="a" label="类别"> </el-table-column>
+          <el-table-column prop="s" label="开始日期"> </el-table-column>
+          <el-table-column prop="d" label="截至日期"> </el-table-column>
+          <el-table-column prop="f" label="罪名"> </el-table-column>
+          <el-table-column prop="g" label="判处日期"> </el-table-column>
+          <el-table-column prop="h" label="刑期"> </el-table-column>
+          <el-table-column prop="j" label="关押"> </el-table-column>
+          <el-table-column prop="k" label="备注"> </el-table-column>
+        </el-table>
       </div>
   </div>
   <!-- 体貌特征 -->
@@ -209,12 +233,36 @@
         体貌特征
         <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
       </div>
+      <div class="list-box" v-if="featureShow">
+        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
+          <el-table-column prop="a" label="类别"> </el-table-column>
+          <el-table-column prop="s" label="开始日期"> </el-table-column>
+          <el-table-column prop="d" label="截至日期"> </el-table-column>
+          <el-table-column prop="f" label="罪名"> </el-table-column>
+          <el-table-column prop="g" label="判处日期"> </el-table-column>
+          <el-table-column prop="h" label="刑期"> </el-table-column>
+          <el-table-column prop="j" label="关押"> </el-table-column>
+          <el-table-column prop="k" label="备注"> </el-table-column>
+        </el-table>
+      </div>
   </div>
   <!-- 社会关系 -->
   <div class="card">
       <div class="title" @click="isShowSocialRelation">
         社会关系
         <span class="iconfont" :class="socialRelationShow?'icon-unfold':'icon-enter'"></span>
+      </div>
+      <div class="list-box" v-if="socialRelationShow">
+        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
+          <el-table-column prop="a" label="类别"> </el-table-column>
+          <el-table-column prop="s" label="开始日期"> </el-table-column>
+          <el-table-column prop="d" label="截至日期"> </el-table-column>
+          <el-table-column prop="f" label="罪名"> </el-table-column>
+          <el-table-column prop="g" label="判处日期"> </el-table-column>
+          <el-table-column prop="h" label="刑期"> </el-table-column>
+          <el-table-column prop="j" label="关押"> </el-table-column>
+          <el-table-column prop="k" label="备注"> </el-table-column>
+        </el-table>
       </div>
   </div>
 </div>
@@ -226,6 +274,7 @@
 export default {
   data() {
     return {
+      tableData: [{ a: "hhhhhhhh", s: "hhhhhhhh", d: "hhhhhhhh", f: "hhhhhhhh", g: "hhhhhhhh", h: "hhhhhhhh", j: "hhhhhhhh", k: "hhhhhhhh" }],
       informationShow: false,
       recordShow: false,
       resumeShow: false,
