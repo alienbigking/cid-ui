@@ -1,6 +1,6 @@
 <template>
     <div class="card">
-      <el-tabs class="um-title" v-model="activeName">
+      <el-tabs v-model="activeName">
         <el-tab-pane v-for="(tab, index) in tabs" :key="index" :label="tab.name" :name="tab.component">
           <keep-alive>
               <component v-if='activeName == tab.component' :is="activeName"></component>
@@ -21,7 +21,7 @@ import criminalSocialRelation from "./components/criminal-social-relation";
 export default {
   data() {
     return {
-      activeName: 'criminal',
+      activeName: 'criminalRecord',
       tabs: [
         { name: "基本信息", component: "criminal" },
         { name: "犯罪记录", component: "criminalRecord" },

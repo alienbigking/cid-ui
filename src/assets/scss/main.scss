@@ -168,8 +168,12 @@
     }
 }
 .el-table{
-    th,td{
+    tr,th,td{
         color: #333;
+        font-size: 12px;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
     }
     .tableHeader{
         height: 50px;
@@ -179,11 +183,12 @@
             border-bottom-color: #bbb;
         }
     }
+    .tableHeader40{
+      background: #F5F5F5;
+      height: 40px;
+    }
 }
 .my_table{
-    th,td{
-        padding: 0;
-    }
     &.el-table--border, &.el-table--group{
         border: 0;
         border-top: 1px solid #ddd;
@@ -219,6 +224,7 @@
         display: none;
     }
 }
+
 .filters{ // 筛选框
     padding: 20px 20px 23px;
     display: flex;
@@ -234,10 +240,36 @@
         width: 176px;
         margin-right: 20px;
     }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
+}
+.searchbtn{
+    background: #29b0a3;
+    color: #fff;
+    width: 100px;
+    border: 0;
+    &:hover{
+      background: #29b0a3;
+      color: #fff;
     }
+}
+.w-px76{
+  width: 76px;
+  background: #009588;
+  &:hover{
+    background: rgba(0,149,136,0.9);
+    color: #fff;
+  }
+}
+.list-box{ // 罪犯编辑模块的表格的父元素
+  border-top: 1px solid #ddd;
+  margin-left: 20px;
+  padding: 30px 20px 20px 0;
+  overflow: hidden;
+}
+.table40{ // 行高40px的表格
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  margin-bottom: 30px;
+  &+button{
+    float: right;
+  }
 }
