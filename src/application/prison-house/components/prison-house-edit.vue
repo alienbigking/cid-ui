@@ -71,6 +71,7 @@ export default {
               this.$router.push(`/prison-house/list`);
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("修改失败");
             });
         }

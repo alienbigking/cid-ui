@@ -68,6 +68,7 @@ export default {
               this.$router.push(`/tenant/list`);
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("修改失败");
             });
         }
