@@ -132,41 +132,39 @@
         width: calc(100% - 120px);
     }
 }
-.labelInTop{ // lable在输入框上面的表单
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    .el-form-item__label{
-        display: block;
-        line-height: 12px;
-        font-size: 12px;
-        margin-bottom: 10px;
-        color:#333;
-    }
-    .el-form-item{
-        .el-form-item__content{
-            width: 100%;
-        }
-    }
-}
 .formPadding{
     padding: 20px 0 20px 20px;
 }
 .form-criminal{
-  padding: 30px 0 0;
     .form-box{
       border-bottom: 1px solid #ddd;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
+      position: relative;
+      padding: 30px 0 10px;
+      &:after{
+        content: "";
+        width: 20px;
+        position: absolute;
+        height: 1px;
+        background: #fff;
+        display: block;
+        bottom: -1px;
+      }
+    }
+    .form-box:last-child{
+      border-bottom: 0;
+      &:after{
+        display: none;
+      }
     }
     .w25{
       width: 25%;
       box-sizing: border-box;
       padding-right: 20px;
       padding-left: 20px;
-      margin-bottom: 30px;
     }
 }
 .el-table{
