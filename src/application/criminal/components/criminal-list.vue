@@ -189,11 +189,11 @@ export default {
   }
   button:nth-child(2) {
     color: #29b0a3;
-    margin-left: 20px;
+    margin-left: 10px;
   }
   button:nth-child(3) {
     color: #f44336;
-    margin-left: 20px;
+    margin-left: 10px;
   }
 }
 </style>
