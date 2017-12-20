@@ -24,7 +24,7 @@
           </el-row>
           <el-row type="flex">
               <el-col :span="6">
-                  <label>名族：</label><span>汉</span>
+                  <label>民族：</label><span>汉</span>
               </el-col>
               <el-col :span="6">
                   <label>出生日期：</label><span>1990-10-10</span>
@@ -216,14 +216,12 @@
       </div>
       <div class="list-box" v-if="resumeShow">
         <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="类别"> </el-table-column>
           <el-table-column prop="s" label="开始日期"> </el-table-column>
           <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="罪名"> </el-table-column>
-          <el-table-column prop="g" label="判处日期"> </el-table-column>
-          <el-table-column prop="h" label="刑期"> </el-table-column>
-          <el-table-column prop="j" label="关押"> </el-table-column>
-          <el-table-column prop="k" label="备注"> </el-table-column>
+          <el-table-column prop="f" label="单位"> </el-table-column>
+          <el-table-column prop="g" label="捕前单位标记"> </el-table-column>
+          <el-table-column prop="h" label="职业"> </el-table-column>
+          <el-table-column prop="j" label="职务"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -233,17 +231,47 @@
         体貌特征
         <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <div class="list-box" v-if="featureShow">
-        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="类别"> </el-table-column>
-          <el-table-column prop="s" label="开始日期"> </el-table-column>
-          <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="罪名"> </el-table-column>
-          <el-table-column prop="g" label="判处日期"> </el-table-column>
-          <el-table-column prop="h" label="刑期"> </el-table-column>
-          <el-table-column prop="j" label="关押"> </el-table-column>
-          <el-table-column prop="k" label="备注"> </el-table-column>
-        </el-table>
+      <div v-if="featureShow">
+        <div class="form-container">
+          <el-row type="flex">
+              <el-col :span="6">
+                  <label>身高(cm):</label><span>检查院</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>体型：</label><span>12534543</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>血型：</label><span>狗蛋</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>脸型：</label><span>身份不明</span>
+              </el-col>
+          </el-row>
+          <el-row type="flex">
+              <el-col :span="6">
+                  <label>口音：</label><span>检查院</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>足长(cm)：</label><span>12534543</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>鞋号：</label><span>狗蛋</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>体重(kg)：</label><span>身份不明</span>
+              </el-col>
+          </el-row>
+          <el-row type="flex">
+              <el-col :span="24">
+                  <label class="rowTitle">特征：</label>
+                  <div class="rowTwo">
+                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
+                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
+                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
+                  </div>
+              </el-col>
+          </el-row>
+        </div>
       </div>
   </div>
   <!-- 社会关系 -->
@@ -254,14 +282,15 @@
       </div>
       <div class="list-box" v-if="socialRelationShow">
         <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="类别"> </el-table-column>
-          <el-table-column prop="s" label="开始日期"> </el-table-column>
-          <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="罪名"> </el-table-column>
-          <el-table-column prop="g" label="判处日期"> </el-table-column>
-          <el-table-column prop="h" label="刑期"> </el-table-column>
-          <el-table-column prop="j" label="关押"> </el-table-column>
-          <el-table-column prop="k" label="备注"> </el-table-column>
+          <el-table-column prop="a" label="称谓"> </el-table-column>
+          <el-table-column prop="s" label="姓名"> </el-table-column>
+          <el-table-column prop="d" label="年龄"> </el-table-column>
+          <el-table-column prop="f" label="所在单位"> </el-table-column>
+          <el-table-column prop="g" label="家庭住址"> </el-table-column>
+          <el-table-column prop="h" label="职业"> </el-table-column>
+          <el-table-column prop="j" label="面貌"> </el-table-column>
+          <el-table-column prop="k" label="电话"> </el-table-column>
+          <el-table-column prop="k" label="主联系人"> </el-table-column>          
         </el-table>
       </div>
   </div>
@@ -338,6 +367,15 @@ export default {
     color: #333;
     height: 14px;
     vertical-align: middle;
+  }
+  .rowTitle {
+    height:47px;
+    background: #fff;
+  }
+  .rowTwo {
+    background: url(../../../assets/images/rowtwo.png) 100% 100% repeat;
+    margin-top: 3px;
+    line-height: 45px;
   }
 }
 </style>
