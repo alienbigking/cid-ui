@@ -72,6 +72,7 @@ export default {
               this.$router.push(`/prison-area/list`);
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("修改失败");
             });
         }

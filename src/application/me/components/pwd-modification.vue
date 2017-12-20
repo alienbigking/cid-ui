@@ -20,7 +20,7 @@
           </el-form-item>
           <div class="form-btn">
               <el-button @click="goBack">返回</el-button>
-              <el-button type="primary" @click="onSubmit">确认</el-button>
+              <el-button type="primary" :loading="saving" @click="onSubmit">确认</el-button>
           </div>
       </el-form>
     </div>
@@ -36,7 +36,7 @@ export default {
         callback(new Error("请输入密码"));
       } else {
         if (this.userPassword.checkPassword !== "") {
-          this.$refs.ruleForm.validateField("checkPassword");
+          this.$refs.form.validateField("checkPassword");
         }
         callback();
       }
@@ -72,20 +72,24 @@ export default {
           { min: 6, message: "密码必须大于6位", trigger: "blur" }
         ]
       },
+      saving: false,
       isShowPwd: false,
       isShowPwd_again: false
     };
   },
   methods: {
     ...mapActions(["updateMyPassword"]),
-    onSubmit() {
+     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.saving = true;
           this.updateMyPassword(this.userPassword)
             .then(() => {
+              this.saving = false;
               this.$message.success("修改成功");
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("修改失败");
             });
         }

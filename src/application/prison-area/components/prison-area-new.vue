@@ -83,6 +83,7 @@ export default {
               this.saving = false;
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("新增失败");
             });
         }
