@@ -3,19 +3,60 @@
         <div class="um-title">
             <p>基本信息</p>
         </div>
-        <el-form class="formPadding" :model="criminal" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="编号" prop="code">
+        <el-form class="form-criminal" :model="criminal" :rules="rules" ref="form" label-position="top">
+          <div class="form-box">
+            <el-form-item class="w25" label="编号" prop="code">
                 <el-input v-model="criminal.code"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="名称" prop="name">
+            <el-form-item class="w25" label="姓名" prop="name">
                 <el-input v-model="criminal.name"></el-input>
             </el-form-item>
-            <el-form-item class="w100 textarea" label="描述" prop="description">
-                <el-input :maxlength="255" v-model="criminal.description" type="textarea" resize="none"></el-input>
+            <el-form-item class="w25" label="身份情况" prop="code">
+                <el-input v-model="criminal.code"></el-input>
             </el-form-item>
-            <el-form-item class="hasButton">
-                <el-button type="primary" :loading="saving" @click="onSubmit(criminal)">新增</el-button>
+            <el-form-item class="w25" label="真实姓名" prop="name">
+                <el-input v-model="criminal.name"></el-input>
             </el-form-item>
+            <el-form-item class="w25" label="别化名" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="性别" prop="name">
+                <el-input v-model="criminal.name"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="民族" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="出生日期" prop="name">
+              <el-date-picker v-model="criminal.date" type="date"></el-date-picker>
+            </el-form-item>
+          </div>
+          <div class="form-box">
+            <el-form-item class="w25" label="编号" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="姓名" prop="name">
+                <el-input v-model="criminal.name"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="身份情况" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="真实姓名" prop="name">
+                <el-input v-model="criminal.name"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="别化名" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="性别" prop="name">
+                <el-input v-model="criminal.name"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="民族" prop="code">
+                <el-input v-model="criminal.code"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="出生日期" prop="name">
+              <el-date-picker v-model="criminal.date" type="date"></el-date-picker>
+            </el-form-item>
+          </div>
+
         </el-form>
     </div>
 </template>
