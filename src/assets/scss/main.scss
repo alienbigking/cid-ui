@@ -49,7 +49,7 @@
         .el-form-item__label{
             line-height: 1;
             font-size: 12px;
-            color:#333;
+            color:#666;
         }
         .el-form-item__content{
             width: 100%;
@@ -57,6 +57,7 @@
     }
     .el-input__inner{
         font-size: 12px;
+        color: #333;
     }
     .el-form-item{
         &.w50{ // 并排的表单
@@ -131,29 +132,48 @@
         width: calc(100% - 120px);
     }
 }
-.labelInTop{ // lable在输入框上面的表单
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    .el-form-item__label{
-        display: block;
-        line-height: 12px;
-        font-size: 12px;
-        margin-bottom: 10px;
-        color:#333;
-    }
-    .el-form-item{
-        .el-form-item__content{
-            width: 100%;
-        }
-    }
-}
 .formPadding{
     padding: 20px 0 20px 20px;
 }
+.form-criminal{
+    .form-box{
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      position: relative;
+      padding: 30px 0 10px;
+      &:after{
+        content: "";
+        width: 20px;
+        position: absolute;
+        height: 1px;
+        background: #fff;
+        display: block;
+        bottom: -1px;
+      }
+    }
+    .form-box:last-child{
+      border-bottom: 0;
+      &:after{
+        display: none;
+      }
+    }
+    .w25{
+      width: 25%;
+      box-sizing: border-box;
+      padding-right: 20px;
+      padding-left: 20px;
+    }
+}
 .el-table{
-    th,td{
+    tr,th,td{
         color: #333;
+        font-size: 12px;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
     }
     .tableHeader{
         height: 50px;
@@ -163,11 +183,12 @@
             border-bottom-color: #bbb;
         }
     }
+    .tableHeader40{
+      background: #F5F5F5;
+      height: 40px;
+    }
 }
 .my_table{
-    th,td{
-        padding: 0;
-    }
     &.el-table--border, &.el-table--group{
         border: 0;
         border-top: 1px solid #ddd;
@@ -203,6 +224,7 @@
         display: none;
     }
 }
+
 .filters{ // 筛选框
     padding: 20px 20px 23px;
     display: flex;
@@ -218,10 +240,36 @@
         width: 176px;
         margin-right: 20px;
     }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
+}
+.searchbtn{
+    background: #29b0a3;
+    color: #fff;
+    width: 100px;
+    border: 0;
+    &:hover{
+      background: #29b0a3;
+      color: #fff;
     }
+}
+.w-px76{
+  width: 76px;
+  background: #009588;
+  &:hover{
+    background: rgba(0,149,136,0.9);
+    color: #fff;
+  }
+}
+.list-box{ // 罪犯编辑模块的表格的父元素
+  border-top: 1px solid #ddd;
+  margin-left: 20px;
+  padding: 30px 20px 20px 0;
+  overflow: hidden;
+}
+.table40{ // 行高40px的表格
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  margin-bottom: 30px;
+  &+button{
+    float: right;
+  }
 }
