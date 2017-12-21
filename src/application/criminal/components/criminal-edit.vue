@@ -21,7 +21,7 @@ import criminalSocialRelation from "./components/criminal-social-relation";
 export default {
   data() {
     return {
-      activeName: 'criminalResume',
+      activeName: 'criminalSocialRelation',
       tabs: [
         { name: "基本信息", component: "criminal" },
         { name: "犯罪记录", component: "criminalRecord" },

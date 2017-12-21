@@ -2,192 +2,261 @@
 <div>
   <!-- 基本信息 -->
   <div class="card">
-      <div class="title" @click="isShowInformation">
+    <div class="title" @click="isShowInformation">
         基本信息
         <span class="iconfont" :class="informationShow?'icon-unfold':'icon-enter'"></span>
-      </div>
-      <div v-if="informationShow">
+    </div>
+    <div v-if="informationShow">
         <div class="form-container">
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>档案号:</label><span>检查院</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>姓名：</label><span>12534543</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>别名：</label><span>狗蛋</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>身份情况：</label><span>身份不明</span>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>民族：</label><span>汉</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>出生日期：</label><span>1990-10-10</span>
-              </el-col>
-          </el-row>
-        </div>
-        <div class="form-container">
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>籍贯/国籍:</label><span>检查院</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>户籍分类：</label><span>12534543</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>出生地：</label><span>狗蛋</span>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="12">
-                  <label>户籍住址：</label><span class="colpre50">湖南省</span><span class="collast50">长沙市</span>
-              </el-col>
-          </el-row>
-        </div>
-        <div class="form-container">
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>捕前文化程度:</label><span>博士</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>现文化程度：</label><span>院士</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>捕前职业：</label><span>研究原子弹</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>捕前面貌：</label><span>国名党</span>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>身份证号：</label><span>65465446546546546</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>特长：</label><span>吹牛皮</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>婚姻：</label><span>已婚</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>工种：</label><span>科学家</span>
-              </el-col>
-          </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>标识:</label><span>检查院</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>编号：</label><span>12534543</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>姓名：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>别名：</label><span>身份不明</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>性别编号：</label><span>汉</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>性别：</label><span>1990-10-10</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>生日:</label><span>检查院</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>身份证号：</label><span>12534543</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>婚否：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>逮捕机关:</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
+                    <label>民族编号:</label><span>博士</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>逮捕日期：</label><span>12534543</span>
+                    <label>民族：</label><span>院士</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>羁押日期：</label><span>狗蛋</span>
+                    <label>国籍编号：</label><span>研究原子弹</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>判决机关：</label><span>狗蛋</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>判决日期：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>罪名：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>判决字号：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>刑期：</label><span>狗蛋</span>
+                    <label>国籍：</label><span>国名党</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>剥政年限：</label><span>狗蛋</span>
+                    <label>户籍类型编号：</label><span>65465446546546546</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>一审机关：</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
+                    <label>户籍类型：</label><span>吹牛皮</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>一审字号：</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
+                    <label>国家编号：</label><span>已婚</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>原案犯类别：</label><span>狗蛋</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>收押类别：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>入监日期：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>调入日期：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>何处调来：</label><span>狗蛋</span>
+                    <label>国家：</label><span>科学家</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>看守所：</label><span>狗蛋</span>
+                    <label>省份编号：</label><span>65465446546546546</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>前科次数：</label><span>狗蛋</span>
+                    <label>省份：</label><span>吹牛皮</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>城市编号：</label><span>已婚</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>城市：</label><span>科学家</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>县编号：</label><span>65465446546546546</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>县：</label><span>吹牛皮</span>
+                </el-col>
+            </el-row>
+        </div>
+        <div class="form-container">
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>户籍地址国家编号:</label><span></span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址国家名称：</label><span>12534543</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址省份编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址省份名称：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>户籍地址城市编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址城市名称：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址县编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>户籍地址县名称：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>户籍地址街道详情：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址国家编号：</label><span></span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址国家名称：</label><span>湖南省</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址省份编号：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>家庭地址省份名称：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址城市编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址城市名称：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址县编号：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>家庭地址县名称：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址街道详情：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>政治面貌编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>政治面貌名称：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+        </div>
+        <div class="form-container">
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>曾经加入的党派团体：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>文化程度编号：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>文化程度名称：</label><span>狗蛋</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>职业：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>特殊技能：</label><span>狗蛋</span>
                 </el-col>
                 <el-col :span="6">
                     <label>累惯犯：</label><span>狗蛋</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>流窜类别：</label><span>狗蛋</span>
+                    <label>四涉：</label><span>狗蛋</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>三涉：</label><span>狗蛋</span>
+                    <label>四史：</label><span>6546544</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>四史：</label><span>狗蛋</span>
+                    <label>流窜类别编号：</label><span>吹牛皮</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>团伙犯罪：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>团伙人数：</label><span>狗蛋</span>
+                    <label>流窜类别名称：</label><span>6546544</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>队别：</label><span>狗蛋</span>
+                    <label>分管等级编号：</label><span>6546544</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>分管等级：</label><span>狗蛋</span>
+                    <label>分管等级名称：</label><span>吹牛皮</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>分押类型：</label><span>狗蛋</span>
+                    <label>分押类别编号：</label><span>6546544</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>减刑尺度：</label><span>狗蛋</span>
+                    <label>分押类别名称：</label><span>6546544</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>档案查密等级：</label><span>6546544</span>
+                    <label>减刑尺度编号：</label><span>6546544</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>执行通知书下达日期：</label><span>吹牛皮</span>
+                    <label>减刑尺度名称：</label><span>吹牛皮</span>
                 </el-col>
             </el-row>
-          </div>
-      </div>
+        </div>
+        <div class="form-container">
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>监区标识：</label><span>6546544</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>监区名称：</label><span>吹牛皮</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>监舍标识：</label><span>6546544</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>监舍名称：</label><span>6546544</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>床位号：</label><span>6546544</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>备注：</label><span>吹牛皮</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>创建时间：</label><span>6546544</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>最后更新时间：</label><span>6546544</span>
+                </el-col>
+            </el-row>
+        </div>  
+    </div>
   </div>
   <!-- 犯罪记录 -->
   <div class="card">
@@ -337,6 +406,7 @@ export default {
     padding:20px;
     color: #333;
     font-size:14px;
+    cursor: pointer;
   }
   .iconfont{
     float: right;
@@ -372,6 +442,15 @@ export default {
     height: 14px;
     vertical-align: middle;
   }
+  .rowTitle {
+    height:47px;
+    background: #fff;
+  }
+  .rowTwo {
+    background: url(../../../assets/images/rowtwo.png) 100% 100% repeat;
+    margin-top: 3px;
+    line-height: 45px;
+  }
   .colpre50 {
     width: 12%;
   }
@@ -383,15 +462,6 @@ export default {
   }
   .collast25 {
     width: calc(65% - 96px);
-  }
-  .rowTitle {
-    height:47px;
-    background: #fff;
-  }
-  .rowTwo {
-    background: url(../../../assets/images/rowtwo.png) 100% 100% repeat;
-    margin-top: 3px;
-    line-height: 45px;
   }
 }
 </style>
