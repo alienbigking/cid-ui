@@ -12,9 +12,8 @@
             <el-input v-model="criminal.alias"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="性别" prop="genderCode">
-          <el-select v-model="criminal.genderCode" placeholder="请选择性别" clearable>
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="famale"></el-option>
+          <el-select v-model="criminal.genderCode" value-key="code" :loading="flag.genders" placeholder="请选择性别" clearable>
+            <el-option v-for="(item, index) in genders" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="出生日期" prop="birthday">
@@ -27,9 +26,8 @@
             <el-input v-model="criminal.married"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="民族" prop="ethnicityCode">
-          <el-select v-model="criminal.ethnicityCode" clearable>
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="famale"></el-option>
+          <el-select v-model="criminal.ethnicityCode" :loading="flag.ethnicities" clearable>
+            <el-option v-for="(item, index) in ethnicities" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
       </div>
@@ -100,25 +98,25 @@
             <el-option label="女" value="famale"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="w25" label="国家(家庭地址)" prop="homeAddressCountryCode">
+        <el-form-item class="w25" label="国家(家庭地址)" prop="householdRegisterAddressStreetDetail">
           <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
             <el-option label="男" value="male"></el-option>
             <el-option label="女" value="famale"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="w25" label="省份(家庭地址)" prop="homeAddressProvinceCode">
+        <el-form-item class="w25" label="省份(家庭地址)" prop="householdRegisterAddressStreetDetail">
           <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
             <el-option label="男" value="male"></el-option>
             <el-option label="女" value="famale"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="w25" label="城市(家庭地址)" prop="homeAddressCityCode">
+        <el-form-item class="w25" label="城市(家庭地址)" prop="householdRegisterAddressStreetDetail">
           <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
             <el-option label="男" value="male"></el-option>
             <el-option label="女" value="famale"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="w25" label="县/区(家庭地址)" prop="homeAddressCountyCode">
+        <el-form-item class="w25" label="县/区(家庭地址)" prop="householdRegisterAddressStreetDetail">
           <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
             <el-option label="男" value="male"></el-option>
             <el-option label="女" value="famale"></el-option>
@@ -133,24 +131,21 @@
       </div>
       <div class="form-box">
         <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-          <el-select v-model="criminal.politicalStatusCode" clearable>
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="famale"></el-option>
+          <el-select v-model="criminal.politicalStatusCode" :loading="flag.politicalStatuses" clearable>
+            <el-option v-for="(item, index) in politicalStatuses" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="参加过何党派团体" prop="politicalParty">
             <el-input v-model="criminal.politicalParty"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="文化程度" prop="educationDegreeCode">
-          <el-select v-model="criminal.educationDegreeCode" clearable>
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="famale"></el-option>
+          <el-select v-model="criminal.educationDegreeCode" :loading="flag.educationDegrees" clearable>
+            <el-option v-for="(item, index) in educationDegrees" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="职业" prop="occupation">
-          <el-select v-model="criminal.occupation" clearable>
-            <el-option label="男" value="male"></el-option>
-            <el-option label="女" value="famale"></el-option>
+          <el-select v-model="criminal.occupation" :loading="flag.occupations" clearable>
+            <el-option v-for="(item, index) in occupations" :key="index" :label="item.name" :value="item.code"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="特殊技能" prop="specialSkill">
@@ -203,14 +198,11 @@
         <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
             <el-input v-model="criminal.prisonHouseId"></el-input>
         </el-form-item>
-        <el-form-item class="w25" label="互监组号" prop="hujianzuhao">
-            <el-input v-model="criminal.hujianzuhao"></el-input>
-        </el-form-item>
         <el-form-item class="w25" label="床位号" prop="bedNumber">
             <el-input v-model="criminal.bedNumber"></el-input>
         </el-form-item>
-        <el-form-item class="w50" label="入监备注" prop="rujianbeizhu">
-            <el-input :maxlength="255" v-model="criminal.rujianbeizhu" type="textarea" resize="none"></el-input>
+        <el-form-item class="w50" label="入监备注" prop="remark">
+            <el-input :maxlength="255" v-model="criminal.remark" type="textarea" resize="none"></el-input>
         </el-form-item>
         <el-form-item class="hasButton">
             <el-button type="primary" @click="onSubmit" :loading="saving">保存</el-button>
@@ -221,29 +213,114 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+// import _ from "lodash";
+
 export default {
   data() {
     return {
       criminal: {},
-      rules: {
-        required: [{ required: true, message: "该项必填", trigger: "blur" }],
-        code: [
-          { required: true, message: "请输入编号", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入租户名称", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
+      rules: {},
+      formRules: {
+        code: ["required"],
+        name: ["required"],
+        genderCode: ["required"],
+        birthday: ["required"],
+        identityCardNumber: ["required"],
+        married: ["required"],
+        ethnicityCode: ["required"],
+        nationalityCode: ["required"],
+        householdRegisterTypeCode: ["required"],
+        birthplaceCountryCode: ["required"],
+        birthplaceProvinceCode: ["required"],
+        birthplaceCityCode: ["required"],
+        birthplaceCountyCode: ["required"],
+        householdRegisterAddressCountryCode: ["required"],
+        householdRegisterAddressProvinceCode: ["required"],
+        householdRegisterAddressCityCode: ["required"],
+        householdRegisterAddressCountyCode: ["required"],
+        householdRegisterAddressStreetDetail: ["required"],
+        homeAddressCountryCode: ["required"],
+        homeAddressProvinceCode: ["required"],
+        homeAddressCityCode: ["required"],
+        homeAddressCountyCode: ["required"],
+        homeAddressStreetDetail: ["required"],
+        politicalStatusCode: ["required"],
+        educationDegreeCode: ["required"],
+        occupation: ["required"],
+        recidivisted: ["required"],
+        involvingFour: ["required"],
+        fourHistory: ["required"],
+        fledTypeCode: ["required"],
+        separateManagementLevelCode: ["required"],
+        separateCustodyTypeCode: ["required"],
+        commutationScaleCode: ["required"],
+        prisonAreaId: ["required"],
+        prisonHouseId: ["required"]
       },
-      saving: false
+      saving: false,
+      flag: {
+        genders: true,
+        ethnicities: true,
+        occupations: true,
+        educationDegrees: true,
+        politicalStatuses: true
+      }
     };
   },
+  computed: {
+    ...mapState({
+      genders: state => state.criminal.genders,
+      ethnicities: state => state.criminal.ethnicities,
+      occupations: state => state.criminal.occupations,
+      educationDegrees: state => state.criminal.educationDegrees,
+      politicalStatuses: state => state.criminal.politicalStatuses
+    })
+  },
   methods: {
+    ...mapActions(["getGenders", "getEthnicities", "getOccupations", "getEducationDegrees", "getPoliticalStatuses"]),
+    addRules() {
+      Object.keys(this.formRules).map(key => {
+        let rule = [];
+        this.formRules[key].forEach(item => {
+          switch (item) {
+            case "required":
+              rule.push({ required: true, message: "该项必填", trigger: "change blur" });
+              break;
+            default:
+              //
+          };
+        });
+        this.rules[key] = rule;
+      });
+    },
     onSubmit() {
       console.log(this.criminal);
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          this.saving = true;
+          console.log(this.criminal, "可以提交了");
+        }
+      });
     }
+  },
+  created() {
+    this.addRules();
+    this.getGenders().then(res => {
+      this.flag.genders = false;
+    });
+    this.getEthnicities().then(res => {
+      this.flag.ethnicities = false;
+    });
+    this.getOccupations().then(res => {
+      this.flag.occupations = false;
+    });
+    this.getEducationDegrees().then(res => {
+      this.flag.educationDegrees = false;
+    });
+    this.getPoliticalStatuses().then(res => {
+      this.flag.politicalStatuses = false;
+    });
   }
 };
 </script>

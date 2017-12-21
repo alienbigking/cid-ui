@@ -337,10 +337,10 @@
             <el-form-item class="w25" label="工种" prop="gongzhong">
                 <el-input v-model="criminal.gongzhong"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="所学专业" prop="suoxuezhuanye">
+            <el-form-item class="w25" label="所学专业" prop="require">
                 <el-input v-model="criminal.suoxuezhuanye"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="音像档案号" prop="yinxiangdanganhao">
+            <el-form-item class="w25" label="音像档案号" prop="require">
                 <el-input v-model="criminal.yinxiangdanganhao"></el-input>
             </el-form-item>
             <el-form-item class="w25" label="参加过何党派团体" prop="canjiaguohedangpaituanti">
@@ -368,18 +368,7 @@ export default {
   data() {
     return {
       criminal: {},
-      rules: {
-        // required: [{ required: true, message: "该项必填", trigger: "blur" }],
-        code: [
-          { required: true, message: "请输入编号", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入租户名称", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
-      },
+      rules: {},
       saving: false
     };
   },
@@ -400,16 +389,16 @@ export default {
         if (valid) {
           console.log(this.criminal);
           this.saving = true;
-          this.addPrisonTenant()
-            .then(res => {
-              this.saving = false;
-              this.$message.success("新增成功");
-              this.$router.push(`/criminal/list`);
-            })
-            .catch(() => {
-              this.$message.error("新增失败");
-              this.saving = false;
-            });
+          // this.addPrisonTenant()
+          //   .then(res => {
+          //     this.saving = false;
+          //     this.$message.success("新增成功");
+          //     this.$router.push(`/criminal/list`);
+          //   })
+          //   .catch(() => {
+          //     this.$message.error("新增失败");
+          //     this.saving = false;
+          //   });
         }
       });
     }
