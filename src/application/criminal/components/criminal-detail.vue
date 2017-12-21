@@ -10,65 +10,43 @@
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>标识:</label><span>检查院</span>
-                </el-col>
-                <el-col :span="6">
                     <label>编号：</label><span>12534543</span>
                 </el-col>
                 <el-col :span="6">
                     <label>姓名：</label><span>狗蛋</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>别名：</label><span>身份不明</span>
+                    <label>别化名：</label><span>身份不明</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>性别：</label><span>汉</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>性别编号：</label><span>汉</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>性别：</label><span>1990-10-10</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>生日:</label><span>检查院</span>
+                    <label>出生日期:</label><span>检查院</span>
                 </el-col>
                 <el-col :span="6">
                     <label>身份证号：</label><span>12534543</span>
                 </el-col>
-            </el-row>
-            <el-row type="flex">
                 <el-col :span="6">
                     <label>婚否：</label><span>狗蛋</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>民族：</label><span>院士</span>
                 </el-col>
             </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>民族编号:</label><span>博士</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>民族：</label><span>院士</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>国籍编号：</label><span>研究原子弹</span>
-                </el-col>
-                <el-col :span="6">
                     <label>国籍：</label><span>国名党</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>户籍类型编号：</label><span>65465446546546546</span>
                 </el-col>
                 <el-col :span="6">
                     <label>户籍类型：</label><span>吹牛皮</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>国家编号：</label><span>已婚</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>国家：</label><span>科学家</span>
+                    <label>国家(出生地)：</label><span>科学家</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
@@ -255,7 +233,7 @@
                     <label>最后更新时间：</label><span>6546544</span>
                 </el-col>
             </el-row>
-        </div>  
+        </div>
     </div>
   </div>
   <!-- 犯罪记录 -->
@@ -359,12 +337,12 @@
           <el-table-column prop="h" label="职业"> </el-table-column>
           <el-table-column prop="j" label="面貌"> </el-table-column>
           <el-table-column prop="k" label="电话"> </el-table-column>
-          <el-table-column prop="k" label="主联系人"> </el-table-column>          
+          <el-table-column prop="k" label="主联系人"> </el-table-column>
         </el-table>
       </div>
   </div>
 </div>
-  
+
 </template>
 <script>
 // import { mapState, mapActions } from "vuex";
@@ -373,7 +351,7 @@ export default {
   data() {
     return {
       tableData: [{ a: "hhhhhhhh", s: "hhhhhhhh", d: "hhhhhhhh", f: "hhhhhhhh", g: "hhhhhhhh", h: "hhhhhhhh", j: "hhhhhhhh", k: "hhhhhhhh" }],
-      informationShow: false,
+      informationShow: true,
       recordShow: false,
       resumeShow: false,
       featureShow: false,
