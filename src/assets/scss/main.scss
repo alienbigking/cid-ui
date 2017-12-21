@@ -153,9 +153,6 @@
         display: block;
         bottom: -1px;
       }
-      .el-input__prefix{
-        left: 0px;
-      }
     }
     .form-box:last-child{
       border-bottom: 0;
@@ -189,7 +186,7 @@
         padding-right: 20px;
       }
       .el-form-item__content>.el-textarea{
-        padding: 0 20px;
+        padding: 0 0 0 20px;
         height: 130px;
         width: 100%;
         box-sizing: border-box;
@@ -325,5 +322,39 @@
   margin-bottom: 30px;
   &+button{
     float: right;
+  }
+}
+.deleteDialog{
+  .el-dialog__body{
+    color: #333;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  b {
+    font-weight: bold;
+  }
+  .icon-tishishuoming {
+    color: #e82e21;
+    font-size: 80px;
+    display: block;
+    line-height: 80px;
+    margin-bottom: 27px;
+    & + span {
+      line-height: 1;
+    }
+  }
+  .el-dialog__footer {
+    padding-top: 30px;
+    button {
+      width: 76px;
+      background: #fcfcfc;
+      color: #666;
+      & + button {
+        margin-left: 20px;
+        color: #fff;
+        background: #085eb5;
+        border-color: #085eb5;
+      }
+    }
   }
 }

@@ -40,7 +40,7 @@
                 </div>
             </template>
         </div>
-        <el-dialog width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
+        <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
@@ -135,38 +135,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 100%;
-  /deep/ .el-dialog__body {
-    color: #333;
-    text-align: center;
-    padding-bottom: 0;
-    b {
-      font-weight: bold;
-    }
-    .icon-tishishuoming {
-      color: #e82e21;
-      font-size: 80px;
-      display: block;
-      line-height: 80px;
-      margin-bottom: 27px;
-      & + span {
-        line-height: 1;
-      }
-    }
-  }
-  /deep/ .el-dialog__footer {
-    padding-top: 30px;
-    button {
-      width: 76px;
-      background: #fcfcfc;
-      color: #666;
-      & + button {
-        margin-left: 20px;
-        color: #fff;
-        background: #085eb5;
-        border-color: #085eb5;
-      }
-    }
-  }
   /deep/ .el-table__body-wrapper {
     overflow: inherit;
   }
