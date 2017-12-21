@@ -81,5 +81,36 @@ export default [
             //     collapse: true
             // }
         ]
+    },
+    {
+        index: '4',
+        name: '角色',
+        collapse: true,
+        children: [
+            {
+                index: '4-1',
+                name: '角色列表',
+                path: '/role/list',
+                collapse: true
+            },
+            // {
+            //     index: '3-2',
+            //     name: '租户明细',
+            //     path: '/tenant/detail',
+            //     collapse: true
+            // },
+            {
+                index: '4-4',
+                name: '新增角色',
+                path: '/role/new',
+                collapse: true
+            }
+            // {
+            //     index: '3-5',
+            //     name: '修改租户',
+            //     path: '/tenant/edit',
+            //     collapse: true
+            // }
+        ]
     }
 ];

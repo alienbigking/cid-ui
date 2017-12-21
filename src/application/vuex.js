@@ -4,5 +4,6 @@ import { vuex as me } from './me';
 import { vuex as tenant } from './tenant';
 import { vuex as prisonArea } from './prison-area';
 import { vuex as prisonHouse } from './prison-house';
+import { vuex as role } from './role';
 
-export default { common, login, me, tenant, prisonArea, prisonHouse };
+export default { common, login, me, tenant, prisonArea, prisonHouse, role };
