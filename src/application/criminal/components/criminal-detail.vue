@@ -10,227 +10,166 @@
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>编号：</label><span>12534543</span>
+                    <label>编号：</label><span>{{criminal.code}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>姓名：</label><span>狗蛋</span>
+                    <label>姓名：</label><span>{{criminal.name}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>别化名：</label><span>身份不明</span>
+                    <label>别化名：</label><span>{{criminal.alias}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>性别：</label><span>汉</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>出生日期:</label><span>检查院</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>身份证号：</label><span>12534543</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>婚否：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>民族：</label><span>院士</span>
-                </el-col>
-            </el-row>
-        </div>
-        <div class="form-container">
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>国籍：</label><span>国名党</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>户籍类型：</label><span>吹牛皮</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>国家(出生地)：</label><span>科学家</span>
+                    <label>性别：</label><span>{{criminal.genderName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>省份编号：</label><span>65465446546546546</span>
+                    <label>出生日期:</label><span>{{criminal.birthday}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>省份：</label><span>吹牛皮</span>
+                    <label>身份证号：</label><span>{{criminal.identityCardNumber}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>城市编号：</label><span>已婚</span>
+                    <label>婚否：</label><span>{{criminal.married}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>城市：</label><span>科学家</span>
+                    <label>民族：</label><span>{{criminal.ethnicityName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>县编号：</label><span>65465446546546546</span>
+                    <label>国籍：</label><span>{{criminal.nationalityName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>县：</label><span>吹牛皮</span>
+                    <label>户籍类型：</label><span>{{criminal.householdRegisterTypeName}}</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex"> 
+                <el-col :span="6">
+                    <label>国家(出生地)：</label><span>{{criminal.birthplaceCountryName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>省份(出生地)：</label><span>{{criminal.birthplaceProvinceName}}</span>
+                </el-col>  
+                <el-col :span="6">
+                    <label>城市(出生地)：</label><span>{{criminal.birthplaceCityName}}</span>
+                </el-col>
+                 <el-col :span="6">
+                    <label>县(出生地)：</label><span>{{criminal.birthplaceCountyName}}</span>
                 </el-col>
             </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>户籍地址国家编号:</label><span></span>
+                    <label>户籍地址国家名称：</label><span>{{criminal.householdRegisterAddressCountryName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址国家名称：</label><span>12534543</span>
+                    <label>户籍地址省份名称：</label><span>{{criminal.householdRegisterAddressProvinceName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址省份编号：</label><span>狗蛋</span>
+                    <label>户籍地址城市名称：</label><span>{{criminal.householdRegisterAddressCityName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址省份名称：</label><span>狗蛋</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>户籍地址城市编号：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>户籍地址城市名称：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>户籍地址县编号：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>户籍地址县名称：</label><span>狗蛋</span>
+                    <label>户籍地址县名称：</label><span>{{criminal.householdRegisterAddressCountyName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>户籍地址街道详情：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址国家编号：</label><span></span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址国家名称：</label><span>湖南省</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址省份编号：</label><span>狗蛋</span>
+                    <label>户籍地址街道详情：</label><span>{{criminal.householdRegisterAddressStreetDetail}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>家庭地址省份名称：</label><span>狗蛋</span>
+                    <label>家庭地址国家名称：</label><span>{{criminal.homeAddressCountryName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>家庭地址城市编号：</label><span>狗蛋</span>
+                    <label>家庭地址省份名称：</label><span>{{criminal.homeAddressProvinceName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>家庭地址城市名称：</label><span>狗蛋</span>
+                    <label>家庭地址城市名称：</label><span>{{criminal.homeAddressCityName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>家庭地址县编号：</label><span>狗蛋</span>
+                    <label>家庭地址县名称：</label><span>{{criminal.homeAddressCountyName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>家庭地址县名称：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址街道详情：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>政治面貌编号：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>政治面貌名称：</label><span>狗蛋</span>
+                    <label>家庭地址街道详情：</label><span>{{criminal.homeAddressStreetDetail}}</span>
                 </el-col>
             </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>曾经加入的党派团体：</label><span>狗蛋</span>
+                    <label>政治面貌名称：</label><span>{{criminal.politicalStatusName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>文化程度编号：</label><span>狗蛋</span>
+                    <label>曾经加入的党派团体：</label><span>{{criminal.politicalParty}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>文化程度名称：</label><span>狗蛋</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>职业：</label><span>狗蛋</span>
+                    <label>文化程度名称：</label><span>{{criminal.educationDegreeName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>特殊技能：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>累惯犯：</label><span>狗蛋</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>四涉：</label><span>狗蛋</span>
+                    <label>职业：</label><span>{{criminal.occupation}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>四史：</label><span>6546544</span>
+                    <label>特殊技能：</label><span>{{criminal.specialSkill}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>流窜类别编号：</label><span>吹牛皮</span>
+                    <label>累惯犯：</label><span>{{criminal.recidivisted}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>流窜类别名称：</label><span>6546544</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>分管等级编号：</label><span>6546544</span>
+                    <label>四涉：</label><span>{{criminal.involvingFour}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>分管等级名称：</label><span>吹牛皮</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>分押类别编号：</label><span>6546544</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>分押类别名称：</label><span>6546544</span>
+                    <label>四史：</label><span>{{criminal.fourHistory}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>减刑尺度编号：</label><span>6546544</span>
+                    <label>流窜类别名称：</label><span>{{criminal.fledTypeName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>减刑尺度名称：</label><span>吹牛皮</span>
+                    <label>分管等级名称：</label><span>{{criminal.separateManagementLevelName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>分押类别名称：</label><span>{{criminal.separateCustodyTypeName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>减刑尺度名称：</label><span>{{criminal.commutationScaleName}}</span>
                 </el-col>
             </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>监区标识：</label><span>6546544</span>
+                    <label>监区标识：</label><span>{{criminal.prisonAreaId}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>监区名称：</label><span>吹牛皮</span>
+                    <label>监区名称：</label><span>{{criminal.prisonAreaName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>监舍标识：</label><span>6546544</span>
+                    <label>监舍标识：</label><span>{{criminal.prisonHouseId}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>监舍名称：</label><span>6546544</span>
+                    <label>监舍名称：</label><span>{{criminal.prisonHouseName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>床位号：</label><span>6546544</span>
+                    <label>床位号：</label><span>{{criminal.bedNumber}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>备注：</label><span>吹牛皮</span>
+                    <label>备注：</label><span>{{criminal.remark}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>创建时间：</label><span>6546544</span>
+                    <label>创建时间：</label><span>{{criminal.createdTime}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>最后更新时间：</label><span>6546544</span>
+                    <label>最后更新时间：</label><span>{{criminal.lastUpdatedTime}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -243,7 +182,7 @@
         <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="recordShow">
-        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="criminalResume" header-row-class-name="tableHeader40">
           <el-table-column prop="a" label="类别"> </el-table-column>
           <el-table-column prop="s" label="开始日期"> </el-table-column>
           <el-table-column prop="d" label="截至日期"> </el-table-column>
@@ -262,13 +201,15 @@
         <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="resumeShow">
-        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-          <el-table-column prop="s" label="开始日期"> </el-table-column>
-          <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="单位"> </el-table-column>
-          <el-table-column prop="g" label="捕前单位标记"> </el-table-column>
-          <el-table-column prop="h" label="职业"> </el-table-column>
-          <el-table-column prop="j" label="职务"> </el-table-column>
+        <el-table class="table40" :data="criminalResume" header-row-class-name="tableHeader40">
+          <el-table-column prop="startDate" label="开始日期"> </el-table-column>
+          <el-table-column prop="endDate" label="截至日期"> </el-table-column>
+          <el-table-column prop="company" label="公司"> </el-table-column>
+          <el-table-column prop="occupation" label="职业"> </el-table-column>
+          <el-table-column prop="duty" label="职位"> </el-table-column>
+          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
+          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -282,40 +223,50 @@
         <div class="form-container">
           <el-row type="flex">
               <el-col :span="6">
-                  <label>身高(cm):</label><span>检查院</span>
+                  <label>身高(cm):</label><span>{{criminalFeature.height}}</span>
+              </el-col>
+               <el-col :span="6">
+                  <label>体重(kg)：</label><span>{{criminalFeature.weight}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>体型：</label><span>12534543</span>
+                  <label>体型：</label><span>{{criminalFeature.somatotypeName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>血型：</label><span>狗蛋</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>脸型：</label><span>身份不明</span>
+                  <label>脸型：</label><span>{{criminalFeature.faceTypeName}}</span>
               </el-col>
           </el-row>
           <el-row type="flex">
               <el-col :span="6">
-                  <label>口音：</label><span>检查院</span>
+                  <label>血型：</label><span>{{criminalFeature.bloodTypeName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>足长(cm)：</label><span>12534543</span>
+                  <label>口音：</label><span>{{criminalFeature.accentName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>鞋号：</label><span>狗蛋</span>
+                  <label>足长(cm)：</label><span>{{criminalFeature.footLength}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>体重(kg)：</label><span>身份不明</span>
+                  <label>鞋号：</label><span>{{criminalFeature.shoeSize}}</span>
               </el-col>
           </el-row>
           <el-row type="flex">
               <el-col :span="24">
                   <label class="rowTitle">特征：</label>
-                  <div class="rowTwo">
-                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
-                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
-                    赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万 赔偿二十万
-                  </div>
+                  <div class="rowTwo"> 1{{criminalFeature.description}}</div>
+              </el-col>
+          </el-row>
+          <el-row type="flex">
+              <el-col :span="6">
+                  <label>罪犯标识：</label><span>{{criminalFeature.criminalId}}</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>罪犯姓名：</label><span>{{criminalFeature.criminalName}}</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>创建时间：</label><span>{{criminalFeature.createdTime}}</span>
+              </el-col>
+              <el-col :span="6">
+                  <label>最后更新时间：</label><span>{{criminalFeature.lastUpdatedTime}}</span>
               </el-col>
           </el-row>
         </div>
@@ -328,16 +279,16 @@
         <span class="iconfont" :class="socialRelationShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="socialRelationShow">
-        <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="称谓"> </el-table-column>
-          <el-table-column prop="s" label="姓名"> </el-table-column>
-          <el-table-column prop="d" label="年龄"> </el-table-column>
-          <el-table-column prop="f" label="所在单位"> </el-table-column>
-          <el-table-column prop="g" label="家庭住址"> </el-table-column>
-          <el-table-column prop="h" label="职业"> </el-table-column>
-          <el-table-column prop="j" label="面貌"> </el-table-column>
-          <el-table-column prop="k" label="电话"> </el-table-column>
-          <el-table-column prop="k" label="主联系人"> </el-table-column>
+        <el-table class="table40" :data="criminalSocial" header-row-class-name="tableHeader40">
+          <el-table-column prop="appellation" label="称谓"> </el-table-column>
+          <el-table-column prop="name" label="姓名"> </el-table-column>
+          <el-table-column prop="age" label="年龄"> </el-table-column>
+          <el-table-column prop="company" label="公司"> </el-table-column>
+          <el-table-column prop="occupation" label="职业"> </el-table-column>
+          <el-table-column prop="politicalStatusName" label="政治面貌"> </el-table-column>
+          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
+          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -350,8 +301,11 @@
 export default {
   data() {
     return {
-      tableData: [{ a: "hhhhhhhh", s: "hhhhhhhh", d: "hhhhhhhh", f: "hhhhhhhh", g: "hhhhhhhh", h: "hhhhhhhh", j: "hhhhhhhh", k: "hhhhhhhh" }],
-      informationShow: true,
+      criminal: {},
+      criminalResume: [{ startDate: "2010-10-10", endDate: "2017-10-10", company: "皇族", occupation: "上单", duty: "肉盾", criminalName: "皇子", createdTime: "2010-10-10", lastUpdatedTime: "2017-10-10" }],
+      criminalSocial: [{ appellation: "父亲", name: "皇子他爸", age: "55", company: "皇族", occupation: "上单", politicalStatusName: "无", criminalName: "皇子", createdTime: "2010-10-10", lastUpdatedTime: "2017-10-10" }],
+      criminalFeature: {},
+      informationShow: false,
       recordShow: false,
       resumeShow: false,
       featureShow: false,
