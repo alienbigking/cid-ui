@@ -17,11 +17,11 @@
             <el-option label="女" value="famale"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item class="w25" label="出生日期" prop="chushengriqi">
-          <el-date-picker v-model="criminal.chushengriqi" type="date"></el-date-picker>
+        <el-form-item class="w25" label="出生日期" prop="birthday">
+          <el-date-picker v-model="criminal.birthday" type="date"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w25" label="身份证号" prop="shenfenzhenghao">
-            <el-input v-model="criminal.shenfenzhenghao"></el-input>
+        <el-form-item class="w25" label="身份证号" prop="identityCardNumber">
+            <el-input v-model="criminal.identityCardNumber"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="婚否" prop="married">
             <el-input v-model="criminal.married"></el-input>
