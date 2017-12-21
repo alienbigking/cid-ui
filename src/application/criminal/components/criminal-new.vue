@@ -29,7 +29,7 @@
                 <el-option label="女" value="famale"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="民族" prop="code">
+            <el-form-item class="w25" label="民族" prop="minzu">
               <el-select v-model="criminal.minzu" clearable>
                 <el-option label="男" value="male"></el-option>
                 <el-option label="女" value="famale"></el-option>
@@ -316,35 +316,35 @@
             </el-form-item>
           </div>
           <div class="form-box">
-            <el-form-item class="w25" label="监舍号" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="监舍号" prop="jianshehao">
+                <el-input v-model="criminal.jianshehao"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="互监组号" prop="name">
-                <el-input v-model="criminal.name"></el-input>
+            <el-form-item class="w25" label="互监组号" prop="hujianzuhao">
+                <el-input v-model="criminal.hujianzuhao"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="互监岗位" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="互监岗位" prop="hujiangangwei">
+                <el-input v-model="criminal.hujiangangwei"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="床位号" prop="name">
-                <el-input v-model="criminal.name"></el-input>
+            <el-form-item class="w25" label="床位号" prop="chuangweihao">
+                <el-input v-model="criminal.chuangweihao"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="监管干警" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="监管干警" prop="jianguanganjing">
+                <el-input v-model="criminal.jianguanganjing"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="勤杂分工" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="勤杂分工" prop="qinzafengong">
+                <el-input v-model="criminal.qinzafengong"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="工种" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="工种" prop="gongzhong">
+                <el-input v-model="criminal.gongzhong"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="所学专业" prop="name">
-                <el-input v-model="criminal.name"></el-input>
+            <el-form-item class="w25" label="所学专业" prop="suoxuezhuanye">
+                <el-input v-model="criminal.suoxuezhuanye"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="音像档案号" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="音像档案号" prop="yinxiangdanganhao">
+                <el-input v-model="criminal.yinxiangdanganhao"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="参加过何党派团体" prop="code">
-                <el-input v-model="criminal.code"></el-input>
+            <el-form-item class="w25" label="参加过何党派团体" prop="canjiaguohedangpaituanti">
+                <el-input v-model="criminal.canjiaguohedangpaituanti"></el-input>
             </el-form-item>
             <div class="w25"></div>
             <el-form-item class="w50" label="附带民事判决情况" prop="fudaiminshipanjueqingkuang">
@@ -354,7 +354,7 @@
                 <el-input :maxlength="255" v-model="criminal.rujianbeizhu" type="textarea" resize="none"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
-                <el-button type="primary" @click="onSubmit">保存</el-button>
+                <el-button type="primary" @click="onSubmit" :loading="saving">保存</el-button>
             </el-form-item>
           </div>
         </el-form>
@@ -369,7 +369,7 @@ export default {
     return {
       criminal: {},
       rules: {
-        required: [{ required: true, message: "该项必填", trigger: "blur" }],
+        // required: [{ required: true, message: "该项必填", trigger: "blur" }],
         code: [
           { required: true, message: "请输入编号", trigger: "blur" },
           { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
@@ -395,23 +395,23 @@ export default {
     ...mapActions(["addPrisonTenant"]),
     onSubmit() {
       console.log(this.criminal);
-      this.$router.push(`/criminal/edit/a1969201-733a-4e3f-a00b-ae805561f9bc`);
-      // this.$refs["form"].validate(valid => {
-      //   if (valid) {
-      //     console.log(this.criminal);
-      //     this.saving = true;
-          // this.addPrisonTenant()
-          //   .then(res => {
-          //     this.saving = false;
-          //     this.$message.success("新增成功");
-          //     this.$router.push(`/criminal/list`);
-          //   })
-          //   .catch(() => {
-          //     this.$message.error("新增失败");
-          //     this.saving = false;
-          //   });
-      //   }
-      // });
+      // this.$router.push(`/criminal/edit/a1969201-733a-4e3f-a00b-ae805561f9bc`);
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          console.log(this.criminal);
+          this.saving = true;
+          this.addPrisonTenant()
+            .then(res => {
+              this.saving = false;
+              this.$message.success("新增成功");
+              this.$router.push(`/criminal/list`);
+            })
+            .catch(() => {
+              this.$message.error("新增失败");
+              this.saving = false;
+            });
+        }
+      });
     }
   }
 };
