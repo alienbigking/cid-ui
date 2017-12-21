@@ -45,7 +45,7 @@
           </el-row>
           <el-row type="flex">
               <el-col :span="12">
-                  <label>户籍住址：</label><span>汉</span>
+                  <label>户籍住址：</label><span class="colpre50">湖南省</span><span class="collast50">长沙市</span>
               </el-col>
           </el-row>
         </div>
@@ -82,7 +82,7 @@
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>逮捕机关:</label><span>检查院</span>
+                    <label>逮捕机关:</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
                 </el-col>
                 <el-col :span="6">
                     <label>逮捕日期：</label><span>12534543</span>
@@ -113,10 +113,10 @@
                     <label>剥政年限：</label><span>狗蛋</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>一审机关：</label><span>狗蛋</span>
+                    <label>一审机关：</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>一审字号：</label><span>狗蛋</span>
+                    <label>一审字号：</label><span class="colpre25">湖南省</span><span class="collast25">皮皮局费</span>
                 </el-col>
                 <el-col :span="6">
                     <label>原案犯类别：</label><span>狗蛋</span>
@@ -341,6 +341,10 @@ export default {
   .iconfont{
     float: right;
   }
+  .list-box {
+    margin-left: 0px;
+    padding: 30px 20px 20px 20px;
+  }
 }
 .form-container {
   box-sizing: border-box;
@@ -367,6 +371,18 @@ export default {
     color: #333;
     height: 14px;
     vertical-align: middle;
+  }
+  .colpre50 {
+    width: 12%;
+  }
+  .collast50 {
+    width: calc(88% - 150px);
+  }
+  .colpre25 {
+    width: 28%;
+  }
+  .collast25 {
+    width: calc(65% - 96px);
   }
   .rowTitle {
     height:47px;
