@@ -222,7 +222,7 @@ export default {
       criminal: {},
       rules: {},
       formRules: {
-        code: ["required"],
+        code: ["required", "-100"],
         name: ["required"],
         genderCode: ["required"],
         birthday: ["required"],
@@ -279,17 +279,28 @@ export default {
   },
   methods: {
     ...mapActions(["getGenders", "getEthnicities", "getOccupations", "getEducationDegrees", "getPoliticalStatuses"]),
+    lengthRule(e) {
+      let min = e.split("-")[0];
+      let max = e.split("-")[1];
+      if (min && max) {
+        return { min: parseInt(min), max: max, message: `请输入${min}至${max}个字符` };
+      } else if (min) {
+        return { min: parseInt(min), message: `至少输入${min}个字符` };
+      } else if (max) {
+        return { max: parseInt(max), message: `最多输入${max}个字符` };
+      } else {
+        return false;
+      }
+    },
     addRules() {
       Object.keys(this.formRules).map(key => {
         let rule = [];
         this.formRules[key].forEach(item => {
-          switch (item) {
-            case "required":
-              rule.push({ required: true, message: "该项必填", trigger: "change blur" });
-              break;
-            default:
-              //
-          };
+          if (item === "required") {
+            rule.push({ required: true, message: "该项必填", trigger: "change blur" });
+          } else if (item.indexOf('-') > -1) {
+            if (this.lengthRule(item)) rule.push(this.lengthRule(item));
+          }
         });
         this.rules[key] = rule;
       });

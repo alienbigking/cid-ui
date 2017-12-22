@@ -368,7 +368,9 @@ export default {
   data() {
     return {
       criminal: {},
-      rules: {},
+      rules: {
+        rujianbeizhu: [ { required: true, message: 'fakdshf' } ]
+      },
       saving: false
     };
   },
@@ -407,7 +409,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.w25{
-  // margin-bottom: 30px;
-}
 </style>

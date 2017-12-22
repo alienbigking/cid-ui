@@ -3,7 +3,7 @@
     <div class="um-title">
       <p>新增角色</p>
     </div>
-    <el-form :model="role" :rules="rules" ref="form" class="labelInTop">
+    <el-form :model="role" :rules="rules" ref="form" class="formPadding" label-position="top">
       <el-form-item class="w50" label="角色名称" prop="name" >
         <el-input v-model="role.name"></el-input>
       </el-form-item>

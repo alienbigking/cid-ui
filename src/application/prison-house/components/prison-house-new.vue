@@ -7,7 +7,7 @@
       <el-form-item class="w50" label="编号" prop="code" >
         <el-input v-model="prisonHouse.code"></el-input>
       </el-form-item>
-      <el-form-item class="w50" label="监舍名称" prop="name" >
+      <el-form-item class="w50" label="名称" prop="name" >
         <el-input v-model="prisonHouse.name"></el-input>
       </el-form-item>
       <el-form-item class="w100 textarea" label="描述" prop="description" >
