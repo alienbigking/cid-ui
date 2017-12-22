@@ -3,7 +3,12 @@ import mutations from './mutations';
 
 const state = {
     pagedTenants: { content: [] },
-    criminal: {}
+    criminal: {},
+    genders: [],
+    ethnicities: [],
+    occupations: [],
+    educationDegrees: [],
+    politicalStatuses: []
 };
 
 export default {

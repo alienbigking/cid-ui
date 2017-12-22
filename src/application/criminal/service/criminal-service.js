@@ -19,5 +19,20 @@ export default {
     },
     delete(id) {
         return axios.delete(`api/tenants/${id}`);
+    },
+    getGenders() {
+      return axios.get(`api/genders`).then(res => res.data);
+    },
+    getEthnicities() {
+      return axios.get(`api/ethnicities`).then(res => res.data);
+    },
+    getOccupations() {
+      return axios.get(`api/occupations`).then(res => res.data);
+    },
+    getEducationDegrees() {
+      return axios.get(`api/education-degrees`).then(res => res.data);
+    },
+    getPoliticalStatuses() {
+      return axios.get(`api/political-statuses`).then(res => res.data);
     }
 };

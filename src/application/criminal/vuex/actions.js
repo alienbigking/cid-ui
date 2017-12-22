@@ -20,5 +20,30 @@ export default {
     },
     deleteTenant({ commit }, id) {
         return criminalService.delete(id);
+    },
+    getGenders({ commit }) {
+      return criminalService.getGenders().then(res => {
+        commit(types.SET_GENDERS, res);
+      });
+    },
+    getEthnicities({ commit }) {
+      return criminalService.getEthnicities().then(res => {
+        commit(types.SET_ETHNICITIES, res);
+      });
+    },
+    getOccupations({ commit }) {
+      return criminalService.getOccupations().then(res => {
+        commit(types.SET_OCCUPATIONS, res);
+      });
+    },
+    getEducationDegrees({ commit }) {
+      return criminalService.getEducationDegrees().then(res => {
+        commit(types.SET_EDUCATION_DEGREES, res);
+      });
+    },
+    getPoliticalStatuses({ commit }) {
+      return criminalService.getPoliticalStatuses().then(res => {
+        commit(types.SET_POLITICAL_STATUES, res);
+      });
     }
 };
