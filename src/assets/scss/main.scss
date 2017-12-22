@@ -49,7 +49,7 @@
         .el-form-item__label{
             line-height: 1;
             font-size: 12px;
-            color:#333;
+            color:#666;
         }
         .el-form-item__content{
             width: 100%;
@@ -57,6 +57,7 @@
     }
     .el-input__inner{
         font-size: 12px;
+        color: #333;
     }
     .el-form-item{
         &.w50{ // 并排的表单
@@ -131,29 +132,91 @@
         width: calc(100% - 120px);
     }
 }
-.labelInTop{ // lable在输入框上面的表单
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    .el-form-item__label{
-        display: block;
-        line-height: 12px;
-        font-size: 12px;
-        margin-bottom: 10px;
-        color:#333;
-    }
-    .el-form-item{
-        .el-form-item__content{
-            width: 100%;
-        }
-    }
-}
 .formPadding{
     padding: 20px 0 20px 20px;
 }
+.form-criminal{
+    .form-box{
+      border-bottom: 1px solid #ddd;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      position: relative;
+      padding: 30px 0 10px;
+      &:after{
+        content: "";
+        width: 20px;
+        position: absolute;
+        height: 1px;
+        background: #fff;
+        display: block;
+        bottom: -1px;
+      }
+    }
+    .form-box:last-child{
+      border-bottom: 0;
+      &:after{
+        display: none;
+      }
+    }
+    .w25{
+      width: 25%;
+      box-sizing: border-box;
+      padding-right: 20px;
+      padding-left: 20px;
+      flex-shrink: 0;
+    }
+    .w50{
+      padding: 0;
+      flex-shrink: 0;
+      .el-form-item__label{
+        padding-left: 20px;
+      }
+      .el-form-item__content>[class^="el-"]:not(.el-textarea):nth-child(1){
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 50%;
+        .el-input__prefix{
+          left: 20px;
+        }
+      }
+      .el-form-item__content>[class^="el-"]:not(.el-textarea):nth-last-child(1){
+        width: calc(50% - 20px);
+        padding-right: 20px;
+      }
+      .el-form-item__content>.el-textarea{
+        padding: 0 0 0 20px;
+        height: 130px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+    }
+    .w75{
+      width: 100%;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      .el-form-item__label{
+        padding-left: 20px;
+      }
+      .el-form-item__content>[class^="el-"]:nth-child(1){
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 25%;
+      }
+      .el-form-item__content>[class^="el-"]:nth-last-child(1){
+        width: 50%;
+        padding-right: 20px;
+      }
+    }
+}
 .el-table{
-    th,td{
+    tr,th,td{
         color: #333;
+        font-size: 12px;
+        padding: 0;
+        height: 40px;
+        line-height: 40px;
     }
     .tableHeader{
         height: 50px;
@@ -163,11 +226,12 @@
             border-bottom-color: #bbb;
         }
     }
+    .tableHeader40{
+      background: #F5F5F5;
+      height: 40px;
+    }
 }
 .my_table{
-    th,td{
-        padding: 0;
-    }
     &.el-table--border, &.el-table--group{
         border: 0;
         border-top: 1px solid #ddd;
@@ -203,6 +267,7 @@
         display: none;
     }
 }
+
 .filters{ // 筛选框
     padding: 20px 20px 23px;
     display: flex;
@@ -218,10 +283,78 @@
         width: 176px;
         margin-right: 20px;
     }
-    .searchbtn{
-        background: #29b0a3;
-        color: #fff;
-        width: 100px;
-        border: 0;
+}
+.searchbtn{
+    background: #29b0a3;
+    color: #fff;
+    width: 100px;
+    border: 0;
+    &:hover{
+      background: #29b0a3;
+      color: #fff;
     }
+    &:focus{
+      background: #29b0a3;
+      color: #fff;
+    }
+}
+.w-px76{
+  width: 76px;
+  background: #009588;
+  &:focus{
+    background: #009588;
+    color: #fff;
+  }
+  &:hover{
+    background: rgba(0,149,136,0.9);
+    color: #fff;
+  }
+}
+.list-box{ // 罪犯编辑模块的表格的父元素
+  border-top: 1px solid #ddd;
+  margin-left: 20px;
+  padding: 30px 20px 20px 0;
+  overflow: hidden;
+}
+.table40{ // 行高40px的表格
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  margin-bottom: 30px;
+  &+button{
+    float: right;
+  }
+}
+.deleteDialog{
+  .el-dialog__body{
+    color: #333;
+    text-align: center;
+    padding-bottom: 0;
+  }
+  b {
+    font-weight: bold;
+  }
+  .icon-tishishuoming {
+    color: #e82e21;
+    font-size: 80px;
+    display: block;
+    line-height: 80px;
+    margin-bottom: 27px;
+    & + span {
+      line-height: 1;
+    }
+  }
+  .el-dialog__footer {
+    padding-top: 30px;
+    button {
+      width: 76px;
+      background: #fcfcfc;
+      color: #666;
+      & + button {
+        margin-left: 20px;
+        color: #fff;
+        background: #085eb5;
+        border-color: #085eb5;
+      }
+    }
+  }
 }

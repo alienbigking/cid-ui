@@ -17,14 +17,15 @@
                     </el-col>
                 </el-row>
             </div>
-        </div>
-        <div class="card padding20">
-            <div class="form-container">
-                <label class="title">租户描述：</label>
-                <div>{{ tenant.description }}</div>
+            <div class="padding20">
+                <div class="form-container">
+                    <label class="title">租户描述：</label>
+                    <div>{{ tenant.description }}</div>
+                </div>
+                <el-button @click="onBack">返回</el-button>
             </div>
-            <el-button @click="onBack">返回</el-button>
         </div>
+
     </div>
 </template>
 <script>
@@ -57,18 +58,21 @@ export default {
   label {
     font-weight: bold;
     color: #333;
-    display: inline-block;
     width: 148px;
+    padding-top: 20px;
+    line-height: 1;
     box-sizing: border-box;
+    float: left;
   }
   span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    padding-bottom: 19px;
+    padding-bottom: 10px;
     padding-top: 20px;
     width: calc(100% - 148px);
     color: #333;
+    height: 14px;
+    vertical-align: middle;
   }
   .el-row .el-col-12:first-child {
     span {
@@ -78,6 +82,8 @@ export default {
   .title {
     display: block;
     margin-bottom: 10px;
+    float: none;
+    padding-top: 0;
     & + div {
       line-height: 24px;
     }
@@ -87,6 +93,10 @@ export default {
   padding-bottom: 20px;
   padding-right: 20px;
   overflow: hidden;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
   button {
     float: right;
   }

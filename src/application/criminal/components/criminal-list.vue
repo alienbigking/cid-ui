@@ -1,24 +1,35 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查询租户</span>
+            <span class="um-title">查看罪犯基本信息</span>
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
-                    <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="姓名" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-select v-model="filter.parentPrisonAreaId" @keyup.enter.native="onSearch" clearable placeholder="请选择隶属监区">
+                        <el-option value=""></el-option>
+                    </el-select>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
-                <el-button type="primary" @click="onNew">新增租户</el-button>
+                <el-button type="primary" @click="onNew">新增罪犯</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedTenants.content" border header-row-class-name="tableHeader">
                   <el-table-column prop="code" label="编号">
                   </el-table-column>
-                  <el-table-column prop="name" label="名称">
+                  <el-table-column prop="name" label="姓名">
                   </el-table-column>
-                  <el-table-column prop="createdTime" label="创建时间" sortable>
+                   <el-table-column prop="secondNname" label="别名">
                   </el-table-column>
-                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                  <el-table-column prop="gender" label="性别">
+                  </el-table-column>
+                  <el-table-column prop="nation" label="民族">
+                  </el-table-column>
+                  <el-table-column prop="birthday" label="出生日期">
+                  </el-table-column>
+                  <!-- <el-table-column prop="appearance" label="捕前面貌">
+                  </el-table-column> -->
+                  <el-table-column prop="prisonArea" label="隶属监区">
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
@@ -72,7 +83,7 @@ export default {
   },
   computed: {
     ...mapState({
-      pagedTenants: state => state.tenant.pagedTenants
+      pagedTenants: state => state.criminal.pagedTenants
     })
   },
   created() {
@@ -90,17 +101,17 @@ export default {
       this.search();
     },
     onView(id) {
-      this.$router.push(`/tenant/detail/${id}`);
+      this.$router.push(`/criminal/detail/${id}`);
     },
     onEdit(id) {
-      this.$router.push(`/tenant/edit/${id}`);
+      this.$router.push(`/criminal/edit/${id}`);
     },
     onDelete(item) {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
     },
     onNew() {
-      this.$router.push(`/tenant/new`);
+      this.$router.push(`/criminal/new`);
     },
     onDeleteConfirm() {
       this.deleting = true;
@@ -146,11 +157,11 @@ export default {
   }
   button:nth-child(2) {
     color: #29b0a3;
-    margin-left: 20px;
+    margin-left: 10px;
   }
   button:nth-child(3) {
     color: #f44336;
-    margin-left: 20px;
+    margin-left: 10px;
   }
 }
 </style>

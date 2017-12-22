@@ -20,8 +20,8 @@ export default {
     addPrisonArea({ commit, state }) {
         return prisonAreaService.add(state.prisonArea);
     },
-    updatePrisonArea({ commit, state }, prisonArea) {
-        return prisonAreaService.update(prisonArea);
+    updatePrisonArea({ commit, state }) {
+        return prisonAreaService.update(state.prisonArea);
     },
     deletePrisonArea({ commit }, id) {
         return prisonAreaService.delete(id);

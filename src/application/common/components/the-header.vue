@@ -6,10 +6,9 @@
             <i class="iconfont icon-caidan" @click="test"></i>
         </div>
         <ul class="header-right">
-            <li><router-link to="/index"><i class="iconfont icon-shezhi"></i></router-link></li>
-            <li><el-badge is-dot><router-link to="/index"><i class="iconfont icon-xiaoxizhongxin"></i></router-link></el-badge></li>
+            <li><router-link to="/"><i class="iconfont icon-shezhi"></i></router-link></li>
+            <li><el-badge is-dot><router-link to="/"><i class="iconfont icon-xiaoxizhongxin"></i></router-link></el-badge></li>
             <li class="hasImg"><router-link to="/me"><img src="../../../assets/images/avatar.png" alt=""><span>管理员</span></router-link></li>
-            <!-- <li><router-link to="/index">管理员</router-link></li> -->
             <li @click="logout"><i class="iconfont icon-tuichu"></i></li>
         </ul>
     </el-header>
@@ -19,11 +18,9 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      // loginState: true
     };
   },
   computed: {
-    // ...mapGetters(["collapsed"])
   },
   methods: {
     ...mapActions(["handleCollapse"]),
@@ -33,6 +30,7 @@ export default {
     // 注销
     logout() {
       window.localStorage.removeItem("TOKEN");
+      this.$message.success("已登出");
       this.$router.push("/login");
     }
   }
@@ -41,6 +39,7 @@ export default {
 <style lang="scss" scoped>
 .icon-caidan {
   cursor: pointer;
+  font-size: 20px;
 }
 
 .header-left {

@@ -4,7 +4,7 @@
       <div class="um-title">
           <p>修改个人信息</p>
       </div>
-      <el-form class="labelInTop" :model="userProfile" :rules="rules" ref="form">
+      <el-form class="formPadding" :model="userProfile" :rules="rules" ref="form" label-position="top">
           <el-form-item label="用户名" class="w50 the-disabled">
               <span class="el-input__inner">{{ userProfile.username }}</span>
           </el-form-item>
@@ -20,7 +20,7 @@
 
           <div class="el-form-item el-form-item-div">
             <el-button class="btn-return" @click="goBack">返回</el-button>
-            <el-button type="primary" class="btn-confirm" @click="submit">保存</el-button>
+            <el-button type="primary" class="btn-confirm" :loading="saving" @click="onSubmit">保存</el-button>
           </div>
       </el-form>
     </div>
@@ -42,7 +42,8 @@ export default {
       userProfile: _.cloneDeep(this.$store.state.me.userProfile),
       rules: {
         name: [{ required: true, message: "姓名不能为空", trigger: "blur" }]
-      }
+      },
+      saving: false
     };
   },
   created() {
@@ -60,14 +61,17 @@ export default {
   },
   methods: {
     ...mapActions(["getMyProfile", "updateMyProfile"]),
-    submit() {
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.saving = true;
           this.updateMyProfile()
             .then(() => {
+              this.saving = false;
               this.$message.success("修改成功");
             })
             .catch(() => {
+              this.saving = false;
               this.$message.error("修改失败");
             });
         }
@@ -81,11 +85,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card {
-  .labelInTop {
-    margin: 26px 0 0 21px;
-  }
-}
 .um-modifyPassword {
   padding: 20px 22px 20px 20px;
   font-size: 14px;
