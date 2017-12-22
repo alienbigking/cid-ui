@@ -45,17 +45,12 @@
                 </el-col>
             </el-row>
             <el-row type="flex"> 
-                <el-col :span="6">
-                    <label>国家(出生地)：</label><span>{{criminal.birthplaceCountryName}}</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>省份(出生地)：</label><span>{{criminal.birthplaceProvinceName}}</span>
-                </el-col>  
-                <el-col :span="6">
-                    <label>城市(出生地)：</label><span>{{criminal.birthplaceCityName}}</span>
-                </el-col>
-                 <el-col :span="6">
-                    <label>县(出生地)：</label><span>{{criminal.birthplaceCountyName}}</span>
+                <el-col :span="24">
+                    <label>出生地：</label>
+                    <span>{{criminal.birthplaceCountryName}}</span>
+                    <span>{{criminal.birthplaceProvinceName}}</span>
+                    <span>{{criminal.birthplaceCityName}}</span>
+                    <span>{{criminal.birthplaceCountyName}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -369,7 +364,7 @@ export default {
     margin-left:8px;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: calc(100% - 150px);
+    width: 135px;
     color: #333;
     height: 14px;
     vertical-align: middle;
@@ -382,18 +377,6 @@ export default {
     background: url(../../../assets/images/rowtwo.png) 100% 100% repeat;
     margin-top: 3px;
     line-height: 45px;
-  }
-  .colpre50 {
-    width: 12%;
-  }
-  .collast50 {
-    width: calc(88% - 150px);
-  }
-  .colpre25 {
-    width: 28%;
-  }
-  .collast25 {
-    width: calc(65% - 96px);
   }
 }
 </style>

@@ -190,6 +190,9 @@
         height: 130px;
         width: 100%;
         box-sizing: border-box;
+        &+.el-form-item__error{
+            left: 20px;
+        }
       }
     }
     .w75{
