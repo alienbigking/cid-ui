@@ -2,11 +2,6 @@ import * as components from './components';
 
 export default [
     {
-        path: '/tenant/detail/:id',
-        component: components.tenantDetail,
-        name: '租户明细'
-    },
-    {
         path: '/tenant/list',
         component: components.tenantList,
         name: '查询租户'
@@ -22,7 +17,8 @@ export default [
         name: '修改租户'
     },
     {
-        path: '/tenant/dashboard',
-        redirect: { name: 'dashboard' }
+        path: '/tenant/detail/:id',
+        component: components.tenantDetail,
+        name: '租户明细'
     }
 ];

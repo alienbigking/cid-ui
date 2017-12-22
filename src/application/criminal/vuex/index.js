@@ -2,13 +2,9 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    pagedTenants: { content: [] },
-    criminal: {},
-    genders: [],
-    ethnicities: [],
-    occupations: [],
-    educationDegrees: [],
-    politicalStatuses: []
+    allCriminals: [],
+    pagedCriminals: { content: [] },
+    criminal: {}
 };
 
 export default {

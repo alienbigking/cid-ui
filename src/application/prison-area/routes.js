@@ -2,11 +2,6 @@ import * as components from './components';
 
 export default [
     {
-        path: '/prison-area/detail/:id',
-        component: components.prisonAreaDetail,
-        name: '监区明细'
-    },
-    {
         path: '/prison-area/list',
         component: components.prisonAreaList,
         name: '查询监区'
@@ -22,7 +17,8 @@ export default [
         name: '修改监区'
     },
     {
-        path: '/prison-area/dashboard',
-        redirect: { name: 'dashboard' }
+        path: '/prison-area/detail/:id',
+        component: components.prisonAreaDetail,
+        name: '监区明细'
     }
 ];
