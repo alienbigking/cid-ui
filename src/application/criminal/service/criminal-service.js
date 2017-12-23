@@ -6,11 +6,6 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/criminals/all`).then(response => {
-            return response.data;
-        });
-    },
     getPaged(params) {
         return axios.get(`api/criminals`, { params: params }).then(response => {
             return response.data;
