@@ -177,15 +177,15 @@
         <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="recordShow">
-        <el-table class="table40" :data="criminalResume.content" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="类别"> </el-table-column>
-          <el-table-column prop="s" label="开始日期"> </el-table-column>
-          <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="罪名"> </el-table-column>
-          <el-table-column prop="g" label="判处日期"> </el-table-column>
-          <el-table-column prop="h" label="刑期"> </el-table-column>
-          <el-table-column prop="j" label="关押"> </el-table-column>
-          <el-table-column prop="k" label="备注"> </el-table-column>
+        <el-table class="table40" :data="criminalRecord.content" header-row-class-name="tableHeader40">
+          <el-table-column prop="decisionAccusation" label="罪名"> </el-table-column>
+          <el-table-column prop="arrestDate" label="逮捕日期"> </el-table-column>
+          <el-table-column prop="detentionDate" label="羁押日期"> </el-table-column>
+          <el-table-column prop="firstTrialOrganName" label="一审机关名称"> </el-table-column>
+          <el-table-column prop="finalTrialOrganName" label="终审机关名称"> </el-table-column>
+          <el-table-column prop="decisionDate" label="判决日期"> </el-table-column>
+          <el-table-column prop="decisionPrisonTermStartDate" label="判决刑期开始日期"> </el-table-column>
+          <el-table-column prop="decisionPrisonTermEndDate" label="判决刑期结束日期"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -247,7 +247,7 @@
           <el-row type="flex">
               <el-col :span="24">
                   <label class="rowTitle">特征：</label>
-                  <div class="rowTwo"> 1{{criminalPhysicalCharacteristic.description}}</div>
+                  <div class="rowTwo"> {{criminalPhysicalCharacteristic.description}}</div>
               </el-col>
           </el-row>
           <el-row type="flex">
@@ -308,7 +308,8 @@ export default {
       criminal: state => state.criminal.criminal,
       criminalResume: state => state.criminal.criminalResume,
       criminalPhysicalCharacteristic: state => state.criminal.criminalResume,
-      criminalSocialRelation: state => state.criminal.criminalResume
+      criminalSocialRelation: state => state.criminal.criminalResume,
+      criminalRecord: state => state.criminal.criminalResume
     })
   },
   created() {
@@ -316,10 +317,10 @@ export default {
     this.getCriminalResume(this.$route.params.id);
     this.getCriminalPhysicalCharacteristic(this.$route.params.id);
     this.getCriminalSocialRelation(this.$route.params.id);
-    console.log(this.criminal);
+    this.getCriminalRecord(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getCriminalResume", "getCriminalPhysicalCharacteristic", "getCriminalSocialRelation" ]),
+    ...mapActions([ "getCriminal", "getCriminalResume", "getCriminalPhysicalCharacteristic", "getCriminalSocialRelation", "getCriminalRecord" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
