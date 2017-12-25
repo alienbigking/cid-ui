@@ -14,7 +14,7 @@
                 <el-button type="primary" @click="onNew">新增罪犯</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedTenants.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedCriminals.content" border header-row-class-name="tableHeader">
                   <el-table-column prop="code" label="编号">
                   </el-table-column>
                   <el-table-column prop="name" label="姓名">
@@ -40,13 +40,13 @@
                   </el-table-column>
                 </el-table>
                 <div class="pagination-box">
-                    <span>共{{ pagedTenants.totalElements }}条信息</span>
+                    <span>共{{ pagedCriminals.totalElements }}条信息</span>
                     <el-pagination
                       @current-change="onPageChange"
                       :current-page.sync="currentPage"
                       :page-size="pagination.size"
                       layout="prev, pager, next, jumper"
-                      :total="pagedTenants.totalElements">
+                      :total="pagedCriminals.totalElements">
                     </el-pagination>
                 </div>
             </template>
@@ -83,14 +83,14 @@ export default {
   },
   computed: {
     ...mapState({
-      pagedTenants: state => state.criminal.pagedTenants
+      pagedCriminals: state => state.criminal.pagedCriminals
     })
   },
   created() {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedCriminals", "deleteTenant"]),
+    ...mapActions(["getPagedCriminals", "deleteCriminal"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -115,7 +115,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteTenant(this.deleteItem.id)
+      this.deleteCriminal(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
