@@ -5,7 +5,7 @@
     </div>
     <div class="list-box">
       <template>
-        <el-table class="table40" :data="criminalSocial" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="criminalSocialRelation.content" header-row-class-name="tableHeader40">
           <el-table-column prop="appellation" label="称谓"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="age" label="年龄"> </el-table-column>
@@ -17,7 +17,7 @@
           <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
-              <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
+              <el-button type="text" @click="onEdit(scope.row)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -51,7 +51,7 @@
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="editDialogVisible = false">确 定</el-button>
+        <el-button type="primary" :loading="saving" @click="onSave">确 定</el-button>
       </span>
     </el-dialog>
 
@@ -67,11 +67,13 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+import _ from "lodash";
+
 export default {
   data() {
     return {
       criminal: {},
-      criminalSocial: [{ appellation: "父亲", name: "皇子他爸", age: "55", company: "皇族", occupation: "上单", politicalStatusName: "无", criminalName: "皇子", createdTime: "2010-10-10", lastUpdatedTime: "2017-10-10" }],
       rules: {
         appellation: [
           { required: true, message: "请输入称谓", trigger: "blur" },
@@ -85,14 +87,34 @@ export default {
       editDialogVisible: false,
       deleteDialogVisible: false,
       deleting: false,
+      saving: false,
       deleteItem: {}
     };
   },
+  computed: {
+    ...mapState({
+      criminalSocialRelation: state => state.criminal.criminalSocialRelation
+    })
+  },
+  watch: {
+    criminalSocialRelation: {
+      handler: _.debounce(function(criminalSocialRelation) {
+        this.$store.commit("updateCriminalSocialRelation", criminalSocialRelation);
+      }, 500),
+      deep: true
+    }
+  },
+  created() {
+    this.search();
+  },
   methods: {
+    ...mapActions([ "addCriminalSocialRelation", "updateCriminalSocialRelation", "getPagedCriminalSocialRelations", "deleteCriminalSocialRelation" ]),
     onNew() {
       this.editDialogVisible = true;
+      this.criminal = {};
     },
-    onEdit() {
+    onEdit(data) {
+      this.criminal = data;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -100,8 +122,56 @@ export default {
       this.deleteDialogVisible = true;
     },
     onDeleteConfirm() {
-      this.deleteDialogVisible = false;
-      console.log('确认删除');
+      this.deleting = true;
+      this.deleteCriminalSocialRelation(this.deleteItem.id)
+        .then(res => {
+          this.deleting = false;
+          this.deleteDialogVisible = false;
+          this.$message.success("删除成功");
+          this.search();
+        })
+        .catch(() => {
+          this.$message.error("删除失败");
+          this.deleting = false;
+        });
+    },
+    onSave() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.criminal.id) {
+            // 修改
+            this.saving = true;
+            this.updateCriminalSocialRelation()
+              .then(res => {
+                this.saving = false;
+                this.search();
+                this.$message.success("修改成功");
+                this.editDialogVisible = false;
+              })
+              .catch(() => {
+                this.saving = false;
+                this.$message.error("修改失败");
+              });
+          } else {
+            // 新增
+            this.saving = true;
+            this.addCriminalSocialRelation()
+              .then(res => {
+                this.saving = false;
+                this.search();
+                this.$message.success("新增成功");
+                this.editDialogVisible = false;
+              })
+              .catch(() => {
+                this.saving = false;
+                this.$message.error("新增失败");
+              });
+          }
+        }
+      });
+    },
+    search() {
+      this.getPagedCriminalSocialRelations({criminalId: this.$route.params.id});
     }
   }
 };

@@ -30,7 +30,7 @@
                     <label>身份证号：</label><span>{{criminal.identityCardNumber}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>婚否：</label><span>{{criminal.married}}</span>
+                    <label>婚否：</label><span>{{criminal.married?"是":"否"}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>民族：</label><span>{{criminal.ethnicityName}}</span>
@@ -100,7 +100,7 @@
                     <label>政治面貌名称：</label><span>{{criminal.politicalStatusName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>曾经加入的党派团体：</label><span>{{criminal.politicalParty}}</span>
+                    <label>曾经加入的党派团体：</label><span>{{criminal.politicalParty?"是":"否"}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>文化程度名称：</label><span>{{criminal.educationDegreeName}}</span>
@@ -114,7 +114,7 @@
                     <label>特殊技能：</label><span>{{criminal.specialSkill}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>累惯犯：</label><span>{{criminal.recidivisted}}</span>
+                    <label>累惯犯：</label><span>{{criminal.recidivisted?"是":"否"}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>四涉：</label><span>{{criminal.involvingFour}}</span>
@@ -314,13 +314,13 @@ export default {
   },
   created() {
     this.getCriminal(this.$route.params.id);
-    this.getCriminalResume(this.$route.params.id);
+    this.getPagedCriminalResumes({criminalId: this.$route.params.id});
     this.getCriminalPhysicalCharacteristic(this.$route.params.id);
-    this.getCriminalSocialRelation(this.$route.params.id);
-    this.getCriminalRecord(this.$route.params.id);
+    this.getPagedCriminalSocialRelations({criminalId: this.$route.params.id});
+    this.getPagedCriminalRecords({criminalId: this.$route.params.id});
   },
   methods: {
-    ...mapActions([ "getCriminal", "getCriminalResume", "getCriminalPhysicalCharacteristic", "getCriminalSocialRelation", "getCriminalRecord" ]),
+    ...mapActions([ "getCriminal", "getPagedCriminalResumes", "getCriminalPhysicalCharacteristic", "getPagedCriminalSocialRelations", "getPagedCriminalRecords" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
@@ -377,7 +377,7 @@ export default {
     margin-left:8px;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: 135px;
+    width: 125px;
     color: #333;
     height: 14px;
     vertical-align: middle;

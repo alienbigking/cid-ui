@@ -4,13 +4,15 @@
       <el-button class="searchbtn w-px76" @click="editDialogVisible=true;criminal={}">新增</el-button>
     </div>
     <div class="list-box">
-      <el-table class="table40" :data="tableData" header-row-class-name="tableHeader40">
-        <el-table-column prop="a" label="开始日期"> </el-table-column>
-        <el-table-column prop="s" label="截至日期"> </el-table-column>
-        <el-table-column prop="d" label="单位"> </el-table-column>
-        <el-table-column prop="f" label="职业"> </el-table-column>
-        <el-table-column prop="g" label="职务"> </el-table-column>
-        <el-table-column prop="h" label="标记捕前单位"> </el-table-column>
+      <el-table class="table40" :data="criminalResume.content" header-row-class-name="tableHeader40">
+        <el-table-column prop="startDate" label="开始日期"> </el-table-column>
+        <el-table-column prop="endDate" label="结束日期"> </el-table-column>
+        <el-table-column prop="company" label="公司"> </el-table-column>
+        <el-table-column prop="occupation" label="职业"> </el-table-column>
+        <el-table-column prop="duty" label="职位"> </el-table-column>
+        <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
+        <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
+        <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
         <el-table-column label="操作" min-width="122">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row)">编辑</el-button>
@@ -23,16 +25,19 @@
     <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
         <el-form class="form-criminal" :model="criminal" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w-px180" label="开始日期" prop="tixing">
-              <el-date-picker v-model="criminal.a" type="date"></el-date-picker>
+              <el-date-picker v-model="criminal.startDate" type="date"></el-date-picker>
             </el-form-item>
-            <el-form-item class="w-px180" label="截至日期" prop="xuexing">
-              <el-date-picker v-model="criminal.s" type="date"></el-date-picker>
+            <el-form-item class="w-px180" label="结束日期" prop="xuexing">
+              <el-date-picker v-model="criminal.endDate" type="date"></el-date-picker>
             </el-form-item>
-            <el-form-item class="w-px180" label="职业" prop="lianxing">
-              <el-input v-model="criminal.f"></el-input>
+            <el-form-item class="w-px180" label="公司" prop="lianxing">
+              <el-input v-model="criminal.company"></el-input>
             </el-form-item>
-            <el-form-item class="w-px382" label="单位" prop="kouyin">
-              <el-input v-model="criminal.f"></el-input>
+            <el-form-item class="w-px180" label="职业" prop="kouyin">
+              <el-input v-model="criminal.occupation"></el-input>
+            </el-form-item>
+            <el-form-item class="w-px180" label="职位" prop="kouyin">
+              <el-input v-model="criminal.duty"></el-input>
             </el-form-item>
         </el-form>
       <span slot="footer" class="dialog-footer">
@@ -52,50 +57,112 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from "vuex";
-// import _ from "lodash";
+import { mapState, mapActions } from "vuex";
+import _ from "lodash";
 export default {
   data() {
     return {
       criminal: {},
-      rules: {},
-      tableData: [{ a: "2017-11-11", s: "2018-11-11", d: "hhhhhhhh", f: "hhhhhhhh", g: "hhhhhhhh", h: "hhhhhhhh" }],
+      rules: {
+        appellation: [
+          { required: true, message: "请输入称谓", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+        ],
+        name: [
+          { required: true, message: "请输入姓名", trigger: "blur" },
+          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
+        ]
+      },
       editDialogVisible: false,
       deleteDialogVisible: false,
       deleting: false,
+      saving: false,
       deleteItem: {}
     };
   },
-  methods: {
-    onEdit(e) {
-      this.criminal = e;
-      this.editDialogVisible = true;
-    },
-    onDelete(e) {
-      this.deleteItem = e;
-      this.deleteDialogVisible = true;
-    },
-    onDeleteConfirm() {
-      // 确定删除
-    },
-    getList() {
-      // 获取简历列表
-    },
-    onSave() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          this.saving = true;
-          if (this.criminal.id) {
-            // 修改
-          } else {
-            // 新增
-          }
-        }
-      });
+  computed: {
+    ...mapState({
+      criminalResume: state => state.criminal.criminalResume
+    })
+  },
+  watch: {
+    criminalResume: {
+      handler: _.debounce(function(criminalResume) {
+        this.$store.commit("updateCriminalResume", criminalResume);
+      }, 500),
+      deep: true
     }
   },
   created() {
     this.getList();
+  },
+  methods: {
+    ...mapActions([ "addCriminalResume", "updateCriminalResume", "getPagedCriminalResumes", "deleteCriminalResume" ]),
+    onNew() {
+      this.editDialogVisible = true;
+      this.criminal = {};
+    },
+    onEdit(data) {
+      this.criminal = data;
+      this.editDialogVisible = true;
+    },
+    onDelete(item) {
+      this.deleteItem = item;
+      this.deleteDialogVisible = true;
+    },
+    onDeleteConfirm() {
+      this.deleting = true;
+      this.deleteCriminalResume(this.deleteItem.id)
+        .then(res => {
+          this.deleting = false;
+          this.deleteDialogVisible = false;
+          this.$message.success("删除成功");
+          this.getList();
+        })
+        .catch(() => {
+          this.$message.error("删除失败");
+          this.deleting = false;
+        });
+    },
+    getList() {
+      // 获取简历列表
+      this.getPagedCriminalResumes({criminalId: this.$route.params.id});
+    },
+    onSave() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.criminal.id) {
+            // 修改
+            this.saving = true;
+            this.updateCriminalResume()
+              .then(res => {
+                this.saving = false;
+                this.getList();
+                this.$message.success("修改成功");
+                this.editDialogVisible = false;
+              })
+              .catch(() => {
+                this.saving = false;
+                this.$message.error("修改失败");
+              });
+          } else {
+            // 新增
+            this.saving = true;
+            this.addCriminalResume()
+              .then(res => {
+                this.saving = false;
+                this.getList();
+                this.$message.success("新增成功");
+                this.editDialogVisible = false;
+              })
+              .catch(() => {
+                this.saving = false;
+                this.$message.error("新增失败");
+              });
+          }
+        }
+      });
+    }
   }
 };
 </script>
@@ -106,15 +173,7 @@ export default {
   .w-px180{
     width: 180px;
     float: left;
-    &:nth-child(1){
-      margin-right: 20px;
-    }
-    &:nth-child(2){
-      margin-right: 40px;
-    }
-  }
-  .w-px382{
-    width: 382px;
+    margin-right: 20px;
   }
 }
 .dialog{
