@@ -209,7 +209,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import {default as regionLookupService} from '@/application/region/service/region-lookup-service';
+import {default as regionLookupService} from '@/application/common/service/region-lookup-service';
 import _ from "lodash";
 export default {
   data() {
