@@ -5,353 +5,185 @@
         </div>
         <el-form class="form-criminal" :model="criminal" :rules="rules" ref="form" label-position="top">
           <div class="form-box">
-            <el-form-item class="w25" label="编号" prop="bianhao">
-                <el-input v-model="criminal.bianhao"></el-input>
+            <el-form-item class="w25" label="编号" prop="code">
+                <el-input v-model="criminal.code"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="姓名" prop="xingming">
-                <el-input v-model="criminal.xingming"></el-input>
+            <el-form-item class="w25" label="姓名" prop="name">
+                <el-input v-model="criminal.name"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="身份情况" prop="shenfenqingkuang">
-              <el-select v-model="criminal.shenfenqingkuang" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="别化名" prop="alias">
+                <el-input v-model="criminal.alias"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="性别" prop="genderCode">
+              <el-select v-model="criminal.genderCode" value-key="code" :loading="flag.allGenders" placeholder="请选择性别" clearable>
+                <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="真实姓名" prop="zhenshixingming">
-                <el-input v-model="criminal.zhenshixingming"></el-input>
+            <el-form-item class="w25" label="出生日期" prop="birthday">
+              <el-date-picker v-model="criminal.birthday" value-format="yyyy-MM-dd" type="date"></el-date-picker>
             </el-form-item>
-            <el-form-item class="w25" label="别化名" prop="biehuaming">
-                <el-input v-model="criminal.biehuaming"></el-input>
+            <el-form-item class="w25" label="身份证号" prop="identityCardNumber">
+                <el-input v-model="criminal.identityCardNumber"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="性别" prop="xingbie">
-              <el-select v-model="criminal.xingbie" placeholder="请选择性别" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
+            <el-form-item class="w25" label="婚否" prop="married">
+                <el-select v-model="criminal.married" clearable>
+                  <el-option label="是" :value="true"></el-option>
+                  <el-option label="否" :value="false"></el-option>
+                </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="民族" prop="minzu">
-              <el-select v-model="criminal.minzu" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="出生日期" prop="chushengriqi">
-              <el-date-picker v-model="criminal.chushengriqi" type="date"></el-date-picker>
-            </el-form-item>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w25" label="捕前文化程度" prop="buqianwenhuachengdu">
-              <el-select v-model="criminal.buqianwenhuachengdu" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="现文化程度" prop="xianwenhuachengdu">
-              <el-select v-model="criminal.xianwenhuachengdu" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="捕前职业" prop="buqianzhiye">
-              <el-select v-model="criminal.buqianzhiye" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="捕前面貌" prop="buqianmianmao">
-              <el-select v-model="criminal.buqianmianmao" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="特长" prop="techang">
-                <el-input v-model="criminal.techang"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="婚姻" prop="hunyin">
-                <el-input v-model="criminal.hunyin"></el-input>
-            </el-form-item>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w25" label="籍贯/国籍" prop="jiguan">
-              <el-select v-model="criminal.jiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="户籍分类" prop="hujifenlei">
-              <el-select v-model="criminal.hujifenlei" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="出生地" prop="chushengdi">
-              <el-select v-model="criminal.chushengdi" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w75" label="户籍住址" prop="hujidizhi">
-              <el-select v-model="criminal.hujidizhi" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item class="w75" label="家庭住址" prop="jiatingzhuzhi">
-              <el-select v-model="criminal.jiatingzhuzhi" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-input></el-input>
-            </el-form-item>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w50" label="逮捕机关" prop="daibujiguan">
-              <el-select v-model="criminal.daibujiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-select v-model="criminal.daibujiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="逮捕日期" prop="daiburiqi">
-              <el-date-picker v-model="criminal.daiburiqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="羁押日期" prop="jiyariqi">
-              <el-date-picker v-model="criminal.jiyariqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w50" label="判决机关" prop="panjuejiguan">
-              <el-select v-model="criminal.panjuejiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-select v-model="criminal.panjuejiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="判决日期" prop="panjueriqi">
-              <el-date-picker v-model="criminal.panjueriqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="罪名" prop="zuiming">
-                <el-input v-model="criminal.zuiming"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="判决字号" prop="panjuezihao">
-              <el-select v-model="criminal.panjuezihao" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-select v-model="criminal.panjuezihao" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="罚金" prop="fajin">
-                <el-input v-model="criminal.fajin"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="罚金交纳" prop="fajinjiaona">
-              <el-select v-model="criminal.fajinjiaona" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w50" label="刑期" prop="xingqi">
-              <el-date-picker placeholder="刑期开始时间" v-model="criminal.xingqikaishi" type="date"></el-date-picker>
-              <el-date-picker placeholder="刑期结束时间" v-model="criminal.xingqijieshu" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="剥政年限" prop="bozhengnianxian">
-              <el-date-picker v-model="criminal.bozhengnianxian" type="date"></el-date-picker>
-            </el-form-item>
-            <div class="w25"></div>
-            <el-form-item class="w50" label="一审机关" prop="yishenjiguan">
-              <el-select v-model="criminal.yishenjiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-input></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="一审字号" prop="yishenzihao">
-              <el-input v-model="criminal.yishenzihao"></el-input>
-              <el-input v-model="criminal.yishenzihao"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="原案犯类别" prop="yuananfanleibie">
-              <el-select v-model="criminal.yuananfanleibie" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="收押类别" prop="shouyaleibie">
-              <el-select v-model="criminal.shouyaleibie" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="入监日期" prop="rujianriqi">
-              <el-date-picker v-model="criminal.rujianriqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="调入日期" prop="diaoruriqi">
-              <el-date-picker v-model="criminal.diaoruriqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="何处调来" prop="hechudiaolai">
-              <el-select v-model="criminal.hechudiaolai" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="看守所" prop="kanshousuo">
-              <el-select v-model="criminal.kanshousuo" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="前科次数" prop="qiankecishu">
-                <el-input v-model="criminal.qiankecishu"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="累惯犯" prop="leiguanfan">
-              <el-select v-model="criminal.leiguanfan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="流窜类别" prop="liucuanleibie">
-              <el-select v-model="criminal.liucuanleibie" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="三涉" prop="sanshe">
-                <el-input v-model="criminal.sanshe"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="四史" prop="sishi">
-                <el-input v-model="criminal.sishi"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="团伙人数" prop="tuanhuorenshu">
-                <el-input v-model="criminal.tuanhuorenshu"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="团伙犯罪" prop="tuanhuofanzui">
-              <el-select v-model="criminal.tuanhuofanzui" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="队别" prop="duibie">
-              <el-select v-model="criminal.duibie" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="分管等级" prop="fenguandengji">
-              <el-select v-model="criminal.fenguandengji" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="分押类型" prop="fenyaleixing">
-              <el-select v-model="criminal.fenyaleixing" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="减刑尺度" prop="jianxingchidu">
-              <el-select v-model="criminal.jianxingchidu" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="身份证号" prop="shenfenzhenghao">
-                <el-input v-model="criminal.shenfenzhenghao"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="执行通知书下达日期" prop="zhixingtongzhishuxiadariqi">
-              <el-date-picker v-model="criminal.zhixingtongzhishuxiadariqi" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="档案查阅密级" prop="danganchayuemiji">
-              <el-select v-model="criminal.danganchayuemiji" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="民族" prop="ethnicityCode">
+              <el-select v-model="criminal.ethnicityCode" value-key="code" :loading="flag.allEthnicities" clearable>
+                <el-option v-for="(item, index) in allEthnicities" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
           </div>
           <div class="form-box">
-            <el-form-item class="w50" label="起诉机关" prop="qisujiguan">
-              <el-select v-model="criminal.qisujiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-              <el-select v-model="criminal.qisujiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="籍贯/国籍" prop="nationalityCode">
+              <el-select v-model="criminal.nationalityCode" value-key="code" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w50" label="起诉字号" prop="qisuzihao">
-              <el-select v-model="criminal.qisuzihao" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="户籍分类" prop="householdRegisterTypeCode">
+              <el-select v-model="criminal.householdRegisterTypeCode" value-key="code" :loading="flag.allHouseholdRegisterTypes" clearable>
+                <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
-              <el-input></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="有无上诉" prop="youwushangsu">
-                <el-input v-model="criminal.youwushangsu"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="终审情况" prop="zhongshenqingkuang">
-                <el-input v-model="criminal.zhongshenqingkuang"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="终审字号" prop="zhongshenzihao">
-              <el-select v-model="criminal.zhongshenzihao" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="国家(出生地)" prop="birthplaceCountryCode">
+              <el-select v-model="criminal.birthplaceCountryCode" value-key="code" @change="getProvinces($event, 'birthplace')" :loading="flag.allCountries"  clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
-              <el-input></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="终审机关" prop="zhongshenjiguan">
-              <el-select v-model="criminal.zhongshenjiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            <el-form-item class="w25" label="省份(出生地)" prop="birthplaceProvinceCode">
+              <el-select v-model="criminal.birthplaceProvinceCode" value-key="code" @change="getCities($event, 'birthplace')" :disabled="!criminal.birthplaceCountryCode" :loading="flag.birthplace.province" clearable>
+                <el-option v-for="(item, index) in birthplace.province" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
-              <el-select v-model="criminal.zhongshenjiguan" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+            </el-form-item>
+            <el-form-item class="w25" label="城市(出生地)" prop="birthplaceCityCode">
+              <el-select v-model="criminal.birthplaceCityCode" value-key="code" @change="getCounties($event, 'birthplace')" :disabled="!criminal.birthplaceProvinceCode" :loading="flag.birthplace.city" clearable>
+                <el-option v-for="(item, index) in birthplace.city" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="县/区(出生地)" prop="birthplaceCountyCode">
+              <el-select v-model="criminal.birthplaceCountyCode" value-key="code" :disabled="!criminal.birthplaceCityCode" clearable>
+                <el-option v-for="(item, index) in birthplace.county" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="国家(户籍地址)" prop="householdRegisterAddressCountryCode">
+              <el-select v-model="criminal.householdRegisterAddressCountryCode" value-key="code" @change="getProvinces($event, 'householdRegisterAddress')" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="省份(户籍地址)" prop="householdRegisterAddressProvinceCode">
+              <el-select v-model="criminal.householdRegisterAddressProvinceCode" value-key="code" @change="getCities($event, 'householdRegisterAddress')" :disabled="!criminal.householdRegisterAddressCountryCode" :loading="flag.householdRegisterAddress.province" clearable>
+                <el-option v-for="(item, index) in householdRegisterAddress.province" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="城市(户籍地址)" prop="householdRegisterAddressCityCode">
+              <el-select v-model="criminal.householdRegisterAddressCityCode" value-key="code" @change="getCounties($event, 'householdRegisterAddress')" :disabled="!criminal.householdRegisterAddressProvinceCode" clearable>
+                <el-option v-for="(item, index) in householdRegisterAddress.city" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="县/区(户籍地址)" prop="householdRegisterAddressCountyCode">
+              <el-select v-model="criminal.householdRegisterAddressCountyCode" value-key="code" :disabled="!criminal.householdRegisterAddressCityCode" clearable>
+                <el-option v-for="(item, index) in householdRegisterAddress.county" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
+                <el-input v-model="criminal.householdRegisterAddressStreetDetail" :disabled="!criminal.householdRegisterAddressCountyCode"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="国家(家庭地址)" prop="homeAddressCountryCode">
+              <el-select v-model="criminal.homeAddressCountryCode" value-key="code" @change="getProvinces($event, 'homeAddress')" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="省份(家庭地址)" prop="homeAddressProvinceCode">
+              <el-select v-model="criminal.homeAddressProvinceCode" value-key="code" @change="getCities($event, 'homeAddress')" :disabled="!criminal.homeAddressCountryCode" :loading="flag.homeAddress.province" clearable>
+                <el-option v-for="(item, index) in homeAddress.province" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="城市(家庭地址)" prop="homeAddressCityCode">
+              <el-select v-model="criminal.homeAddressCityCode" value-key="code" @change="getCounties($event, 'homeAddress')" :disabled="!criminal.homeAddressProvinceCode" clearable>
+                <el-option v-for="(item, index) in homeAddress.city" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="县/区(家庭地址)" prop="homeAddressCountyCode">
+              <el-select v-model="criminal.homeAddressCountyCode" value-key="code" :disabled="!criminal.homeAddressCityCode" clearable>
+                <el-option v-for="(item, index) in homeAddress.county" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
+                <el-input v-model="criminal.homeAddressStreetDetail" :disabled="!criminal.homeAddressCountyCode"></el-input>
+            </el-form-item>
+          </div>
+          <div class="form-box">
+            <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
+              <el-select v-model="criminal.politicalStatusCode" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="参加过何党派团体" prop="politicalParty">
+                <el-input v-model="criminal.politicalParty"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="文化程度" prop="educationDegreeCode">
+              <el-select v-model="criminal.educationDegreeCode" value-key="code" :loading="flag.allEducationDegrees" clearable>
+                <el-option v-for="(item, index) in allEducationDegrees" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="职业" prop="occupation">
+                <el-input v-model="criminal.occupation"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="特殊技能" prop="specialSkill">
+                <el-input v-model="criminal.specialSkill"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="是否累惯犯" prop="recidivisted">
+              <el-select v-model="criminal.recidivisted" clearable>
+                <el-option label="是" :value="true"></el-option>
+                <el-option label="否" :value="false"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="四涉" prop="involvingFour">
+                <el-input v-model="criminal.involvingFour"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="四史" prop="fourHistory">
+                <el-input v-model="criminal.fourHistory"></el-input>
+            </el-form-item>
+            <el-form-item class="w25" label="流窜类别" prop="fledTypeCode">
+              <el-select v-model="criminal.fledTypeCode" value-key="code" :loading="flag.allFledTypes" clearable>
+                <el-option v-for="(item, index) in allFledTypes" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="分管等级" prop="separateManagementLevelCode">
+              <el-select v-model="criminal.separateManagementLevelCode" value-key="code" :loading="flag.allSeparateManagementLevels" clearable>
+                <el-option v-for="(item, index) in allSeparateManagementLevels" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="分押类型" prop="separateCustodyTypeCode">
+              <el-select v-model="criminal.separateCustodyTypeCode" value-key="code" :loading="flag.allSeparateCustodyTypes" clearable>
+                <el-option v-for="(item, index) in allSeparateCustodyTypes" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="减刑尺度" prop="commutationScaleCode">
+              <el-select v-model="criminal.commutationScaleCode" value-key="code" :loading="flag.allCommutationScales" clearable>
+                <el-option v-for="(item, index) in allCommutationScales" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
           </div>
           <div class="form-box">
-            <el-form-item class="w25" label="监舍号" prop="jianshehao">
-                <el-input v-model="criminal.jianshehao"></el-input>
+            <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
+              <el-select v-model="criminal.prisonAreaId" :loading="flag.prisonArea" clearable>
+                <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.code"></el-option>
+              </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="互监组号" prop="hujianzuhao">
-                <el-input v-model="criminal.hujianzuhao"></el-input>
+            <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
+              <el-select v-model="criminal.prisonHouseId" :loading="flag.prisonHouses" clearable>
+                <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.code"></el-option>
+              </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="互监岗位" prop="hujiangangwei">
-                <el-input v-model="criminal.hujiangangwei"></el-input>
+            <el-form-item class="w25" label="床位号" prop="bedNumber">
+                <el-input v-model="criminal.bedNumber"></el-input>
             </el-form-item>
-            <el-form-item class="w25" label="床位号" prop="chuangweihao">
-                <el-input v-model="criminal.chuangweihao"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="监管干警" prop="jianguanganjing">
-                <el-input v-model="criminal.jianguanganjing"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="勤杂分工" prop="qinzafengong">
-                <el-input v-model="criminal.qinzafengong"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="工种" prop="gongzhong">
-                <el-input v-model="criminal.gongzhong"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="所学专业" prop="require">
-                <el-input v-model="criminal.suoxuezhuanye"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="音像档案号" prop="require">
-                <el-input v-model="criminal.yinxiangdanganhao"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="参加过何党派团体" prop="canjiaguohedangpaituanti">
-                <el-input v-model="criminal.canjiaguohedangpaituanti"></el-input>
-            </el-form-item>
-            <div class="w25"></div>
-            <el-form-item class="w50" label="附带民事判决情况" prop="fudaiminshipanjueqingkuang">
-                <el-input :maxlength="255" v-model="criminal.fudaiminshipanjueqingkuang" type="textarea" resize="none"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="入监备注" prop="rujianbeizhu">
-                <el-input :maxlength="255" v-model="criminal.rujianbeizhu" type="textarea" resize="none"></el-input>
+            <el-form-item class="w50" label="入监备注" prop="remark">
+                <el-input :maxlength="255" v-model="criminal.remark" type="textarea" resize="none"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
                 <el-button type="primary" @click="onSubmit" :loading="saving">保存</el-button>
@@ -362,17 +194,113 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
+// import { mapActions } from "vuex";
+import {default as criminalLookupService} from '@/application/common/service/criminal-lookup-service';
+import {default as regionLookupService} from '@/application/common/service/region-lookup-service';
 import _ from "lodash";
 export default {
   data() {
     return {
       criminal: {},
-      rules: {
-        rujianbeizhu: [ { required: true, message: 'fakdshf' } ]
+      rules: {},
+      formRules: {
+        code: ["required", "-100"],
+        name: ["required"],
+        genderCode: ["required"],
+        birthday: ["required"],
+        identityCardNumber: ["required"],
+        married: ["required"],
+        ethnicityCode: ["required"],
+        nationalityCode: ["required"],
+        householdRegisterTypeCode: ["required"],
+        birthplaceCountryCode: ["required"],
+        birthplaceProvinceCode: ["required"],
+        birthplaceCityCode: ["required"],
+        birthplaceCountyCode: ["required"],
+        householdRegisterAddressCountryCode: ["required"],
+        householdRegisterAddressProvinceCode: ["required"],
+        householdRegisterAddressCityCode: ["required"],
+        householdRegisterAddressCountyCode: ["required"],
+        householdRegisterAddressStreetDetail: ["required"],
+        homeAddressCountryCode: ["required"],
+        homeAddressProvinceCode: ["required"],
+        homeAddressCityCode: ["required"],
+        homeAddressCountyCode: ["required"],
+        homeAddressStreetDetail: ["required"],
+        politicalStatusCode: ["required"],
+        educationDegreeCode: ["required"],
+        occupation: ["required"],
+        recidivisted: ["required"],
+        involvingFour: ["required"],
+        fourHistory: ["required"],
+        fledTypeCode: ["required"],
+        separateManagementLevelCode: ["required"],
+        separateCustodyTypeCode: ["required"],
+        commutationScaleCode: ["required"],
+        prisonAreaId: ["required"],
+        prisonHouseId: ["required"]
       },
-      saving: false
+      saving: false,
+      flag: {
+        allGenders: true,
+        allEthnicities: true,
+        allEducationDegrees: true,
+        allPoliticalStatuses: true,
+        allCountries: true,
+        birthplace: {
+          province: true,
+          city: true,
+          county: true
+        },
+        householdRegisterAddress: {
+          province: true,
+          city: true,
+          county: true
+        },
+        homeAddress: {
+          province: true,
+          city: true,
+          county: true
+        },
+        allSeparateManagementLevels: true,
+        allSeparateCustodyTypes: true,
+        allCommutationScales: true,
+        prisonArea: true,
+        prisonHouses: true
+      },
+      allCountries: [],
+      birthplace: {
+        province: [],
+        city: [],
+        county: []
+      },
+      householdRegisterAddress: {
+        province: [],
+        city: [],
+        county: []
+      },
+      homeAddress: {
+        province: [],
+        city: [],
+        county: []
+      },
+      allGenders: [],
+      allEthnicities: [],
+      allEducationDegrees: [],
+      allPoliticalStatuses: [],
+      allHouseholdRegisterTypes: [],
+      allFledTypes: [],
+      allSeparateManagementLevels: [],
+      allSeparateCustodyTypes: [],
+      allCommutationScales: []
     };
+  },
+  computed: {
+    ...mapState({
+      allPrisonAreas: state => state.prisonArea.allPrisonAreas,
+      allPrisonHouses: state => state.prisonHouse.allPrisonHouses
+    })
   },
   watch: {
     criminal: {
@@ -383,27 +311,120 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["addPrisonTenant"]),
+    ...mapActions(["getAllPrisonAreas", "getAllPrisonHouses", "addCriminal"]),
+    lengthRule(e) {
+      let min = e.split("-")[0];
+      let max = e.split("-")[1];
+      if (min && max) {
+        return { min: parseInt(min), max: max, message: `请输入${min}至${max}个字符` };
+      } else if (min) {
+        return { min: parseInt(min), message: `至少输入${min}个字符` };
+      } else if (max) {
+        return { max: parseInt(max), message: `最多输入${max}个字符` };
+      } else {
+        return false;
+      }
+    },
+    addRules() {
+      Object.keys(this.formRules).map(key => {
+        let rule = [];
+        this.formRules[key].forEach(item => {
+          if (item === "required") {
+            rule.push({ required: true, message: "该项必填", trigger: "change blur" });
+          } else if (item.indexOf('-') > -1) {
+            if (this.lengthRule(item)) rule.push(this.lengthRule(item));
+          }
+        });
+        this.rules[key] = rule;
+      });
+    },
+    getProvinces(e, type) {
+      // 修改国家之后先清空已选择的城市县区等
+      delete this.criminal[`${type}ProvinceCode`];
+      delete this.criminal[`${type}CityCode`];
+      delete this.criminal[`${type}CountyCode`];
+      delete this.criminal[`${type}StreetDetail`];
+      if (!e) return;
+      regionLookupService.getAllProvinces(e.code).then(res => {
+        this[type].province = res;
+        this.flag[type].province = false;
+      });
+    },
+    getCities(e, type) {
+      delete this.criminal[`${type}CityCode`];
+      delete this.criminal[`${type}CountyCode`];
+      delete this.criminal[`${type}StreetDetail`];
+      if (!e) return;
+      regionLookupService.getAllCities(e.code).then(res => {
+        this[type].city = res;
+        this.flag[type].city = false;
+      });
+    },
+    getCounties(e, type) {
+      delete this.criminal[`${type}CountyCode`];
+      delete this.criminal[`${type}StreetDetail`];
+      if (!e) return;
+      regionLookupService.getAllCounties(e.code).then(res => {
+        this[type].county = res;
+        this.flag[type].county = false;
+      });
+    },
     onSubmit() {
-      console.log(this.criminal);
-      // this.$router.push(`/criminal/edit/a1969201-733a-4e3f-a00b-ae805561f9bc`);
+      // console.log(this.criminal);
       this.$refs["form"].validate(valid => {
         if (valid) {
-          console.log(this.criminal);
           this.saving = true;
-          // this.addPrisonTenant()
-          //   .then(res => {
-          //     this.saving = false;
-          //     this.$message.success("新增成功");
-          //     this.$router.push(`/criminal/list`);
-          //   })
-          //   .catch(() => {
-          //     this.$message.error("新增失败");
-          //     this.saving = false;
-          //   });
+          let criminal = Object.assign({}, this.criminal);
+          Object.keys(criminal).map(key => {
+            if (typeof (criminal[key]) === "object") {
+              let obj = Object.assign({}, criminal[key]);
+              let str = key.substring(0, key.lastIndexOf("Code"));
+              criminal[key] = obj.code;
+              criminal[`${str}Name`] = obj.name;
+            }
+          });
+          console.log(criminal);
+          this.$store.commit("updateCriminal", criminal);
+          this.addCriminal().then(res => {
+            console.log(res);
+            this.$router.push(`/criminal/list`);
+          });
         }
       });
     }
+  },
+  created() {
+    criminalLookupService.getAllLookUp(["getAllGenders", "getAllEthnicities", "getAllEducationDegrees", "getAllPoliticalStatuses", "getAllHouseholdRegisterTypes", "getAllFledTypes", "getAllSeparateManagementLevels", "getAllSeparateCustodyTypes", "getAllCommutationScales"]).then(res => {
+      this.allGenders = res[0];
+      this.flag.allGenders = false;
+      this.allEthnicities = res[1];
+      this.flag.allEthnicities = false;
+      this.allEducationDegrees = res[2];
+      this.flag.allEducationDegrees = false;
+      this.allPoliticalStatuses = res[3];
+      this.flag.allPoliticalStatuses = false;
+      this.allHouseholdRegisterTypes = res[4];
+      this.flag.allHouseholdRegisterTypes = false;
+      this.allFledTypes = res[5];
+      this.flag.allFledTypes = false;
+      this.allSeparateManagementLevels = res[6];
+      this.flag.allSeparateManagementLevels = false;
+      this.allSeparateCustodyTypes = res[7];
+      this.flag.allSeparateCustodyTypes = false;
+      this.allCommutationScales = res[8];
+      this.flag.allCommutationScales = false;
+    });
+    this.addRules();
+    regionLookupService.getAllCountries().then(res => {
+      this.allCountries = res;
+      this.flag.allCountries = false;
+    });
+    this.getAllPrisonAreas().then(res => {
+      this.flag.prisonArea = false;
+    });
+    this.getAllPrisonHouses().then(res => {
+      this.flag.prisonHouses = false;
+    });
   }
 };
 </script>
