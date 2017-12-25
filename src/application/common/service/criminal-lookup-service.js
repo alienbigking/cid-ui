@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 export default {
+    getAllLookUp(urls) {
+      let requests = urls.map(url => this[url]());
+      return axios.all(requests).then(response => response);
+    },
     getAllGenders() {
         return axios.get(`api/genders`).then(response => response.data);
     },
