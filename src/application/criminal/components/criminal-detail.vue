@@ -177,15 +177,15 @@
         <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="recordShow">
-        <el-table class="table40" :data="criminalResume" header-row-class-name="tableHeader40">
-          <el-table-column prop="a" label="类别"> </el-table-column>
-          <el-table-column prop="s" label="开始日期"> </el-table-column>
-          <el-table-column prop="d" label="截至日期"> </el-table-column>
-          <el-table-column prop="f" label="罪名"> </el-table-column>
-          <el-table-column prop="g" label="判处日期"> </el-table-column>
-          <el-table-column prop="h" label="刑期"> </el-table-column>
-          <el-table-column prop="j" label="关押"> </el-table-column>
-          <el-table-column prop="k" label="备注"> </el-table-column>
+        <el-table class="table40" :data="criminalRecord.content" header-row-class-name="tableHeader40">
+          <el-table-column prop="decisionAccusation" label="罪名"> </el-table-column>
+          <el-table-column prop="arrestDate" label="逮捕日期"> </el-table-column>
+          <el-table-column prop="detentionDate" label="羁押日期"> </el-table-column>
+          <el-table-column prop="firstTrialOrganName" label="一审机关名称"> </el-table-column>
+          <el-table-column prop="finalTrialOrganName" label="终审机关名称"> </el-table-column>
+          <el-table-column prop="decisionDate" label="判决日期"> </el-table-column>
+          <el-table-column prop="decisionPrisonTermStartDate" label="判决刑期开始日期"> </el-table-column>
+          <el-table-column prop="decisionPrisonTermEndDate" label="判决刑期结束日期"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -196,7 +196,7 @@
         <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="resumeShow">
-        <el-table class="table40" :data="criminalResume" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="criminalResume.content" header-row-class-name="tableHeader40">
           <el-table-column prop="startDate" label="开始日期"> </el-table-column>
           <el-table-column prop="endDate" label="截至日期"> </el-table-column>
           <el-table-column prop="company" label="公司"> </el-table-column>
@@ -218,50 +218,50 @@
         <div class="form-container">
           <el-row type="flex">
               <el-col :span="6">
-                  <label>身高(cm):</label><span>{{criminalFeature.height}}</span>
+                  <label>身高(cm):</label><span>{{criminalPhysicalCharacteristic.height}}</span>
               </el-col>
                <el-col :span="6">
-                  <label>体重(kg)：</label><span>{{criminalFeature.weight}}</span>
+                  <label>体重(kg)：</label><span>{{criminalPhysicalCharacteristic.weight}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>体型：</label><span>{{criminalFeature.somatotypeName}}</span>
+                  <label>体型：</label><span>{{criminalPhysicalCharacteristic.somatotypeName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>脸型：</label><span>{{criminalFeature.faceTypeName}}</span>
+                  <label>脸型：</label><span>{{criminalPhysicalCharacteristic.faceTypeName}}</span>
               </el-col>
           </el-row>
           <el-row type="flex">
               <el-col :span="6">
-                  <label>血型：</label><span>{{criminalFeature.bloodTypeName}}</span>
+                  <label>血型：</label><span>{{criminalPhysicalCharacteristic.bloodTypeName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>口音：</label><span>{{criminalFeature.accentName}}</span>
+                  <label>口音：</label><span>{{criminalPhysicalCharacteristic.accentName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>足长(cm)：</label><span>{{criminalFeature.footLength}}</span>
+                  <label>足长(cm)：</label><span>{{criminalPhysicalCharacteristic.footLength}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>鞋号：</label><span>{{criminalFeature.shoeSize}}</span>
+                  <label>鞋号：</label><span>{{criminalPhysicalCharacteristic.shoeSize}}</span>
               </el-col>
           </el-row>
           <el-row type="flex">
               <el-col :span="24">
                   <label class="rowTitle">特征：</label>
-                  <div class="rowTwo"> 1{{criminalFeature.description}}</div>
+                  <div class="rowTwo"> {{criminalPhysicalCharacteristic.description}}</div>
               </el-col>
           </el-row>
           <el-row type="flex">
               <el-col :span="6">
-                  <label>罪犯标识：</label><span>{{criminalFeature.criminalId}}</span>
+                  <label>罪犯标识：</label><span>{{criminalPhysicalCharacteristic.criminalId}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>罪犯姓名：</label><span>{{criminalFeature.criminalName}}</span>
+                  <label>罪犯姓名：</label><span>{{criminalPhysicalCharacteristic.criminalName}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>创建时间：</label><span>{{criminalFeature.createdTime}}</span>
+                  <label>创建时间：</label><span>{{criminalPhysicalCharacteristic.createdTime}}</span>
               </el-col>
               <el-col :span="6">
-                  <label>最后更新时间：</label><span>{{criminalFeature.lastUpdatedTime}}</span>
+                  <label>最后更新时间：</label><span>{{criminalPhysicalCharacteristic.lastUpdatedTime}}</span>
               </el-col>
           </el-row>
         </div>
@@ -274,7 +274,7 @@
         <span class="iconfont" :class="socialRelationShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="socialRelationShow">
-        <el-table class="table40" :data="criminalSocial" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="criminalSocialRelation.content" header-row-class-name="tableHeader40">
           <el-table-column prop="appellation" label="称谓"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="age" label="年龄"> </el-table-column>
@@ -291,15 +291,11 @@
 
 </template>
 <script>
-// import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      criminal: {},
-      criminalResume: [{ startDate: "2010-10-10", endDate: "2017-10-10", company: "皇族", occupation: "上单", duty: "肉盾", criminalName: "皇子", createdTime: "2010-10-10", lastUpdatedTime: "2017-10-10" }],
-      criminalSocial: [{ appellation: "父亲", name: "皇子他爸", age: "55", company: "皇族", occupation: "上单", politicalStatusName: "无", criminalName: "皇子", createdTime: "2010-10-10", lastUpdatedTime: "2017-10-10" }],
-      criminalFeature: {},
       informationShow: false,
       recordShow: false,
       resumeShow: false,
@@ -307,7 +303,24 @@ export default {
       socialRelationShow: false
     };
   },
+  computed: {
+    ...mapState({
+      criminal: state => state.criminal.criminal,
+      criminalResume: state => state.criminal.criminalResume,
+      criminalPhysicalCharacteristic: state => state.criminal.criminalResume,
+      criminalSocialRelation: state => state.criminal.criminalResume,
+      criminalRecord: state => state.criminal.criminalResume
+    })
+  },
+  created() {
+    this.getCriminal(this.$route.params.id);
+    this.getCriminalResume(this.$route.params.id);
+    this.getCriminalPhysicalCharacteristic(this.$route.params.id);
+    this.getCriminalSocialRelation(this.$route.params.id);
+    this.getCriminalRecord(this.$route.params.id);
+  },
   methods: {
+    ...mapActions([ "getCriminal", "getCriminalResume", "getCriminalPhysicalCharacteristic", "getCriminalSocialRelation", "getCriminalRecord" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
