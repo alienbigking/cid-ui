@@ -7,17 +7,20 @@ export default {
         });
     },
     getAllProvinces(countryCode) {
-        return axios.get(`api/provinces/${countryCode}`).then(response => {
+        const params = { countryCode: countryCode };
+        return axios.get(`api/provinces`, { params: params }).then(response => {
             return response.data;
         });
     },
     getAllCities(provinceCode) {
-        return axios.get(`api/cities/${provinceCode}`).then(response => {
+        const params = { provinceCode: provinceCode };
+        return axios.get(`api/cities`, { params: params }).then(response => {
             return response.data;
         });
     },
     getAllCounties(cityCode) {
-        return axios.get(`api/counties/${cityCode}`).then(response => {
+        const params = { cityCode: cityCode };
+        return axios.get(`api/counties`, { params: params }).then(response => {
             return response.data;
         });
     }
