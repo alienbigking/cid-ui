@@ -7,9 +7,6 @@ export default {
     getAllEthnicities() {
         return axios.get(`api/ethnicities`).then(response => response.data);
     },
-    getAllNationalities() {
-        return axios.get(`api/nationalities`).then(response => response.data);
-    },
     getAllHouseholdRegisterTypes() {
         return axios.get(`api/household-register-types`).then(response => response.data);
     },
