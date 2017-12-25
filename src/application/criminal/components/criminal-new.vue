@@ -36,27 +36,23 @@
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="籍贯/国籍" prop="nationalityCode">
-              <el-select v-model="criminal.nationalityCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.nationalityCode" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item.code"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="户籍分类" prop="householdRegisterTypeCode">
-              <el-select v-model="criminal.householdRegisterTypeCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.householdRegisterTypeCode" :loading="flag.allHouseholdRegisterTypes" clearable>
+                <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item.code"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="国家(出生地)" prop="birthplaceCountryCode">
-              <el-select v-model="criminal.birthplaceCountryCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.birthplaceCountryCode" value-key="code" @change="getProvinces($event, 'birthplace')" :loading="flag.allCountries"  clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="省份(出生地)" prop="birthplaceProvinceCode">
-              <el-select v-model="criminal.birthplaceProvinceCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.birthplaceProvinceCode" :loading="flag.allProvinces.birthplace" loading-text="" clearable>
+                <el-option v-for="(item, index) in allProvinces.birthplace" :key="index" :label="item.name" :value="item.code"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="城市(出生地)" prop="birthplaceCityCode">
@@ -72,15 +68,13 @@
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="国家(户籍地址)" prop="householdRegisterAddressCountryCode">
-              <el-select v-model="criminal.householdRegisterAddressCountryCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.householdRegisterAddressCountryCode" value-key="code" @change="getProvinces($event, 'household')" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="省份(户籍地址)" prop="householdRegisterAddressProvinceCode">
-              <el-select v-model="criminal.householdRegisterAddressProvinceCode" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
+              <el-select v-model="criminal.householdRegisterAddressProvinceCode" :loading="flag.allProvinces.household" clearable>
+                <el-option v-for="(item, index) in allProvinces.household" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="城市(户籍地址)" prop="householdRegisterAddressCityCode">
@@ -101,26 +95,24 @@
                 <el-option label="女" value="famale"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="国家(家庭地址)" prop="householdRegisterAddressStreetDetail">
-              <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
+            <el-form-item class="w25" label="国家(家庭地址)" prop="homeAddressCountryCode">
+              <el-select v-model="criminal.homeAddressCountryCode" value-key="code" @change="getProvinces($event, 'home')" :loading="flag.allCountries" clearable>
+                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="省份(家庭地址)" prop="homeAddressProvinceCode">
+              <el-select v-model="criminal.homeAddressProvinceCode" :loading="flag.allProvinces.home" clearable>
+                <el-option v-for="(item, index) in allProvinces.home" :key="index" :label="item.name" :value="item.code"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item class="w25" label="城市(家庭地址)" prop="homeAddressCityCode">
+              <el-select v-model="criminal.homeAddressCityCode" clearable>
                 <el-option label="男" value="male"></el-option>
                 <el-option label="女" value="famale"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="省份(家庭地址)" prop="householdRegisterAddressStreetDetail">
-              <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="城市(家庭地址)" prop="householdRegisterAddressStreetDetail">
-              <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
-                <el-option label="男" value="male"></el-option>
-                <el-option label="女" value="famale"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="县/区(家庭地址)" prop="householdRegisterAddressStreetDetail">
-              <el-select v-model="criminal.householdRegisterAddressStreetDetail" clearable>
+            <el-form-item class="w25" label="县/区(家庭地址)" prop="homeAddressCountyCode">
+              <el-select v-model="criminal.homeAddressCountyCode" clearable>
                 <el-option label="男" value="male"></el-option>
                 <el-option label="女" value="famale"></el-option>
               </el-select>
@@ -217,7 +209,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-
+import {default as regionLookupService} from '@/application/region/service/region-lookup-service';
 import _ from "lodash";
 export default {
   data() {
@@ -267,7 +259,19 @@ export default {
         allEthnicities: true,
         occupations: true,
         allEducationDegrees: true,
-        allPoliticalStatuses: true
+        allPoliticalStatuses: true,
+        allCountries: true,
+        allProvinces: {
+          birthplace: true,
+          household: true,
+          home: true
+        }
+      },
+      allCountries: [],
+      allProvinces: {
+        birthplace: [],
+        household: [],
+        home: []
       }
     };
   },
@@ -290,7 +294,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getAllGenders", "getAllEthnicities", "getAllEducationDegrees", "getAllPoliticalStatuses", "getAllHouseholdRegisterTypes"]),
+    ...mapActions(["getAllGenders", "getAllEthnicities", "getAllEducationDegrees", "getAllPoliticalStatuses", "getAllHouseholdRegisterTypes", "getAllFledTypes"]),
     lengthRule(e) {
       let min = e.split("-")[0];
       let max = e.split("-")[1];
@@ -317,6 +321,12 @@ export default {
         this.rules[key] = rule;
       });
     },
+    getProvinces(e, type) {
+      console.log(e, type);
+      // this.getAllProvinces("0086").then(res => {
+      //   this.flag.allProvinces = false;
+      // });
+    },
     onSubmit() {
       console.log(this.criminal);
       this.$refs["form"].validate(valid => {
@@ -328,6 +338,7 @@ export default {
     }
   },
   created() {
+    console.log(regionLookupService);
     this.addRules();
     this.getAllGenders().then(res => {
       this.flag.allGenders = false;
@@ -345,7 +356,14 @@ export default {
       this.flag.allPoliticalStatuses = false;
     });
     this.getAllHouseholdRegisterTypes().then(res => {
-      this.flag.allHouseholdRegisterTypes = true;
+      this.flag.allHouseholdRegisterTypes = false;
+    });
+    this.getAllFledTypes().then(res => {
+      this.flag.allFledTypes = false;
+    });
+    regionLookupService.getAllCountries().then(res => {
+      this.allCountries = res;
+      this.flag.allCountries = false;
     });
   }
 };
