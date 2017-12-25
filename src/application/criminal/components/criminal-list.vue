@@ -90,7 +90,7 @@ export default {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedTenants", "deleteTenant"]),
+    ...mapActions(["getPagedCriminals", "deleteTenant"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -129,7 +129,7 @@ export default {
     },
     search() {
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedTenants(params).then(() => {
+      this.getPagedCriminals(params).then(() => {
         this.searching = false;
       });
     },
