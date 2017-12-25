@@ -1,10 +1,8 @@
 import * as types from './mutation-types';
 import { default as criminalService } from '../service/criminal-service';
-import { default as criminalLookupService } from '../service/criminal-lookup-service';
 import { default as criminalRecordService } from '../service/criminal-record-service';
 import { default as criminalResumeService } from '../service/criminal-resume-service';
 import { default as criminalPhysicalCharacteristicService } from '../service/criminal-physical-characteristic-service';
-import { default as criminalPhysicalCharacteristicLookupService } from '../service/criminal-physical-characteristic-lookup-service';
 import { default as criminalSocialRelationService } from '../service/criminal-social-relation-service';
 
 export default {
@@ -27,52 +25,6 @@ export default {
     },
     deleteCriminal({ commit }, id) {
         return criminalService.delete(id);
-    },
-    // 罪犯查找数据
-    getAllGenders({ commit, state }, params) {
-        return criminalLookupService.getAllGenders(params).then(allGenders => {
-            commit(types.SET_ALL_GENDERS, allGenders);
-        });
-    },
-    getAllEthnicities({ commit, state }, params) {
-        return criminalLookupService.getAllEthnicities(params).then(allEthnicities => {
-            commit(types.SET_ALL_ETHNICITIES, allEthnicities);
-        });
-    },
-    getAllHouseholdRegisterTypes({ commit, state }, params) {
-        return criminalLookupService.getAllHouseholdRegisterTypes(params).then(allHouseholdRegisterTypes => {
-            commit(types.SET_ALL_HOUSEHOLD_REGISTER_TYPES, allHouseholdRegisterTypes);
-        });
-    },
-    getAllPoliticalStatuses({ commit, state }, params) {
-        return criminalLookupService.getAllPoliticalStatuses(params).then(allPoliticalStatuses => {
-            commit(types.SET_ALL_POLITICAL_STATUSES, allPoliticalStatuses);
-        });
-    },
-    getAllEducationDegrees({ commit, state }, params) {
-        return criminalLookupService.getAllEducationDegrees(params).then(allEducationDegrees => {
-            commit(types.SET_ALL_EDUCATION_DEGREES, allEducationDegrees);
-        });
-    },
-    getAllFledTypes({ commit, state }, params) {
-        return criminalLookupService.getAllFledTypes(params).then(allFledTypes => {
-            commit(types.SET_ALL_FLED_TYPES, allFledTypes);
-        });
-    },
-    getAllSeparateManagementLevels({ commit, state }, params) {
-        return criminalLookupService.getAllSeparateManagementLevels(params).then(allSeparateManagementLevels => {
-            commit(types.SET_ALL_SEPARATE_MANAGEMENT_LEVELS, allSeparateManagementLevels);
-        });
-    },
-    getAllSeparateCustodyTypes({ commit, state }, params) {
-        return criminalLookupService.getAllSeparateCustodyTypes(params).then(allSeparateCustodyTypes => {
-            commit(types.SET_ALL_SEPARATE_CUSTODY_TYPES, allSeparateCustodyTypes);
-        });
-    },
-    getAllCommutationScales({ commit, state }, params) {
-        return criminalLookupService.getAllCommutationScales(params).then(allCommutationScales => {
-            commit(types.SET_ALL_COMMUTATION_SCALES, allCommutationScales);
-        });
     },
     // 罪犯犯罪记录
     getCriminalRecord({ commit, state }, id) {
@@ -148,27 +100,6 @@ export default {
     },
     deleteCriminalPhysicalCharacteristic({ commit }, id) {
         return criminalPhysicalCharacteristicService.delete(id);
-    },
-    // 罪犯体貌特征查找数据
-    getAllSomatotypes({ commit, state }, params) {
-        return criminalPhysicalCharacteristicLookupService.getAllSomatotypes(params).then(allSomatotypes => {
-            commit(types.SET_ALL_SOMATOTYPES, allSomatotypes);
-        });
-    },
-    getAllFaceTypes({ commit, state }, params) {
-        return criminalPhysicalCharacteristicLookupService.getAllFaceTypes(params).then(allFaceTypes => {
-            commit(types.SET_ALL_FACE_TYPES, allFaceTypes);
-        });
-    },
-    getAllBloodTypes({ commit, state }, params) {
-        return criminalPhysicalCharacteristicLookupService.getAllBloodTypes(params).then(allBloodTypes => {
-            commit(types.SET_ALL_BLOOD_TYPES, allBloodTypes);
-        });
-    },
-    getAllAccents({ commit, state }, params) {
-        return criminalPhysicalCharacteristicLookupService.getAllAccents(params).then(allAccents => {
-            commit(types.SET_ALL_ACCENTS, allAccents);
-        });
     },
     // 罪犯社会关系
     getCriminalSocialRelation({ commit, state }, id) {
