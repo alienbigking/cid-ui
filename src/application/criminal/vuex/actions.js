@@ -39,11 +39,6 @@ export default {
             commit(types.SET_ALL_ETHNICITIES, allEthnicities);
         });
     },
-    getAllNationalities({ commit, state }, params) {
-        return criminalLookupService.getAllNationalities(params).then(allNationalities => {
-            commit(types.SET_ALL_NATIONALITIES, allNationalities);
-        });
-    },
     getAllHouseholdRegisterTypes({ commit, state }, params) {
         return criminalLookupService.getAllHouseholdRegisterTypes(params).then(allHouseholdRegisterTypes => {
             commit(types.SET_ALL_HOUSEHOLD_REGISTER_TYPES, allHouseholdRegisterTypes);
