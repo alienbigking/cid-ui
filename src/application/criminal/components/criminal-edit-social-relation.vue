@@ -17,7 +17,7 @@
           <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
-              <el-button type="text" @click="onEdit(scope.row)">编辑</el-button>
+              <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
@@ -118,13 +118,15 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([ "addCriminalSocialRelation", "updateCriminalSocialRelation", "getAllCriminalSocialRelations", "deleteCriminalSocialRelation" ]),
+    ...mapActions([ "getCriminalSocialRelation", "addCriminalSocialRelation", "updateCriminalSocialRelation", "getAllCriminalSocialRelations", "deleteCriminalSocialRelation" ]),
     onNew() {
       this.editDialogVisible = true;
       this.criminalSocialRelation = {criminalId: this.$route.params.id};
     },
-    onEdit(data) {
-      this.criminalSocialRelation = data;
+    onEdit(id) {
+      this.getCriminalSocialRelation(id).then(() => {
+        this.criminalSocialRelation = _.cloneDeep(this.$store.state.criminal.criminalSocialRelation);
+      });
       this.editDialogVisible = true;
     },
     onDelete(item) {
