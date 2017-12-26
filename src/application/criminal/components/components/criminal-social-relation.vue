@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="filters">
-      <el-button class="searchbtn w-px76" @click="editDialogVisible=true;criminalSocialRelation={}">新增</el-button>
+      <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
     </div>
     <div class="list-box">
       <template>
@@ -42,16 +42,11 @@
           <el-form-item class="w25" label="职业" prop="occupation">
             <el-input v-model="criminalSocialRelation.occupation"></el-input>
           </el-form-item>
-          <!-- <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-            <el-select v-model="criminalSocialRelation.politicalStatusCode" :loading="flag.allPoliticalStatuses" clearable placeholder="请选择政治面貌">
-              <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item.code"></el-option>
-            </el-select>
-          </el-form-item> -->
           <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-            <el-select v-model="criminalSocialRelation.politicalStatusCode" value-key="code" :loading="flag.allPoliticalStatuses" clearable placeholder="请选择政治面貌">
-              <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item.code"></el-option>
-            </el-select>
-          </el-form-item>
+              <el-select v-model="criminalSocialRelation.politicalStatusCode" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="criminalSocialRelation.id?item.code:item"></el-option>
+              </el-select>
+            </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>
@@ -78,8 +73,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalSocialRelation: {},
-      // _.cloneDeep(this.$store.state.criminal.criminalSocialRelation)
+      criminalSocialRelation: _.cloneDeep(this.$store.state.criminal.criminalSocialRelation),
       rules: {
         appellation: [
           { required: true, message: "请输入称谓", trigger: "blur" },
@@ -107,12 +101,6 @@ export default {
     })
   },
   watch: {
-    allCriminalSocialRelations: {
-      handler: _.debounce(function(allCriminalSocialRelations) {
-        this.$store.commit("updateCriminalSocialRelation", allCriminalSocialRelations);
-      }, 500),
-      deep: true
-    },
     criminalSocialRelation: {
       handler: _.debounce(function(criminalSocialRelation) {
         this.$store.commit("updateCriminalSocialRelation", criminalSocialRelation);
@@ -131,10 +119,10 @@ export default {
   },
   methods: {
     ...mapActions([ "addCriminalSocialRelation", "updateCriminalSocialRelation", "getAllCriminalSocialRelations", "deleteCriminalSocialRelation" ]),
-    // onNew() {
-    //   this.editDialogVisible = true;
-    //   this.criminalSocialRelation = {};
-    // },
+    onNew() {
+      this.editDialogVisible = true;
+      this.criminalSocialRelation = {criminalId: this.$route.params.id};
+    },
     onEdit(data) {
       this.criminalSocialRelation = data;
       this.editDialogVisible = true;
@@ -159,11 +147,23 @@ export default {
     },
     getList() {
       // 获取简历列表
-      this.getAllCriminalSocialRelations(this.$route.params.id);
+      this.getAllCriminalSocialRelations(this.$route.params.id).then(() => {
+        this.criminalSocialRelation = _.cloneDeep(this.$store.state.criminal.criminalSocialRelation);
+      });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          let criminalSocialRelation = Object.assign({}, this.criminalSocialRelation);
+            Object.keys(criminalSocialRelation).map(key => {
+              if (typeof criminalSocialRelation[key] === "object") {
+                let obj = Object.assign({}, criminalSocialRelation[key]);
+                let str = key.substring(0, key.lastIndexOf("Code"));
+                criminalSocialRelation[key] = obj.code;
+                criminalSocialRelation[`${str}Name`] = obj.name;
+              }
+            });
+          this.$store.commit("updateCriminalSocialRelation", criminalSocialRelation);
           if (this.criminalSocialRelation.id) {
             // 修改
             this.saving = true;
