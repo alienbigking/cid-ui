@@ -1,6 +1,6 @@
 <template>
     <div class="login" :span="24">
-      <single-header></single-header>
+      <the-login-header></the-login-header>
       <div class="login-box" :span="6">
           <i class="iconfont icon-yunshujukuRDS"></i>
           <el-form class="login-input" :model="user" :rules="rules" ref="form">
@@ -20,16 +20,19 @@
               </div>
           </el-form>
       </div>
-      <single-footer></single-footer>
+      <the-login-footer></the-login-footer>
     </div>
 </template>
 <script>
+import theLoginFooter from "./the-login-footer";
+import theLoginHeader from "./the-login-header";
 import { mapActions } from "vuex";
-import singleFooter from "./single-footer";
-import singleHeader from "./single-header";
 
 export default {
-  components: { singleFooter, singleHeader },
+  components: {
+    "the-login-header": theLoginHeader,
+    "the-login-footer": theLoginFooter
+  },
   data() {
     return {
       user: {
