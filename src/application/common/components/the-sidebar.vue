@@ -12,11 +12,11 @@
                 </div>
           </div>
         </router-link>
-        <the-menu></the-menu>
+        <the-sidebar-menu></the-sidebar-menu>
     </el-aside>
 </template>
 <script>
-import { default as theMenu } from "./the-menu";
+import { default as TheSidebarMenu } from "./the-sidebar-menu";
 import { mapGetters } from "vuex";
 
 export default {
@@ -26,7 +26,7 @@ export default {
     };
   },
   components: {
-    "the-menu": theMenu
+    "the-sidebar-menu": TheSidebarMenu
   },
   computed: {
       ...mapGetters(["collapsed"])
