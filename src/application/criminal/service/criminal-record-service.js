@@ -6,8 +6,8 @@ export default {
             return response.data;
         });
     },
-    getAll() {
-        return axios.get(`api/criminal-records/all`).then(response => {
+    getAll(id) {
+        return axios.get(`api/criminal-records/all?criminalId=${id}`).then(response => {
             return response.data;
         });
     },

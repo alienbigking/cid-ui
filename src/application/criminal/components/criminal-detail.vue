@@ -160,8 +160,8 @@
                 <el-col :span="6">
                     <label>床位号：</label><span>{{criminal.bedNumber}}</span>
                 </el-col>
-                <el-col :span="6">
-                    <label>备注：</label><span>{{criminal.remark}}</span>
+                <el-col :span="15">
+                    <label>备注：</label><span class="s50">{{criminal.remark}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
@@ -182,7 +182,7 @@
         <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="recordShow">
-        <el-table class="table40" :data="criminalRecord.content" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="allCriminalRecords" header-row-class-name="tableHeader40">
           <el-table-column prop="decisionAccusation" label="罪名"> </el-table-column>
           <el-table-column prop="arrestDate" label="逮捕日期"> </el-table-column>
           <el-table-column prop="detentionDate" label="羁押日期"> </el-table-column>
@@ -201,7 +201,7 @@
         <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="resumeShow">
-        <el-table class="table40" :data="criminalResume.content" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="allCriminalResumes" header-row-class-name="tableHeader40">
           <el-table-column prop="startDate" label="开始日期"> </el-table-column>
           <el-table-column prop="endDate" label="截至日期"> </el-table-column>
           <el-table-column prop="company" label="公司"> </el-table-column>
@@ -279,7 +279,7 @@
         <span class="iconfont" :class="socialRelationShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div class="list-box" v-if="socialRelationShow">
-        <el-table class="table40" :data="criminalSocialRelation.content" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
           <el-table-column prop="appellation" label="称谓"> </el-table-column>
           <el-table-column prop="name" label="姓名"> </el-table-column>
           <el-table-column prop="age" label="年龄"> </el-table-column>
@@ -311,21 +311,21 @@ export default {
   computed: {
     ...mapState({
       criminal: state => state.criminal.criminal,
-      criminalResume: state => state.criminal.criminalResume,
+      allCriminalResumes: state => state.criminal.allCriminalResumes,
       criminalPhysicalCharacteristic: state => state.criminal.criminalResume,
-      criminalSocialRelation: state => state.criminal.criminalResume,
-      criminalRecord: state => state.criminal.criminalResume
+      allCriminalSocialRelations: state => state.criminal.allCriminalSocialRelations,
+      allCriminalRecords: state => state.criminal.allCriminalRecords
     })
   },
   created() {
     this.getCriminal(this.$route.params.id);
-    this.getPagedCriminalResumes({criminalId: this.$route.params.id});
+    this.getAllCriminalRecords(this.$route.params.id);
     this.getCriminalPhysicalCharacteristic(this.$route.params.id);
-    this.getPagedCriminalSocialRelations({criminalId: this.$route.params.id});
-    this.getPagedCriminalRecords({criminalId: this.$route.params.id});
+    this.getAllCriminalResumes(this.$route.params.id);
+    this.getAllCriminalSocialRelations(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getPagedCriminalResumes", "getCriminalPhysicalCharacteristic", "getPagedCriminalSocialRelations", "getPagedCriminalRecords" ]),
+    ...mapActions([ "getCriminal", "getAllCriminalRecords", "getAllCriminalResumes", "getCriminalPhysicalCharacteristic", "getAllCriminalSocialRelations" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
@@ -388,7 +388,7 @@ export default {
     vertical-align: middle;
   }
   .s50{
-    width: calc(100% - 400px); 
+    width: calc(100% - 300px); 
   }
   .rowTitle {
     height:47px;
