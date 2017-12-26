@@ -1,29 +1,29 @@
 <template>
   <el-menu unique-opened :collapse="collapsed" class="base" text-color="#d1d1d1" active-text-color="#fff">
     <template v-for="(menu, index) in menus">
-      <el-submenu :index="menu.index" v-if="menu.children" class="first" @mouseenter.native="showMenu(index,menu.name)">
+      <el-submenu :key="menu.index" :index="menu.index" v-if="menu.children" class="first" @mouseenter.native="showMenu(index,menu.name)">
           <li class="menuText" :style="collapsed ? 'display: block' : 'display: none'">{{ menuText }}</li>
           <template slot="title">
             <i class="iconfont icon-shezhi"></i>
             <span>{{menu.name}}</span>
           </template>
           <template v-for="submenu in menu.children">
-              <el-submenu :index="submenu.index" v-if="submenu.children" class="second">
+              <el-submenu :key="submenu.index" :index="submenu.index" v-if="submenu.children" class="second">
                   <template slot="title">
                       <span>{{submenu.name}}</span>
                   </template>
                   <template v-for="item in submenu.children">
-                      <el-menu-item :index="item.index" @click.native="onNavigate(item.path)"  class="third">
+                      <el-menu-item :key="item.index" :index="item.index" @click.native="onNavigate(item.path)"  class="third">
                           <span slot="title">{{item.name}}</span>
                       </el-menu-item>
                   </template>
               </el-submenu>
-              <el-menu-item :index="submenu.index" v-else @click.native="onNavigate(submenu.path)">
+              <el-menu-item :key="submenu.index" :index="submenu.index" v-else @click.native="onNavigate(submenu.path)">
                   <span slot="title">{{submenu.name}}</span>
               </el-menu-item>
           </template>
       </el-submenu>
-      <el-menu-item :index="menu.index" v-else @click.native="onNavigate(menu.path)" class="hahahaha">
+      <el-menu-item :key="menu.index" :index="menu.index" v-else @click.native="onNavigate(menu.path)" class="hahahaha">
           <i class="iconfont icon-shezhi"></i>
           <span slot="title">{{menu.name}}</span>
       </el-menu-item>
@@ -33,23 +33,24 @@
 <script>
 import { default as menus } from "../service/menu-service";
 import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
       menus: menus,
-      menuText: ''
+      menuText: ""
     };
   },
   computed: {
-      ...mapGetters(["collapsed"])
+    ...mapGetters(["collapsed"])
   },
   methods: {
-      showMenu(e, status) {
-            // console.log(status)
-            // console.log(e, status);
-            // let menuText = status;
-            this.menuText = status;
-        },
+    showMenu(e, status) {
+      // console.log(status)
+      // console.log(e, status);
+      // let menuText = status;
+      this.menuText = status;
+    },
     onNavigate(path) {
       this.$router.push(path);
     }
@@ -75,12 +76,12 @@ export default {
     .second:last-child {
       border-bottom: 1px solid #303b40;
     }
-    .el-menu-item[role="menuitem"]:not(.third){
-        background: #202a2f;
-        padding-left: 47px !important;
+    .el-menu-item[role="menuitem"]:not(.third) {
+      background: #202a2f;
+      padding-left: 47px !important;
     }
-    .el-menu-item.third[role="menuitem"]{
-        padding-left: 66px !important;
+    .el-menu-item.third[role="menuitem"] {
+      padding-left: 66px !important;
     }
   }
   .second {
@@ -108,8 +109,8 @@ export default {
     background: #29b0a3;
     color: #fff;
   }
-  .iconfont{
-      margin-right: 14px;
+  .iconfont {
+    margin-right: 14px;
   }
 }
 </style>
