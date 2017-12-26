@@ -6,9 +6,6 @@
                 <div class="filter">
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="姓名" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-select v-model="filter.prisonAreaId" @keyup.enter.native="onSearch" clearable placeholder="请选择隶属监区">
-                        <el-option value=""></el-option>
-                    </el-select>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
                 <el-button type="primary" @click="onNew">新增罪犯</el-button>

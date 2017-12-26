@@ -171,12 +171,12 @@
           <div class="form-box">
             <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
               <el-select v-model="criminal.prisonAreaId" :loading="flag.prisonArea" clearable>
-                <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.code"></el-option>
+                <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
               <el-select v-model="criminal.prisonHouseId" :loading="flag.prisonHouses" clearable>
-                <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.code"></el-option>
+                <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="床位号" prop="bedNumber">
