@@ -1,8 +1,17 @@
 <template>
     <div>
-        <el-breadcrumb separator="/" separator-class="separatorClass">
-            <el-breadcrumb-item><i class="iconfont icon-home" style="margin-right:5px;"></i>主页</el-breadcrumb-item>
-            <el-breadcrumb-item v-for="(item, index) in breadcrumbs" :key="index" v-if="item.name">{{ item.name }}</el-breadcrumb-item>
+        <el-breadcrumb 
+          separator="/" 
+          separator-class="separatorClass">
+            <el-breadcrumb-item>
+              <i class="iconfont icon-home" style="margin-right:5px;"></i>主页
+            </el-breadcrumb-item>
+            <el-breadcrumb-item 
+              :key="index" 
+              v-for="(item, index) in breadcrumbs" 
+              v-if="item.name">
+              {{ item.name }}
+            </el-breadcrumb-item>
         </el-breadcrumb>
     </div>
 </template>
@@ -13,12 +22,6 @@ export default {
       breadcrumbs: []
     };
   },
-  methods: {
-    render() {
-      let breadcrumbs = this.$route.matched;
-      this.breadcrumbs = breadcrumbs;
-    }
-  },
   watch: {
     $route(to, from) {
       this.breadcrumbs = to.matched;
@@ -26,6 +29,12 @@ export default {
   },
   mounted() {
     this.render();
+  },
+  methods: {
+    render() {
+      let breadcrumbs = this.$route.matched;
+      this.breadcrumbs = breadcrumbs;
+    }
   }
 };
 </script>
@@ -44,9 +53,8 @@ export default {
   display: flex;
   align-items: stretch;
 }
-/deep/ .el-breadcrumb__item{
+/deep/ .el-breadcrumb__item {
   overflow: hidden;
-  // line-height: 40px;
 }
 /deep/ .el-breadcrumb__inner,
 /deep/ .el-breadcrumb__inner a {

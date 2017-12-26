@@ -1,29 +1,59 @@
 <template>
-  <el-menu unique-opened :collapse="collapsed" class="base" text-color="#d1d1d1" active-text-color="#fff">
+  <el-menu 
+    unique-opened 
+    :collapse="collapsed" 
+    class="base" 
+    text-color="#d1d1d1" 
+    active-text-color="#fff">
     <template v-for="(menu, index) in menus">
-      <el-submenu :key="menu.index" :index="menu.index" v-if="menu.children" class="first" @mouseenter.native="showMenu(index,menu.name)">
-          <li class="menuText" :style="collapsed ? 'display: block' : 'display: none'">{{ menuText }}</li>
+      <el-submenu 
+        :key="menu.index" 
+        :index="menu.index" 
+        v-if="menu.children" 
+        class="first" 
+        @mouseenter.native="showMenu(index,menu.name)">
+          <li 
+            class="menuText" 
+            :style="collapsed ? 'display: block' : 'display: none'">
+            {{ menuText }}
+          </li>
           <template slot="title">
             <i class="iconfont icon-shezhi"></i>
             <span>{{menu.name}}</span>
           </template>
           <template v-for="submenu in menu.children">
-              <el-submenu :key="submenu.index" :index="submenu.index" v-if="submenu.children" class="second">
-                  <template slot="title">
-                      <span>{{submenu.name}}</span>
-                  </template>
-                  <template v-for="item in submenu.children">
-                      <el-menu-item :key="item.index" :index="item.index" @click.native="onNavigate(item.path)"  class="third">
-                          <span slot="title">{{item.name}}</span>
-                      </el-menu-item>
-                  </template>
-              </el-submenu>
-              <el-menu-item :key="submenu.index" :index="submenu.index" v-else @click.native="onNavigate(submenu.path)">
-                  <span slot="title">{{submenu.name}}</span>
-              </el-menu-item>
+            <el-submenu 
+              :key="submenu.index" 
+              :index="submenu.index" 
+              v-if="submenu.children" 
+              class="second">
+                <template slot="title">
+                  <span>{{submenu.name}}</span>
+                </template>
+                <template v-for="item in submenu.children">
+                  <el-menu-item 
+                    :key="item.index" 
+                    :index="item.index" 
+                    @click.native="onNavigate(item.path)"  
+                    class="third">
+                      <span slot="title">{{item.name}}</span>
+                  </el-menu-item>
+                </template>
+            </el-submenu>
+            <el-menu-item 
+              :key="submenu.index" 
+              :index="submenu.index" 
+              v-else @click.native="onNavigate(submenu.path)">
+                <span slot="title">{{submenu.name}}</span>
+            </el-menu-item>
           </template>
       </el-submenu>
-      <el-menu-item :key="menu.index" :index="menu.index" v-else @click.native="onNavigate(menu.path)" class="hahahaha">
+      <el-menu-item 
+        :key="menu.index" 
+        :index="menu.index" 
+        v-else 
+        @click.native="onNavigate(menu.path)" 
+        class="hahahaha">
           <i class="iconfont icon-shezhi"></i>
           <span slot="title">{{menu.name}}</span>
       </el-menu-item>
@@ -46,9 +76,6 @@ export default {
   },
   methods: {
     showMenu(e, status) {
-      // console.log(status)
-      // console.log(e, status);
-      // let menuText = status;
       this.menuText = status;
     },
     onNavigate(path) {
