@@ -26,22 +26,23 @@
                 <el-col :span="6">
                     <label>出生日期:</label><span>{{criminal.birthday}}</span>
                 </el-col>
-                <el-col :span="6">
-                    <label>身份证号：</label><span>{{criminal.identityCardNumber}}</span>
-                </el-col>
+                
                 <el-col :span="6">
                     <label>婚否：</label><span>{{criminal.married?"是":"否"}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>民族：</label><span>{{criminal.ethnicityName}}</span>
                 </el-col>
-            </el-row>
-            <el-row type="flex">
                 <el-col :span="6">
                     <label>国籍：</label><span>{{criminal.nationalityName}}</span>
                 </el-col>
+            </el-row>
+            <el-row type="flex">
                 <el-col :span="6">
                     <label>户籍类型：</label><span>{{criminal.householdRegisterTypeName}}</span>
+                </el-col>
+                <el-col :span="15">
+                    <label>身份证号：</label><span class="s50">{{criminal.identityCardNumber}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex"> 
@@ -57,47 +58,47 @@
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>户籍地址国家名称：</label><span>{{criminal.householdRegisterAddressCountryName}}</span>
+                    <label>户籍地址国家：</label><span>{{criminal.householdRegisterAddressCountryName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址省份名称：</label><span>{{criminal.householdRegisterAddressProvinceName}}</span>
+                    <label>户籍地址省份：</label><span>{{criminal.householdRegisterAddressProvinceName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址城市名称：</label><span>{{criminal.householdRegisterAddressCityName}}</span>
+                    <label>户籍地址城市：</label><span>{{criminal.householdRegisterAddressCityName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label>户籍地址县名称：</label><span>{{criminal.householdRegisterAddressCountyName}}</span>
+                    <label>户籍地址县：</label><span>{{criminal.householdRegisterAddressCountyName}}</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="15">
+                    <label>户籍地址街道详情：</label><span class="s50">{{criminal.householdRegisterAddressStreetDetail}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>户籍地址街道详情：</label><span>{{criminal.householdRegisterAddressStreetDetail}}</span>
+                    <label>家庭地址国家：</label><span>{{criminal.homeAddressCountryName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址省份：</label><span>{{criminal.homeAddressProvinceName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址城市：</label><span>{{criminal.homeAddressCityName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>家庭地址县：</label><span>{{criminal.homeAddressCountyName}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
-                <el-col :span="6">
-                    <label>家庭地址国家名称：</label><span>{{criminal.homeAddressCountryName}}</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址省份名称：</label><span>{{criminal.homeAddressProvinceName}}</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址城市名称：</label><span>{{criminal.homeAddressCityName}}</span>
-                </el-col>
-                <el-col :span="6">
-                    <label>家庭地址县名称：</label><span>{{criminal.homeAddressCountyName}}</span>
-                </el-col>
-            </el-row>
-            <el-row type="flex">
-                <el-col :span="6">
-                    <label>家庭地址街道详情：</label><span>{{criminal.homeAddressStreetDetail}}</span>
+                <el-col :span="15">
+                    <label>家庭地址街道详情：</label><span class="s50">{{criminal.homeAddressStreetDetail}}</span>
                 </el-col>
             </el-row>
         </div>
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>政治面貌名称：</label><span>{{criminal.politicalStatusName}}</span>
+                    <label>政治面貌：</label><span>{{criminal.politicalStatusName}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>曾经加入的党派团体：</label><span>{{criminal.politicalParty?"是":"否"}}</span>
@@ -141,16 +142,18 @@
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
-                    <label>监区标识：</label><span>{{criminal.prisonAreaId}}</span>
-                </el-col>
-                <el-col :span="6">
                     <label>监区名称：</label><span>{{criminal.prisonAreaName}}</span>
                 </el-col>
-                <el-col :span="6">
-                    <label>监舍标识：</label><span>{{criminal.prisonHouseId}}</span>
+                <el-col :span="15">
+                    <label>监区标识：</label><span class="s50">{{criminal.prisonAreaId}}</span>
                 </el-col>
+            </el-row>
+            <el-row type="flex">
                 <el-col :span="6">
                     <label>监舍名称：</label><span>{{criminal.prisonHouseName}}</span>
+                </el-col>
+                <el-col :span="15">
+                    <label>监舍标识：</label><span class="s50">{{criminal.prisonHouseId}}</span>
                 </el-col>
             </el-row>
             <el-row type="flex">
@@ -160,11 +163,13 @@
                 <el-col :span="6">
                     <label>备注：</label><span>{{criminal.remark}}</span>
                 </el-col>
-                <el-col :span="6">
-                    <label>创建时间：</label><span>{{criminal.createdTime}}</span>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="12">
+                    <label>创建时间：</label><span class="s50">{{criminal.createdTime}}</span>
                 </el-col>
-                <el-col :span="6">
-                    <label>最后更新时间：</label><span>{{criminal.lastUpdatedTime}}</span>
+                <el-col :span="12">
+                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -381,6 +386,9 @@ export default {
     color: #333;
     height: 14px;
     vertical-align: middle;
+  }
+  .s50{
+    width: calc(100% - 400px); 
   }
   .rowTitle {
     height:47px;
