@@ -32,8 +32,8 @@ export default {
             commit(types.SET_CRIMINAL_RECORD, criminalRecord);
         });
     },
-    getAllCriminalRecords({ commit, state }) {
-        return criminalRecordService.getAll().then(criminalRecords => {
+    getAllCriminalRecords({ commit, state }, id) {
+        return criminalRecordService.getAll(id).then(criminalRecords => {
             commit(types.SET_ALL_CRIMINAL_RECORDS, criminalRecords);
         });
     },
@@ -57,8 +57,8 @@ export default {
             commit(types.SET_CRIMINAL_RESUME, criminalResume);
         });
     },
-    getAllCriminalResumes({ commit, state }) {
-        return criminalResumeService.getAll().then(criminalResumes => {
+    getAllCriminalResumes({ commit, state }, id) {
+        return criminalResumeService.getAll(id).then(criminalResumes => {
             commit(types.SET_ALL_CRIMINAL_RESUMES, criminalResumes);
         });
     },
@@ -82,8 +82,8 @@ export default {
             commit(types.SET_CRIMINAL_PHYSICAL_CHARACTERISTIC, criminalPhysicalCharacteristic);
         });
     },
-    getAllCriminalPhysicalCharacteristics({ commit, state }) {
-        return criminalPhysicalCharacteristicService.getAll().then(criminalPhysicalCharacteristics => {
+    getAllCriminalPhysicalCharacteristics({ commit, state }, id) {
+        return criminalPhysicalCharacteristicService.getAll(id).then(criminalPhysicalCharacteristics => {
             commit(types.SET_ALL_CRIMINAL_PHYSICAL_CHARACTERISTICS, criminalPhysicalCharacteristics);
         });
     },
@@ -107,8 +107,8 @@ export default {
             commit(types.SET_CRIMINAL_SOCIAL_RELATION, criminalSocialRelation);
         });
     },
-    getAllCriminalSocialRelations({ commit, state }) {
-        return criminalSocialRelationService.getAll().then(criminalSocialRelations => {
+    getAllCriminalSocialRelations({ commit, state }, id) {
+        return criminalSocialRelationService.getAll(id).then(criminalSocialRelations => {
             commit(types.SET_ALL_CRIMINAL_SOCIAL_RELATIONS, criminalSocialRelations);
         });
     },
