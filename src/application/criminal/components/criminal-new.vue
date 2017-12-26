@@ -170,12 +170,12 @@
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
-              <el-select v-model="criminal.prisonAreaId" :loading="flag.prisonArea" clearable>
+              <el-select v-model="criminal.prisonAreaId" :loading="flag.allPrisonAreas" clearable>
                 <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
-              <el-select v-model="criminal.prisonHouseId" :loading="flag.prisonHouses" clearable>
+              <el-select v-model="criminal.prisonHouseId" :loading="flag.allPrisonHouses" clearable>
                 <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
@@ -195,8 +195,8 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import {default as criminalLookupService} from '@/application/common/service/lookup/criminal-lookup-service';
-import {default as regionLookupService} from '@/application/common/service/lookup/region-lookup-service';
+import { default as criminalLookupService } from "@/application/common/service/lookup/criminal-lookup-service";
+import { default as regionLookupService } from "@/application/common/service/lookup/region-lookup-service";
 import _ from "lodash";
 
 export default {
@@ -266,8 +266,8 @@ export default {
         allSeparateManagementLevels: true,
         allSeparateCustodyTypes: true,
         allCommutationScales: true,
-        prisonArea: true,
-        prisonHouses: true
+        allPrisonAreas: true,
+        allPrisonHouses: true
       },
       allCountries: [],
       birthplace: {
@@ -330,8 +330,12 @@ export default {
         let rule = [];
         this.formRules[key].forEach(item => {
           if (item === "required") {
-            rule.push({ required: true, message: "该项必填", trigger: "change blur" });
-          } else if (item.indexOf('-') > -1) {
+            rule.push({
+              required: true,
+              message: "该项必填",
+              trigger: "change blur"
+            });
+          } else if (item.indexOf("-") > -1) {
             if (this.lengthRule(item)) rule.push(this.lengthRule(item));
           }
         });
@@ -345,8 +349,8 @@ export default {
       delete this.criminal[`${type}CountyCode`];
       delete this.criminal[`${type}StreetDetail`];
       if (!e) return;
-      regionLookupService.getAllProvinces(e.code).then(res => {
-        this[type].province = res;
+      regionLookupService.getAllProvinces(e.code).then(response => {
+        this[type].province = response;
         this.flag[type].province = false;
       });
     },
@@ -355,8 +359,8 @@ export default {
       delete this.criminal[`${type}CountyCode`];
       delete this.criminal[`${type}StreetDetail`];
       if (!e) return;
-      regionLookupService.getAllCities(e.code).then(res => {
-        this[type].city = res;
+      regionLookupService.getAllCities(e.code).then(response => {
+        this[type].city = response;
         this.flag[type].city = false;
       });
     },
@@ -364,8 +368,8 @@ export default {
       delete this.criminal[`${type}CountyCode`];
       delete this.criminal[`${type}StreetDetail`];
       if (!e) return;
-      regionLookupService.getAllCounties(e.code).then(res => {
-        this[type].county = res;
+      regionLookupService.getAllCounties(e.code).then(response => {
+        this[type].county = response;
         this.flag[type].county = false;
       });
     },
@@ -376,7 +380,7 @@ export default {
           this.saving = true;
           let criminal = Object.assign({}, this.criminal);
           Object.keys(criminal).map(key => {
-            if (typeof (criminal[key]) === "object") {
+            if (typeof criminal[key] === "object") {
               let obj = Object.assign({}, criminal[key]);
               let str = key.substring(0, key.lastIndexOf("Code"));
               criminal[key] = obj.code;
@@ -385,8 +389,8 @@ export default {
           });
           console.log(criminal);
           this.$store.commit("updateCriminal", criminal);
-          this.addCriminal().then(res => {
-            console.log(res);
+          this.addCriminal().then(response => {
+            console.log(response);
             this.$router.push(`/criminal/list`);
           });
         }
@@ -394,40 +398,48 @@ export default {
     }
   },
   created() {
-    criminalLookupService.getAllLookUp(["getAllGenders", "getAllEthnicities", "getAllEducationDegrees", "getAllPoliticalStatuses", "getAllHouseholdRegisterTypes", "getAllFledTypes", "getAllSeparateManagementLevels", "getAllSeparateCustodyTypes", "getAllCommutationScales"]).then(res => {
-      this.allGenders = res[0];
+    Promise.all([
+      criminalLookupService.getAllGenders(),
+      criminalLookupService.getAllEthnicities(),
+      criminalLookupService.getAllHouseholdRegisterTypes(),
+      criminalLookupService.getAllPoliticalStatuses(),
+      criminalLookupService.getAllEducationDegrees(),
+      criminalLookupService.getAllFledTypes(),
+      criminalLookupService.getAllSeparateManagementLevels(),
+      criminalLookupService.getAllSeparateCustodyTypes(),
+      criminalLookupService.getAllCommutationScales(),
+      regionLookupService.getAllCountries(),
+      this.getAllPrisonAreas(),
+      this.getAllPrisonHouses()
+    ]).then(response => {
+      this.allGenders = response[0];
       this.flag.allGenders = false;
-      this.allEthnicities = res[1];
+      this.allEthnicities = response[1];
       this.flag.allEthnicities = false;
-      this.allEducationDegrees = res[2];
-      this.flag.allEducationDegrees = false;
-      this.allPoliticalStatuses = res[3];
-      this.flag.allPoliticalStatuses = false;
-      this.allHouseholdRegisterTypes = res[4];
+      this.allHouseholdRegisterTypes = response[2];
       this.flag.allHouseholdRegisterTypes = false;
-      this.allFledTypes = res[5];
+      this.allPoliticalStatuses = response[3];
+      this.flag.allPoliticalStatuses = false;
+      this.allEducationDegrees = response[4];
+      this.flag.allEducationDegrees = false;
+      this.allFledTypes = response[5];
       this.flag.allFledTypes = false;
-      this.allSeparateManagementLevels = res[6];
+      this.allSeparateManagementLevels = response[6];
       this.flag.allSeparateManagementLevels = false;
-      this.allSeparateCustodyTypes = res[7];
+      this.allSeparateCustodyTypes = response[7];
       this.flag.allSeparateCustodyTypes = false;
-      this.allCommutationScales = res[8];
+      this.allCommutationScales = response[8];
       this.flag.allCommutationScales = false;
+      this.allCountries = response[9];
+      this.flag.allCountries = false;
+      this.flag.allPrisonAreas = false;
+      this.flag.allPrisonHouses = false;
     });
     this.addRules();
-    regionLookupService.getAllCountries().then(res => {
-      this.allCountries = res;
-      this.flag.allCountries = false;
-    });
-    this.getAllPrisonAreas().then(res => {
-      this.flag.prisonArea = false;
-    });
-    this.getAllPrisonHouses().then(res => {
-      this.flag.prisonHouses = false;
-    });
   }
 };
 </script>
 
 <style lang="scss" scoped>
+
 </style>
