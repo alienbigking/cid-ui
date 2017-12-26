@@ -3,22 +3,22 @@ import * as components from './components';
 export default [
     {
         path: '/prison-house/list',
-        component: components.prisonHouseList,
+        component: components.PrisonHouseList,
         name: '查询监舍'
     },
     {
         path: '/prison-house/new',
-        component: components.prisonHouseNew,
+        component: components.PrisonHouseNew,
         name: '新增监舍'
     },
     {
         path: '/prison-house/edit/:id',
-        component: components.prisonHouseEdit,
+        component: components.PrisonHouseEdit,
         name: '修改监舍'
     },
     {
         path: '/prison-house/detail/:id',
-        component: components.prisonHouseDetail,
+        component: components.PrisonHouseDetail,
         name: '监舍明细'
     }
 ];

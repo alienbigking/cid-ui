@@ -1,4 +1,4 @@
-export { default as roleList } from './role-list';
-export { default as roleNew } from './role-new';
-export { default as roleEdit } from './role-edit';
-export { default as roleDetail } from './role-detail';
+export { default as RoleList } from './role-list';
+export { default as RoleNew } from './role-new';
+export { default as RoleEdit } from './role-edit';
+export { default as RoleDetail } from './role-detail';

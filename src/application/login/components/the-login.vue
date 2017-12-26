@@ -24,14 +24,14 @@
     </div>
 </template>
 <script>
-import theLoginFooter from "./the-login-footer";
-import theLoginHeader from "./the-login-header";
+import TheLoginFooter from "./the-login-footer";
+import TheLoginHeader from "./the-login-header";
 import { mapActions } from "vuex";
 
 export default {
   components: {
-    "the-login-header": theLoginHeader,
-    "the-login-footer": theLoginFooter
+    "the-login-header": TheLoginHeader,
+    "the-login-footer": TheLoginFooter
   },
   data() {
     return {

@@ -3,7 +3,7 @@ import * as components from './components';
 export default [
     {
         path: '/login',
-        component: components.theLogin,
+        component: components.TheLogin,
         name: '登陆'
     }
 ];

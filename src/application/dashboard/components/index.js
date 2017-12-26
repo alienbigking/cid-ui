@@ -1,1 +1,1 @@
-export { default as theDashboard } from './the-dashboard';
+export { default as TheDashboard } from './the-dashboard';

@@ -16,7 +16,7 @@
     </el-aside>
 </template>
 <script>
-import { default as theSidebarMenu } from "./the-sidebar-menu";
+import { default as TheSidebarMenu } from "./the-sidebar-menu";
 import { mapGetters } from "vuex";
 
 export default {
@@ -26,7 +26,7 @@ export default {
     };
   },
   components: {
-    "the-sidebar-menu": theSidebarMenu
+    "the-sidebar-menu": TheSidebarMenu
   },
   computed: {
       ...mapGetters(["collapsed"])

@@ -1,4 +1,4 @@
-export { default as theHeader } from './the-header';
-export { default as theSidebar } from './the-sidebar';
-export { default as theBreadcrumb } from './the-breadcrumb';
-export { default as theFooter } from './the-footer';
+export { default as TheHeader } from './the-header';
+export { default as TheSidebar } from './the-sidebar';
+export { default as TheBreadcrumb } from './the-breadcrumb';
+export { default as TheFooter } from './the-footer';
