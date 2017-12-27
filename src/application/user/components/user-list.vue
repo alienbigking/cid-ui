@@ -7,7 +7,7 @@
                     <el-input placeholder="用户账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="用户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择用户使用状态">
-                      <el-option v-for="item in userStatus" :key="item.value" :lable="item.text" :value="item.value"></el-option>
+                      <el-option v-for="item in userStatus" :key="item.value" :label="item.text" :value="item.value"></el-option>
                     </el-select>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
@@ -23,7 +23,8 @@
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
                   </el-table-column>
-                  <el-table-column prop="status" label="用户状态" sortable :formatter="statusFormatter">
+                  <el-table-column label="用户状态" sortable >
+                    <template slot-scope="scope">{{scope.row.status | userStatus}}</template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
