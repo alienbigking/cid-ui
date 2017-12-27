@@ -131,5 +131,36 @@
             //     collapse: true
             // }
         ]
+    },
+    {
+        index: '6',
+        name: '用户',
+        collapse: true,
+        children: [
+            {
+                index: '6-1',
+                name: '用户列表',
+                path: '/user/list',
+                collapse: true
+            },
+            // {
+            //     index: '3-2',
+            //     name: '租户明细',
+            //     path: '/tenant/detail',
+            //     collapse: true
+            // },
+            {
+                index: '6-4',
+                name: '新增用户',
+                path: '/user/new',
+                collapse: true
+            }
+            // {
+            //     index: '3-5',
+            //     name: '修改租户',
+            //     path: '/tenant/edit',
+            //     collapse: true
+            // }
+        ]
     }
   ];
