@@ -390,8 +390,9 @@ export default {
           });
           this.$store.commit("updateCriminal", criminal);
           this.updateCriminal().then(response => {
+            this.saving = false;
             this.$router.push(`/criminal/list`);
-          }).complate(() => {
+          }).catch(() => {
             this.saving = false;
           });
         }
