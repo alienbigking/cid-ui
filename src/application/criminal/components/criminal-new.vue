@@ -209,7 +209,7 @@ export default {
         name: ["required"],
         genderCode: ["required"],
         birthday: ["required"],
-        identityCardNumber: ["required"],
+        identityCardNumber: ["required", "18-18"],
         married: ["required"],
         ethnicityCode: ["required"],
         nationalityCode: ["required"],
@@ -316,7 +316,8 @@ export default {
       let min = e.split("-")[0];
       let max = e.split("-")[1];
       if (min && max) {
-        return { min: parseInt(min), max: max, message: `请输入${min}至${max}个字符` };
+        if (min === max) return { min: parseInt(min), max: parseInt(max), message: `请输入${min}个字符` };
+        return { min: parseInt(min), max: parseInt(max), message: `请输入${min}至${max}个字符` };
       } else if (min) {
         return { min: parseInt(min), message: `至少输入${min}个字符` };
       } else if (max) {
