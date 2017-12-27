@@ -46,11 +46,6 @@ export default {
       saving: false
     };
   },
-  created() {
-    this.getMyProfile().then(() => {
-      this.userProfile = _.cloneDeep(this.$store.state.me.userProfile);
-    });
-  },
   watch: {
     userProfile: {
       handler: _.debounce(function(userProfile) {
@@ -58,6 +53,11 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    this.getMyProfile().then(() => {
+      this.userProfile = _.cloneDeep(this.$store.state.me.userProfile);
+    });
   },
   methods: {
     ...mapActions(["getMyProfile", "updateMyProfile"]),
