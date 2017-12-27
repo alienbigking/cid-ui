@@ -1,35 +1,39 @@
 <template>
-    <el-aside :width="collapsed ? '55px' : '260px'" :class="collapsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
+    <el-aside 
+      :width="collapsed ? '55px' : '260px'" 
+      :class="collapsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
         <router-link to="/dashboard">
-          <div class="avatar" :class="collapsed ? 'avatar-collapsed' : ''">
+          <div 
+            class="avatar" 
+            :class="collapsed ? 'avatar-collapsed' : ''">
               <img src="../../../assets/images/avatar.png" alt="">
                 <div class="avatar-right">
                     <span>管理员</span>
                     <div class="">
-                        <i class="el-icon-location"></i>
-                        <span>管理员</span>
+                      <i class="el-icon-location"></i>
+                      <span>管理员</span>
                     </div>
                 </div>
           </div>
         </router-link>
-        <the-menu></the-menu>
+        <the-sidebar-menu></the-sidebar-menu>
     </el-aside>
 </template>
 <script>
-import { default as theMenu } from "./the-menu";
+import { default as TheSidebarMenu } from "./the-sidebar-menu";
 import { mapGetters } from "vuex";
 
 export default {
+  components: {
+    "the-sidebar-menu": TheSidebarMenu
+  },
   data() {
     return {
       menuText: ""
     };
   },
-  components: {
-    "the-menu": theMenu
-  },
   computed: {
-      ...mapGetters(["collapsed"])
+    ...mapGetters(["collapsed"])
   },
   methods: {}
 };
@@ -59,7 +63,6 @@ export default {
       margin-bottom: 10px;
     }
     i {
-        // font-size: 12px;
       margin-right: 6px;
     }
   }

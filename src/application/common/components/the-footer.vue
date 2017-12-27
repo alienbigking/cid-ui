@@ -1,5 +1,7 @@
 <template>
-    <el-footer height="40px">Copyright &copy; 2006-2017 罪犯数据库</el-footer>
+    <el-footer height="40px">
+      Copyright &copy; 2006-2017 罪犯数据库
+    </el-footer>
 </template>
 <script>
 export default {

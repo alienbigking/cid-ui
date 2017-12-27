@@ -22,10 +22,10 @@ import * as commonComponents from "./common/components";
 
 export default {
   components: {
-    "the-header": commonComponents.theHeader,
-    "the-sidebar": commonComponents.theSidebar,
-    "the-breadcrumb": commonComponents.theBreadcrumb,
-    "the-footer": commonComponents.theFooter
+    "the-header": commonComponents.TheHeader,
+    "the-sidebar": commonComponents.TheSidebar,
+    "the-breadcrumb": commonComponents.TheBreadcrumb,
+    "the-footer": commonComponents.TheFooter
   }
 };
 </script>
