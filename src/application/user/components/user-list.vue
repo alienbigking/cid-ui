@@ -7,7 +7,7 @@
                     <el-input placeholder="用户账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="用户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择用户使用状态">
-                      <el-option v-for="item in userStatus" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                      <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
                     </el-select>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
@@ -24,7 +24,7 @@
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
                   </el-table-column>
                   <el-table-column label="用户状态" sortable >
-                    <template slot-scope="scope">{{scope.row.status | userStatus}}</template>
+                    <template slot-scope="scope">{{scope.row.status | convertToText(userStatuses)}}</template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
@@ -59,20 +59,12 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import _ from "lodash";
+import { default as userStatusService } from "../service/user-status-service";
 
 export default {
   data() {
     return {
-      userStatus: [
-        {
-          text: '使用中',
-          value: 'Enabled'
-        },
-       {
-          text: '禁用中',
-          value: 'Disabed'
-        }
-      ],
+      userStatuses: [],
       filter: {},
       pagination: {
         page: 0,
@@ -92,18 +84,11 @@ export default {
     })
   },
   created() {
+    this.userStatuses = userStatusService.getAll();
     this.search();
   },
   methods: {
     ...mapActions(["getPagedUsers", "deleteUser"]),
-    statusFormatter(row, column) {
-      switch (row.status) {
-         case "Enabled":
-                return "使用中";
-         case "Disabled":
-                return "已注销";
-      }
-    },
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;

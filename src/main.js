@@ -4,9 +4,10 @@ import router from './router';
 import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
+import filter from './filter';
 import { default as oauth } from './utils/oauth';
 import { default as errorHandler } from './utils/error-handler';
-import filters from './filter';
+
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/style.scss';
 import './assets/fonts/iconfont.css';
@@ -15,9 +16,10 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 
+filter.config(Vue);
 oauth.config(axios);
 errorHandler.config(axios, store, router);
-Object.keys(filters).forEach((keys) => Vue.filter(keys, filters[keys]));
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',
