@@ -42,11 +42,6 @@ export default {
       saving: false
     };
   },
-  created() {
-    this.getTenant(this.$route.params.id).then(() => {
-      this.tenant = _.cloneDeep(this.$store.state.tenant.tenant);
-    });
-  },
   watch: {
     tenant: {
       handler: _.debounce(function(tenant) {
@@ -54,6 +49,11 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    this.getTenant(this.$route.params.id).then(() => {
+      this.tenant = _.cloneDeep(this.$store.state.tenant.tenant);
+    });
   },
   methods: {
     ...mapActions(["getTenant", "updatePrisonTenant"]),
@@ -81,4 +81,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 </style>

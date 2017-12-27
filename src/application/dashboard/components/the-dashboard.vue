@@ -7,9 +7,7 @@
 // import { mapActions } from "vuex";
 
 export default {
-  created() {
-    // this.$router.push('login');
-  }
+  created() {}
 };
 </script>
 <style lang="scss" scoped>
