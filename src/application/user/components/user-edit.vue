@@ -1,16 +1,16 @@
 <template>
     <div>
         <div class="card">
-            <span class="um-title">修改租户</span>
-            <el-form class="formPadding" :model="tenant" :rules="rules" ref="form" label-position="top">
+            <span class="um-title">修改用户</span>
+            <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
                 <el-form-item label="编号" class="w50" prop="code">
-                    <el-input v-model="tenant.code"></el-input>
+                    <el-input v-model="user.code"></el-input>
                 </el-form-item>
                 <el-form-item label="名称" class="w50" prop="name">
-                    <el-input v-model="tenant.name"></el-input>
+                    <el-input v-model="user.name"></el-input>
                 </el-form-item>
                 <el-form-item class="w100 textarea" label="描述" prop="description">
-                    <el-input :maxlength="255" type="textarea" resize="none" v-model="tenant.description"></el-input>
+                    <el-input :maxlength="255" type="textarea" resize="none" v-model="user.description"></el-input>
                 </el-form-item>
                 <el-form-item class="hasButton">
                     <el-button @click="onBack">返 回</el-button>
@@ -27,7 +27,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      tenant: _.cloneDeep(this.$store.state.tenant.tenant),
+      user: _.cloneDeep(this.$store.state.user.user),
       rules: {
         code: [
           { required: true, message: "请输入编号", trigger: "blur" },
@@ -42,30 +42,30 @@ export default {
       saving: false
     };
   },
+  created() {
+    this.getUser(this.$route.params.id).then(() => {
+      this.user = _.cloneDeep(this.$store.state.user.user);
+    });
+  },
   watch: {
-    tenant: {
-      handler: _.debounce(function(tenant) {
-        this.$store.commit("updateTenant", tenant);
+    user: {
+      handler: _.debounce(function(user) {
+        this.$store.commit("updateUser", user);
       }, 500),
       deep: true
     }
   },
-  created() {
-    this.getTenant(this.$route.params.id).then(() => {
-      this.tenant = _.cloneDeep(this.$store.state.tenant.tenant);
-    });
-  },
   methods: {
-    ...mapActions(["getTenant", "updatePrisonTenant"]),
+    ...mapActions(["getUser", "updateUser"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updatePrisonTenant()
+          this.updateUser()
             .then(res => {
               this.saving = false;
               this.$message.success("修改成功");
-              this.$router.push(`/tenant/list`);
+              this.$router.push(`/user/list`);
             })
             .catch(() => {
               this.saving = false;
@@ -81,5 +81,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-
 </style>

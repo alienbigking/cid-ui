@@ -43,8 +43,8 @@
             <el-input v-model="criminalSocialRelation.occupation"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-              <el-select v-model="criminalSocialRelation.politicalStatusCode" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
-                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="criminalSocialRelation.id?item.code:item"></el-option>
+              <el-select v-model="selectedPoliticalStatus" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
       </el-form>
@@ -73,7 +73,9 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalSocialRelation: _.cloneDeep(this.$store.state.criminal.criminalSocialRelation),
+      criminalSocialRelation: _.cloneDeep(
+        this.$store.state.criminal.criminalSocialRelation
+      ),
       rules: {
         appellation: [
           { required: true, message: "请输入称谓", trigger: "blur" },
@@ -84,6 +86,7 @@ export default {
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ]
       },
+      selectedPoliticalStatus: null,
       flag: {
         allPoliticalStatuses: true
       },
@@ -97,13 +100,17 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalSocialRelations: state => state.criminal.allCriminalSocialRelations
+      allCriminalSocialRelations: state =>
+        state.criminal.allCriminalSocialRelations
     })
   },
   watch: {
     criminalSocialRelation: {
       handler: _.debounce(function(criminalSocialRelation) {
-        this.$store.commit("updateCriminalSocialRelation", criminalSocialRelation);
+        this.$store.commit(
+          "updateCriminalSocialRelation",
+          criminalSocialRelation
+        );
       }, 500),
       deep: true
     }
@@ -118,14 +125,27 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([ "getCriminalSocialRelation", "addCriminalSocialRelation", "updateCriminalSocialRelation", "getAllCriminalSocialRelations", "deleteCriminalSocialRelation" ]),
+    ...mapActions([
+      "getCriminalSocialRelation",
+      "addCriminalSocialRelation",
+      "updateCriminalSocialRelation",
+      "getAllCriminalSocialRelations",
+      "deleteCriminalSocialRelation"
+    ]),
     onNew() {
       this.editDialogVisible = true;
-      this.criminalSocialRelation = {criminalId: this.$route.params.id};
+      this.criminalSocialRelation = { criminalId: this.$route.params.id };
     },
     onEdit(id) {
       this.getCriminalSocialRelation(id).then(() => {
-        this.criminalSocialRelation = _.cloneDeep(this.$store.state.criminal.criminalSocialRelation);
+        this.criminalSocialRelation = _.cloneDeep(
+          this.$store.state.criminal.criminalSocialRelation
+        );
+        this.selectedPoliticalStatus = {
+          code: this.criminalSocialRelation.politicalStatusCode,
+          name: this.criminalSocialRelation.politicalStatusName
+        };
+        // this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
       });
       this.editDialogVisible = true;
     },
@@ -148,24 +168,21 @@ export default {
         });
     },
     getList() {
-      // 获取简历列表
       this.getAllCriminalSocialRelations(this.$route.params.id).then(() => {
-        this.criminalSocialRelation = _.cloneDeep(this.$store.state.criminal.criminalSocialRelation);
+        this.criminalSocialRelation = _.cloneDeep(
+          this.$store.state.criminal.criminalSocialRelation
+        );
       });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          let criminalSocialRelation = Object.assign({}, this.criminalSocialRelation);
-            Object.keys(criminalSocialRelation).map(key => {
-              if (typeof criminalSocialRelation[key] === "object") {
-                let obj = Object.assign({}, criminalSocialRelation[key]);
-                let str = key.substring(0, key.lastIndexOf("Code"));
-                criminalSocialRelation[key] = obj.code;
-                criminalSocialRelation[`${str}Name`] = obj.name;
-              }
-            });
-          this.$store.commit("updateCriminalSocialRelation", criminalSocialRelation);
+          this.criminalSocialRelation.politicalStatusCode = this.selectedPoliticalStatus.code;
+          this.criminalSocialRelation.politicalStatusName = this.selectedPoliticalStatus.name;
+          this.$store.commit(
+            "updateCriminalSocialRelation",
+            this.criminalSocialRelation
+          );
           if (this.criminalSocialRelation.id) {
             // 修改
             this.saving = true;
@@ -212,12 +229,14 @@ export default {
     margin-left: 30px;
   }
 }
-.form-criminal .w50 .el-form-item__content > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-  width:100%;
+.form-criminal
+  .w50
+  .el-form-item__content
+  > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
+  width: 100%;
 }
-.el-form .el-form-item.w50{
+.el-form .el-form-item.w50 {
   padding-right: 0;
 }
-
 </style>
 

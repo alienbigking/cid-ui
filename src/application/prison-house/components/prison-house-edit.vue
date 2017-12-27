@@ -36,19 +36,12 @@ export default {
         ],
         name: [
           { required: true, message: "请输入监舍名称", trigger: "blur" },
-          { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ],
-        description: [
-          { max: 255, message: '255 个字符以内', trigger: 'blur' }
-        ]
+        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
       },
       saving: false
     };
-  },
-  created() {
-    this.getPrisonHouse(this.$route.params.id).then(() => {
-      this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
-    });
   },
   watch: {
     prisonHouse: {
@@ -57,6 +50,11 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    this.getPrisonHouse(this.$route.params.id).then(() => {
+      this.prisonHouse = _.cloneDeep(this.$store.state.prisonHouse.prisonHouse);
+    });
   },
   methods: {
     ...mapActions(["getPrisonHouse", "updatePrisonHouse"]),

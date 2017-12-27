@@ -46,11 +46,6 @@ export default {
       saving: false
     };
   },
-  created() {
-    this.getPrisonArea(this.$route.params.id).then(() => {
-      this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
-    });
-  },
   watch: {
     prisonArea: {
       handler: _.debounce(function(prisonArea) {
@@ -58,6 +53,11 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    this.getPrisonArea(this.$route.params.id).then(() => {
+      this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
+    });
   },
   methods: {
     ...mapActions(["getPrisonArea", "updatePrisonArea"]),

@@ -101,7 +101,10 @@ export default {
   watch: {
     criminalRecord: {
       handler: _.debounce(function(criminalRecord) {
-        this.$store.commit("updateCriminalRecord", criminalRecord);
+        this.$store.commit(
+          "updateCriminalRecord",
+          criminalRecord
+        );
       }, 500),
       deep: true
     }
@@ -110,13 +113,23 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([ "addCriminalRecord", "updateCriminalRecord", "getPagedCriminalRecords", "deleteCriminalRecord" ]),
+    ...mapActions([
+      "getCriminalRecord",
+      "addCriminalRecord",
+      "updateCriminalRecord",
+      "getAllCriminalRecords",
+      "deleteCriminalRecord"
+    ]),
     onNew() {
       this.editDialogVisible = true;
-      this.criminal = {};
+      this.criminalRecord = { criminalId: this.$route.params.id };
     },
-    onEdit(data) {
-      this.criminal = data;
+    onEdit(id) {
+      this.getCriminalRecord(id).then(() => {
+        this.criminalRecord = _.cloneDeep(
+          this.$store.state.criminal.criminalRecord
+        );
+      });
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -138,8 +151,7 @@ export default {
         });
     },
     getList() {
-      // 获取简历列表
-      this.getPagedCriminalRecords({criminalId: this.$route.params.id});
+      this.getAllCriminalRecords(this.$route.params.id);
     },
     onSave() {
       this.$refs["form"].validate(valid => {
