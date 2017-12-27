@@ -4,6 +4,7 @@ import router from './router';
 import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
+import filter from './filter';
 import { default as oauth } from './utils/oauth';
 import { default as errorHandler } from './utils/error-handler';
 
@@ -15,6 +16,7 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 
+filter.config(Vue);
 oauth.config(axios);
 errorHandler.config(axios, store, router);
 

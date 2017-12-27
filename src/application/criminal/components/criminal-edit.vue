@@ -21,7 +21,7 @@ import criminalEditSocialRelation from "./criminal-edit-social-relation";
 export default {
   data() {
     return {
-      activeName: 'criminalEditInformation',
+      activeName: 'criminalEditPhysicalCharacteristic',
       tabs: [
         { name: "基本信息", component: "criminalEditInformation" },
         { name: "犯罪记录", component: "criminalEditRecord" },
