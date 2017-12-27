@@ -10,7 +10,7 @@
     </div>
 </template>
 <script>
-import criminalEditInformation from "./criminal-edit-information";
+import criminalEditBasicInformation from "./criminal-edit-basic-information";
 import criminalEditRecord from "./criminal-edit-record";
 import criminalEditResume from "./criminal-edit-resume";
 import criminalEditPhysicalCharacteristic from "./criminal-edit-physical-characteristic";
@@ -21,9 +21,9 @@ import criminalEditSocialRelation from "./criminal-edit-social-relation";
 export default {
   data() {
     return {
-      activeName: 'criminalEditInformation',
+      activeName: 'criminalEditPhysicalCharacteristic',
       tabs: [
-        { name: "基本信息", component: "criminalEditInformation" },
+        { name: "基本信息", component: "criminalEditBasicInformation" },
         { name: "犯罪记录", component: "criminalEditRecord" },
         { name: "简历", component: "criminalEditResume" },
         { name: "体貌特征", component: "criminalEditPhysicalCharacteristic" },
@@ -31,7 +31,7 @@ export default {
       ]
     };
   },
-  components: { criminalEditInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation }
+  components: { criminalEditBasicInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation }
 };
 </script>
 <style lang="scss" scoped>
