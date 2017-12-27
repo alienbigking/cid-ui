@@ -220,56 +220,17 @@
         <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
       </div>
       <div v-if="featureShow">
-        <div class="form-container">
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>身高(cm):</label><span>{{criminalPhysicalCharacteristic.height}}</span>
-              </el-col>
-               <el-col :span="6">
-                  <label>体重(kg)：</label><span>{{criminalPhysicalCharacteristic.weight}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>体型：</label><span>{{criminalPhysicalCharacteristic.somatotypeName}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>脸型：</label><span>{{criminalPhysicalCharacteristic.faceTypeName}}</span>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>血型：</label><span>{{criminalPhysicalCharacteristic.bloodTypeName}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>口音：</label><span>{{criminalPhysicalCharacteristic.accentName}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>足长(cm)：</label><span>{{criminalPhysicalCharacteristic.footLength}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>鞋号：</label><span>{{criminalPhysicalCharacteristic.shoeSize}}</span>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="24">
-                  <label class="rowTitle">特征：</label>
-                  <div class="rowTwo"> {{criminalPhysicalCharacteristic.description}}</div>
-              </el-col>
-          </el-row>
-          <el-row type="flex">
-              <el-col :span="6">
-                  <label>罪犯标识：</label><span>{{criminalPhysicalCharacteristic.criminalId}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>罪犯姓名：</label><span>{{criminalPhysicalCharacteristic.criminalName}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>创建时间：</label><span>{{criminalPhysicalCharacteristic.createdTime}}</span>
-              </el-col>
-              <el-col :span="6">
-                  <label>最后更新时间：</label><span>{{criminalPhysicalCharacteristic.lastUpdatedTime}}</span>
-              </el-col>
-          </el-row>
-        </div>
+        <el-table class="table40" :data="allCriminalPhysicalCharacteristics" header-row-class-name="tableHeader40">
+          <el-table-column prop="height" label="身高"> </el-table-column>
+          <el-table-column prop="weight" label="体重"> </el-table-column>
+          <el-table-column prop="somatotypeName" label="体型"> </el-table-column>
+          <el-table-column prop="faceTypeName" label="脸型"> </el-table-column>
+          <el-table-column prop="bloodTypeName" label="血型"> </el-table-column>
+          <el-table-column prop="accentName" label="口音"> </el-table-column>
+          <el-table-column prop="footLength" label="足长"> </el-table-column>
+          <el-table-column prop="shoeSize" label="鞋号"> </el-table-column>
+          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+        </el-table>
       </div>
   </div>
   <!-- 社会关系 -->
@@ -312,7 +273,7 @@ export default {
     ...mapState({
       criminal: state => state.criminal.criminal,
       allCriminalResumes: state => state.criminal.allCriminalResumes,
-      criminalPhysicalCharacteristic: state => state.criminal.criminalResume,
+      allCriminalPhysicalCharacteristics: state => state.criminal.allCriminalPhysicalCharacteristics,
       allCriminalSocialRelations: state => state.criminal.allCriminalSocialRelations,
       allCriminalRecords: state => state.criminal.allCriminalRecords
     })
@@ -320,12 +281,12 @@ export default {
   created() {
     this.getCriminal(this.$route.params.id);
     this.getAllCriminalRecords(this.$route.params.id);
-    this.getCriminalPhysicalCharacteristic(this.$route.params.id);
+    this.getAllCriminalPhysicalCharacteristics(this.$route.params.id);
     this.getAllCriminalResumes(this.$route.params.id);
     this.getAllCriminalSocialRelations(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getAllCriminalRecords", "getAllCriminalResumes", "getCriminalPhysicalCharacteristic", "getAllCriminalSocialRelations" ]),
+    ...mapActions([ "getCriminal", "getAllCriminalRecords", "getAllCriminalResumes", "getAllCriminalPhysicalCharacteristics", "getAllCriminalSocialRelations" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
