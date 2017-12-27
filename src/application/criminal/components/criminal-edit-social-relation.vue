@@ -145,7 +145,7 @@ export default {
           code: this.criminalSocialRelation.politicalStatusCode,
           name: this.criminalSocialRelation.politicalStatusName
         };
-        this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
+        // this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
       });
       this.editDialogVisible = true;
     },
@@ -168,7 +168,6 @@ export default {
         });
     },
     getList() {
-      // 获取简历列表
       this.getAllCriminalSocialRelations(this.$route.params.id).then(() => {
         this.criminalSocialRelation = _.cloneDeep(
           this.$store.state.criminal.criminalSocialRelation
@@ -178,13 +177,11 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          criminalSocialRelation.politicalStatusCode =
-            selectedPoliticalStatus.code;
-          criminalSocialRelation.politicalStatusName =
-            selectedPoliticalStatus.name;
+          this.criminalSocialRelation.politicalStatusCode = this.selectedPoliticalStatus.code;
+          this.criminalSocialRelation.politicalStatusName = this.selectedPoliticalStatus.name;
           this.$store.commit(
             "updateCriminalSocialRelation",
-            criminalSocialRelation
+            this.criminalSocialRelation
           );
           if (this.criminalSocialRelation.id) {
             // 修改
