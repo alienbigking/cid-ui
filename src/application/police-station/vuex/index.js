@@ -2,7 +2,7 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    collapsed: false
+    allPoliceStations: []
 };
 
 export default {
