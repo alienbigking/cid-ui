@@ -4,7 +4,8 @@ import router from './router';
 import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
-import filter from './filter';
+import filters from './filter';
+import errorHander from './plugin/error-handler';
 import { default as oauthRequestInterceptor } from './utils/oauth-request-interceptor';
 import { default as errorResponseInterceptor } from './utils/error-response-interceptor';
 
@@ -15,8 +16,9 @@ import './assets/fonts/iconfont.css';
 Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
+Vue.use(filters);
+Vue.use(errorHander);
 
-filter.config(Vue);
 oauthRequestInterceptor.config(axios);
 errorResponseInterceptor.config(axios, store, router);
 

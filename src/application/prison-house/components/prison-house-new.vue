@@ -23,7 +23,6 @@
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
-import errorHandler from "@/utils/error-handler";
 
 export default {
   data() {
@@ -65,8 +64,7 @@ export default {
             })
             .catch(error => {
               this.saving = false;
-              errorHandler.handle(error.response, this.$message, "新增失败");
-              // this.$message.error("新增失败");
+              this.$handleError(error.response, "新增失败");
             });
         }
       });
