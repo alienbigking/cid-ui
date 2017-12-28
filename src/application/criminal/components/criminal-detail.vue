@@ -219,7 +219,7 @@
         体貌特征
         <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <div v-if="featureShow">
+      <div class="list-box" v-if="featureShow">
         <el-table class="table40" :data="allCriminalPhysicalCharacteristics" header-row-class-name="tableHeader40">
           <el-table-column prop="height" label="身高"> </el-table-column>
           <el-table-column prop="weight" label="体重"> </el-table-column>
