@@ -19,19 +19,19 @@ import criminalEditSocialRelation from "./criminal-edit-social-relation";
 // import _ from "lodash";
 
 export default {
-  data() {
-    return {
-      activeName: 'criminalEditPhysicalCharacteristic',
-      tabs: [
-        { name: "基本信息", component: "criminalEditBasicInformation" },
-        { name: "犯罪记录", component: "criminalEditRecord" },
-        { name: "简历", component: "criminalEditResume" },
-        { name: "体貌特征", component: "criminalEditPhysicalCharacteristic" },
-        { name: "社会关系", component: "criminalEditSocialRelation" }
-      ]
-    };
-  },
-  components: { criminalEditBasicInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation }
+    components: { criminalEditBasicInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation },
+    data() {
+      return {
+        activeName: 'criminalEditPhysicalCharacteristic',
+        tabs: [
+          { name: "基本信息", component: "criminalEditBasicInformation" },
+          { name: "犯罪记录", component: "criminalEditRecord" },
+          { name: "简历", component: "criminalEditResume" },
+          { name: "体貌特征", component: "criminalEditPhysicalCharacteristic" },
+          { name: "社会关系", component: "criminalEditSocialRelation" }
+        ]
+      };
+    }
 };
 </script>
 <style lang="scss" scoped>
