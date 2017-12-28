@@ -25,15 +25,15 @@
       </template>
     </div>
     <el-dialog max-height="500px" width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
-      <el-form class="form-criminal" :model="criminalPhysicalCharacteristic" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="身高(m)" prop="height">
-            <el-input v-model.number="criminalPhysicalCharacteristic.height"></el-input>
+      <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
+          <el-form-item class="w25" label="身高(m)" prop="criminalPhysicalCharacteristic.height">
+            <el-input v-model.number="form.criminalPhysicalCharacteristic.height"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体重(kg)" prop="weight">
-            <el-input v-model.number="criminalPhysicalCharacteristic.weight"></el-input>
+            <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体型" prop="selectedSomatotype">
-            <el-select v-model="selectedSomatotype" value-key="code" :loading="flag.allSomatotypes" clearable placeholder="请选择体型">
+            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="flag.allSomatotypes" clearable placeholder="请选择体型">
               <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -53,13 +53,13 @@
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="足长(cm)" prop="footLength">
-            <el-input v-model.number="criminalPhysicalCharacteristic.footLength"></el-input>
+            <el-input v-model.number="form.criminalPhysicalCharacteristic.footLength"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="鞋号" prop="shoeSize">
-            <el-input v-model.number="criminalPhysicalCharacteristic.shoeSize"></el-input>
+            <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
           <el-form-item class="w100" label="体貌特征描述" prop="otherFeatures">
-            <el-table :data="criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
+            <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
               <el-table-column prop="description">
                 <template slot-scope="scope">
                   <el-input v-model="scope.row.description"></el-input>
@@ -99,29 +99,31 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalPhysicalCharacteristic: _.cloneDeep(
-        this.$store.state.criminal.criminalPhysicalCharacteristic
-      ),
+      form: {
+        selectedSomatotype: null,
+        selectedFaceType: null,
+        selectedBloodType: null,
+        selectedAccent: null,
+        criminalPhysicalCharacteristic: _.cloneDeep(
+          this.$store.state.criminal.criminalPhysicalCharacteristic
+        )
+      },
       rules: {
-        height: [
+        "criminalPhysicalCharacteristic.height": [
           { required: true, message: "请输入身高" },
           { type: "number", message: "身高必须为数字值" }
         ],
-        weight: [
+        "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
           { type: "number", message: "体重必须为数字值" }
         ],
-        selectedSomatotype: [
-          { required: true, message: "请选择血型", trigger: "blur" }
-        ],
+        selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [
           { required: true, message: "请选择脸型", trigger: "blur" }
         ]
       },
-      selectedSomatotype: null,
-      selectedFaceType: null,
-      selectedBloodType: null,
-      selectedAccent: null,
+      // selectedSomatotype: null,
+
       characteristicDescription: null,
       flag: {
         allSomatotypes: true,
@@ -152,10 +154,7 @@ export default {
         somatotypeCode: val.code,
         somatotypeName: val.name
       };
-      this.$store.commit(
-          "updateCriminalPhysicalCharacteristic",
-          obj
-        );
+      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
     criminalPhysicalCharacteristic: {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
@@ -186,15 +185,19 @@ export default {
     this.getList();
   },
   methods: {
-      removePhysicalCharacteristic(item) {
-        var index = this.criminalPhysicalCharacteristic.otherFeatures.indexOf(item);
-        if (index !== -1) {
-          this.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
-        }
-      },
-      addPhysicalCharacteristic() {
-        this.criminalPhysicalCharacteristic.otherFeatures.push({description: ""});
-      },
+    removePhysicalCharacteristic(item) {
+      var index = this.form.criminalPhysicalCharacteristic.otherFeatures.indexOf(
+        item
+      );
+      if (index !== -1) {
+        this.form.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
+      }
+    },
+    addPhysicalCharacteristic() {
+      this.form.criminalPhysicalCharacteristic.otherFeatures.push({
+        description: ""
+      });
+    },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
       "addCriminalPhysicalCharacteristic",
@@ -203,29 +206,32 @@ export default {
       "deleteCriminalPhysicalCharacteristic"
     ]),
     onNew() {
-      this.criminalPhysicalCharacteristic = { otherFeatures: [{ description: "" }], criminalId: this.$route.params.id };
+      this.form.criminalPhysicalCharacteristic = {
+        otherFeatures: [{ description: "" }],
+        criminalId: this.$route.params.id
+      };
       this.editDialogVisible = true;
     },
     onEdit(id) {
       this.getCriminalPhysicalCharacteristic(id).then(() => {
-        this.criminalPhysicalCharacteristic = _.cloneDeep(
+        this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
         this.selectedSomatotype = {
-          code: this.criminalPhysicalCharacteristic.somatotypeCode,
-          name: this.criminalPhysicalCharacteristic.somatotypeName
+          code: this.form.criminalPhysicalCharacteristic.somatotypeCode,
+          name: this.form.criminalPhysicalCharacteristic.somatotypeName
         };
         this.selectedFaceType = {
-          code: this.criminalPhysicalCharacteristic.faceTypeCode,
-          name: this.criminalPhysicalCharacteristic.faceTypeName
+          code: this.form.criminalPhysicalCharacteristic.faceTypeCode,
+          name: this.form.criminalPhysicalCharacteristic.faceTypeName
         };
         this.selectedBloodType = {
-          code: this.criminalPhysicalCharacteristic.bloodTypeCode,
-          name: this.criminalPhysicalCharacteristic.bloodTypeName
+          code: this.form.criminalPhysicalCharacteristic.bloodTypeCode,
+          name: this.form.criminalPhysicalCharacteristic.bloodTypeName
         };
         this.selectedAccent = {
-          code: this.criminalPhysicalCharacteristic.accentCode,
-          name: this.criminalPhysicalCharacteristic.accentName
+          code: this.form.criminalPhysicalCharacteristic.accentCode,
+          name: this.form.criminalPhysicalCharacteristic.accentName
         };
       });
       this.editDialogVisible = true;
@@ -249,8 +255,10 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalPhysicalCharacteristics(this.$route.params.id).then(() => {
-        this.criminalPhysicalCharacteristic = _.cloneDeep(
+      this.getAllCriminalPhysicalCharacteristics(
+        this.$route.params.id
+      ).then(() => {
+        this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
       });
@@ -258,23 +266,23 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          // this.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
-          // this.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
+          // this.form.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
+          // this.form.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
 
-          this.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
-          this.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
+          this.form.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
+          this.form.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
 
-          this.criminalPhysicalCharacteristic.bloodTypeCode = this.selectedBloodType.code;
-          this.criminalPhysicalCharacteristic.bloodTypeName = this.selectedBloodType.name;
+          this.form.criminalPhysicalCharacteristic.bloodTypeCode = this.selectedBloodType.code;
+          this.form.criminalPhysicalCharacteristic.bloodTypeName = this.selectedBloodType.name;
 
-          this.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
-          this.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
+          this.form.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
+          this.form.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
 
           this.$store.commit(
             "updateCriminalPhysicalCharacteristic",
-            this.criminalPhysicalCharacteristic
+            this.form.criminalPhysicalCharacteristic
           );
-          if (this.criminalPhysicalCharacteristic.id) {
+          if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
             this.updateCriminalPhysicalCharacteristic()
@@ -319,14 +327,12 @@ export default {
     color: #f44336;
   }
 }
-.form-criminal
-  .w50 {
-    .el-form-item__content
-    > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-      width: 100%;
-    }
+.form-criminal .w50 {
+  .el-form-item__content > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
+    width: 100%;
   }
-    
+}
+
 .el-form .el-form-item.w50 {
   padding-right: 0;
 }
