@@ -22,11 +22,10 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalRecord" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="罪名" prop="decisionAccusation">
+          <el-form-item class="w25" label="判决罪名" prop="decisionAccusation">
             <el-input v-model="criminalRecord.decisionAccusation"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="逮捕日期" prop="arrestDate">
@@ -76,7 +75,7 @@
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="判决字号" prop="finalTrialOrganName">
+          <el-form-item class="w25" label="判决字号" prop="decisionLetterNumber">
             <el-input v-model="criminalRecord.decisionLetterNumber"></el-input>
           </el-form-item>
 
@@ -93,15 +92,16 @@
           <el-form-item class="w25" label="判决刑期结束日期" prop="decisionPrisonTermEndDate">
             <el-date-picker v-model="criminalRecord.decisionPrisonTermEndDate" type="date"></el-date-picker>
           </el-form-item>
-          <el-form-item class="w50" label="判决明细" prop="decisionDetail">
-            <el-input v-model="criminalRecord.decisionDetail"></el-input>
-          </el-form-item>
           <el-form-item class="w25" label="有否上诉" prop="appealed">
             <el-select v-model="criminalRecord.appealed" clearable>
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
           </el-form-item>
+          <el-form-item class="w50" label="判决明细" prop="decisionDetail">
+            <el-input v-model="criminalRecord.decisionDetail"></el-input>
+          </el-form-item>
+          
 
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -132,14 +132,22 @@ export default {
         this.$store.state.criminal.criminalRecord
       ),
       rules: {
-        appellation: [
-          { required: true, message: "请输入称谓", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ]
+        decisionAccusation: [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
+        arrestDate: [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
+        detentionDate: [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
+        selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关", trigger: "blur" }],
+        selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关", trigger: "blur" }],
+        prosecutionLetterNumber: [{ required: true, message: "请输入起诉字号", trigger: "blur" }],
+        prosecutionAccusation: [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
+        selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关", trigger: "blur" }],
+        firstTrialLetterNumber: [{ required: true, message: "请输入一审字号", trigger: "blur" }],
+        selectedDecisionOrgan: [{ required: true, message: "请选择判决机关", trigger: "blur" }],
+        decisionLetterNumber: [{ required: true, message: "请输入判决字号", trigger: "blur" }],
+        decisionDate: [{ required: true, message: "请选择判决日期", trigger: "blur" }],
+        decisionDeprivationPoliticalRightYears: [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
+        decisionPrisonTermStartDate: [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],
+        decisionPrisonTermEndDate: [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
+        appealed: [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
       },
       selectedArrestOrgan: null,
       selectedProsecutionOrgan: null,
