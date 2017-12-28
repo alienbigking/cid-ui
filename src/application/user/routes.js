@@ -20,5 +20,10 @@ export default [
         path: '/user/detail/:id',
         component: components.userDetail,
         name: '用户明细'
+    },
+    {
+        path: '/user/:id/password',
+        component: components.userPassword,
+        name: '修改用户密码'
     }
 ];

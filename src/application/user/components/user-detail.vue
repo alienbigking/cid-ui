@@ -5,22 +5,35 @@
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>编号：</label><span>{{ user.code }}</span>
+                        <label>姓名：</label><span>{{ user.name }}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>创建时间：</label><span>{{ user.createdTime }}</span>
+                        <label>用户账号：</label><span>{{ user.username }}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
+                    <el-col :span="12">
+                        <label>用户状态：</label><span>{{ user.status | convertToText(userStatuses)}}</span>
+                    </el-col>
+                </el-row>   
+                <el-row type="flex" justify="space-between">
+                     <el-col :span="12">
+                        <label>创建时间：</label><span>{{ user.createdTime }}</span>
+                    </el-col>
                     <el-col :span="12">
                         <label>最后更新时间：</label><span>{{ user.lastUpdatedTime }}</span>
                     </el-col>
                 </el-row>
             </div>
             <div class="padding20">
-                <div class="form-container">
-                    <label class="title">用户描述：</label>
-                    <div>{{ user.description }}</div>
+               <div class="form-container">
+                    <label class="title">用户所属租户：</label>
+                    <el-col :span="12">
+                        <label>租户账户：</label><span>{{ user.tenantId }}</span>
+                    </el-col>
+                    <el-col :span="12">
+                        <label>租户名称：</label><span>{{ user.tenantName }}</span>
+                    </el-col>
                 </div>
                 <el-button @click="onBack">返回</el-button>
             </div>
@@ -30,6 +43,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import { default as userStatusService } from "../service/user-status-service";
 
 export default {
   computed: {
@@ -39,6 +53,7 @@ export default {
   },
   created() {
     this.getUser(this.$route.params.id);
+    this.userStatuses = userStatusService.getAll();
   },
   methods: {
     ...mapActions(["getUser"]),

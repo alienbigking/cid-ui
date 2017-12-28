@@ -7,7 +7,7 @@ export default {
             },
             {
                 text: '禁用中',
-                value: 'Disabed'
+                value: 'Disabled'
             }
         ];
     }

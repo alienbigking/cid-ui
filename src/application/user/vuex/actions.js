@@ -20,5 +20,14 @@ export default {
     },
     deleteUser({ commit }, id) {
         return userService.delete(id);
+    },
+    updatePassword({ commit }, id, userPassword) {
+        return userService.updatePassword(id, userPassword);
+    },
+    enableUser({ commit }, id) {
+        return userService.enableUser(id);
+    },
+    disableUser({ commit }, id) {
+        return userService.disableUser(id);
     }
 };

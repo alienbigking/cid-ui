@@ -1,25 +1,38 @@
 <template>
-    <div>
-        <div class="card">
-            <span class="um-title">修改用户</span>
-            <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-                <el-form-item label="编号" class="w50" prop="code">
-                    <el-input v-model="user.code"></el-input>
-                </el-form-item>
-                <el-form-item label="名称" class="w50" prop="name">
-                    <el-input v-model="user.name"></el-input>
-                </el-form-item>
-                <el-form-item class="w100 textarea" label="描述" prop="description">
-                    <el-input :maxlength="255" type="textarea" resize="none" v-model="user.description"></el-input>
-                </el-form-item>
-                <el-form-item class="hasButton">
-                    <el-button @click="onBack">返 回</el-button>
-                    <el-button type="primary" :loading="saving" @click="onSubmit">确 认</el-button>
-                </el-form-item>
-            </el-form>
-        </div>
+  <div>
+    <div class="card">
+      <div class="um-title">
+          <p>修改用户信息</p>
+      </div>
+      <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
+          <el-form-item label="账号名称" class="w50" prop="username">
+              <el-input v-model="user.username"></el-input>
+          </el-form-item>
+          <el-form-item label="姓名" class="w50" prop="name">
+              <el-input v-model="user.name"></el-input>
+          </el-form-item>
+          <el-form-item label="创建时间" class="w50 the-disabled">
+              <span class="el-input__inner">{{ user.createdTime }}</span>
+          </el-form-item>
+          <el-form-item label="最后更新时间" class="w50 the-disabled">
+              <span class="el-input__inner">{{ user.lastUpdatedTime }}</span>
+          </el-form-item>
+
+          <div class="el-form-item el-form-item-div">
+            <el-button class="btn-return" @click="goBack">返回</el-button>
+            <el-button type="primary" class="btn-confirm" :loading="saving" @click="onSubmit">保存</el-button>
+          </div>
+      </el-form>
     </div>
+    <div class="um-modifyPassword card">
+      <p>修改密码</p>
+      <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
+      <!-- <router-link class="modififyPassword" to="/user/password">修改</router-link> -->
+      <el-button @click="updatePassword">修改密码</el-button>
+    </div>
+  </div>
 </template>
+
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
@@ -29,23 +42,10 @@ export default {
     return {
       user: _.cloneDeep(this.$store.state.user.user),
       rules: {
-        code: [
-          { required: true, message: "请输入编号", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入租户名称", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
+        name: [{ required: true, message: "姓名不能为空", trigger: "blur" }]
       },
       saving: false
     };
-  },
-  created() {
-    this.getUser(this.$route.params.id).then(() => {
-      this.user = _.cloneDeep(this.$store.state.user.user);
-    });
   },
   watch: {
     user: {
@@ -55,6 +55,11 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.getUser(this.$route.params.id).then(() => {
+      this.user = _.cloneDeep(this.$store.state.user.user);
+    });
+  },
   methods: {
     ...mapActions(["getUser", "updateUser"]),
     onSubmit() {
@@ -62,10 +67,9 @@ export default {
         if (valid) {
           this.saving = true;
           this.updateUser()
-            .then(res => {
+            .then(() => {
               this.saving = false;
               this.$message.success("修改成功");
-              this.$router.push(`/user/list`);
             })
             .catch(() => {
               this.saving = false;
@@ -74,11 +78,35 @@ export default {
         }
       });
     },
-    onBack() {
+    updatePassword() {
+      let params = this.$route.params.id;
+      this.$router.push(`/user/${params}/password`);
+    },
+    goBack() {
       this.$router.go(-1);
     }
   }
 };
 </script>
+
 <style lang="scss" scoped>
+.um-modifyPassword {
+  padding: 20px 22px 20px 20px;
+  font-size: 14px;
+  color: #333;
+  line-height: 1;
+  p {
+    display: inline-block;
+    margin-right: 40px;
+  }
+  span {
+    font-size: 12px;
+    color: #999;
+  }
+  .modififyPassword {
+    float: right;
+    font-size: 12px;
+    color: #2196f3;
+  }
+}
 </style>

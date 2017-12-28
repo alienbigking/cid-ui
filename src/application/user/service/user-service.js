@@ -19,5 +19,14 @@ export default {
     },
     delete(id) {
         return axios.delete(`api/users/${id}`);
+    },
+    updatePassword(id, userPassword) {
+        return axios.put(`api/users/${id}/password`, userPassword);
+    },
+    enableUser(id) {
+        return axios.post(`api/users/${id}/enable`);
+    },
+    disableUser(id) {
+        return axios.post(`api/users/${id}/disable`);
     }
 };
