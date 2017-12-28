@@ -23,7 +23,6 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalSocialRelation" :rules="rules" ref="form" label-position="top">

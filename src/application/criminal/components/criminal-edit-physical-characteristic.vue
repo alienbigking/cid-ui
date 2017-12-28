@@ -29,7 +29,6 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalPhysicalCharacteristic" :rules="rules" ref="form" label-position="top">
@@ -65,11 +64,20 @@
           <el-form-item class="w25" label="鞋号" prop="shoeSize">
             <el-input v-model="criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <!-- <el-form-item class="w50" label="特征" prop="description">
-              <el-input :maxlength="255" v-model="characteristicDescription" type="textarea" resize="none"></el-input>
-          </el-form-item> -->
-          <el-form-item class="w25" label="体貌特征描述" prop="shoeSize">
-            <el-input v-for="(item, index) in criminalPhysicalCharacteristic.otherFeatures" :key="index" v-model="item.description"></el-input>
+          <el-form-item class="w100" label="体貌特征描述" prop="otherFeatures">
+            <el-table :data="criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
+              <el-table-column prop="description">
+                <template slot-scope="scope">
+                  <el-input v-model="scope.row.description"></el-input>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作" min-width="122">
+                <template slot-scope="scope">
+                  <el-button @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+            <el-button @click="addPhysicalCharacteristic">新增特征</el-button>
           </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -114,8 +122,8 @@ export default {
         // ],
         // faceTypeCode: [
         //   { required: true, message: "请选择脸型", trigger: "blur" }
-        // ]
-        // description: [
+        // ],
+        // otherFeatures: [
         //   { required: true, message: "不能为空", trigger: "blur" },
         //   { max: 255, message: "长度在 1 到 255 个字符", trigger: "blur" }
         // ]
@@ -178,6 +186,17 @@ export default {
     this.getList();
   },
   methods: {
+      removePhysicalCharacteristic(item) {
+        var index = this.criminalPhysicalCharacteristic.otherFeatures.indexOf(item);
+        if (index !== -1) {
+          this.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
+        }
+      },
+      addPhysicalCharacteristic() {
+        this.criminalPhysicalCharacteristic.otherFeatures.push({
+          description: ''
+        });
+      },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
       "addCriminalPhysicalCharacteristic",
@@ -210,7 +229,6 @@ export default {
           code: this.criminalPhysicalCharacteristic.accentCode,
           name: this.criminalPhysicalCharacteristic.accentName
         };
-        // this.characteristicDescription = this.criminalPhysicalCharacteristic.otherFeatures[0].description;
       });
       this.editDialogVisible = true;
     },
@@ -254,7 +272,6 @@ export default {
           this.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
           this.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
 
-          // this.criminalPhysicalCharacteristic.otherFeatures[0].description = this.characteristicDescription;
           this.$store.commit(
             "updateCriminalPhysicalCharacteristic",
             this.criminalPhysicalCharacteristic
@@ -302,15 +319,16 @@ export default {
   }
   button:nth-child(2) {
     color: #f44336;
-    margin-left: 30px;
   }
 }
 .form-criminal
-  .w50
-  .el-form-item__content
-  > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-  width: 100%;
-}
+  .w50 {
+    .el-form-item__content
+    > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
+      width: 100%;
+    }
+  }
+    
 .el-form .el-form-item.w50 {
   padding-right: 0;
 }
