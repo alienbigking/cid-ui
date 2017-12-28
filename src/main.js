@@ -4,7 +4,7 @@ import router from './router';
 import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
-import filters from './filter';
+import filters from './plugin/filters';
 import validators from './plugin/validators';
 import errorHander from './plugin/error-handler';
 import { default as requestInterceptor } from './utils/interceptor/request-interceptor';
