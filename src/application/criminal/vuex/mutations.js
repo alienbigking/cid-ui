@@ -6,7 +6,6 @@ export default {
         state.criminal = criminal;
     },
     [types.UPDATE_CRIMINAL](state, criminal) {
-      console.log(criminal);
         Object.assign(state.criminal, criminal);
     },
     [types.SET_PAGED_CRIMINALS](state, pagedCriminals) {

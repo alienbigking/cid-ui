@@ -33,7 +33,7 @@
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalPhysicalCharacteristic" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="身高(cm)" prop="height">
+          <el-form-item class="w25" label="身高(m)" prop="height">
             <el-input v-model="criminalPhysicalCharacteristic.height"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体重(kg)" prop="weight">
@@ -65,8 +65,11 @@
           <el-form-item class="w25" label="鞋号" prop="shoeSize">
             <el-input v-model="criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <el-form-item class="w50" label="特征" prop="description">
+          <!-- <el-form-item class="w50" label="特征" prop="description">
               <el-input :maxlength="255" v-model="characteristicDescription" type="textarea" resize="none"></el-input>
+          </el-form-item> -->
+          <el-form-item class="w25" label="体貌特征描述" prop="shoeSize">
+            <el-input v-for="(item, index) in criminalPhysicalCharacteristic.otherFeatures" :key="index" v-model="item.description"></el-input>
           </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -98,20 +101,20 @@ export default {
         this.$store.state.criminal.criminalPhysicalCharacteristic
       ),
       rules: {
-        height: [
-          { required: true, message: "请输入身高" },
-          { type: "number", max: 50, message: "长度在 1 到 50 个字符" }
-        ],
-        weight: [
-          { required: true, message: "请输入体重", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ],
-        somatotypeCode: [
-          { required: true, message: "请选择血型", trigger: "blur" }
-        ],
-        faceTypeCode: [
-          { required: true, message: "请选择脸型", trigger: "blur" }
-        ]
+        // height: [
+        //   { required: true, message: "请输入身高" },
+        //   { type: "number", max: 50, message: "长度在 1 到 50 个字符" }
+        // ],
+        // weight: [
+        //   { required: true, message: "请输入体重", trigger: "blur" },
+        //   { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
+        // ],
+        // somatotypeCode: [
+        //   { required: true, message: "请选择血型", trigger: "blur" }
+        // ],
+        // faceTypeCode: [
+        //   { required: true, message: "请选择脸型", trigger: "blur" }
+        // ]
         // description: [
         //   { required: true, message: "不能为空", trigger: "blur" },
         //   { max: 255, message: "长度在 1 到 255 个字符", trigger: "blur" }
@@ -183,8 +186,8 @@ export default {
       "deleteCriminalPhysicalCharacteristic"
     ]),
     onNew() {
+      this.criminalPhysicalCharacteristic = { otherFeatures: [{ description: "" }], criminalId: this.$route.params.id };
       this.editDialogVisible = true;
-      this.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id };
     },
     onEdit(id) {
       this.getCriminalPhysicalCharacteristic(id).then(() => {
@@ -207,7 +210,7 @@ export default {
           code: this.criminalPhysicalCharacteristic.accentCode,
           name: this.criminalPhysicalCharacteristic.accentName
         };
-        this.characteristicDescription = this.criminalPhysicalCharacteristic.otherFeatures[0].description;
+        // this.characteristicDescription = this.criminalPhysicalCharacteristic.otherFeatures[0].description;
       });
       this.editDialogVisible = true;
     },
@@ -251,7 +254,7 @@ export default {
           this.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
           this.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
 
-          this.criminalPhysicalCharacteristic.otherFeatures[0].description = this.characteristicDescription;
+          // this.criminalPhysicalCharacteristic.otherFeatures[0].description = this.characteristicDescription;
           this.$store.commit(
             "updateCriminalPhysicalCharacteristic",
             this.criminalPhysicalCharacteristic

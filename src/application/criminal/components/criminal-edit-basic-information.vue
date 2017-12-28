@@ -307,7 +307,6 @@ export default {
   watch: {
     criminal: {
       handler: _.debounce(function(criminal) {
-        console.log(criminal);
         this.$store.commit("updateCriminal", criminal);
       }, 500),
       deep: true
