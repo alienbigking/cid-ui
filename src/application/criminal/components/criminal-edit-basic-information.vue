@@ -1,8 +1,5 @@
 <template>
-    <div class="card">
-        <div class="um-title">
-            <p>基本信息</p>
-        </div>
+    <div>
         <el-form class="form-criminal" :model="criminal" :rules="rules" ref="form" label-position="top">
           <div class="form-box">
             <el-form-item class="w25" label="编号" prop="code">
@@ -16,9 +13,9 @@
             </el-form-item>
             <el-form-item class="w25" label="性别" prop="genderCode">
               <el-select v-model="criminal.genderCode" value-key="code" :loading="flag.allGenders" placeholder="请选择性别" clearable>
-                <!-- <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option> -->
-                <el-option label="男" value="gnd0001"></el-option>
-                <el-option label="女" value="gnd0002"></el-option>
+                <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
+                <!-- <el-option label="男" value="gnd0001"></el-option> -->
+                <!-- <el-option label="女" value="gnd0002"></el-option> -->
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="出生日期" prop="birthday">
@@ -204,6 +201,8 @@ import _ from "lodash";
 export default {
   data() {
     return {
+      // criminal: _.cloneDeep(this.$store.state.criminal.criminal),
+      criminal: {},
       rules: {},
       formRules: {
         code: ["required", "-100"],
@@ -299,7 +298,6 @@ export default {
   },
   computed: {
     ...mapState({
-      criminal: state => _.cloneDeep(state.criminal.criminal),
       allPrisonAreas: state => state.prisonArea.allPrisonAreas,
       allPrisonHouses: state => state.prisonHouse.allPrisonHouses
     })
@@ -313,12 +311,13 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["getCriminal", "getAllPrisonAreas", "getAllPrisonHouses", "addCriminal"]),
+    ...mapActions(["getCriminal", "getAllPrisonAreas", "getAllPrisonHouses", "updateCriminal"]),
     lengthRule(e) {
       let min = e.split("-")[0];
       let max = e.split("-")[1];
       if (min && max) {
-        return { min: parseInt(min), max: max, message: `请输入${min}至${max}个字符` };
+        if (min === max) return { min: parseInt(min), max: parseInt(max), message: `请输入${min}个字符` };
+        return { min: parseInt(min), max: parseInt(max), message: `请输入${min}至${max}个字符` };
       } else if (min) {
         return { min: parseInt(min), message: `至少输入${min}个字符` };
       } else if (max) {
@@ -389,17 +388,19 @@ export default {
               criminal[`${str}Name`] = obj.name;
             }
           });
-          console.log(criminal);
           this.$store.commit("updateCriminal", criminal);
-          this.addCriminal().then(response => {
-            console.log(response);
+          this.updateCriminal().then(response => {
+            this.saving = false;
             this.$router.push(`/criminal/list`);
+          }).catch(() => {
+            this.saving = false;
           });
         }
       });
     }
   },
   created() {
+    this.criminal = { id: this.$route.params.id };
     Promise.all([
       criminalLookupService.getAllGenders(),
       criminalLookupService.getAllEthnicities(),
@@ -436,7 +437,34 @@ export default {
       this.flag.allCountries = false;
       this.flag.allPrisonAreas = false;
       this.flag.allPrisonHouses = false;
-      this.getCriminal(this.$route.params.id);
+    });
+    this.getCriminal(this.$route.params.id).then(() => {
+      let criminal = _.cloneDeep(this.$store.state.criminal.criminal);
+      Object.keys(criminal).map(key => {
+        let arr = key.split("Code");
+        if (arr.length === 2 && arr[1] === "") {
+          criminal[key] = {
+            name: criminal[`${arr[0]}Name`],
+            code: criminal[key]
+          };
+          delete criminal[`${arr[0]}Name`];
+        }
+      });
+      this.criminal = criminal;
+      ["birthplace", "householdRegisterAddress", "homeAddress"].map(type => {
+        regionLookupService.getAllProvinces(this.criminal[`${type}CountryCode`].code).then(response => {
+          this[type].province = response;
+          this.flag[type].province = false;
+        });
+        regionLookupService.getAllCities(this.criminal[`${type}ProvinceCode`].code).then(response => {
+          this[type].city = response;
+          this.flag[type].city = false;
+        });
+        regionLookupService.getAllCounties(this.criminal[`${type}CityCode`].code).then(response => {
+          this[type].county = response;
+          this.flag[type].county = false;
+        });
+      });
     });
     this.addRules();
   }
