@@ -31,6 +31,8 @@
                       <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
                       <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
                       <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
+                      <el-button type="text" @click="onEnable(scope.row)">激活</el-button>
+                      <el-button type="text" @click="onDisable(scope.row)">注销</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -54,6 +56,22 @@
             <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
           </span>
         </el-dialog>
+        <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="statusDialogVisible">
+          <i class="iconfont icon-tishishuoming"></i>
+          <span>确认激活<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="statusDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="onEnableConfirm" :loading="settingStatus">确 定</el-button>
+          </span>
+        </el-dialog>
+        <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="disablledStatusDialogVisible">
+          <i class="iconfont icon-tishishuoming"></i>
+          <span>确认禁用<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="statusDialogVisible = false">取 消</el-button>
+            <el-button type="primary" @click="onDisableConfirm" :loading="settingStatus">确 定</el-button>
+          </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -75,7 +93,12 @@ export default {
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
-      deleteItem: {}
+      deleteItem: {},
+      statusItem: {},
+      disableItem: {},
+      statusDialogVisible: false,
+      disablledStatusDialogVisible: false,
+      settingStatus: false
     };
   },
   computed: {
@@ -88,7 +111,7 @@ export default {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedUsers", "deleteUser"]),
+    ...mapActions(["getPagedUsers", "deleteUser", "enableUser", "disableUser"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -104,12 +127,48 @@ export default {
     onEdit(id) {
       this.$router.push(`/user/edit/${id}`);
     },
+    onEnable(item) {
+      this.statusItem = item;
+      this.statusDialogVisible = true;
+    },
+    onDisable(item) {
+      this.disableItem = item;
+      this.disablledStatusDialogVisible = true;
+    },
     onDelete(item) {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
     },
     onNew() {
       this.$router.push(`/user/new`);
+    },
+    onEnableConfirm() {
+      this.settingStatus = true;
+      this.enableUser(this.statusItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.statusDialogVisible = false;
+          this.$message.success("更改成功");
+          this.search();
+        })
+        .catch(() => {
+          this.$message.error("修改失败");
+          this.statusDialogVisible = false;
+        });
+    },
+    onDisableConfirm() {
+      this.settingStatus = true;
+      this.disableUser(this.disableItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.disablledStatusDialogVisible = false;
+          this.$message.success("更改成功");
+          this.search();
+        })
+        .catch(() => {
+          this.$message.error("修改失败");
+          this.disablledStatusDialogVisible = false;
+        });
     },
     onDeleteConfirm() {
       this.deleting = true;
