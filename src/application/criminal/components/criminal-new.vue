@@ -205,11 +205,11 @@ export default {
       criminal: {},
       rules: {},
       formRules: {
-        code: ["required", "-100"],
-        name: ["required"],
+        code: ["required", "-50"],
+        name: ["required", "-50"],
         genderCode: ["required"],
         birthday: ["required"],
-        identityCardNumber: ["required", "18-18"],
+        identityCardNumber: ["required", "18-18", "ID"],
         married: ["required"],
         ethnicityCode: ["required"],
         nationalityCode: ["required"],
@@ -222,18 +222,18 @@ export default {
         householdRegisterAddressProvinceCode: ["required"],
         householdRegisterAddressCityCode: ["required"],
         householdRegisterAddressCountyCode: ["required"],
-        householdRegisterAddressStreetDetail: ["required"],
+        householdRegisterAddressStreetDetail: ["required", "-50"],
         homeAddressCountryCode: ["required"],
         homeAddressProvinceCode: ["required"],
         homeAddressCityCode: ["required"],
         homeAddressCountyCode: ["required"],
-        homeAddressStreetDetail: ["required"],
+        homeAddressStreetDetail: ["required", "-50"],
         politicalStatusCode: ["required"],
         educationDegreeCode: ["required"],
-        occupation: ["required"],
+        occupation: ["required", "-50"],
         recidivisted: ["required"],
-        involvingFour: ["required"],
-        fourHistory: ["required"],
+        involvingFour: ["required", "-50"],
+        fourHistory: ["required", "-50"],
         fledTypeCode: ["required"],
         separateManagementLevelCode: ["required"],
         separateCustodyTypeCode: ["required"],
@@ -309,6 +309,46 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    Promise.all([
+      criminalLookupService.getAllGenders(),
+      criminalLookupService.getAllEthnicities(),
+      criminalLookupService.getAllHouseholdRegisterTypes(),
+      criminalLookupService.getAllPoliticalStatuses(),
+      criminalLookupService.getAllEducationDegrees(),
+      criminalLookupService.getAllFledTypes(),
+      criminalLookupService.getAllSeparateManagementLevels(),
+      criminalLookupService.getAllSeparateCustodyTypes(),
+      criminalLookupService.getAllCommutationScales(),
+      regionLookupService.getAllCountries(),
+      this.getAllPrisonAreas(),
+      this.getAllPrisonHouses()
+    ]).then(response => {
+      this.allGenders = response[0];
+      this.flag.allGenders = false;
+      this.allEthnicities = response[1];
+      this.flag.allEthnicities = false;
+      this.allHouseholdRegisterTypes = response[2];
+      this.flag.allHouseholdRegisterTypes = false;
+      this.allPoliticalStatuses = response[3];
+      this.flag.allPoliticalStatuses = false;
+      this.allEducationDegrees = response[4];
+      this.flag.allEducationDegrees = false;
+      this.allFledTypes = response[5];
+      this.flag.allFledTypes = false;
+      this.allSeparateManagementLevels = response[6];
+      this.flag.allSeparateManagementLevels = false;
+      this.allSeparateCustodyTypes = response[7];
+      this.flag.allSeparateCustodyTypes = false;
+      this.allCommutationScales = response[8];
+      this.flag.allCommutationScales = false;
+      this.allCountries = response[9];
+      this.flag.allCountries = false;
+      this.flag.allPrisonAreas = false;
+      this.flag.allPrisonHouses = false;
+    });
+    this.addRules();
   },
   methods: {
     ...mapActions(["getAllPrisonAreas", "getAllPrisonHouses", "addCriminal"]),
@@ -388,55 +428,15 @@ export default {
               criminal[`${str}Name`] = obj.name;
             }
           });
-          console.log(criminal);
+          // console.log(criminal);
           this.$store.commit("updateCriminal", criminal);
           this.addCriminal().then(response => {
-            console.log(response);
+            // console.log(response);
             this.$router.push(`/criminal/list`);
           });
         }
       });
     }
-  },
-  created() {
-    Promise.all([
-      criminalLookupService.getAllGenders(),
-      criminalLookupService.getAllEthnicities(),
-      criminalLookupService.getAllHouseholdRegisterTypes(),
-      criminalLookupService.getAllPoliticalStatuses(),
-      criminalLookupService.getAllEducationDegrees(),
-      criminalLookupService.getAllFledTypes(),
-      criminalLookupService.getAllSeparateManagementLevels(),
-      criminalLookupService.getAllSeparateCustodyTypes(),
-      criminalLookupService.getAllCommutationScales(),
-      regionLookupService.getAllCountries(),
-      this.getAllPrisonAreas(),
-      this.getAllPrisonHouses()
-    ]).then(response => {
-      this.allGenders = response[0];
-      this.flag.allGenders = false;
-      this.allEthnicities = response[1];
-      this.flag.allEthnicities = false;
-      this.allHouseholdRegisterTypes = response[2];
-      this.flag.allHouseholdRegisterTypes = false;
-      this.allPoliticalStatuses = response[3];
-      this.flag.allPoliticalStatuses = false;
-      this.allEducationDegrees = response[4];
-      this.flag.allEducationDegrees = false;
-      this.allFledTypes = response[5];
-      this.flag.allFledTypes = false;
-      this.allSeparateManagementLevels = response[6];
-      this.flag.allSeparateManagementLevels = false;
-      this.allSeparateCustodyTypes = response[7];
-      this.flag.allSeparateCustodyTypes = false;
-      this.allCommutationScales = response[8];
-      this.flag.allCommutationScales = false;
-      this.allCountries = response[9];
-      this.flag.allCountries = false;
-      this.flag.allPrisonAreas = false;
-      this.flag.allPrisonHouses = false;
-    });
-    this.addRules();
   }
 };
 </script>
