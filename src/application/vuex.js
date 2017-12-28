@@ -7,5 +7,8 @@ import { vuex as prisonHouse } from './prison-house';
 import { vuex as criminal } from './criminal';
 import { vuex as role } from './role';
 import { vuex as user } from './user';
+import { vuex as court } from './court';
+import { vuex as policeStation } from './police-station';
+import { vuex as procuratorate } from './procuratorate';
 
-export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user };
+export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user, court, policeStation, procuratorate };

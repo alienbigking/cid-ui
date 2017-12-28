@@ -10,7 +10,7 @@ export default {
                         case 401:
                             store.dispatch('logout');
                             router.replace({
-                                path: 'login',
+                                path: '/login',
                                 query: { redirect: router.currentRoute.fullPath }
                             });
                             break;
@@ -19,7 +19,8 @@ export default {
                             break;
                         case 404:
                             // TODO:跳转到404页面
-                            break;
+                            return;
+                        // break;
                         case 500:
                             // TODO:跳转到错误页面
                             break;

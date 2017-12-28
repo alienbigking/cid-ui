@@ -35,11 +35,10 @@ export default {
         ],
         name: [
           { required: true, message: "请输入监舍名称", trigger: "blur" },
-          { max: 100, message: '长度在 1 到 100 个字符', trigger: 'blur' }
+          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
+          // { validator: this.$validators.decimal1i2f, trigger: 'blur' }
         ],
-        description: [
-          { max: 255, message: '255 个字符以内', trigger: 'blur' }
-        ]
+        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
       },
       saving: false
     };
@@ -64,9 +63,9 @@ export default {
               this.$message.success("新增成功");
               this.$router.push(`/prison-house/list`);
             })
-            .catch(() => {
+            .catch(error => {
               this.saving = false;
-              this.$message.error("新增失败");
+              this.$handleError(error.response, "新增失败");
             });
         }
       });

@@ -23,7 +23,6 @@
           </el-table-column>
         </el-table>
       </template>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalSocialRelation" :rules="rules" ref="form" label-position="top">
@@ -42,11 +41,11 @@
           <el-form-item class="w25" label="职业" prop="occupation">
             <el-input v-model="criminalSocialRelation.occupation"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-              <el-select v-model="selectedPoliticalStatus" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
-                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
+          <el-form-item class="w25" label="政治面貌" prop="selectedPoliticalStatus">
+            <el-select v-model="selectedPoliticalStatus" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+              <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
+            </el-select>
+          </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="editDialogVisible = false">取 消</el-button>

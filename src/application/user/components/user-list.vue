@@ -24,7 +24,7 @@
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
                   </el-table-column>
                   <el-table-column label="用户状态" sortable >
-                    <template slot-scope="scope">{{scope.row.status | convertToText(userStatuses)}}</template>
+                    <template slot-scope="scope">{{scope.row.status | enumText(userStatuses)}}</template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">

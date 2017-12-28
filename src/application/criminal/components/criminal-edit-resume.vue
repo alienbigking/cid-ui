@@ -4,7 +4,7 @@
       <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
     </div>
     <div class="list-box">
-      <el-table class="table40" :data="criminalResumes" header-row-class-name="tableHeader40">
+      <el-table class="table40" :data="allCriminalResumes" header-row-class-name="tableHeader40">
         <el-table-column prop="startDate" label="开始日期"> </el-table-column>
         <el-table-column prop="endDate" label="结束日期"> </el-table-column>
         <el-table-column prop="company" label="公司"> </el-table-column>
@@ -15,20 +15,19 @@
         <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
         <el-table-column label="操作" min-width="122">
           <template slot-scope="scope">
-            <el-button type="text" @click="onEdit(scope.row)">编辑</el-button>
+            <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
             <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
         <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w-px180" label="开始日期" prop="startDate">
-              <el-date-picker v-model="criminalResume.startDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="结束日期" prop="endDate">
-              <el-date-picker v-model="criminalResume.endDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="公司" prop="company">
               <el-input v-model="criminalResume.company"></el-input>
@@ -62,16 +61,12 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalResume: {},
+      criminalResume: _.cloneDeep(
+        this.$store.state.criminal.criminalResume
+      ),
       rules: {
-        appellation: [
-          { required: true, message: "请输入称谓", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ]
+        startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
+        endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
       },
       editDialogVisible: false,
       deleteDialogVisible: false,
@@ -82,14 +77,16 @@ export default {
   },
   computed: {
     ...mapState({
-      criminalResumes: state => state.criminal.criminalResumes
+      allCriminalResumes: state => state.criminal.allCriminalResumes
     })
   },
   watch: {
     criminalResume: {
       handler: _.debounce(function(criminalResume) {
-        // criminalResume.criminalId =
-        this.$store.commit("updateCriminalResume", criminalResume);
+        this.$store.commit(
+          "updateCriminalResume",
+          criminalResume
+        );
       }, 500),
       deep: true
     }
@@ -98,13 +95,23 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([ "addCriminalResume", "updateCriminalResume", "getAllCriminalResumes", "deleteCriminalResume" ]),
+    ...mapActions([
+      "getCriminalResume",
+      "addCriminalResume",
+      "updateCriminalResume",
+      "getAllCriminalResumes",
+      "deleteCriminalResume"
+    ]),
     onNew() {
       this.editDialogVisible = true;
-      this.criminalResume = {criminalId: this.$route.params.id};
+      this.criminalResume = { criminalId: this.$route.params.id };
     },
-    onEdit(data) {
-      this.criminalResume = data;
+    onEdit(id) {
+      this.getCriminalResume(id).then(() => {
+        this.criminalResume = _.cloneDeep(
+          this.$store.state.criminal.criminalResume
+        );
+      });
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -126,8 +133,11 @@ export default {
         });
     },
     getList() {
-      // 获取简历列表
-      this.getAllCriminalResumes(this.$route.params.id);
+      this.getAllCriminalResumes(this.$route.params.id).then(() => {
+        this.criminalResume = _.cloneDeep(
+          this.$store.state.criminal.criminalResume
+        );
+      });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
