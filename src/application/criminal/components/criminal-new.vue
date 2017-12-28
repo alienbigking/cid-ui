@@ -183,10 +183,10 @@
                 <el-input v-model="criminal.bedNumber"></el-input>
             </el-form-item>
             <el-form-item class="w50" label="入监备注" prop="remark">
-                <el-input :maxlength="255" v-model="criminal.remark" type="textarea" resize="none"></el-input>
+                <el-input v-model="criminal.remark" :maxlength="255" type="textarea" resize="none"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
-                <el-button type="primary" @click="onSubmit" :loading="saving">保存</el-button>
+                <el-button type="primary" :loading="saving" @click="onSubmit">保存</el-button>
             </el-form-item>
           </div>
         </el-form>
