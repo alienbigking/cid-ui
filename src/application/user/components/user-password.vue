@@ -80,8 +80,6 @@ export default {
   methods: {
     ...mapActions(["updatePassword"]),
      onSubmit() {
-       console.log(this.$route.params.id);
-       console.log(this.userPassword);
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;

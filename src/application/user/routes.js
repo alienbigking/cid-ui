@@ -24,6 +24,6 @@ export default [
     {
         path: '/user/:id/password',
         component: components.userPassword,
-        name: '用户明细'
+        name: '修改用户密码'
     }
 ];
