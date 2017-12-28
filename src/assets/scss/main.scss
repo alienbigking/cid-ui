@@ -212,6 +212,11 @@
         padding-right: 20px;
       }
     }
+    .w100{
+        padding: 0;
+        padding-left: 20px;
+        flex-shrink: 0;
+      }
 }
 .el-table{
     tr,th,td{
@@ -220,6 +225,9 @@
         padding: 0;
         height: 40px;
         line-height: 40px;
+    }
+    .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell {
+        padding-left: 0px;
     }
     .tableHeader{
         height: 50px;

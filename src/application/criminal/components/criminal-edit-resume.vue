@@ -20,7 +20,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-button type="primary">保存</el-button>
     </div>
     <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
         <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
@@ -66,14 +65,8 @@ export default {
         this.$store.state.criminal.criminalResume
       ),
       rules: {
-        appellation: [
-          { required: true, message: "请输入称谓", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
-        name: [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        ]
+        startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
+        endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
       },
       editDialogVisible: false,
       deleteDialogVisible: false,
