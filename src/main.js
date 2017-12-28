@@ -5,9 +5,10 @@ import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
 import filters from './filter';
+import validators from './plugin/validators';
 import errorHander from './plugin/error-handler';
-import { default as oauthRequestInterceptor } from './utils/oauth-request-interceptor';
-import { default as errorResponseInterceptor } from './utils/error-response-interceptor';
+import { default as requestInterceptor } from './utils/interceptor/request-interceptor';
+import { default as responseInterceptor } from './utils/interceptor/response-interceptor';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/style.scss';
@@ -17,10 +18,11 @@ Vue.config.productionTip = false;
 
 Vue.use(ElementUI);
 Vue.use(filters);
+Vue.use(validators);
 Vue.use(errorHander);
 
-oauthRequestInterceptor.config(axios);
-errorResponseInterceptor.config(axios, store, router);
+requestInterceptor.config(axios);
+responseInterceptor.config(axios, store, router);
 
 /* eslint-disable no-new */
 new Vue({
