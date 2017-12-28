@@ -6,14 +6,14 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalRecords" header-row-class-name="tableHeader40">
-          <el-table-column prop="decisionAccusation" label="罪名"> </el-table-column>
-          <el-table-column prop="arrestDate" label="逮捕日期"> </el-table-column>
-          <el-table-column prop="detentionDate" label="羁押日期"> </el-table-column>
-          <el-table-column prop="firstTrialOrganName" label="一审机关"> </el-table-column>
-          <el-table-column prop="finalTrialOrganName" label="终审机关"> </el-table-column>
-          <el-table-column prop="decisionDate" label="判决日期"> </el-table-column>
-          <el-table-column prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
-          <el-table-column prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
+          <el-table-column align="center" prop="arrestDate" label="逮捕日期"> </el-table-column>
+          <el-table-column align="center" prop="detentionDate" label="羁押日期"> </el-table-column>
+          <el-table-column align="center" prop="firstTrialOrganName" label="一审机关"> </el-table-column>
+          <el-table-column align="center" prop="finalTrialOrganName" label="终审机关"> </el-table-column>
+          <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>

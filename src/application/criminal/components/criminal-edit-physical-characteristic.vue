@@ -6,16 +6,16 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalPhysicalCharacteristics" header-row-class-name="tableHeader40">
-          <el-table-column prop="height" label="身高"> </el-table-column>
-          <el-table-column prop="weight" label="体重"> </el-table-column>
-          <el-table-column prop="somatotypeName" label="体型"> </el-table-column>
-          <el-table-column prop="faceTypeName" label="脸型"> </el-table-column>
-          <el-table-column prop="bloodTypeName" label="血型"> </el-table-column>
-          <el-table-column prop="accentName" label="口音"> </el-table-column>
-          <el-table-column prop="footLength" label="足长"> </el-table-column>
-          <el-table-column prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
-          <el-table-column label="操作" min-width="122">
+          <el-table-column align="center" prop="height" label="身高"> </el-table-column>
+          <el-table-column align="center" prop="weight" label="体重"> </el-table-column>
+          <el-table-column align="center" prop="somatotypeName" label="体型"> </el-table-column>
+          <el-table-column align="center" prop="faceTypeName" label="脸型"> </el-table-column>
+          <el-table-column align="center" prop="bloodTypeName" label="血型"> </el-table-column>
+          <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
+          <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
+          <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>

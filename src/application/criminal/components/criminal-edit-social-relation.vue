@@ -6,15 +6,15 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
-          <el-table-column prop="appellation" label="称谓"> </el-table-column>
-          <el-table-column prop="name" label="姓名"> </el-table-column>
-          <el-table-column prop="age" label="年龄"> </el-table-column>
-          <el-table-column prop="company" label="公司"> </el-table-column>
-          <el-table-column prop="occupation" label="职业"> </el-table-column>
-          <el-table-column prop="politicalStatusName" label="政治面貌"> </el-table-column>
-          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
+          <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
+          <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
+          <el-table-column align="center" prop="company" label="公司"> </el-table-column>
+          <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+          <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
+          <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
