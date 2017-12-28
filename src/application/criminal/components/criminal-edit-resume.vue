@@ -142,7 +142,7 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.criminalResume.id) {
+          if (this.criminalResume.id === null) {
             // 修改
             this.saving = true;
             this.updateCriminalResume()

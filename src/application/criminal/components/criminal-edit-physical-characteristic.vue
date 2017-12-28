@@ -14,12 +14,6 @@
           <el-table-column prop="accentName" label="口音"> </el-table-column>
           <el-table-column prop="footLength" label="足长"> </el-table-column>
           <el-table-column prop="shoeSize" label="鞋号"> </el-table-column>
-          <!-- <el-table-column prop="otherFeatures[0].description" label="其它特征"> </el-table-column> -->
-           <!-- <el-table-column label="其它特征">
-            <template slot-scope="scope">
-              {{scope.row.otherFeatures[0].description}}
-            </template>
-          </el-table-column> -->
           <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
@@ -30,25 +24,25 @@
         </el-table>
       </template>
     </div>
-    <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
+    <el-dialog max-height="500px" width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="criminalPhysicalCharacteristic" :rules="rules" ref="form" label-position="top">
           <el-form-item class="w25" label="身高(m)" prop="height">
-            <el-input v-model="criminalPhysicalCharacteristic.height"></el-input>
+            <el-input v-model.number="criminalPhysicalCharacteristic.height"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体重(kg)" prop="weight">
-            <el-input v-model="criminalPhysicalCharacteristic.weight"></el-input>
+            <el-input v-model.number="criminalPhysicalCharacteristic.weight"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="体型" prop="somatotypeCode">
+          <el-form-item class="w25" label="体型" prop="selectedSomatotype">
             <el-select v-model="selectedSomatotype" value-key="code" :loading="flag.allSomatotypes" clearable placeholder="请选择体型">
               <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="脸型" prop="faceTypeCode">
+          <el-form-item class="w25" label="脸型" prop="selectedFaceType">
             <el-select v-model="selectedFaceType" value-key="code" :loading="flag.allFaceTypes" clearable placeholder="请选择脸型">
               <el-option v-for="(item, index) in allFaceTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="血型" prop="bloodTypeCode">
+          <el-form-item class="w25" label="血型" prop="selectedBloodType">
             <el-select v-model="selectedBloodType" value-key="code" :loading="flag.allBloodTypes" clearable placeholder="请选择血型">
               <el-option v-for="(item, index) in allBloodTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
@@ -59,10 +53,10 @@
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="足长(cm)" prop="footLength">
-            <el-input v-model="criminalPhysicalCharacteristic.footLength"></el-input>
+            <el-input v-model.number="criminalPhysicalCharacteristic.footLength"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="鞋号" prop="shoeSize">
-            <el-input v-model="criminalPhysicalCharacteristic.shoeSize"></el-input>
+            <el-input v-model.number="criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
           <el-form-item class="w100" label="体貌特征描述" prop="otherFeatures">
             <el-table :data="criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
@@ -109,24 +103,20 @@ export default {
         this.$store.state.criminal.criminalPhysicalCharacteristic
       ),
       rules: {
-        // height: [
-        //   { required: true, message: "请输入身高" },
-        //   { type: "number", max: 50, message: "长度在 1 到 50 个字符" }
-        // ],
-        // weight: [
-        //   { required: true, message: "请输入体重", trigger: "blur" },
-        //   { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
-        // ],
-        // somatotypeCode: [
-        //   { required: true, message: "请选择血型", trigger: "blur" }
-        // ],
-        // faceTypeCode: [
-        //   { required: true, message: "请选择脸型", trigger: "blur" }
-        // ],
-        // otherFeatures: [
-        //   { required: true, message: "不能为空", trigger: "blur" },
-        //   { max: 255, message: "长度在 1 到 255 个字符", trigger: "blur" }
-        // ]
+        height: [
+          { required: true, message: "请输入身高" },
+          { type: "number", message: "身高必须为数字值" }
+        ],
+        weight: [
+          { required: true, message: "请输入体重" },
+          { type: "number", message: "体重必须为数字值" }
+        ],
+        selectedSomatotype: [
+          { required: true, message: "请选择血型", trigger: "blur" }
+        ],
+        selectedFaceType: [
+          { required: true, message: "请选择脸型", trigger: "blur" }
+        ]
       },
       selectedSomatotype: null,
       selectedFaceType: null,
@@ -157,11 +147,21 @@ export default {
     })
   },
   watch: {
-    criminalSocialRelation: {
-      handler: _.debounce(function(criminalSocialRelation) {
+    selectedSomatotype(val) {
+      let obj = {
+        somatotypeCode: val.code,
+        somatotypeName: val.name
+      };
+      this.$store.commit(
+          "updateCriminalPhysicalCharacteristic",
+          obj
+        );
+    },
+    criminalPhysicalCharacteristic: {
+      handler: _.debounce(function(criminalPhysicalCharacteristic) {
         this.$store.commit(
-          "updateCriminalSocialRelation",
-          criminalSocialRelation
+          "updateCriminalPhysicalCharacteristic",
+          criminalPhysicalCharacteristic
         );
       }, 500),
       deep: true
@@ -193,9 +193,7 @@ export default {
         }
       },
       addPhysicalCharacteristic() {
-        this.criminalPhysicalCharacteristic.otherFeatures.push({
-          description: ''
-        });
+        this.criminalPhysicalCharacteristic.otherFeatures.push({description: ""});
       },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
@@ -260,8 +258,8 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
-          this.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
+          // this.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
+          // this.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
 
           this.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
           this.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
@@ -333,4 +331,3 @@ export default {
   padding-right: 0;
 }
 </style>
-
