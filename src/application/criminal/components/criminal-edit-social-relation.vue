@@ -42,7 +42,7 @@
             <el-input v-model="form.criminalSocialRelation.occupation"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="政治面貌" prop="criminalSocialRelation.selectedPoliticalStatus">
-            <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -78,9 +78,6 @@ export default {
           this.$store.state.criminal.criminalSocialRelation
         )
       },
-      // criminalSocialRelation: _.cloneDeep(
-      //   this.$store.state.criminal.criminalSocialRelation
-      // ),
       rules: {
         "criminalSocialRelation.appellation": [
           { required: true, message: "请输入称谓", trigger: "blur" },
@@ -92,7 +89,7 @@ export default {
         ]
       },
       // selectedPoliticalStatus: null,
-      selecting: true,
+      initializing: true,
       allPoliticalStatuses: [],
       editDialogVisible: false,
       deleteDialogVisible: false,
@@ -130,7 +127,7 @@ export default {
       criminalLookupService.getAllPoliticalStatuses()
     ]).then(response => {
       this.allPoliticalStatuses = response[0];
-      this.selecting = false;
+      this.initializing = false;
     });
     this.getList();
   },
@@ -144,7 +141,6 @@ export default {
     ]),
     onNew() {
       this.form.selectedPoliticalStatus = {};
-      // this.criminalSocialRelation = { criminalId: this.$route.params.id };
       this.$store.commit("setCriminalSocialRelation", {
         criminalId: this.$route.params.id
       });
@@ -162,7 +158,6 @@ export default {
           code: this.form.criminalSocialRelation.politicalStatusCode,
           name: this.form.criminalSocialRelation.politicalStatusName
         };
-        // this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
       });
       this.editDialogVisible = true;
     },
@@ -194,12 +189,6 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          // this.criminalSocialRelation.politicalStatusCode = this.selectedPoliticalStatus.code;
-          // this.criminalSocialRelation.politicalStatusName = this.selectedPoliticalStatus.name;
-          // this.$store.commit(
-          //   "updateCriminalSocialRelation",
-          //   this.criminalSocialRelation
-          // );
           if (this.form.criminalSocialRelation.id) {
             // 修改
             this.saving = true;

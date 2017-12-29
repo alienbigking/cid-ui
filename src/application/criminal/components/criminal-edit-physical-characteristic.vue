@@ -33,22 +33,22 @@
             <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体型" prop="selectedSomatotype">
-            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="selecting" clearable placeholder="请选择体型">
+            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="initializing" clearable placeholder="请选择体型">
               <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="脸型" prop="selectedFaceType">
-            <el-select v-model="form.selectedFaceType" value-key="code" :loading="selecting" clearable placeholder="请选择脸型">
+            <el-select v-model="form.selectedFaceType" value-key="code" :loading="initializing" clearable placeholder="请选择脸型">
               <el-option v-for="(item, index) in allFaceTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="血型" prop="selectedBloodType">
-            <el-select v-model="form.selectedBloodType" value-key="code" :loading="selecting" clearable placeholder="请选择血型">
+            <el-select v-model="form.selectedBloodType" value-key="code" :loading="initializing" clearable placeholder="请选择血型">
               <el-option v-for="(item, index) in allBloodTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="口音" prop="selectedAccent">
-            <el-select v-model="form.selectedAccent" value-key="code" :loading="selecting" clearable placeholder="请选择口音">
+            <el-select v-model="form.selectedAccent" value-key="code" :loading="initializing" clearable placeholder="请选择口音">
               <el-option v-for="(item, index) in allAccents" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -119,14 +119,11 @@ export default {
           { required: true, message: "请输入体重" },
           { validator: this.$validators.decimal3i2f, trigger: 'change' }
         ],
-        // "criminalPhysicalCharacteristic.otherFeatures.description": [
-        //   { required: true, message: "不能为空" }
-        // ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
       characteristicDescription: null,
-      selecting: true,
+      initializing: true,
       allSomatotypes: [],
       allFaceTypes: [],
       allBloodTypes: [],
@@ -223,7 +220,7 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
-      this.selecting = false;
+      this.initializing = false;
     });
     this.getList();
   },

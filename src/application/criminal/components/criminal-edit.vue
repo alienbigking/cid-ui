@@ -15,8 +15,6 @@ import criminalEditRecord from "./criminal-edit-record";
 import criminalEditResume from "./criminal-edit-resume";
 import criminalEditPhysicalCharacteristic from "./criminal-edit-physical-characteristic";
 import criminalEditSocialRelation from "./criminal-edit-social-relation";
-// import { mapActions } from "vuex";
-// import _ from "lodash";
 
 export default {
     components: { criminalEditBasicInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation },

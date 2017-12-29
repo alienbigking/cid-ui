@@ -36,12 +36,12 @@
             </el-form-item>
           
           <el-form-item class="w25" label="逮捕机关" prop="selectedArrestOrgan">
-            <el-select v-model="form.selectedArrestOrgan" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedArrestOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allPoliceStations" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="起诉机关" prop="selectedProsecutionOrgan">
-            <el-select v-model="form.selectedProsecutionOrgan" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedProsecutionOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allProcuratorates" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -54,7 +54,7 @@
 
 
           <el-form-item class="w25" label="一审机关" prop="selectedFirstTrialOrgan">
-            <el-select v-model="form.selectedFirstTrialOrgan" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedFirstTrialOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -62,7 +62,7 @@
             <el-input v-model="form.criminalRecord.firstTrialLetterNumber"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="终审机关" prop="selectedFinalTrialOrgan">
-            <el-select v-model="form.selectedFinalTrialOrgan" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedFinalTrialOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -71,7 +71,7 @@
             <el-input v-model="form.criminalRecord.finalTrialLetterNumber"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="判决机关" prop="selectedDecisionOrgan">
-            <el-select v-model="form.selectedDecisionOrgan" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedDecisionOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -156,7 +156,7 @@ export default {
         "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
         "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
       },
-      selecting: true,
+      initializing: true,
       allCourts: [],
       allPoliceStations: [],
       allProcuratorates: [],
@@ -227,7 +227,7 @@ export default {
       this.allCourts = this.$store.state.court.allCourts;
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
-      this.selecting = false;
+      this.initializing = false;
     });
     this.getList();
   },
