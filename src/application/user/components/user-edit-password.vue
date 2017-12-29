@@ -79,13 +79,15 @@ export default {
   },
   methods: {
     ...mapActions(["updatePassword"]),
-     onSubmit() {
-       console.log(this.$route.params.id);
-       console.log(this.userPassword);
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updatePassword(this.$route.params.id, this.userPassword)
+          const params = {
+            id: this.$route.params.id,
+            userPassword: this.userPassword
+          };
+          this.updatePassword(params)
             .then(() => {
               this.saving = false;
               this.$message.success("修改成功");

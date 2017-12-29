@@ -4,7 +4,7 @@ import mutations from './mutations';
 const state = {
     // 罪犯
     allCriminals: [],
-    pagedCriminals: {content: []},
+    pagedCriminals: { content: [] },
     criminal: {},
     // 罪犯查找数据
     allGenders: [],
@@ -19,16 +19,16 @@ const state = {
     allCommutationScales: [],
     // 罪犯犯罪记录
     allCriminalRecords: [],
-    pagedCriminalRecords: {content: []},
+    pagedCriminalRecords: { content: [] },
     criminalRecord: {},
     // 罪犯简历
     allCriminalResumes: [],
-    pagedCriminalResumes: {content: []},
+    pagedCriminalResumes: { content: [] },
     criminalResume: {},
     // 罪犯体貌特征
     allCriminalPhysicalCharacteristics: [],
-    pagedCriminalPhysicalCharacteristics: {content: []},
-    criminalPhysicalCharacteristic: {},
+    pagedCriminalPhysicalCharacteristics: { content: [] },
+    criminalPhysicalCharacteristic: { otherFeatures: [] },
     // 罪犯体貌特征查找数据
     allSomatotypes: [],
     allFaceTypes: [],
@@ -36,7 +36,7 @@ const state = {
     allAccents: [],
     // 罪犯社会关系
     allCriminalSocialRelations: [],
-    pagedCriminalSocialRelations: {content: []},
+    pagedCriminalSocialRelations: { content: [] },
     criminalSocialRelation: {}
 };
 
