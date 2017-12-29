@@ -138,9 +138,6 @@ export default {
           this.$store.state.criminal.criminalRecord
         )
       },
-      // criminalRecord: _.cloneDeep(
-      //   this.$store.state.criminal.criminalRecord
-      // ),
       rules: {
         "criminalRecord.decisionAccusation": [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
         "criminalRecord.arrestDate": [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
@@ -159,17 +156,7 @@ export default {
         "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
         "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
       },
-      // selectedArrestOrgan: null,
-      // selectedProsecutionOrgan: null,
-      // selectedFirstTrialOrgan: null,
-      // selectedFinalTrialOrgan: null,
-      // selectedDecisionOrgan: null,
       selecting: true,
-      // flag: {
-      //   allCourts: true,
-      //   allPoliceStations: true,
-      //   allProcuratorates: true
-      // },
       allCourts: [],
       allPoliceStations: [],
       allProcuratorates: [],
@@ -238,11 +225,8 @@ export default {
       this.getAllProcuratorates()
     ]).then(() => {
       this.allCourts = this.$store.state.court.allCourts;
-      // this.flag.allCourts = false;
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
-      // this.flag.allPoliceStations = false;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
-      // this.flag.allProcuratorates = false;
       this.selecting = false;
     });
     this.getList();

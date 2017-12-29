@@ -58,7 +58,7 @@
           <el-form-item class="w25" label="鞋号" prop="criminalPhysicalCharacteristic.shoeSize">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures">
+          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures.description">
             <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
               <el-table-column prop="description">
                 <template slot-scope="scope">
@@ -111,23 +111,20 @@ export default {
       rules: {
         "criminalPhysicalCharacteristic.height": [
           { required: true, message: "请输入身高" },
-          { type: "number", message: "身高必须为数字值" }
+          { validator: this.$validators.decimal1i2f, trigger: 'change' }
         ],
         "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
-          { type: "number", message: "体重必须为数字值" }
+          { validator: this.$validators.decimal3i2f, trigger: 'change' }
+        ],
+        "criminalPhysicalCharacteristic.otherFeatures.description": [
+          { required: true, message: "请输入身高" }
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
       characteristicDescription: null,
       selecting: true,
-      // flag: {
-      //   allSomatotypes: true,
-      //   allFaceTypes: true,
-      //   allBloodTypes: true,
-      //   allAccents: true
-      // },
       allSomatotypes: [],
       allFaceTypes: [],
       allBloodTypes: [],
@@ -182,6 +179,15 @@ export default {
         );
       }, 500),
       deep: true
+    },
+    "form.criminalPhysicalCharacteristic.otherFeatures": {
+      handler: _.debounce(function(criminalPhysicalCharacteristic) {
+        this.$store.commit(
+          "updateCriminalPhysicalCharacteristic",
+          criminalPhysicalCharacteristic
+        );
+      }, 500),
+      deep: true
     }
   },
   created() {
@@ -205,13 +211,15 @@ export default {
         item
       );
       if (index !== -1) {
-        this.form.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
-      }
+        let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
+        this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      };
     },
     addPhysicalCharacteristic() {
-      this.form.criminalPhysicalCharacteristic.otherFeatures.push({
+      let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.push({
         description: ""
       });
+      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
@@ -305,7 +313,6 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            console.log(this.form.criminalPhysicalCharacteristic);
             this.addCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
