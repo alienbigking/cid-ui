@@ -118,9 +118,7 @@ export default {
           { type: "number", message: "体重必须为数字值" }
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
-        selectedFaceType: [
-          { required: true, message: "请选择脸型" }
-        ]
+        selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
       characteristicDescription: null,
       selecting: true,
@@ -227,13 +225,13 @@ export default {
       "deleteCriminalPhysicalCharacteristic"
     ]),
     onNew() {
-      this.form.criminalPhysicalCharacteristic = {
-        otherFeatures: [{ description: "" }],
+      this.form.selectedSomatotype = null;
+      this.$store.commit("setCriminalPhysicalCharacteristic", {
+        otherFeatures: [],
         criminalId: this.$route.params.id
-      };
-      this.$store.commit(
-        "setCriminalPhysicalCharacteristic",
-        {}
+      });
+      this.form.criminalPhysicalCharacteristic = _.cloneDeep(
+        this.$store.state.criminal.criminalPhysicalCharacteristic
       );
       this.editDialogVisible = true;
     },
