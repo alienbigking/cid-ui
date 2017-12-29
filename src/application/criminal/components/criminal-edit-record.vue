@@ -259,8 +259,13 @@ export default {
       "deleteCriminalRecord"
     ]),
     onNew() {
-      this.editDialogVisible = true;
+      this.form.selectedArrestOrgan = {};
+      this.form.selectedProsecutionOrgan = {};
+      this.form.selectedFirstTrialOrgan = {};
+      this.form.selectedFinalTrialOrgan = {};
+      this.form.selectedDecisionOrgan = {};
       this.form.criminalRecord = { criminalId: this.$route.params.id };
+      this.editDialogVisible = true;
     },
     onEdit(id) {
       this.getCriminalRecord(id).then(() => {
@@ -314,24 +319,6 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          // this.criminalRecord.arrestOrganCode = this.selectedArrestOrgan.code;
-          // this.criminalRecord.arrestOrganName = this.selectedArrestOrgan.name;
-
-          // this.criminalRecord.prosecutionOrganCode = this.selectedProsecutionOrgan.code;
-          // this.criminalRecord.prosecutionOrganName = this.selectedProsecutionOrgan.name;
-
-          // this.criminalRecord.firstTrialOrganCode = this.selectedFirstTrialOrgan.code;
-          // this.criminalRecord.firstTrialOrganName = this.selectedFirstTrialOrgan.name;
-
-          // this.criminalRecord.finalTrialOrganCode = this.selectedFinalTrialOrgan.code;
-          // this.criminalRecord.finalTrialOrganName = this.selectedFinalTrialOrgan.name;
-
-          // this.criminalRecord.decisionOrganCode = this.selectedDecisionOrgan.code;
-          // this.criminalRecord.decisionOrganName = this.selectedDecisionOrgan.name;
-          // this.$store.commit(
-          //   "updateCriminalRecord",
-          //   this.criminalRecord
-          // );
           if (this.form.criminalRecord.id) {
             // 修改
             this.saving = true;

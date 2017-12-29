@@ -192,13 +192,9 @@ export default {
       criminalPhysicalCharacteristicLookupService.getAllAccents()
     ]).then(response => {
       this.allSomatotypes = response[0];
-      // this.flag.allSomatotypes = false;
       this.allFaceTypes = response[1];
-      // this.flag.allFaceTypes = false;
       this.allBloodTypes = response[2];
-      // this.flag.allBloodTypes = false;
       this.allAccents = response[3];
-      // this.flag.allAccents = false;
       this.selecting = false;
     });
     this.getList();
@@ -225,7 +221,10 @@ export default {
       "deleteCriminalPhysicalCharacteristic"
     ]),
     onNew() {
-      this.form.selectedSomatotype = null;
+      this.form.selectedSomatotype = {};
+      this.form.selectedFaceType = {};
+      this.form.selectedBloodType = {};
+      this.form.selectedAccent = {};
       this.$store.commit("setCriminalPhysicalCharacteristic", {
         otherFeatures: [],
         criminalId: this.$route.params.id
@@ -289,18 +288,6 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          // this.form.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
-          // this.form.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
-          // this.form.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
-          // this.form.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
-          // this.form.criminalPhysicalCharacteristic.bloodTypeCode = this.selectedBloodType.code;
-          // this.form.criminalPhysicalCharacteristic.bloodTypeName = this.selectedBloodType.name;
-          // this.form.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
-          // this.form.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
-          // this.$store.commit(
-          //   "updateCriminalPhysicalCharacteristic",
-          //   this.form.criminalPhysicalCharacteristic
-          // );
           if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
