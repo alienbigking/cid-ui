@@ -12,7 +12,7 @@
                 <el-input v-model="criminal.alias"></el-input>
             </el-form-item>
             <el-form-item class="w25" label="性别" prop="genderCode">
-              <el-select v-model="criminal.genderCode" value-key="code" :loading="flag.allGenders" placeholder="请选择性别" clearable>
+              <el-select v-model="criminal.genderCode" value-key="code" :loading="lookupLoading" placeholder="请选择性别" clearable>
                 <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
                 <!-- <el-option label="男" value="gnd0001"></el-option> -->
                 <!-- <el-option label="女" value="gnd0002"></el-option> -->
@@ -31,24 +31,24 @@
                 </el-select>
             </el-form-item>
             <el-form-item class="w25" label="民族" prop="ethnicityCode">
-              <el-select v-model="criminal.ethnicityCode" value-key="code" :loading="flag.allEthnicities" clearable>
+              <el-select v-model="criminal.ethnicityCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allEthnicities" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="籍贯/国籍" prop="nationalityCode">
-              <el-select v-model="criminal.nationalityCode" value-key="code" :loading="flag.allCountries" clearable>
+              <el-select v-model="criminal.nationalityCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="户籍分类" prop="householdRegisterTypeCode">
-              <el-select v-model="criminal.householdRegisterTypeCode" value-key="code" :loading="flag.allHouseholdRegisterTypes" clearable>
+              <el-select v-model="criminal.householdRegisterTypeCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="国家(出生地)" prop="birthplaceCountryCode">
-              <el-select v-model="criminal.birthplaceCountryCode" value-key="code" :loading="flag.allCountries" clearable @change="getProvinces($event, 'birthplace')">
+              <el-select v-model="criminal.birthplaceCountryCode" value-key="code" :loading="lookupLoading" clearable @change="getProvinces($event, 'birthplace')">
                 <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -63,12 +63,12 @@
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="县/区(出生地)" prop="birthplaceCountyCode">
-              <el-select v-model="criminal.birthplaceCountyCode" value-key="code" :disabled="!criminal.birthplaceCityCode" clearable>
+              <el-select v-model="criminal.birthplaceCountyCode" value-key="code" :disabled="!criminal.birthplaceCityCode" :loading="flag.birthplace.county" clearable>
                 <el-option v-for="(item, index) in birthplace.county" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="国家(户籍地址)" prop="householdRegisterAddressCountryCode">
-              <el-select v-model="criminal.householdRegisterAddressCountryCode" value-key="code" :loading="flag.allCountries" clearable @change="getProvinces($event, 'householdRegisterAddress')">
+              <el-select v-model="criminal.householdRegisterAddressCountryCode" value-key="code" :loading="lookupLoading" clearable @change="getProvinces($event, 'householdRegisterAddress')">
                 <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -78,12 +78,12 @@
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="城市(户籍地址)" prop="householdRegisterAddressCityCode">
-              <el-select v-model="criminal.householdRegisterAddressCityCode" value-key="code" :disabled="!criminal.householdRegisterAddressProvinceCode" clearable @change="getCounties($event, 'householdRegisterAddress')">
+              <el-select v-model="criminal.householdRegisterAddressCityCode" value-key="code" :disabled="!criminal.householdRegisterAddressProvinceCode" :loading="flag.householdRegisterAddress.city" clearable @change="getCounties($event, 'householdRegisterAddress')">
                 <el-option v-for="(item, index) in householdRegisterAddress.city" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="县/区(户籍地址)" prop="householdRegisterAddressCountyCode">
-              <el-select v-model="criminal.householdRegisterAddressCountyCode" value-key="code" :disabled="!criminal.householdRegisterAddressCityCode" clearable>
+              <el-select v-model="criminal.householdRegisterAddressCountyCode" value-key="code" :disabled="!criminal.householdRegisterAddressCityCode" :loading="flag.householdRegisterAddress.county" clearable>
                 <el-option v-for="(item, index) in householdRegisterAddress.county" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -91,7 +91,7 @@
                 <el-input v-model="criminal.householdRegisterAddressStreetDetail" :disabled="!criminal.householdRegisterAddressCountyCode"></el-input>
             </el-form-item>
             <el-form-item class="w25" label="国家(家庭地址)" prop="homeAddressCountryCode">
-              <el-select v-model="criminal.homeAddressCountryCode" value-key="code" :loading="flag.allCountries" clearable @change="getProvinces($event, 'homeAddress')">
+              <el-select v-model="criminal.homeAddressCountryCode" value-key="code" :loading="lookupLoading" clearable @change="getProvinces($event, 'homeAddress')">
                 <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -101,12 +101,12 @@
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="城市(家庭地址)" prop="homeAddressCityCode">
-              <el-select v-model="criminal.homeAddressCityCode" value-key="code" :disabled="!criminal.homeAddressProvinceCode" clearable @change="getCounties($event, 'homeAddress')">
+              <el-select v-model="criminal.homeAddressCityCode" value-key="code" :disabled="!criminal.homeAddressProvinceCode" :loading="flag.homeAddress.city" clearable @change="getCounties($event, 'homeAddress')">
                 <el-option v-for="(item, index) in homeAddress.city" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="县/区(家庭地址)" prop="homeAddressCountyCode">
-              <el-select v-model="criminal.homeAddressCountyCode" value-key="code" :disabled="!criminal.homeAddressCityCode" clearable>
+              <el-select v-model="criminal.homeAddressCountyCode" value-key="code" :disabled="!criminal.homeAddressCityCode" :loading="flag.homeAddress.county" clearable>
                 <el-option v-for="(item, index) in homeAddress.county" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -116,7 +116,7 @@
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-              <el-select v-model="criminal.politicalStatusCode" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+              <el-select v-model="criminal.politicalStatusCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -124,7 +124,7 @@
                 <el-input v-model="criminal.politicalParty"></el-input>
             </el-form-item>
             <el-form-item class="w25" label="文化程度" prop="educationDegreeCode">
-              <el-select v-model="criminal.educationDegreeCode" value-key="code" :loading="flag.allEducationDegrees" clearable>
+              <el-select v-model="criminal.educationDegreeCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allEducationDegrees" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
@@ -147,34 +147,34 @@
                 <el-input v-model="criminal.fourHistory"></el-input>
             </el-form-item>
             <el-form-item class="w25" label="流窜类别" prop="fledTypeCode">
-              <el-select v-model="criminal.fledTypeCode" value-key="code" :loading="flag.allFledTypes" clearable>
+              <el-select v-model="criminal.fledTypeCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allFledTypes" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="分管等级" prop="separateManagementLevelCode">
-              <el-select v-model="criminal.separateManagementLevelCode" value-key="code" :loading="flag.allSeparateManagementLevels" clearable>
+              <el-select v-model="criminal.separateManagementLevelCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allSeparateManagementLevels" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="分押类型" prop="separateCustodyTypeCode">
-              <el-select v-model="criminal.separateCustodyTypeCode" value-key="code" :loading="flag.allSeparateCustodyTypes" clearable>
+              <el-select v-model="criminal.separateCustodyTypeCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allSeparateCustodyTypes" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="减刑尺度" prop="commutationScaleCode">
-              <el-select v-model="criminal.commutationScaleCode" value-key="code" :loading="flag.allCommutationScales" clearable>
+              <el-select v-model="criminal.commutationScaleCode" value-key="code" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allCommutationScales" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
-              <el-select v-model="criminal.prisonAreaId" :loading="flag.allPrisonAreas" clearable>
+              <el-select v-model="criminal.prisonAreaId" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
-              <el-select v-model="criminal.prisonHouseId" :loading="flag.allPrisonHouses" clearable>
+              <el-select v-model="criminal.prisonHouseId" :loading="lookupLoading" clearable>
                 <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.id"></el-option>
               </el-select>
             </el-form-item>
@@ -242,12 +242,8 @@ export default {
         prisonHouseId: ["required"]
       },
       saving: false,
+      lookupLoading: true, // promise.all之后将所有下拉框的loading设为false
       flag: {
-        allGenders: true,
-        allEthnicities: true,
-        allEducationDegrees: true,
-        allPoliticalStatuses: true,
-        allCountries: true,
         birthplace: {
           province: true,
           city: true,
@@ -262,12 +258,7 @@ export default {
           province: true,
           city: true,
           county: true
-        },
-        allSeparateManagementLevels: true,
-        allSeparateCustodyTypes: true,
-        allCommutationScales: true,
-        allPrisonAreas: true,
-        allPrisonHouses: true
+        }
       },
       allCountries: [],
       birthplace: {
@@ -327,27 +318,16 @@ export default {
       this.getAllPrisonHouses()
     ]).then(response => {
       this.allGenders = response[0];
-      this.flag.allGenders = false;
       this.allEthnicities = response[1];
-      this.flag.allEthnicities = false;
       this.allHouseholdRegisterTypes = response[2];
-      this.flag.allHouseholdRegisterTypes = false;
       this.allPoliticalStatuses = response[3];
-      this.flag.allPoliticalStatuses = false;
       this.allEducationDegrees = response[4];
-      this.flag.allEducationDegrees = false;
       this.allFledTypes = response[5];
-      this.flag.allFledTypes = false;
       this.allSeparateManagementLevels = response[6];
-      this.flag.allSeparateManagementLevels = false;
       this.allSeparateCustodyTypes = response[7];
-      this.flag.allSeparateCustodyTypes = false;
       this.allCommutationScales = response[8];
-      this.flag.allCommutationScales = false;
       this.allCountries = response[9];
-      this.flag.allCountries = false;
-      this.flag.allPrisonAreas = false;
-      this.flag.allPrisonHouses = false;
+      this.lookupLoading = false;
     });
     this.getCriminal(this.$route.params.id).then(() => {
       let criminal = _.cloneDeep(this.$store.state.criminal.criminal);
