@@ -158,8 +158,8 @@ export default {
           code: this.form.criminalSocialRelation.politicalStatusCode,
           name: this.form.criminalSocialRelation.politicalStatusName
         };
+        this.editDialogVisible = true;
       });
-      this.editDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;

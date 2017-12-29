@@ -197,15 +197,6 @@ export default {
         );
       }, 500),
       deep: true
-    },
-    "form.criminalPhysicalCharacteristic.otherFeatures": {
-      handler: _.debounce(function(criminalPhysicalCharacteristic) {
-        this.$store.commit(
-          "updateCriminalPhysicalCharacteristic",
-          criminalPhysicalCharacteristic
-        );
-      }, 500),
-      deep: true
     }
   },
   created() {
@@ -230,10 +221,10 @@ export default {
       );
     },
     addPhysicalCharacteristic() {
-      let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.push({
+      this.form.criminalPhysicalCharacteristic.otherFeatures.push({
         description: ""
       });
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      // this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
@@ -277,8 +268,8 @@ export default {
           code: this.form.criminalPhysicalCharacteristic.accentCode,
           name: this.form.criminalPhysicalCharacteristic.accentName
         };
+        this.editDialogVisible = true;
       });
-      this.editDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
