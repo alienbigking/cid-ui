@@ -58,11 +58,13 @@
           <el-form-item class="w25" label="鞋号" prop="criminalPhysicalCharacteristic.shoeSize">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures.description">
+          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures">
             <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
               <el-table-column prop="description">
                 <template slot-scope="scope">
-                  <el-input v-model="scope.row.description"></el-input>
+                  <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
+                    <el-input v-model="scope.row.description"></el-input>
+                  </el-form-item>
                 </template>
               </el-table-column>
               <el-table-column label="操作" min-width="122">
@@ -117,9 +119,9 @@ export default {
           { required: true, message: "请输入体重" },
           { validator: this.$validators.decimal3i2f, trigger: 'change' }
         ],
-        "criminalPhysicalCharacteristic.otherFeatures.description": [
-          { required: true, message: "请输入身高" }
-        ],
+        // "criminalPhysicalCharacteristic.otherFeatures.description": [
+        //   { required: true, message: "不能为空" }
+        // ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
@@ -144,32 +146,52 @@ export default {
   },
   watch: {
     "form.selectedSomatotype"(val) {
-      let obj = {
-        somatotypeCode: val.code,
-        somatotypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "somatotypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "somatotypeName",
+        val.name
+      );
     },
     "form.selectedFaceType"(val) {
-      let obj = {
-        faceTypeCode: val.code,
-        faceTypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "faceTypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "faceTypeName",
+        val.name
+      );
     },
     "form.selectedBloodType"(val) {
-      let obj = {
-        bloodTypeCode: val.code,
-        bloodTypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "bloodTypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "bloodTypeName",
+        val.name
+      );
     },
     "form.selectedAccent"(val) {
-      let obj = {
-        accentCode: val.code,
-        accentName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "accentCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "accentName",
+        val.name
+      );
     },
     "form.criminalPhysicalCharacteristic": {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
@@ -206,14 +228,10 @@ export default {
     this.getList();
   },
   methods: {
-    removePhysicalCharacteristic(item) {
-      var index = this.form.criminalPhysicalCharacteristic.otherFeatures.indexOf(
-        item
+    removePhysicalCharacteristic(feature) {
+      this.form.criminalPhysicalCharacteristic.otherFeatures = this.form.criminalPhysicalCharacteristic.otherFeatures.filter(
+        item => item !== feature
       );
-      if (index !== -1) {
-        let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
-        this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
-      };
     },
     addPhysicalCharacteristic() {
       let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.push({
