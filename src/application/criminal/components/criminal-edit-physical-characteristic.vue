@@ -147,32 +147,52 @@ export default {
   },
   watch: {
     "form.selectedSomatotype"(val) {
-      let obj = {
-        somatotypeCode: val.code,
-        somatotypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "somatotypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "somatotypeName",
+        val.name
+      );
     },
     "form.selectedFaceType"(val) {
-      let obj = {
-        faceTypeCode: val.code,
-        faceTypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "faceTypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "faceTypeName",
+        val.name
+      );
     },
     "form.selectedBloodType"(val) {
-      let obj = {
-        bloodTypeCode: val.code,
-        bloodTypeName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "bloodTypeCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "bloodTypeName",
+        val.name
+      );
     },
     "form.selectedAccent"(val) {
-      let obj = {
-        accentCode: val.code,
-        accentName: val.name
-      };
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "accentCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalPhysicalCharacteristic,
+        "accentName",
+        val.name
+      );
     },
     "form.criminalPhysicalCharacteristic": {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
@@ -192,25 +212,18 @@ export default {
       criminalPhysicalCharacteristicLookupService.getAllAccents()
     ]).then(response => {
       this.allSomatotypes = response[0];
-      // this.flag.allSomatotypes = false;
       this.allFaceTypes = response[1];
-      // this.flag.allFaceTypes = false;
       this.allBloodTypes = response[2];
-      // this.flag.allBloodTypes = false;
       this.allAccents = response[3];
-      // this.flag.allAccents = false;
       this.selecting = false;
     });
     this.getList();
   },
   methods: {
-    removePhysicalCharacteristic(item) {
-      var index = this.form.criminalPhysicalCharacteristic.otherFeatures.indexOf(
-        item
+    removePhysicalCharacteristic(feature) {
+      this.form.criminalPhysicalCharacteristic.otherFeatures = this.form.criminalPhysicalCharacteristic.otherFeatures.filter(
+        item => item !== feature
       );
-      if (index !== -1) {
-        this.form.criminalPhysicalCharacteristic.otherFeatures.splice(index, 1);
-      }
     },
     addPhysicalCharacteristic() {
       this.form.criminalPhysicalCharacteristic.otherFeatures.push({

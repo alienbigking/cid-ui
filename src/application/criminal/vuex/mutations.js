@@ -1,4 +1,5 @@
 import * as types from './mutation-types';
+import _ from "lodash";
 
 export default {
     // 罪犯
@@ -42,8 +43,7 @@ export default {
         state.criminalPhysicalCharacteristic = criminalPhysicalCharacteristic;
     },
     [types.UPDATE_CRIMINAL_PHYSICAL_CHARACTERISTIC](state, criminalPhysicalCharacteristic) {
-        console.log(criminalPhysicalCharacteristic);
-        Object.assign(state.criminalPhysicalCharacteristic, criminalPhysicalCharacteristic);
+        state.criminalPhysicalCharacteristic = _.cloneDeep(criminalPhysicalCharacteristic);
     },
     [types.SET_ALL_CRIMINAL_PHYSICAL_CHARACTERISTICS](state, allCriminalPhysicalCharacteristics) {
         state.allCriminalPhysicalCharacteristics = allCriminalPhysicalCharacteristics;
