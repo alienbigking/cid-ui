@@ -24,82 +24,82 @@
       </template>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
-      <el-form class="form-criminal" :model="criminalRecord" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="判决罪名" prop="decisionAccusation">
-            <el-input v-model="criminalRecord.decisionAccusation"></el-input>
+      <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
+          <el-form-item class="w25" label="判决罪名" prop="criminalRecord.decisionAccusation">
+            <el-input v-model="form.criminalRecord.decisionAccusation"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="逮捕日期" prop="arrestDate">
-              <el-date-picker v-model="criminalRecord.arrestDate" type="date"></el-date-picker>
+          <el-form-item class="w25" label="逮捕日期" prop="criminalRecord.arrestDate">
+              <el-date-picker v-model="form.criminalRecord.arrestDate" type="date"></el-date-picker>
             </el-form-item>
-           <el-form-item class="w25" label="羁押日期" prop="detentionDate">
-              <el-date-picker v-model="criminalRecord.detentionDate" type="date"></el-date-picker>
+           <el-form-item class="w25" label="羁押日期" prop="criminalRecord.detentionDate">
+              <el-date-picker v-model="form.criminalRecord.detentionDate" type="date"></el-date-picker>
             </el-form-item>
           
           <el-form-item class="w25" label="逮捕机关" prop="selectedArrestOrgan">
-            <el-select v-model="selectedArrestOrgan" value-key="code" :loading="flag.allPoliceStations" clearable>
+            <el-select v-model="form.selectedArrestOrgan" value-key="code" :loading="selecting" clearable>
               <el-option v-for="(item, index) in allPoliceStations" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="起诉机关" prop="selectedProsecutionOrgan">
-            <el-select v-model="selectedProsecutionOrgan" value-key="code" :loading="flag.allProcuratorates" clearable>
+            <el-select v-model="form.selectedProsecutionOrgan" value-key="code" :loading="selecting" clearable>
               <el-option v-for="(item, index) in allProcuratorates" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="起诉字号" prop="prosecutionLetterNumber">
-            <el-input v-model="criminalRecord.prosecutionLetterNumber"></el-input>
+          <el-form-item class="w25" label="起诉字号" prop="criminalRecord.prosecutionLetterNumber">
+            <el-input v-model="form.criminalRecord.prosecutionLetterNumber"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="起诉罪名" prop="prosecutionAccusation">
-            <el-input v-model="criminalRecord.prosecutionAccusation"></el-input>
+          <el-form-item class="w25" label="起诉罪名" prop="criminalRecord.prosecutionAccusation">
+            <el-input v-model="form.criminalRecord.prosecutionAccusation"></el-input>
           </el-form-item>
 
 
           <el-form-item class="w25" label="一审机关" prop="selectedFirstTrialOrgan">
-            <el-select v-model="selectedFirstTrialOrgan" value-key="code" :loading="flag.allCourts" clearable>
+            <el-select v-model="form.selectedFirstTrialOrgan" value-key="code" :loading="selecting" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="一审字号" prop="firstTrialLetterNumber">
-            <el-input v-model="criminalRecord.firstTrialLetterNumber"></el-input>
+          <el-form-item class="w25" label="一审字号" prop="criminalRecord.firstTrialLetterNumber">
+            <el-input v-model="form.criminalRecord.firstTrialLetterNumber"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="终审机关" prop="selectedFinalTrialOrgan">
-            <el-select v-model="selectedFinalTrialOrgan" value-key="code" :loading="flag.allCourts" clearable>
+            <el-select v-model="form.selectedFinalTrialOrgan" value-key="code" :loading="selecting" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
 
-          <el-form-item class="w25" label="终审字号" prop="finalTrialLetterNumber">
-            <el-input v-model="criminalRecord.finalTrialLetterNumber"></el-input>
+          <el-form-item class="w25" label="终审字号" prop="criminalRecord.finalTrialLetterNumber">
+            <el-input v-model="form.criminalRecord.finalTrialLetterNumber"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="判决机关" prop="selectedDecisionOrgan">
-            <el-select v-model="selectedDecisionOrgan" value-key="code" :loading="flag.allCourts" clearable>
+            <el-select v-model="form.selectedDecisionOrgan" value-key="code" :loading="selecting" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="判决字号" prop="decisionLetterNumber">
-            <el-input v-model="criminalRecord.decisionLetterNumber"></el-input>
+          <el-form-item class="w25" label="判决字号" prop="criminalRecord.decisionLetterNumber">
+            <el-input v-model="form.criminalRecord.decisionLetterNumber"></el-input>
           </el-form-item>
 
-          <el-form-item class="w25" label="判决日期" prop="decisionDate">
-              <el-date-picker v-model="criminalRecord.decisionDate" type="date"></el-date-picker>
+          <el-form-item class="w25" label="判决日期" prop="criminalRecord.decisionDate">
+              <el-date-picker v-model="form.criminalRecord.decisionDate" type="date"></el-date-picker>
             </el-form-item>
-          <el-form-item class="w25" label="判决剥政年限" prop="decisionDeprivationPoliticalRightYears">
-            <el-input v-model="criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
+          <el-form-item class="w25" label="判决剥政年限" prop="criminalRecord.decisionDeprivationPoliticalRightYears">
+            <el-input v-model="form.criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
           </el-form-item>
 
-          <el-form-item class="w25" label="判决刑期开始日期" prop="decisionPrisonTermStartDate">
-            <el-date-picker v-model="criminalRecord.decisionPrisonTermStartDate" type="date"></el-date-picker>
+          <el-form-item class="w25" label="判决刑期开始日期" prop="criminalRecord.decisionPrisonTermStartDate">
+            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermStartDate" type="date"></el-date-picker>
           </el-form-item>
-          <el-form-item class="w25" label="判决刑期结束日期" prop="decisionPrisonTermEndDate">
-            <el-date-picker v-model="criminalRecord.decisionPrisonTermEndDate" type="date"></el-date-picker>
+          <el-form-item class="w25" label="判决刑期结束日期" prop="criminalRecord.decisionPrisonTermEndDate">
+            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermEndDate" type="date"></el-date-picker>
           </el-form-item>
-          <el-form-item class="w25" label="有否上诉" prop="appealed">
-            <el-select v-model="criminalRecord.appealed" clearable>
+          <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
+            <el-select v-model="form.criminalRecord.appealed" clearable>
                 <el-option label="是" :value="true"></el-option>
                 <el-option label="否" :value="false"></el-option>
               </el-select>
           </el-form-item>
-          <el-form-item class="w50" label="判决明细" prop="decisionDetail">
-            <el-input v-model="criminalRecord.decisionDetail"></el-input>
+          <el-form-item class="w50" label="判决明细" prop="criminalRecord.decisionDetail">
+            <el-input v-model="form.criminalRecord.decisionDetail"></el-input>
           </el-form-item>
           
 
@@ -128,37 +128,48 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalRecord: _.cloneDeep(
-        this.$store.state.criminal.criminalRecord
-      ),
+      form: {
+        selectedArrestOrgan: null,
+        selectedProsecutionOrgan: null,
+        selectedFirstTrialOrgan: null,
+        selectedFinalTrialOrgan: null,
+        selectedDecisionOrgan: null,
+        criminalRecord: _.cloneDeep(
+          this.$store.state.criminal.criminalRecord
+        )
+      },
+      // criminalRecord: _.cloneDeep(
+      //   this.$store.state.criminal.criminalRecord
+      // ),
       rules: {
-        // decisionAccusation: [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
-        // arrestDate: [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
-        // detentionDate: [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
-        // selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关", trigger: "blur" }],
-        // selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关", trigger: "blur" }],
-        // prosecutionLetterNumber: [{ required: true, message: "请输入起诉字号", trigger: "blur" }],
-        // prosecutionAccusation: [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
-        // selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关", trigger: "blur" }],
-        // firstTrialLetterNumber: [{ required: true, message: "请输入一审字号", trigger: "blur" }],
-        // selectedDecisionOrgan: [{ required: true, message: "请选择判决机关", trigger: "blur" }],
-        // decisionLetterNumber: [{ required: true, message: "请输入判决字号", trigger: "blur" }],
-        // decisionDate: [{ required: true, message: "请选择判决日期", trigger: "blur" }],
-        // decisionDeprivationPoliticalRightYears: [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
-        // decisionPrisonTermStartDate: [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],
-        // decisionPrisonTermEndDate: [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
-        // appealed: [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
+        "criminalRecord.decisionAccusation": [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
+        "criminalRecord.arrestDate": [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
+        "criminalRecord.detentionDate": [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
+        selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关", trigger: "blur" }],
+        selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关", trigger: "blur" }],
+        "criminalRecord.prosecutionLetterNumber": [{ required: true, message: "请输入起诉字号", trigger: "blur" }],
+        "criminalRecord.prosecutionAccusation": [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
+        selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关", trigger: "blur" }],
+        "criminalRecord.firstTrialLetterNumber": [{ required: true, message: "请输入一审字号", trigger: "blur" }],
+        selectedDecisionOrgan: [{ required: true, message: "请选择判决机关", trigger: "blur" }],
+        "criminalRecord.decisionLetterNumber": [{ required: true, message: "请输入判决字号", trigger: "blur" }],
+        "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期", trigger: "blur" }],
+        "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
+        "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],
+        "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
+        "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
       },
-      selectedArrestOrgan: null,
-      selectedProsecutionOrgan: null,
-      selectedFirstTrialOrgan: null,
-      selectedFinalTrialOrgan: null,
-      selectedDecisionOrgan: null,
-      flag: {
-        allCourts: true,
-        allPoliceStations: true,
-        allProcuratorates: true
-      },
+      // selectedArrestOrgan: null,
+      // selectedProsecutionOrgan: null,
+      // selectedFirstTrialOrgan: null,
+      // selectedFinalTrialOrgan: null,
+      // selectedDecisionOrgan: null,
+      selecting: true,
+      // flag: {
+      //   allCourts: true,
+      //   allPoliceStations: true,
+      //   allProcuratorates: true
+      // },
       allCourts: [],
       allPoliceStations: [],
       allProcuratorates: [],
@@ -192,11 +203,12 @@ export default {
       this.getAllProcuratorates()
     ]).then(() => {
       this.allCourts = this.$store.state.court.allCourts;
-      this.flag.allCourts = false;
+      // this.flag.allCourts = false;
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
-      this.flag.allPoliceStations = false;
+      // this.flag.allPoliceStations = false;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
-      this.flag.allProcuratorates = false;
+      // this.flag.allProcuratorates = false;
+      this.selecting = false;
     });
     this.getList();
   },
@@ -221,24 +233,24 @@ export default {
           this.$store.state.criminal.criminalRecord
         );
         this.selectedArrestOrgan = {
-          code: this.criminalRecord.arrestOrganCode,
-          name: this.criminalRecord.arrestOrganName
+          code: this.form.criminalRecord.arrestOrganCode,
+          name: this.form.criminalRecord.arrestOrganName
         };
         this.selectedProsecutionOrgan = {
-          code: this.criminalRecord.prosecutionOrganCode,
-          name: this.criminalRecord.prosecutionOrganName
+          code: this.form.criminalRecord.prosecutionOrganCode,
+          name: this.form.criminalRecord.prosecutionOrganName
         };
         this.selectedFirstTrialOrgan = {
-          code: this.criminalRecord.firstTrialOrganCode,
-          name: this.criminalRecord.firstTrialOrganName
+          code: this.form.criminalRecord.firstTrialOrganCode,
+          name: this.form.criminalRecord.firstTrialOrganName
         };
         this.selectedFinalTrialOrgan = {
-          code: this.criminalRecord.finalTrialOrganCode,
-          name: this.criminalRecord.finalTrialOrganName
+          code: this.form.criminalRecord.finalTrialOrganCode,
+          name: this.form.criminalRecord.finalTrialOrganName
         };
         this.selectedDecisionOrgan = {
-          code: this.criminalRecord.decisionOrganCode,
-          name: this.criminalRecord.decisionOrganName
+          code: this.form.criminalRecord.decisionOrganCode,
+          name: this.form.criminalRecord.decisionOrganName
         };
       });
       this.editDialogVisible = true;

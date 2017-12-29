@@ -29,36 +29,36 @@
           <el-form-item class="w25" label="身高(m)" prop="criminalPhysicalCharacteristic.height">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.height"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="体重(kg)" prop="weight">
+          <el-form-item class="w25" label="体重(kg)" prop="criminalPhysicalCharacteristic.weight">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体型" prop="selectedSomatotype">
-            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="flag.allSomatotypes" clearable placeholder="请选择体型">
+            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="selecting" clearable placeholder="请选择体型">
               <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="脸型" prop="selectedFaceType">
-            <el-select v-model="selectedFaceType" value-key="code" :loading="flag.allFaceTypes" clearable placeholder="请选择脸型">
+            <el-select v-model="form.selectedFaceType" value-key="code" :loading="selecting" clearable placeholder="请选择脸型">
               <el-option v-for="(item, index) in allFaceTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="血型" prop="selectedBloodType">
-            <el-select v-model="selectedBloodType" value-key="code" :loading="flag.allBloodTypes" clearable placeholder="请选择血型">
+            <el-select v-model="form.selectedBloodType" value-key="code" :loading="selecting" clearable placeholder="请选择血型">
               <el-option v-for="(item, index) in allBloodTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="口音" prop="accentCode">
-            <el-select v-model="selectedAccent" value-key="code" :loading="flag.allAccents" clearable placeholder="请选择口音">
+          <el-form-item class="w25" label="口音" prop="selectedAccent">
+            <el-select v-model="form.selectedAccent" value-key="code" :loading="selecting" clearable placeholder="请选择口音">
               <el-option v-for="(item, index) in allAccents" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="足长(cm)" prop="footLength">
+          <el-form-item class="w25" label="足长(cm)" prop="criminalPhysicalCharacteristic.footLength">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.footLength"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="鞋号" prop="shoeSize">
+          <el-form-item class="w25" label="鞋号" prop="criminalPhysicalCharacteristic.shoeSize">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <el-form-item class="w100" label="体貌特征描述" prop="otherFeatures">
+          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures">
             <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
               <el-table-column prop="description">
                 <template slot-scope="scope">
@@ -119,18 +119,17 @@ export default {
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [
-          { required: true, message: "请选择脸型", trigger: "blur" }
+          { required: true, message: "请选择脸型" }
         ]
       },
-      // selectedSomatotype: null,
-
       characteristicDescription: null,
-      flag: {
-        allSomatotypes: true,
-        allFaceTypes: true,
-        allBloodTypes: true,
-        allAccents: true
-      },
+      selecting: true,
+      // flag: {
+      //   allSomatotypes: true,
+      //   allFaceTypes: true,
+      //   allBloodTypes: true,
+      //   allAccents: true
+      // },
       allSomatotypes: [],
       allFaceTypes: [],
       allBloodTypes: [],
@@ -156,6 +155,27 @@ export default {
       };
       this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
+    selectedFaceType(val) {
+      let obj = {
+        faceTypeCode: val.code,
+        faceTypeName: val.name
+      };
+      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+    },
+    selectedBloodType(val) {
+      let obj = {
+        bloodTypeCode: val.code,
+        bloodTypeName: val.name
+      };
+      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+    },
+    selectedAccent(val) {
+      let obj = {
+        accentCode: val.code,
+        accentName: val.name
+      };
+      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
+    },
     criminalPhysicalCharacteristic: {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
         this.$store.commit(
@@ -174,13 +194,14 @@ export default {
       criminalPhysicalCharacteristicLookupService.getAllAccents()
     ]).then(response => {
       this.allSomatotypes = response[0];
-      this.flag.allSomatotypes = false;
+      // this.flag.allSomatotypes = false;
       this.allFaceTypes = response[1];
-      this.flag.allFaceTypes = false;
+      // this.flag.allFaceTypes = false;
       this.allBloodTypes = response[2];
-      this.flag.allBloodTypes = false;
+      // this.flag.allBloodTypes = false;
       this.allAccents = response[3];
-      this.flag.allAccents = false;
+      // this.flag.allAccents = false;
+      this.selecting = false;
     });
     this.getList();
   },
@@ -268,20 +289,16 @@ export default {
         if (valid) {
           // this.form.criminalPhysicalCharacteristic.somatotypeCode = this.selectedSomatotype.code;
           // this.form.criminalPhysicalCharacteristic.somatotypeName = this.selectedSomatotype.name;
-
-          this.form.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
-          this.form.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
-
-          this.form.criminalPhysicalCharacteristic.bloodTypeCode = this.selectedBloodType.code;
-          this.form.criminalPhysicalCharacteristic.bloodTypeName = this.selectedBloodType.name;
-
-          this.form.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
-          this.form.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
-
-          this.$store.commit(
-            "updateCriminalPhysicalCharacteristic",
-            this.form.criminalPhysicalCharacteristic
-          );
+          // this.form.criminalPhysicalCharacteristic.faceTypeCode = this.selectedFaceType.code;
+          // this.form.criminalPhysicalCharacteristic.faceTypeName = this.selectedFaceType.name;
+          // this.form.criminalPhysicalCharacteristic.bloodTypeCode = this.selectedBloodType.code;
+          // this.form.criminalPhysicalCharacteristic.bloodTypeName = this.selectedBloodType.name;
+          // this.form.criminalPhysicalCharacteristic.accentCode = this.selectedAccent.code;
+          // this.form.criminalPhysicalCharacteristic.accentName = this.selectedAccent.name;
+          // this.$store.commit(
+          //   "updateCriminalPhysicalCharacteristic",
+          //   this.form.criminalPhysicalCharacteristic
+          // );
           if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
@@ -299,6 +316,7 @@ export default {
           } else {
             // 新增
             this.saving = true;
+            console.log(this.form.criminalPhysicalCharacteristic);
             this.addCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
