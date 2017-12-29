@@ -122,12 +122,6 @@ export default {
       },
       characteristicDescription: null,
       selecting: true,
-      // flag: {
-      //   allSomatotypes: true,
-      //   allFaceTypes: true,
-      //   allBloodTypes: true,
-      //   allAccents: true
-      // },
       allSomatotypes: [],
       allFaceTypes: [],
       allBloodTypes: [],
