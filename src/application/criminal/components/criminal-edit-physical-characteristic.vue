@@ -148,35 +148,35 @@ export default {
     })
   },
   watch: {
-    selectedSomatotype(val) {
+    "form.selectedSomatotype"(val) {
       let obj = {
         somatotypeCode: val.code,
         somatotypeName: val.name
       };
       this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
-    selectedFaceType(val) {
+    "form.selectedFaceType"(val) {
       let obj = {
         faceTypeCode: val.code,
         faceTypeName: val.name
       };
       this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
-    selectedBloodType(val) {
+    "form.selectedBloodType"(val) {
       let obj = {
         bloodTypeCode: val.code,
         bloodTypeName: val.name
       };
       this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
-    selectedAccent(val) {
+    "form.selectedAccent"(val) {
       let obj = {
         accentCode: val.code,
         accentName: val.name
       };
       this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
-    criminalPhysicalCharacteristic: {
+    "form.criminalPhysicalCharacteristic": {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
         this.$store.commit(
           "updateCriminalPhysicalCharacteristic",
@@ -231,6 +231,10 @@ export default {
         otherFeatures: [{ description: "" }],
         criminalId: this.$route.params.id
       };
+      this.$store.commit(
+        "setCriminalPhysicalCharacteristic",
+        {}
+      );
       this.editDialogVisible = true;
     },
     onEdit(id) {
@@ -238,19 +242,19 @@ export default {
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
-        this.selectedSomatotype = {
+        this.form.selectedSomatotype = {
           code: this.form.criminalPhysicalCharacteristic.somatotypeCode,
           name: this.form.criminalPhysicalCharacteristic.somatotypeName
         };
-        this.selectedFaceType = {
+        this.form.selectedFaceType = {
           code: this.form.criminalPhysicalCharacteristic.faceTypeCode,
           name: this.form.criminalPhysicalCharacteristic.faceTypeName
         };
-        this.selectedBloodType = {
+        this.form.selectedBloodType = {
           code: this.form.criminalPhysicalCharacteristic.bloodTypeCode,
           name: this.form.criminalPhysicalCharacteristic.bloodTypeName
         };
-        this.selectedAccent = {
+        this.form.selectedAccent = {
           code: this.form.criminalPhysicalCharacteristic.accentCode,
           name: this.form.criminalPhysicalCharacteristic.accentName
         };

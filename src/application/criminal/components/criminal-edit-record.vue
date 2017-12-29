@@ -145,13 +145,13 @@ export default {
         "criminalRecord.decisionAccusation": [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
         "criminalRecord.arrestDate": [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
         "criminalRecord.detentionDate": [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
-        selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关", trigger: "blur" }],
-        selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关", trigger: "blur" }],
+        selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关" }],
+        selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关" }],
         "criminalRecord.prosecutionLetterNumber": [{ required: true, message: "请输入起诉字号", trigger: "blur" }],
         "criminalRecord.prosecutionAccusation": [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
-        selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关", trigger: "blur" }],
+        selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关" }],
         "criminalRecord.firstTrialLetterNumber": [{ required: true, message: "请输入一审字号", trigger: "blur" }],
-        selectedDecisionOrgan: [{ required: true, message: "请选择判决机关", trigger: "blur" }],
+        selectedDecisionOrgan: [{ required: true, message: "请选择判决机关" }],
         "criminalRecord.decisionLetterNumber": [{ required: true, message: "请输入判决字号", trigger: "blur" }],
         "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期", trigger: "blur" }],
         "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
@@ -186,7 +186,42 @@ export default {
     })
   },
   watch: {
-    criminalRecord: {
+    "form.selectedArrestOrgan"(val) {
+      let obj = {
+        arrestOrganCode: val.code,
+        arrestOrganName: val.name
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
+    "form.selectedProsecutionOrgan"(val) {
+      let obj = {
+        prosecutionOrganCode: val.code,
+        prosecutionOrganName: val.name
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
+    "form.selectedFirstTrialOrgan"(val) {
+      let obj = {
+        firstTrialOrganCode: val.code,
+        firstTrialOrganName: val.name
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
+    "form.selectedFinalTrialOrgan"(val) {
+      let obj = {
+        finalTrialOrganCode: val.code,
+        finalTrialOrganName: val.name
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
+    "form.selectedDecisionOrgan"(val) {
+      let obj = {
+        decisionOrganCode: val.code,
+        decisionOrganName: val.name
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
+    "form.criminalRecord": {
       handler: _.debounce(function(criminalRecord) {
         this.$store.commit(
           "updateCriminalRecord",
@@ -225,30 +260,30 @@ export default {
     ]),
     onNew() {
       this.editDialogVisible = true;
-      this.criminalRecord = { criminalId: this.$route.params.id };
+      this.form.criminalRecord = { criminalId: this.$route.params.id };
     },
     onEdit(id) {
       this.getCriminalRecord(id).then(() => {
-        this.criminalRecord = _.cloneDeep(
+        this.form.criminalRecord = _.cloneDeep(
           this.$store.state.criminal.criminalRecord
         );
-        this.selectedArrestOrgan = {
+        this.form.selectedArrestOrgan = {
           code: this.form.criminalRecord.arrestOrganCode,
           name: this.form.criminalRecord.arrestOrganName
         };
-        this.selectedProsecutionOrgan = {
+        this.form.selectedProsecutionOrgan = {
           code: this.form.criminalRecord.prosecutionOrganCode,
           name: this.form.criminalRecord.prosecutionOrganName
         };
-        this.selectedFirstTrialOrgan = {
+        this.form.selectedFirstTrialOrgan = {
           code: this.form.criminalRecord.firstTrialOrganCode,
           name: this.form.criminalRecord.firstTrialOrganName
         };
-        this.selectedFinalTrialOrgan = {
+        this.form.selectedFinalTrialOrgan = {
           code: this.form.criminalRecord.finalTrialOrganCode,
           name: this.form.criminalRecord.finalTrialOrganName
         };
-        this.selectedDecisionOrgan = {
+        this.form.selectedDecisionOrgan = {
           code: this.form.criminalRecord.decisionOrganCode,
           name: this.form.criminalRecord.decisionOrganName
         };
@@ -279,25 +314,25 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.criminalRecord.arrestOrganCode = this.selectedArrestOrgan.code;
-          this.criminalRecord.arrestOrganName = this.selectedArrestOrgan.name;
+          // this.criminalRecord.arrestOrganCode = this.selectedArrestOrgan.code;
+          // this.criminalRecord.arrestOrganName = this.selectedArrestOrgan.name;
 
-          this.criminalRecord.prosecutionOrganCode = this.selectedProsecutionOrgan.code;
-          this.criminalRecord.prosecutionOrganName = this.selectedProsecutionOrgan.name;
+          // this.criminalRecord.prosecutionOrganCode = this.selectedProsecutionOrgan.code;
+          // this.criminalRecord.prosecutionOrganName = this.selectedProsecutionOrgan.name;
 
-          this.criminalRecord.firstTrialOrganCode = this.selectedFirstTrialOrgan.code;
-          this.criminalRecord.firstTrialOrganName = this.selectedFirstTrialOrgan.name;
+          // this.criminalRecord.firstTrialOrganCode = this.selectedFirstTrialOrgan.code;
+          // this.criminalRecord.firstTrialOrganName = this.selectedFirstTrialOrgan.name;
 
-          this.criminalRecord.finalTrialOrganCode = this.selectedFinalTrialOrgan.code;
-          this.criminalRecord.finalTrialOrganName = this.selectedFinalTrialOrgan.name;
+          // this.criminalRecord.finalTrialOrganCode = this.selectedFinalTrialOrgan.code;
+          // this.criminalRecord.finalTrialOrganName = this.selectedFinalTrialOrgan.name;
 
-          this.criminalRecord.decisionOrganCode = this.selectedDecisionOrgan.code;
-          this.criminalRecord.decisionOrganName = this.selectedDecisionOrgan.name;
-          this.$store.commit(
-            "updateCriminalRecord",
-            this.criminalRecord
-          );
-          if (this.criminalRecord.id) {
+          // this.criminalRecord.decisionOrganCode = this.selectedDecisionOrgan.code;
+          // this.criminalRecord.decisionOrganName = this.selectedDecisionOrgan.name;
+          // this.$store.commit(
+          //   "updateCriminalRecord",
+          //   this.criminalRecord
+          // );
+          if (this.form.criminalRecord.id) {
             // 修改
             this.saving = true;
             this.updateCriminalRecord()

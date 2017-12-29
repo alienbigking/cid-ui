@@ -42,6 +42,7 @@ export default {
         state.criminalPhysicalCharacteristic = criminalPhysicalCharacteristic;
     },
     [types.UPDATE_CRIMINAL_PHYSICAL_CHARACTERISTIC](state, criminalPhysicalCharacteristic) {
+        console.log(criminalPhysicalCharacteristic);
         Object.assign(state.criminalPhysicalCharacteristic, criminalPhysicalCharacteristic);
     },
     [types.SET_ALL_CRIMINAL_PHYSICAL_CHARACTERISTICS](state, allCriminalPhysicalCharacteristics) {
