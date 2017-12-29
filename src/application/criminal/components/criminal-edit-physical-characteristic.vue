@@ -58,7 +58,7 @@
           <el-form-item class="w25" label="鞋号" prop="criminalPhysicalCharacteristic.shoeSize">
             <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
           </el-form-item>
-          <el-form-item class="w100" label="体貌特征描述" prop="criminalPhysicalCharacteristic.otherFeatures">
+          <el-form-item class="w100" label="其它特征" prop="criminalPhysicalCharacteristic.otherFeatures">
             <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" :show-header="false" header-row-class-name="tableHeader40">
               <el-table-column prop="description">
                 <template slot-scope="scope">
@@ -81,13 +81,12 @@
         <el-button type="primary" :loading="saving" @click="onSave">确 定</el-button>
       </span>
     </el-dialog>
-
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
         <i class="iconfont icon-tishishuoming"></i>
         <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+          <el-button @click="deleteDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
         </span>
     </el-dialog>
   </div>
@@ -102,10 +101,10 @@ export default {
   data() {
     return {
       form: {
-        selectedSomatotype: null,
-        selectedFaceType: null,
-        selectedBloodType: null,
-        selectedAccent: null,
+        selectedSomatotype: {},
+        selectedFaceType: {},
+        selectedBloodType: {},
+        selectedAccent: {},
         criminalPhysicalCharacteristic: _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         )
@@ -113,15 +112,12 @@ export default {
       rules: {
         "criminalPhysicalCharacteristic.height": [
           { required: true, message: "请输入身高" },
-          { validator: this.$validators.decimal1i2f, trigger: 'change' }
+          { validator: this.$validators.decimal1i2f, trigger: "change" }
         ],
         "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
-          { validator: this.$validators.decimal3i2f, trigger: 'change' }
+          { validator: this.$validators.decimal3i2f, trigger: "change" }
         ],
-        // "criminalPhysicalCharacteristic.otherFeatures.description": [
-        //   { required: true, message: "不能为空" }
-        // ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
