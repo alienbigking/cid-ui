@@ -182,7 +182,7 @@ export default {
           this.getList();
         })
         .catch(() => {
-          this.$message.error("删除失败");
+          this.$handleError("删除失败");
           this.deleting = false;
         });
     },
@@ -208,7 +208,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$handleError("修改失败");
               });
           } else {
             // 新增
@@ -222,7 +222,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$handleError("新增失败");
               });
           }
         }

@@ -65,19 +65,23 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["updateMyPassword"]),
+    ...mapActions(["updatePassword"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updateMyPassword(this.userPassword)
+          const params = {
+            id: this.$route.params.id,
+            userPassword: this.userPassword
+          };
+          this.updatePassword(params)
             .then(() => {
               this.saving = false;
               this.$message.success("修改成功");
             })
             .catch(() => {
               this.saving = false;
-              this.$message.error("修改失败");
+              this.$handleError("修改失败");
             });
         }
       });
