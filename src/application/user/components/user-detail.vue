@@ -18,10 +18,10 @@
                 </el-row>   
                 <el-row type="flex" justify="space-between">
                      <el-col :span="12">
-                        <label>创建时间：</label><span>{{ user.createdTime }}</span>
+                        <label>创建时间：</label><span>{{ user.createdTime && user.createdTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span>{{ user.lastUpdatedTime }}</span>
+                        <label>最后更新时间：</label><span>{{ user.lastUpdatedTime && user.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
                     </el-col>
                 </el-row>
             </div>

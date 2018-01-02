@@ -20,8 +20,14 @@
                   <el-table-column prop="name" label="用户名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.createdTime && scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.lastUpdatedTime && scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column label="用户状态" sortable >
                     <template slot-scope="scope">{{scope.row.status | enumText(userStatuses)}}</template>

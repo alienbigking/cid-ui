@@ -87,10 +87,10 @@
           </el-form-item>
 
           <el-form-item class="w25" label="判决刑期开始日期" prop="criminalRecord.decisionPrisonTermStartDate">
-            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermStartDate" type="date"></el-date-picker>
+            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermStartDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
           </el-form-item>
           <el-form-item class="w25" label="判决刑期结束日期" prop="criminalRecord.decisionPrisonTermEndDate">
-            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermEndDate" type="date"></el-date-picker>
+            <el-date-picker v-model="form.criminalRecord.decisionPrisonTermEndDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
           </el-form-item>
           <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
             <el-select v-model="form.criminalRecord.appealed" clearable>
@@ -155,6 +155,22 @@ export default {
         "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],
         "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
         "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
+      },
+      pickerBeginDateBefore: {
+        disabledDate: (time) => {
+          let beginDateVal = this.form.criminalRecord.decisionPrisonTermEndDate;
+          if (beginDateVal) {
+              return time.getTime() > beginDateVal;
+          }
+        }
+      },
+      pickerBeginDateAfter: {
+        disabledDate: (time) => {
+          let beginDateVal = this.form.criminalRecord.decisionPrisonTermStartDate;
+          if (beginDateVal) {
+              return time.getTime() < beginDateVal;
+          }
+        }
       },
       initializing: true,
       allCourts: [],

@@ -18,8 +18,16 @@
                   <el-table-column prop="code" label="编号"> </el-table-column>
                   <el-table-column prop="name" label="监区名称"> </el-table-column>
                   <el-table-column prop="parentPrisonAreaName" label="上级监区"> </el-table-column>
-                  <el-table-column prop="createdTime" label="创建时间" sortable> </el-table-column>
-                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable> </el-table-column>
+                  <el-table-column prop="createdTime" label="创建时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.createdTime && scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
+                  </el-table-column>
+                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.lastUpdatedTime && scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
+                  </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                       <template slot-scope="scope">
                           <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>

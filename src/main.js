@@ -4,6 +4,7 @@ import router from './router';
 import store from './store/';
 import ElementUI from 'element-ui';
 import axios from 'axios';
+import VueMoment from 'vue-moment';
 import filters from './plugin/filters';
 import validators from './plugin/validators';
 import errorHander from './plugin/error-handler';
@@ -20,6 +21,7 @@ Vue.use(ElementUI);
 Vue.use(filters);
 Vue.use(validators);
 Vue.use(errorHander);
+Vue.use(VueMoment);
 
 requestInterceptor.config(axios);
 responseInterceptor.config(axios, store, router);

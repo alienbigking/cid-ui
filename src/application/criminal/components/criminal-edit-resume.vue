@@ -11,8 +11,16 @@
         <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
         <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
         <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
-        <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
-        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+        <el-table-column align="center" prop="createdTime" label="创建时间">
+          <template slot-scope="scope">
+              {{scope.row.createdTime && scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
+        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+          <template slot-scope="scope">
+              {{scope.row.lastUpdatedTime && scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" min-width="122">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -24,10 +32,10 @@
     <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
         <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w-px180" label="开始日期" prop="startDate">
-              <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="结束日期" prop="endDate">
-              <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="公司" prop="company">
               <el-input v-model="criminalResume.company"></el-input>
@@ -67,6 +75,22 @@ export default {
       rules: {
         startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
         endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+      },
+      pickerBeginDateBefore: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.endDate;
+          if (beginDateVal) {
+            return time.getTime() > beginDateVal;
+          }
+        }
+      },
+      pickerBeginDateAfter: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.startDate;
+          if (beginDateVal) {
+            return time.getTime() < beginDateVal;
+          }
+        }
       },
       editDialogVisible: false,
       deleteDialogVisible: false,

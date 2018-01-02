@@ -14,7 +14,11 @@
           <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
           <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
           <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime && scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
           <el-table-column align="center" label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
