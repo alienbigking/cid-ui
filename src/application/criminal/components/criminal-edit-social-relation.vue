@@ -88,7 +88,6 @@ export default {
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ]
       },
-      // selectedPoliticalStatus: null,
       initializing: true,
       allPoliticalStatuses: [],
       editDialogVisible: false,

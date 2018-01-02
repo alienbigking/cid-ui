@@ -224,7 +224,6 @@ export default {
       this.form.criminalPhysicalCharacteristic.otherFeatures.push({
         description: ""
       });
-      // this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
