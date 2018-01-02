@@ -15,8 +15,7 @@
             </el-form-item>
             <el-form-item class="w50" label="用户状态" prop="status">
             <el-select v-model="user.status"   clearable placeholder="请选择用户使用状态">
-                <el-option  value="Enabled">可用</el-option>
-                <el-option  value="Disabled">不可使用</el-option>
+                <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             </el-form-item>
             <el-form-item class="hasButton">
@@ -29,9 +28,12 @@
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
+import { default as userStatusService } from "../service/user-status-service";
+
 export default {
   data() {
     return {
+      userStatuses: [],
       user: {},
       rules: {
         username: [
@@ -59,6 +61,9 @@ export default {
       }, 500),
       deep: true
     }
+  },
+  created() {
+    this.userStatuses = userStatusService.getAll();
   },
   methods: {
     ...mapActions(["addUser"]),
