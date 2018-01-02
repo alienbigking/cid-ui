@@ -13,12 +13,12 @@
         <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
         <el-table-column align="center" prop="createdTime" label="创建时间">
           <template slot-scope="scope">
-              {{scope.row.createdTime && scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+              {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
           </template>
         </el-table-column>
         <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
           <template slot-scope="scope">
-              {{scope.row.lastUpdatedTime && scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+              {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
           </template>
         </el-table-column>
         <el-table-column label="操作" min-width="122">

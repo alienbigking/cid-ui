@@ -8,12 +8,12 @@
                         <label>编号：</label><span> {{prisonHouse.id}}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>创建时间：</label><span> {{prisonHouse.createdTime && prisonHouse.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                        <label>创建时间：</label><span> {{prisonHouse.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span> {{prisonHouse.lastUpdatedTime && prisonHouse.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                        <label>最后更新时间：</label><span> {{prisonHouse.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                     </el-col>
                 </el-row>
             </div>
