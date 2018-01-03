@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="um-title">
-            <p>基本信息</p>
+            <p>新增罪犯</p>
         </div>
         <el-form class="form-criminal" :model="criminal" :rules="rules" ref="form" label-position="top">
           <div class="form-box">
