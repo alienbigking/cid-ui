@@ -49,6 +49,9 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.tenant = {};
+  },
   methods: {
     ...mapActions(["addPrisonTenant"]),
     onSubmit() {
