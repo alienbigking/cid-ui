@@ -44,11 +44,9 @@ export default {
       deep: true
     }
   },
-  computed: {
-    created() {
-      this.role={};
-    }
-  }
+  created() {
+    this.role = {};
+  },
   methods: {
     ...mapActions(["addRole"]),
     onSubmit() {

@@ -66,6 +66,7 @@ export default {
     this.getAllPrisonAreas().then(() => {
       this.gettingAllPrisonAreas = false;
     });
+    this.prisonArea = {};
   },
   methods: {
     ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),

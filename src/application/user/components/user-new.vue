@@ -63,6 +63,7 @@ export default {
     }
   },
   created() {
+    this.user = {};
     this.userStatuses = userStatusService.getAll();
   },
   methods: {
