@@ -4,7 +4,7 @@
       <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
     </div>
     <div class="list-box">
-      <el-table class="table40" :data="allCriminalResumes" header-row-class-name="tableHeader40">
+      <el-table class="table40" :data="allCriminalResumes" :loading="loading" header-row-class-name="tableHeader40">
         <el-table-column align="center" prop="startDate" label="开始日期"> </el-table-column>
         <el-table-column align="center" prop="endDate" label="结束日期"> </el-table-column>
         <el-table-column align="center" prop="company" label="公司"> </el-table-column>
@@ -21,28 +21,8 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
-        <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w-px180" label="开始日期" prop="startDate">
-              <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w-px180" label="结束日期" prop="endDate">
-              <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w-px180" label="公司" prop="company">
-              <el-input v-model="criminalResume.company"></el-input>
-            </el-form-item>
-            <el-form-item class="w-px180" label="职业" prop="occupation">
-              <el-input v-model="criminalResume.occupation"></el-input>
-            </el-form-item>
-            <el-form-item class="w-px180" label="职位" prop="duty">
-              <el-input v-model="criminalResume.duty"></el-input>
-            </el-form-item>
-        </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="editDialogVisible = false">返回</el-button>
-        <el-button type="primary" @click="onSave">保存</el-button>
-      </span>
+    <el-dialog class="dialog" width="710px" :center="true" :visible.sync="editDialogVisible">
+      <criminal-resume-edit :criminalResumeId="criminalResumeId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-resume-edit>
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-tishishuoming"></i>
@@ -57,21 +37,19 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import CriminalResumeEdit from "./criminal-resume-edit";
 import _ from "lodash";
 export default {
+  components: {
+    "criminal-resume-edit": CriminalResumeEdit
+  },
   data() {
     return {
-      criminalResume: _.cloneDeep(
-        this.$store.state.criminal.criminalResume
-      ),
-      rules: {
-        startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
-        endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
-      },
-      editDialogVisible: false,
+      criminalResumeId: "",
+      editDialogVisible: null,
       deleteDialogVisible: false,
       deleting: false,
-      saving: false,
+      loading: true,
       deleteItem: {}
     };
   },
@@ -80,38 +58,20 @@ export default {
       allCriminalResumes: state => state.criminal.allCriminalResumes
     })
   },
-  watch: {
-    criminalResume: {
-      handler: _.debounce(function(criminalResume) {
-        this.$store.commit(
-          "updateCriminalResume",
-          criminalResume
-        );
-      }, 500),
-      deep: true
-    }
-  },
   created() {
     this.getList();
   },
   methods: {
     ...mapActions([
-      "getCriminalResume",
-      "addCriminalResume",
-      "updateCriminalResume",
       "getAllCriminalResumes",
       "deleteCriminalResume"
     ]),
     onNew() {
+      this.criminalResumeId = "";
       this.editDialogVisible = true;
-      this.criminalResume = { criminalId: this.$route.params.id };
     },
     onEdit(id) {
-      this.getCriminalResume(id).then(() => {
-        this.criminalResume = _.cloneDeep(
-          this.$store.state.criminal.criminalResume
-        );
-      });
+      this.criminalResumeId = id;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -137,41 +97,7 @@ export default {
         this.criminalResume = _.cloneDeep(
           this.$store.state.criminal.criminalResume
         );
-      });
-    },
-    onSave() {
-      this.$refs["form"].validate(valid => {
-        if (valid) {
-          if (this.criminalResume.id) {
-            // 修改
-            this.saving = true;
-            this.updateCriminalResume()
-              .then(res => {
-                this.saving = false;
-                this.getList();
-                this.$message.success("修改成功");
-                this.editDialogVisible = false;
-              })
-              .catch(() => {
-                this.saving = false;
-                this.$message.error("修改失败");
-              });
-          } else {
-            // 新增
-            this.saving = true;
-            this.addCriminalResume()
-              .then(res => {
-                this.saving = false;
-                this.getList();
-                this.$message.success("新增成功");
-                this.editDialogVisible = false;
-              })
-              .catch(() => {
-                this.saving = false;
-                this.$message.error("新增失败");
-              });
-          }
-        }
+        this.loading = false;
       });
     }
   }
@@ -185,11 +111,6 @@ export default {
     width: 180px;
     float: left;
     margin-right: 20px;
-  }
-}
-.dialog{
-  &>div>div:nth-child(2){
-    padding-bottom: 0;
   }
 }
 .cell {
