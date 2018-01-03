@@ -44,6 +44,9 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.role = {};
+  },
   methods: {
     ...mapActions(["addRole"]),
     onSubmit() {
