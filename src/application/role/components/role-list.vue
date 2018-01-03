@@ -7,6 +7,7 @@
                     <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
+                <el-button type="primary" @click="onNew">新增角色</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedRoles.content" border header-row-class-name="tableHeader">
@@ -96,6 +97,9 @@ export default {
     },
     onEdit(id) {
       this.$router.push(`/role/edit/${id}`);
+    },
+    onNew() {
+      this.$router.push(`/role/new`);
     },
     onDelete(item) {
       this.deleteItem = item;
