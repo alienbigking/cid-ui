@@ -60,6 +60,9 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.user = {};
+  },
   methods: {
     ...mapActions(["addUser"]),
     onSubmit() {
