@@ -309,7 +309,7 @@ export default {
           this.getList();
         })
         .catch(() => {
-          this.$handleError("删除失败");
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },
@@ -331,7 +331,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$handleError("修改失败");
+                this.$handleError(error.response, "修改失败");
               });
           } else {
             // 新增
@@ -345,7 +345,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$handleError("新增失败");
+                this.$handleError(error.response, "新增失败");
               });
           }
         }

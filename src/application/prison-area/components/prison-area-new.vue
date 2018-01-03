@@ -84,7 +84,7 @@ export default {
             })
             .catch(() => {
               this.saving = false;
-              this.$handleError("新增失败");
+              this.$handleError(error.response, "新增失败");
             });
         }
       });

@@ -61,7 +61,7 @@ export default {
               this.$router.push(`/role/list`);
             })
             .catch(() => {
-              this.$handleError("修改失败");
+              this.$handleError(error.response, "修改失败");
             });
         }
       });

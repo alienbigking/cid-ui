@@ -73,7 +73,7 @@ export default {
             })
             .catch(() => {
               this.saving = false;
-              this.$handleError("修改失败");
+              this.$handleError(error.response, "修改失败");
             });
         }
       });

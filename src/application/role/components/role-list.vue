@@ -111,7 +111,7 @@ export default {
           this.search();
         })
         .catch(() => {
-          this.$handleError("删除失败");
+          this.$handleError(error.response, "删除失败");
         });
     },
     search() {

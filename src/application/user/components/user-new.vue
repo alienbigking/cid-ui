@@ -73,7 +73,7 @@ export default {
               this.$router.push(`/user/list`);
             })
             .catch(() => {
-              this.$handleError("新增失败");
+              this.$handleError(error.response, "新增失败");
               this.saving = false;
             });
         }
