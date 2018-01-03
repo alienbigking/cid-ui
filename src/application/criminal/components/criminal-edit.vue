@@ -10,25 +10,23 @@
     </div>
 </template>
 <script>
-import criminalEditBasicInformation from "./criminal-edit-basic-information";
-import criminalEditRecord from "./criminal-edit-record";
-import criminalEditResume from "./criminal-edit-resume";
-import criminalEditPhysicalCharacteristic from "./criminal-edit-physical-characteristic";
-import criminalEditSocialRelation from "./criminal-edit-social-relation";
-// import { mapActions } from "vuex";
-// import _ from "lodash";
+import CriminalEditBasicInformation from "./criminal-edit-basic-information";
+import CriminalEditRecord from "./criminal-edit-record";
+import CriminalEditResume from "./criminal-edit-resume";
+import CriminalEditPhysicalCharacteristic from "./criminal-edit-physical-characteristic";
+import CriminalEditSocialRelation from "./criminal-edit-social-relation";
 
 export default {
-    components: { criminalEditBasicInformation, criminalEditRecord, criminalEditResume, criminalEditPhysicalCharacteristic, criminalEditSocialRelation },
+    components: { CriminalEditBasicInformation, CriminalEditRecord, CriminalEditResume, CriminalEditPhysicalCharacteristic, CriminalEditSocialRelation },
     data() {
       return {
         activeName: 'criminalEditResume',
         tabs: [
-          { name: "基本信息", component: "criminalEditBasicInformation" },
-          { name: "犯罪记录", component: "criminalEditRecord" },
-          { name: "简历", component: "criminalEditResume" },
-          { name: "体貌特征", component: "criminalEditPhysicalCharacteristic" },
-          { name: "社会关系", component: "criminalEditSocialRelation" }
+          { name: "基本信息", component: "CriminalEditBasicInformation" },
+          { name: "犯罪记录", component: "CriminalEditRecord" },
+          { name: "简历", component: "CriminalEditResume" },
+          { name: "体貌特征", component: "CriminalEditPhysicalCharacteristic" },
+          { name: "社会关系", component: "CriminalEditSocialRelation" }
         ]
       };
     }

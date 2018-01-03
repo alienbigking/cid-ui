@@ -13,8 +13,14 @@
                   <el-table-column prop="name" label="角色名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
@@ -105,7 +111,7 @@ export default {
           this.search();
         })
         .catch(() => {
-          this.$message.error("删除失败");
+          this.$handleError("删除失败");
         });
     },
     search() {

@@ -1,2 +1,2 @@
-export { default as UserProfileEdit } from './user-profile-edit';
-export { default as UserPasswordEdit } from './user-password-edit';
+export { default as MyProfileEdit } from './my-profile-edit';
+export { default as MyPasswordEdit } from './my-password-edit';

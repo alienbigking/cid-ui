@@ -166,10 +166,10 @@
             </el-row>
             <el-row type="flex">
                 <el-col :span="12">
-                    <label>创建时间：</label><span class="s50">{{criminal.createdTime}}</span>
+                    <label>创建时间：</label><span class="s50">{{criminal.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                 </el-col>
                 <el-col :span="12">
-                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime}}</span>
+                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -208,8 +208,16 @@
           <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
           <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>
@@ -229,7 +237,11 @@
           <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
           <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
           <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>
@@ -248,8 +260,16 @@
           <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
           <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>

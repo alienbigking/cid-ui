@@ -14,7 +14,11 @@
           <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
           <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
           <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
           <el-table-column align="center" label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -33,22 +37,22 @@
             <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="体型" prop="selectedSomatotype">
-            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="selecting" clearable placeholder="请选择体型">
+            <el-select v-model="form.selectedSomatotype" value-key="code" :loading="initializing" clearable placeholder="请选择体型">
               <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="脸型" prop="selectedFaceType">
-            <el-select v-model="form.selectedFaceType" value-key="code" :loading="selecting" clearable placeholder="请选择脸型">
+            <el-select v-model="form.selectedFaceType" value-key="code" :loading="initializing" clearable placeholder="请选择脸型">
               <el-option v-for="(item, index) in allFaceTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="血型" prop="selectedBloodType">
-            <el-select v-model="form.selectedBloodType" value-key="code" :loading="selecting" clearable placeholder="请选择血型">
+            <el-select v-model="form.selectedBloodType" value-key="code" :loading="initializing" clearable placeholder="请选择血型">
               <el-option v-for="(item, index) in allBloodTypes" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item class="w25" label="口音" prop="selectedAccent">
-            <el-select v-model="form.selectedAccent" value-key="code" :loading="selecting" clearable placeholder="请选择口音">
+            <el-select v-model="form.selectedAccent" value-key="code" :loading="initializing" clearable placeholder="请选择口音">
               <el-option v-for="(item, index) in allAccents" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -122,7 +126,7 @@ export default {
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },
       characteristicDescription: null,
-      selecting: true,
+      initializing: true,
       allSomatotypes: [],
       allFaceTypes: [],
       allBloodTypes: [],
@@ -197,15 +201,6 @@ export default {
         );
       }, 500),
       deep: true
-    },
-    "form.criminalPhysicalCharacteristic.otherFeatures": {
-      handler: _.debounce(function(criminalPhysicalCharacteristic) {
-        this.$store.commit(
-          "updateCriminalPhysicalCharacteristic",
-          criminalPhysicalCharacteristic
-        );
-      }, 500),
-      deep: true
     }
   },
   created() {
@@ -219,7 +214,7 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
-      this.selecting = false;
+      this.initializing = false;
     });
     this.getList();
   },
@@ -230,10 +225,9 @@ export default {
       );
     },
     addPhysicalCharacteristic() {
-      let obj = this.form.criminalPhysicalCharacteristic.otherFeatures.push({
+      this.form.criminalPhysicalCharacteristic.otherFeatures.push({
         description: ""
       });
-      this.$store.commit("updateCriminalPhysicalCharacteristic", obj);
     },
     ...mapActions([
       "getCriminalPhysicalCharacteristic",
@@ -277,8 +271,8 @@ export default {
           code: this.form.criminalPhysicalCharacteristic.accentCode,
           name: this.form.criminalPhysicalCharacteristic.accentName
         };
+        this.editDialogVisible = true;
       });
-      this.editDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
@@ -294,7 +288,7 @@ export default {
           this.getList();
         })
         .catch(() => {
-          this.$message.error("删除失败");
+          this.$handleError("删除失败");
           this.deleting = false;
         });
     },
@@ -322,7 +316,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$handleError("修改失败");
               });
           } else {
             // 新增
@@ -336,7 +330,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$handleError("新增失败");
               });
           }
         }

@@ -13,15 +13,15 @@
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>用户状态：</label><span>{{ user.status | convertToText(userStatuses)}}</span>
+                        <label>用户状态：</label><span>{{ user.status | enumText(userStatuses)}}</span>
                     </el-col>
                 </el-row>   
                 <el-row type="flex" justify="space-between">
                      <el-col :span="12">
-                        <label>创建时间：</label><span>{{ user.createdTime }}</span>
+                        <label>创建时间：</label><span>{{ user.createdTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span>{{ user.lastUpdatedTime }}</span>
+                        <label>最后更新时间：</label><span>{{ user.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
                     </el-col>
                 </el-row>
             </div>

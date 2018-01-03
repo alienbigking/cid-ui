@@ -13,8 +13,16 @@
           <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
           <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -42,7 +50,7 @@
             <el-input v-model="form.criminalSocialRelation.occupation"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="政治面貌" prop="criminalSocialRelation.selectedPoliticalStatus">
-            <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="selecting" clearable>
+            <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -78,9 +86,6 @@ export default {
           this.$store.state.criminal.criminalSocialRelation
         )
       },
-      // criminalSocialRelation: _.cloneDeep(
-      //   this.$store.state.criminal.criminalSocialRelation
-      // ),
       rules: {
         "criminalSocialRelation.appellation": [
           { required: true, message: "请输入称谓", trigger: "blur" },
@@ -91,8 +96,7 @@ export default {
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ]
       },
-      // selectedPoliticalStatus: null,
-      selecting: true,
+      initializing: true,
       allPoliticalStatuses: [],
       editDialogVisible: false,
       deleteDialogVisible: false,
@@ -130,7 +134,7 @@ export default {
       criminalLookupService.getAllPoliticalStatuses()
     ]).then(response => {
       this.allPoliticalStatuses = response[0];
-      this.selecting = false;
+      this.initializing = false;
     });
     this.getList();
   },
@@ -144,7 +148,6 @@ export default {
     ]),
     onNew() {
       this.form.selectedPoliticalStatus = {};
-      // this.criminalSocialRelation = { criminalId: this.$route.params.id };
       this.$store.commit("setCriminalSocialRelation", {
         criminalId: this.$route.params.id
       });
@@ -162,9 +165,8 @@ export default {
           code: this.form.criminalSocialRelation.politicalStatusCode,
           name: this.form.criminalSocialRelation.politicalStatusName
         };
-        // this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
+        this.editDialogVisible = true;
       });
-      this.editDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
@@ -180,7 +182,7 @@ export default {
           this.getList();
         })
         .catch(() => {
-          this.$message.error("删除失败");
+          this.$handleError("删除失败");
           this.deleting = false;
         });
     },
@@ -194,12 +196,6 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          // this.criminalSocialRelation.politicalStatusCode = this.selectedPoliticalStatus.code;
-          // this.criminalSocialRelation.politicalStatusName = this.selectedPoliticalStatus.name;
-          // this.$store.commit(
-          //   "updateCriminalSocialRelation",
-          //   this.criminalSocialRelation
-          // );
           if (this.form.criminalSocialRelation.id) {
             // 修改
             this.saving = true;
@@ -212,7 +208,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$handleError("修改失败");
               });
           } else {
             // 新增
@@ -226,7 +222,7 @@ export default {
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$handleError("新增失败");
               });
           }
         }

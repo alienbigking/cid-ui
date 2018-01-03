@@ -11,8 +11,16 @@
         <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
         <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
         <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
-        <el-table-column align="center" prop="createdTime" label="创建时间"> </el-table-column>
-        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+        <el-table-column align="center" prop="createdTime" label="创建时间">
+          <template slot-scope="scope">
+              {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
+        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+          <template slot-scope="scope">
+              {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" min-width="122">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -26,7 +34,7 @@
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-tishishuoming"></i>
-      <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.d }}</b>吗</span>
+      <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="deleteDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
@@ -88,7 +96,7 @@ export default {
           this.getList();
         })
         .catch(() => {
-          this.$message.error("删除失败");
+          this.$handleError("删除失败");
           this.deleting = false;
         });
     },

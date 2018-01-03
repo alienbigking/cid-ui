@@ -31,66 +31,57 @@
 import { mapActions } from "vuex";
 export default {
   data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请输入密码"));
-      } else {
-        if (this.userPassword.checkPassword !== "") {
-          this.$refs.form.validateField("checkPassword");
-        }
-        callback();
-      }
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === "") {
-        callback(new Error("请再次输入密码"));
-      } else if (value !== this.userPassword.newPassword) {
-        callback(new Error("两次输入密码不一致!"));
-      } else {
-        callback();
-      }
-    };
     return {
       userPassword: {
         oldPassword: "",
         newPassword: "",
         checkPassword: ""
       },
-      rules: {
-        oldPassword: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
-        ],
-        newPassword: [
-          { validator: validatePass, trigger: "blur" },
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
-        ],
-        checkPassword: [
-          { validator: validatePass2, trigger: "blur" },
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
-        ]
-      },
       saving: false,
       isShowPwd: false,
       isShowPwd_again: false
     };
   },
+  computed: {
+    rules() {
+      return {
+        oldPassword: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { min: 6, message: "密码必须大于6位", trigger: "blur" }
+        ],
+        newPassword: [
+          { required: true, message: "密码不能为空", trigger: "blur" },
+          { min: 6, message: "密码必须大于6位", trigger: "blur" }
+        ],
+        checkPassword: [
+          {
+            validator: this.$validators.equalTo,
+            compareTo: this.userPassword.newPassword,
+            message: "密码不匹配",
+            trigger: "blur"
+          }
+        ]
+      };
+    }
+  },
   methods: {
-    ...mapActions(["updateMyPassword"]),
-     onSubmit() {
+    ...mapActions(["updatePassword"]),
+    onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updateMyPassword(this.userPassword)
+          const params = {
+            id: this.$route.params.id,
+            userPassword: this.userPassword
+          };
+          this.updatePassword(params)
             .then(() => {
               this.saving = false;
               this.$message.success("修改成功");
             })
             .catch(() => {
               this.saving = false;
-              this.$message.error("修改失败");
+              this.$handleError("修改失败");
             });
         }
       });

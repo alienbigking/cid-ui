@@ -73,14 +73,14 @@ export default {
             })
             .catch(() => {
               this.saving = false;
-              this.$message.error("修改失败");
+              this.$handleError("修改失败");
             });
         }
       });
     },
     updatePassword() {
       let params = this.$route.params.id;
-      this.$router.push(`/user/${params}/password`);
+      this.$router.push(`/user/password-edit/${params}`);
     },
     goBack() {
       this.$router.go(-1);

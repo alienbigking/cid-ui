@@ -1,4 +1,4 @@
-import enumText from './enum-text-filter';
+import enumText from './enum-text';
 
 export {
     enumText
