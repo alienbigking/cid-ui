@@ -157,7 +157,7 @@ export default {
           this.$message.success("更改成功");
           this.search();
         })
-        .catch(() => {
+        .catch(error => {
           this.$handleError(error.response, "修改失败");
           this.statusDialogVisible = false;
         });
@@ -171,7 +171,7 @@ export default {
           this.$message.success("更改成功");
           this.search();
         })
-        .catch(() => {
+        .catch(error => {
           this.$handleError(error.response, "修改失败");
           this.disablledStatusDialogVisible = false;
         });
@@ -185,7 +185,7 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
+        .catch(error => {
           this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });

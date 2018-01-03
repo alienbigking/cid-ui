@@ -70,7 +70,7 @@ export default {
               this.saving = false;
               this.$message.success("修改成功");
             })
-            .catch(() => {
+            .catch(error => {
               this.saving = false;
               this.$handleError(error.response, "修改失败");
             });

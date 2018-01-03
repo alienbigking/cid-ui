@@ -54,7 +54,7 @@ export default {
               this.$message.success("新增成功");
               this.$router.push(`/role/list`);
             })
-            .catch(() => {
+            .catch(error => {
               this.$handleError(error.response, "新增失败");
             });
         }

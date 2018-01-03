@@ -61,7 +61,7 @@ export default {
               this.$message.success("新增成功");
               this.$router.push(`/tenant/list`);
             })
-            .catch(() => {
+            .catch(error => {
               this.$handleError(error.response, "新增失败");
               this.saving = false;
             });

@@ -60,7 +60,7 @@ export default {
               this.$message.success("修改成功");
               this.$router.push(`/role/list`);
             })
-            .catch(() => {
+            .catch(error => {
               this.$handleError(error.response, "修改失败");
             });
         }

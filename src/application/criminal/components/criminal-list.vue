@@ -119,7 +119,7 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
+        .catch(error => {
           this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
