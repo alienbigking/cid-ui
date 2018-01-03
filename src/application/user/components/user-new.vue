@@ -4,17 +4,17 @@
             <p>新增用户</p>
         </div>
         <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="用户账号" prop="username">
+            <el-form-item class="w50" label="账号" prop="username">
                 <el-input v-model="user.username"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户名称" prop="name">
+            <el-form-item class="w50" label="名称" prop="name">
                 <el-input v-model="user.name"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户密码" prop="password">
+            <el-form-item class="w50" label="密码" prop="password">
                 <el-input v-model="user.password"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户状态" prop="status">
-            <el-select v-model="user.status"   clearable placeholder="请选择用户使用状态">
+            <el-form-item class="w50" label="状态" prop="status">
+            <el-select v-model="user.status"   clearable placeholder="请选择使用状态">
                 <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             </el-form-item>

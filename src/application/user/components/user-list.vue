@@ -4,20 +4,20 @@
             <span class="um-title">查询用户</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="用户账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
-                    <el-input placeholder="用户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择用户使用状态">
+                    <el-input placeholder="账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择使用状态">
                       <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
                     </el-select>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
-                <el-button type="primary" @click="onNew">新增用户</el-button>
+                <el-button type="primary" @click="onNew">新增</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedUsers.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="username" label="用户账号">
+                  <el-table-column prop="username" label="账号">
                   </el-table-column>
-                  <el-table-column prop="name" label="用户名称">
+                  <el-table-column prop="name" label="名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                     <template slot-scope="scope">
