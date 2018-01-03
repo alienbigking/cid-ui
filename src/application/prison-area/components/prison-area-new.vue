@@ -82,9 +82,9 @@ export default {
               this.$router.push(`/prison-area/list`);
               this.saving = false;
             })
-            .catch(() => {
+            .catch(error => {
               this.saving = false;
-              this.$message.error("新增失败");
+              this.$handleError(error.response, "新增失败");
             });
         }
       });

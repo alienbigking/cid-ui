@@ -22,8 +22,8 @@ export default [
         name: '用户明细'
     },
     {
-        path: '/user/:id/password',
-        component: components.UserPassword,
+        path: '/user/password-edit/:id',
+        component: components.UserPasswordEdit,
         name: '修改用户密码'
     }
 ];

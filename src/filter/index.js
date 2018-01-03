@@ -1,5 +1,7 @@
-import enumText from './enum-text-filter';
+import enumText from './enum-text';
+import moment from './moment';
 
 export {
-    enumText
+    enumText,
+    moment
 };

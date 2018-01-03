@@ -20,8 +20,14 @@
                   <el-table-column prop="name" label="用户名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column label="用户状态" sortable >
                     <template slot-scope="scope">{{scope.row.status | enumText(userStatuses)}}</template>
@@ -151,8 +157,8 @@ export default {
           this.$message.success("更改成功");
           this.search();
         })
-        .catch(() => {
-          this.$message.error("修改失败");
+        .catch(error => {
+          this.$handleError(error.response, "修改失败");
           this.statusDialogVisible = false;
         });
     },
@@ -165,8 +171,8 @@ export default {
           this.$message.success("更改成功");
           this.search();
         })
-        .catch(() => {
-          this.$message.error("修改失败");
+        .catch(error => {
+          this.$handleError(error.response, "修改失败");
           this.disablledStatusDialogVisible = false;
         });
     },
@@ -179,8 +185,8 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
-          this.$message.error("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },

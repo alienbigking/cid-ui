@@ -16,7 +16,7 @@ export default [
         children: [
             {
                 path: '/',
-                redirect: { name: '信息面板' }
+                redirect: '/dashboard'
             },
             ...dashboard,
             ...me,

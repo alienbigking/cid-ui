@@ -57,8 +57,8 @@ export default {
             .then(() => {
               this.$router.push("/dashboard");
             })
-            .catch(() => {
-              this.$message.error("登陆失败");
+            .catch(error => {
+              this.$handleError(error.response, "登陆失败");
             });
         }
       });

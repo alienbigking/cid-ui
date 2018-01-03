@@ -6,15 +6,23 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
-          <el-table-column prop="appellation" label="称谓"> </el-table-column>
-          <el-table-column prop="name" label="姓名"> </el-table-column>
-          <el-table-column prop="age" label="年龄"> </el-table-column>
-          <el-table-column prop="company" label="公司"> </el-table-column>
-          <el-table-column prop="occupation" label="职业"> </el-table-column>
-          <el-table-column prop="politicalStatusName" label="政治面貌"> </el-table-column>
-          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
+          <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
+          <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
+          <el-table-column align="center" prop="company" label="公司"> </el-table-column>
+          <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+          <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
+          <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
           <el-table-column label="操作" min-width="122">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -25,24 +33,24 @@
       </template>
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
-      <el-form class="form-criminal" :model="criminalSocialRelation" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="称谓" prop="appellation">
-            <el-input v-model="criminalSocialRelation.appellation"></el-input>
+      <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
+          <el-form-item class="w25" label="称谓" prop="criminalSocialRelation.appellation">
+            <el-input v-model="form.criminalSocialRelation.appellation"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="姓名" prop="name">
-            <el-input v-model="criminalSocialRelation.name"></el-input>
+          <el-form-item class="w25" label="姓名" prop="criminalSocialRelation.name">
+            <el-input v-model="form.criminalSocialRelation.name"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="年龄" prop="age">
-            <el-input v-model="criminalSocialRelation.age"></el-input>
+          <el-form-item class="w25" label="年龄" prop="criminalSocialRelation.age">
+            <el-input v-model="form.criminalSocialRelation.age" type="number"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="公司" prop="company">
-            <el-input v-model="criminalSocialRelation.company"></el-input>
+          <el-form-item class="w25" label="公司" prop="criminalSocialRelation.company">
+            <el-input v-model="form.criminalSocialRelation.company"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="职业" prop="occupation">
-            <el-input v-model="criminalSocialRelation.occupation"></el-input>
+          <el-form-item class="w25" label="职业" prop="criminalSocialRelation.occupation">
+            <el-input v-model="form.criminalSocialRelation.occupation"></el-input>
           </el-form-item>
-          <el-form-item class="w25" label="政治面貌" prop="selectedPoliticalStatus">
-            <el-select v-model="selectedPoliticalStatus" value-key="code" :loading="flag.allPoliticalStatuses" clearable>
+          <el-form-item class="w25" label="政治面貌" prop="criminalSocialRelation.selectedPoliticalStatus">
+            <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
@@ -72,23 +80,23 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      criminalSocialRelation: _.cloneDeep(
-        this.$store.state.criminal.criminalSocialRelation
-      ),
+      form: {
+        selectedPoliticalStatus: null,
+        criminalSocialRelation: _.cloneDeep(
+          this.$store.state.criminal.criminalSocialRelation
+        )
+      },
       rules: {
-        appellation: [
+        "criminalSocialRelation.appellation": [
           { required: true, message: "请输入称谓", trigger: "blur" },
           { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
         ],
-        name: [
+        "criminalSocialRelation.name": [
           { required: true, message: "请输入姓名", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ]
       },
-      selectedPoliticalStatus: null,
-      flag: {
-        allPoliticalStatuses: true
-      },
+      initializing: true,
       allPoliticalStatuses: [],
       editDialogVisible: false,
       deleteDialogVisible: false,
@@ -104,7 +112,14 @@ export default {
     })
   },
   watch: {
-    criminalSocialRelation: {
+    "form.selectedPoliticalStatus"(val) {
+      let obj = {
+        politicalStatusCode: val.code,
+        politicalStatusName: val.name
+      };
+      this.$store.commit("updateCriminalSocialRelation", obj);
+    },
+    "form.criminalSocialRelation": {
       handler: _.debounce(function(criminalSocialRelation) {
         this.$store.commit(
           "updateCriminalSocialRelation",
@@ -119,7 +134,7 @@ export default {
       criminalLookupService.getAllPoliticalStatuses()
     ]).then(response => {
       this.allPoliticalStatuses = response[0];
-      this.flag.allPoliticalStatuses = false;
+      this.initializing = false;
     });
     this.getList();
   },
@@ -132,21 +147,26 @@ export default {
       "deleteCriminalSocialRelation"
     ]),
     onNew() {
+      this.form.selectedPoliticalStatus = {};
+      this.$store.commit("setCriminalSocialRelation", {
+        criminalId: this.$route.params.id
+      });
+      this.form.criminalSocialRelation = _.cloneDeep(
+        this.$store.state.criminal.criminalSocialRelation
+      );
       this.editDialogVisible = true;
-      this.criminalSocialRelation = { criminalId: this.$route.params.id };
     },
     onEdit(id) {
       this.getCriminalSocialRelation(id).then(() => {
-        this.criminalSocialRelation = _.cloneDeep(
+        this.form.criminalSocialRelation = _.cloneDeep(
           this.$store.state.criminal.criminalSocialRelation
         );
-        this.selectedPoliticalStatus = {
-          code: this.criminalSocialRelation.politicalStatusCode,
-          name: this.criminalSocialRelation.politicalStatusName
+        this.form.selectedPoliticalStatus = {
+          code: this.form.criminalSocialRelation.politicalStatusCode,
+          name: this.form.criminalSocialRelation.politicalStatusName
         };
-        // this.selectedPoliticalStatus=this.allPoliticalStatuses.find(ps=>ps.code=this.criminalSocialRelation.politicalStatusCode);
+        this.editDialogVisible = true;
       });
-      this.editDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
@@ -161,14 +181,14 @@ export default {
           this.$message.success("删除成功");
           this.getList();
         })
-        .catch(() => {
-          this.$message.error("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },
     getList() {
       this.getAllCriminalSocialRelations(this.$route.params.id).then(() => {
-        this.criminalSocialRelation = _.cloneDeep(
+        this.form.criminalSocialRelation = _.cloneDeep(
           this.$store.state.criminal.criminalSocialRelation
         );
       });
@@ -176,13 +196,7 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.criminalSocialRelation.politicalStatusCode = this.selectedPoliticalStatus.code;
-          this.criminalSocialRelation.politicalStatusName = this.selectedPoliticalStatus.name;
-          this.$store.commit(
-            "updateCriminalSocialRelation",
-            this.criminalSocialRelation
-          );
-          if (this.criminalSocialRelation.id) {
+          if (this.form.criminalSocialRelation.id) {
             // 修改
             this.saving = true;
             this.updateCriminalSocialRelation()
@@ -192,9 +206,9 @@ export default {
                 this.$message.success("修改成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$handleError(error.response, "修改失败");
               });
           } else {
             // 新增
@@ -206,9 +220,9 @@ export default {
                 this.$message.success("新增成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$handleError(error.response, "新增失败");
               });
           }
         }

@@ -166,10 +166,10 @@
             </el-row>
             <el-row type="flex">
                 <el-col :span="12">
-                    <label>创建时间：</label><span class="s50">{{criminal.createdTime}}</span>
+                    <label>创建时间：</label><span class="s50">{{criminal.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                 </el-col>
                 <el-col :span="12">
-                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime}}</span>
+                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -183,14 +183,14 @@
       </div>
       <div class="list-box" v-if="recordShow">
         <el-table class="table40" :data="allCriminalRecords" header-row-class-name="tableHeader40">
-          <el-table-column prop="decisionAccusation" label="罪名"> </el-table-column>
-          <el-table-column prop="arrestDate" label="逮捕日期"> </el-table-column>
-          <el-table-column prop="detentionDate" label="羁押日期"> </el-table-column>
-          <el-table-column prop="firstTrialOrganName" label="一审机关名称"> </el-table-column>
-          <el-table-column prop="finalTrialOrganName" label="终审机关名称"> </el-table-column>
-          <el-table-column prop="decisionDate" label="判决日期"> </el-table-column>
-          <el-table-column prop="decisionPrisonTermStartDate" label="判决刑期开始日期"> </el-table-column>
-          <el-table-column prop="decisionPrisonTermEndDate" label="判决刑期结束日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
+          <el-table-column align="center" prop="arrestDate" label="逮捕日期"> </el-table-column>
+          <el-table-column align="center" prop="detentionDate" label="羁押日期"> </el-table-column>
+          <el-table-column align="center" prop="firstTrialOrganName" label="一审机关名称"> </el-table-column>
+          <el-table-column align="center" prop="finalTrialOrganName" label="终审机关名称"> </el-table-column>
+          <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionPrisonTermStartDate" label="判决刑期开始日期"> </el-table-column>
+          <el-table-column align="center" prop="decisionPrisonTermEndDate" label="判决刑期结束日期"> </el-table-column>
         </el-table>
       </div>
   </div>
@@ -202,14 +202,22 @@
       </div>
       <div class="list-box" v-if="resumeShow">
         <el-table class="table40" :data="allCriminalResumes" header-row-class-name="tableHeader40">
-          <el-table-column prop="startDate" label="开始日期"> </el-table-column>
-          <el-table-column prop="endDate" label="截至日期"> </el-table-column>
-          <el-table-column prop="company" label="公司"> </el-table-column>
-          <el-table-column prop="occupation" label="职业"> </el-table-column>
-          <el-table-column prop="duty" label="职位"> </el-table-column>
-          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="startDate" label="开始日期"> </el-table-column>
+          <el-table-column align="center" prop="endDate" label="截至日期"> </el-table-column>
+          <el-table-column align="center" prop="company" label="公司"> </el-table-column>
+          <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+          <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
+          <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>
@@ -221,15 +229,19 @@
       </div>
       <div class="list-box" v-if="featureShow">
         <el-table class="table40" :data="allCriminalPhysicalCharacteristics" header-row-class-name="tableHeader40">
-          <el-table-column prop="height" label="身高"> </el-table-column>
-          <el-table-column prop="weight" label="体重"> </el-table-column>
-          <el-table-column prop="somatotypeName" label="体型"> </el-table-column>
-          <el-table-column prop="faceTypeName" label="脸型"> </el-table-column>
-          <el-table-column prop="bloodTypeName" label="血型"> </el-table-column>
-          <el-table-column prop="accentName" label="口音"> </el-table-column>
-          <el-table-column prop="footLength" label="足长"> </el-table-column>
-          <el-table-column prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="height" label="身高"> </el-table-column>
+          <el-table-column align="center" prop="weight" label="体重"> </el-table-column>
+          <el-table-column align="center" prop="somatotypeName" label="体型"> </el-table-column>
+          <el-table-column align="center" prop="faceTypeName" label="脸型"> </el-table-column>
+          <el-table-column align="center" prop="bloodTypeName" label="血型"> </el-table-column>
+          <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
+          <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
+          <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>
@@ -241,15 +253,23 @@
       </div>
       <div class="list-box" v-if="socialRelationShow">
         <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
-          <el-table-column prop="appellation" label="称谓"> </el-table-column>
-          <el-table-column prop="name" label="姓名"> </el-table-column>
-          <el-table-column prop="age" label="年龄"> </el-table-column>
-          <el-table-column prop="company" label="公司"> </el-table-column>
-          <el-table-column prop="occupation" label="职业"> </el-table-column>
-          <el-table-column prop="politicalStatusName" label="政治面貌"> </el-table-column>
-          <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
-          <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
-          <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+          <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
+          <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
+          <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
+          <el-table-column align="center" prop="company" label="公司"> </el-table-column>
+          <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+          <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
+          <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
+          <el-table-column align="center" prop="createdTime" label="创建时间">
+            <template slot-scope="scope">
+                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
+          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+            <template slot-scope="scope">
+                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+            </template>
+          </el-table-column>
         </el-table>
       </div>
   </div>

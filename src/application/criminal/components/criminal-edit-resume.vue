@@ -5,14 +5,22 @@
     </div>
     <div class="list-box">
       <el-table class="table40" :data="allCriminalResumes" header-row-class-name="tableHeader40">
-        <el-table-column prop="startDate" label="开始日期"> </el-table-column>
-        <el-table-column prop="endDate" label="结束日期"> </el-table-column>
-        <el-table-column prop="company" label="公司"> </el-table-column>
-        <el-table-column prop="occupation" label="职业"> </el-table-column>
-        <el-table-column prop="duty" label="职位"> </el-table-column>
-        <el-table-column prop="criminalName" label="罪犯姓名"> </el-table-column>
-        <el-table-column prop="createdTime" label="创建时间"> </el-table-column>
-        <el-table-column prop="lastUpdatedTime" label="最后更新时间"> </el-table-column>
+        <el-table-column align="center" prop="startDate" label="开始日期"> </el-table-column>
+        <el-table-column align="center" prop="endDate" label="结束日期"> </el-table-column>
+        <el-table-column align="center" prop="company" label="公司"> </el-table-column>
+        <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+        <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
+        <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
+        <el-table-column align="center" prop="createdTime" label="创建时间">
+          <template slot-scope="scope">
+              {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
+        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+          <template slot-scope="scope">
+              {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+          </template>
+        </el-table-column>
         <el-table-column label="操作" min-width="122">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
@@ -24,10 +32,10 @@
     <el-dialog class="dialog" width="710px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
         <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w-px180" label="开始日期" prop="startDate">
-              <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="结束日期" prop="endDate">
-              <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
+              <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
             </el-form-item>
             <el-form-item class="w-px180" label="公司" prop="company">
               <el-input v-model="criminalResume.company"></el-input>
@@ -46,7 +54,7 @@
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-tishishuoming"></i>
-      <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.d }}</b>吗</span>
+      <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="deleteDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
@@ -67,6 +75,22 @@ export default {
       rules: {
         startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
         endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+      },
+      pickerBeginDateBefore: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.endDate;
+          if (beginDateVal) {
+            return time.getTime() > beginDateVal;
+          }
+        }
+      },
+      pickerBeginDateAfter: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.startDate;
+          if (beginDateVal) {
+            return time.getTime() < beginDateVal;
+          }
+        }
       },
       editDialogVisible: false,
       deleteDialogVisible: false,
@@ -127,8 +151,8 @@ export default {
           this.$message.success("删除成功");
           this.getList();
         })
-        .catch(() => {
-          this.$message.error("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },
@@ -152,9 +176,9 @@ export default {
                 this.$message.success("修改成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$handleError(error.response, "修改失败");
               });
           } else {
             // 新增
@@ -166,9 +190,9 @@ export default {
                 this.$message.success("新增成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$handleError(error.response, "新增失败");
               });
           }
         }

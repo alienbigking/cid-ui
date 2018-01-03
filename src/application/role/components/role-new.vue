@@ -28,10 +28,10 @@ export default {
       rules: {
         name: [
           { required: true, message: "请输入角色名称", trigger: "blur" },
-          { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
         ],
         description: [
-          { min: 5, max: 255, message: '长度在 5 到 255 个字符', trigger: 'blur' }
+          { min: 5, max: 255, message: "长度在 5 到 255 个字符", trigger: "blur" }
         ]
       }
     };
@@ -59,8 +59,8 @@ export default {
               this.$message.success("新增成功");
               this.$router.push(`/role/list`);
             })
-            .catch(() => {
-              this.$message.error("新增失败");
+            .catch(error => {
+              this.$handleError(error.response, "新增失败");
             });
         }
       });

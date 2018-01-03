@@ -24,8 +24,6 @@
                   </el-table-column>
                   <el-table-column prop="birthday" label="出生日期">
                   </el-table-column>
-                  <!-- <el-table-column prop="politicalStatusName" label="捕前面貌">
-                  </el-table-column> -->
                   <el-table-column prop="prisonAreaName" label="隶属监区">
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
@@ -119,8 +117,8 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
-          this.$message.error("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },

@@ -94,9 +94,9 @@
                 }
             }
         }
-        &.el-form-item-div{ // 有两个按钮的表单，按钮位于中间，两按钮上的字数相等，按钮间相隔22px
+        &.el-form-item-div{ // 有两个按钮的表单，按钮位于右侧，两按钮上的字数相等，按钮间相隔22px
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: center;
             margin-right: 0;
             width: 100%;
@@ -267,10 +267,10 @@
         .sort-caret{
             position: relative;
             &.ascending{
-                top: 3px;
+                top: 0px;
             }
             &.descending{
-                bottom: 3px;
+                bottom: -2px;
             }
         }
     }

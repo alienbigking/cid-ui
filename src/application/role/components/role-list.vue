@@ -7,14 +7,21 @@
                     <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
                 </div>
+                <el-button type="primary" @click="onNew">新增角色</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedRoles.content" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="角色名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                    <template slot-scope="scope">
+                      {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                    </template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
@@ -91,6 +98,9 @@ export default {
     onEdit(id) {
       this.$router.push(`/role/edit/${id}`);
     },
+    onNew() {
+      this.$router.push(`/role/new`);
+    },
     onDelete(item) {
       this.deleteItem = item;
       this.deleteDialogVisible = true;
@@ -104,8 +114,8 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
-          this.$message.error("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
         });
     },
     search() {
