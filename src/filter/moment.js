@@ -1,11 +1,10 @@
 import Moment from 'moment';
-function moment(data, formatString) {
-  formatString = formatString || 'YYYY-MM-DD hh:mm:ss';
+function moment(data, format) {
   if (!data) {
     return '';
-  } else {
-    return Moment(data).format(formatString);
   }
+  format = format || 'YYYY-MM-DD hh:mm:ss';
+  return Moment(data).format(format);
 }
 
 export default moment;
