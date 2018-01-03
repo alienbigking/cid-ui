@@ -66,6 +66,7 @@ export default {
     this.getAllPrisonAreas().then(() => {
       this.gettingAllPrisonAreas = false;
     });
+    this.prisonArea = {};
   },
   methods: {
     ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),
@@ -82,9 +83,9 @@ export default {
               this.$router.push(`/prison-area/list`);
               this.saving = false;
             })
-            .catch(() => {
+            .catch(error => {
               this.saving = false;
-              this.$handleError("新增失败");
+              this.$handleError(error.response, "新增失败");
             });
         }
       });

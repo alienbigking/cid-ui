@@ -166,10 +166,10 @@
             </el-row>
             <el-row type="flex">
                 <el-col :span="12">
-                    <label>创建时间：</label><span class="s50">{{criminal.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                    <label>创建时间：</label><span class="s50">{{criminal.createdTime | moment}}</span>
                 </el-col>
                 <el-col :span="12">
-                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                    <label>最后更新时间：</label><span class="s50">{{criminal.lastUpdatedTime | moment}}</span>
                 </el-col>
             </el-row>
         </div>
@@ -210,12 +210,12 @@
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
           <el-table-column align="center" prop="createdTime" label="创建时间">
             <template slot-scope="scope">
-                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.createdTime | moment}}
             </template>
           </el-table-column>
           <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
             <template slot-scope="scope">
-                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.lastUpdatedTime | moment}}
             </template>
           </el-table-column>
         </el-table>
@@ -239,7 +239,7 @@
           <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
           <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
             <template slot-scope="scope">
-                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.lastUpdatedTime | moment}}
             </template>
           </el-table-column>
         </el-table>
@@ -262,12 +262,12 @@
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
           <el-table-column align="center" prop="createdTime" label="创建时间">
             <template slot-scope="scope">
-                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.createdTime | moment}}
             </template>
           </el-table-column>
           <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
             <template slot-scope="scope">
-                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.lastUpdatedTime | moment}}
             </template>
           </el-table-column>
         </el-table>

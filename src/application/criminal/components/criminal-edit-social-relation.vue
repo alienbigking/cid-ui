@@ -15,12 +15,12 @@
           <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
           <el-table-column align="center" prop="createdTime" label="创建时间">
             <template slot-scope="scope">
-                {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.createdTime | moment}}
             </template>
           </el-table-column>
           <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
             <template slot-scope="scope">
-                {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                {{scope.row.lastUpdatedTime | moment}}
             </template>
           </el-table-column>
           <el-table-column label="操作" min-width="122">
@@ -181,8 +181,8 @@ export default {
           this.$message.success("删除成功");
           this.getList();
         })
-        .catch(() => {
-          this.$handleError("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },
@@ -206,9 +206,9 @@ export default {
                 this.$message.success("修改成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$handleError("修改失败");
+                this.$handleError(error.response, "修改失败");
               });
           } else {
             // 新增
@@ -220,9 +220,9 @@ export default {
                 this.$message.success("新增成功");
                 this.editDialogVisible = false;
               })
-              .catch(() => {
+              .catch(error => {
                 this.saving = false;
-                this.$handleError("新增失败");
+                this.$handleError(error.response, "新增失败");
               });
           }
         }

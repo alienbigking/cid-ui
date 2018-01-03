@@ -51,6 +51,9 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.prisonHouse = {};
+  },
   methods: {
     ...mapActions(["addPrisonHouse"]),
     onSubmit() {

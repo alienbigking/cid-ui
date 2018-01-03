@@ -4,19 +4,18 @@
             <p>新增用户</p>
         </div>
         <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="用户账号" prop="username">
+            <el-form-item class="w50" label="账号" prop="username">
                 <el-input v-model="user.username"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户名称" prop="name">
+            <el-form-item class="w50" label="名称" prop="name">
                 <el-input v-model="user.name"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户密码" prop="password">
+            <el-form-item class="w50" label="密码" prop="password">
                 <el-input v-model="user.password"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="用户状态" prop="status">
-            <el-select v-model="user.status"   clearable placeholder="请选择用户使用状态">
-                <el-option  value="Enabled">可用</el-option>
-                <el-option  value="Disabled">不可使用</el-option>
+            <el-form-item class="w50" label="状态" prop="status">
+            <el-select v-model="user.status"   clearable placeholder="请选择使用状态">
+                <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             </el-form-item>
             <el-form-item class="hasButton">
@@ -29,9 +28,12 @@
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
+import { default as userStatusService } from "../service/user-status-service";
+
 export default {
   data() {
     return {
+      userStatuses: [],
       user: {},
       rules: {
         username: [
@@ -60,6 +62,10 @@ export default {
       deep: true
     }
   },
+  created() {
+    this.user = {};
+    this.userStatuses = userStatusService.getAll();
+  },
   methods: {
     ...mapActions(["addUser"]),
     onSubmit() {
@@ -72,8 +78,8 @@ export default {
               this.$message.success("新增成功");
               this.$router.push(`/user/list`);
             })
-            .catch(() => {
-              this.$handleError("新增失败");
+            .catch(error => {
+              this.$handleError(error.response, "新增失败");
               this.saving = false;
             });
         }

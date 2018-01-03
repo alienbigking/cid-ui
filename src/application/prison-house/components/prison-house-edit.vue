@@ -68,9 +68,9 @@ export default {
               this.$message.success("修改成功");
               this.$router.push(`/prison-house/list`);
             })
-            .catch(() => {
+            .catch(error => {
               this.saving = false;
-              this.$handleError("修改失败");
+              this.$handleError(error.response, "修改失败");
             });
         }
       });

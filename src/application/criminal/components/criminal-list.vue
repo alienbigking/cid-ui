@@ -117,8 +117,8 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
-          this.$handleError("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },

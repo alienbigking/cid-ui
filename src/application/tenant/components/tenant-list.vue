@@ -18,12 +18,12 @@
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                     <template slot-scope="scope">
-                      {{scope.row.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                      {{scope.row.createdTime | moment}}
                     </template>
                   </el-table-column>
                   <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
                     <template slot-scope="scope">
-                      {{scope.row.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}
+                      {{scope.row.lastUpdatedTime | moment}}
                     </template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
@@ -117,8 +117,8 @@ export default {
           this.$message.success("删除成功");
           this.search();
         })
-        .catch(() => {
-          this.$handleError("删除失败");
+        .catch(error => {
+          this.$handleError(error.response, "删除失败");
           this.deleting = false;
         });
     },

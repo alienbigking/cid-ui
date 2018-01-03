@@ -44,7 +44,6 @@ export default {
     },
     logout() {
       window.localStorage.removeItem("TOKEN");
-      this.$message.success("登出成功");
       this.$router.push("/login");
     }
   }
@@ -54,6 +53,9 @@ export default {
 .icon-caidan {
   cursor: pointer;
   font-size: 20px;
+}
+.icon-tuichu {
+  cursor: pointer;
 }
 
 .header-left {
