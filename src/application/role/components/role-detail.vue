@@ -8,12 +8,12 @@
                         <label>角色名称：</label><span> {{role.name}}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>创建时间：</label><span> {{role.createdTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                        <label>创建时间：</label><span> {{role.createdTime | moment}}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span> {{role.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss")}}</span>
+                        <label>最后更新时间：</label><span> {{role.lastUpdatedTime | moment}}</span>
                     </el-col>
                 </el-row>
             </div>

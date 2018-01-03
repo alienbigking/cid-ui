@@ -12,10 +12,10 @@
               <el-input v-model="userProfile.name"></el-input>
           </el-form-item>
           <el-form-item label="创建时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ userProfile.createdTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
+              <span class="el-input__inner">{{ userProfile.createdTime | moment }}</span>
           </el-form-item>
           <el-form-item label="最后更新时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ userProfile.lastUpdatedTime | moment("YYYY-MM-DD HH:mm:ss") }}</span>
+              <span class="el-input__inner">{{ userProfile.lastUpdatedTime | moment }}</span>
           </el-form-item>
 
           <div class="el-form-item el-form-item-div">
