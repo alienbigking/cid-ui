@@ -1,4 +1,5 @@
 import Moment from 'moment';
+
 function moment(data, format) {
   if (!data) {
     return '';
