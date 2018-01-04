@@ -2,11 +2,11 @@ export default {
     getAll() {
         return [
             {
-                text: '使用中',
+                text: '启用',
                 value: 'Enabled'
             },
             {
-                text: '禁用中',
+                text: '禁用',
                 value: 'Disabled'
             }
         ];
