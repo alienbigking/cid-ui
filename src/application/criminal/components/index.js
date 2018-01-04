@@ -1,4 +1,4 @@
-export { default as criminalList } from './criminal-list';
-export { default as criminalNew } from './criminal-new';
-export { default as criminalEdit } from './criminal-edit';
-export { default as criminalDetail } from './criminal-detail';
+export { default as CriminalList } from './criminal-list';
+export { default as CriminalNew } from './criminal-new';
+export { default as CriminalEdit } from './criminal-edit';
+export { default as CriminalDetail } from './criminal-detail';

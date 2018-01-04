@@ -9,7 +9,15 @@
     <div v-if="informationShow">
         <div class="form-container">
             <el-row type="flex">
-                <el-col :span="6">
+                <el-col :span="1"><label>编号：</label></el-col>
+                <el-col :span="5"><span>{{criminal.code}}</span></el-col>
+                <el-col :span="1"><label>姓名：</label></el-col>
+                <el-col :span="5"><span>{{criminal.name}}</span></el-col>
+                <el-col :span="1"><label>别化名：</label></el-col>
+                <el-col :span="5"><span>{{criminal.alias}}</span></el-col>
+                <el-col :span="1"><label>曾经加入的党派团体：</label></el-col>
+                <el-col :span="5"><span>{{criminal.genderName}}</span></el-col>
+                <!-- <el-col :span="6">
                     <label>编号：</label><span>{{criminal.code}}</span>
                 </el-col>
                 <el-col :span="6">
@@ -20,7 +28,7 @@
                 </el-col>
                 <el-col :span="6">
                     <label>性别：</label><span>{{criminal.genderName}}</span>
-                </el-col>
+                </el-col> -->
             </el-row>
             <el-row type="flex">
                 <el-col :span="6">
@@ -282,7 +290,7 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      informationShow: false,
+      informationShow: true,
       recordShow: false,
       resumeShow: false,
       featureShow: false,
@@ -363,7 +371,7 @@ export default {
     margin-left:8px;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: 125px;
+    width: 100%;
     color: #333;
     height: 14px;
     vertical-align: middle;
