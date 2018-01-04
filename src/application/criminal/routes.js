@@ -20,5 +20,10 @@ export default [
         path: '/criminal/detail/:id',
         component: components.CriminalDetail,
         name: '罪犯明细'
+    },
+    {
+        path: '/criminal/record-detail/:id',
+        component: components.CriminalRecordDetail,
+        name: '犯罪记录明细'
     }
 ];
