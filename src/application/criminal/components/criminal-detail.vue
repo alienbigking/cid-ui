@@ -368,10 +368,10 @@ export default {
   span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
-    margin-left:8px;
+    // margin-left:8px;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: 100%;
+    width: 90%;
     color: #333;
     height: 14px;
     vertical-align: middle;
