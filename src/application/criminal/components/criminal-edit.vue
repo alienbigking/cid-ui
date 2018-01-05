@@ -20,7 +20,7 @@ export default {
     components: { CriminalEditBasicInformation, CriminalEditRecord, CriminalEditResume, CriminalEditPhysicalCharacteristic, CriminalEditSocialRelation },
     data() {
       return {
-        activeName: 'criminalEditResume',
+        activeName: 'CriminalEditBasicInformation',
         tabs: [
           { name: "基本信息", component: "CriminalEditBasicInformation" },
           { name: "犯罪记录", component: "CriminalEditRecord" },

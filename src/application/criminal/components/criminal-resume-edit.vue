@@ -2,10 +2,10 @@
   <!-- <div> -->
     <el-form class="form-criminal" v-loading='loading' :model="criminalResume" :rules="rules" ref="form" label-position="top">
         <el-form-item class="w-px180" label="开始日期" prop="startDate">
-          <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
+          <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180" label="结束日期" prop="endDate">
-          <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
+          <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180 margin-left40" label="公司" prop="company">
           <el-input v-model="criminalResume.company"></el-input>
@@ -27,6 +27,7 @@
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
+
 export default {
   props: {
     criminalResumeId: {
@@ -38,12 +39,26 @@ export default {
   },
   data() {
     return {
-      criminalResume: _.cloneDeep(
-        this.$store.state.criminal.criminalResume
-      ),
+      criminalResume: _.cloneDeep(this.$store.state.criminal.criminalResume),
       rules: {
         startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
         endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+      },
+      pickerBeginDateBefore: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.endDate;
+          if (beginDateVal) {
+              return time.getTime() > beginDateVal;
+          }
+        }
+      },
+      pickerBeginDateAfter: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.startDate;
+          if (beginDateVal) {
+              return time.getTime() < beginDateVal;
+          }
+        }
       },
       loading: true,
       saving: false
@@ -59,10 +74,7 @@ export default {
     },
     criminalResume: {
       handler: _.debounce(function(criminalResume) {
-        this.$store.commit(
-          "updateCriminalResume",
-          criminalResume
-        );
+        this.$store.commit("updateCriminalResume", criminalResume);
       }, 500),
       deep: true
     }
@@ -133,9 +145,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-criminal{
+.form-criminal {
   padding: 0 28px;
-  .w-px180{
+  .w-px180 {
     width: 180px;
     float: left;
     margin-right: 20px;
@@ -143,7 +155,7 @@ export default {
       margin-right: 0;
     }
   }
-  .margin-left40{
+  .margin-left40 {
     margin-left: 20px;
   }
 }

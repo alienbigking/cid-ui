@@ -47,6 +47,7 @@
 import { mapState, mapActions } from "vuex";
 import CriminalResumeEdit from "./criminal-resume-edit";
 import _ from "lodash";
+
 export default {
   components: {
     "criminal-resume-edit": CriminalResumeEdit
