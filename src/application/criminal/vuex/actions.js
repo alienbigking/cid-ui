@@ -82,24 +82,11 @@ export default {
             commit(types.SET_CRIMINAL_PHYSICAL_CHARACTERISTIC, criminalPhysicalCharacteristic);
         });
     },
-    getAllCriminalPhysicalCharacteristics({ commit, state }, id) {
-        return criminalPhysicalCharacteristicService.getAll(id).then(criminalPhysicalCharacteristics => {
-            commit(types.SET_ALL_CRIMINAL_PHYSICAL_CHARACTERISTICS, criminalPhysicalCharacteristics);
-        });
-    },
-    getPagedCriminalPhysicalCharacteristics({ commit, state }, params) {
-        return criminalPhysicalCharacteristicService.getPaged(params).then(pagedCriminalPhysicalCharacteristics => {
-            commit(types.SET_PAGED_CRIMINAL_PHYSICAL_CHARACTERISTICS, pagedCriminalPhysicalCharacteristics);
-        });
-    },
     addCriminalPhysicalCharacteristic({ commit, state }) {
         return criminalPhysicalCharacteristicService.add(state.criminalPhysicalCharacteristic);
     },
     updateCriminalPhysicalCharacteristic({ commit, state }) {
         return criminalPhysicalCharacteristicService.update(state.criminalPhysicalCharacteristic);
-    },
-    deleteCriminalPhysicalCharacteristic({ commit }, id) {
-        return criminalPhysicalCharacteristicService.delete(id);
     },
     // 罪犯社会关系
     getCriminalSocialRelation({ commit, state }, id) {

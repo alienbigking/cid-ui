@@ -66,10 +66,10 @@
             </el-row>
             <el-row type="flex" justify="space-between">
                 <el-col :span="12">
-                    <label>创建时间：</label><span>51</span>
+                    <label>创建时间：</label><span>{{criminalRecord.createdTime | moment}}</span>
                 </el-col>
                 <el-col :span="12">
-                    <label>最后更新时间：</label><span>165</span>
+                    <label>最后更新时间：</label><span>{{criminalRecord.lastUpdatedTime | moment}}</span>
                 </el-col>
             </el-row>
         </div>

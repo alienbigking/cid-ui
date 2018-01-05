@@ -10,7 +10,6 @@
         <el-table-column align="center" prop="company" label="公司"> </el-table-column>
         <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
         <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
-        <el-table-column align="center" prop="criminalName" label="罪犯姓名"> </el-table-column>
         <el-table-column align="center" prop="createdTime" label="创建时间">
           <template slot-scope="scope">
               {{scope.row.createdTime | moment}}
