@@ -37,7 +37,15 @@ const state = {
     // 罪犯社会关系
     allCriminalSocialRelations: [],
     pagedCriminalSocialRelations: { content: [] },
-    criminalSocialRelation: {}
+    criminalSocialRelation: {},
+    // 罪犯罚金
+    allCriminalForfeits: [],
+    pagedCriminalForfeits: { content: [] },
+    criminalForfeit: {},
+    // 罪犯出入监
+    allCriminalOutInPrisons: [],
+    pagedCriminalOutInPrisons: { content: [] },
+    criminalOutInPrison: {}
 };
 
 export default {

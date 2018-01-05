@@ -4,6 +4,8 @@ import { default as criminalRecordService } from '../service/criminal-record-ser
 import { default as criminalResumeService } from '../service/criminal-resume-service';
 import { default as criminalPhysicalCharacteristicService } from '../service/criminal-physical-characteristic-service';
 import { default as criminalSocialRelationService } from '../service/criminal-social-relation-service';
+import { default as criminalForfeitService } from '../service/criminal-forfeit-service';
+import { default as criminalOutInPrisonService } from '../service/criminal-outInPrison-service';
 
 export default {
     // 罪犯
@@ -112,5 +114,55 @@ export default {
     },
     deleteCriminalSocialRelation({ commit }, id) {
         return criminalSocialRelationService.delete(id);
+    },
+    // 罪犯罚金管理
+    getCriminalForfeit({ commit, state }, id) {
+        return criminalForfeitService.get(id).then(criminalForfeit => {
+            commit(types.SET_CRIMINAL_FORFEIT, criminalForfeit);
+        });
+    },
+    getAllCriminalForfeits({ commit, state }, id) {
+        return criminalForfeitService.getAll(id).then(criminalForfeits => {
+            commit(types.SET_ALL_CRIMINAL_FORFEITS, criminalForfeits);
+        });
+    },
+    getPagedCriminalForfeits({ commit, state }, params) {
+        return criminalForfeitService.getPaged(params).then(pagedCriminalForfeits => {
+            commit(types.SET_PAGED_CRIMINAL_FORFEITS, pagedCriminalForfeits);
+        });
+    },
+    addCriminalForfeit({ commit, state }) {
+        return criminalForfeitService.add(state.criminalForfeit);
+    },
+    updateCriminalForfeit({ commit, state }) {
+        return criminalForfeitService.update(state.criminalForfeit);
+    },
+    deleteCriminalForfeit({ commit }, id) {
+        return criminalForfeitService.delete(id);
+    },
+    // 罪犯出入监管理
+    getCriminalOutInPrison({ commit, state }, id) {
+        return criminalOutInPrisonService.get(id).then(criminalOutInPrison => {
+            commit(types.SET_CRIMINAL_OUTINPRISON, criminalOutInPrison);
+        });
+    },
+    getAllCriminalOutInPrisons({ commit, state }, id) {
+        return criminalOutInPrisonService.getAll(id).then(criminalOutInPrisons => {
+            commit(types.SET_ALL_CRIMINAL_OUTINPRISONS, criminalOutInPrisons);
+        });
+    },
+    getPagedCriminalOutInPrisons({ commit, state }, params) {
+        return criminalOutInPrisonService.getPaged(params).then(pagedCriminalOutInPrisons => {
+            commit(types.SET_PAGED_CRIMINAL_OUTINPRISONS, pagedCriminalOutInPrisons);
+        });
+    },
+    addCriminalOutInPrison({ commit, state }) {
+        return criminalOutInPrisonService.add(state.criminalOutInPrison);
+    },
+    updateCriminalOutInPrison({ commit, state }) {
+        return criminalOutInPrisonService.update(state.criminalOutInPrison);
+    },
+    deleteCriminalOutInPrison({ commit }, id) {
+        return criminalOutInPrisonService.delete(id);
     }
 };

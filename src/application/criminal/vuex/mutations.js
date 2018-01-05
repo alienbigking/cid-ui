@@ -63,5 +63,31 @@ export default {
     },
     [types.SET_PAGED_CRIMINAL_SOCIAL_RELATIONS](state, pagedCriminalSocialRelations) {
         state.pagedCriminalSocialRelations = pagedCriminalSocialRelations;
+    },
+    // 罪犯罚金管理
+    [types.SET_CRIMINAL_FORFEIT](state, criminalForfeit) {
+        state.criminalForfeit = criminalForfeit;
+    },
+    [types.UPDATE_CRIMINAL_FORFEIT](state, criminalForfeit) {
+        Object.assign(state.criminalForfeit, criminalForfeit);
+    },
+    [types.SET_ALL_CRIMINAL_FORFEITS](state, allCriminalForfeits) {
+        state.allCriminalForfeits = allCriminalForfeits;
+    },
+    [types.SET_PAGED_CRIMINAL_FORFEITS](state, pagedCriminalForfeits) {
+        state.pagedCriminalForfeits = pagedCriminalForfeits;
+    },
+     // 罪犯罚金管理
+    [types.SET_CRIMINAL_OUTINPRISON](state, criminalOutInPrison) {
+        state.criminalOutInPrison = criminalOutInPrison;
+    },
+    [types.UPDATE_CRIMINAL_OUTINPRISON](state, criminalOutInPrison) {
+        Object.assign(state.criminalOutInPrison, criminalOutInPrison);
+    },
+    [types.SET_ALL_CRIMINAL_OUTINPRISONS](state, allCriminalOutInPrisons) {
+        state.allCriminalOutInPrisons = allCriminalOutInPrisons;
+    },
+    [types.SET_PAGED_CRIMINAL_OUTINPRISONS](state, pagedCriminalOutInPrisons) {
+        state.pagedCriminalOutInPrisons = pagedCriminalOutInPrisons;
     }
 };
