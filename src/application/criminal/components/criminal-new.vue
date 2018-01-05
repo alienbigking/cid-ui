@@ -235,6 +235,7 @@ export default {
     }
   },
   created() {
+    this.criminal.id = null;
     Promise.all([
       criminalLookupService.getAllGenders(),
       criminalLookupService.getAllEthnicities(),
@@ -315,8 +316,7 @@ export default {
           if (item === "required") {
             rule.push({
               required: true,
-              message: "该项必填",
-              trigger: "change blur"
+              message: "该项必填"
             });
           } else if (item.indexOf("-") > -1) {
             if (this.lengthRule(item)) rule.push(this.lengthRule(item));

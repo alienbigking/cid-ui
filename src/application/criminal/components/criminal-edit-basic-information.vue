@@ -47,72 +47,28 @@
                 <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item class="w25" label="国家(出生地)" prop="birthplaceCountryCode">
-              <el-select v-model="criminal.birthplaceCountryCode" value-key="code" :loading="initializing" clearable @change="getProvinces($event, 'birthplace')">
-                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
+            <el-form-item class="w50" label="出生地" prop="birthplace">
+              <el-cascader :options="allCountries" @change="onChange($event, 'birthplace')" @active-item-change="onChangeAddress($event, 'birthplace')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.birthplace" :loading="initializing" clearable>
+              </el-cascader>
             </el-form-item>
-            <el-form-item class="w25" label="省份(出生地)" prop="birthplaceProvinceCode">
-              <el-select v-model="criminal.birthplaceProvinceCode" value-key="code" :disabled="!criminal.birthplaceCountryCode" :loading="flag.birthplace.province" clearable @change="getCities($event, 'birthplace')">
-                <el-option v-for="(item, index) in birthplace.province" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="城市(出生地)" prop="birthplaceCityCode">
-              <el-select v-model="criminal.birthplaceCityCode" value-key="code" :disabled="!criminal.birthplaceProvinceCode" :loading="flag.birthplace.city" clearable @change="getCounties($event, 'birthplace')">
-                <el-option v-for="(item, index) in birthplace.city" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="县/区(出生地)" prop="birthplaceCountyCode">
-              <el-select v-model="criminal.birthplaceCountyCode" value-key="code" :disabled="!criminal.birthplaceCityCode" :loading="flag.birthplace.county" clearable>
-                <el-option v-for="(item, index) in birthplace.county" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="国家(户籍地址)" prop="householdRegisterAddressCountryCode">
-              <el-select v-model="criminal.householdRegisterAddressCountryCode" value-key="code" :loading="initializing" clearable @change="getProvinces($event, 'householdRegisterAddress')">
-                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="省份(户籍地址)" prop="householdRegisterAddressProvinceCode">
-              <el-select v-model="criminal.householdRegisterAddressProvinceCode" value-key="code" :disabled="!criminal.householdRegisterAddressCountryCode" :loading="flag.householdRegisterAddress.province" clearable @change="getCities($event, 'householdRegisterAddress')">
-                <el-option v-for="(item, index) in householdRegisterAddress.province" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="城市(户籍地址)" prop="householdRegisterAddressCityCode">
-              <el-select v-model="criminal.householdRegisterAddressCityCode" value-key="code" :disabled="!criminal.householdRegisterAddressProvinceCode" :loading="flag.householdRegisterAddress.city" clearable @change="getCounties($event, 'householdRegisterAddress')">
-                <el-option v-for="(item, index) in householdRegisterAddress.city" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="县/区(户籍地址)" prop="householdRegisterAddressCountyCode">
-              <el-select v-model="criminal.householdRegisterAddressCountyCode" value-key="code" :disabled="!criminal.householdRegisterAddressCityCode" :loading="flag.householdRegisterAddress.county" clearable>
-                <el-option v-for="(item, index) in householdRegisterAddress.county" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
-                <el-input v-model="criminal.householdRegisterAddressStreetDetail" :disabled="!criminal.householdRegisterAddressCountyCode"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="国家(家庭地址)" prop="homeAddressCountryCode">
-              <el-select v-model="criminal.homeAddressCountryCode" value-key="code" :loading="initializing" clearable @change="getProvinces($event, 'homeAddress')">
-                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="省份(家庭地址)" prop="homeAddressProvinceCode">
-              <el-select v-model="criminal.homeAddressProvinceCode" value-key="code" :disabled="!criminal.homeAddressCountryCode" :loading="flag.homeAddress.province" clearable @change="getCities($event, 'homeAddress')">
-                <el-option v-for="(item, index) in homeAddress.province" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="城市(家庭地址)" prop="homeAddressCityCode">
-              <el-select v-model="criminal.homeAddressCityCode" value-key="code" :disabled="!criminal.homeAddressProvinceCode" :loading="flag.homeAddress.city" clearable @change="getCounties($event, 'homeAddress')">
-                <el-option v-for="(item, index) in homeAddress.city" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="县/区(家庭地址)" prop="homeAddressCountyCode">
-              <el-select v-model="criminal.homeAddressCountyCode" value-key="code" :disabled="!criminal.homeAddressCityCode" :loading="flag.homeAddress.county" clearable>
-                <el-option v-for="(item, index) in homeAddress.county" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
-                <el-input v-model="criminal.homeAddressStreetDetail" :disabled="!criminal.homeAddressCountyCode"></el-input>
-            </el-form-item>
+            <div class="w75">
+              <el-form-item label="户籍地址" prop="householdRegisterAddress">
+                <el-cascader :options="allCountries" @change="onChange($event, 'householdRegisterAddress')" @active-item-change="onChangeAddress($event, 'householdRegisterAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.householdRegisterAddress" :loading="initializing" clearable>
+                </el-cascader>
+              </el-form-item>
+              <el-form-item label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
+                <el-input v-model="criminal.householdRegisterAddressStreetDetail"></el-input>
+              </el-form-item>
+            </div>
+            <div class="w75">
+              <el-form-item label="家庭地址" prop="homeAddress">
+                <el-cascader :options="allCountries" @change="onChange($event, 'homeAddress')" @active-item-change="onChangeAddress($event, 'homeAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.homeAddress" :loading="initializing" clearable>
+                </el-cascader>
+              </el-form-item>
+              <el-form-item label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
+                <el-input v-model="criminal.homeAddressStreetDetail"></el-input>
+              </el-form-item>
+            </div>
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
@@ -201,7 +157,6 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      // criminal: _.cloneDeep(this.$store.state.criminal.criminal),
       criminal: {},
       rules: {},
       formRules: {
@@ -214,19 +169,10 @@ export default {
         ethnicityCode: ["required"],
         nationalityCode: ["required"],
         householdRegisterTypeCode: ["required"],
-        birthplaceCountryCode: ["required"],
-        birthplaceProvinceCode: ["required"],
-        birthplaceCityCode: ["required"],
-        birthplaceCountyCode: ["required"],
-        householdRegisterAddressCountryCode: ["required"],
-        householdRegisterAddressProvinceCode: ["required"],
-        householdRegisterAddressCityCode: ["required"],
-        householdRegisterAddressCountyCode: ["required"],
+        birthplace: ["required"],
+        householdRegisterAddress: ["required"],
         householdRegisterAddressStreetDetail: ["required", "-50"],
-        homeAddressCountryCode: ["required"],
-        homeAddressProvinceCode: ["required"],
-        homeAddressCityCode: ["required"],
-        homeAddressCountyCode: ["required"],
+        homeAddress: ["required"],
         homeAddressStreetDetail: ["required", "-50"],
         politicalStatusCode: ["required"],
         educationDegreeCode: ["required"],
@@ -243,38 +189,24 @@ export default {
       },
       saving: false,
       initializing: true, // promise.all之后将所有下拉框的loading设为false
-      flag: {
-        birthplace: {
-          province: true,
-          city: true,
-          county: true
-        },
-        householdRegisterAddress: {
-          province: true,
-          city: true,
-          county: true
-        },
-        homeAddress: {
-          province: true,
-          city: true,
-          county: true
-        }
-      },
       allCountries: [],
       birthplace: {
-        province: [],
-        city: [],
-        county: []
+        countryIndex: "",
+        provinceIndex: "",
+        cityIndex: "",
+        countyIndex: ""
       },
       householdRegisterAddress: {
-        province: [],
-        city: [],
-        county: []
+        countryIndex: "",
+        provinceIndex: "",
+        cityIndex: "",
+        countyIndex: ""
       },
       homeAddress: {
-        province: [],
-        city: [],
-        county: []
+        countryIndex: "",
+        provinceIndex: "",
+        cityIndex: "",
+        countyIndex: ""
       },
       allGenders: [],
       allEthnicities: [],
@@ -326,6 +258,7 @@ export default {
       this.allSeparateManagementLevels = response[6];
       this.allSeparateCustodyTypes = response[7];
       this.allCommutationScales = response[8];
+      response[9].map(item => { item.children = []; });
       this.allCountries = response[9];
       this.initializing = false;
     });
@@ -334,33 +267,81 @@ export default {
       Object.keys(criminal).map(key => {
         let arr = key.split("Code");
         if (arr.length === 2 && arr[1] === "") {
-          criminal[key] = {
-            name: criminal[`${arr[0]}Name`],
-            code: criminal[key]
-          };
-          delete criminal[`${arr[0]}Name`];
+          if (arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)) {
+            let str = arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)[0];
+            criminal[str] = [criminal[`${str}CountryCode`], criminal[`${str}ProvinceCode`], criminal[`${str}CityCode`], criminal[`${str}CountyCode`]];
+          } else {
+            criminal[key] = {
+              name: criminal[`${arr[0]}Name`],
+              code: criminal[key]
+            };
+            delete criminal[`${arr[0]}Name`];
+          }
         }
       });
       this.criminal = criminal;
       ["birthplace", "householdRegisterAddress", "homeAddress"].map(type => {
-        regionLookupService.getAllProvinces(this.criminal[`${type}CountryCode`].code).then(response => {
-          this[type].province = response;
-          this.flag[type].province = false;
-        });
-        regionLookupService.getAllCities(this.criminal[`${type}ProvinceCode`].code).then(response => {
-          this[type].city = response;
-          this.flag[type].city = false;
-        });
-        regionLookupService.getAllCounties(this.criminal[`${type}CityCode`].code).then(response => {
-          this[type].county = response;
-          this.flag[type].county = false;
-        });
+        this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === this.criminal[type][0]; });
+        if (!this.allCountries[this[type].countryIndex].children.length) {
+          regionLookupService.getAllProvinces(this.criminal[type][0]).then(provinces => {
+            provinces.map(item => { item.children = []; });
+            this.allCountries[this[type].countryIndex].children = _.cloneDeep(provinces);
+            this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => {
+              return item.code === this.criminal[type][1];
+            });
+
+            if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
+              regionLookupService.getAllCities(this.criminal[type][1]).then(cities => {
+                cities.map(item => { item.children = []; });
+                this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(cities);
+                this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => {
+                  return item.code === this.criminal[type][2];
+                });
+
+                if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.length) {
+                  regionLookupService.getAllCounties(this.criminal[type][2]).then(counties => {
+                    this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(counties);
+                    this[type].countyIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.findIndex(item => { return item.code === this.criminal[type][3]; });
+                  });
+                }
+              });
+            }
+          });
+        }
       });
     });
     this.addRules();
   },
   methods: {
     ...mapActions(["getCriminal", "getAllPrisonAreas", "getAllPrisonHouses", "updateCriminal"]),
+    onChange(arr, type) {
+      this[type].countyIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.findIndex(item => { return item.code === arr[3]; });
+    },
+    onChangeAddress(arr, type) {
+      if (!arr[0]) return;
+      this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === arr[0]; });
+      if (!this.allCountries[this[type].countryIndex].children.length) {
+        regionLookupService.getAllProvinces(arr[0]).then(response => {
+          response.map(item => { item.children = []; });
+          this.allCountries[this[type].countryIndex].children = _.cloneDeep(response);
+        });
+      }
+      if (!arr[1]) return;
+      this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => { return item.code === arr[1]; });
+      if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
+        regionLookupService.getAllCities(arr[1]).then(response => {
+          response.map(item => { item.children = []; });
+          this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(response);
+        });
+      }
+      if (!arr[2]) return;
+      this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => { return item.code === arr[2]; });
+      if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].length) {
+        regionLookupService.getAllCounties(arr[2]).then(response => {
+          this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(response);
+        });
+      }
+    },
     lengthRule(e) {
       let min = e.split("-")[0];
       let max = e.split("-")[1];
@@ -382,8 +363,7 @@ export default {
           if (item === "required") {
             rule.push({
               required: true,
-              message: "该项必填",
-              trigger: "change blur"
+              message: "该项必填"
             });
           } else if (item.indexOf("-") > -1) {
             if (this.lengthRule(item)) rule.push(this.lengthRule(item));
@@ -392,45 +372,23 @@ export default {
         this.rules[key] = rule;
       });
     },
-    getProvinces(e, type) {
-      // 修改国家之后先清空已选择的城市县区等
-      delete this.criminal[`${type}ProvinceCode`];
-      delete this.criminal[`${type}CityCode`];
-      delete this.criminal[`${type}CountyCode`];
-      delete this.criminal[`${type}StreetDetail`];
-      if (!e) return;
-      regionLookupService.getAllProvinces(e.code).then(response => {
-        this[type].province = response;
-        this.flag[type].province = false;
-      });
-    },
-    getCities(e, type) {
-      delete this.criminal[`${type}CityCode`];
-      delete this.criminal[`${type}CountyCode`];
-      delete this.criminal[`${type}StreetDetail`];
-      if (!e) return;
-      regionLookupService.getAllCities(e.code).then(response => {
-        this[type].city = response;
-        this.flag[type].city = false;
-      });
-    },
-    getCounties(e, type) {
-      delete this.criminal[`${type}CountyCode`];
-      delete this.criminal[`${type}StreetDetail`];
-      if (!e) return;
-      regionLookupService.getAllCounties(e.code).then(response => {
-        this[type].county = response;
-        this.flag[type].county = false;
-      });
-    },
     onSubmit() {
-      // console.log(this.criminal);
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
           let criminal = Object.assign({}, this.criminal);
           Object.keys(criminal).map(key => {
-            if (typeof criminal[key] === "object") {
+            if (criminal[key] instanceof Array) {
+              criminal[`${key}CountryCode`] = this.allCountries[this[key].countryIndex].code;
+              criminal[`${key}CountryName`] = this.allCountries[this[key].countryIndex].name;
+              criminal[`${key}ProvinceCode`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].code;
+              criminal[`${key}ProvinceName`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].name;
+              criminal[`${key}CityCode`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].children[this[key].cityIndex].code;
+              criminal[`${key}CityName`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].children[this[key].cityIndex].name;
+              criminal[`${key}CountyCode`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].children[this[key].cityIndex].children[this[key].countyIndex].code;
+              criminal[`${key}CountyName`] = this.allCountries[this[key].countryIndex].children[this[key].provinceIndex].children[this[key].cityIndex].children[this[key].countyIndex].name;
+              delete criminal[key];
+            } else if (criminal[key] instanceof Object) {
               let obj = Object.assign({}, criminal[key]);
               let str = key.substring(0, key.lastIndexOf("Code"));
               criminal[key] = obj.code;
