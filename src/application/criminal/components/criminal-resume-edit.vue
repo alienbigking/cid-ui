@@ -1,6 +1,6 @@
 <template>
-  <div v-loading='loading'>
-    <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
+  <!-- <div> -->
+    <el-form class="form-criminal" v-loading='loading' :model="criminalResume" :rules="rules" ref="form" label-position="top">
         <el-form-item class="w-px180" label="开始日期" prop="startDate">
           <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
         </el-form-item>
@@ -21,7 +21,7 @@
           <el-button type="primary" :loading="saving" @click="onSave">保存</el-button>
         </div>
     </el-form>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -117,7 +117,7 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.criminalResume = { criminalId: this.$route.params.id };
+        this.criminalResume = { criminalId: this.$route.params.id, id: null };
         this.loading = false;
       } else {
         this.getCriminalResume(this.criminalResumeId).then(() => {
