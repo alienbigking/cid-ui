@@ -1,11 +1,11 @@
 <template>
-  <div v-loading='loading'>
-    <el-form class="form-criminal" :model="criminalResume" :rules="rules" ref="form" label-position="top">
+  <!-- <div> -->
+    <el-form class="form-criminal" v-loading='loading' :model="criminalResume" :rules="rules" ref="form" label-position="top">
         <el-form-item class="w-px180" label="开始日期" prop="startDate">
-          <el-date-picker v-model="criminalResume.startDate" type="date"></el-date-picker>
+          <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180" label="结束日期" prop="endDate">
-          <el-date-picker v-model="criminalResume.endDate" type="date"></el-date-picker>
+          <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180 margin-left40" label="公司" prop="company">
           <el-input v-model="criminalResume.company"></el-input>
@@ -21,7 +21,7 @@
           <el-button type="primary" :loading="saving" @click="onSave">保存</el-button>
         </div>
     </el-form>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -43,6 +43,22 @@ export default {
       rules: {
         startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
         endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+      },
+      pickerBeginDateBefore: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.endDate;
+          if (beginDateVal) {
+              return time.getTime() > beginDateVal;
+          }
+        }
+      },
+      pickerBeginDateAfter: {
+        disabledDate: (time) => {
+          let beginDateVal = this.criminalResume.startDate;
+          if (beginDateVal) {
+              return time.getTime() < beginDateVal;
+          }
+        }
       },
       loading: true,
       saving: false
@@ -113,7 +129,7 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.criminalResume = { criminalId: this.$route.params.id };
+        this.criminalResume = { criminalId: this.$route.params.id, id: null };
         this.loading = false;
       } else {
         this.getCriminalResume(this.criminalResumeId).then(() => {

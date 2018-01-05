@@ -7,10 +7,10 @@
       <template>
         <el-table class="table40" :data="allCriminalRecords" header-row-class-name="tableHeader40">
           <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
-          <el-table-column align="center" prop="arrestDate" label="逮捕日期"> </el-table-column>
-          <el-table-column align="center" prop="detentionDate" label="羁押日期"> </el-table-column>
+          <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关"> </el-table-column>
           <el-table-column align="center" prop="firstTrialOrganName" label="一审机关"> </el-table-column>
           <el-table-column align="center" prop="finalTrialOrganName" label="终审机关"> </el-table-column>
+          <el-table-column align="center" prop="decisionOrganName" label="判决机关"> </el-table-column>          
           <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
@@ -25,32 +25,31 @@
     </div>
     <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w25" label="判决罪名" prop="criminalRecord.decisionAccusation">
-            <el-input v-model="form.criminalRecord.decisionAccusation"></el-input>
-          </el-form-item>
           <el-form-item class="w25" label="逮捕日期" prop="criminalRecord.arrestDate">
-              <el-date-picker v-model="form.criminalRecord.arrestDate" type="date"></el-date-picker>
-            </el-form-item>
-           <el-form-item class="w25" label="羁押日期" prop="criminalRecord.detentionDate">
-              <el-date-picker v-model="form.criminalRecord.detentionDate" type="date"></el-date-picker>
-            </el-form-item>
-          
+            <el-date-picker v-model="form.criminalRecord.arrestDate" type="date"></el-date-picker>
+          </el-form-item>
+          <el-form-item class="w25" label="羁押日期" prop="criminalRecord.detentionDate">
+            <el-date-picker v-model="form.criminalRecord.detentionDate" type="date"></el-date-picker>
+          </el-form-item>
           <el-form-item class="w25" label="逮捕机关" prop="selectedArrestOrgan">
             <el-select v-model="form.selectedArrestOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allPoliceStations" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
+          <el-form-item class="w25"></el-form-item>
+
           <el-form-item class="w25" label="起诉机关" prop="selectedProsecutionOrgan">
             <el-select v-model="form.selectedProsecutionOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allProcuratorates" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-          <el-form-item class="w25" label="起诉字号" prop="criminalRecord.prosecutionLetterNumber">
-            <el-input v-model="form.criminalRecord.prosecutionLetterNumber"></el-input>
-          </el-form-item>
           <el-form-item class="w25" label="起诉罪名" prop="criminalRecord.prosecutionAccusation">
             <el-input v-model="form.criminalRecord.prosecutionAccusation"></el-input>
           </el-form-item>
+          <el-form-item class="w25" label="起诉字号" prop="criminalRecord.prosecutionLetterNumber">
+            <el-input v-model="form.criminalRecord.prosecutionLetterNumber"></el-input>
+          </el-form-item>
+          <el-form-item class="w25"></el-form-item>
 
 
           <el-form-item class="w25" label="一审机关" prop="selectedFirstTrialOrgan">
@@ -66,14 +65,17 @@
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
           </el-form-item>
-
           <el-form-item class="w25" label="终审字号" prop="criminalRecord.finalTrialLetterNumber">
             <el-input v-model="form.criminalRecord.finalTrialLetterNumber"></el-input>
           </el-form-item>
+
           <el-form-item class="w25" label="判决机关" prop="selectedDecisionOrgan">
             <el-select v-model="form.selectedDecisionOrgan" value-key="code" :loading="initializing" clearable>
               <el-option v-for="(item, index) in allCourts" :key="index" :label="item.name" :value="item"></el-option>
             </el-select>
+          </el-form-item>
+          <el-form-item class="w25" label="判决罪名" prop="criminalRecord.decisionAccusation">
+            <el-input v-model="form.criminalRecord.decisionAccusation"></el-input>
           </el-form-item>
           <el-form-item class="w25" label="判决字号" prop="criminalRecord.decisionLetterNumber">
             <el-input v-model="form.criminalRecord.decisionLetterNumber"></el-input>
@@ -82,14 +84,14 @@
           <el-form-item class="w25" label="判决日期" prop="criminalRecord.decisionDate">
               <el-date-picker v-model="form.criminalRecord.decisionDate" type="date"></el-date-picker>
             </el-form-item>
-          <el-form-item class="w25" label="判决剥政年限" prop="criminalRecord.decisionDeprivationPoliticalRightYears">
+          <el-form-item class="w25" label="剥政年限" prop="criminalRecord.decisionDeprivationPoliticalRightYears">
             <el-input v-model="form.criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
           </el-form-item>
 
-          <el-form-item class="w25" label="判决刑期开始日期" prop="criminalRecord.decisionPrisonTermStartDate">
+          <el-form-item class="w25" label="刑期开始日期" prop="criminalRecord.decisionPrisonTermStartDate">
             <el-date-picker v-model="form.criminalRecord.decisionPrisonTermStartDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
           </el-form-item>
-          <el-form-item class="w25" label="判决刑期结束日期" prop="criminalRecord.decisionPrisonTermEndDate">
+          <el-form-item class="w25" label="刑期结束日期" prop="criminalRecord.decisionPrisonTermEndDate">
             <el-date-picker v-model="form.criminalRecord.decisionPrisonTermEndDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
           </el-form-item>
           <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
@@ -98,8 +100,8 @@
                 <el-option label="否" :value="false"></el-option>
               </el-select>
           </el-form-item>
-          <el-form-item class="w50" label="判决明细" prop="criminalRecord.decisionDetail">
-            <el-input v-model="form.criminalRecord.decisionDetail"></el-input>
+          <el-form-item class="w100" label="判决明细" prop="criminalRecord.decisionDetail">
+            <el-input type="textarea" v-model="form.criminalRecord.decisionDetail"></el-input>
           </el-form-item>
           
 
@@ -365,13 +367,9 @@ export default {
     margin-left: 30px;
   }
 }
-.form-criminal .w50 .el-form-item__content > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-  width:100%;
+.el-form .el-textarea /deep/ .el-textarea__inner{
+  height: 120px;
 }
-.el-form .el-form-item.w50{
-  padding-right: 0;
-}
-
 </style>
 
 

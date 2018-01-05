@@ -3,22 +3,27 @@ import * as components from './components';
 export default [
     {
         path: '/criminal/list',
-        component: components.criminalList,
+        component: components.CriminalList,
         name: '查询罪犯'
     },
     {
         path: '/criminal/new',
-        component: components.criminalNew,
+        component: components.CriminalNew,
         name: '新增罪犯'
     },
     {
         path: '/criminal/edit/:id',
-        component: components.criminalEdit,
+        component: components.CriminalEdit,
         name: '修改罪犯'
     },
     {
         path: '/criminal/detail/:id',
-        component: components.criminalDetail,
+        component: components.CriminalDetail,
         name: '罪犯明细'
+    },
+    {
+        path: '/criminal/record-detail/:id',
+        component: components.CriminalRecordDetail,
+        name: '犯罪记录明细'
     }
 ];
