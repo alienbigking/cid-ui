@@ -4,16 +4,19 @@
       <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
     </div>
     <div class="list-box">
-      <el-table class="table40" :data="allCriminalResumes" :loading="loading" header-row-class-name="tableHeader40">
-        <el-table-column align="center" prop="startDate" label="开始日期"> </el-table-column>
-        <el-table-column align="center" prop="endDate" label="结束日期"> </el-table-column>
-        <el-table-column align="center" prop="company" label="公司"> </el-table-column>
-        <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
-        <el-table-column align="center" prop="duty" label="职位"> </el-table-column>
-        <el-table-column align="center" prop="createdTime" label="创建时间">
+      <el-table class="table40" :data="allCriminalForfeits" :loading="loading" header-row-class-name="tableHeader40">
+        <el-table-column align="center" prop="receiptNumber" label="罚金单据号"> </el-table-column>
+        <el-table-column align="center" prop="amount" label="缴纳罚金"> </el-table-column>
+        <el-table-column align="center" prop="payee" label="收款单位"></el-table-column>
+        <el-table-column align="center" prop="paymentDate" label="缴纳日期">
           <template slot-scope="scope">
               {{scope.row.createdTime | moment}}
           </template>
+        </el-table-column>
+        <el-table-column align="center" prop="createdTime" label="创建时间">
+          <template slot-scope="scope">
+              {{scope.row.createdTime | moment}}
+          </template> 
         </el-table-column>
         <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
           <template slot-scope="scope">
@@ -29,7 +32,7 @@
       </el-table>
     </div>
     <el-dialog class="dialog" width="710px" :center="true" :visible.sync="editDialogVisible">
-      <criminal-resume-edit :criminalResumeId="criminalResumeId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-resume-edit>
+      <criminal-forfeit-edit :criminalForfeitId="criminalForfeitId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-forfeit-edit>
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-tishishuoming"></i>
@@ -44,16 +47,16 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalResumeEdit from "./criminal-resume-edit";
+import CriminalForfeitEdit from "./criminal-forfeit-edit";
 import _ from "lodash";
 
 export default {
   components: {
-    "criminal-resume-edit": CriminalResumeEdit
+    "criminal-forfeit-edit": CriminalForfeitEdit
   },
   data() {
     return {
-      criminalResumeId: "",
+      criminalForfeitId: "",
       editDialogVisible: null,
       deleteDialogVisible: false,
       deleting: false,
@@ -63,7 +66,7 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalResumes: state => state.criminal.allCriminalResumes
+      allCriminalForfeits: state => state.criminal.allCriminalForfeits
     })
   },
   created() {
@@ -71,15 +74,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalResumes",
-      "deleteCriminalResume"
+      "getAllCriminalForfeits",
+      "deleteCriminalForfeit"
     ]),
     onNew() {
-      this.criminalResumeId = "";
+      this.criminalForfeitId = "";
       this.editDialogVisible = true;
     },
     onEdit(id) {
-      this.criminalResumeId = id;
+      this.criminalForfeitId = id;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -88,7 +91,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalResume(this.deleteItem.id)
+      this.deleteCriminalForfeit(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -101,9 +104,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalResumes(this.$route.params.id).then(() => {
-        this.criminalResume = _.cloneDeep(
-          this.$store.state.criminal.criminalResume
+      this.getAllCriminalForfeits(this.$route.params.id).then(() => {
+        this.criminalForfeit = _.cloneDeep(
+          this.$store.state.criminal.criminalForfeit
         );
         this.loading = false;
       });

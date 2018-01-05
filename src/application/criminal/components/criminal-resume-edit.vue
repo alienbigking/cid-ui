@@ -159,4 +159,7 @@ export default {
     margin-left: 20px;
   }
 }
+.el-form .el-form-item.el-form-item-div {
+    justify-content: center;
+}
 </style>

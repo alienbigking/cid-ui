@@ -22,3 +22,13 @@ export const SET_CRIMINAL_SOCIAL_RELATION = 'setCriminalSocialRelation';
 export const UPDATE_CRIMINAL_SOCIAL_RELATION = 'updateCriminalSocialRelation';
 export const SET_ALL_CRIMINAL_SOCIAL_RELATIONS = 'setAllCriminalSocialRelations';
 export const SET_PAGED_CRIMINAL_SOCIAL_RELATIONS = 'setPagedCriminalSocialRelations';
+// 罪犯罚金管理
+export const SET_CRIMINAL_FORFEIT = 'setCriminalSocialForfeit';
+export const UPDATE_CRIMINAL_FORFEIT = 'updateCriminalSocialForfeit';
+export const SET_ALL_CRIMINAL_FORFEITS = 'setAllCriminalSocialForfeits';
+export const SET_PAGED_CRIMINAL_FORFEITS = 'setPagedCriminalSocialForfeits';
+// 罪犯出入监管理
+export const SET_CRIMINAL_OUTINPRISON = 'setCriminalSocialOutInPrison';
+export const UPDATE_CRIMINAL_OUTINPRISON = 'updateCriminalSocialOutInPrison';
+export const SET_ALL_CRIMINAL_OUTINPRISONS = 'setAllCriminalSocialOutInPrisons';
+export const SET_PAGED_CRIMINAL_OUTINPRISONS = 'setPagedCriminalSocialOutInPrisons';
