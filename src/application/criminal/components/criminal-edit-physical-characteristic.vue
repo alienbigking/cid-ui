@@ -35,7 +35,7 @@
         <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
       </el-form-item>
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
-        <el-table :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
           <el-table-column align="center" label="其它特征" prop="description">
             <template slot-scope="scope">
               <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
