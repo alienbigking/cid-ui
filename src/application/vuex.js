@@ -10,5 +10,6 @@ import { vuex as user } from './user';
 import { vuex as court } from './court';
 import { vuex as policeStation } from './police-station';
 import { vuex as procuratorate } from './procuratorate';
+import { vuex as prisonDepartment } from './prison-department';
 
-export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user, court, policeStation, procuratorate };
+export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user, court, policeStation, procuratorate, prisonDepartment };

@@ -7,6 +7,7 @@ import { routes as prisonHouse } from './prison-house';
 import { routes as criminal } from './criminal';
 import { routes as role } from './role';
 import { routes as user } from './user';
+import { routes as prisonDepartment } from './prison-department';
 import main from './main';
 
 export default [
@@ -25,7 +26,8 @@ export default [
             ...prisonHouse,
             ...criminal,
             ...role,
-            ...user
+            ...user,
+            ...prisonDepartment
         ]
     },
     ...login
