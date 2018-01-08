@@ -14,9 +14,9 @@
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonDepartments.content" border header-row-class-name="tableHeader">
-                  <el-table-column prop="code" label="编号">
+                  <el-table-column prop="name" label="部门名称">
                   </el-table-column>
-                  <el-table-column prop="name" label="监舍名称">
+                  <el-table-column prop="parentDepartmentName" label="上级部门名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                     <template slot-scope="scope">
@@ -86,7 +86,10 @@ export default {
     })
   },
   created() {
-    this.search();
+    this.getAllPrisonDepartments().then(() => {
+      this.gettingPrisonDepartments = false;
+      this.search();
+    });
   },
   methods: {
     ...mapActions([
