@@ -10,7 +10,7 @@
             <el-form-item class="w50" label="名称" prop="name" >
                 <el-input v-model="prisonArea.name"></el-input>
             </el-form-item>
-            <el-form-item class="w50 the-disabled" label="上级监区" prop="parentPrisonAreaName">
+            <el-form-item class="w50 the-disabled" label="上级监区">
                 <span class="el-input__inner">{{  prisonArea.parentPrisonAreaName }}</span>
             </el-form-item>
             <el-form-item class="w100 textarea" label="描述" prop="description">

@@ -2,7 +2,9 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    token: {}
+  allPrisonBureaus: [],
+  pagedPrisonBureaus: { content: [] },
+  prisonBureau: {}
 };
 
 export default {

@@ -133,5 +133,43 @@
                 collapse: true
             }
         ]
+    },
+    // {
+    //     index: '8',
+    //     name: '监狱局',
+    //     collapse: true,
+    //     children: [
+    //         {
+    //             index: '8-1',
+    //             name: '监狱局列表',
+    //             path: '/prison-bureau/list',
+    //             collapse: true
+    //         },
+    //         {
+    //             index: '8-4',
+    //             name: '新增监狱局',
+    //             path: '/prison-bureau/new',
+    //             collapse: true
+    //         }
+    //     ]
+    // },
+    {
+        index: '9',
+        name: '监狱局部门',
+        collapse: true,
+        children: [
+            {
+                index: '9-1',
+                name: '监狱局部门列表',
+                path: '/prison-bureau-department/list',
+                collapse: true
+            },
+            {
+                index: '9-4',
+                name: '新增监狱局部门',
+                path: '/prison-bureau-department/new',
+                collapse: true
+            }
+        ]
     }
   ];
