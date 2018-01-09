@@ -1,20 +1,17 @@
 <template>
     <div class="card">
         <div class="um-title">
-            <p>修改监区</p>
+            <p>修改监狱部门</p>
         </div>
-        <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="编号" prop="code" >
-                <el-input v-model="prisonArea.code"></el-input>
-            </el-form-item>
+        <el-form class="formPadding" :model="prisonDepartment" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="名称" prop="name" >
-                <el-input v-model="prisonArea.name"></el-input>
+                <el-input v-model="prisonDepartment.name"></el-input>
             </el-form-item>
-            <el-form-item class="w50 the-disabled" label="上级监区">
-                <span class="el-input__inner">{{  prisonArea.parentPrisonAreaName }}</span>
+            <el-form-item class="w50 the-disabled" label="上级部门" prop="parentDepartmentName">
+                <span class="el-input__inner">{{prisonDepartment.parentDepartmentName}}</span>
             </el-form-item>
             <el-form-item class="w100 textarea" label="描述" prop="description">
-                <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonArea.description"></el-input>
+                <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonDepartment.description"></el-input>
             </el-form-item>
             <el-form-item class="hasButton">
                 <el-button @click="onBack">返 回</el-button>
@@ -31,14 +28,10 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea),
+      prisonDepartment: _.cloneDeep(this.$store.state.prisonDepartment.prisonDepartment),
       rules: {
-        code: [
-          { required: true, message: "请输入组织结构代码", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
-        ],
         name: [
-          { required: true, message: "请输入监区名称", trigger: "blur" },
+          { required: true, message: "请输入监狱部门名称", trigger: "blur" },
           { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
         ],
         description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
@@ -47,29 +40,29 @@ export default {
     };
   },
   watch: {
-    prisonArea: {
-      handler: _.debounce(function(prisonArea) {
-        this.$store.commit("updatePrisonArea", prisonArea);
+    prisonDepartment: {
+      handler: _.debounce(function(prisonDepartment) {
+        this.$store.commit("updatePrisonDepartment", prisonDepartment);
       }, 500),
       deep: true
     }
   },
   created() {
-    this.getPrisonArea(this.$route.params.id).then(() => {
-      this.prisonArea = _.cloneDeep(this.$store.state.prisonArea.prisonArea);
+    this.getPrisonDepartment(this.$route.params.id).then(() => {
+      this.prisonDepartment = _.cloneDeep(this.$store.state.prisonDepartment.prisonDepartment);
     });
   },
   methods: {
-    ...mapActions(["getPrisonArea", "updatePrisonArea"]),
+    ...mapActions(["getPrisonDepartment", "updatePrisonDepartment"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updatePrisonArea()
+          this.updatePrisonDepartment()
             .then(res => {
               this.saving = false;
               this.$message.success("修改成功");
-              this.$router.push(`/prison-area/list`);
+              this.$router.push(`/prison-department/list`);
             })
             .catch(error => {
               this.saving = false;

@@ -136,22 +136,46 @@
         体貌特征
         <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <div class="list-box" v-if="featureShow">
-        <el-table class="table40" :data="allCriminalPhysicalCharacteristics" header-row-class-name="tableHeader40">
-          <el-table-column align="center" prop="height" label="身高"> </el-table-column>
-          <el-table-column align="center" prop="weight" label="体重"> </el-table-column>
-          <el-table-column align="center" prop="somatotypeName" label="体型"> </el-table-column>
-          <el-table-column align="center" prop="faceTypeName" label="脸型"> </el-table-column>
-          <el-table-column align="center" prop="bloodTypeName" label="血型"> </el-table-column>
-          <el-table-column align="center" prop="accentName" label="口音"> </el-table-column>
-          <el-table-column align="center" prop="footLength" label="足长"> </el-table-column>
-          <el-table-column align="center" prop="shoeSize" label="鞋号"> </el-table-column>
-          <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
-            <template slot-scope="scope">
-                {{scope.row.lastUpdatedTime | moment}}
-            </template>
-          </el-table-column>
-        </el-table>
+      <div v-if="featureShow">
+        <div class="form-container">
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>身高(m)：</label><span>{{criminalPhysicalCharacteristic.height}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>体重(kg)：</label><span>{{criminalPhysicalCharacteristic.weight}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>体型：</label><span>{{criminalPhysicalCharacteristic.somatotypeName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>脸型：</label><span>{{criminalPhysicalCharacteristic.faceTypeName}}</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="6">
+                    <label>血型：</label><span>{{criminalPhysicalCharacteristic.bloodTypeName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>口音：</label><span>{{criminalPhysicalCharacteristic.accentName}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>足长(cm)：</label><span>{{criminalPhysicalCharacteristic.footLength}}</span>
+                </el-col>
+                <el-col :span="6">
+                    <label>鞋号：</label><span>{{criminalPhysicalCharacteristic.shoeSize}}</span>
+                </el-col>
+            </el-row>
+            <el-row type="flex">
+                <el-col :span="24">
+                    <label>其他特征：</label><span>
+                        <b v-for="(item, index) in criminalPhysicalCharacteristic.otherFeatures" :key="index">
+                            {{item.description}}
+                        </b>
+                    </span>
+                </el-col>
+            </el-row>
+        </div>
       </div>
   </div>
   <!-- 社会关系 -->
@@ -211,15 +235,15 @@ export default {
   computed: {
     ...mapState({
       criminal: state => state.criminal.criminal,
-      allCriminalPhysicalCharacteristics: state => state.criminal.allCriminalPhysicalCharacteristics
+      criminalPhysicalCharacteristic: state => state.criminal.criminalPhysicalCharacteristic
     })
   },
   created() {
     this.getCriminal(this.$route.params.id);
-    this.getAllCriminalPhysicalCharacteristics(this.$route.params.id);
+    this.getCriminalPhysicalCharacteristic(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getAllCriminalPhysicalCharacteristics" ]),
+    ...mapActions([ "getCriminal", "getCriminalPhysicalCharacteristic" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
