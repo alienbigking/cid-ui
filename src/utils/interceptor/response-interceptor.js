@@ -16,13 +16,16 @@ export default {
                             break;
                         case 403:
                             // TODO:跳转到403页面
+                            router.push(`/not-found-resource`);
                             break;
                         case 404:
                             // TODO:跳转到404页面
+                            router.push(`/not-found`);
                             return;
                         // break;
                         case 500:
                             // TODO:跳转到错误页面
+                            router.push(`/server-error`);
                             break;
                     }
                 }

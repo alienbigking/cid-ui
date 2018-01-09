@@ -15,5 +15,9 @@ export default [
         path: '/server-error',
         component: components.ServerError,
         name: '500'
+    },
+    {
+        path: '*',
+        component: components.NotFound
     }
 ];
