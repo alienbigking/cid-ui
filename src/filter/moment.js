@@ -4,7 +4,7 @@ function moment(data, format) {
   if (!data) {
     return '';
   }
-  format = format || 'YYYY-MM-DD hh:mm:ss';
+  format = format || 'YYYY-MM-DD HH:mm:ss';
   return Moment(data).format(format);
 }
 

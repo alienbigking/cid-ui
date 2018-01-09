@@ -5,7 +5,7 @@
     </div>
     <div class="list-box">
       <el-table class="table40" :data="allCriminalOutInPrisons" :loading="loading" header-row-class-name="tableHeader40">
-        <el-table-column align="center" prop="reasonCode" label="出入事由"> </el-table-column>
+        <el-table-column align="center" prop="reasonName" label="出入事由"> </el-table-column>
         <el-table-column align="center" prop="outgoingDate" label="出监日期">  
           <template slot-scope="scope">
               {{scope.row.outgoingDate | moment}}

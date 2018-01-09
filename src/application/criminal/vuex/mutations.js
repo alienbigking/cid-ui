@@ -77,7 +77,7 @@ export default {
     [types.SET_PAGED_CRIMINAL_FORFEITS](state, pagedCriminalForfeits) {
         state.pagedCriminalForfeits = pagedCriminalForfeits;
     },
-     // 罪犯罚金管理
+     // 罪犯出入监管理
     [types.SET_CRIMINAL_OUTINPRISON](state, criminalOutInPrison) {
         state.criminalOutInPrison = criminalOutInPrison;
     },

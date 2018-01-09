@@ -162,6 +162,22 @@
       </div>
       <criminal-detail-social-relation :socialRelationShow="socialRelationShow"></criminal-detail-social-relation>
   </div>
+  <!-- 罚金 -->
+  <div class="card">
+      <div class="title" @click="isShowForfeit">
+        罚金
+        <span class="iconfont" :class="forfeitShow?'icon-unfold':'icon-enter'"></span>
+      </div>
+      <criminal-detail-forfeit :forfeitShow="forfeitShow"></criminal-detail-forfeit>   
+  </div>
+  <!-- 出入监 -->
+  <div class="card">
+      <div class="title" @click="isShowOutInPrison">
+        出入监
+        <span class="iconfont" :class="outInPrisonShow?'icon-unfold':'icon-enter'"></span>
+      </div>
+      <criminal-detail-outInPrison :outInPrisonShow="outInPrisonShow"></criminal-detail-outInPrison>   
+  </div>
 </div>
 
 </template>
@@ -169,21 +185,27 @@
 import CriminalDetailRecord from './criminal-detail-record';
 import CriminalDetailResume from './criminal-detail-resume';
 import CriminalDetailSocialRelation from './criminal-detail-social-relation';
+import CriminalDetailForfeit from './criminal-detail-forfeit';
+import CriminalDetailOutInPrison from './criminal-detail-outInPrison';
 import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
     "criminal-detail-record": CriminalDetailRecord,
     "criminal-detail-resume": CriminalDetailResume,
-    "criminal-detail-social-relation": CriminalDetailSocialRelation
+    "criminal-detail-social-relation": CriminalDetailSocialRelation,
+    "criminal-detail-forfeit": CriminalDetailForfeit,
+    "criminal-detail-outInPrison": CriminalDetailOutInPrison
   },
   data() {
     return {
       informationShow: false,
-      recordShow: true,
+      recordShow: false,
       resumeShow: false,
       featureShow: false,
-      socialRelationShow: false
+      socialRelationShow: false,
+      forfeitShow: false,
+      outInPrisonShow: false
     };
   },
   computed: {
@@ -212,6 +234,12 @@ export default {
     },
     isShowSocialRelation() {
       this.socialRelationShow = !this.socialRelationShow;
+    },
+    isShowForfeit() {
+      this.forfeitShow = !this.forfeitShow;
+    },
+    isShowOutInPrison() {
+      this.outInPrisonShow = !this.outInPrisonShow;
     }
   }
 };
