@@ -8,10 +8,13 @@
           <el-input v-model="criminalForfeit.amount" ></el-input>
         </el-form-item>
         <el-form-item class="w-px180" label="收款单位" prop="payee">
-          <el-input v-model="criminalForfeit.company"></el-input>
+          <el-input v-model="criminalForfeit.payee"></el-input>
         </el-form-item>
         <el-form-item class="w-px180" label="缴纳日期" prop="paymentDate">
           <el-date-picker v-model="criminalForfeit.paymentDate" type="date"></el-date-picker>
+        </el-form-item>
+        <el-form-item class="w100" label="备注" prop="remark" >
+          <el-input type="textarea" resize="none" v-model="criminalForfeit.remark"></el-input>
         </el-form-item>
         <div class="el-form-item el-form-item-div">
           <el-button @click="onClose">返回</el-button>
@@ -138,6 +141,12 @@ export default {
   }
   .margin-left40 {
     margin-left: 20px;
+  }
+  .w100 {
+    width: 640px;
+    float: left;
+    padding-left: 0px;
+    padding-right: 58px;
   }
 }
 </style>

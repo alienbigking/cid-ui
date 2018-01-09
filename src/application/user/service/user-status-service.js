@@ -3,11 +3,11 @@ export default {
         return [
             {
                 text: '启用',
-                value: 'Enabled'
+                value: 'ENABLED'
             },
             {
                 text: '禁用',
-                value: 'Disabled'
+                value: 'DISABLED'
             }
         ];
     }
