@@ -70,7 +70,6 @@ export default {
     this.criminalOutInPrison.id = null;
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
-      console.log(this.allOutInPrisonReasons);
       this.initializing = false;
     });
   },
@@ -117,10 +116,13 @@ export default {
             Object.keys(criminalOutInPrison).map(key => {
             if (criminalOutInPrison[key] instanceof Object) {
               let obj = Object.assign({}, criminalOutInPrison[key]);
+              let str = key.substring(0, key.lastIndexOf("Name"));
+              criminalOutInPrison[`${str}Code`] = obj.code;
               criminalOutInPrison[key] = obj.name;
             }
             });
             this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
+            console.log(criminalOutInPrison);
             this.addCriminalOutInPrison(criminalOutInPrison)
               .then(res => {
                 this.saving = false;
