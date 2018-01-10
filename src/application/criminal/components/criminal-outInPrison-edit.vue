@@ -67,7 +67,8 @@ export default {
   },
   created() {
     this.render();
-    this.criminalOutInPrison.id = null;
+    // this.criminalOutInPrison.id = null;
+    this.$store.commit("setCriminalOutInPrison", {});
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
       this.initializing = false;
@@ -140,7 +141,7 @@ export default {
     },
     render() {
       if (!this.criminalOutInPrisonId) {
-        this.criminalOutInPrison = { criminalId: this.$route.params.id };
+        this.criminalOutInPrison = { criminalId: this.$route.params.id, id: null };
         this.loading = false;
       } else {
         this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
@@ -161,6 +162,7 @@ export default {
   .w-px180 {
     width: 180px;
     float: left;
+    padding-right: 0px;
     margin-right: 20px;
     &:nth-child(3n) {
       margin-right: 0;
