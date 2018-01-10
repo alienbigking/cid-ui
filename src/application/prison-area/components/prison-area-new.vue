@@ -66,7 +66,7 @@ export default {
     this.getAllPrisonAreas().then(() => {
       this.gettingAllPrisonAreas = false;
     });
-    this.prisonArea = {};
+    this.$store.commit("setPrisonArea", {});
   },
   methods: {
     ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),

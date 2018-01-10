@@ -45,7 +45,7 @@ export default {
     }
   },
   created() {
-    this.role = {};
+    this.$store.commit("updateRole", {});
   },
   methods: {
     ...mapActions(["addRole"]),

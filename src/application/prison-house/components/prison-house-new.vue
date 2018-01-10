@@ -52,7 +52,7 @@ export default {
     }
   },
   created() {
-    this.prisonHouse = {};
+    this.$store.commit("setPrisonHouse", {});
   },
   methods: {
     ...mapActions(["addPrisonHouse"]),
