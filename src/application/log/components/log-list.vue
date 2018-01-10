@@ -36,6 +36,11 @@
                       {{scope.row.createdTime | moment}}
                     </template>
                   </el-table-column>
+                  <el-table-column align="center" label="操作">
+                    <template slot-scope="scope">
+                      <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
+                    </template>
+                  </el-table-column>
                 </el-table>
                 <div class="pagination-box">
                     <span>共{{ pagedLogs.totalElements }}条信息</span>
@@ -97,27 +102,7 @@ export default {
       this.search();
     },
     onView(id) {
-      this.$router.push(`/prison-area/detail/${id}`);
-    },
-    onEdit(id) {
-      this.$router.push(`/prison-area/edit/${id}`);
-    },
-    onDelete(item) {
-      this.deleteItem = item;
-      this.deleteDialogVisible = true;
-    },
-    onDeleteConfirm() {
-      this.deleting = true;
-      this.deleteLog(this.deleteItem.id)
-        .then(res => {
-          this.deleting = false;
-          this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
-          this.search();
-        })
-        .catch(error => {
-          this.$handleError(error.response, "删除失败");
-        });
+      this.$router.push(`/log/detail/${id}`);
     },
     search() {
       let params = Object.assign({}, this.getFilter(), this.pagination);
@@ -131,9 +116,6 @@ export default {
           result[key] = value;
         }
       });
-    },
-    onNew() {
-      this.$router.push(`/prison-area/new`);
     }
   }
 };

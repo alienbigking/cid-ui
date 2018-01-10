@@ -94,16 +94,4 @@ export default {
     }
   }
 }
-.padding20 {
-  padding-bottom: 20px;
-  padding-right: 20px;
-  overflow: hidden;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  button {
-    float: right;
-  }
-}
 </style>

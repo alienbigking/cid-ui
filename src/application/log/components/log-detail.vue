@@ -1,47 +1,47 @@
 <template>
     <div>
         <div class="card">
-            <span class="um-title">{{ tenant.name }} - 明细</span>
+            <span class="um-title">日志明细</span>
             <div class="form-container">
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>编号：</label><span>{{ tenant.code }}</span>
+                        <label>操作人：</label><span>{{ log.operator }}</span>
                     </el-col>
                     <el-col :span="12">
-                        <label>创建时间：</label><span>{{ tenant.createdTime | moment }}</span>
+                        <label>类别：</label><span>{{ log.type | enumText(logTypes) }}</span>
                     </el-col>
                 </el-row>
                 <el-row type="flex" justify="space-between">
                     <el-col :span="12">
-                        <label>最后更新时间：</label><span>{{ tenant.lastUpdatedTime | moment }}</span>
+                        <label>动作：</label><span>{{ log.action }}</span>
                     </el-col>
+                    <el-col :span="12">
+                       <label>创建时间：</label><span>{{ log.createdTime | moment }}</span>
+                   </el-col>
                 </el-row>
-            </div>
-            <div class="padding20">
-                <div class="form-container">
-                    <label class="title">租户描述：</label>
-                    <div>{{ tenant.description }}</div>
+                <div class="padding20">
+                   <el-button @click="onBack">返回</el-button>
                 </div>
-                <el-button @click="onBack">返回</el-button>
             </div>
         </div>
-
     </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import { default as logTypeService } from "../service/log-type-service";
 
 export default {
   computed: {
     ...mapState({
-      tenant: state => state.tenant.tenant
+      log: state => state.log.log
     })
   },
   created() {
-    this.getTenant(this.$route.params.id);
+    this.getLog(this.$route.params.id);
+    this.logTypes = logTypeService.getAll();
   },
   methods: {
-    ...mapActions(["getTenant"]),
+    ...mapActions(["getLog"]),
     onBack() {
       this.$router.go(-1);
     }
