@@ -5,7 +5,6 @@
         <span class="fs-16">罪犯数据库</span>
     </div>
     <ul class="header-right">
-        <li><router-link to="/index"><i class="iconfont icon-shezhi"></i></router-link></li>
         <li><router-link to="/login">您好，请登录！</router-link></li>
     </ul>
     </el-header>

@@ -153,7 +153,6 @@ import { mapState, mapActions } from "vuex";
 import { default as criminalLookupService } from "@/application/common/service/lookup/criminal-lookup-service";
 import { default as regionLookupService } from "@/application/common/service/lookup/region-lookup-service";
 import _ from "lodash";
-
 export default {
   data() {
     return {
@@ -289,7 +288,6 @@ export default {
             this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => {
               return item.code === this.criminal[type][1];
             });
-
             if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
               regionLookupService.getAllCities(this.criminal[type][1]).then(cities => {
                 cities.map(item => { item.children = []; });
@@ -297,7 +295,6 @@ export default {
                 this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => {
                   return item.code === this.criminal[type][2];
                 });
-
                 if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.length) {
                   regionLookupService.getAllCounties(this.criminal[type][2]).then(counties => {
                     this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(counties);
@@ -410,5 +407,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>

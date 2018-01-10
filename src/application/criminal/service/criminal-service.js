@@ -15,7 +15,6 @@ export default {
         return axios.post('api/criminals', criminal);
     },
     update(criminal) {
-      console.log(123);
         return axios.put(`api/criminals/${criminal.id}`, criminal);
     },
     delete(id) {

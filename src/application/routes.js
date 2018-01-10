@@ -10,6 +10,7 @@ import { routes as user } from './user';
 import { routes as prisonDepartment } from './prison-department';
 import { routes as prisonBureau } from './prison-bureau';
 import { routes as prisonBureauDepartment } from './prison-bureau-department';
+import { routes as log } from './log';
 import { routes as error } from './error';
 import main from './main';
 
@@ -32,7 +33,8 @@ export default [
             ...user,
             ...prisonDepartment,
             ...prisonBureau,
-            ...prisonBureauDepartment
+            ...prisonBureauDepartment,
+            ...log
         ]
     },
     ...login,

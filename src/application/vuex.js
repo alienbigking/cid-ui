@@ -14,5 +14,6 @@ import { vuex as prisonDepartment } from './prison-department';
 import { vuex as prison } from './prison';
 import { vuex as prisonBureau } from './prison-bureau';
 import { vuex as prisonBureauDepartment } from './prison-bureau-department';
+import { vuex as log } from './log';
 
-export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user, court, policeStation, procuratorate, prisonDepartment, prison, prisonBureau, prisonBureauDepartment };
+export default { common, login, me, tenant, prisonArea, prisonHouse, criminal, role, user, court, policeStation, procuratorate, prisonDepartment, prison, prisonBureau, prisonBureauDepartment, log };

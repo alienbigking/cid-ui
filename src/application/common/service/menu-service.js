@@ -171,5 +171,18 @@
                 collapse: true
             }
         ]
+    },
+    {
+        index: '10',
+        name: '日志',
+        collapse: true,
+        children: [
+            {
+                index: '10-1',
+                name: '系统日志',
+                path: '/log/list',
+                collapse: true
+            }
+        ]
     }
   ];
