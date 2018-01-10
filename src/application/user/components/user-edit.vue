@@ -5,9 +5,9 @@
           <p>修改用户信息</p>
       </div>
       <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-          <el-form-item label="账号名称" class="w50" prop="username">
-              <el-input v-model="user.username"></el-input>
-          </el-form-item>
+          <el-form-item label="账号名称" class="w50 the-disabled" prop="username">
+              <span class="el-input__inner">{{user.username}}</span>
+          </el-form-item> 
           <el-form-item label="姓名" class="w50" prop="name">
               <el-input v-model="user.name"></el-input>
           </el-form-item>
