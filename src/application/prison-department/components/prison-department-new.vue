@@ -59,7 +59,7 @@ export default {
     this.getAllPrisonDepartments().then(() => {
       this.gettingAllPrisonDepartments = false;
     });
-    this.prisonDepartment = {};
+    this.$store.commit("setPrisonDepartment", {});
   },
   methods: {
     ...mapActions(["addPrisonDepartment", "getAllPrisonDepartments"]),

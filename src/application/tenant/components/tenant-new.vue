@@ -50,7 +50,7 @@ export default {
     }
   },
   created() {
-    this.tenant = {};
+    this.$store.commit("setTenant", {});
   },
   methods: {
     ...mapActions(["addPrisonTenant"]),

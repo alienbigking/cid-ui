@@ -63,8 +63,8 @@ export default {
     }
   },
   created() {
-    this.user = {};
     this.userStatuses = userStatusService.getAll();
+    this.$store.commit("setUser", {});
   },
   methods: {
     ...mapActions(["addUser"]),
