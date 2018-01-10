@@ -25,17 +25,21 @@ export default {
   },
   data() {
     return {
-      restTime: 5
+      restTime: 5,
+      timeCounter: null
     };
   },
   created() {
-    setInterval(() => {
+    this.timeCounter = setInterval(() => {
       if (this.restTime === 0) {
         this.$router.go(-1);
       } else {
         this.restTime--;
       }
     }, 1000);
+  },
+  beforeDestroy() {
+    clearInterval(this.timeCounter);
   },
   methods: {
     onBack() {
@@ -49,7 +53,6 @@ export default {
 .error {
   width: 100%;
   height: 100%;
-  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   align-items: center;
