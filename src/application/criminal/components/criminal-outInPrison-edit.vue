@@ -67,10 +67,10 @@ export default {
   },
   created() {
     this.render();
-    this.criminalOutInPrison.id = null;
+    // this.criminalOutInPrison.id = null;
+    this.$store.commit("setCriminalOutInPrison", {});
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
-      console.log(this.allOutInPrisonReasons);
       this.initializing = false;
     });
   },
@@ -117,10 +117,13 @@ export default {
             Object.keys(criminalOutInPrison).map(key => {
             if (criminalOutInPrison[key] instanceof Object) {
               let obj = Object.assign({}, criminalOutInPrison[key]);
+              let str = key.substring(0, key.lastIndexOf("Name"));
+              criminalOutInPrison[`${str}Code`] = obj.code;
               criminalOutInPrison[key] = obj.name;
             }
             });
             this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
+            console.log(criminalOutInPrison);
             this.addCriminalOutInPrison(criminalOutInPrison)
               .then(res => {
                 this.saving = false;
@@ -138,7 +141,7 @@ export default {
     },
     render() {
       if (!this.criminalOutInPrisonId) {
-        this.criminalOutInPrison = { criminalId: this.$route.params.id };
+        this.criminalOutInPrison = { criminalId: this.$route.params.id, id: null };
         this.loading = false;
       } else {
         this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
@@ -159,6 +162,7 @@ export default {
   .w-px180 {
     width: 180px;
     float: left;
+    padding-right: 0px;
     margin-right: 20px;
     &:nth-child(3n) {
       margin-right: 0;
