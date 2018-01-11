@@ -24,6 +24,20 @@ Vue.use(errorHander);
 requestInterceptor.config(axios);
 responseInterceptor.config(axios, store, router);
 
+// TODO:重构
+router.beforeEach((to, from, next) => {
+    if (!to.meta.requireAuth) {
+        next();
+        return;
+    }
+    if (store.state.login.accessToken) {
+        next();
+    } else {
+        const login = { path: '/login', query: { redirect: to.fullPath } };
+        next(login);
+    }
+});
+
 /* eslint-disable no-new */
 new Vue({
     el: '#app',

@@ -5,9 +5,7 @@ export default {
                 return response;
             },
             error => {
-                console.log(error);
                 if (error.response) {
-                    console.log(error.response.status);
                     switch (error.response.status) {
                         case 401:
                             store.dispatch('logout');

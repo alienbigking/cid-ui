@@ -43,12 +43,10 @@ export default {
   watch: {
     checkedRoles: {
       handler: _.debounce(function(checkedRoles) {
-        console.log(checkedRoles);
         let arr = [];
         checkedRoles.forEach(item => {
           arr.push({ roleId: item });
         });
-        console.log(arr);
         this.$store.commit("updateUserRole", arr);
       }, 500),
       deep: true
@@ -58,7 +56,10 @@ export default {
     this.getRoles();
     this.getUserRoles(this.userId).then(() => {
       this.loading = false;
-      this.checkedRoles = _.cloneDeep(this.$store.state.user.role);
+      this.checked = _.cloneDeep(this.$store.state.user.role);
+      this.checked.forEach(item => {
+        this.checkedRoles.push(item.roleId);
+      });
     });
   },
   methods: {
@@ -69,10 +70,15 @@ export default {
       "deleteUserRole"
     ]),
     handleCheckAllChange(val) {
-      this.checkedRoles = val ? this.roles : [];
+      if (val) {
+        this.roles.forEach(item => {
+          this.checkedRoles.push(item.id);
+        });
+      } else {
+        this.checkedRoles = [];
+      }
     },
     handleCheckedRolesChange(value) {
-      console.log(value);
       let checkedCount = value.length;
       this.checkAll = checkedCount === this.roles.length;
     },

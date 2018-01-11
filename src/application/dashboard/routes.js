@@ -4,6 +4,7 @@ export default [
     {
         path: '/dashboard',
         component: components.TheDashboard,
-        name: '信息面板'
+        name: '信息面板',
+        meta: { requireAuth: true }
     }
 ];
