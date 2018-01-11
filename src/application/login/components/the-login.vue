@@ -18,7 +18,7 @@
                   <el-checkbox label="记住我"></el-checkbox>
               </el-form-item>
               <div class="form-input-submit">
-                <el-button type="info" @click="onSubmit">登录</el-button>
+                <el-button type="info" @click="onSubmit">登 录</el-button>
               </div>
           </el-form>
       </div>
@@ -119,6 +119,8 @@ export default {
         button {
           width: 100%;
           background-color: #516671;
+          border: 0;
+          color: #fff;
         }
       }
     }

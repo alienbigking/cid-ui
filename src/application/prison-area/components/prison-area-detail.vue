@@ -26,7 +26,6 @@
                   {{prisonArea.description}}
               </div>
               <el-button @click="onBack">返 回</el-button>
-              <!-- <el-button class="button-return">返回</el-button> -->
           </div>
       <!-- </div> -->
   </div>

@@ -19,9 +19,13 @@
                        <label>创建时间：</label><span>{{ log.createdTime | moment }}</span>
                    </el-col>
                 </el-row>
-                <div class="padding20">
-                   <el-button @click="onBack">返回</el-button>
+            </div>
+            <div class="form-container padding20">
+                <label class="title">日志详情：</label>
+                <div>
+                    {{log.detail}}
                 </div>
+                <el-button @click="onBack">返 回</el-button>
             </div>
         </div>
     </div>

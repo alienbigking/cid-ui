@@ -19,8 +19,8 @@
           </el-form-item>
 
           <div class="el-form-item el-form-item-div">
-            <el-button class="btn-return" @click="goBack">返回</el-button>
-            <el-button type="primary" class="btn-confirm" :loading="saving" @click="onSubmit">保存</el-button>
+            <el-button @click="goBack">返 回</el-button>
+            <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
           </div>
       </el-form>
     </div>

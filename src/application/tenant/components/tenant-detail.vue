@@ -22,7 +22,7 @@
                     <label class="title">租户描述：</label>
                     <div>{{ tenant.description }}</div>
                 </div>
-                <el-button @click="onBack">返回</el-button>
+                <el-button @click="onBack">返 回</el-button>
             </div>
         </div>
 

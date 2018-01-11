@@ -1,7 +1,9 @@
 @import "./variable", "./mixin";
-.button-return{
-  @include button-diy(return);
+
+@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure {
+  .button-#{$type} { @include button-diy($type); }
 }
+
 .box{
     height: 100%;
     width: 100%;
@@ -106,8 +108,6 @@
             width: 100%;
             padding-right: 20px;
             button{
-                height: 36px;
-                font-size: 12px;
                 margin-left: 0;
                 &+button{
                     margin-left: 22px;
@@ -290,9 +290,6 @@
         line-height: 50px;
         font-size: 12px;
         padding: 0 20px !important;
-        button{
-            font-size: 12px;
-        }
     }
     .caret-wrapper{
         float: right;
@@ -331,20 +328,7 @@
         margin-right: 20px;
     }
 }
-.searchbtn{
-    background: #29b0a3;
-    color: #fff;
-    width: 100px;
-    border: 0;
-    &:hover{
-      background: #29b0a3;
-      color: #fff;
-    }
-    &:focus{
-      background: #29b0a3;
-      color: #fff;
-    }
-}
+
 .w-px76{
   width: 76px;
   background: #009588;

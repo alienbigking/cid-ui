@@ -49,10 +49,10 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button class="addButton" @click="addPhysicalCharacteristic">新增特征</el-button>
+        <el-button class="button-addInEdit" @click="addPhysicalCharacteristic">新增特征</el-button>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button type="primary" :loading="saving" @click="onSave">保存</el-button>
+          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
       </el-form-item>
     </div>
   </el-form>
@@ -258,9 +258,10 @@ export default {
     color: #f44336;
   }
 }
-.addButton{
-  display: inline-block;
+.button-addInEdit{
+  width: 100px;
+}
+.button-addInEdit{
   float: right;
-  margin-top: 20px;
 }
 </style>

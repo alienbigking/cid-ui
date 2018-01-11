@@ -14,7 +14,7 @@
         <el-input type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
       </el-form-item>
       <el-form-item class="hasButton">
-          <el-button type="primary" :loading="saving" @click="onSubmit">新增</el-button>
+          <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
       </el-form-item>
     </el-form>
   </div>

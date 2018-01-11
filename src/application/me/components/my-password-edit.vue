@@ -19,8 +19,8 @@
               </el-input>
           </el-form-item>
           <div class="form-btn">
-              <el-button @click="goBack">返回</el-button>
-              <el-button type="primary" :loading="saving" @click="onSubmit">确认</el-button>
+              <el-button @click="goBack">返 回</el-button>
+              <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
           </div>
       </el-form>
     </div>

@@ -80,8 +80,8 @@
           <el-input type="textarea" v-model="form.criminalRecord.decisionDetail"></el-input>
         </el-form-item>
         <div class="el-form-item el-form-item-div">
-          <el-button @click="onClose">返回</el-button>
-          <el-button type="primary" :loading="saving" @click="onSave">保存</el-button>
+          <el-button class="button-cancel" @click="onClose">返 回</el-button>
+          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
         </div>
     </el-form>
   </div>

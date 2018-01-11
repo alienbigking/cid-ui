@@ -5,12 +5,12 @@
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
+                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 </div>
-                <el-button type="primary" @click="onNew">新增角色</el-button>
+                <el-button class="button-addInList" @click="onNew">新增角色</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedRoles.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedRoles.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="角色名称">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
@@ -67,6 +67,7 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
+      loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -119,10 +120,12 @@ export default {
         });
     },
     search() {
+      this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedRoles(params).then(() => {
         this.searching = false;
-      });
+        this.loading = false;
+      }).catch(() => { this.searching = false; this.loading = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

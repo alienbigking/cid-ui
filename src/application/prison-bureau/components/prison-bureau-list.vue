@@ -6,12 +6,12 @@
                 <div class="filter">
                     <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                     <el-input placeholder="监狱局名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
+                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 </div>
-                <el-button type="primary" @click="onNew">新增监狱局</el-button>
+                <el-button class="button-addInList" @click="onNew">新增监狱局</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedPrisonHouses.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedPrisonHouses.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="code" label="编号">
                   </el-table-column>
                   <el-table-column prop="name" label="监狱局名称">
@@ -50,8 +50,8 @@
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -70,6 +70,7 @@ export default {
         sort: "createdTime,desc"
       },
       currentPage: 1,
+      loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -87,6 +88,7 @@ export default {
   methods: {
     ...mapActions(["getPagedPrisonHouses", "deletePrisonHouse"]),
     onSearch() {
+      this.searching = true;
       this.pagination.page = 0;
       this.search();
     },
@@ -121,11 +123,11 @@ export default {
         });
     },
     search() {
-      this.searching = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonHouses(params).then(() => {
         this.searching = false;
-      });
+        this.loading = false;
+      }).catch(() => { this.searching = false; this.loading = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

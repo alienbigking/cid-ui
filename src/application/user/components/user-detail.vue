@@ -35,7 +35,7 @@
                         <label>租户名称：</label><span>{{ user.tenantName }}</span>
                     </el-col>
                 </div>
-                <el-button @click="onBack">返回</el-button>
+                <el-button @click="onBack">返 回</el-button>
             </div>
         </div>
 

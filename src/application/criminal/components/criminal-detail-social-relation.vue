@@ -1,6 +1,6 @@
 <template>
   <div class="list-box" v-if="socialRelationShow">
-    <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
+    <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40">
       <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
       <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
       <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
@@ -30,13 +30,20 @@ export default {
       type: Boolean
     }
   },
+  data() {
+    return {
+      loading: true
+    };
+  },
   computed: {
     ...mapState({
       allCriminalSocialRelations: state => state.criminal.allCriminalSocialRelations
     })
   },
   created() {
-    this.getAllCriminalSocialRelations(this.$route.params.id);
+    this.getAllCriminalSocialRelations(this.$route.params.id)
+      .then(() => { this.loading = false; })
+      .catch(() => { this.loading = false; });
   },
   methods: {
     ...mapActions([ "getAllCriminalSocialRelations" ])
