@@ -3,7 +3,8 @@ import mutations from './mutations';
 
 const state = {
     pagedUsers: { content: [] },
-    user: {}
+    user: {},
+    role: []
 };
 
 export default {

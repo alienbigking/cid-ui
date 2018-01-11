@@ -34,6 +34,7 @@
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作">
                     <template slot-scope="scope">
+                      <el-button type="text" @click="onSelectRoles(scope.row.id)">分配角色</el-button>
                       <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
                       <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
                       <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
@@ -54,6 +55,11 @@
                 </div>
             </template>
         </div>
+
+        <el-dialog class="dialog" width="450px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
+          <user-list-edit :userId="userId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></user-list-edit>
+        </el-dialog>
+
         <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
@@ -84,8 +90,12 @@
 import { mapState, mapActions } from "vuex";
 import _ from "lodash";
 import { default as userStatusService } from "../service/user-status-service";
+import UserListEdit from "./user-list-edit";
 
 export default {
+  components: {
+    "user-list-edit": UserListEdit
+  },
   data() {
     return {
       userStatuses: [],
@@ -97,6 +107,8 @@ export default {
       },
       currentPage: 1,
       searching: false,
+      editDialogVisible: false,
+      userId: null,
       deleting: false,
       deleteDialogVisible: false,
       deleteItem: {},
@@ -126,6 +138,10 @@ export default {
     onPageChange(page) {
       this.pagination.page = page - 1;
       this.search();
+    },
+    onSelectRoles(id) {
+      this.editDialogVisible = true;
+      this.userId = id;
     },
     onView(id) {
       this.$router.push(`/user/detail/${id}`);
@@ -211,6 +227,11 @@ export default {
   height: 100%;
   /deep/ .el-table__body-wrapper {
     overflow: inherit;
+  }
+  .dialog{
+    /deep/ .el-dialog--center .el-dialog__body{
+      padding: 0px 27px 15px;
+    }
   }
 }
 
