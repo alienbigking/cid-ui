@@ -59,8 +59,11 @@ export default {
           this.login(this.user)
             .then(() => {
               logService.addLoginLog();
-              // TODO：根据redirect query导航
-              this.$router.push("/dashboard");
+              let redirect = this.$route.query.redirect;
+              if (!redirect) {
+                redirect = "/dashboard";
+              }
+              this.$router.push(redirect);
             })
             .catch(error => {
               this.$handleError(error.response, "登陆失败");
@@ -72,7 +75,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.iconfont{
+.iconfont {
   font-size: 18px;
   color: #999999;
 }
@@ -101,7 +104,7 @@ export default {
     .login-input {
       padding: 0 20px;
       margin-top: 38px;
-      /deep/ .el-input__inner{
+      /deep/ .el-input__inner {
         color: #999;
       }
       .form-input-remember {
@@ -120,13 +123,13 @@ export default {
       }
     }
   }
-  /deep/ .el-checkbox__input.is-checked+.el-checkbox__label{
+  /deep/ .el-checkbox__input.is-checked + .el-checkbox__label {
     color: #606266;
   }
-  /deep/ .el-checkbox__inner:hover{
+  /deep/ .el-checkbox__inner:hover {
     border-color: #dcdfe6;
   }
-  /deep/ .el-checkbox__input.is-checked .el-checkbox__inner{
+  /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
     background: #999;
     border-color: #999;
   }

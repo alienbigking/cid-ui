@@ -326,7 +326,6 @@ export default {
       });
     },
     onSubmit() {
-      console.log(this.criminal);
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
@@ -349,7 +348,6 @@ export default {
               criminal[`${str}Name`] = obj.name;
             }
           });
-          console.log(criminal);
           this.$store.commit("updateCriminal", criminal);
           this.addCriminal().then(response => {
             this.$router.push(`/criminal/list`);

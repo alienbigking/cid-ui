@@ -119,7 +119,6 @@ export default {
     render() {
       if (!this.criminalForfeitId) {
         this.criminalForfeit = { criminalId: this.$route.params.id, id: null };
-        console.log(this.criminalForfeit);
         this.loading = false;
       } else {
         this.getCriminalForfeit(this.criminalForfeitId).then(() => {

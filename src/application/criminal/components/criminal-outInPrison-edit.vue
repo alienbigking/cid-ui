@@ -88,7 +88,6 @@ export default {
           if (this.criminalOutInPrison.id) {
             // 修改
             let criminalOutInPrison = Object.assign({}, this.criminalOutInPrison);
-            console.log(this.criminalOutInPrison);
             Object.keys(criminalOutInPrison).map(key => {
             if (criminalOutInPrison[key] instanceof Object) {
               let obj = Object.assign({}, criminalOutInPrison[key]);
@@ -121,7 +120,6 @@ export default {
             }
             });
             this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
-            console.log(criminalOutInPrison);
             this.addCriminalOutInPrison(criminalOutInPrison)
               .then(res => {
                 this.saving = false;
