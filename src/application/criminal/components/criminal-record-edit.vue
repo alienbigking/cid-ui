@@ -23,7 +23,7 @@
           <el-input v-model="form.criminalRecord.prosecutionAccusation"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="起诉字号" prop="criminalRecord.prosecutionLetterNumber">
-          <el-input v-model="form.criminalRecord.prosecutionLetterNumber"></el-input>
+          <el-input v-model.number="form.criminalRecord.prosecutionLetterNumber"></el-input>
         </el-form-item>
         <el-form-item class="w25"></el-form-item>
 
@@ -34,7 +34,7 @@
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="一审字号" prop="criminalRecord.firstTrialLetterNumber">
-          <el-input v-model="form.criminalRecord.firstTrialLetterNumber"></el-input>
+          <el-input v-model.number="form.criminalRecord.firstTrialLetterNumber"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="终审机关" prop="selectedFinalTrialOrgan">
           <el-select v-model="form.selectedFinalTrialOrgan" value-key="code" :loading="initializing" clearable>
@@ -42,7 +42,7 @@
           </el-select>
         </el-form-item>
         <el-form-item class="w25" label="终审字号" prop="criminalRecord.finalTrialLetterNumber">
-          <el-input v-model="form.criminalRecord.finalTrialLetterNumber"></el-input>
+          <el-input v-model.number="form.criminalRecord.finalTrialLetterNumber"></el-input>
         </el-form-item>
 
         <el-form-item class="w25" label="判决机关" prop="selectedDecisionOrgan">
@@ -54,7 +54,7 @@
           <el-input v-model="form.criminalRecord.decisionAccusation"></el-input>
         </el-form-item>
         <el-form-item class="w25" label="判决字号" prop="criminalRecord.decisionLetterNumber">
-          <el-input v-model="form.criminalRecord.decisionLetterNumber"></el-input>
+          <el-input v-model.number="form.criminalRecord.decisionLetterNumber"></el-input>
         </el-form-item>
 
         <el-form-item class="w25" label="判决日期" prop="criminalRecord.decisionDate">
@@ -118,12 +118,24 @@ export default {
         "criminalRecord.detentionDate": [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
         selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关" }],
         selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关" }],
-        "criminalRecord.prosecutionLetterNumber": [{ required: true, message: "请输入起诉字号", trigger: "blur" }],
+        "criminalRecord.prosecutionLetterNumber": [
+          { required: true, message: "请输入起诉字号", trigger: "blur" },
+          { type: 'number', message: '必须为数字值' }
+        ],
         "criminalRecord.prosecutionAccusation": [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
         selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关" }],
-        "criminalRecord.firstTrialLetterNumber": [{ required: true, message: "请输入一审字号", trigger: "blur" }],
+        "criminalRecord.firstTrialLetterNumber": [
+          { required: true, message: "请输入一审字号", trigger: "blur" },
+          { type: 'number', message: '必须为数字值' }
+        ],
+        "criminalRecord.finalTrialLetterNumber": [
+          { type: 'number', message: '必须为数字值' }
+        ],
         selectedDecisionOrgan: [{ required: true, message: "请选择判决机关" }],
-        "criminalRecord.decisionLetterNumber": [{ required: true, message: "请输入判决字号", trigger: "blur" }],
+        "criminalRecord.decisionLetterNumber": [
+          { required: true, message: "请输入判决字号", trigger: "blur" },
+          { type: 'number', message: '必须为数字值' }
+        ],
         "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期", trigger: "blur" }],
         "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
         "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],

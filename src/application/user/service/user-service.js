@@ -28,5 +28,16 @@ export default {
     },
     disableUser(id) {
         return axios.post(`api/users/${id}/disable`);
+    },
+    getRoles(id) {
+        return axios.get(`api/users/${id}/user-roles`).then(response => {
+            return response.data;
+        });
+    },
+    updateRole(id, role) {
+        return axios.put(`api/users/${id}/user-roles`, role);
+    },
+    deleteRole(id) {
+        return axios.delete(`api/users/${id}/user-roles`);
     }
 };

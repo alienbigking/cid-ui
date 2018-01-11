@@ -29,5 +29,16 @@ export default {
     },
     disableUser({ commit }, id) {
         return userService.disableUser(id);
+    },
+    getUserRoles({ commit, state }, id) {
+        return userService.getRoles(id).then(role => {
+            commit(types.SET_ROLES, role);
+        });
+    },
+    updateUserRole({ commit, state }, id) {
+        return userService.updateRole(id, state.role);
+    },
+    deleteUserRole({ commit, state }, id) {
+        return userService.deleteRole(id);
     }
 };
