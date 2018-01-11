@@ -15,7 +15,7 @@
                     <el-col :span="12">
                         <label>用户状态：</label><span>{{ user.status | enumText(userStatuses)}}</span>
                     </el-col>
-                </el-row>   
+                </el-row>
                 <el-row type="flex" justify="space-between">
                      <el-col :span="12">
                         <label>创建时间：</label><span>{{ user.createdTime | moment }}</span>
@@ -102,18 +102,6 @@ export default {
     & + div {
       line-height: 24px;
     }
-  }
-}
-.padding20 {
-  padding-bottom: 20px;
-  padding-right: 20px;
-  overflow: hidden;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  button {
-    float: right;
   }
 }
 </style>

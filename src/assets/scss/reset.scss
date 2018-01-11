@@ -70,18 +70,19 @@
         background-color: #333;
       }
     }
-}
-.el-input, .el-select{
-    height: 36px;
-    line-height: 36px;
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
-    width: 100%;
-    .el-input__inner{
-        height: 100%;
+    .el-input, .el-select{
+        height: 36px;
+        line-height: 36px;
+        box-sizing: border-box;
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        .el-input__inner{
+            height: 100%;
+        }
     }
 }
+
 .el-button:not([class~="medium"]):not([class~="small"]):not([class~="el-button--mini"]){
     height: 36px;
     line-height: 0;

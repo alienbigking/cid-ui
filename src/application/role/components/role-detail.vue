@@ -85,12 +85,4 @@ export default {
     }
   }
 }
-.padding20 {
-  padding-bottom: 20px;
-  padding-right: 20px;
-  overflow: hidden;
-  button {
-    float: right;
-  }
-}
 </style>

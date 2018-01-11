@@ -54,20 +54,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .form-container {
-  box-sizing: border-box;
-  width: 100%;
-  position: relative;
-  padding: 20px 20px 20px 41px;
-  font-size: 14px;
-  label {
-    font-weight: bold;
-    color: #333;
-    display: inline-block;
-    width: 148px;
-    box-sizing: border-box;
-    float: left;
-    padding-top: 20px;
-  }
   span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
@@ -94,16 +80,5 @@ export default {
     }
   }
 }
-.padding20 {
-  padding-bottom: 20px;
-  padding-right: 20px;
-  overflow: hidden;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  button {
-    float: right;
-  }
-}
+
 </style>
