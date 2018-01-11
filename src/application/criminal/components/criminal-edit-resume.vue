@@ -1,10 +1,10 @@
 <template>
   <div class="">
     <div class="filters">
-      <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
+      <el-button class="button-addInEdit" @click="onNew">新 增</el-button>
     </div>
     <div class="list-box">
-      <el-table class="table40" :data="allCriminalResumes" :loading="loading" header-row-class-name="tableHeader40">
+      <el-table class="table40" :data="allCriminalResumes" v-loading="loading" header-row-class-name="tableHeader40">
         <el-table-column align="center" prop="startDate" label="开始日期"> </el-table-column>
         <el-table-column align="center" prop="endDate" label="结束日期"> </el-table-column>
         <el-table-column align="center" prop="company" label="公司"> </el-table-column>
@@ -35,8 +35,8 @@
       <i class="iconfont icon-tishishuoming"></i>
       <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="deleteDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+        <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -106,7 +106,7 @@ export default {
           this.$store.state.criminal.criminalResume
         );
         this.loading = false;
-      });
+      }).catch(() => { this.loading = false; });
     }
   }
 };

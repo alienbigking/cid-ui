@@ -1,11 +1,11 @@
 <template>
   <div class="container">
     <div class="filters">
-      <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
+      <el-button class="button-addInEdit" @click="onNew">新 增</el-button>
     </div>
     <div class="list-box">
       <template>
-        <el-table class="table40" :data="allCriminalSocialRelations" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40">
           <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
           <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
           <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
@@ -39,8 +39,8 @@
         <i class="iconfont icon-tishishuoming"></i>
         <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
         </span>
     </el-dialog>
   </div>
@@ -59,6 +59,7 @@ export default {
       criminalSocialRelationId: "",
       editDialogVisible: false,
       deleteDialogVisible: false,
+      loading: true,
       deleting: false,
       saving: false,
       deleteItem: {}
@@ -105,7 +106,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalSocialRelations(this.$route.params.id);
+      this.getAllCriminalSocialRelations(this.$route.params.id)
+        .then(() => { this.loading = false; })
+        .catch(() => { this.loading = false; });
     }
   }
 };
@@ -131,4 +134,3 @@ export default {
   padding-right: 0;
 }
 </style>
-

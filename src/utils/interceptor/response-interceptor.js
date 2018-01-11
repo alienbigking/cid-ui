@@ -1,6 +1,5 @@
 export default {
     config(axios, store, router) {
-        console.log(...arguments);
         axios.interceptors.response.use(
             response => {
                 return response;

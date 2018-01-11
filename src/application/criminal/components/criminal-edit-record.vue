@@ -1,16 +1,16 @@
 <template>
   <div class="container">
     <div class="filters">
-      <el-button class="searchbtn w-px76" @click="onNew">新增</el-button>
+      <el-button class="button-addInEdit" @click="onNew">新 增</el-button>
     </div>
     <div class="list-box">
       <template>
-        <el-table class="table40" :data="allCriminalRecords" header-row-class-name="tableHeader40">
+        <el-table class="table40" :data="allCriminalRecords" v-loading="loading" header-row-class-name="tableHeader40">
           <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
           <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关"> </el-table-column>
           <el-table-column align="center" prop="firstTrialOrganName" label="一审机关"> </el-table-column>
           <el-table-column align="center" prop="finalTrialOrganName" label="终审机关"> </el-table-column>
-          <el-table-column align="center" prop="decisionOrganName" label="判决机关"> </el-table-column>          
+          <el-table-column align="center" prop="decisionOrganName" label="判决机关"> </el-table-column>
           <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
@@ -31,8 +31,8 @@
         <i class="iconfont icon-tishishuoming"></i>
         <span>确认删除<b style="margin: 0 10px;"></b>吗</span>
         <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
         </span>
     </el-dialog>
   </div>
@@ -51,6 +51,7 @@ export default {
       criminalRecordId: "",
       editDialogVisible: false,
       deleteDialogVisible: false,
+      loading: true,
       deleting: false,
       deleteItem: {}
     };
@@ -95,7 +96,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalRecords(this.$route.params.id);
+      this.getAllCriminalRecords(this.$route.params.id)
+        .then(() => { this.loading = false; })
+        .catch(() => { this.loading = false; });
     }
   }
 };
@@ -112,5 +115,3 @@ export default {
   }
 }
 </style>
-
-

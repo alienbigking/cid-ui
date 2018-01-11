@@ -11,7 +11,7 @@
               </el-form-item>
               <el-form-item class="hasButton">
                   <el-button @click="onBack">返 回</el-button>
-                  <el-button type="primary" @click="onSubmit">确 认</el-button>
+                  <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
               </el-form-item>
           </el-form>
       </div>
@@ -34,7 +34,8 @@ export default {
         description: [
           { min: 5, max: 255, message: "长度在 5 到 255 个字符", trigger: "blur" }
         ]
-      }
+      },
+      saving: false
     };
   },
   watch: {
@@ -55,12 +56,15 @@ export default {
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
+          this.saving = true;
           this.updateRole()
             .then(res => {
+              this.saving = false;
               this.$message.success("修改成功");
               this.$router.push(`/role/list`);
             })
             .catch(error => {
+              this.saving = false;
               this.$handleError(error.response, "修改失败");
             });
         }

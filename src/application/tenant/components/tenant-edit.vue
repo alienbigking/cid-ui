@@ -14,7 +14,7 @@
                 </el-form-item>
                 <el-form-item class="hasButton">
                     <el-button @click="onBack">返 回</el-button>
-                    <el-button type="primary" :loading="saving" @click="onSubmit">确 认</el-button>
+                    <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
                 </el-form-item>
             </el-form>
         </div>

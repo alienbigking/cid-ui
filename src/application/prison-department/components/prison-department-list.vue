@@ -8,9 +8,9 @@
                     <el-select v-model="filter.parentDepartmentId" clearable :loading="gettingPrisonDepartments">
                         <el-option v-for="(item, index) in allPrisonDepartments" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>
-                    <el-button class="searchbtn" :loading="searching" @click="onSearch">查询</el-button>
+                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 </div>
-                <el-button type="primary" @click="onNew">新增监狱部门</el-button>
+                <el-button class="button-addInList" @click="onNew">新增监狱部门</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonDepartments.content" border header-row-class-name="tableHeader">
@@ -52,8 +52,8 @@
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
           </span>
         </el-dialog>
     </div>

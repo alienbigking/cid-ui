@@ -17,7 +17,7 @@
           </el-form-item>
           <el-form-item class="hasButton">
             <el-button @click="onBack">返 回</el-button>
-            <el-button type="primary" :loading="saving" @click="onSubmit">新增</el-button>
+            <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
           </el-form-item>
         </el-form>
     </div>

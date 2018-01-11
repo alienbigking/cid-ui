@@ -19,11 +19,11 @@
                       type="date" value-format="yyyy-MM-dd"
                       placeholder="创建结束日期" @keyup.enter.native="onSearch">
                     </el-date-picker>
-                    <el-button class="searchbtn" @click="onSearch">查询</el-button>
+                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 </div>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedLogs.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedLogs.content" v-loading='gettingLogs' border header-row-class-name="tableHeader">
                   <el-table-column prop="operator" label="操作人"> </el-table-column>
                   <el-table-column label="类别">
                     <template slot-scope="scope">
@@ -71,11 +71,8 @@ export default {
         sort: "createdTime,desc"
       },
       currentPage: 1,
-      gettingLogs: false,
-      searching: false,
-      deleting: false,
-      deleteDialogVisible: false,
-      deleteItem: {}
+      gettingLogs: true,
+      searching: false
     };
   },
   computed: {
@@ -99,16 +96,19 @@ export default {
     },
     onPageChange(page) {
       this.pagination.page = page - 1;
+      this.gettingLogs = true;
       this.search();
     },
     onView(id) {
       this.$router.push(`/log/detail/${id}`);
     },
     search() {
+      this.gettingLogs = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedLogs(params).then(() => {
         this.searching = false;
-      });
+        this.gettingLogs = false;
+      }).catch(() => { this.searching = false; this.gettingLogs = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

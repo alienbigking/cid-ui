@@ -1,6 +1,9 @@
 @import "./variable", "./mixin";
-.button-return{
-  @include button-diy(return);
+// .button-search{
+//   @include button-diy(search);
+// }
+@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure {
+  .button-#{$type} { @include button-diy($type); }
 }
 .box{
     height: 100%;
@@ -331,20 +334,7 @@
         margin-right: 20px;
     }
 }
-.searchbtn{
-    background: #29b0a3;
-    color: #fff;
-    width: 100px;
-    border: 0;
-    &:hover{
-      background: #29b0a3;
-      color: #fff;
-    }
-    &:focus{
-      background: #29b0a3;
-      color: #fff;
-    }
-}
+
 .w-px76{
   width: 76px;
   background: #009588;

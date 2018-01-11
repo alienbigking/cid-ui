@@ -7,7 +7,7 @@
       <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
           <el-form-item label="账号名称" class="w50 the-disabled" prop="username">
               <span class="el-input__inner">{{user.username}}</span>
-          </el-form-item> 
+          </el-form-item>
           <el-form-item label="姓名" class="w50" prop="name">
               <el-input v-model="user.name"></el-input>
           </el-form-item>
@@ -19,8 +19,8 @@
           </el-form-item>
 
           <div class="el-form-item el-form-item-div">
-            <el-button class="btn-return" @click="goBack">返回</el-button>
-            <el-button type="primary" class="btn-confirm" :loading="saving" @click="onSubmit">保存</el-button>
+            <el-button @click="goBack">返 回</el-button>
+            <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
           </div>
       </el-form>
     </div>
