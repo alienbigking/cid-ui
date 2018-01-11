@@ -4,7 +4,6 @@
   border-color: $color-border;
   color: #fff;
   display: inline-flex;
-  font-size: 12px;
   height: 36px;
   justify-content: center;
   line-height: 0;
@@ -68,6 +67,7 @@
 }
 // 其他按钮
 @mixin button-diy($type: default) {
+    font-size: 12px;
     &:not(.el-button--text){ @include button($type); }
     &:not(.el-button--text):hover{ @include button-hover($type); }
     &:not(.el-button--text):active{ @include button-hover($type); }

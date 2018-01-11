@@ -11,7 +11,7 @@
                 <el-button class="button-addInList" @click="onNew">新增监舍</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedPrisonHouses.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedPrisonHouses.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="code" label="编号">
                   </el-table-column>
                   <el-table-column prop="name" label="监舍名称">
@@ -70,6 +70,7 @@ export default {
         sort: "createdTime,desc"
       },
       currentPage: 1,
+      loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -87,6 +88,7 @@ export default {
   methods: {
     ...mapActions(["getPagedPrisonHouses", "deletePrisonHouse"]),
     onSearch() {
+      this.searching = true;
       this.pagination.page = 0;
       this.search();
     },
@@ -121,11 +123,12 @@ export default {
         });
     },
     search() {
-      this.searching = true;
+      this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonHouses(params).then(() => {
         this.searching = false;
-      });
+        this.loading = false;
+      }).catch(() => { this.searching = false; this.loading = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

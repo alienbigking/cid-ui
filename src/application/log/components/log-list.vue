@@ -31,6 +31,7 @@
                     </template>
                   </el-table-column>
                   <el-table-column prop="action" label="动作"> </el-table-column>
+                  <el-table-column prop="detail" label="详情" :show-overflow-tooltip="true"> </el-table-column>
                   <el-table-column label="创建时间">
                     <template slot-scope="scope">
                       {{scope.row.createdTime | moment}}

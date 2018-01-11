@@ -261,4 +261,7 @@ export default {
 .button-addInEdit{
   width: 100px;
 }
+.button-addInEdit{
+  float: right;
+}
 </style>

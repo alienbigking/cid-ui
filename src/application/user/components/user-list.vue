@@ -14,7 +14,7 @@
                 <el-button class="button-addInList" @click="onNew">新 增</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedUsers.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedUsers.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="username" label="账号">
                   </el-table-column>
                   <el-table-column prop="name" label="名称">
@@ -106,6 +106,7 @@ export default {
         sort: "createdTime,desc"
       },
       currentPage: 1,
+      loading: true,
       searching: false,
       editDialogVisible: false,
       userId: null,
@@ -207,10 +208,12 @@ export default {
         });
     },
     search() {
+      this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedUsers(params).then(() => {
         this.searching = false;
-      });
+        this.loading = false;
+      }).catch(() => { this.searching = false; this.loading = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

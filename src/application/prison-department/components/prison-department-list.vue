@@ -13,7 +13,7 @@
                 <el-button class="button-addInList" @click="onNew">新增监狱部门</el-button>
             </div>
             <template>
-                <el-table class="my_table" :data="pagedPrisonDepartments.content" border header-row-class-name="tableHeader">
+                <el-table class="my_table" :data="pagedPrisonDepartments.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="name" label="部门名称">
                   </el-table-column>
                   <el-table-column prop="parentDepartmentName" label="上级部门名称">
@@ -72,7 +72,8 @@ export default {
         sort: "createdTime,desc"
       },
       currentPage: 1,
-      gettingPrisonDepartments: false,
+      gettingPrisonDepartments: true,
+      loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
@@ -89,7 +90,7 @@ export default {
     this.getAllPrisonDepartments().then(() => {
       this.gettingPrisonDepartments = false;
       this.search();
-    });
+    }).catch(() => { this.gettingPrisonDepartments = false; });
   },
   methods: {
     ...mapActions([
@@ -98,6 +99,7 @@ export default {
       "deletePrisonDepartment"
       ]),
     onSearch() {
+      this.searching = true;
       this.pagination.page = 0;
       this.search();
     },
@@ -132,11 +134,12 @@ export default {
         });
     },
     search() {
-      this.searching = true;
+      this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
       this.getPagedPrisonDepartments(params).then(() => {
         this.searching = false;
-      });
+        this.loading = false;
+      }).catch(() => { this.searching = false; this.loading = false; });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {
