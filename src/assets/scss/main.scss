@@ -1,3 +1,7 @@
+@import "./variable", "./mixin";
+.button-return{
+  @include button-diy(return);
+}
 .box{
     height: 100%;
     width: 100%;
@@ -418,12 +422,12 @@
     float: left;
     padding-top: 20px;
   }
-  span {
+  div:not(.padding20) span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     padding-top: 20px;
-    width: calc(100% - 100px);
+    width: calc(100% - 148px);
     color: #333;
     height: 14px;
     vertical-align: middle;
@@ -445,6 +449,7 @@
   border-bottom-right-radius: 4px;
   button {
     float: right;
+    margin-top: 20px;
   }
   // &>button:last-child:not(:first-child){
   //   margin-top: 20px;

@@ -4,8 +4,8 @@
         <el-form-item class="w-px180" label="罚金单据" prop="receiptNumber">
           <el-input v-model="criminalForfeit.receiptNumber" ></el-input>
         </el-form-item>
-        <el-form-item class="w-px180" label="缴纳罚金" prop="amount">
-          <el-input v-model="criminalForfeit.amount" ></el-input>
+        <el-form-item class="w-px180" label="缴纳罚金(元)" prop="amount">
+          <el-input v-model="criminalForfeit.amount" placeholder="请输入数字，不能带汉字" ></el-input>
         </el-form-item>
         <el-form-item class="w-px180" label="收款单位" prop="payee">
           <el-input v-model="criminalForfeit.payee"></el-input>
@@ -41,8 +41,13 @@ export default {
     return {
       criminalForfeit: _.cloneDeep(this.$store.state.criminal.criminalForfeit),
       rules: {
-        startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
-        endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+        amount: [
+          {required: true, message: "此项不能为空", trigger: "blur"},
+          { validator: this.$validators.decimal8i2f, trigger: "change" }
+        ],
+        paymentDate: [{ required: true, message: "请输入缴纳日期", trigger: "blur" }],
+        receiptNumber: [{required: true, message: "请输入收款单据", trigger: "blur"}],
+        payee: [{required: true, message: "请输入接收单位", trigger: "blur"}]
       },
       loading: true,
       saving: false
@@ -113,7 +118,8 @@ export default {
     },
     render() {
       if (!this.criminalForfeitId) {
-        this.criminalForfeit = { criminalId: this.$route.params.id };
+        this.criminalForfeit = { criminalId: this.$route.params.id, id: null };
+        console.log(this.criminalForfeit);
         this.loading = false;
       } else {
         this.getCriminalForfeit(this.criminalForfeitId).then(() => {

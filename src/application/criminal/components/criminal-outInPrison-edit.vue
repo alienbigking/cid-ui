@@ -67,8 +67,6 @@ export default {
   },
   created() {
     this.render();
-    // this.criminalOutInPrison.id = null;
-    this.$store.commit("setCriminalOutInPrison", {});
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
       this.initializing = false;
