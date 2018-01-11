@@ -61,20 +61,25 @@
   </el-menu>
 </template>
 <script>
-import { default as menus } from "../service/menu-service";
-import { mapGetters } from "vuex";
+import { mapState, mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
     return {
-      menus: menus,
       menuText: ""
     };
   },
   computed: {
+    ...mapState({
+      menus: state => state.common.menus
+    }),
     ...mapGetters(["collapsed"])
   },
+  created() {
+    this.getMenus();
+  },
   methods: {
+    ...mapActions(["getMenus"]),
     showMenu(e, status) {
       this.menuText = status;
     },

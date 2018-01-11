@@ -59,6 +59,7 @@ export default {
           this.login(this.user)
             .then(() => {
               logService.addLoginLog();
+              // TODO：根据redirect query导航
               this.$router.push("/dashboard");
             })
             .catch(error => {
