@@ -25,8 +25,18 @@ function decimal3i2f(rule, value, callback) {
     }
 };
 
+function decimal8i2f(rule, value, callback) {
+    let regExp = /^\d{1,8}(\.\d{1,2})?$/;
+    if (regExp.test(value) === false) {
+        callback(new Error('最多保留8位整数2位小数'));
+    } else {
+        callback();
+    }
+};
+
 export {
     decimal1i2f,
     decimal2i2f,
-    decimal3i2f
+    decimal3i2f,
+    decimal8i2f
 };
