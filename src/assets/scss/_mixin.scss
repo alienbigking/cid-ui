@@ -1,0 +1,28 @@
+// 按钮样式
+@mixin button($type) {
+  font-size: 12px;
+  @if $type == null {
+    color: $color-default;
+  } @else {
+    color: $color-default;
+    background: $white;
+  }
+}
+// 按钮hover样式
+@mixin button-hover($type) {
+  @if $type == null {
+    background: rgba($color-border, 0.2);
+  } @else {
+    color: $color-default;
+    background: rgba($color-border, 0.2);
+    border-color: $color-border;
+  }
+}
+// 其他按钮
+@mixin button-diy($type: default) {
+    @include button($type);
+    &:hover{ @include button-hover($type); }
+    &:active{ @include button-hover($type); }
+    &:focus{ @include button-hover($type); }
+    &:visited{ @include button-hover($type); }
+}
