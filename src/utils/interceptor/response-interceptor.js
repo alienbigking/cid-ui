@@ -17,6 +17,8 @@ export default {
                             router.replace({ path: "/server-error" });
                             break;
                     }
+                } else {
+                    router.replace({ path: "/server-error" });
                 }
                 return Promise.reject(error);
             });
