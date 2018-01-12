@@ -7,6 +7,7 @@ import axios from 'axios';
 import filters from './plugin/filters';
 import validators from './plugin/validators';
 import errorHander from './plugin/error-handler';
+import tokenStorage from './utils/token/token-storage';
 import { default as requestInterceptor } from './utils/interceptor/request-interceptor';
 import { default as responseInterceptor } from './utils/interceptor/response-interceptor';
 
@@ -30,7 +31,7 @@ router.beforeEach((to, from, next) => {
         next();
         return;
     }
-    if (store.state.login.accessToken) {
+    if (tokenStorage.decodeAccessToken()) {
         next();
     } else {
         const login = { path: '/login', query: { redirect: to.fullPath } };
