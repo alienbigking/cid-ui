@@ -9,7 +9,8 @@ export default {
                     const token = JSON.parse(tokenStorage);
                     config.headers.Authorization = `Bearer ${token.access_token}`;
                 }
-                return config;
+                // return config;
+                return Promise.resolve(config);
             },
             error => {
                 return Promise.reject(error);
