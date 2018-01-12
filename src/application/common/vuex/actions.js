@@ -1,9 +1,14 @@
 import * as types from './mutation-types';
 import { default as menuService } from '../service/menu-service';
+import tokenStorage from '@/utils/token/token-storage';
 
 export default {
     getMenus({ commit, rootState }, params) {
-        const tenantType = rootState.login.accessToken.tenant_type;
+        let tenantType;
+        const accessToken = tokenStorage.decodeAccessToken();
+        if (accessToken) {
+            tenantType = accessToken.tenant_type;
+        }
         return menuService.getMenus(tenantType).then(menus => {
             commit(types.SET_MENUS, menus);
         });

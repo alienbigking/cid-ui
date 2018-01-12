@@ -1,3 +1,3 @@
-export { default as NotFound } from './not-found';
-export { default as NotFoundResource } from './not-found-resource';
-export { default as ServerError } from './server-error';
+export { default as TheNotFoundError } from './the-not-found-error';
+export { default as TheForbiddenError } from './the-forbidden-error';
+export { default as TheServerError } from './the-server-error';

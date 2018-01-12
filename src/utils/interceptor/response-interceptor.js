@@ -17,13 +17,13 @@ export default {
                         case 403:
                             // TODO:跳转到403页面
                             router.push({
-                                path: "/not-found-resource"
+                                path: "/forbidden-error"
                               });
                             break;
                         case 404:
                             // TODO:跳转到404页面
                             router.push({
-                                path: "/not-found"
+                                path: "/not-found-error"
                               });
                             break;
                         case 500:

@@ -141,8 +141,8 @@ export default {
       this.search();
     },
     onSelectRoles(id) {
-      this.editDialogVisible = true;
       this.userId = id;
+      this.editDialogVisible = true;
     },
     onView(id) {
       this.$router.push(`/user/detail/${id}`);
