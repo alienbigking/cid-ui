@@ -41,8 +41,8 @@ export default {
     return {
       criminalResume: _.cloneDeep(this.$store.state.criminal.criminalResume),
       rules: {
-        startDate: [{ required: true, message: "请输入开始日期", trigger: "blur" }],
-        endDate: [{ required: true, message: "请输入结束日期", trigger: "blur" }]
+        startDate: [{ required: true, message: "请输入开始日期" }],
+        endDate: [{ required: true, message: "请输入结束日期" }]
       },
       pickerBeginDateBefore: {
         disabledDate: (time) => {

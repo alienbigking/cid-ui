@@ -28,11 +28,11 @@ export default {
       role: _.cloneDeep(this.$store.state.role.role),
       rules: {
         name: [
-          { required: true, message: "请输入角色名称", trigger: "blur" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" }
+          { required: true, message: "请输入角色名称" },
+          { min: 3, max: 5, message: "长度在 3 到 5 个字符" }
         ],
         description: [
-          { min: 5, max: 255, message: "长度在 5 到 255 个字符", trigger: "blur" }
+          { min: 5, max: 255, message: "长度在 5 到 255 个字符" }
         ]
       },
       saving: false

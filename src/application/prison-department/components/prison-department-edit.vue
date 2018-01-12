@@ -31,10 +31,10 @@ export default {
       prisonDepartment: _.cloneDeep(this.$store.state.prisonDepartment.prisonDepartment),
       rules: {
         name: [
-          { required: true, message: "请输入监狱部门名称", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
+          { required: true, message: "请输入监狱部门名称" },
+          { max: 100, message: "长度在 1 到 100 个字符" }
         ],
-        description: [{ max: 255, message: "255 个字符以内", trigger: "blur" }]
+        description: [{ max: 255, message: "255 个字符以内" }]
       },
       saving: false
     };

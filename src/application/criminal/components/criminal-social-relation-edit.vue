@@ -53,12 +53,12 @@ export default {
       },
       rules: {
         "criminalSocialRelation.appellation": [
-          { required: true, message: "请输入称谓", trigger: "blur" },
-          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
+          { required: true, message: "请输入称谓" },
+          { max: 50, message: "长度在 1 到 50 个字符" }
         ],
         "criminalSocialRelation.name": [
-          { required: true, message: "请输入姓名", trigger: "blur" },
-          { max: 100, message: "长度在 1 到 100 个字符", trigger: "blur" }
+          { required: true, message: "请输入姓名" },
+          { max: 100, message: "长度在 1 到 100 个字符" }
         ]
       },
       initializing: true,
