@@ -6,11 +6,7 @@
         <div class="error-number"></div>
         <p class="error-message">非常抱歉</p>
         <p class="error-reason">您访问的页面不存在或已删除</p>
-        <p class="error-action"><span> <b class="rest-time">{{restTime }}</b>秒后自动返回上一页面</span></p>
-        <p>
-          <el-button type="text" class="error-button" @click="onBack">手动返回 >></el-button>
-          <el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button>
-        </p>
+        <p><el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button></p>
       </div>
       <div class="error-right">
         <div class="error-image"></div>
@@ -28,28 +24,7 @@ export default {
     "the-error-header": TheErrorHeader,
     "the-error-footer": TheErrorFooter
   },
-  data() {
-    return {
-      restTime: 5,
-      timeCounter: null
-    };
-  },
-  created() {
-    this.timeCounter = setInterval(() => {
-      if (this.restTime === 0) {
-        this.$router.go(-1);
-      } else {
-        this.restTime--;
-      }
-    }, 1000);
-  },
-  beforeDestroy() {
-    clearInterval(this.timeCounter);
-  },
   methods: {
-    onBack() {
-      this.$router.go(-1);
-    },
     onHome() {
       this.$router.push(`/dashboard`);
     }
@@ -88,13 +63,7 @@ export default {
       .error-reason{
         font-size:18px;
         margin-top:12px;
-      }
-      .error-action{
-        font-size:14px;
-        margin-top:22px;
-      }
-      .rest-time{
-        color:red;
+        margin-bottom: 12px;
       }
       .error-button{
         color:red;
