@@ -10,7 +10,7 @@
                   </el-input>
               </el-form-item>
               <el-form-item class="noLable" prop="password">
-                  <el-input type="password" class="el-input-inner" placeholder="请输入密码" v-model="user.password">
+                  <el-input type="password" class="el-input-inner" placeholder="请输入密码" v-model="user.password"  @keyup.enter.native="onSubmit">
                       <span slot="prefix" class="iconfont icon-lock_fill"></span>
                   </el-input>
               </el-form-item>
