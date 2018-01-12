@@ -22,7 +22,7 @@ export default [
     {
         path: '/prison-department/detail/:id',
         component: components.PrisonDepartmentDetail,
-        name: '监舍监狱部门',
+        name: '监狱部门明细',
         meta: { requireAuth: true }
     }
 ];

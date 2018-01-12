@@ -1,13 +1,13 @@
 <template>
     <div class="card">
         <div class="um-title">
-            <p>新增监狱局部门</p>
+            <p>新增部门</p>
         </div>
         <el-form class="formPadding" :model="prisonBureauDepartment" :rules="rules" ref="form" label-position="top">
           <el-form-item class="w50" label="名称" prop="name">
             <el-input v-model="prisonBureauDepartment.name"></el-input>
           </el-form-item>
-          <el-form-item class="w50" label="上级监狱局部门" prop="parentDepartmentId">
+          <el-form-item class="w50" label="上级部门" prop="parentDepartmentId">
             <el-select v-model="prisonBureauDepartment.parentDepartmentId" clearable :loading="gettingAllPrisonBureauDepartments">
               <el-option v-for="(item, index) in allPrisonBureauDepartments" :key="index" :label="item.name" :value="item.id"></el-option>
             </el-select>

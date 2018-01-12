@@ -6,7 +6,11 @@
         <div class="error-number"></div>
         <p class="error-message">内部服务器错误</p>
         <p class="error-reason">您查找的资源存在问题，无法显示</p>
-        <p class="error-action"><span><b class="rest-time">{{restTime }}</b>秒后自动返回上一页面</span><el-button type="text" class="error-button" @click="onBack">手动返回 >></el-button></p>
+        <p class="error-action"><span><b class="rest-time">{{restTime }}</b>秒后自动返回上一页面</span></p>
+        <p>
+          <el-button type="text" class="error-button" @click="onBack">手动返回 >></el-button>
+          <el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button>
+        </p>
       </div>
       <div class="error-right">
         <div class="error-image"></div>
@@ -45,6 +49,9 @@ export default {
   methods: {
     onBack() {
       this.$router.go(-1);
+    },
+    onHome() {
+      this.$router.push(`/dashboard`);
     }
   }
 };
@@ -91,8 +98,6 @@ export default {
       }
       .error-button{
         color:red;
-        display:inline-block;
-        margin-left:20px;
       }
     }
     .error-right{ 
