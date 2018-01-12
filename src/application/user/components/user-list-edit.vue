@@ -8,8 +8,8 @@
       <el-checkbox v-for="(item, index) in roles" :label="item.id" :key="index">{{item.name}}</el-checkbox>
     </el-checkbox-group>
     <div class="user-role-button">
-      <el-button class="btn-return" @click="onClose">取消</el-button>
-      <el-button type="primary" @click="onSave" :loading="saving">确认</el-button>
+      <el-button class="button-cancel" @click="onClose">取消</el-button>
+      <el-button class="button-confirm" @click="onSave" :loading="saving">确认</el-button>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
       type: Boolean
     },
     userId: {
+      default: '',
       type: String
     }
   },
@@ -41,6 +42,12 @@ export default {
     })
   },
   watch: {
+    editDialogVisible(val) {
+      if (val) {
+        this.loading = true;
+        this.render();
+      }
+    },
     checkedRoles: {
       handler: _.debounce(function(checkedRoles) {
         let arr = [];
@@ -53,13 +60,8 @@ export default {
     }
   },
   created() {
-    this.getRoles();
-    this.getUserRoles(this.userId).then(() => {
-      this.loading = false;
-      this.checked = _.cloneDeep(this.$store.state.user.role);
-      this.checked.forEach(item => {
-        this.checkedRoles.push(item.roleId);
-      });
+    this.getRoles().then(() => {
+      this.render();
     });
   },
   methods: {
@@ -70,12 +72,11 @@ export default {
       "deleteUserRole"
     ]),
     handleCheckAllChange(val) {
+      this.checkedRoles = [];
       if (val) {
         this.roles.forEach(item => {
           this.checkedRoles.push(item.id);
         });
-      } else {
-        this.checkedRoles = [];
       }
     },
     handleCheckedRolesChange(value) {
@@ -113,6 +114,17 @@ export default {
             this.$message.error("删除失败");
           });
       }
+    },
+    render() {
+      this.checkedRoles = [];
+      this.getUserRoles(this.userId).then(() => {
+        this.loading = false;
+        this.checked = _.cloneDeep(this.$store.state.user.role);
+        this.checkAll = this.checked.length === this.roles.length;
+        this.checked.forEach(item => {
+          this.checkedRoles.push(item.roleId);
+        });
+      });
     }
   }
 };
@@ -154,6 +166,7 @@ export default {
 }
 .user-role-button{
   margin-top:15px;
-  margin-left:245px;
+  display: flex;
+  justify-content: flex-end;
 }
 </style>

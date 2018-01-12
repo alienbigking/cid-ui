@@ -8,7 +8,7 @@
                     <el-input placeholder="姓名" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 </div>
-                <el-button class="button-addInList" @click="onNew">新增罪犯</el-button>
+                <el-button class="button-addInList" @click="onNew">新增</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedCriminals.content" v-loading="loading" border header-row-class-name="tableHeader">
