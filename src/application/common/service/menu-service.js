@@ -16,6 +16,12 @@ export default {
 
 const prisonMenus = [
     {
+        index: '3',
+        name: '工作台',
+        path: '/dashboard',
+        collapse: true
+    },
+    {
         index: '7',
         name: '部门',
         collapse: true,
@@ -146,6 +152,12 @@ const prisonMenus = [
 
 const prisonBureauMenus = [
     {
+        index: '8',
+        name: '工作台',
+        path: '/dashboard',
+        collapse: true
+    },
+    {
         index: '9',
         name: '部门',
         collapse: true,
@@ -218,6 +230,12 @@ const prisonBureauMenus = [
 ];
 
 const platformMenus = [
+    {
+        index: '2',
+        name: '工作台',
+        path: '/dashboard',
+        collapse: true
+    },
     {
         index: '3',
         name: '租户',
