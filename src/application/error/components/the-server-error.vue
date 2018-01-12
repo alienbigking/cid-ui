@@ -5,7 +5,7 @@
       <div class="error-left">
         <div class="error-number"></div>
         <p class="error-message">内部服务器错误</p>
-        <p class="error-reason">您查找的资源存在问题，无法显示</p>
+        <p class="error-reason">请联系系统管理员</p>
         <p><el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button></p>
       </div>
       <div class="error-right">
