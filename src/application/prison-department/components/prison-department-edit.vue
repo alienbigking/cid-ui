@@ -1,7 +1,7 @@
 <template>
     <div class="card">
         <div class="um-title">
-            <p>修改监狱部门</p>
+            <p>修改部门</p>
         </div>
         <el-form class="formPadding" :model="prisonDepartment" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="名称" prop="name" >
