@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查询监狱局部门</span>
+            <span class="um-title">查询部门</span>
             <div class="filters">
                 <div class="filter">
                     <el-input placeholder="部门名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>

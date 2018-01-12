@@ -5,7 +5,7 @@
       <div class="error-left">
         <div class="error-number"></div>
         <p class="error-reason">对不起，您无权访问该页面！</p>
-        <p class="error-action"><span><b class="rest-time">{{restTime }}</b>秒后自动返回上一页面</span><el-button type="text" class="error-button" @click="onBack">手动返回 >></el-button></p>
+        <p><el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button></p>
       </div>
       <div class="error-right">
         <div class="error-image"></div>
@@ -23,27 +23,9 @@ export default {
     "the-error-header": TheErrorHeader,
     "the-error-footer": TheErrorFooter
   },
-  data() {
-    return {
-      restTime: 5,
-      timeCounter: null
-    };
-  },
-  created() {
-    this.timeCounter = setInterval(() => {
-      if (this.restTime === 0) {
-        this.$router.go(-1);
-      } else {
-        this.restTime--;
-      }
-    }, 1000);
-  },
-  beforeDestroy() {
-    clearInterval(this.timeCounter);
-  },
   methods: {
-    onBack() {
-      this.$router.go(-1);
+    onHome() {
+      this.$router.push(`/dashboard`);
     }
   }
 };
@@ -60,7 +42,7 @@ export default {
   .error-box{
     display: flex;
     flex-direction: row;
-    margin-top: 222px;
+    transform: translateY(50%);
     width: 650px;
     box-sizing: content-box;
     .error-left{
@@ -76,18 +58,10 @@ export default {
       .error-reason{
         font-size:18px;
         margin-top:33px;
-      }
-      .error-action{
-        font-size:14px;
-        margin-top:22px;
-      }
-      .rest-time{
-        color:red;
+        margin-bottom: 12px;
       }
       .error-button{
         color:red;
-        display:inline-block;
-        margin-left:20px;
       }
     }
     .error-right{ 

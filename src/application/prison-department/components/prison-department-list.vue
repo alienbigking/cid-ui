@@ -1,10 +1,10 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查询监狱部门</span>
+            <span class="um-title">查询部门</span>
             <div class="filters">
                 <div class="filter">
-                    <el-input placeholder="监狱部门名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                    <el-input placeholder="部门名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
                     <el-select v-model="filter.parentDepartmentId" clearable :loading="gettingPrisonDepartments">
                         <el-option v-for="(item, index) in allPrisonDepartments" :key="index" :label="item.name" :value="item.id"></el-option>
                     </el-select>

@@ -22,7 +22,7 @@
             </div>
             <div class="padding20">
                 <div class="form-container">
-                    <label class="title">监狱部门描述：</label>
+                    <label class="title">部门描述：</label>
                     <div>
                         {{prisonDepartment.description}}
                     </div>
