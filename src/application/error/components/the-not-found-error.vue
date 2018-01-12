@@ -43,7 +43,7 @@ export default {
   .error-box{
     display: flex;
     flex-direction: row;
-    margin-top: 222px;
+    margin-top: 160px;
     width: 650px;
     box-sizing: content-box;
     .error-left{
