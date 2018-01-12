@@ -1,19 +1,19 @@
 <template>
-  <el-menu 
-    unique-opened 
-    :collapse="collapsed" 
-    class="base" 
-    text-color="#d1d1d1" 
+  <el-menu
+    unique-opened
+    :collapse="collapsed"
+    class="base"
+    text-color="#d1d1d1"
     active-text-color="#fff">
     <template v-for="(menu, index) in menus">
-      <el-submenu 
-        :key="menu.index" 
-        :index="menu.index" 
-        v-if="menu.children" 
-        class="first" 
+      <el-submenu
+        v-if="!menu.children"
+        :key="menu.index"
+        :index="menu.index"
+        class="first no-arrow"
         @mouseenter.native="showMenu(index,menu.name)">
-          <li 
-            class="menuText" 
+          <li
+            class="menuText"
             :style="collapsed ? 'display: block' : 'display: none'">
             {{ menuText }}
           </li>
@@ -21,42 +21,59 @@
             <i class="iconfont icon-shezhi"></i>
             <span>{{menu.name}}</span>
           </template>
-          <template v-for="submenu in menu.children">
-            <el-submenu 
-              :key="submenu.index" 
-              :index="submenu.index" 
-              v-if="submenu.children" 
+      </el-submenu>
+      <el-submenu
+        v-if="menu.children"
+        :key="menu.index"
+        :index="menu.index"
+        class="first"
+        @mouseenter.native="showMenu(index,menu.name)">
+          <li
+            class="menuText"
+            :style="collapsed ? 'display: block' : 'display: none'">
+            {{ menuText }}
+          </li>
+          <template slot="title">
+            <i class="iconfont icon-shezhi"></i>
+            <span>{{menu.name}}</span>
+          </template>
+          <template
+            v-for="submenu in menu.children">
+            <el-submenu
+              :key="submenu.index"
+              :index="submenu.index"
+              v-if="submenu.children"
               class="second">
                 <template slot="title">
                   <span>{{submenu.name}}</span>
                 </template>
                 <template v-for="item in submenu.children">
-                  <el-menu-item 
-                    :key="item.index" 
-                    :index="item.index" 
-                    @click.native="onNavigate(item.path)"  
+                  <el-menu-item
+                    :key="item.index"
+                    :index="item.index"
+                    @click.native="onNavigate(item.path)"
                     class="third">
                       <span slot="title">{{item.name}}</span>
                   </el-menu-item>
                 </template>
             </el-submenu>
-            <el-menu-item 
-              :key="submenu.index" 
-              :index="submenu.index" 
+            <el-menu-item
+              :key="submenu.index"
+              :index="submenu.index"
               v-else @click.native="onNavigate(submenu.path)">
                 <span slot="title">{{submenu.name}}</span>
             </el-menu-item>
           </template>
       </el-submenu>
-      <el-menu-item 
-        :key="menu.index" 
-        :index="menu.index" 
-        v-else 
-        @click.native="onNavigate(menu.path)" 
-        class="hahahaha">
+      <!-- <el-menu-item
+        :key="menu.index"
+        :index="menu.index"
+        v-else
+        @click.native="onNavigate(menu.path)"
+        class="first">
           <i class="iconfont icon-shezhi"></i>
           <span slot="title">{{menu.name}}</span>
-      </el-menu-item>
+      </el-menu-item> -->
     </template>
   </el-menu>
 </template>
@@ -81,7 +98,9 @@ export default {
   methods: {
     ...mapActions(["getMenus"]),
     showMenu(e, status) {
-      this.menuText = status;
+      setTimeout(() => {
+        this.menuText = status;
+      }, 500);
     },
     onNavigate(path) {
       this.$router.push(path);
@@ -104,6 +123,9 @@ export default {
           background: transparent;
         }
       }
+    }
+    &.no-arrow{
+      /deep/ .el-submenu__icon-arrow{ display: none;}
     }
     .second:last-child {
       border-bottom: 1px solid #303b40;
@@ -140,6 +162,7 @@ export default {
     font-size: 14px;
     background: #29b0a3;
     color: #fff;
+    min-width: 200px;
   }
   .iconfont {
     margin-right: 14px;
