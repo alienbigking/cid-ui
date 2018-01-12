@@ -43,10 +43,10 @@ export default {
         password: "Password@1"
       },
       rules: {
-        username: [{ required: true, message: "用户名不能为空", trigger: "blur" }],
+        username: [{ required: true, message: "用户名不能为空" }],
         password: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
+          { required: true, message: "密码不能为空" },
+          { min: 6, message: "密码必须大于6位" }
         ]
       }
     };

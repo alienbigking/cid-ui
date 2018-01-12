@@ -113,19 +113,19 @@ export default {
         )
       },
       rules: {
-        "criminalRecord.decisionAccusation": [{ required: true, message: "请输入判决罪名", trigger: "blur" }],
-        "criminalRecord.arrestDate": [{ required: true, message: "请选择逮捕日期", trigger: "blur" }],
-        "criminalRecord.detentionDate": [{ required: true, message: "请输入羁押日期", trigger: "blur" }],
+        "criminalRecord.decisionAccusation": [{ required: true, message: "请输入判决罪名" }],
+        "criminalRecord.arrestDate": [{ required: true, message: "请选择逮捕日期" }],
+        "criminalRecord.detentionDate": [{ required: true, message: "请输入羁押日期" }],
         selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关" }],
         selectedProsecutionOrgan: [{ required: true, message: "请选择起诉机关" }],
         "criminalRecord.prosecutionLetterNumber": [
-          { required: true, message: "请输入起诉字号", trigger: "blur" },
+          { required: true, message: "请输入起诉字号" },
           { type: 'number', message: '必须为数字值' }
         ],
-        "criminalRecord.prosecutionAccusation": [{ required: true, message: "请输入起诉罪名", trigger: "blur" }],
+        "criminalRecord.prosecutionAccusation": [{ required: true, message: "请输入起诉罪名" }],
         selectedFirstTrialOrgan: [{ required: true, message: "请选择一审机关" }],
         "criminalRecord.firstTrialLetterNumber": [
-          { required: true, message: "请输入一审字号", trigger: "blur" },
+          { required: true, message: "请输入一审字号" },
           { type: 'number', message: '必须为数字值' }
         ],
         "criminalRecord.finalTrialLetterNumber": [
@@ -133,14 +133,14 @@ export default {
         ],
         selectedDecisionOrgan: [{ required: true, message: "请选择判决机关" }],
         "criminalRecord.decisionLetterNumber": [
-          { required: true, message: "请输入判决字号", trigger: "blur" },
+          { required: true, message: "请输入判决字号" },
           { type: 'number', message: '必须为数字值' }
         ],
-        "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期", trigger: "blur" }],
-        "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限", trigger: "blur" }],
-        "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期", trigger: "blur" }],
-        "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期", trigger: "blur" }],
-        "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉", trigger: "blur" }]
+        "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期" }],
+        "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限" }],
+        "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期" }],
+        "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期" }],
+        "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉" }]
       },
       pickerBeginDateBefore: {
         disabledDate: (time) => {

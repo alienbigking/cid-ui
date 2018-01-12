@@ -42,12 +42,12 @@ export default {
       criminalForfeit: _.cloneDeep(this.$store.state.criminal.criminalForfeit),
       rules: {
         amount: [
-          {required: true, message: "此项不能为空", trigger: "blur"},
-          { validator: this.$validators.decimal8i2f, trigger: "change" }
+          {required: true, message: "此项不能为空"},
+          { validator: this.$validators.decimal8i2f }
         ],
-        paymentDate: [{ required: true, message: "请输入缴纳日期", trigger: "blur" }],
-        receiptNumber: [{required: true, message: "请输入收款单据", trigger: "blur"}],
-        payee: [{required: true, message: "请输入接收单位", trigger: "blur"}]
+        paymentDate: [{ required: true, message: "请输入缴纳日期" }],
+        receiptNumber: [{ required: true, message: "请输入收款单据" }],
+        payee: [{ required: true, message: "请输入接收单位" }]
       },
       loading: true,
       saving: false

@@ -7,30 +7,14 @@ export default {
             error => {
                 if (error.response) {
                     switch (error.response.status) {
-                        case 401:
-                            store.dispatch('logout');
-                            router.replace({
-                                path: '/login',
-                                query: { redirect: router.currentRoute.fullPath }
-                            });
-                            break;
                         case 403:
-                            // TODO:跳转到403页面
-                            router.push({
-                                path: "/forbidden-error"
-                              });
+                            router.replace({ path: "/forbidden-error" });
                             break;
                         case 404:
-                            // TODO:跳转到404页面
-                            router.push({
-                                path: "/not-found-error"
-                              });
+                            router.replace({ path: "/not-found-error" });
                             break;
                         case 500:
-                            // TODO:跳转到错误页面
-                            router.push({
-                                path: "/server-error"
-                              });
+                            router.replace({ path: "/server-error" });
                             break;
                     }
                 }

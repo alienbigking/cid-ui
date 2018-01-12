@@ -42,7 +42,7 @@ export default {
     return {
       user: _.cloneDeep(this.$store.state.user.user),
       rules: {
-        name: [{ required: true, message: "姓名不能为空", trigger: "blur" }]
+        name: [{ required: true, message: "姓名不能为空" }]
       },
       saving: false
     };

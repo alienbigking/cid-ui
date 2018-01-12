@@ -46,19 +46,18 @@ export default {
     rules() {
       return {
         oldPassword: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
+          { required: true, message: "密码不能为空" },
+          { min: 6, message: "密码必须大于6位" }
         ],
         newPassword: [
-          { required: true, message: "密码不能为空", trigger: "blur" },
-          { min: 6, message: "密码必须大于6位", trigger: "blur" }
+          { required: true, message: "密码不能为空" },
+          { min: 6, message: "密码必须大于6位" }
         ],
         checkPassword: [
           {
             validator: this.$validators.equalTo,
             compareTo: this.userPassword.newPassword,
-            message: "密码不匹配",
-            trigger: "blur"
+            message: "密码不匹配"
           }
         ]
       };
