@@ -120,7 +120,7 @@ export default {
       this.getUserRoles(this.userId).then(() => {
         this.loading = false;
         this.checked = _.cloneDeep(this.$store.state.user.role);
-        this.checkAll = this.checked === this.roles.length;
+        this.checkAll = this.checked.length === this.roles.length;
         this.checked.forEach(item => {
           this.checkedRoles.push(item.roleId);
         });
