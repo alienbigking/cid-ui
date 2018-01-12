@@ -26,7 +26,7 @@
               {{scope.row.lastUpdatedTime | moment}}
           </template>
         </el-table-column>
-        <el-table-column label="操作" min-width="122">
+        <el-table-column align="center" label="操作" width="170px">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
             <el-button type="text" @click="onDelete(scope.row)">删除</el-button>

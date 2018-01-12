@@ -32,7 +32,7 @@
                   <el-table-column label="用户状态" sortable >
                     <template slot-scope="scope">{{scope.row.status | enumText(userStatuses)}}</template>
                   </el-table-column>
-                  <el-table-column align="center" prop="opretion" label="操作">
+                  <el-table-column align="center" prop="opretion" label="操作" width="310px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onSelectRoles(scope.row.id)">分配角色</el-button>
                       <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>

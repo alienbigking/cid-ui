@@ -14,8 +14,6 @@
             <el-form-item class="w25" label="性别" prop="genderCode">
               <el-select v-model="criminal.genderCode" value-key="code" :loading="initializing" placeholder="请选择性别" clearable>
                 <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
-                <!-- <el-option label="男" value="gnd0001"></el-option> -->
-                <!-- <el-option label="女" value="gnd0002"></el-option> -->
               </el-select>
             </el-form-item>
             <el-form-item class="w25" label="出生日期" prop="birthday">

@@ -26,7 +26,7 @@
                 <el-col :span="6">
                     <label>出生日期:</label><span>{{criminal.birthday}}</span>
                 </el-col>
-                
+
                 <el-col :span="6">
                     <label>婚否：</label><span>{{criminal.married?"是":"否"}}</span>
                 </el-col>
@@ -106,7 +106,7 @@
                     <label>床位号：</label><span>{{criminal.bedNumber}}</span>
                 </el-col>
             </el-row>
-            <el-row type="flex">   
+            <el-row type="flex">
                 <el-col :span="24">
                     <label>备注：</label><span class="s50">{{criminal.remark}}</span>
                 </el-col>
@@ -128,7 +128,7 @@
         简历
         <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <criminal-detail-resume :resumeShow="resumeShow"></criminal-detail-resume>   
+      <criminal-detail-resume :resumeShow="resumeShow"></criminal-detail-resume>
   </div>
   <!-- 体貌特征 -->
   <div class="card">
@@ -192,7 +192,7 @@
         罚金
         <span class="iconfont" :class="forfeitShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <criminal-detail-forfeit :forfeitShow="forfeitShow"></criminal-detail-forfeit>   
+      <criminal-detail-forfeit :forfeitShow="forfeitShow"></criminal-detail-forfeit>
   </div>
   <!-- 出入监 -->
   <div class="card">
@@ -200,7 +200,7 @@
         出入监
         <span class="iconfont" :class="outInPrisonShow?'icon-unfold':'icon-enter'"></span>
       </div>
-      <criminal-detail-outInPrison :outInPrisonShow="outInPrisonShow"></criminal-detail-outInPrison>   
+      <criminal-detail-outInPrison :outInPrisonShow="outInPrisonShow"></criminal-detail-outInPrison>
   </div>
 </div>
 
@@ -279,10 +279,6 @@ export default {
   }
   .iconfont{
     float: right;
-  }
-  .list-box {
-    margin-left: 0px;
-    padding: 30px 20px 20px 20px;
   }
 }
 .form-container {
