@@ -3,14 +3,12 @@
         <div class="card">
             <span class="um-title">查询用户</span>
             <div class="filters">
-                <div class="filter">
-                    <el-input placeholder="账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
-                    <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                    <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择使用状态">
-                      <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
-                    </el-select>
-                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-                </div>
+                <el-input placeholder="账号" v-model="filter.username" @keyup.enter.native="onSearch"></el-input>
+                <el-input placeholder="名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择使用状态">
+                  <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                </el-select>
+                <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
                 <el-button class="button-addInList" @click="onNew">新增</el-button>
             </div>
             <template>
