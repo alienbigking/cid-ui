@@ -3,24 +3,22 @@
         <div class="card">
             <span class="um-title">查询日志</span>
             <div class="filters">
-                <div class="filter">
-                    <el-input placeholder="操作人" v-model="filter.operator" @keyup.enter.native="onSearch"></el-input>
-                    <el-select v-model="filter.type" @keyup.enter.native="onSearch" clearable placeholder="请选择类别">
-                      <el-option v-for="item in logTypes" :key="item.value" :label="item.text" :value="item.value"></el-option>
-                    </el-select>
-                    <el-input placeholder="动作" v-model="filter.action" @keyup.enter.native="onSearch"></el-input>
-                    <el-date-picker
-                      v-model="filter.createdStartDate"
-                      type="date" value-format="yyyy-MM-dd"
-                      placeholder="创建开始日期" @keyup.enter.native="onSearch">
-                    </el-date-picker>
-                    <el-date-picker
-                      v-model="filter.createdEndDate"
-                      type="date" value-format="yyyy-MM-dd"
-                      placeholder="创建结束日期" @keyup.enter.native="onSearch">
-                    </el-date-picker>
-                    <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-                </div>
+                <el-input placeholder="操作人" v-model="filter.operator" @keyup.enter.native="onSearch"></el-input>
+                <el-select v-model="filter.type" @keyup.enter.native="onSearch" clearable placeholder="请选择类别">
+                    <el-option v-for="item in logTypes" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                </el-select>
+                <el-input placeholder="动作" v-model="filter.action" @keyup.enter.native="onSearch"></el-input>
+                <el-date-picker
+                  v-model="filter.createdStartDate"
+                  type="date" value-format="yyyy-MM-dd"
+                  placeholder="创建开始日期" @keyup.enter.native="onSearch">
+                </el-date-picker>
+                <el-date-picker
+                  v-model="filter.createdEndDate"
+                  type="date" value-format="yyyy-MM-dd"
+                  placeholder="创建结束日期" @keyup.enter.native="onSearch">
+                </el-date-picker>
+                <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedLogs.content" v-loading='gettingLogs' border header-row-class-name="tableHeader">

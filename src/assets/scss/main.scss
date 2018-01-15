@@ -4,6 +4,21 @@
   .button-#{$type} { @include button-diy($type); }
 }
 
+.filters{ // 筛选框
+    padding: 10px 20px 20px;
+    overflow: hidden;
+    &>[class^="el-"]{
+      vertical-align: top;
+      margin-top: 10px;
+      &:not(.el-button) {
+        width: 176px;
+        margin-right: 20px;
+      }
+      &.button-addInList{
+        float: right;
+      }
+    }
+}
 .box{
     height: 100%;
     width: 100%;
@@ -309,23 +324,6 @@
     }
     &.el-table--border::after, &.el-table--group::after{
         display: none;
-    }
-}
-
-.filters{ // 筛选框
-    padding: 20px 20px 23px;
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    .filter{
-        // flex-shrink: 0;
-        display: inline-flex;
-        align-items: center;
-    }
-    .el-input,.el-select{
-        width: 176px;
-        margin-right: 20px;
     }
 }
 
