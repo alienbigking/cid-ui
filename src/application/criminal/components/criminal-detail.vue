@@ -223,7 +223,7 @@ export default {
   },
   data() {
     return {
-      informationShow: false,
+      informationShow: true,
       recordShow: false,
       resumeShow: false,
       featureShow: false,

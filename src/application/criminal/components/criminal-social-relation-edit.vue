@@ -61,6 +61,17 @@ export default {
           { max: 100, message: "长度在 1 到 100 个字符" }
         ]
       },
+      // rules: {
+      //   type: "object",
+      //   form: {
+      //     type: "object",
+      //     required: true,
+      //     criminalSocialRelation: {
+      //       appellation: { type: "string", required: true },
+      //       name: { type: "string", required: true }
+      //     }
+      //   }
+      // },
       initializing: true,
       allPoliticalStatuses: [],
       loading: true,
