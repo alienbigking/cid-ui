@@ -16,6 +16,7 @@
     "build:prod": "cross-env CONFIG_ENV=prod node build/build.js"
   },
   "dependencies": {
+    "async-validator": "^1.8.2",
     "axios": "^0.17.1",
     "element-ui": "^2.0.11",
     "jwt-decode": "^2.2.0",
