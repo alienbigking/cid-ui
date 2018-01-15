@@ -59,18 +59,21 @@ export default {
   label {
     font-weight: bold;
     color: #333;
-    display: inline-block;
     width: 148px;
+    padding-top: 20px;
+    line-height: 1;
     box-sizing: border-box;
+    float: left;
   }
   span {
     display: inline-block;
     border-bottom: 1px solid #ddd;
-    box-sizing: border-box;
-    padding-bottom: 19px;
+    padding-bottom: 10px;
     padding-top: 20px;
     width: calc(100% - 148px);
     color: #333;
+    height: 14px;
+    vertical-align: middle;
   }
   .el-row .el-col-12:first-child {
     span {
@@ -80,6 +83,8 @@ export default {
   .title {
     display: block;
     margin-bottom: 10px;
+    float: none;
+    padding-top: 0;
     & + div {
       line-height: 24px;
     }
