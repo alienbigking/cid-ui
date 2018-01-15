@@ -137,7 +137,10 @@ export default {
           { type: 'number', message: '必须为数字值' }
         ],
         "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期" }],
-        "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限" }],
+        "criminalRecord.decisionDeprivationPoliticalRightYears": [
+          { required: true, message: "请输入判决剥政年限" },
+          { type: 'number', message: '必须为数字值' }
+        ],
         "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期" }],
         "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期" }],
         "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉" }]

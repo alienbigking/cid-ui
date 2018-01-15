@@ -62,10 +62,11 @@ export default {
         ]
       },
       // rules: {
-      //   "form.criminalSocialRelation": {
+      //   type: "object",
+      //   form: {
       //     type: "object",
       //     required: true,
-      //     fields: {
+      //     criminalSocialRelation: {
       //       appellation: { type: "string", required: true },
       //       name: { type: "string", required: true }
       //     }
