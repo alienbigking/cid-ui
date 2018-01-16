@@ -116,14 +116,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-criminal{
-  padding: 0 28px;
-  .w-px180{
-    width: 180px;
-    float: left;
-    margin-right: 20px;
-  }
-}
 .cell {
   button:nth-child(1) {
     color: #2196f3;

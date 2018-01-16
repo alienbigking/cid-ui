@@ -66,7 +66,7 @@
         </el-form-item>
 
         <el-form-item class="w25 connect-date" label="刑期日期" prop="startEndTime">
-          <el-date-picker v-model="form.startEndTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd"></el-date-picker>                  
+          <el-date-picker v-model="form.startEndTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
         <div class="w25"></div>
         <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
@@ -78,7 +78,7 @@
         <el-form-item class="w100" label="判决明细" prop="criminalRecord.decisionDetail">
           <el-input type="textarea" resize="none" v-model="form.criminalRecord.decisionDetail"></el-input>
         </el-form-item>
-        <div class="el-form-item el-form-item-div">
+        <div class="el-form-item-div">
           <el-button class="button-cancel" @click="onClose">返 回</el-button>
           <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
         </div>
