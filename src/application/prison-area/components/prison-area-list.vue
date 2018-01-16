@@ -125,6 +125,7 @@ export default {
           this.search();
         })
         .catch(error => {
+          this.deleting = false;
           this.$handleError(error.response, "删除失败");
         });
     },

@@ -124,13 +124,4 @@ export default {
     margin-left: 30px;
   }
 }
-.form-criminal
-  .w50
-  .el-form-item__content
-  > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-  width: 100%;
-}
-.el-form .el-form-item.w50 {
-  padding-right: 0;
-}
 </style>

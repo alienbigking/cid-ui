@@ -3,7 +3,7 @@
         <div class="header-left">
             <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
             <span class="fs-16">罪犯数据库</span>
-            <i class="iconfont icon-caidan" @click="test"></i>
+            <i class="iconfont icon-caidan" @click="onCollapse"></i>
         </div>
         <ul class="header-right">
             <li>
@@ -39,7 +39,7 @@ export default {
   computed: {},
   methods: {
     ...mapActions(["handleCollapse"]),
-    test() {
+    onCollapse() {
       this.handleCollapse();
     },
     logout() {
@@ -50,19 +50,18 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.icon-caidan {
-  cursor: pointer;
-  font-size: 20px;
-}
-.icon-tuichu {
+.iconfont {
   cursor: pointer;
 }
-
 .header-left {
   display: flex;
   align-items: center;
   .fs-16 {
+    font-size: 16px;
     margin: 0 142px 0 10px;
+  }
+  .icon-caidan {
+    font-size: 20px;
   }
 }
 .header-right {
@@ -70,12 +69,6 @@ export default {
   align-items: center;
   li {
     margin-left: 20px;
-    i {
-      display: block;
-      height: 16px;
-      width: 16px;
-      font-size: 16px;
-    }
     a {
       color: #fff;
       font-size: 12px;

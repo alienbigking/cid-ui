@@ -135,12 +135,12 @@
             <el-form-item class="w25" label="床位号" prop="bedNumber">
                 <el-input v-model="criminal.bedNumber"></el-input>
             </el-form-item>
-            <el-form-item class="w50" label="入监备注" prop="remark">
+            <el-form-item class="w100" label="备注" prop="remark">
                 <el-input v-model="criminal.remark" :maxlength="255" type="textarea" resize="none"></el-input>
             </el-form-item>
-            <el-form-item class="hasButton">
+            <div class="el-form-item-div">
                 <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
-            </el-form-item>
+            </div>
           </div>
         </el-form>
     </div>
@@ -258,51 +258,52 @@ export default {
       response[9].map(item => { item.children = []; });
       this.allCountries = response[9];
       this.initializing = false;
-    });
-    this.getCriminal(this.$route.params.id).then(() => {
-      let criminal = _.cloneDeep(this.$store.state.criminal.criminal);
-      Object.keys(criminal).map(key => {
-        let arr = key.split("Code");
-        if (arr.length === 2 && arr[1] === "") {
-          if (arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)) {
-            let str = arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)[0];
-            criminal[str] = [criminal[`${str}CountryCode`], criminal[`${str}ProvinceCode`], criminal[`${str}CityCode`], criminal[`${str}CountyCode`]];
-          } else {
-            criminal[key] = {
-              name: criminal[`${arr[0]}Name`],
-              code: criminal[key]
-            };
-            delete criminal[`${arr[0]}Name`];
-          }
-        }
-      });
-      this.criminal = criminal;
-      ["birthplace", "householdRegisterAddress", "homeAddress"].map(type => {
-        this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === this.criminal[type][0]; });
-        if (!this.allCountries[this[type].countryIndex].children.length) {
-          regionLookupService.getAllProvinces(this.criminal[type][0]).then(provinces => {
-            provinces.map(item => { item.children = []; });
-            this.allCountries[this[type].countryIndex].children = _.cloneDeep(provinces);
-            this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => {
-              return item.code === this.criminal[type][1];
-            });
-            if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
-              regionLookupService.getAllCities(this.criminal[type][1]).then(cities => {
-                cities.map(item => { item.children = []; });
-                this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(cities);
-                this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => {
-                  return item.code === this.criminal[type][2];
-                });
-                if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.length) {
-                  regionLookupService.getAllCounties(this.criminal[type][2]).then(counties => {
-                    this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(counties);
-                    this[type].countyIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.findIndex(item => { return item.code === this.criminal[type][3]; });
-                  });
-                }
-              });
+
+      this.getCriminal(this.$route.params.id).then(() => {
+        let criminal = _.cloneDeep(this.$store.state.criminal.criminal);
+        Object.keys(criminal).map(key => {
+          let arr = key.split("Code");
+          if (arr.length === 2 && arr[1] === "") {
+            if (arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)) {
+              let str = arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)[0];
+              criminal[str] = [criminal[`${str}CountryCode`], criminal[`${str}ProvinceCode`], criminal[`${str}CityCode`], criminal[`${str}CountyCode`]];
+            } else {
+              criminal[key] = {
+                name: criminal[`${arr[0]}Name`],
+                code: criminal[key]
+              };
+              delete criminal[`${arr[0]}Name`];
             }
-          });
-        }
+          }
+        });
+        this.criminal = criminal;
+        ["birthplace", "householdRegisterAddress", "homeAddress"].map(type => {
+          this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === this.criminal[type][0]; });
+          if (!this.allCountries[this[type].countryIndex].children.length) {
+            regionLookupService.getAllProvinces(this.criminal[type][0]).then(provinces => {
+              provinces.map(item => { item.children = []; });
+              this.allCountries[this[type].countryIndex].children = _.cloneDeep(provinces);
+              this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => {
+                return item.code === this.criminal[type][1];
+              });
+              if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
+                regionLookupService.getAllCities(this.criminal[type][1]).then(cities => {
+                  cities.map(item => { item.children = []; });
+                  this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(cities);
+                  this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => {
+                    return item.code === this.criminal[type][2];
+                  });
+                  if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.length) {
+                    regionLookupService.getAllCounties(this.criminal[type][2]).then(counties => {
+                      this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(counties);
+                      this[type].countyIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.findIndex(item => { return item.code === this.criminal[type][3]; });
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
       });
     });
     this.addRules();

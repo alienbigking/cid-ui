@@ -1,14 +1,14 @@
 <template>
     <div>
-        <el-breadcrumb 
-          separator="/" 
+        <el-breadcrumb
+          separator="/"
           separator-class="separatorClass">
             <el-breadcrumb-item>
               <i class="iconfont icon-home" style="margin-right:5px;"></i>主页
             </el-breadcrumb-item>
-            <el-breadcrumb-item 
-              :key="index" 
-              v-for="(item, index) in breadcrumbs" 
+            <el-breadcrumb-item
+              :key="index"
+              v-for="(item, index) in breadcrumbs"
               v-if="item.name">
               {{ item.name }}
             </el-breadcrumb-item>
@@ -44,7 +44,7 @@ export default {
 }
 .el-container .el-breadcrumb {
   height: 41px;
-  background: #fff;
+  background: #FCFCFC;
   line-height: 40px;
   font-size: 12px;
   border-bottom: 1px solid #ddd;

@@ -35,6 +35,7 @@
         <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
       </el-form-item>
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
+        <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
         <el-table class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
           <el-table-column align="center" label="其它特征" prop="description">
             <template slot-scope="scope">
@@ -49,11 +50,10 @@
             </template>
           </el-table-column>
         </el-table>
-        <el-button class="button-addInEdit" @click="addPhysicalCharacteristic">新增特征</el-button>
       </el-form-item>
-      <el-form-item class="hasButton">
+      <div class="el-form-item-div">
           <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
-      </el-form-item>
+      </div>
     </div>
   </el-form>
 </div>
@@ -253,15 +253,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.table40{ margin-bottom: 0; }
 .cell {
   button:nth-child(1) {
     color: #f44336;
   }
 }
-.button-addInEdit{
-  width: 100px;
-}
-.button-addInEdit{
+.mini{
   float: right;
+  margin-bottom: 5px;
+  height: 31px;
 }
 </style>
