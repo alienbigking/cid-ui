@@ -27,8 +27,7 @@
     <div class="um-modifyPassword card">
       <p>修改密码</p>
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
-      <!-- <router-link class="modififyPassword" to="/user/password">修改</router-link> -->
-      <el-button @click="updatePassword">修改密码</el-button>
+      <el-button class="modififyPassword" @click="updatePassword">修改密码</el-button>
     </div>
   </div>
 </template>
@@ -95,6 +94,7 @@ export default {
   font-size: 14px;
   color: #333;
   line-height: 1;
+  width: 100%
   p {
     display: inline-block;
     margin-right: 40px;
@@ -107,6 +107,8 @@ export default {
     float: right;
     font-size: 12px;
     color: #2196f3;
+    position: relative;
+    bottom: 16px;
   }
 }
 </style>
