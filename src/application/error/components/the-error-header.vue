@@ -61,6 +61,7 @@ export default {
   display: flex;
   align-items: center;
   .fs-16 {
+    font-size: 16px;
     margin: 0 142px 0 10px;
   }
 }

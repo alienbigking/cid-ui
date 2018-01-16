@@ -1,5 +1,5 @@
 <template>
-  <el-header style="height: 47px;position: absolute;">
+  <el-header style="height: 47px;position: fixed;">
     <div class="header-left">
         <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
         <span class="fs-16">罪犯数据库</span>
@@ -19,6 +19,7 @@ export default {};
   display: flex;
   align-items: center;
   .fs-16 {
+    font-size: 16px;
     margin-left: 10px;
   }
 }

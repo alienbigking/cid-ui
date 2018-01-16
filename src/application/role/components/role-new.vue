@@ -1,8 +1,6 @@
 <template>
-  <div class="card">
-    <div class="um-title">
-      <p>新增角色</p>
-    </div>
+  <div class="detail-card">
+    <h3 class="card-title">新增角色</h3>
     <el-form :model="role" :rules="rules" ref="form" class="formPadding" label-position="top">
       <el-form-item class="w50" label="角色名称" prop="name" >
         <el-input v-model="role.name"></el-input>
@@ -10,9 +8,10 @@
       <el-form-item class="w100 textarea" label="监舍描述" prop="description" >
         <el-input type="textarea" resize="none" v-model="role.description"></el-input>
       </el-form-item>
-      <el-form-item class="hasButton">
+      <div class="el-form-item-div">
+          <el-button @click="onBack">返 回</el-button>
           <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
-      </el-form-item>
+      </div>
     </el-form>
   </div>
 </template>
@@ -66,6 +65,9 @@ export default {
             });
         }
       });
+    },
+    onBack() {
+      this.$router.go(-1);
     }
   }
 };

@@ -1,4 +1,4 @@
-@import "./variable", "./mixin";
+// @import "./variable", "./mixin";
 
 @each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure {
   .button-#{$type} { @include button-diy($type); }
@@ -19,10 +19,86 @@
       }
     }
 }
+.detail-card{ // 卡片
+  border: $border;
+  background: $white;
+  border-radius: $radius;
+  font-size: 14px;
+  color: #333;
+  .card-title{
+    color: #333;
+    border-bottom: $border;
+    padding: $padding-default;
+  }
+  .card-body{
+    box-sizing: border-box;
+    padding: 0 20px 20px 40px;
+    border-bottom: $border;
+    overflow: hidden;
+    &:last-child{ border: 0;}
+    label{
+      font-size: 14px;
+      font-weight: bold;
+      display: inline-block;
+      vertical-align: top;
+      width: 148px;
+      margin-top: 20px;
+    }
+    label + span{
+      border-bottom: $border;
+      display: inline-block;
+      vertical-align: top;
+      width: calc(100% - 148px);
+      min-height: 14px;
+      padding-top: 20px;
+      padding-bottom: 10px;
+    }
+  }
+  .el-row .el-col-12:first-child{
+    span{
+      width: calc(100% - 198px);
+    }
+  }
+  .detail{
+      margin-top: 20px;
+      & + .el-button{
+          float: right;
+          margin-top: 20px;
+      }
+  }
+  & + .detail-card { margin-top: 10px; }
+}
+
+.card{
+    border:1px solid #ddd;
+    border-radius:5px;
+    background:#fff;
+    .um-title{
+        display: block;
+        padding:20px;
+        border-bottom:1px solid #DDD;
+        color: #333;
+        font-size:14px;
+    }
+    &+.card{
+        margin-top: 10px;
+    }
+}
+
 .box{
     height: 100%;
     width: 100%;
 }
+// 修改密码页面的输入框
+.gray-inner{
+  .el-input__inner {
+    background: #f5f5f5;
+    &:focus {
+      background: #ffffff;
+    }
+  }
+}
+
 .menu-collapsed{
     overflow: visible;
     &>.el-submenu__title{
@@ -59,9 +135,7 @@
         padding-left: 36px !important;
     }
 }
-.fs-16{
-    font-size: 16px;
-}
+
 .el-form{
     &.el-form--label-top{
         display: flex;
@@ -115,20 +189,6 @@
                 }
             }
         }
-        &.el-form-item-div{ // 有两个按钮的表单，按钮位于右侧，两按钮上的字数相等，按钮间相隔22px
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-right: 0;
-            width: 100%;
-            padding-right: 20px;
-            button{
-                margin-left: 0;
-                &+button{
-                    margin-left: 22px;
-                }
-            }
-        }
         &.the-disabled{ // 不可修改的表单
             .el-input__inner{
                 background: #F2F2F2;
@@ -142,6 +202,16 @@
             }
         }
     }
+    .el-form-item-div{ // 有两个按钮的表单，按钮位于右侧，按钮间相隔20px
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+        button{
+            margin-right: $padding-default;
+            margin-left: 0;
+        }
+    }
     .el-textarea{
         .el-textarea__inner{
             height: 100%;
@@ -153,6 +223,19 @@
 }
 .formPadding{
     padding: 20px 0 20px 20px;
+    .el-checkbox__input.is-checked + .el-checkbox__label {
+      color: #606266;
+    }
+    .el-checkbox__inner:hover {
+      border-color: #dcdfe6;
+    }
+    .el-checkbox__input.is-checked .el-checkbox__inner {
+      background: #999;
+      border-color: #999;
+    }
+    .el-checkbox__input.is-focus .el-checkbox__inner{
+      border-color: #999;
+    }
 }
 .form-criminal{
     .form-box{

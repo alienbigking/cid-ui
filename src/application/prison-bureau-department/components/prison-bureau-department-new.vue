@@ -1,8 +1,6 @@
 <template>
-    <div class="card">
-        <div class="um-title">
-            <p>新增部门</p>
-        </div>
+    <div class="detail-card">
+        <h3 class="card-title">新增部门</h3>
         <el-form class="formPadding" :model="prisonBureauDepartment" :rules="rules" ref="form" label-position="top">
           <el-form-item class="w50" label="名称" prop="name">
             <el-input v-model="prisonBureauDepartment.name"></el-input>
@@ -15,10 +13,10 @@
           <el-form-item class="w100 textarea" label="描述" prop="description">
             <el-input v-model="prisonBureauDepartment.description" type="textarea" :maxlength="255" resize="none"></el-input>
           </el-form-item>
-          <el-form-item class="hasButton">
+          <div class="el-form-item-div">
             <el-button @click="onBack">返 回</el-button>
             <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
-          </el-form-item>
+          </div>
         </el-form>
     </div>
 </template>

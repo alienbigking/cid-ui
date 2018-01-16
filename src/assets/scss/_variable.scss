@@ -8,6 +8,7 @@ $background-header: #37474F;
 $height-input: 36px;
 // 边框颜色
 $color-border: #DDDDDD;
+$border: 1px solid $color-border;
 // 默认颜色
 $color-default: #333;
 // 字体
@@ -18,3 +19,5 @@ $padding-default: 20px;
 $margin-top: 10px;
 // 筛选框宽度
 $width-input-filter: 176px;
+//圆角
+$radius: 4px;

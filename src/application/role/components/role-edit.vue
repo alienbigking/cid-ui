@@ -1,20 +1,18 @@
 <template>
-  <div>
-      <div class="card">
-          <span class="um-title">修改角色</span>
-          <el-form class="formPadding" :model="role" :rules="rules" ref="form" label-position="top">
-              <el-form-item label="角色名称" class="w50" prop="name" >
-                  <el-input v-model="role.name"></el-input>
-              </el-form-item>
-              <el-form-item class="w100 textarea" label="角色描述" prop="description" >
-                  <el-input :maxlength="255" type="textarea" resize="none" v-model="role.description"></el-input>
-              </el-form-item>
-              <el-form-item class="hasButton">
-                  <el-button @click="onBack">返 回</el-button>
-                  <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
-              </el-form-item>
-          </el-form>
-      </div>
+  <div class="detail-card">
+      <h3 class="card-title">修改角色</h3>
+      <el-form class="formPadding" :model="role" :rules="rules" ref="form" label-position="top">
+          <el-form-item label="角色名称" class="w50" prop="name" >
+              <el-input v-model="role.name"></el-input>
+          </el-form-item>
+          <el-form-item class="w100 textarea" label="角色描述" prop="description" >
+              <el-input :maxlength="255" type="textarea" resize="none" v-model="role.description"></el-input>
+          </el-form-item>
+          <div class="el-form-item-div">
+              <el-button @click="onBack">返 回</el-button>
+              <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
+          </div>
+      </el-form>
   </div>
 </template>
 
@@ -78,12 +76,4 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.labelInTop {
-  padding-left: 20px;
-  padding-top: 20px;
-  .w100 {
-    width: 100%;
-    padding-right: 20px;
-  }
-}
 </style>

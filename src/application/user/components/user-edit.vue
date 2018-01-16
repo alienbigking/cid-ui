@@ -1,9 +1,7 @@
 <template>
   <div>
-    <div class="card">
-      <div class="um-title">
-          <p>修改用户信息</p>
-      </div>
+    <div class="detail-card">
+      <h3 class="card-title">修改用户信息</h3>
       <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
           <el-form-item label="账号名称" class="w50 the-disabled" prop="username">
               <span class="el-input__inner">{{user.username}}</span>
@@ -18,17 +16,15 @@
               <span class="el-input__inner">{{ user.lastUpdatedTime }}</span>
           </el-form-item>
 
-          <div class="el-form-item el-form-item-div">
+          <div class="el-form-item-div">
             <el-button @click="goBack">返 回</el-button>
             <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
           </div>
       </el-form>
     </div>
-    <div class="um-modifyPassword card">
-      <p>修改密码</p>
+    <div class="detail-card">修改密码
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
-      <!-- <router-link class="modififyPassword" to="/user/password">修改</router-link> -->
-      <el-button @click="updatePassword">修改密码</el-button>
+      <span class="modififyPassword" @click="updatePassword">修改</span>
     </div>
   </div>
 </template>
@@ -90,16 +86,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.um-modifyPassword {
-  padding: 20px 22px 20px 20px;
+.detail-card + .detail-card {
+  padding: 20px;
   font-size: 14px;
   color: #333;
   line-height: 1;
-  p {
-    display: inline-block;
-    margin-right: 40px;
-  }
   span {
+    margin-left: 40px;
     font-size: 12px;
     color: #999;
   }
@@ -107,6 +100,7 @@ export default {
     float: right;
     font-size: 12px;
     color: #2196f3;
+    cursor: pointer;
   }
 }
 </style>

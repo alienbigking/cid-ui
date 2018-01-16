@@ -1,8 +1,6 @@
 <template>
-    <div class="card">
-        <div class="um-title">
-            <p>修改监区</p>
-        </div>
+    <div class="detail-card">
+        <h3 class="card-title">修改监区</h3>
         <el-form class="formPadding" :model="prisonArea" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="编号" prop="code" >
                 <el-input v-model="prisonArea.code"></el-input>
@@ -16,10 +14,10 @@
             <el-form-item class="w100 textarea" label="描述" prop="description">
                 <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonArea.description"></el-input>
             </el-form-item>
-            <el-form-item class="hasButton">
+            <div class="el-form-item-div">
                 <el-button @click="onBack">返 回</el-button>
                 <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
-            </el-form-item>
+            </div>
         </el-form>
     </div>
 </template>
