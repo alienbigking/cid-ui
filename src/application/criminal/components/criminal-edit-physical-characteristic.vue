@@ -44,7 +44,7 @@
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="200px">
+          <el-table-column align="center" label="操作" width="201px">
             <template slot-scope="scope">
               <el-button type="text" @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
             </template>

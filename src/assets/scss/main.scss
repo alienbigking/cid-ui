@@ -446,6 +446,9 @@
   &+button{
     float: right;
   }
+  &.el-table--border::after, &.el-table--group::after{
+    display: none;
+  }
 }
 .deleteDialog{
   .el-dialog__body{
