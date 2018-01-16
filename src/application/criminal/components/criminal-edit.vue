@@ -29,8 +29,8 @@ export default {
           { name: "简历", component: "CriminalEditResume" },
           { name: "体貌特征", component: "CriminalEditPhysicalCharacteristic" },
           { name: "社会关系", component: "CriminalEditSocialRelation" },
-          { name: "罚金管理", component: "CriminalEditForfeit" },
-          { name: "出入监管理", component: "CriminalOutInPrison" }
+          { name: "罚金", component: "CriminalEditForfeit" },
+          { name: "出入监记录", component: "CriminalOutInPrison" }
         ]
       };
     }
