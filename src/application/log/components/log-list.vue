@@ -37,7 +37,7 @@
                   </el-table-column>
                   <el-table-column align="center" label="操作">
                     <template slot-scope="scope">
-                      <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
+                      <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
