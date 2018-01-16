@@ -178,3 +178,7 @@
 .dialog .el-dialog__body{
   padding-bottom: 0;
 }
+.el-date-editor .el-range-input, .el-date-editor .el-range-separator {
+    height: 25px;
+    margin-bottom: 5px;
+}
