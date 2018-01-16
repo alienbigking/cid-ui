@@ -258,6 +258,7 @@
     }
     .form-box:last-child{
       border-bottom: 0;
+      padding-bottom: 20px;
       &:after{
         display: none;
       }
@@ -327,7 +328,7 @@
       }
       .el-form-item:nth-child(2){
         width: 25%;
-        margin-left: 20px;
+        margin-left: 40px;
         float: left;
 
       }
@@ -382,6 +383,7 @@
     .tableHeader40{
       background: #F5F5F5;
       height: 40px;
+      font-weight: bold;
     }
 }
 .my_table{

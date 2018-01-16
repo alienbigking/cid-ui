@@ -138,12 +138,12 @@
             <el-form-item class="w25" label="床位号" prop="bedNumber">
                 <el-input v-model="criminal.bedNumber"></el-input>
             </el-form-item>
-            <el-form-item class="w100" label="入监备注" prop="remark">
+            <el-form-item class="w100" label="备注" prop="remark">
                 <el-input v-model="criminal.remark" :maxlength="255" type="textarea" resize="none"></el-input>
             </el-form-item>
-            <el-form-item class="hasButton">
+            <div class="el-form-item-div">
                 <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
-            </el-form-item>
+            </div>
           </div>
         </el-form>
     </div>
