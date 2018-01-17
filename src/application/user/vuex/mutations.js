@@ -1,11 +1,12 @@
 import * as types from './mutation-types';
+import _ from "lodash";
 
 export default {
     [types.SET_USER](state, user) {
         state.user = user;
     },
     [types.UPDATE_USER](state, user) {
-        Object.assign(state.user, user);
+        state.user = _.cloneDeep(user);
     },
     [types.SET_PAGED_USERS](state, pagedUsers) {
         state.pagedUsers = pagedUsers;

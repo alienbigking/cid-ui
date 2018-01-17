@@ -1,10 +1,11 @@
 import * as types from './mutation-types';
+import _ from "lodash";
 
 export default {
     [types.SET_USER_PROFILE](state, userProfile) {
         state.userProfile = userProfile;
     },
     [types.UPDATE_USER_PROFILE](state, userProfile) {
-        Object.assign(state.userProfile, userProfile);
+        state.userProfile = _.cloneDeep(userProfile);
     }
 };

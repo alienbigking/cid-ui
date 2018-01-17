@@ -5,7 +5,7 @@
           <i class="iconfont icon-yunshujukuRDS"></i>
           <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
               <el-form-item prop="username">
-                  <el-input type="text" placeholder="请输入用户名" v-model="user.username">
+                  <el-input type="text" placeholder="请输入用户名" v-model="user.username" @keyup.enter.native="onSubmit">
                       <span slot="prefix" class="iconfont icon-people_fill"></span>
                   </el-input>
               </el-form-item>
@@ -39,8 +39,8 @@ export default {
   data() {
     return {
       user: {
-        username: "prs0001",
-        password: "Password@1"
+        username: "",
+        password: ""
       },
       rules: {
         username: [{ required: true, message: "用户名不能为空" }],
