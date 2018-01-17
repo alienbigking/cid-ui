@@ -11,7 +11,8 @@
         :key="menu.index"
         :index="menu.index"
         class="first no-arrow"
-        @mouseenter.native="showMenu(index,menu.name)">
+        @mouseenter.native="showMenu(index,menu.name)"
+        @click.native="onNavigate(menu.path)">
           <li
             class="menuText"
             :style="collapsed ? 'display: block' : 'display: none'">
