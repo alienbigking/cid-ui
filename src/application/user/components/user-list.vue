@@ -17,12 +17,12 @@
                   </el-table-column>
                   <el-table-column prop="name" label="名称">
                   </el-table-column>
-                  <el-table-column prop="createdTime" label="创建时间" sortable>
+                  <el-table-column prop="createdTime" label="创建时间" width="180px">
                     <template slot-scope="scope">
                       {{scope.row.createdTime | moment}}
                     </template>
                   </el-table-column>
-                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
+                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" width="180px">
                     <template slot-scope="scope">
                       {{scope.row.lastUpdatedTime | moment}}
                     </template>
@@ -34,7 +34,7 @@
                       <el-button class="button-status" type="text" v-if="scope.row.status=='DISABLED'" @click="onEnable(scope.row)">启用</el-button>
                     </template>
                   </el-table-column>
-                  <el-table-column align="center" prop="opretion" label="操作" width="310px">
+                  <el-table-column align="center" prop="opretion" label="操作" width="280px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onSelectRoles(scope.row.id)">分配角色</el-button>
                       <el-button type="text" @click="onView(scope.row.id)">查看</el-button>

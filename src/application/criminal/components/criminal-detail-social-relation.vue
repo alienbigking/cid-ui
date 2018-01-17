@@ -1,18 +1,18 @@
 <template>
   <div class="list-box" v-if="socialRelationShow">
-    <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40">
-      <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
-      <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
-      <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
-      <el-table-column align="center" prop="company" label="公司"> </el-table-column>
-      <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
-      <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
-      <el-table-column align="center" prop="createdTime" label="创建时间">
+    <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40" style="width:100%">
+      <el-table-column  align="center" prop="appellation" label="称谓" :show-overflow-tooltip="true"> </el-table-column>
+      <el-table-column  align="center" prop="name" label="姓名" :show-overflow-tooltip="true"> </el-table-column>
+      <el-table-column  align="center" prop="age" label="年龄" width="40px"> </el-table-column>
+      <el-table-column  align="center" prop="company" label="公司" :show-overflow-tooltip="true"> </el-table-column>
+      <el-table-column  align="center" prop="occupation" label="职业" :show-overflow-tooltip="true"> </el-table-column>
+      <el-table-column  align="center" prop="politicalStatusName" label="政治面貌" :show-overflow-tooltip="true"> </el-table-column>
+      <el-table-column  align="center" prop="createdTime" label="创建时间" >
         <template slot-scope="scope">
             {{scope.row.createdTime | moment}}
         </template>
       </el-table-column>
-      <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+      <el-table-column  align="center" prop="lastUpdatedTime" label="最后更新时间" >
         <template slot-scope="scope">
             {{scope.row.lastUpdatedTime | moment}}
         </template>

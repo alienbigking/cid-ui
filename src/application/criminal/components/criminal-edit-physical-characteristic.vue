@@ -37,7 +37,7 @@
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
         <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
         <el-table class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
-          <el-table-column align="center" label="其它特征" prop="description">
+          <el-table-column align="center" label="其它特征" prop="description" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
                 <el-input v-model="scope.row.description"></el-input>

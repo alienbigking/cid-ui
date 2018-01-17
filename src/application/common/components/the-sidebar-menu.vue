@@ -11,12 +11,11 @@
         :key="menu.index"
         :index="menu.index"
         class="first no-arrow"
-        @mouseenter.native="showMenu(index,menu.name)"
         @click.native="onNavigate(menu.path)">
           <li
             class="menuText"
             :style="collapsed ? 'display: block' : 'display: none'">
-            {{ menuText }}
+            {{ menu.name }}
           </li>
           <template slot="title">
             <i class="iconfont icon-shezhi"></i>
@@ -27,12 +26,11 @@
         v-if="menu.children"
         :key="menu.index"
         :index="menu.index"
-        class="first"
-        @mouseenter.native="showMenu(index,menu.name)">
+        class="first">
           <li
             class="menuText"
             :style="collapsed ? 'display: block' : 'display: none'">
-            {{ menuText }}
+            {{ menu.name }}
           </li>
           <template slot="title">
             <i class="iconfont icon-shezhi"></i>
@@ -98,11 +96,6 @@ export default {
   },
   methods: {
     ...mapActions(["getMenus"]),
-    showMenu(e, status) {
-      setTimeout(() => {
-        this.menuText = status;
-      }, 300);
-    },
     onNavigate(path) {
       this.$router.push(path);
     }

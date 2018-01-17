@@ -1,7 +1,7 @@
 <template>
   <div class="list-box" v-if="recordShow">
         <el-table class="table40" :data="allCriminalRecords" v-loading="loading" header-row-class-name="tableHeader40">
-          <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
+          <el-table-column align="center" prop="decisionAccusation" label="罪名" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="firstTrialOrganName" label="一审机关" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="finalTrialOrganName" label="终审机关" :show-overflow-tooltip="true"> </el-table-column>
