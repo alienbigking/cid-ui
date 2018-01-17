@@ -7,10 +7,10 @@
       <template>
         <el-table class="table40" :data="allCriminalRecords" v-loading="loading" header-row-class-name="tableHeader40">
           <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
-          <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关"> </el-table-column>
-          <el-table-column align="center" prop="firstTrialOrganName" label="一审机关"> </el-table-column>
-          <el-table-column align="center" prop="finalTrialOrganName" label="终审机关"> </el-table-column>
-          <el-table-column align="center" prop="decisionOrganName" label="判决机关"> </el-table-column>
+          <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column align="center" prop="firstTrialOrganName" label="一审机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column align="center" prop="finalTrialOrganName" label="终审机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column align="center" prop="decisionOrganName" label="判决机关" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
           <el-table-column align="center" prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
