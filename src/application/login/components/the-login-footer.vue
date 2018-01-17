@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <span>Copyright &copy; 2006-2017 罪犯数据库</span>
+    <span>Copyright &copy; 2017-2018 罪犯数据库</span>
   </div>
 </template>
 
