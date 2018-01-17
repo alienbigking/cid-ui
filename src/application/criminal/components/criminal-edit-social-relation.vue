@@ -6,11 +6,11 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40">
-          <el-table-column align="center" prop="appellation" label="称谓"> </el-table-column>
+          <el-table-column align="center" prop="appellation" label="称谓" width="40px"> </el-table-column>
           <el-table-column align="center" prop="name" label="姓名"> </el-table-column>
-          <el-table-column align="center" prop="age" label="年龄"> </el-table-column>
-          <el-table-column align="center" prop="company" label="公司"> </el-table-column>
-          <el-table-column align="center" prop="occupation" label="职业"> </el-table-column>
+          <el-table-column align="center" prop="age" label="年龄" width="40px"> </el-table-column>
+          <el-table-column align="center" prop="company" label="公司" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column align="center" prop="occupation" label="职业"  width="40px" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="politicalStatusName" label="政治面貌"> </el-table-column>
           <el-table-column align="center" prop="createdTime" label="创建时间">
             <template slot-scope="scope">
