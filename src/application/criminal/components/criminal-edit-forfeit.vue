@@ -31,7 +31,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog class="dialog" width="730px" :center="true" :visible.sync="editDialogVisible">
+    <el-dialog title="罚金" class="dialog" width="730px" :center="true" :visible.sync="editDialogVisible">
       <criminal-forfeit-edit :criminalForfeitId="criminalForfeitId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-forfeit-edit>
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">

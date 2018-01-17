@@ -28,7 +28,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog class="dialog" width="710px" :center="true" :visible.sync="editDialogVisible">
+    <el-dialog title="简历" class="dialog" width="710px" :center="true" :visible.sync="editDialogVisible">
       <criminal-resume-edit :criminalResumeId="criminalResumeId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-resume-edit>
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
