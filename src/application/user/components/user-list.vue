@@ -156,7 +156,7 @@ export default {
     },
     onDisable(item) {
       this.disableItem = item;
-      this.statusDialogVisible = true;
+      this.disablledStatusDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
