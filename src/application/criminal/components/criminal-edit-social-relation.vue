@@ -31,7 +31,7 @@
         </el-table>
       </template>
     </div>
-    <el-dialog title="社会关系" width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
+    <el-dialog class="dialog" title="社会关系" width="950px" :visible.sync="editDialogVisible">
       <criminal-social-relation-edit :criminalSocialRelationId="criminalSocialRelationId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-social-relation-edit>
     </el-dialog>
 

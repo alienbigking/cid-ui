@@ -4,7 +4,7 @@
         <el-form-item class="w-px180" label="开始日期" prop="startDate">
           <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w-px180" label="结束日期" prop="endDate">
+        <el-form-item class="w-px180 margin-left40" label="结束日期" prop="endDate">
           <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180 margin-left40" label="公司" prop="company">
@@ -13,7 +13,7 @@
         <el-form-item class="w-px180" label="职业" prop="occupation">
           <el-input v-model="criminalResume.occupation"></el-input>
         </el-form-item>
-        <el-form-item class="w-px180" label="职位" prop="duty">
+        <el-form-item class="w-px180 margin-left40" label="职位" prop="duty">
           <el-input v-model="criminalResume.duty"></el-input>
         </el-form-item>
         <div class="el-form-item el-form-item-div">

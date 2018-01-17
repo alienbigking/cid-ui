@@ -12,9 +12,9 @@
             </div>
             <template>
                 <el-table class="my_table" :data="pagedPrisonBureauDepartments.content" v-loading="loading" border header-row-class-name="tableHeader">
-                  <el-table-column prop="name" label="部门名称">
+                  <el-table-column prop="name" label="部门名称" :show-overflow-tooltip="true">
                   </el-table-column>
-                  <el-table-column prop="parentDepartmentName" label="上级部门名称">
+                  <el-table-column prop="parentDepartmentName" label="上级部门名称" :show-overflow-tooltip="true">
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                     <template slot-scope="scope">

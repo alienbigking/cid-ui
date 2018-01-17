@@ -1,11 +1,11 @@
 <template>
   <div class="detail-card">
-      <h3 class="card-title">修改角色</h3>
+      <h3 class="card-title">修改</h3>
       <el-form class="formPadding" :model="role" :rules="rules" ref="form" label-position="top">
-          <el-form-item label="角色名称" class="w50" prop="name" >
+          <el-form-item label="名称" class="w50" prop="name" >
               <el-input v-model="role.name"></el-input>
           </el-form-item>
-          <el-form-item class="w100 textarea" label="角色描述" prop="description" >
+          <el-form-item class="w100 textarea" label="描述" prop="description" >
               <el-input :maxlength="255" type="textarea" resize="none" v-model="role.description"></el-input>
           </el-form-item>
           <div class="el-form-item-div">
