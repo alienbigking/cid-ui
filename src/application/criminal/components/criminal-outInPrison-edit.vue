@@ -4,7 +4,7 @@
         <el-form-item class="w-px180" label="出监日期" prop="outgoingDate">
           <el-date-picker v-model="criminalOutInPrison.outgoingDate"  value-format="yyyy-MM-dd" type="date"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w-px180" label="入监日期" prop="entryDate">
+        <el-form-item class="w-px180 margin-left40" label="入监日期" prop="entryDate">
           <el-date-picker v-model="criminalOutInPrison.entryDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
         </el-form-item>
         <el-form-item class="w-px180 margin-left40" label="出监事由" prop="reasonName">

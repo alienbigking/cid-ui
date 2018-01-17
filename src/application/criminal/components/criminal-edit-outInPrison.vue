@@ -34,7 +34,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <el-dialog title="出入监" class="dialog" width="710px" :center="true" :visible.sync="editDialogVisible">
+    <el-dialog title="出入监" class="dialog" width="730px" :visible.sync="editDialogVisible">
       <criminal-outinprison-edit :criminalOutInPrisonId="criminalOutInPrisonId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-outinprison-edit>
     </el-dialog>
     <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
