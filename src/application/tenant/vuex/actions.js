@@ -1,7 +1,11 @@
-import * as types from './mutation-types';
-import { default as tenantService } from '../service/tenant-service';
+import * as types from "./mutation-types";
+import { default as tenantRegisterService } from "../service/tenant-register-service";
+import { default as tenantService } from "../service/tenant-service";
 
 export default {
+    addPrisonTenant({ commit, state }) {
+        return tenantRegisterService.addPrisonTenant(state.tenant);
+    },
     getTenant({ commit, state }, id) {
         return tenantService.get(id).then(tenant => {
             commit(types.SET_TENANT, tenant);
@@ -12,11 +16,8 @@ export default {
             commit(types.SET_PAGED_TENANTS, tenants);
         });
     },
-    addPrisonTenant({ commit, state }) {
-        return tenantService.addPrisonTenant(state.tenant);
-    },
-    updatePrisonTenant({ commit, state }) {
-        return tenantService.updatePrisonTenant(state.tenant);
+    updateTenant({ commit, state }) {
+        return tenantService.update(state.tenant);
     },
     deleteTenant({ commit }, id) {
         return tenantService.delete(id);
