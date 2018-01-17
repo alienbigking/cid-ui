@@ -24,11 +24,7 @@
     </div>
     <div class="detail-card">修改密码
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
-<<<<<<< HEAD
-      <el-button class="modififyPassword" @click="updatePassword">修改密码</el-button>
-=======
       <span class="modififyPassword" @click="updatePassword">修改</span>
->>>>>>> 1037026b9f6c8eac0646d47c6bce6aceaa566adc
     </div>
   </div>
 </template>
