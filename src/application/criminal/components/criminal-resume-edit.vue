@@ -146,7 +146,7 @@ export default {
 
 <style lang="scss" scoped>
 .form-criminal {
-  padding: 0 28px;
+  padding: 0 8px 0 28px;
   .w-px180 {
     width: 180px;
     float: left;
@@ -160,6 +160,6 @@ export default {
   }
 }
 .el-form .el-form-item.el-form-item-div {
-    justify-content: center;
+    justify-content: flex-end;
 }
 </style>
