@@ -11,11 +11,8 @@ export default {
             return response.data;
         });
     },
-    addPrisonTenant(tenant) {
-        return axios.post('api/tenants/prison-tenants', tenant);
-    },
-    updatePrisonTenant(tenant) {
-        return axios.put(`api/tenants/prison-tenants/${tenant.id}`, tenant);
+    update(tenant) {
+        return axios.put(`api/tenants/${tenant.id}`, tenant);
     },
     delete(id) {
         return axios.delete(`api/tenants/${id}`);

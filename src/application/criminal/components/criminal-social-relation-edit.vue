@@ -196,6 +196,6 @@ export default {
 
 <style lang="scss" scoped>
 .el-form .el-form-item.el-form-item-div {
-    justify-content: center;
+    justify-content: flex-end;
 }
 </style>

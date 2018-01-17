@@ -54,12 +54,12 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getTenant", "updatePrisonTenant"]),
+    ...mapActions(["getTenant", "updateTenant"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updatePrisonTenant()
+          this.updateTenant()
             .then(res => {
               this.saving = false;
               this.$message.success("修改成功");
