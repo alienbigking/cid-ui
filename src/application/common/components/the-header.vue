@@ -21,7 +21,7 @@
             <li class="hasImg">
               <router-link to="/me">
                 <img src="../../../assets/images/avatar.png" alt="">
-                <span>管理员</span>
+                <span>{{userName}}</span>
               </router-link>
             </li>
             <li @click="logout">
@@ -32,18 +32,23 @@
 </template>
 <script>
 import { mapActions } from "vuex";
+import { default as informationStorage } from "../service/information-storage";
 export default {
   data() {
-    return {};
+    return {
+      userName: ""
+    };
   },
-  computed: {},
+  created() {
+    this.userName = informationStorage.decodeInformation().username;
+  },
   methods: {
     ...mapActions(["handleCollapse"]),
     onCollapse() {
       this.handleCollapse();
     },
     logout() {
-      window.localStorage.removeItem("TOKEN");
+      window.localStorage.clear();
       this.$router.push("/login");
     }
   }
