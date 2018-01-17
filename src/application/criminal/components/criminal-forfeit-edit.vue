@@ -4,10 +4,10 @@
         <el-form-item class="w-px180" label="罚金单据" prop="receiptNumber">
           <el-input v-model="criminalForfeit.receiptNumber" ></el-input>
         </el-form-item>
-        <el-form-item class="w-px180" label="缴纳罚金(元)" prop="amount">
+        <el-form-item class="w-px180 margin-left40" label="缴纳罚金(元)" prop="amount">
           <el-input v-model="criminalForfeit.amount" placeholder="请输入数字，不能带汉字" ></el-input>
         </el-form-item>
-        <el-form-item class="w-px180" label="收款单位" prop="payee">
+        <el-form-item class="w-px180 margin-left40" label="收款单位" prop="payee">
           <el-input v-model="criminalForfeit.payee"></el-input>
         </el-form-item>
         <el-form-item class="w-px180" label="缴纳日期" prop="paymentDate">
@@ -135,7 +135,7 @@ export default {
 
 <style lang="scss" scoped>
 .form-criminal {
-  padding: 0 28px;
+  padding: 0 8px 0 28px;
   .w-px180 {
     width: 180px;
     float: left;
@@ -148,10 +148,7 @@ export default {
     margin-left: 20px;
   }
   .w100 {
-    width: 640px;
-    float: left;
     padding-left: 0px;
-    padding-right: 58px;
   }
 }
 </style>
