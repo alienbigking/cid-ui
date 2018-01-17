@@ -1,45 +1,39 @@
 <template>
-    <div>
-        <div class="card">
-            <span class="um-title">{{ user.name }} - 明细</span>
-            <div class="form-container">
-                <el-row type="flex" justify="space-between">
-                    <el-col :span="12">
-                        <label>姓名：</label><span>{{ user.name }}</span>
-                    </el-col>
-                    <el-col :span="12">
-                        <label>用户账号：</label><span>{{ user.username }}</span>
-                    </el-col>
-                </el-row>
-                <el-row type="flex" justify="space-between">
-                    <el-col :span="12">
-                        <label>用户状态：</label><span>{{ user.status | enumText(userStatuses)}}</span>
-                    </el-col>
-                </el-row>
-                <el-row type="flex" justify="space-between">
-                     <el-col :span="12">
-                        <label>创建时间：</label><span>{{ user.createdTime | moment }}</span>
-                    </el-col>
-                    <el-col :span="12">
-                        <label>最后更新时间：</label><span>{{ user.lastUpdatedTime | moment }}</span>
-                    </el-col>
-                </el-row>
-            </div>
-            <div class="padding20">
-               <div class="form-container">
-                    <label class="title">用户所属租户：</label>
-                    <el-col :span="12">
-                        <label>租户账户：</label><span>{{ user.tenantId }}</span>
-                    </el-col>
-                    <el-col :span="12">
-                        <label>租户名称：</label><span>{{ user.tenantName }}</span>
-                    </el-col>
-                </div>
-                <el-button @click="onBack">返 回</el-button>
-            </div>
-        </div>
-
-    </div>
+  <div class="detail-card">
+      <h3 class="card-title">{{ user.name }} - 明细</h3>
+      <div class="card-body">
+          <el-row>
+              <el-col :span="12">
+                  <label>姓名：</label><span>{{ user.name }}</span>
+              </el-col>
+              <el-col :span="12">
+                  <label>用户账号：</label><span>{{ user.username }}</span>
+              </el-col>
+          </el-row>
+          <el-row>
+              <el-col :span="12">
+                  <label>用户状态：</label><span>{{ user.status | enumText(userStatuses)}}</span>
+              </el-col>
+          </el-row>
+          <el-row>
+               <el-col :span="12">
+                  <label>创建时间：</label><span>{{ user.createdTime | moment }}</span>
+              </el-col>
+              <el-col :span="12">
+                  <label>最后更新时间：</label><span>{{ user.lastUpdatedTime | moment }}</span>
+              </el-col>
+          </el-row>
+      </div>
+      <div class="card-body">
+          <label class="title">所属租户</label>
+          <el-row class="detail">
+              <el-col :span="12">
+                  <label>租户名称：</label><span>{{ user.tenantName }}</span>
+              </el-col>
+            </el-row>
+          <el-button @click="onBack">返 回</el-button>
+      </div>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
@@ -64,44 +58,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.form-container {
-  box-sizing: border-box;
-  width: 100%;
-  position: relative;
-  padding: 20px 20px 20px 41px;
-  font-size: 14px;
-  label {
-    font-weight: bold;
-    color: #333;
-    width: 148px;
-    padding-top: 20px;
-    line-height: 1;
-    box-sizing: border-box;
-    float: left;
-  }
-  span {
-    display: inline-block;
-    border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    padding-top: 20px;
-    width: calc(100% - 148px);
-    color: #333;
-    height: 14px;
-    vertical-align: middle;
-  }
-  .el-row .el-col-12:first-child {
-    span {
-      width: calc(100% - 198px);
-    }
-  }
-  .title {
-    display: block;
-    margin-bottom: 10px;
-    float: none;
-    padding-top: 0;
-    & + div {
-      line-height: 24px;
-    }
-  }
+.detail{
+  margin-top: 0;
 }
 </style>

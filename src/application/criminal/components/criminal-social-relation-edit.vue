@@ -61,6 +61,17 @@ export default {
           { max: 100, message: "长度在 1 到 100 个字符" }
         ]
       },
+      // rules: {
+      //   type: "object",
+      //   "form.criminalSocialRelation": {
+      //     type: "object",
+      //     required: true,
+      //     fields: {
+      //       appellation: { type: "string", required: true },
+      //       name: { type: "string", required: true }
+      //     }
+      //   }
+      // },
       initializing: true,
       allPoliticalStatuses: [],
       loading: true,
@@ -101,6 +112,20 @@ export default {
     });
     this.render();
   },
+  // computed: {
+  //   rules() {
+  //     var Schema = require('async-validate');
+  //     this.form.criminalSocialRelation = {
+  //       type: "object",
+  //       fields: {
+  //         appellation: [{ type: "string", message: "请输入称谓", required: true }],
+  //         name: [{ type: "string", message: "请输入姓名", required: true }]
+  //       }
+  //     };
+  //     var schema = new Schema(this.form.criminalSocialRelation);
+  //     console.log(schema);
+  //   }
+  // },
   methods: {
     ...mapActions([
       "getCriminalSocialRelation",

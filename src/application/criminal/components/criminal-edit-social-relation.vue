@@ -31,7 +31,7 @@
         </el-table>
       </template>
     </div>
-    <el-dialog width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
+    <el-dialog title="社会关系" width="950px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
       <criminal-social-relation-edit :criminalSocialRelationId="criminalSocialRelationId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-social-relation-edit>
     </el-dialog>
 
@@ -123,14 +123,5 @@ export default {
     color: #f44336;
     margin-left: 30px;
   }
-}
-.form-criminal
-  .w50
-  .el-form-item__content
-  > [class^="el-"]:not(.el-textarea):nth-last-child(1) {
-  width: 100%;
-}
-.el-form .el-form-item.w50 {
-  padding-right: 0;
 }
 </style>

@@ -1,8 +1,6 @@
 <template>
-    <div class="card">
-        <div class="um-title">
-            <p>新增用户</p>
-        </div>
+    <div class="detail-card">
+        <h3 class="card-title">新增用户</h3>
         <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="账号" prop="username">
                 <el-input v-model="user.username"></el-input>
@@ -18,9 +16,10 @@
                 <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
             </el-select>
             </el-form-item>
-            <el-form-item class="hasButton">
+            <div class="el-form-item-div">
+                <el-button @click="goBack">返 回</el-button>
                 <el-button class="button-addInNew" :loading="saving" @click="onSubmit(user)">新 增</el-button>
-            </el-form-item>
+            </div>
         </el-form>
     </div>
 </template>
@@ -84,6 +83,9 @@ export default {
             });
         }
       });
+    },
+    goBack() {
+      this.$router.go(-1);
     }
   }
 };

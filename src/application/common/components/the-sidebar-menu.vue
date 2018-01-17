@@ -100,7 +100,7 @@ export default {
     showMenu(e, status) {
       setTimeout(() => {
         this.menuText = status;
-      }, 500);
+      }, 300);
     },
     onNavigate(path) {
       this.$router.push(path);

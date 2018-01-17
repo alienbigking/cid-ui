@@ -1,8 +1,6 @@
 <template>
-    <div class="card">
-        <div class="um-title">
-            <p>新增租户</p>
-        </div>
+    <div class="detail-card">
+        <div class="card-title">新增租户</div>
         <el-form class="formPadding" :model="tenant" :rules="rules" ref="form" label-position="top">
             <el-form-item class="w50" label="编号" prop="code">
                 <el-input v-model="tenant.code"></el-input>
@@ -13,9 +11,9 @@
             <el-form-item class="w100 textarea" label="描述" prop="description">
                 <el-input :maxlength="255" v-model="tenant.description" type="textarea" resize="none"></el-input>
             </el-form-item>
-            <el-form-item class="hasButton">
+            <div class="el-form-item-div">
                 <el-button class="button-addInNew" :loading="saving" @click="onSubmit(tenant)">新 增</el-button>
-            </el-form-item>
+            </div>
         </el-form>
     </div>
 </template>

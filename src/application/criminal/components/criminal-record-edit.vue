@@ -2,10 +2,10 @@
   <div v-loading="loading">
     <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
         <el-form-item class="w25" label="逮捕日期" prop="criminalRecord.arrestDate">
-          <el-date-picker v-model="form.criminalRecord.arrestDate" type="date"></el-date-picker>
+          <el-date-picker v-model="form.criminalRecord.arrestDate" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
         <el-form-item class="w25" label="羁押日期" prop="criminalRecord.detentionDate">
-          <el-date-picker v-model="form.criminalRecord.detentionDate" type="date"></el-date-picker>
+          <el-date-picker v-model="form.criminalRecord.detentionDate" type="date"  value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
         <el-form-item class="w25" label="逮捕机关" prop="selectedArrestOrgan">
           <el-select v-model="form.selectedArrestOrgan" value-key="code" :loading="initializing" clearable>
@@ -58,18 +58,17 @@
         </el-form-item>
 
         <el-form-item class="w25" label="判决日期" prop="criminalRecord.decisionDate">
-            <el-date-picker v-model="form.criminalRecord.decisionDate" type="date"></el-date-picker>
-          </el-form-item>
-        <el-form-item class="w25" label="剥政年限" prop="criminalRecord.decisionDeprivationPoliticalRightYears">
-          <el-input v-model="form.criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
+          <el-date-picker v-model="form.criminalRecord.decisionDate" type="date"  value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
 
-        <el-form-item class="w25" label="刑期开始日期" prop="criminalRecord.decisionPrisonTermStartDate">
-          <el-date-picker v-model="form.criminalRecord.decisionPrisonTermStartDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
+        <el-form-item class="w25" label="剥政年限" prop="criminalRecord.decisionDeprivationPoliticalRightYears">
+          <el-input v-model.number="form.criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
         </el-form-item>
-        <el-form-item class="w25" label="刑期结束日期" prop="criminalRecord.decisionPrisonTermEndDate">
-          <el-date-picker v-model="form.criminalRecord.decisionPrisonTermEndDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
+
+        <el-form-item class="w25 connect-date" label="刑期日期" prop="startEndTime">
+          <el-date-picker v-model="form.startEndTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
+        <div class="w25"></div>
         <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
           <el-select v-model="form.criminalRecord.appealed" clearable>
               <el-option label="是" :value="true"></el-option>
@@ -77,9 +76,9 @@
             </el-select>
         </el-form-item>
         <el-form-item class="w100" label="判决明细" prop="criminalRecord.decisionDetail">
-          <el-input type="textarea" v-model="form.criminalRecord.decisionDetail"></el-input>
+          <el-input type="textarea" resize="none" v-model="form.criminalRecord.decisionDetail"></el-input>
         </el-form-item>
-        <div class="el-form-item el-form-item-div">
+        <div class="el-form-item-div">
           <el-button class="button-cancel" @click="onClose">返 回</el-button>
           <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
         </div>
@@ -108,6 +107,7 @@ export default {
         selectedFirstTrialOrgan: null,
         selectedFinalTrialOrgan: null,
         selectedDecisionOrgan: null,
+        startEndTime: [],
         criminalRecord: _.cloneDeep(
           this.$store.state.criminal.criminalRecord
         )
@@ -137,9 +137,13 @@ export default {
           { type: 'number', message: '必须为数字值' }
         ],
         "criminalRecord.decisionDate": [{ required: true, message: "请选择判决日期" }],
-        "criminalRecord.decisionDeprivationPoliticalRightYears": [{ required: true, message: "请输入判决剥政年限" }],
-        "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期" }],
-        "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期" }],
+        "criminalRecord.decisionDeprivationPoliticalRightYears": [
+          { required: true, message: "请输入判决剥政年限" },
+          { type: 'number', message: '必须为数字值' }
+        ],
+        startEndTime: [{ required: true, message: "请选择刑期日期" }],
+        // "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期" }],
+        // "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期" }],
         "criminalRecord.appealed": [{ required: true, message: "请选择有否上诉" }]
       },
       pickerBeginDateBefore: {
@@ -209,6 +213,13 @@ export default {
       };
       this.$store.commit("updateCriminalRecord", obj);
     },
+    "form.startEndTime"(val) {
+      let obj = {
+        decisionPrisonTermStartDate: val[0],
+        decisionPrisonTermEndDate: val[1]
+      };
+      this.$store.commit("updateCriminalRecord", obj);
+    },
     "form.criminalRecord": {
       handler: _.debounce(function(criminalRecord) {
         this.$store.commit(
@@ -246,6 +257,7 @@ export default {
       this.$emit("on-close");
     },
     onSave() {
+      // console.log(this.value1);
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.criminalRecord.id) {
@@ -294,6 +306,10 @@ export default {
           this.form.criminalRecord = _.cloneDeep(
             this.$store.state.criminal.criminalRecord
           );
+          this.form.criminalRecord.decisionLetterNumber = Number(this.form.criminalRecord.decisionLetterNumber);
+          this.form.criminalRecord.finalTrialLetterNumber = Number(this.form.criminalRecord.finalTrialLetterNumber);
+          this.form.criminalRecord.firstTrialLetterNumber = Number(this.form.criminalRecord.firstTrialLetterNumber);
+          this.form.criminalRecord.prosecutionLetterNumber = Number(this.form.criminalRecord.prosecutionLetterNumber);
           this.form.selectedArrestOrgan = {
             code: this.form.criminalRecord.arrestOrganCode,
             name: this.form.criminalRecord.arrestOrganName
@@ -314,6 +330,10 @@ export default {
             code: this.form.criminalRecord.decisionOrganCode,
             name: this.form.criminalRecord.decisionOrganName
           };
+          this.form.startEndTime = [
+            this.form.criminalRecord.decisionPrisonTermStartDate,
+            this.form.criminalRecord.decisionPrisonTermEndDate
+          ];
           this.loading = false;
         });
       }
@@ -327,6 +347,9 @@ export default {
   height: 120px;
 }
 .el-form .el-form-item.el-form-item-div {
-    justify-content: center;
+  justify-content: center;
+}
+.connect-date /deep/ .el-form-item__content{
+    height:36px;
 }
 </style>

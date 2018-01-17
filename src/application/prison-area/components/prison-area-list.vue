@@ -28,8 +28,8 @@
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作" width="170px">
                       <template slot-scope="scope">
+                          <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
                           <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
-                          <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
                           <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
                       </template>
                     </el-table-column>
@@ -125,6 +125,7 @@ export default {
           this.search();
         })
         .catch(error => {
+          this.deleting = false;
           this.$handleError(error.response, "删除失败");
         });
     },

@@ -7,7 +7,7 @@
         <el-form-item class="w-px180" label="入监日期" prop="entryDate">
           <el-date-picker v-model="criminalOutInPrison.entryDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w-px180" label="出监事由" prop="reasonName">
+        <el-form-item class="w-px180 margin-left40" label="出监事由" prop="reasonName">
               <el-select v-model="criminalOutInPrison.reasonName" value-key="name" :loading="initializing" placeholder="请选择出监事由" clearable>
                 <el-option v-for="(item, index) in allOutInPrisonReasons" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
@@ -154,7 +154,7 @@ export default {
 
 <style lang="scss" scoped>
 .form-criminal {
-  padding: 0 28px;
+  padding: 0 8px 0 28px;
   .w-px180 {
     width: 180px;
     float: left;
@@ -168,10 +168,7 @@ export default {
     margin-left: 20px;
   }
   .w100 {
-    width: 640px;
-    float: left;
     padding-left: 0px;
-    padding-right: 58px;
   }
 }
 </style>

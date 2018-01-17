@@ -1,20 +1,17 @@
 <template>
-  <div>
-    <div class="card">
-      <div class="um-title">
-        <p>修改密码</p>
-      </div>
-      <el-form class="w340" :model="userPassword" :rules="rules" ref="form">
-          <el-form-item class="noLable" prop="oldPassword">
-              <el-input type="password" class="el-input-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
+    <div class="detail-card">
+      <h3 class="card-title">修改密码</h3>
+      <el-form class="w340" :model="userPassword" :rules="rules" ref="form" label-position="top">
+          <el-form-item prop="oldPassword">
+              <el-input type="password" class="gray-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
           </el-form-item>
-          <el-form-item class="noLable" prop="newPassword">
-              <el-input class="el-input-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
+          <el-form-item prop="newPassword">
+              <el-input class="gray-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
                   <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
               </el-input>
           </el-form-item>
-          <el-form-item class="noLable" prop="checkPassword">
-              <el-input class="el-input-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
+          <el-form-item prop="checkPassword">
+              <el-input class="gray-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
                 <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
               </el-input>
           </el-form-item>
@@ -24,7 +21,6 @@
           </div>
       </el-form>
     </div>
-  </div>
 </template>
 
 <script>
@@ -95,23 +91,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-input-inner /deep/ .el-input__inner {
-  padding-right: 36px;
-  background: #f5f5f5;
-  font-size: 12px;
-  &:focus {
-    background: #ffffff;
-  }
-}
 .w340 {
-  width: 400px;
-  padding: 30px;
-  margin: auto;
+  width: 340px;
+  margin: 30px auto;
+  &>div{ width: 100%;}
   .form-btn {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    /deep/ button {
+    [class*="button-"] {
       width: 160px;
     }
   }

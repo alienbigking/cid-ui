@@ -1,23 +1,21 @@
 <template>
-  <div>
-      <div class="card">
-          <span class="um-title">修改监舍</span>
-          <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="form" label-position="top">
-              <el-form-item label="编号" class="w50" prop="code" >
-                  <el-input v-model="prisonHouse.code"></el-input>
-              </el-form-item>
-              <el-form-item label="名称" class="w50" prop="name" >
-                  <el-input v-model="prisonHouse.name"></el-input>
-              </el-form-item>
-              <el-form-item class="w100 textarea" label="描述" prop="description" >
-                  <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
-              </el-form-item>
-              <el-form-item class="hasButton">
-                  <el-button @click="onBack">返 回</el-button>
-                  <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
-              </el-form-item>
-          </el-form>
-      </div>
+  <div class="detail-card">
+      <h3 class="card-title">修改监舍</h3>
+      <el-form class="formPadding" :model="prisonHouse" :rules="rules" ref="form" label-position="top">
+          <el-form-item label="编号" class="w50" prop="code" >
+              <el-input v-model="prisonHouse.code"></el-input>
+          </el-form-item>
+          <el-form-item label="名称" class="w50" prop="name" >
+              <el-input v-model="prisonHouse.name"></el-input>
+          </el-form-item>
+          <el-form-item class="w100 textarea" label="描述" prop="description" >
+              <el-input :maxlength="255" type="textarea" resize="none" v-model="prisonHouse.description"></el-input>
+          </el-form-item>
+          <div class="el-form-item-div">
+              <el-button @click="onBack">返 回</el-button>
+              <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
+          </div>
+      </el-form>
   </div>
 </template>
 

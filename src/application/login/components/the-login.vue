@@ -1,26 +1,27 @@
 <template>
-    <div class="login" :span="24">
+    <div class="box container login">
       <the-login-header></the-login-header>
-      <div class="login-box" :span="6">
+      <div class="login-box"><div>
           <i class="iconfont icon-yunshujukuRDS"></i>
-          <el-form class="login-input" :model="user" :rules="rules" ref="form">
-              <el-form-item class="noLable" prop="username">
-                  <el-input type="text" class="el-input-inner" placeholder="请输入用户名" v-model="user.username">
+          <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
+              <el-form-item prop="username">
+                  <el-input type="text" placeholder="请输入用户名" v-model="user.username">
                       <span slot="prefix" class="iconfont icon-people_fill"></span>
                   </el-input>
               </el-form-item>
-              <el-form-item class="noLable" prop="password">
-                  <el-input type="password" class="el-input-inner" placeholder="请输入密码" v-model="user.password"  @keyup.enter.native="onSubmit">
+              <el-form-item prop="password">
+                  <el-input type="password" placeholder="请输入密码" v-model="user.password"  @keyup.enter.native="onSubmit">
                       <span slot="prefix" class="iconfont icon-lock_fill"></span>
                   </el-input>
               </el-form-item>
-              <el-form-item class="form-input-remember">
-                  <el-checkbox label="记住我"></el-checkbox>
               </el-form-item>
               <div class="form-input-submit">
-                <el-button type="info" @click="onSubmit">登 录</el-button>
+                <el-checkbox label="记住我"></el-checkbox>
+                <el-button @click="onSubmit">登 录</el-button>
               </div>
           </el-form>
+
+          </div>
       </div>
       <the-login-footer></the-login-footer>
     </div>
@@ -30,7 +31,6 @@ import TheLoginFooter from "./the-login-footer";
 import TheLoginHeader from "./the-login-header";
 import { default as logService } from "../../log/service/log-service";
 import { mapActions } from "vuex";
-
 export default {
   components: {
     "the-login-header": TheLoginHeader,
@@ -85,55 +85,47 @@ export default {
   display: block;
   text-align: center;
 }
-.login {
-  width: 100%;
+.container{
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   background: url(../../../assets/images/background.png) no-repeat;
+  background-position: top center;
   background-size: cover;
-  .login-box {
-    margin-top: 168px;
+  box-sizing: border-box;
+  .login-box{
+    position: fixed;
+    top: 47px;
+    height: calc(100% - 47px);
+    overflow-y: auto;
+    width: 100%;
+  }
+}
+.login-box{
+  &>div{
     width: 322px;
-    padding-top: 36px;
-    box-sizing: content-box;
-    background: url(../../../assets/images/login.png) no-repeat;
-    background-size: 100% 100%;
-    background-position: center;
-    .login-input {
-      padding: 0 20px;
-      margin-top: 38px;
-      /deep/ .el-input__inner {
-        color: #999;
-      }
-      .form-input-remember {
-        margin-top: -5px;
-        /deep/ .el-form-item__content {
-          font-size: 14px;
-          line-height: 1;
-        }
-      }
-      .form-input-submit {
-        margin-bottom: 37px;
-        button {
-          width: 100%;
-          background-color: #516671;
-          border: 0;
-          color: #fff;
-        }
-      }
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #FCFCFC;
+    margin: 168px auto;
+    padding: 36px 20px 16px 0;
+    box-sizing: border-box;
+  }
+}
+.formPadding{
+  padding-top: 40px;
+  &>div{ width: 100%;}
+  .form-input-submit {
+    label{
+      margin-bottom: 20px;
+    }
+    button {
+      width: 100%;
+      background-color: #516671;
+      border: 0;
+      color: #fff;
     }
   }
-  /deep/ .el-checkbox__input.is-checked + .el-checkbox__label {
-    color: #606266;
-  }
-  /deep/ .el-checkbox__inner:hover {
-    border-color: #dcdfe6;
-  }
-  /deep/ .el-checkbox__input.is-checked .el-checkbox__inner {
-    background: #999;
-    border-color: #999;
-  }
+}
+.login {
+  
 }
 </style>

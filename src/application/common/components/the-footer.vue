@@ -1,6 +1,6 @@
 <template>
     <el-footer height="40px">
-      Copyright &copy; 2006-2017 罪犯数据库
+      Copyright &copy; 2017-2018 罪犯数据库
     </el-footer>
 </template>
 <script>

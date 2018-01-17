@@ -27,17 +27,19 @@
                       {{scope.row.lastUpdatedTime | moment}}
                     </template>
                   </el-table-column>
-                  <el-table-column label="用户状态" sortable >
-                    <template slot-scope="scope">{{scope.row.status | enumText(userStatuses)}}</template>
+                  <el-table-column label="用户状态" sortable align="center">
+                    <template slot-scope="scope">
+                      {{scope.row.status | enumText(userStatuses)}}
+                      <el-button class="button-status" type="text" v-if="scope.row.status=='ENABLED'" @click="onDisable(scope.row)">禁用</el-button>
+                      <el-button class="button-status" type="text" v-if="scope.row.status=='DISABLED'" @click="onEnable(scope.row)">启用</el-button>
+                    </template>
                   </el-table-column>
                   <el-table-column align="center" prop="opretion" label="操作" width="310px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onSelectRoles(scope.row.id)">分配角色</el-button>
+                      <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
                       <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
-                      <el-button type="text" @click="onView(scope.row.id)">明细</el-button>
                       <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
-                      <el-button type="text" @click="onEnable(scope.row)">激活</el-button>
-                      <el-button type="text" @click="onDisable(scope.row)">注销</el-button>
                     </template>
                   </el-table-column>
                 </el-table>
@@ -68,7 +70,7 @@
         </el-dialog>
         <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="statusDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
-          <span>确认激活<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+          <span>确认启用<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
             <el-button class="button-cancel" @click="statusDialogVisible = false">取 消</el-button>
             <el-button class="button-sure" :loading="settingStatus" @click="onEnableConfirm">确 定</el-button>
@@ -76,9 +78,9 @@
         </el-dialog>
         <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="disablledStatusDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
-          <span>确认禁用<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+          <span>确认禁用<b style="margin: 0 10px;">{{ disableItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
-            <el-button class="button-cancel" @click="statusDialogVisible = false">取 消</el-button>
+            <el-button class="button-cancel" @click="disablledStatusDialogVisible = false">取 消</el-button>
             <el-button class="button-sure" :loading="settingStatus" @click="onDisableConfirm">确 定</el-button>
           </span>
         </el-dialog>
@@ -154,7 +156,7 @@ export default {
     },
     onDisable(item) {
       this.disableItem = item;
-      this.disablledStatusDialogVisible = true;
+      this.statusDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
@@ -169,7 +171,7 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.statusDialogVisible = false;
-          this.$message.success("更改成功");
+          this.$message.success("启用成功");
           this.search();
         })
         .catch(error => {
@@ -183,7 +185,7 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.disablledStatusDialogVisible = false;
-          this.$message.success("更改成功");
+          this.$message.success("禁用成功");
           this.search();
         })
         .catch(error => {
@@ -242,11 +244,15 @@ export default {
   }
   button:nth-child(2) {
     color: #29b0a3;
-    margin-left: 20px;
   }
   button:nth-child(3) {
-    color: #f44336;
-    margin-left: 20px;
+    color: #29b0a3;
   }
+  button:nth-child(4) {
+    color: #f44336;
+  }
+  .button-status{
+  vertical-align: baseline;
+}
 }
 </style>

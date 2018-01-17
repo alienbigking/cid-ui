@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <span>Copyright &copy; 2006-2017 罪犯数据库</span>
+    <span>Copyright &copy; 2017-2018 罪犯数据库</span>
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {};
   line-height: 40px;
   font-size: 12px;
   color: #a3a6ab;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
