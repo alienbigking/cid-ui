@@ -5,23 +5,23 @@
     </div>
     <div class="list-box">
       <el-table class="table40" :data="allCriminalOutInPrisons" v-loading="loading" header-row-class-name="tableHeader40">
-        <el-table-column align="center" prop="reasonName" label="出入事由"> </el-table-column>
-        <el-table-column align="center" prop="outgoingDate" label="出监日期">
+        <el-table-column  prop="reasonName" label="出入事由" width="100px"> </el-table-column>
+        <el-table-column  prop="outgoingDate" label="出监日期">
           <template slot-scope="scope">
               {{scope.row.outgoingDate | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="entryDate" label="入监日期">
+        <el-table-column  prop="entryDate" label="入监日期">
           <template slot-scope="scope">
               {{scope.row.entryDate | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="createdTime" label="创建时间">
+        <el-table-column  prop="createdTime" label="创建时间">
           <template slot-scope="scope">
               {{scope.row.createdTime | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+        <el-table-column  prop="lastUpdatedTime" label="最后更新时间">
           <template slot-scope="scope">
               {{scope.row.lastUpdatedTime | moment}}
           </template>

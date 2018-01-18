@@ -359,7 +359,8 @@
         line-height: 40px;
     }
     .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell {
-        padding-left: 0px;
+        padding-left: 10px;
+        padding-right: 0px;
     }
     .tableHeader{
         height: 50px;

@@ -141,6 +141,7 @@ export default {
           { required: true, message: "请输入判决剥政年限" },
           { type: 'number', message: '必须为数字值' }
         ],
+        selectedFinalTrialOrgan: [{ required: true, message: "请输入终审机关" }],
         startEndTime: [{ required: true, message: "请选择刑期日期" }],
         // "criminalRecord.decisionPrisonTermStartDate": [{ required: true, message: "请选择判决刑期开始日期" }],
         // "criminalRecord.decisionPrisonTermEndDate": [{ required: true, message: "请选择判决刑期结束日期" }],
