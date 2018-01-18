@@ -76,7 +76,7 @@ export default {
     .sidebar-name{
       font-size:12px;
       margin-top: 2px;
-      color: #999999;
+      color: rgba(255,255,255,.8);
     }
   }
   &.avatar-collapsed {
