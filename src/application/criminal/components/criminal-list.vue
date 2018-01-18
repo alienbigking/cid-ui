@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="card">
-            <span class="um-title">查看罪犯基本信息</span>
+            <span class="um-title">查询罪犯</span>
             <div class="filters">
                 <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                 <el-input placeholder="姓名" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
