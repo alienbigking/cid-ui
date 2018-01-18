@@ -276,6 +276,7 @@ export default {
     color: #333;
     font-size:14px;
     cursor: pointer;
+    font-weight: bold;
   }
   .iconfont{
     float: right;
