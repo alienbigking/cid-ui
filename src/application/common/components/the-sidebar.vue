@@ -1,10 +1,9 @@
 <template>
-    <el-aside 
-      :width="collapsed ? '55px' : '260px'" 
-      :class="collapsed ? 'aside menu-collapsed' : 'aside menu-expanded'">
+    <el-aside :width="collapsed ? '64px' : '260px'" class="aside"
+      :class="collapsed ? 'menu-collapsed' : ''">
         <router-link to="/dashboard">
-          <div 
-            class="avatar" 
+          <div
+            class="avatar"
             :class="collapsed ? 'avatar-collapsed' : ''">
               <img src="../../../assets/images/avatar.png" alt="">
                 <div class="avatar-right">
@@ -41,18 +40,25 @@ export default {
 <style lang="scss" scoped>
 .aside {
   background: #263238;
-  color: #fff;
-  transition: all 0.2s linear;
+  transition: width .3s linear;
+}
+.menu-collapsed{
+  overflow: visible;
+  .iconfont{margin-right: 30px;}
 }
 .avatar {
   display: flex;
-  padding: 20px 0 20px 7px;
+  padding: 20px 0 20px 11px;
   align-items: stretch;
   color: #fff;
+  height: 78px;
+  overflow: hidden;
+  box-sizing: border-box;
   img {
     height: 38px;
     width: 38px;
     margin-right: 16px;
+    flex-shrink: 0;
   }
   .avatar-right {
     display: flex;

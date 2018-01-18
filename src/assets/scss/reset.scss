@@ -8,6 +8,59 @@
 .el-input__inner, .el-textarea__inner {
   background: transparent;
 }
+.sidebar{
+  width: 100% !important;
+  transition: width 0;
+  border-right: 0;
+  .el-submenu__title .el-submenu__icon-arrow { color: #FFFFFF; }
+  .el-submenu {
+    .el-menu{ border-bottom: 1px solid #303B40; }
+  }
+  .el-icon-arrow-down:before{
+    content: "\E604";
+  }
+  .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+    transform: rotate(90deg);
+  }
+}
+.el-menu--collapse{
+  .el-submenu {
+    .el-menu {
+      margin-left: 0;
+      border: 0;
+      box-shadow: none;
+    }
+    .first{
+      background: #29B0A3; color: #fff;
+    }
+  }
+}
+.first{
+  &.el-menu-item, & > .el-submenu__title {
+    line-height: 44px;
+    height: 44px;
+  }
+  .iconfont{
+    margin-right: 10px;
+    margin-left: 4px;
+  }
+  &.is-active, &.is-active > .el-submenu__title {
+    background: #29B0A3 !important;
+    color: #FFFFFF !important;
+    & > i { color: #FFFFFF; }
+  }
+}
+.second{
+  &.el-menu-item, & > .el-submenu__title {
+    line-height: 38px;
+    height: 38px;
+    padding-left: 54px !important;
+  }
+  &.is-active, &.is-active > .el-submenu__title {
+    background: #182125 !important;
+    color: #FFFFFF !important;
+  }
+}
 .box{
     .flex-column{
         flex-direction: column;
@@ -108,48 +161,6 @@
     .el-badge__content{
         border: 0;
     }
-}
-.aside{
-    .el-submenu .el-menu-item{
-        height: 38px;
-        line-height: 38px;
-    }
-    .first{
-        &>.el-submenu__title{
-            padding-left: 16px !important;
-        }
-        &.is-opened>.el-submenu__title{
-            color: #fff !important;
-        }
-    }
-    .el-submenu__title{
-        font-size: 14px;
-        height: 44px;
-        line-height: 44px;
-        i{
-            color: #fff;
-        }
-        &:hover{
-            background: transparent;
-        }
-    }
-    .second{
-        .el-submenu__title{
-            color: #d1d1d1;
-            height: 38px;
-            padding-left: 47px !important;
-            line-height: 38px;
-        }
-        &.is-opened .el-submenu__title{
-            color: #fffefe;
-        }
-    }
-}
-.menu-icon{
-    margin-right: 8px;
-    height: 16px;
-    width: 16px;
-    display: inline-block;
 }
 .el-form{
     box-sizing: border-box;

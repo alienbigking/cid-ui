@@ -98,44 +98,6 @@
     }
   }
 }
-
-.menu-collapsed{
-    overflow: visible;
-    &>.el-submenu__title{
-        padding-left: 16px !important;
-    }
-    .base{
-        width: 55px;
-    }
-    .first{
-        &>.el-menu{
-            margin-left: 0;
-            border-left: 1px solid #536067;
-        }
-        &.is-active{
-            background: #29B0A3;
-        }
-    }
-    .second{
-        &>.el-menu{
-            left: -1px;
-            margin-left: 0;
-            position: relative;
-            border: 0;
-            border-left: 1px solid #536067;
-            display: block !important;
-            border-radius: 0;
-            transition: all 0s linear;
-        }
-        .el-icon-arrow-right:before{
-            content: "\E603";
-        }
-    }
-    .third{
-        padding-left: 36px !important;
-    }
-}
-
 .el-form{
     &.el-form--label-top{
         display: flex;
