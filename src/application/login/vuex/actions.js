@@ -11,9 +11,9 @@ export default {
     logout({ commit }) {
         commit(types.REMOVE_TOKEN);
     },
-    getPersonaInformation({ commit }) {
-        return userService.getMyProfile().then(personalInformation => {
-            commit(types.SET_INFORMATION, personalInformation);
+    getProfile({ commit }) {
+        return userService.getMyProfile().then(profile => {
+            commit(types.SET_PROFILE, profile);
         });
     }
 };

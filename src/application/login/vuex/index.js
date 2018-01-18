@@ -3,7 +3,7 @@ import mutations from './mutations';
 
 const state = {
     token: {},
-    personalInformation: {}
+    profile: {}
 };
 
 export default {

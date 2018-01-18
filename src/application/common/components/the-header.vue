@@ -32,7 +32,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import { default as informationStorage } from "../service/information-storage";
+import { default as profileStorage } from "../service/profile-storage";
 export default {
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
     };
   },
   created() {
-    this.userName = informationStorage.decodeInformation().username;
+    this.userName = profileStorage.getProfile().username;
   },
   methods: {
     ...mapActions(["handleCollapse"]),
