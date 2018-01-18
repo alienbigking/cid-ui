@@ -5,7 +5,7 @@ import { default as criminalResumeService } from '../service/criminal-resume-ser
 import { default as criminalPhysicalCharacteristicService } from '../service/criminal-physical-characteristic-service';
 import { default as criminalSocialRelationService } from '../service/criminal-social-relation-service';
 import { default as criminalForfeitService } from '../service/criminal-forfeit-service';
-import { default as criminalOutInPrisonService } from '../service/criminal-outInPrison-service';
+import { default as criminalOutInPrisonService } from '../service/criminal-outinprison-service';
 
 export default {
     // 罪犯

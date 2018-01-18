@@ -210,7 +210,7 @@ import CriminalDetailRecord from './criminal-detail-record';
 import CriminalDetailResume from './criminal-detail-resume';
 import CriminalDetailSocialRelation from './criminal-detail-social-relation';
 import CriminalDetailForfeit from './criminal-detail-forfeit';
-import CriminalDetailOutInPrison from './criminal-detail-outInPrison';
+import CriminalDetailOutInPrison from './criminal-detail-outinprison';
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -276,6 +276,7 @@ export default {
     color: #333;
     font-size:14px;
     cursor: pointer;
+    font-weight: bold;
   }
   .iconfont{
     float: right;

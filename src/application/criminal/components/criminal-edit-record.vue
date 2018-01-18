@@ -6,15 +6,15 @@
     <div class="list-box">
       <template>
         <el-table class="table40" :data="allCriminalRecords" v-loading="loading" header-row-class-name="tableHeader40">
-          <el-table-column align="center" prop="decisionAccusation" label="罪名"> </el-table-column>
-          <el-table-column align="center" prop="prosecutionOrganName" label="起诉机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column align="center" prop="firstTrialOrganName" label="一审机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column align="center" prop="finalTrialOrganName" label="终审机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column align="center" prop="decisionOrganName" label="判决机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column align="center" prop="decisionDate" label="判决日期"> </el-table-column>
-          <el-table-column align="center" prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
-          <el-table-column align="center" prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
-          <el-table-column align="center" label="操作" width="170px">
+          <el-table-column  prop="decisionAccusation" label="罪名" width="80px"> </el-table-column>
+          <el-table-column  prop="prosecutionOrganName" label="起诉机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column  prop="firstTrialOrganName" label="一审机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column  prop="finalTrialOrganName" label="终审机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column  prop="decisionOrganName" label="判决机关" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column  prop="decisionDate" label="判决日期"> </el-table-column>
+          <el-table-column  prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
+          <el-table-column  prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
+          <el-table-column  label="操作" width="170px">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
