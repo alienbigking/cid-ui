@@ -1,78 +1,21 @@
 <template>
-  <el-menu
-    unique-opened
-    :collapse="collapsed"
-    class="base"
-    text-color="#d1d1d1"
-    active-text-color="#fff">
-    <template v-for="(menu, index) in menus">
-      <el-submenu
-        v-if="!menu.children"
-        :key="menu.index"
-        :index="menu.index"
-        class="first no-arrow"
-        @click.native="onNavigate(menu.path)">
-          <li
-            class="menuText"
-            :style="collapsed ? 'display: block' : 'display: none'">
-            {{ menu.name }}
-          </li>
-          <template slot="title">
-            <i class="iconfont icon-shezhi"></i>
-            <span>{{menu.name}}</span>
-          </template>
-      </el-submenu>
-      <el-submenu
-        v-if="menu.children"
-        :key="menu.index"
-        :index="menu.index"
-        class="first">
-          <li
-            class="menuText"
-            :style="collapsed ? 'display: block' : 'display: none'">
-            {{ menu.name }}
-          </li>
-          <template slot="title">
-            <i class="iconfont icon-shezhi"></i>
-            <span>{{menu.name}}</span>
-          </template>
-          <template
-            v-for="submenu in menu.children">
-            <el-submenu
-              :key="submenu.index"
-              :index="submenu.index"
-              v-if="submenu.children"
-              class="second">
-                <template slot="title">
-                  <span>{{submenu.name}}</span>
-                </template>
-                <template v-for="item in submenu.children">
-                  <el-menu-item
-                    :key="item.index"
-                    :index="item.index"
-                    @click.native="onNavigate(item.path)"
-                    class="third">
-                      <span slot="title">{{item.name}}</span>
-                  </el-menu-item>
-                </template>
-            </el-submenu>
-            <el-menu-item
-              :key="submenu.index"
-              :index="submenu.index"
-              v-else @click.native="onNavigate(submenu.path)">
-                <span slot="title">{{submenu.name}}</span>
-            </el-menu-item>
-          </template>
-      </el-submenu>
-      <!-- <el-menu-item
-        :key="menu.index"
-        :index="menu.index"
-        v-else
-        @click.native="onNavigate(menu.path)"
-        class="first">
+  <el-menu :default-active="activeItem" :collapse="collapsed" background-color="#263238" text-color="#D1D1D1" active-text-color="#FFFFFF" class="sidebar-menu" unique-opened @select="onSelected">
+    <template v-for="(first, idx1) in menus">
+      <el-submenu v-if="first.children" :index="first.index" :key="idx1" class="first">
+        <template slot="title">
           <i class="iconfont icon-shezhi"></i>
-          <span slot="title">{{menu.name}}</span>
-      </el-menu-item> -->
+          <span slot="title">{{ first.name }}</span>
+        </template>
+        <li class="el-menu-item first"
+          :style="collapsed ? 'display: block' : 'display: none'">
+          {{ first.name }}
+        </li>
+        <el-menu-item v-for="(second, idx2) in first.children" :key="idx2" :index="second.index" class="second" @click="onNavigate(second.path)">{{ second.name }}</el-menu-item>
+      </el-submenu>
+      <el-menu-item v-else :index="first.index" :key="idx1" :route="first" class="first" @click="onNavigate(first.path)">
+        <i class="iconfont icon-shezhi"></i>
+        <span slot="title">{{ first.name }}</span>
+      </el-menu-item>
     </template>
   </el-menu>
 </template>
@@ -82,7 +25,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      menuText: ""
+      activeItem: ''
     };
   },
   computed: {
@@ -92,74 +35,50 @@ export default {
     ...mapGetters(["collapsed"])
   },
   created() {
-    this.getMenus();
+    this.getMenus().then(res => {
+      if (sessionStorage.getItem("activeItem")) {
+        this.activeItem = sessionStorage.getItem("activeItem");
+      } else if (!this.menus[0].children) {
+        this.activeItem = this.menus[0].index;
+      } else {
+        this.activeItem = this.menus[0].children[0].index;
+      }
+    });
   },
   methods: {
     ...mapActions(["getMenus"]),
     onNavigate(path) {
       this.$router.push(path);
+    },
+    // setActive() {
+    //   let urlPath = this.$route.matched[this.$route.matched.length - 1].path;
+    //   let matched;
+    //   if (urlPath.split("/").length === 2) {
+    //     matched = this.menus.find(menu => {
+    //       return menu.path === urlPath;
+    //     });
+    //   } else if (urlPath.split("/").length === 3) {
+    //     this.menus.forEach(menu => {
+    //       if (menu.children && menu.children.find(child => { return child.path === urlPath; })) {
+    //         matched = menu.children.find(child => { return child.path === urlPath });
+    //       }
+    //     });
+    //   } else if (urlPath.split("/").length >= 4) {
+    //     let url = `${ urlPath.replace("/", "*").split("/")[0].replace("*", "/") }/list`;
+    //     this.menus.forEach(menu => {
+    //       if (menu.children && menu.children.find(child => { return child.path === url; })) {
+    //         matched = menu.children.find(child => { return child.path === url });
+    //       }
+    //     });
+    //   }
+    //   this.activeItem = matched.index;
+    // },
+    onSelected(a) {
+      sessionStorage.setItem("activeItem", a);
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.aside {
-  .base {
-    border-right: 0;
-    transition: all 0s linear;
-    background: #263238;
-  }
-  .first {
-    &.is-opened {
-      background: #29b0a3;
-      & > .el-submenu__title {
-        &:hover {
-          background: transparent;
-        }
-      }
-    }
-    &.no-arrow{
-      /deep/ .el-submenu__icon-arrow{ display: none;}
-    }
-    .second:last-child {
-      border-bottom: 1px solid #303b40;
-    }
-    .el-menu-item[role="menuitem"]:not(.third) {
-      background: #202a2f;
-      padding-left: 47px !important;
-    }
-    .el-menu-item.third[role="menuitem"] {
-      padding-left: 66px !important;
-    }
-  }
-  .second {
-    background: #202a2f;
-    &.is-active {
-      background: #182125;
-    }
-    &.is-opened {
-      .third:last-child {
-        border-bottom: 1px solid #303b40;
-      }
-    }
-  }
-  .third {
-    background: #182125;
-    &.is-active {
-      background: #13191c;
-    }
-  }
-  .menuText {
-    height: 43px;
-    line-height: 43px;
-    padding-left: 20px;
-    font-size: 14px;
-    background: #29b0a3;
-    color: #fff;
-    min-width: 200px;
-  }
-  .iconfont {
-    margin-right: 14px;
-  }
-}
+.iconfont{ color: #D1D1D1; }
 </style>
