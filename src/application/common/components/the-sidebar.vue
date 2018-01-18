@@ -7,10 +7,10 @@
             :class="collapsed ? 'avatar-collapsed' : ''">
               <img src="../../../assets/images/avatar.png" alt="">
                 <div class="avatar-right">
-                    <span>管理员</span>
+                    <span>{{userName}}</span>
                     <div class="">
                       <i class="el-icon-location"></i>
-                      <span>管理员</span>
+                      <span>{{name}}</span>
                     </div>
                 </div>
           </div>
@@ -20,6 +20,7 @@
 </template>
 <script>
 import { default as TheSidebarMenu } from "./the-sidebar-menu";
+import { default as profileStorage } from "../service/profile-storage";
 import { mapGetters } from "vuex";
 
 export default {
@@ -28,11 +29,17 @@ export default {
   },
   data() {
     return {
-      menuText: ""
+      menuText: "",
+      userName: "",
+      name: ""
     };
   },
   computed: {
     ...mapGetters(["collapsed"])
+  },
+  created() {
+    this.userName = profileStorage.getProfile().username;
+    this.name = profileStorage.getProfile().name;
   },
   methods: {}
 };

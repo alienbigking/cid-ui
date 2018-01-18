@@ -37,7 +37,7 @@
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
         <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
         <el-table class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
-          <el-table-column align="center" label="其它特征" prop="description">
+          <el-table-column align="center" label="其它特征" prop="description" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
                 <el-input v-model="scope.row.description"></el-input>
@@ -84,6 +84,10 @@ export default {
         "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
           { validator: this.$validators.decimal3i2f }
+        ],
+        "criminalPhysicalCharacteristic.footLength": [
+          { required: true, message: "请输入足长" },
+          { validator: this.$validators.decimal2i2f }
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
@@ -191,7 +195,7 @@ export default {
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
-        if (this.form.criminalPhysicalCharacteristic.id !== null) {
+        if (this.form.criminalPhysicalCharacteristic.id) {
           this.form.selectedSomatotype = {
             code: this.form.criminalPhysicalCharacteristic.somatotypeCode,
             name: this.form.criminalPhysicalCharacteristic.somatotypeName
@@ -209,14 +213,14 @@ export default {
             name: this.form.criminalPhysicalCharacteristic.accentName
           };
         } else {
-          this.form.criminalPhysicalCharacteristic = Object.assign(this.form.criminalPhysicalCharacteristic, { criminalId: this.$route.params.id });
+          this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id };
         }
       });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.criminalPhysicalCharacteristic.id !== null) {
+          if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
             this.updateCriminalPhysicalCharacteristic()

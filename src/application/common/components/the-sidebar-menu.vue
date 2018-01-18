@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="activeItem" :collapse="collapsed" background-color="#263238" text-color="#D1D1D1" active-text-color="#FFFFFF" class="sidebar" unique-opened @select="onSelected">
+  <el-menu :default-active="activeItem" :collapse="collapsed" background-color="#263238" text-color="#D1D1D1" active-text-color="#FFFFFF" class="sidebar-menu" unique-opened @select="onSelected">
     <template v-for="(first, idx1) in menus">
       <el-submenu v-if="first.children" :index="first.index" :key="idx1" class="first">
         <template slot="title">

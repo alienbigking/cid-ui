@@ -5,20 +5,20 @@
     </div>
     <div class="list-box">
       <el-table class="table40" :data="allCriminalForfeits" v-loading="loading" header-row-class-name="tableHeader40">
-        <el-table-column align="center" prop="receiptNumber" label="罚金单据号"> </el-table-column>
-        <el-table-column align="center" prop="amount" label="缴纳罚金"> </el-table-column>
-        <el-table-column align="center" prop="payee" label="收款单位"></el-table-column>
-        <el-table-column align="center" prop="paymentDate" label="缴纳日期">
+        <el-table-column  prop="receiptNumber" label="罚金单据号" :show-overflow-tooltip="true"> </el-table-column>
+        <el-table-column  prop="amount" label="缴纳罚金" :show-overflow-tooltip="true"> </el-table-column>
+        <el-table-column  prop="payee" label="收款单位" :show-overflow-tooltip="true"></el-table-column>
+        <el-table-column  prop="paymentDate" label="缴纳日期">
           <template slot-scope="scope">
               {{scope.row.createdTime | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="createdTime" label="创建时间">
+        <el-table-column  prop="createdTime" label="创建时间">
           <template slot-scope="scope">
               {{scope.row.createdTime | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" prop="lastUpdatedTime" label="最后更新时间">
+        <el-table-column  prop="lastUpdatedTime" label="最后更新时间">
           <template slot-scope="scope">
               {{scope.row.lastUpdatedTime | moment}}
           </template>

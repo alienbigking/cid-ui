@@ -7,6 +7,13 @@ export default {
             error => {
                 if (error.response) {
                     switch (error.response.status) {
+                        case 401:
+                            store.dispatch('logout');
+                            router.replace({
+                                path: '/login',
+                                query: { redirect: router.currentRoute.fullPath }
+                            });
+                            break;
                         case 403:
                             router.replace({ path: "/forbidden-error" });
                             break;
