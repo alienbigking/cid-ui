@@ -31,7 +31,7 @@ router.beforeEach((to, from, next) => {
         next();
         return;
     }
-    if (tokenStorage.decodeAccessToken()) {
+    if (tokenStorage.getToken()) {
         next();
     } else {
         const login = { path: '/login', query: { redirect: to.fullPath } };
