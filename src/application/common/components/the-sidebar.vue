@@ -21,7 +21,7 @@
 </template>
 <script>
 import { default as TheSidebarMenu } from "./the-sidebar-menu";
-import { default as informationStorage } from "../service/information-storage";
+import { default as profileStorage } from "../service/profile-storage";
 import { mapGetters } from "vuex";
 
 export default {
@@ -39,8 +39,8 @@ export default {
     ...mapGetters(["collapsed"])
   },
   created() {
-    this.userName = informationStorage.decodeInformation().username;
-    this.name = informationStorage.decodeInformation().name;
+    this.userName = profileStorage.getProfile().username;
+    this.name = profileStorage.getProfile().name;
   },
   methods: {}
 };

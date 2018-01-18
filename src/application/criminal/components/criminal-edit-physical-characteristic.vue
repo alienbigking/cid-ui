@@ -195,7 +195,7 @@ export default {
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
-        if (this.form.criminalPhysicalCharacteristic.id !== null) {
+        if (this.form.criminalPhysicalCharacteristic.id) {
           this.form.selectedSomatotype = {
             code: this.form.criminalPhysicalCharacteristic.somatotypeCode,
             name: this.form.criminalPhysicalCharacteristic.somatotypeName
@@ -213,14 +213,14 @@ export default {
             name: this.form.criminalPhysicalCharacteristic.accentName
           };
         } else {
-          this.form.criminalPhysicalCharacteristic = Object.assign(this.form.criminalPhysicalCharacteristic, { criminalId: this.$route.params.id });
+          this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id };
         }
       });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.form.criminalPhysicalCharacteristic.id !== null) {
+          if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
             this.updateCriminalPhysicalCharacteristic()
