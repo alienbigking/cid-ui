@@ -2,11 +2,11 @@ function handleError(response, text) {
     if (response && response.status === 400) {
         if (response.data && response.data.code) {
             this.$message.error(response.data.message);
-            // return;
+        } else {
+            this.$message.error(text);
         }
     }
-    // this.$message.error(text);
-};
+}
 
 export default {
     install: (Vue, Option) => {
