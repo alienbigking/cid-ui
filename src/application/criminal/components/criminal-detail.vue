@@ -6,7 +6,7 @@
         基本信息
         <span class="iconfont" :class="informationShow?'icon-unfold':'icon-enter'"></span>
     </div>
-    <div v-if="informationShow">
+    <!-- <div v-if="informationShow"> -->
         <div class="form-container">
             <el-row type="flex">
                 <el-col :span="6">
@@ -111,7 +111,7 @@
                     <label>备注：</label><span class="s50">{{criminal.remark}}</span>
                 </el-col>
             </el-row>
-        </div>
+        <!-- </div> -->
     </div>
   </div>
   <!-- 犯罪记录 -->
@@ -287,12 +287,12 @@ export default {
   width: 100%;
   position: relative;
   padding: 20px 20px 20px 41px;
-  font-size: 14px;
+  font-size: 12px;
   border-top: 1px solid #ddd;
   label {
     color: #666;
     display: inline-block;
-    font-size: 14px;
+    font-size: 12px;
     width: 80px;
     box-sizing: border-box;
     float: left;
@@ -300,13 +300,14 @@ export default {
   }
   span {
     display: inline-block;
-    border-bottom: 1px solid #ddd;
+    // border-bottom: 1px solid #ddd;
     padding-bottom: 10px;
     padding-top: 20px;
     width: calc(100% - 100px);
     color: #333;
     height: 14px;
-    vertical-align: middle;
+    // vertical-align:middle;
+    font-weight: bold;
   }
   .label120{
       width: 130px;
