@@ -1,9 +1,6 @@
 export default {
-    getProfile() {
-        const myProfile = localStorage.getItem('profile');
-        if (myProfile) {
-            const profile = JSON.parse(myProfile);
-            return profile;
-        }
+    getMyProfile() {
+        const myProfile = localStorage.getItem('myProfile');
+        return JSON.parse(myProfile);
     }
 };

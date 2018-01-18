@@ -6,8 +6,5 @@ export default {
     },
     [types.REMOVE_TOKEN](state) {
         localStorage.removeItem('TOKEN');
-    },
-    [types.SET_PROFILE](state, profile) {
-        localStorage.setItem('profile', JSON.stringify(profile));
     }
 };

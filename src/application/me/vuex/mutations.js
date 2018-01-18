@@ -7,5 +7,8 @@ export default {
     },
     [types.UPDATE_USER_PROFILE](state, userProfile) {
         state.userProfile = _.cloneDeep(userProfile);
+    },
+    [types.SET_MYPROFILE](state, userProfile) {
+        localStorage.setItem('myProfile', JSON.stringify(userProfile));
     }
 };
