@@ -19,7 +19,7 @@
             </li>
             <li class="hasImg">
               <router-link to="/me">
-                <img src="../../../assets/images/avatar.png" alt="">
+                <img src="../../../assets/images/face11.jpg" alt="">
                 <span>管理员</span>
               </router-link>
             </li>
@@ -82,6 +82,9 @@ export default {
     }
     img {
       margin-right: 7px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
     }
   }
   li.hasImg a {
