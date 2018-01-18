@@ -68,13 +68,13 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 12px;
+    font-size: 14px;
     margin-top: 2px;
     & > span {
       margin-bottom: 8px;
     }
     .sidebar-name{
-      font-size:10px;
+      font-size:12px;
       margin-top: 2px;
       color: #999999;
     }
