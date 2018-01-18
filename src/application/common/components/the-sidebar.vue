@@ -26,7 +26,6 @@ export default {
   },
   data() {
     return {
-      menuText: "",
       userName: "",
       name: ""
     };
@@ -37,6 +36,7 @@ export default {
   created() {
     this.userName = profileStorage.getMyProfile().username;
     this.name = profileStorage.getMyProfile().name;
+    console.log(this.collapsed);
   },
   methods: {}
 };
