@@ -213,7 +213,7 @@ export default {
             name: this.form.criminalPhysicalCharacteristic.accentName
           };
         } else {
-          this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id };
+          this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id, otherFeatures: [] };
         }
       });
     },
