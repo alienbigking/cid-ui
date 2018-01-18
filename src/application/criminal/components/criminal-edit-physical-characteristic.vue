@@ -85,6 +85,10 @@ export default {
           { required: true, message: "请输入体重" },
           { validator: this.$validators.decimal3i2f }
         ],
+        "criminalPhysicalCharacteristic.footLength": [
+          { required: true, message: "请输入足长" },
+          { validator: this.$validators.decimal2i2f }
+        ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
       },

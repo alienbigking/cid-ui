@@ -156,7 +156,7 @@ export default {
     },
     onDisable(item) {
       this.disableItem = item;
-      this.statusDialogVisible = true;
+      this.disablledStatusDialogVisible = true;
     },
     onDelete(item) {
       this.deleteItem = item;
@@ -243,12 +243,15 @@ export default {
     color: #2196f3;
   }
   button:nth-child(2) {
+    margin-left: 20px;
     color: #29b0a3;
   }
   button:nth-child(3) {
+    margin-left: 20px;
     color: #29b0a3;
   }
   button:nth-child(4) {
+    margin-left: 20px;
     color: #f44336;
   }
   .button-status{
