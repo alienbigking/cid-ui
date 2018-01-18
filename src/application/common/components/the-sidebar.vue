@@ -6,13 +6,10 @@
           <div 
             class="avatar" 
             :class="collapsed ? 'avatar-collapsed' : ''">
-              <img src="../../../assets/images/avatar.png" alt="">
+              <img src="../../../assets/images/face11.jpg" alt="">
                 <div class="avatar-right">
                     <span>{{userName}}</span>
-                    <div class="">
-                      <i class="el-icon-location"></i>
-                      <span>{{name}}</span>
-                    </div>
+                    <span class="sidebar-name">{{name}}</span>
                 </div>
           </div>
         </router-link>
@@ -39,8 +36,8 @@ export default {
     ...mapGetters(["collapsed"])
   },
   created() {
-    this.userName = profileStorage.getProfile().username;
-    this.name = profileStorage.getProfile().name;
+    this.userName = profileStorage.getMyProfile().username;
+    this.name = profileStorage.getMyProfile().name;
   },
   methods: {}
 };
@@ -60,17 +57,21 @@ export default {
     height: 38px;
     width: 38px;
     margin-right: 16px;
+    border-radius: 50%;
   }
   .avatar-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-size: 12px;
+    margin-top: 2px;
     & > span {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
-    i {
-      margin-right: 6px;
+    .sidebar-name{
+      font-size:10px;
+      margin-top: 2px;
+      color: #999999;
     }
   }
   &.avatar-collapsed {

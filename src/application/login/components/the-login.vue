@@ -51,13 +51,13 @@ export default {
     };
   },
   methods: {
-    ...mapActions([ "login", "getProfile" ]),
+    ...mapActions([ "login", "getMyProfile" ]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.login(this.user)
             .then(() => {
-              this.getProfile().then(() => {
+              this.getMyProfile().then(() => {
                 logService.addLoginLog();
                 let redirect = this.$route.query.redirect;
                 if (!redirect) {
