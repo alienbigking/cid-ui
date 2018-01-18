@@ -14,7 +14,6 @@
                       <span slot="prefix" class="iconfont icon-lock_fill"></span>
                   </el-input>
               </el-form-item>
-              </el-form-item>
               <div class="form-input-submit">
                 <el-checkbox label="记住我"></el-checkbox>
                 <el-button @click="onSubmit">登 录</el-button>
@@ -39,8 +38,8 @@ export default {
   data() {
     return {
       user: {
-        username: "",
-        password: ""
+        username: "prs0001",
+        password: "Password@1"
       },
       rules: {
         username: [{ required: true, message: "用户名不能为空" }],
@@ -52,18 +51,20 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["login"]),
+    ...mapActions([ "login", "getPersonaInformation" ]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.login(this.user)
             .then(() => {
-              logService.addLoginLog();
-              let redirect = this.$route.query.redirect;
-              if (!redirect) {
-                redirect = "/dashboard";
-              }
-              this.$router.push(redirect);
+              this.getPersonaInformation().then(() => {
+                logService.addLoginLog();
+                let redirect = this.$route.query.redirect;
+                if (!redirect) {
+                  redirect = "/dashboard";
+                }
+                this.$router.push(redirect);
+                });
             })
             .catch(error => {
               this.$handleError(error.response, "登陆失败");
@@ -124,8 +125,5 @@ export default {
       color: #fff;
     }
   }
-}
-.login {
-  
 }
 </style>
