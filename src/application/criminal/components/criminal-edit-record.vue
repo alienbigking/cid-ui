@@ -14,7 +14,7 @@
           <el-table-column  prop="decisionDate" label="判决日期"> </el-table-column>
           <el-table-column  prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
           <el-table-column  prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
-          <el-table-column  label="操作" width="170px">
+          <el-table-column  label="操作" width="141px">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
@@ -111,7 +111,6 @@ export default {
   }
   button:nth-child(2) {
     color: #f44336;
-    margin-left: 30px;
   }
 }
 </style>

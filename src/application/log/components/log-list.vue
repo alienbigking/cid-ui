@@ -35,7 +35,7 @@
                       {{scope.row.createdTime | moment}}
                     </template>
                   </el-table-column>
-                  <el-table-column align="center" label="操作">
+                  <el-table-column align="center" label="操作" width="141px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
                     </template>
@@ -120,23 +120,9 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
-  height: 100%;
-  /deep/ .el-table__body-wrapper {
-    overflow: inherit;
-  }
-}
 .cell {
   button:nth-child(1) {
     color: #2196f3;
-  }
-  button:nth-child(2) {
-    color: #29b0a3;
-    margin-left: 20px;
-  }
-  button:nth-child(3) {
-    color: #f44336;
-    margin-left: 20px;
   }
 }
 </style>

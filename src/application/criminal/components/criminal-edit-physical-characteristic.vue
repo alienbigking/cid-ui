@@ -261,7 +261,7 @@ export default {
 <style lang="scss" scoped>
 .table40{ margin-bottom: 0; }
 .cell {
-  button:nth-child(1) {
+  button {
     color: #f44336;
   }
 }

@@ -34,7 +34,7 @@
                       <el-button class="button-status" type="text" v-if="scope.row.status=='DISABLED'" @click="onEnable(scope.row)">启用</el-button>
                     </template>
                   </el-table-column>
-                  <el-table-column align="center" prop="opretion" label="操作" width="280px">
+                  <el-table-column align="center" prop="opretion" label="操作" width="201px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onSelectRoles(scope.row.id)">分配角色</el-button>
                       <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
@@ -55,11 +55,9 @@
                 </div>
             </template>
         </div>
-
-        <el-dialog class="dialog" width="450px" :center="true" custom-class="noPadding" :visible.sync="editDialogVisible">
+        <el-dialog class="dialog" width="450px" :visible.sync="editDialogVisible">
           <user-list-edit :userId="userId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></user-list-edit>
         </el-dialog>
-
         <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
@@ -227,12 +225,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  height: 100%;
-  /deep/ .el-table__body-wrapper {
-    overflow: inherit;
-  }
   .dialog{
-    /deep/ .el-dialog--center .el-dialog__body{
+    /deep/ .el-dialog__body{
       padding: 0px 27px 15px;
     }
   }
@@ -243,19 +237,16 @@ export default {
     color: #2196f3;
   }
   button:nth-child(2) {
-    margin-left: 20px;
     color: #29b0a3;
   }
   button:nth-child(3) {
-    margin-left: 20px;
     color: #29b0a3;
   }
   button:nth-child(4) {
-    margin-left: 20px;
     color: #f44336;
   }
   .button-status{
-  vertical-align: baseline;
-}
+    vertical-align: baseline;
+  }
 }
 </style>

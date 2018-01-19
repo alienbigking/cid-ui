@@ -20,7 +20,7 @@
               {{scope.row.lastUpdatedTime | moment}}
           </template>
         </el-table-column>
-        <el-table-column align="center" label="操作" width="170px">
+        <el-table-column align="center" label="操作" width="141px">
           <template slot-scope="scope">
             <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
             <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
@@ -119,7 +119,6 @@ export default {
   }
   button:nth-child(2) {
     color: #f44336;
-    margin-left: 30px;
   }
 }
 </style>

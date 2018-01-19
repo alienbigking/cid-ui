@@ -21,7 +21,7 @@
                       {{scope.row.lastUpdatedTime | moment}}
                     </template>
                   </el-table-column>
-                  <el-table-column align="center" prop="opretion" label="操作" width="170px">
+                  <el-table-column align="center" prop="opretion" label="操作" width="141px">
                     <template slot-scope="scope">
                       <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
                       <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
@@ -142,11 +142,9 @@ export default {
   }
   button:nth-child(2) {
     color: #29b0a3;
-    margin-left: 20px;
   }
   button:nth-child(3) {
     color: #f44336;
-    margin-left: 20px;
   }
 }
 </style>
