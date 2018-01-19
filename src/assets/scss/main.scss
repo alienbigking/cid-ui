@@ -46,7 +46,7 @@
       // width: 148px;
       width: auto;
       margin-top: 20px;
-      float: left;
+      // float: left;
       box-sizing: border-box;
     }
     label + span{
@@ -73,6 +73,9 @@
       & + .el-button{
           float: right;
           margin-top: 20px;
+      }
+      &.el-row{
+        margin-top: 0;
       }
   }
   & + .detail-card { margin-top: 10px; }
