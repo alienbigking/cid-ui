@@ -97,9 +97,8 @@ export default {
       criminalLookupService.getAllPoliticalStatuses()
     ]).then(response => {
       this.allPoliticalStatuses = response[0];
-      this.render().then(() => {
-        this.initializing = false;
-      });
+      this.initializing = false;
+      this.render();
     });
   },
   methods: {

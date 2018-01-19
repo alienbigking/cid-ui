@@ -170,9 +170,8 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
-      this.render().then(() => {
-        this.initializing = false;
-      });
+      this.initializing = false;
+      this.render();
     });
   },
   methods: {
