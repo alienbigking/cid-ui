@@ -125,7 +125,7 @@ export default {
         })
         .catch(error => {
           this.deleting = false;
-          this.$handleError(error.response, "删除失败");
+          this.$showError(error, "删除失败");
         });
     },
     search() {

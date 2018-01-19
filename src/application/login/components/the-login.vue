@@ -67,7 +67,7 @@ export default {
                 });
             })
             .catch(error => {
-              this.$handleError(error.response, "登陆失败");
+              this.$showError(error, "登陆失败");
             });
         }
       });
