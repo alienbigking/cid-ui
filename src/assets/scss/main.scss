@@ -74,6 +74,9 @@
           float: right;
           margin-top: 20px;
       }
+      &.el-row{
+        margin-top: 0;
+      }
   }
   & + .detail-card { margin-top: 10px; }
 }
