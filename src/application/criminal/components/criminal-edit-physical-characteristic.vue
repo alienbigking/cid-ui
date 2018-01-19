@@ -232,7 +232,7 @@ export default {
               })
               .catch(error => {
                 this.saving = false;
-                this.$showError(error, "修改失败");
+                this.$errorMessage.show(error, "修改失败");
               });
           } else {
             // 新增
@@ -246,7 +246,7 @@ export default {
               })
               .catch(error => {
                 this.saving = false;
-                this.$showError(error, "新增失败");
+                this.$errorMessage.show(error, "新增失败");
               });
           }
         }

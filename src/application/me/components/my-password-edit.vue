@@ -72,7 +72,7 @@ export default {
             })
             .catch(error => {
               this.saving = false;
-              this.$showError(error, "修改失败");
+              this.$errorMessage.show(error, "修改失败");
             });
         }
       });

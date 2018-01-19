@@ -76,7 +76,7 @@ export default {
             })
             .catch(error => {
               this.saving = false;
-              this.$showError(error, "新增失败");
+              this.$errorMessage.show(error, "新增失败");
             });
         }
       });

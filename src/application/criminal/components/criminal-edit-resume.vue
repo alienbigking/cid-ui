@@ -96,7 +96,7 @@ export default {
           this.getList();
         })
         .catch(error => {
-          this.$showError(error, "删除失败");
+          this.$errorMessage.show(error, "删除失败");
           this.deleting = false;
         });
     },

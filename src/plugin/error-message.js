@@ -1,4 +1,4 @@
-function showError(error, message) {
+function show(error, message) {
     const response = error.response;
     if (response && response.status === 400) {
         if (response.data && response.data.code) {
@@ -11,6 +11,6 @@ function showError(error, message) {
 
 export default {
     install: (Vue, Option) => {
-        Vue.prototype.$showError = showError;
+        Vue.prototype.$errorMessage = { show, $message: Vue.prototype.$message };
     }
 };
