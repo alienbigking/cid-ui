@@ -1,149 +1,143 @@
 <template>
-    <div>
-        <el-form ref="form" :model="criminal" class="form-criminal" :rules="rules" label-position="top">
-          <div class="form-box">
-            <el-form-item class="w25" label="编号" prop="code">
-                <el-input v-model="criminal.code"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="姓名" prop="name">
-                <el-input v-model="criminal.name"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="别化名" prop="alias">
-                <el-input v-model="criminal.alias"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="性别" prop="genderCode">
-              <el-select v-model="criminal.genderCode" value-key="code" :loading="initializing" placeholder="请选择性别" clearable>
-                <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="出生日期" prop="birthday">
-              <el-date-picker v-model="criminal.birthday" value-format="yyyy-MM-dd" type="date"></el-date-picker>
-            </el-form-item>
-            <el-form-item class="w25" label="身份证号" prop="identityCardNumber">
-                <el-input v-model="criminal.identityCardNumber"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="婚否" prop="married">
-                <el-select v-model="criminal.married" clearable>
-                  <el-option label="是" :value="true"></el-option>
-                  <el-option label="否" :value="false"></el-option>
-                </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="民族" prop="ethnicityCode">
-              <el-select v-model="criminal.ethnicityCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allEthnicities" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w25" label="籍贯/国籍" prop="nationalityCode">
-              <el-select v-model="criminal.nationalityCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="户籍分类" prop="householdRegisterTypeCode">
-              <el-select v-model="criminal.householdRegisterTypeCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w50" label="出生地" prop="birthplace">
-              <el-cascader :options="allCountries" @change="onChange($event, 'birthplace')" @active-item-change="onChangeAddress($event, 'birthplace')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.birthplace" :loading="initializing" clearable>
-              </el-cascader>
-            </el-form-item>
-            <div class="w75">
-              <el-form-item label="户籍地址" prop="householdRegisterAddress">
-                <el-cascader :options="allCountries" @change="onChange($event, 'householdRegisterAddress')" @active-item-change="onChangeAddress($event, 'householdRegisterAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.householdRegisterAddress" :loading="initializing" clearable>
-                </el-cascader>
-              </el-form-item>
-              <el-form-item label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
-                <el-input v-model="criminal.householdRegisterAddressStreetDetail"></el-input>
-              </el-form-item>
-            </div>
-            <div class="w75">
-              <el-form-item label="家庭地址" prop="homeAddress">
-                <el-cascader :options="allCountries" @change="onChange($event, 'homeAddress')" @active-item-change="onChangeAddress($event, 'homeAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.homeAddress" :loading="initializing" clearable>
-                </el-cascader>
-              </el-form-item>
-              <el-form-item label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
-                <el-input v-model="criminal.homeAddressStreetDetail"></el-input>
-              </el-form-item>
-            </div>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
-              <el-select v-model="criminal.politicalStatusCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="参加过何党派团体" prop="politicalParty">
-                <el-input v-model="criminal.politicalParty"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="文化程度" prop="educationDegreeCode">
-              <el-select v-model="criminal.educationDegreeCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allEducationDegrees" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="职业" prop="occupation">
-                <el-input v-model="criminal.occupation"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="特殊技能" prop="specialSkill">
-                <el-input v-model="criminal.specialSkill"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="是否累惯犯" prop="recidivisted">
-              <el-select v-model="criminal.recidivisted" clearable>
-                <el-option label="是" :value="true"></el-option>
-                <el-option label="否" :value="false"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="四涉" prop="involvingFour">
-                <el-input v-model="criminal.involvingFour"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="四史" prop="fourHistory">
-                <el-input v-model="criminal.fourHistory"></el-input>
-            </el-form-item>
-            <el-form-item class="w25" label="流窜类别" prop="fledTypeCode">
-              <el-select v-model="criminal.fledTypeCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allFledTypes" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="分管等级" prop="separateManagementLevelCode">
-              <el-select v-model="criminal.separateManagementLevelCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allSeparateManagementLevels" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="分押类型" prop="separateCustodyTypeCode">
-              <el-select v-model="criminal.separateCustodyTypeCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allSeparateCustodyTypes" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="减刑尺度" prop="commutationScaleCode">
-              <el-select v-model="criminal.commutationScaleCode" value-key="code" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allCommutationScales" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-            </el-form-item>
-          </div>
-          <div class="form-box">
-            <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
-              <el-select v-model="criminal.prisonAreaId" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
-              <el-select v-model="criminal.prisonHouseId" :loading="initializing" clearable>
-                <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.id"></el-option>
-              </el-select>
-            </el-form-item>
-            <el-form-item class="w25" label="床位号" prop="bedNumber">
-                <el-input v-model="criminal.bedNumber"></el-input>
-            </el-form-item>
-            <el-form-item class="w100" label="备注" prop="remark">
-                <el-input v-model="criminal.remark" :maxlength="255" type="textarea" resize="none"></el-input>
-            </el-form-item>
-            <div class="el-form-item-div">
-                <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
-            </div>
-          </div>
-        </el-form>
+  <el-form ref="form" :model="criminal" class="form-criminal" :rules="rules" label-position="top">
+    <div class="form-box">
+      <el-form-item class="w25" label="编号" prop="code">
+          <el-input v-model="criminal.code"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="姓名" prop="name">
+          <el-input v-model="criminal.name"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="别化名" prop="alias">
+          <el-input v-model="criminal.alias"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="性别" prop="genderCode">
+        <el-select v-model="criminal.genderCode" value-key="code" :loading="initializing" placeholder="请选择性别" clearable>
+          <el-option v-for="(item, index) in allGenders" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="出生日期" prop="birthday">
+        <el-date-picker v-model="criminal.birthday" value-format="yyyy-MM-dd" type="date"></el-date-picker>
+      </el-form-item>
+      <el-form-item class="w25" label="身份证号" prop="identityCardNumber">
+          <el-input v-model="criminal.identityCardNumber"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="婚否" prop="married">
+          <el-select v-model="criminal.married" clearable>
+            <el-option label="是" :value="true"></el-option>
+            <el-option label="否" :value="false"></el-option>
+          </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="民族" prop="ethnicityCode">
+        <el-select v-model="criminal.ethnicityCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allEthnicities" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
     </div>
+    <div class="form-box">
+      <el-form-item class="w25" label="籍贯/国籍" prop="nationalityCode">
+        <el-select v-model="criminal.nationalityCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allCountries" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="户籍分类" prop="householdRegisterTypeCode">
+        <el-select v-model="criminal.householdRegisterTypeCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allHouseholdRegisterTypes" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w50" label="出生地" prop="birthplace">
+        <el-cascader :options="allCountries" @change="onChange($event, 'birthplace')" @active-item-change="onChangeAddress($event, 'birthplace')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.birthplace" :loading="initializing" clearable>
+        </el-cascader>
+      </el-form-item>
+      <el-form-item class="w50" label="户籍地址" prop="householdRegisterAddress">
+        <el-cascader :options="allCountries" @change="onChange($event, 'householdRegisterAddress')" @active-item-change="onChangeAddress($event, 'householdRegisterAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.householdRegisterAddress" :loading="initializing" clearable>
+        </el-cascader>
+      </el-form-item>
+      <el-form-item class="w50" label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
+        <el-input v-model="criminal.householdRegisterAddressStreetDetail"></el-input>
+      </el-form-item>
+      <el-form-item class="w50" label="家庭地址" prop="homeAddress">
+        <el-cascader :options="allCountries" @change="onChange($event, 'homeAddress')" @active-item-change="onChangeAddress($event, 'homeAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.homeAddress" :loading="initializing" clearable>
+        </el-cascader>
+      </el-form-item>
+      <el-form-item class="w50" label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
+        <el-input v-model="criminal.homeAddressStreetDetail"></el-input>
+      </el-form-item>
+    </div>
+    <div class="form-box">
+      <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
+        <el-select v-model="criminal.politicalStatusCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="参加过何党派团体" prop="politicalParty">
+          <el-input v-model="criminal.politicalParty"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="文化程度" prop="educationDegreeCode">
+        <el-select v-model="criminal.educationDegreeCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allEducationDegrees" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="职业" prop="occupation">
+          <el-input v-model="criminal.occupation"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="特殊技能" prop="specialSkill">
+          <el-input v-model="criminal.specialSkill"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="是否累惯犯" prop="recidivisted">
+        <el-select v-model="criminal.recidivisted" clearable>
+          <el-option label="是" :value="true"></el-option>
+          <el-option label="否" :value="false"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="四涉" prop="involvingFour">
+          <el-input v-model="criminal.involvingFour"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="四史" prop="fourHistory">
+          <el-input v-model="criminal.fourHistory"></el-input>
+      </el-form-item>
+      <el-form-item class="w25" label="流窜类别" prop="fledTypeCode">
+        <el-select v-model="criminal.fledTypeCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allFledTypes" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="分管等级" prop="separateManagementLevelCode">
+        <el-select v-model="criminal.separateManagementLevelCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allSeparateManagementLevels" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="分押类型" prop="separateCustodyTypeCode">
+        <el-select v-model="criminal.separateCustodyTypeCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allSeparateCustodyTypes" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="减刑尺度" prop="commutationScaleCode">
+        <el-select v-model="criminal.commutationScaleCode" value-key="code" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allCommutationScales" :key="index" :label="item.name" :value="item"></el-option>
+        </el-select>
+      </el-form-item>
+    </div>
+    <div class="form-box">
+      <el-form-item class="w25" label="所属监区" prop="prisonAreaId">
+        <el-select v-model="criminal.prisonAreaId" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allPrisonAreas" :key="index" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="监舍号" prop="prisonHouseId">
+        <el-select v-model="criminal.prisonHouseId" :loading="initializing" clearable>
+          <el-option v-for="(item, index) in allPrisonHouses" :key="index" :label="item.name" :value="item.id"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item class="w25" label="床位号" prop="bedNumber">
+          <el-input v-model="criminal.bedNumber"></el-input>
+      </el-form-item>
+      <el-form-item class="w100" label="备注" prop="remark">
+          <el-input v-model="criminal.remark" :maxlength="255" type="textarea" resize="none"></el-input>
+      </el-form-item>
+      <div class="el-form-item-div">
+          <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
+      </div>
+    </div>
+  </el-form>
 </template>
 
 <script>

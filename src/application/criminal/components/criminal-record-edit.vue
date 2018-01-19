@@ -65,10 +65,9 @@
           <el-input v-model.number="form.criminalRecord.decisionDeprivationPoliticalRightYears"></el-input>
         </el-form-item>
 
-        <el-form-item class="w25 connect-date" label="刑期日期" prop="startEndTime">
-          <el-date-picker v-model="form.startEndTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期"  value-format="yyyy-MM-dd"></el-date-picker>
+        <el-form-item class="w50" label="刑期日期" prop="startEndTime">
+          <el-date-picker v-model="form.startEndTime" type="daterange" range-separator="至" start-placeholder="开始日期" end-placeholder="结束日期" value-format="yyyy-MM-dd"></el-date-picker>
         </el-form-item>
-        <div class="w25"></div>
         <el-form-item class="w25" label="有否上诉" prop="criminalRecord.appealed">
           <el-select v-model="form.criminalRecord.appealed" clearable>
               <el-option label="是" :value="true"></el-option>
@@ -343,13 +342,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-form .el-textarea /deep/ .el-textarea__inner{
-  height: 120px;
-}
-.el-form .el-form-item.el-form-item-div {
-  justify-content: center;
-}
-.connect-date /deep/ .el-form-item__content{
-    height:36px;
-}
+
 </style>

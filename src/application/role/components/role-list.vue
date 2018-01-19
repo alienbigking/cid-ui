@@ -45,8 +45,8 @@
           <i class="iconfont icon-tishishuoming"></i>
           <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
           <span slot="footer" class="dialog-footer">
-            <el-button @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="onDeleteConfirm" :loading="deleting">确 定</el-button>
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
           </span>
         </el-dialog>
     </div>
@@ -114,7 +114,7 @@ export default {
           this.search();
         })
         .catch(error => {
-          this.$handleError(error.response, "删除失败");
+          this.$errorMessage.show(error, "删除失败");
         });
     },
     search() {
@@ -138,38 +138,6 @@ export default {
 <style lang="scss" scoped>
 .container {
   height: 100%;
-  /deep/ .el-dialog__body {
-    color: #333;
-    text-align: center;
-    padding-bottom: 0;
-    b {
-      font-weight: bold;
-    }
-    .icon-tishishuoming {
-      color: #e82e21;
-      font-size: 80px;
-      display: block;
-      line-height: 80px;
-      margin-bottom: 27px;
-      & + span {
-        line-height: 1;
-      }
-    }
-  }
-  /deep/ .el-dialog__footer {
-    padding-top: 30px;
-    button {
-      width: 76px;
-      background: #fcfcfc;
-      color: #666;
-      & + button {
-        margin-left: 20px;
-        color: #fff;
-        background: #085eb5;
-        border-color: #085eb5;
-      }
-    }
-  }
   /deep/ .el-table__body-wrapper {
     overflow: inherit;
   }

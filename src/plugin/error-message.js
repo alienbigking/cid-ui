@@ -1,15 +1,16 @@
-function handleError(response, text) {
+function show(error, message) {
+    const response = error.response;
     if (response && response.status === 400) {
         if (response.data && response.data.code) {
             this.$message.error(response.data.message);
         } else {
-            this.$message.error(text);
+            this.$message.error(message);
         }
     }
 }
 
 export default {
     install: (Vue, Option) => {
-        Vue.prototype.$handleError = handleError;
+        Vue.prototype.$errorMessage = { show, $message: Vue.prototype.$message };
     }
 };
