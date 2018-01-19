@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { vuex } from '../application';
+import { vuex } from '@/application';
 
 Vue.use(Vuex);
 

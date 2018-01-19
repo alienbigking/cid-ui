@@ -1,4 +1,4 @@
-import * as validators from '../validator';
+import * as validators from '@/validator';
 
 export default {
     install: (Vue, Option) => {
