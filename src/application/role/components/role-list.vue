@@ -136,13 +136,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.container {
-  height: 100%;
-  /deep/ .el-table__body-wrapper {
-    overflow: inherit;
-  }
-}
-
 .cell {
   button:nth-child(1) {
     color: #2196f3;

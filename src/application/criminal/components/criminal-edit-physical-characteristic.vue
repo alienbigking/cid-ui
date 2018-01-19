@@ -36,7 +36,7 @@
       </el-form-item>
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
         <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
-        <el-table class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
+        <el-table ref="gk-table" class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
           <el-table-column align="center" label="其它特征" prop="description" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
@@ -44,7 +44,7 @@
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="201px">
+          <el-table-column align="center" label="操作" width="200px">
             <template slot-scope="scope">
               <el-button type="text" @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
             </template>
@@ -215,6 +215,7 @@ export default {
         } else {
           this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id, otherFeatures: [] };
         }
+        // this.$refs["gk-table"].doLayout();
       });
     },
     onSave() {
