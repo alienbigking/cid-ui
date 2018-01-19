@@ -68,9 +68,8 @@ export default {
   created() {
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
-      this.render().then(() => {
-        this.initializing = false;
-      });
+      this.initializing = false;
+      this.render();
     });
   },
   methods: {
