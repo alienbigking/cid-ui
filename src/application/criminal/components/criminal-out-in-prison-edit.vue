@@ -137,7 +137,7 @@ export default {
     },
     render() {
       if (!this.criminalOutInPrisonId) {
-        this.criminalOutInPrison = { criminalId: this.$route.params.id, id: null };
+        this.$store.commit("setCriminalOutInPrison", { criminalId: this.$route.params.id, id: null });
         this.loading = false;
       } else {
         this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {

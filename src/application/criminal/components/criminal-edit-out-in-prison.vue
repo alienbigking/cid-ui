@@ -72,7 +72,7 @@ export default {
       allCriminalOutInPrisons: state => state.criminal.allCriminalOutInPrisons
     })
   },
-  created() {
+  activated() {
     this.getList();
   },
   methods: {

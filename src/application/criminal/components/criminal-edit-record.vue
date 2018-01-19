@@ -61,7 +61,7 @@ export default {
       allCriminalRecords: state => state.criminal.allCriminalRecords
     })
   },
-  created() {
+  activated() {
     this.getList();
   },
   methods: {
