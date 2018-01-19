@@ -315,5 +315,10 @@ export default {
   .span120{
       width: calc(100% - 150px);
   }
+  .s50{
+      display:inline-block;
+    //   line-height: 16px;
+      word-wrap: break-word;
+  }
 }
 </style>
