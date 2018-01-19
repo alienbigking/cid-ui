@@ -4,9 +4,8 @@
       <el-button class="button-addInEdit" @click="onNew">新 增</el-button>
     </div>
     <div class="list-box">
-      <template>
         <el-table class="table40" :data="allCriminalSocialRelations" v-loading="loading" header-row-class-name="tableHeader40">
-          <el-table-column  prop="appellation" label="称谓" width="40px" :show-overflow-tooltip="true"> </el-table-column>
+          <el-table-column  prop="appellation" label="称谓" width="60px" :show-overflow-tooltip="true"> </el-table-column>
           <el-table-column align="center" prop="name" label="姓名" width="80px"> </el-table-column>
           <el-table-column  prop="age" label="年龄" width="50px"> </el-table-column>
           <el-table-column align="left" prop="company" label="公司"  :show-overflow-tooltip="true"> </el-table-column>
@@ -22,14 +21,13 @@
                 {{scope.row.lastUpdatedTime | moment}}
             </template>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="170px">
+          <el-table-column align="center" label="操作" width="141px">
             <template slot-scope="scope">
               <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
               <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
-      </template>
     </div>
     <el-dialog class="dialog" title="社会关系" width="950px" :visible.sync="editDialogVisible">
       <criminal-social-relation-edit :criminalSocialRelationId="criminalSocialRelationId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-social-relation-edit>
@@ -121,7 +119,6 @@ export default {
   }
   button:nth-child(2) {
     color: #f44336;
-    margin-left: 30px;
   }
 }
 </style>

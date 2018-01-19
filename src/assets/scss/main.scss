@@ -324,7 +324,6 @@
     }
 }
 .el-table{
-  overflow-x: auto;
     tr,th,td{
         color: #333;
         font-size: 12px;
@@ -346,6 +345,16 @@
       font-weight: bold;
       th,td{ background: transparent; }
     }
+    .cell {
+      button + button {
+        margin-left: 7px; // 需小于20px
+      }
+    }
+}
+.container {
+  .el-table__body-wrapper {
+    overflow: inherit;
+  }
 }
 .my_table{
     &.el-table--border, &.el-table--group{

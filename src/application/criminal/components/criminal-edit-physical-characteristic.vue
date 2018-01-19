@@ -36,7 +36,7 @@
       </el-form-item>
       <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
         <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
-        <el-table ref="gk-table" class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" border header-row-class-name="tableHeader40">
+        <el-table ref="gk-table" class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" header-row-class-name="tableHeader40">
           <el-table-column align="center" label="其它特征" prop="description" :show-overflow-tooltip="true">
             <template slot-scope="scope">
               <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
@@ -260,7 +260,7 @@ export default {
 <style lang="scss" scoped>
 .table40{ margin-bottom: 0; }
 .cell {
-  button:nth-child(1) {
+  button {
     color: #f44336;
   }
 }
