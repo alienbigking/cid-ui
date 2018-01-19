@@ -69,7 +69,7 @@ export default {
         state.criminal.allCriminalSocialRelations
     })
   },
-  created() {
+  activated() {
     this.getList();
   },
   methods: {

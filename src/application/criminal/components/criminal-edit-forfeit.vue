@@ -69,7 +69,7 @@ export default {
       allCriminalForfeits: state => state.criminal.allCriminalForfeits
     })
   },
-  created() {
+  activated() {
     this.getList();
   },
   methods: {

@@ -170,9 +170,9 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
+      this.render();
       this.initializing = false;
     });
-    this.render();
   },
   methods: {
     removePhysicalCharacteristic(feature) {
@@ -214,6 +214,7 @@ export default {
           };
         } else {
           this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id, otherFeatures: [] };
+          this.$store.commit("setCriminalPhysicalCharacteristic", this.form.criminalPhysicalCharacteristic);
         }
         // this.$refs["gk-table"].doLayout();
       });

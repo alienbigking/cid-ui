@@ -7,7 +7,7 @@ export default {
         state.criminal = criminal;
     },
     [types.UPDATE_CRIMINAL](state, criminal) {
-        Object.assign(state.criminal, criminal);
+        state.criminal = _.cloneDeep(criminal);
     },
     [types.SET_PAGED_CRIMINALS](state, pagedCriminals) {
         state.pagedCriminals = pagedCriminals;
@@ -30,7 +30,7 @@ export default {
         state.criminalResume = criminalResume;
     },
     [types.UPDATE_CRIMINAL_RESUME](state, criminalResume) {
-        Object.assign(state.criminalResume, criminalResume);
+        state.criminalResume = _.cloneDeep(criminalResume);
     },
     [types.SET_ALL_CRIMINAL_RESUMES](state, allCriminalResumes) {
         state.allCriminalResumes = allCriminalResumes;
@@ -56,7 +56,7 @@ export default {
         state.criminalSocialRelation = criminalSocialRelation;
     },
     [types.UPDATE_CRIMINAL_SOCIAL_RELATION](state, criminalSocialRelation) {
-        Object.assign(state.criminalSocialRelation, criminalSocialRelation);
+        state.criminalSocialRelation = _.cloneDeep(criminalSocialRelation);
     },
     [types.SET_ALL_CRIMINAL_SOCIAL_RELATIONS](state, allCriminalSocialRelations) {
         state.allCriminalSocialRelations = allCriminalSocialRelations;
@@ -69,7 +69,7 @@ export default {
         state.criminalForfeit = criminalForfeit;
     },
     [types.UPDATE_CRIMINAL_FORFEIT](state, criminalForfeit) {
-        Object.assign(state.criminalForfeit, criminalForfeit);
+        state.criminalForfeit = _.cloneDeep(criminalForfeit);
     },
     [types.SET_ALL_CRIMINAL_FORFEITS](state, allCriminalForfeits) {
         state.allCriminalForfeits = allCriminalForfeits;
@@ -77,12 +77,12 @@ export default {
     [types.SET_PAGED_CRIMINAL_FORFEITS](state, pagedCriminalForfeits) {
         state.pagedCriminalForfeits = pagedCriminalForfeits;
     },
-     // 罪犯出入监管理
+    // 罪犯出入监管理
     [types.SET_CRIMINAL_OUTINPRISON](state, criminalOutInPrison) {
         state.criminalOutInPrison = criminalOutInPrison;
     },
     [types.UPDATE_CRIMINAL_OUTINPRISON](state, criminalOutInPrison) {
-        Object.assign(state.criminalOutInPrison, criminalOutInPrison);
+        state.criminalOutInPrison = _.cloneDeep(criminalOutInPrison);
     },
     [types.SET_ALL_CRIMINAL_OUTINPRISONS](state, allCriminalOutInPrisons) {
         state.allCriminalOutInPrisons = allCriminalOutInPrisons;

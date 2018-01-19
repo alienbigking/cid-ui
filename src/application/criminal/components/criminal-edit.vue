@@ -16,7 +16,7 @@ import CriminalEditResume from "./criminal-edit-resume";
 import CriminalEditPhysicalCharacteristic from "./criminal-edit-physical-characteristic";
 import CriminalEditSocialRelation from "./criminal-edit-social-relation";
 import CriminalEditForfeit from "./criminal-edit-forfeit";
-import CriminalOutInPrison from "./criminal-edit-outinprison";
+import CriminalOutInPrison from "./criminal-edit-out-in-prison";
 
 export default {
     components: { CriminalEditBasicInformation, CriminalEditRecord, CriminalEditResume, CriminalEditPhysicalCharacteristic, CriminalEditSocialRelation, CriminalEditForfeit, CriminalOutInPrison },

@@ -68,7 +68,7 @@
                       <label>政治面貌：</label><span>{{criminal.politicalStatusName}}</span>
                   </el-col>
                   <el-col :span="6">
-                      <label class="label120">是否参加党派团体：</label><span class="span120">{{criminal.politicalParty?"是":"否"}}</span>
+                      <label>是否参加党派团体：</label><span class="span120">{{criminal.politicalParty?"是":"否"}}</span>
                   </el-col>
                   <el-col :span="6">
                       <label>文化程度：</label><span>{{criminal.educationDegreeName}}</span>
@@ -209,7 +209,7 @@ import CriminalDetailRecord from './criminal-detail-record';
 import CriminalDetailResume from './criminal-detail-resume';
 import CriminalDetailSocialRelation from './criminal-detail-social-relation';
 import CriminalDetailForfeit from './criminal-detail-forfeit';
-import CriminalDetailOutInPrison from './criminal-detail-outinprison';
+import CriminalDetailOutInPrison from './criminal-detail-out-in-prison';
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -282,7 +282,7 @@ export default {
   }
   .card-body{
     label{
-      width: 80px;
+      width: auto;
     }
     span{ width: calc(100% - 100px); }
     .label120{
