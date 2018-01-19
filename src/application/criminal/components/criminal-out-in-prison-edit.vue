@@ -66,10 +66,11 @@ export default {
     }
   },
   created() {
-    this.render();
     Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
-      this.initializing = false;
+      this.render().then(() => {
+        this.initializing = false;
+      });
     });
   },
   methods: {

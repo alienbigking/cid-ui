@@ -238,9 +238,10 @@ export default {
       this.allCourts = this.$store.state.court.allCourts;
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
-      this.initializing = false;
+      this.render().then(() => {
+        this.initializing = false;
+      });
     });
-    this.render();
   },
   methods: {
     ...mapActions([

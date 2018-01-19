@@ -159,7 +159,7 @@ export default {
       deep: true
     }
   },
-  created() {
+  activated() {
     Promise.all([
       criminalPhysicalCharacteristicLookupService.getAllSomatotypes(),
       criminalPhysicalCharacteristicLookupService.getAllFaceTypes(),
@@ -170,8 +170,9 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
-      this.render();
-      this.initializing = false;
+      this.render().then(() => {
+        this.initializing = false;
+      });
     });
   },
   methods: {

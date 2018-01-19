@@ -224,7 +224,7 @@ export default {
       deep: true
     }
   },
-  created() {
+  activated() {
     this.criminal = { id: this.$route.params.id };
     Promise.all([
       criminalLookupService.getAllGenders(),
