@@ -15,7 +15,6 @@
                   </el-input>
               </el-form-item>
               <div class="form-input-submit">
-                <el-checkbox label="记住我"></el-checkbox>
                 <el-button @click="onSubmit">登 录</el-button>
               </div>
           </el-form>
@@ -67,7 +66,7 @@ export default {
                 });
             })
             .catch(error => {
-              this.$handleError(error.response, "登陆失败");
+              this.$errorMessage.show(error, "登陆失败");
             });
         }
       });
@@ -115,9 +114,6 @@ export default {
   padding-top: 40px;
   &>div{ width: 100%;}
   .form-input-submit {
-    label{
-      margin-bottom: 20px;
-    }
     button {
       width: 100%;
       background-color: #516671;

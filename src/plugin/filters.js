@@ -1,4 +1,4 @@
-import * as filters from '../filter';
+import * as filters from '@/filter';
 
 export default {
     install: (Vue, Option) => {

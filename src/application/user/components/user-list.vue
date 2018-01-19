@@ -175,7 +175,7 @@ export default {
           this.search();
         })
         .catch(error => {
-          this.$handleError(error.response, "修改失败");
+          this.$errorMessage.show(error, "修改失败");
           this.statusDialogVisible = false;
         });
     },
@@ -189,7 +189,7 @@ export default {
           this.search();
         })
         .catch(error => {
-          this.$handleError(error.response, "修改失败");
+          this.$errorMessage.show(error, "修改失败");
           this.disablledStatusDialogVisible = false;
         });
     },
@@ -203,7 +203,7 @@ export default {
           this.search();
         })
         .catch(error => {
-          this.$handleError(error.response, "删除失败");
+          this.$errorMessage.show(error, "删除失败");
           this.deleting = false;
         });
     },

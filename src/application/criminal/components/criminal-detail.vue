@@ -7,7 +7,7 @@
         <span class="iconfont" :class="informationShow?'icon-unfold':'icon-enter'"></span>
     </div>
     <div v-if="informationShow">
-        <div class="card-body">
+          <div class="card-body">
               <el-row>
                   <el-col :span="6">
                       <label>编号：</label><span>{{criminal.code}}</span>
@@ -108,7 +108,7 @@
               </el-row>
               <el-row>
                   <el-col :span="24">
-                      <label>备注：</label><span class="s50">{{criminal.remark}}</span>
+                      <label>备注：</label><span>{{criminal.remark}}</span>
                   </el-col>
               </el-row>
           </div>
@@ -292,5 +292,10 @@ export default {
         width: calc(100% - 150px);
     }
   }
+  // .s50{
+  //     display:inline-block;
+  //   //   line-height: 16px;
+  //     word-wrap: break-word;
+  // }
 }
 </style>
