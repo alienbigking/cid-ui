@@ -239,8 +239,8 @@ export default {
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
       this.initializing = false;
+      this.render();
     });
-    this.render();
   },
   methods: {
     ...mapActions([
