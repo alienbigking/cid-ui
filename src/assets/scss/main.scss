@@ -43,6 +43,7 @@
       vertical-align: top;
       width: 148px;
       margin-top: 20px;
+      float: left;
     }
     label + span{
       border-bottom: $border;
@@ -315,16 +316,13 @@
     }
 }
 .el-table{
+  overflow-x: auto;
     tr,th,td{
         color: #333;
         font-size: 12px;
         padding: 0;
         height: 40px;
         line-height: 40px;
-    }
-    .cell, .el-table th div, .el-table--border td:first-child .cell, .el-table--border th:first-child .cell {
-        padding-left: 10px;
-        padding-right: 0px;
     }
     .tableHeader{
         height: 50px;
@@ -390,7 +388,7 @@
 .list-box{ // 罪犯编辑模块的表格的父元素
   border-top: 1px solid #ddd;
   margin-left: 20px;
-  padding: 30px 20px 20px 0;
+  padding: 30px 20px 0 0;
   overflow: hidden;
 }
 .table40{ // 行高40px的表格
