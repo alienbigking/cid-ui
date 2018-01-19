@@ -68,7 +68,7 @@
                     <label>政治面貌：</label><span>{{criminal.politicalStatusName}}</span>
                 </el-col>
                 <el-col :span="6">
-                    <label class="label120">是否参加党派团体：</label><span class="span120">{{criminal.politicalParty?"是":"否"}}</span>
+                    <label>是否参加党派团体：</label><span class="span120">{{criminal.politicalParty?"是":"否"}}</span>
                 </el-col>
                 <el-col :span="6">
                     <label>文化程度：</label><span>{{criminal.educationDegreeName}}</span>
@@ -293,7 +293,7 @@ export default {
     color: #666;
     display: inline-block;
     font-size: 12px;
-    width: 80px;
+    width: auto;
     box-sizing: border-box;
     float: left;
     padding-top: 20px;
