@@ -7,7 +7,9 @@
 // import { mapActions } from "vuex";
 
 export default {
-  created() {}
+  created() {
+    sessionStorage.setItem("activeItem", "3");
+  }
 };
 </script>
 <style lang="scss" scoped>

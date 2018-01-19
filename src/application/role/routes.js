@@ -4,7 +4,7 @@ export default [
     {
         path: '/role/list',
         component: components.RoleList,
-        name: '查询角色功能',
+        name: '查询角色',
         meta: { requireAuth: true }
     },
     {

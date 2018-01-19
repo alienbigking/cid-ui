@@ -20,7 +20,7 @@
             </li>
             <li class="hasImg">
               <router-link to="/me">
-                <img src="../../../assets/images/avatar.png" alt="">
+                <img src="../../../assets/images/face11.jpg" alt="">
                 <span>{{userName}}</span>
               </router-link>
             </li>
@@ -40,7 +40,7 @@ export default {
     };
   },
   created() {
-    this.userName = profileStorage.getProfile().username;
+    this.userName = profileStorage.getMyProfile().username;
   },
   methods: {
     ...mapActions(["handleCollapse"]),
@@ -49,6 +49,7 @@ export default {
     },
     logout() {
       window.localStorage.clear();
+      window.sessionStorage.clear();
       this.$router.push("/login");
     }
   }
@@ -80,6 +81,9 @@ export default {
     }
     img {
       margin-right: 7px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
     }
   }
   li.hasImg a {

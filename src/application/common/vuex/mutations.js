@@ -6,5 +6,6 @@ export default {
     },
     [types.SET_COLLAPSED](state) {
         state.collapsed = !state.collapsed;
+        sessionStorage.setItem("collapsed", state.collapsed);
     }
 };

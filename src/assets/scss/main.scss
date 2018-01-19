@@ -99,44 +99,6 @@
     }
   }
 }
-
-.menu-collapsed{
-    overflow: visible;
-    &>.el-submenu__title{
-        padding-left: 16px !important;
-    }
-    .base{
-        width: 55px;
-    }
-    .first{
-        &>.el-menu{
-            margin-left: 0;
-            border-left: 1px solid #536067;
-        }
-        &.is-active{
-            background: #29B0A3;
-        }
-    }
-    .second{
-        &>.el-menu{
-            left: -1px;
-            margin-left: 0;
-            position: relative;
-            border: 0;
-            border-left: 1px solid #536067;
-            display: block !important;
-            border-radius: 0;
-            transition: all 0s linear;
-        }
-        .el-icon-arrow-right:before{
-            content: "\E603";
-        }
-    }
-    .third{
-        padding-left: 36px !important;
-    }
-}
-
 .el-form{
     &.el-form--label-top{
         display: flex;
@@ -221,6 +183,9 @@
     .el-form-item__content{ // 当有标签且标签与输入框在同一行时输入框的宽度
         width: calc(100% - 120px);
     }
+    .el-date-editor.el-input, .el-date-editor.el-input__inner{
+      width: 100%;
+    }
 }
 .formPadding{
     padding: 20px 0 20px 20px;
@@ -270,32 +235,17 @@
       padding-right: 20px;
       padding-left: 20px;
       flex-shrink: 0;
-      .el-date-editor--daterange.el-input,
-      .el-date-editor--daterange.el-input__inner,
-      .el-date-editor--timerange.el-input,
-      .el-date-editor--timerange.el-input__inner{
-          width: 415px;
-          height: 36px;height: 36px;
-          line-height: 36px;
-      }
     }
     .w50{
-      padding: 0;
-      flex-shrink: 0;
       .el-form-item__label{
         padding-left: 20px;
       }
-      .el-form-item__content>[class^="el-"]:not(.el-textarea):not(.el-cascader):nth-child(1){
+      .el-form-item__content>[class^="el-"]:not(.el-textarea):not(.el-cascader):not(.el-date-editor):nth-child(1){
         padding-left: 20px;
-        padding-right: 20px;
-        width: 50%;
         .el-input__prefix{
           left: 20px;
         }
-      }
-      .el-form-item__content>[class^="el-"]:not(.el-textarea):not(.el-cascader):nth-last-child(1){
-        width: calc(50% - 20px);
-        padding-right: 20px;
+        &+.el-form-item__error{ left: 20px; }
       }
       .el-form-item__content>.el-textarea{
         padding: 0 0 0 20px;
@@ -316,6 +266,19 @@
             left: 20px;
         }
       }
+      .el-form-item__content>.el-date-editor{
+        height: 36px;
+        padding: 0;
+        box-sizing: border-box;
+        margin-left: 20px;
+        width: calc(100% - 20px);
+        &+.el-form-item__error{
+            left: 20px;
+        }
+        .el-input__icon{ margin-left: 0px; width: 36px; }
+        .el-range-input{ width: calc(39% - 12px); font-size: 12px; vertical-align: top; }
+        .el-range-separator{ line-height: 34px;}
+      }
     }
     .w75{
       width: 100%;
@@ -328,7 +291,7 @@
 
       }
       .el-form-item:nth-child(2){
-        width: 25%;
+        width: calc(50% - 40px);
         margin-left: 40px;
         float: left;
 

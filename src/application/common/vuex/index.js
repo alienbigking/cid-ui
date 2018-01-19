@@ -3,7 +3,7 @@ import mutations from './mutations';
 
 const state = {
     menus: [],
-    collapsed: false
+    collapsed: Boolean(JSON.parse(sessionStorage.getItem("collapsed")))
 };
 const getters = {
     collapsed: state => state.collapsed

@@ -52,24 +52,20 @@
               <el-cascader :options="allCountries" @change="onChange($event, 'birthplace')" @active-item-change="onChangeAddress($event, 'birthplace')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.birthplace" :loading="initializing" clearable>
               </el-cascader>
             </el-form-item>
-            <div class="w75">
-              <el-form-item label="户籍地址" prop="householdRegisterAddress">
-                <el-cascader :options="allCountries" @change="onChange($event, 'householdRegisterAddress')" @active-item-change="onChangeAddress($event, 'householdRegisterAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.householdRegisterAddress" :loading="initializing" clearable>
-                </el-cascader>
-              </el-form-item>
-              <el-form-item label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
-                <el-input v-model="criminal.householdRegisterAddressStreetDetail"></el-input>
-              </el-form-item>
-            </div>
-            <div class="w75">
-              <el-form-item label="家庭地址" prop="homeAddress">
-                <el-cascader :options="allCountries" @change="onChange($event, 'homeAddress')" @active-item-change="onChangeAddress($event, 'homeAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.homeAddress" :loading="initializing" clearable>
-                </el-cascader>
-              </el-form-item>
-              <el-form-item label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
-                <el-input v-model="criminal.homeAddressStreetDetail"></el-input>
-              </el-form-item>
-            </div>
+            <el-form-item class="w50" label="户籍地址" prop="householdRegisterAddress">
+              <el-cascader :options="allCountries" @change="onChange($event, 'householdRegisterAddress')" @active-item-change="onChangeAddress($event, 'householdRegisterAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.householdRegisterAddress" :loading="initializing" clearable>
+              </el-cascader>
+            </el-form-item>
+            <el-form-item class="w50" label="街道详情(户籍地址)" prop="householdRegisterAddressStreetDetail">
+              <el-input v-model="criminal.householdRegisterAddressStreetDetail"></el-input>
+            </el-form-item>
+            <el-form-item class="w50" label="家庭地址" prop="homeAddress">
+              <el-cascader :options="allCountries" @change="onChange($event, 'homeAddress')" @active-item-change="onChangeAddress($event, 'homeAddress')" :props="{ value: 'code', label: 'name', children: 'children' }" separator="-" v-model="criminal.homeAddress" :loading="initializing" clearable>
+              </el-cascader>
+            </el-form-item>
+            <el-form-item class="w50" label="街道详情(家庭地址)" prop="homeAddressStreetDetail">
+              <el-input v-model="criminal.homeAddressStreetDetail"></el-input>
+            </el-form-item>
           </div>
           <div class="form-box">
             <el-form-item class="w25" label="政治面貌" prop="politicalStatusCode">
