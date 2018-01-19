@@ -298,7 +298,8 @@ export default {
         this.form.selectedFirstTrialOrgan = {};
         this.form.selectedFinalTrialOrgan = {};
         this.form.selectedDecisionOrgan = {};
-        this.$store.commit("setCriminalRecord", { criminalId: this.$route.params.id, id: null });
+        this.criminalRecord = { criminalId: this.$route.params.id, id: null };
+        this.$store.commit("updateCriminalRecord", this.criminalRecord);
         this.loading = false;
       } else {
         this.getCriminalRecord(this.criminalRecordId).then(() => {
