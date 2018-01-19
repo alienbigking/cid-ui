@@ -209,7 +209,7 @@ import CriminalDetailRecord from './criminal-detail-record';
 import CriminalDetailResume from './criminal-detail-resume';
 import CriminalDetailSocialRelation from './criminal-detail-social-relation';
 import CriminalDetailForfeit from './criminal-detail-forfeit';
-import CriminalDetailOutInPrison from './criminal-detail-outinprison';
+import CriminalDetailOutInPrison from './criminal-detail-out-in-prison';
 import { mapState, mapActions } from "vuex";
 
 export default {
