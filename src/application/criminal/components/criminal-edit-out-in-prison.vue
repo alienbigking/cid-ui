@@ -50,7 +50,7 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalOutInPrisonEdit from "./criminal-outinprison-edit";
+import CriminalOutInPrisonEdit from "./criminal-out-in-prison-edit";
 import _ from "lodash";
 
 export default {
