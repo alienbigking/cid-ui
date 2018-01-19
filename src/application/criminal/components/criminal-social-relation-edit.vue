@@ -76,11 +76,16 @@ export default {
       }
     },
     "form.selectedPoliticalStatus"(val) {
-      let obj = {
-        politicalStatusCode: val.code,
-        politicalStatusName: val.name
-      };
-      this.$store.commit("updateCriminalSocialRelation", obj);
+      this.$set(
+        this.form.criminalSocialRelation,
+        "politicalStatusCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalSocialRelation,
+        "politicalStatusName",
+        val.name
+      );
     },
     "form.criminalSocialRelation": {
       handler: _.debounce(function(criminalSocialRelation) {
@@ -149,7 +154,7 @@ export default {
     render() {
       if (!this.criminalSocialRelationId) {
         this.form.selectedPoliticalStatus = {};
-        this.$store.commit("setCriminalSocialRelation", { criminalId: this.$route.params.id, id: null });
+        this.$store.commit("setCriminalSocialRelation", { criminalId: this.$route.params.id });
         this.criminalSocialRelation = _.cloneDeep(this.$store.state.criminal.criminalSocialRelation);
         this.loading = false;
       } else {
