@@ -2,18 +2,18 @@
   <div>
     <div class="detail-card">
       <h3 class="card-title">修改个人信息</h3>
-      <el-form class="formPadding" :model="userProfile" :rules="rules" ref="form" label-position="top">
+      <el-form class="formPadding" :model="myProfile" :rules="rules" ref="form" label-position="top">
           <el-form-item label="用户名" class="w50 the-disabled">
-              <span class="el-input__inner">{{ userProfile.username }}</span>
+              <span class="el-input__inner">{{ myProfile.username }}</span>
           </el-form-item>
           <el-form-item label="姓名" class="w50" prop="name">
-              <el-input v-model="userProfile.name"></el-input>
+              <el-input v-model="myProfile.name"></el-input>
           </el-form-item>
           <el-form-item label="创建时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ userProfile.createdTime | moment }}</span>
+              <span class="el-input__inner">{{ myProfile.createdTime | moment }}</span>
           </el-form-item>
           <el-form-item label="最后更新时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ userProfile.lastUpdatedTime | moment }}</span>
+              <span class="el-input__inner">{{ myProfile.lastUpdatedTime | moment }}</span>
           </el-form-item>
 
           <div class="el-form-item-div">
@@ -36,7 +36,7 @@ import _ from "lodash";
 export default {
   data() {
     return {
-      userProfile: _.cloneDeep(this.$store.state.me.userProfile),
+      myProfile: _.cloneDeep(this.$store.state.me.myProfile),
       rules: {
         name: [{ required: true, message: "姓名不能为空" }]
       },
@@ -44,16 +44,16 @@ export default {
     };
   },
   watch: {
-    userProfile: {
-      handler: _.debounce(function(userProfile) {
-        this.$store.commit("updateUserProfile", userProfile);
+    myProfile: {
+      handler: _.debounce(function(myProfile) {
+        this.$store.commit("updateMyProfile", myProfile);
       }, 500),
       deep: true
     }
   },
   created() {
     this.getMyProfile().then(() => {
-      this.userProfile = _.cloneDeep(this.$store.state.me.userProfile);
+      this.myProfile = _.cloneDeep(this.$store.state.me.myProfile);
     });
   },
   methods: {
@@ -69,7 +69,7 @@ export default {
             })
             .catch(error => {
               this.saving = false;
-              this.$handleError(error.response, "修改失败");
+              this.$errorMessage.show(error, "修改失败");
             });
         }
       });

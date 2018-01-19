@@ -1,10 +1,11 @@
-import * as types from './mutation-types';
+import * as types from "./mutation-types";
+import tokenStorage from "@/utils/token/token-storage";
 
 export default {
     [types.SET_TOKEN](state, token) {
-        localStorage.setItem('TOKEN', JSON.stringify(token));
+        tokenStorage.setToken(token);
     },
     [types.REMOVE_TOKEN](state) {
-        localStorage.removeItem('TOKEN');
+        tokenStorage.removeToken();
     }
 };
