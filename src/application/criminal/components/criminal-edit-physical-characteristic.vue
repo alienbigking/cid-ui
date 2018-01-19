@@ -44,7 +44,7 @@
               </el-form-item>
             </template>
           </el-table-column>
-          <el-table-column align="center" label="操作" width="201px">
+          <el-table-column align="center" label="操作" width="199px">
             <template slot-scope="scope">
               <el-button type="text" @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
             </template>
@@ -170,9 +170,9 @@ export default {
       this.allFaceTypes = response[1];
       this.allBloodTypes = response[2];
       this.allAccents = response[3];
+      this.render();
       this.initializing = false;
     });
-    this.render();
   },
   methods: {
     removePhysicalCharacteristic(feature) {
@@ -214,6 +214,7 @@ export default {
           };
         } else {
           this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id, otherFeatures: [] };
+          this.$store.commit("setCriminalPhysicalCharacteristic", this.form.criminalPhysicalCharacteristic);
         }
       });
     },
