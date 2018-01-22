@@ -1,7 +1,8 @@
 <template>
-    <div class="box container login">
-      <the-login-header></the-login-header>
-      <div class="login-box"><div>
+  <el-container class="flex-column">
+    <the-login-header></the-login-header>
+    <el-main class="login-box">
+      <div>
           <i class="iconfont icon-yunshujukuRDS"></i>
           <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
               <el-form-item prop="username">
@@ -18,11 +19,10 @@
                 <el-button @click="onSubmit">登 录</el-button>
               </div>
           </el-form>
-
-          </div>
       </div>
-      <the-login-footer></the-login-footer>
-    </div>
+    </el-main>
+    <the-login-footer></the-login-footer>
+</el-container>
 </template>
 <script>
 import TheLoginFooter from "./the-login-footer";
@@ -85,20 +85,6 @@ export default {
   display: block;
   text-align: center;
 }
-.container{
-  height: 100%;
-  background: url(../../../assets/images/background.png) no-repeat;
-  background-position: top center;
-  background-size: cover;
-  box-sizing: border-box;
-  .login-box{
-    position: fixed;
-    top: 47px;
-    height: calc(100% - 47px);
-    overflow-y: auto;
-    width: 100%;
-  }
-}
 .login-box{
   &>div{
     width: 322px;
@@ -121,5 +107,11 @@ export default {
       color: #fff;
     }
   }
+}
+.flex-column{
+    flex-direction: column;
+    background: url(../../../assets/images/background.png) no-repeat;
+    background-position: top center;
+    background-size: cover;
 }
 </style>
