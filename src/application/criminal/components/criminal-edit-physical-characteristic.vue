@@ -79,15 +79,15 @@ export default {
       rules: {
         "criminalPhysicalCharacteristic.height": [
           { required: true, message: "请输入身高" },
-          { validator: this.$validators.decimal1i2f }
+          { validator: this.$validators.decimal1i2f, trigger: "change" }
         ],
         "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
-          { validator: this.$validators.decimal3i2f }
+          { validator: this.$validators.decimal3i2f, trigger: "change" }
         ],
         "criminalPhysicalCharacteristic.footLength": [
           { required: true, message: "请输入足长" },
-          { validator: this.$validators.decimal2i2f }
+          { validator: this.$validators.decimal2i2f, trigger: "change" }
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
@@ -213,8 +213,10 @@ export default {
             name: this.form.criminalPhysicalCharacteristic.accentName
           };
         } else {
-          this.form.criminalPhysicalCharacteristic = { criminalId: this.$route.params.id, otherFeatures: [] };
-          this.$store.commit("setCriminalPhysicalCharacteristic", this.form.criminalPhysicalCharacteristic);
+          this.$store.commit("setCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
+          this.form.criminalPhysicalCharacteristic = _.cloneDeep(
+            this.$store.state.criminal.criminalPhysicalCharacteristic
+          );
         }
         // this.$refs["gk-table"].doLayout();
       });

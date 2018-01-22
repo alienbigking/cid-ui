@@ -129,8 +129,10 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.criminalResume = { criminalId: this.$route.params.id, id: null };
-        this.$store.commit("updateCriminalResume", this.criminalResume);
+        this.$store.commit("setCriminalResume", { criminalId: this.$route.params.id });
+        this.criminalResume = _.cloneDeep(
+            this.$store.state.criminal.criminalResume
+          );
         this.loading = false;
       } else {
         this.getCriminalResume(this.criminalResumeId).then(() => {

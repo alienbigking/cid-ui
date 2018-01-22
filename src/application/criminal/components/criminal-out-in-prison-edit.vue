@@ -137,8 +137,10 @@ export default {
     },
     render() {
       if (!this.criminalOutInPrisonId) {
-        this.criminalOutInPrison = { criminalId: this.$route.params.id, id: null };
-        this.$store.commit("updateCriminalOutInPrison", this.criminalOutInPrison);
+        this.$store.commit("setCriminalOutInPrison", { criminalId: this.$route.params.id });
+        this.criminalOutInPrison = _.cloneDeep(
+            this.$store.state.criminal.criminalOutInPrison
+          );
         this.loading = false;
       } else {
         this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
