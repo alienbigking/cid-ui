@@ -178,39 +178,64 @@ export default {
       }
     },
     "form.selectedArrestOrgan"(val) {
-      let obj = {
-        arrestOrganCode: val.code,
-        arrestOrganName: val.name
-      };
-      this.$store.commit("updateCriminalRecord", obj);
+      this.$set(
+        this.form.criminalRecord,
+        "arrestOrganCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalRecord,
+        "arrestOrganName",
+        val.name
+      );
     },
     "form.selectedProsecutionOrgan"(val) {
-      let obj = {
-        prosecutionOrganCode: val.code,
-        prosecutionOrganName: val.name
-      };
-      this.$store.commit("updateCriminalRecord", obj);
+      this.$set(
+        this.form.criminalRecord,
+        "prosecutionOrganCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalRecord,
+        "prosecutionOrganName",
+        val.name
+      );
     },
     "form.selectedFirstTrialOrgan"(val) {
-      let obj = {
-        firstTrialOrganCode: val.code,
-        firstTrialOrganName: val.name
-      };
-      this.$store.commit("updateCriminalRecord", obj);
+      this.$set(
+        this.form.criminalRecord,
+        "firstTrialOrganCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalRecord,
+        "firstTrialOrganName",
+        val.name
+      );
     },
     "form.selectedFinalTrialOrgan"(val) {
-      let obj = {
-        finalTrialOrganCode: val.code,
-        finalTrialOrganName: val.name
-      };
-      this.$store.commit("updateCriminalRecord", obj);
+      this.$set(
+        this.form.criminalRecord,
+        "finalTrialOrganCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalRecord,
+        "finalTrialOrganName",
+        val.name
+      );
     },
     "form.selectedDecisionOrgan"(val) {
-      let obj = {
-        decisionOrganCode: val.code,
-        decisionOrganName: val.name
-      };
-      this.$store.commit("updateCriminalRecord", obj);
+      this.$set(
+        this.form.criminalRecord,
+        "decisionOrganCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalRecord,
+        "decisionOrganName",
+        val.name
+      );
     },
     "form.startEndTime"(val) {
       let obj = {
@@ -298,7 +323,8 @@ export default {
         this.form.selectedFirstTrialOrgan = {};
         this.form.selectedFinalTrialOrgan = {};
         this.form.selectedDecisionOrgan = {};
-        this.$store.commit("setCriminalRecord", { criminalId: this.$route.params.id, id: null });
+        this.form.criminalRecord = { criminalId: this.$route.params.id, id: null };
+        this.$store.commit("updateCriminalRecord", this.criminalRecord);
         this.loading = false;
       } else {
         this.getCriminalRecord(this.criminalRecordId).then(() => {

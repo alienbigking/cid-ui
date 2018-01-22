@@ -130,7 +130,7 @@ export default {
     render() {
       if (!this.criminalResumeId) {
         this.criminalResume = { criminalId: this.$route.params.id, id: null };
-        this.$store.commit("setCriminalResume", this.criminalResume);
+        this.$store.commit("updateCriminalResume", this.criminalResume);
         this.loading = false;
       } else {
         this.getCriminalResume(this.criminalResumeId).then(() => {
