@@ -346,7 +346,11 @@ export default {
           });
           this.$store.commit("updateCriminal", criminal);
           this.addCriminal().then(response => {
+            this.saving = false;
             this.$router.push(`/criminal/list`);
+          }).catch(error => {
+            this.saving = false;
+            this.$errorMessage.show(error, "新增失败");
           });
         }
       });

@@ -389,8 +389,9 @@ export default {
           this.updateCriminal().then(response => {
             this.saving = false;
             this.$router.push(`/criminal/list`);
-          }).catch(() => {
+          }).catch(error => {
             this.saving = false;
+            this.$errorMessage.show(error, "修改失败");
           });
         }
       });
