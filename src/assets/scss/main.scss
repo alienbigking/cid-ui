@@ -1,7 +1,5 @@
-// @import "./variable", "./mixin";
-
 @each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure {
-  .button-#{$type} { @include button-diy($type); }
+  .el-button.button-#{$type} { @include button-diy($type); }
 }
 
 .filters{ // 筛选框
@@ -43,22 +41,21 @@
       font-weight: bold;
       display: inline-block;
       vertical-align: top;
-      // width: 148px;
       width: auto;
-      margin-top: 20px;
-      // float: left;
+      margin-top: 16px;
       box-sizing: border-box;
+      line-height: 20px;
     }
     label + span{
-      // border-bottom: $border;
       display: inline-block;
       vertical-align: top;
       width: calc(100% - 148px);
-      min-height: 14px;
-      padding-top: 20px;
-      padding-bottom: 10px;
+      min-height: 16px;
+      padding-top: 16px;
+      padding-bottom: 6px;
       font-weight: bold;
       font-size: 12px;
+      line-height: 20px;
     }
   }
   .el-row .el-col-12:first-child{
@@ -414,4 +411,18 @@
       }
     }
   }
+}
+.user-checkbox-group{
+  border-bottom: 1px solid #ddd;
+  padding: 5px 0;
+  .el-checkbox{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 24px;
+    &+.el-checkbox{ margin-left: 0; }
+    .el-checkbox__inner{ margin-top: 2px;}
+  }
+  .el-checkbox__label{ padding-left: 0; padding-right: 10px; }
 }
