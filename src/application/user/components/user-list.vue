@@ -226,8 +226,9 @@ export default {
 <style lang="scss" scoped>
 .container {
   .dialog{
-    /deep/ .el-dialog__body{
-      padding: 0px 27px 15px;
+    div div:nth-child(1){
+      margin-top: -30px;
+      padding-bottom: 15px;
     }
   }
 }

@@ -1,12 +1,6 @@
 // 按钮样式
 @mixin button($type) {
-  align-items: center;
-  border-color: $color-border;
-  color: #fff;
-  display: inline-flex;
-  height: 36px;
-  justify-content: center;
-  line-height: 0;
+  color: #FFFFFF;
   @if $type == search { // 查询
     background: #29B0A3;
     border: 0;
@@ -35,13 +29,10 @@
     background: #2196F3;
     border: 0;
     width: 76px;
-  } @else { // 默认
-    background: $white;
-    color: $color-default;
   }
 }
 // 按钮hover样式
-@mixin button-hover($type) {
+@mixin button-hover($type: default) {
   color: #fff;
   @if $type == search {
     background: rgba(#29B0A3, 0.9);
@@ -51,7 +42,6 @@
     color: #666;
     background: rgba($color-border, 0.2);
   } @else if $type == sure {
-    color: #fff;
     background: rgba(#085EB5, 0.9);
   } @else if $type == addInList {
     background: rgba(#2196F3, 0.9);
@@ -67,11 +57,10 @@
 }
 // 其他按钮
 @mixin button-diy($type: default) {
-    font-size: 12px;
-    &:not(.el-button--text){ @include button($type); }
-    &:not(.el-button--text):hover{ @include button-hover($type); }
-    &:not(.el-button--text):active{ @include button-hover($type); }
-    &:not(.el-button--text):focus{ @include button-hover($type); }
-    &:not(.el-button--text):visited{ @include button-hover($type); }
+    @include button($type);
+    &:hover{ @include button-hover($type); }
+    &:active{ @include button-hover($type); }
+    &:focus{ @include button-hover($type); }
+    &:visited{ @include button-hover($type); }
 }
 // 复选框
