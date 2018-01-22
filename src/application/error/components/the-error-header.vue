@@ -1,5 +1,5 @@
 <template>
-    <el-header style="height: 47px;">
+    <el-header style="height: 47px; position: fixed; z-index: 100;">
         <div class="header-left">
             <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
             <span class="fs-16">罪犯数据库</span>
@@ -49,47 +49,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.icon-caidan {
-  cursor: pointer;
-  font-size: 20px;
-}
-.icon-tuichu {
-  cursor: pointer;
-}
-
-.header-left {
-  display: flex;
-  align-items: center;
-  .fs-16 {
-    font-size: 16px;
-    margin: 0 142px 0 10px;
-  }
-}
-.header-right {
-  display: flex;
-  align-items: center;
-  li {
-    margin-left: 20px;
-    i {
-      display: block;
-      height: 16px;
-      width: 16px;
-      font-size: 16px;
-    }
-    a {
-      color: #fff;
-      font-size: 12px;
-    }
-    img {
-      margin-right: 7px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-    }
-  }
-  li.hasImg a {
-    display: flex;
-    align-items: center;
-  }
-}
+@import "./error";
 </style>

@@ -112,23 +112,6 @@
   }
 }
 .el-form{
-    &.el-form--label-top{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        .el-form-item__label{
-            line-height: 1;
-            font-size: 12px;
-            color:#666;
-        }
-        .el-form-item__content{
-            width: 100%;
-        }
-    }
-    .el-input__inner{
-        font-size: 12px;
-        color: #333;
-    }
     .el-form-item{
         &.w50{ // 并排的表单
             margin-right: 0;
@@ -186,17 +169,6 @@
             margin-right: $padding-default;
             margin-left: 0;
         }
-    }
-    .el-textarea{
-        .el-textarea__inner{
-            height: 100%;
-        }
-    }
-    .el-form-item__content{ // 当有标签且标签与输入框在同一行时输入框的宽度
-        width: calc(100% - 120px);
-    }
-    .el-date-editor.el-input, .el-date-editor.el-input__inner{
-      width: 100%;
     }
 }
 .formPadding{
@@ -392,19 +364,6 @@
         display: none;
     }
 }
-
-.w-px76{
-  width: 76px;
-  background: #009588;
-  &:focus{
-    background: #009588;
-    color: #fff;
-  }
-  &:hover{
-    background: rgba(0,149,136,0.9);
-    color: #fff;
-  }
-}
 .list-box{ // 罪犯编辑模块的表格的父元素
   border-top: 1px solid #ddd;
   margin-left: 20px;
@@ -455,54 +414,4 @@
       }
     }
   }
-}
-.form-container {
-  box-sizing: border-box;
-  width: 100%;
-  position: relative;
-  padding: 20px 20px 20px 41px;
-  font-size: 14px;
-  // border-top: 1px solid #ddd;
-  label {
-    color: #333;
-    font-weight: bold;
-    display: inline-block;
-    font-size: 14px;
-    width: 148px;
-    box-sizing: border-box;
-    float: left;
-    padding-top: 20px;
-  }
-  div:not(.padding20) span {
-    display: inline-block;
-    //border-bottom: 1px solid #ddd;
-    padding-bottom: 10px;
-    padding-top: 20px;
-    width: calc(100% - 148px);
-    color: #333;
-    height: 14px;
-    vertical-align: middle;
-  }
-  .label120{
-      width: 130px;
-  }
-  .span120{
-      width: calc(100% - 150px);
-  }
-}
-.padding20 {
-  padding-bottom: 20px;
-  padding-right: 20px;
-  overflow: hidden;
-  background: #fff;
-  border-top: 1px solid #ddd;
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-  button {
-    float: right;
-    margin-top: 20px;
-  }
-  // &>button:last-child:not(:first-child){
-  //   margin-top: 20px;
-  // }
 }

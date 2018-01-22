@@ -1,0 +1,86 @@
+.icon-tuichu {
+  cursor: pointer;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  .fs-16 {
+    font-size: 16px;
+    margin: 0 142px 0 10px;
+  }
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  li {
+    margin-left: 20px;
+    i {
+      display: block;
+      height: 16px;
+      width: 16px;
+      font-size: 16px;
+    }
+    a {
+      color: #fff;
+      font-size: 12px;
+    }
+    img {
+      margin-right: 7px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+  }
+  li.hasImg a {
+    display: flex;
+    align-items: center;
+  }
+}
+footer {
+  line-height: 40px;
+  font-size: 12px;
+  color: #a3a6ab;
+  text-align: center;
+  background: #f5f5f5;
+}
+.flex-column {
+  flex-direction: column;
+  align-items: stretch;
+  padding-top: 47px;
+  .error-box{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      background-color: #f5f5f5;
+      min-height: 283px;
+      margin-top: 20px;
+  }
+}
+.error-left{
+  width:300px;
+  flex-shrink: 0;
+}
+.error-number{
+  width:151px;
+  height: 74px;
+}
+.error-message{
+  font-size:18px;
+  margin-top:33px;
+}
+.error-reason{
+  font-size:18px;
+  margin-top:12px;
+}
+.error-button{
+  margin-top: 12px;
+  color:red;
+}
+.error-right{
+    flex-shrink: 0;
+    width:281px;
+    height: 283px;
+    margin-left:50px;
+}

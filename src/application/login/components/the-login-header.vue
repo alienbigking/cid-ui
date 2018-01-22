@@ -1,13 +1,11 @@
 <template>
-  <el-header style="height: 47px;position: fixed;">
+  <el-header style="height: 47px; position: fixed; z-index: 100;">
     <div class="header-left">
         <i class="iconfont icon-yunshujukuRDS" style="font-size: 22px;"></i>
         <span class="fs-16">罪犯数据库</span>
     </div>
-    <ul class="header-right">
-        <li><router-link to="/login">您好，请登录！</router-link></li>
-    </ul>
-    </el-header>
+    <div class="header-right">您好，请登录！</router-link></li></div>
+  </el-header>
 </template>
 
 <script>
@@ -24,14 +22,7 @@ export default {};
   }
 }
 .header-right {
-  display: flex;
-  align-items: center;
-  li {
-    margin-left: 20px;
-    a {
-      color: #fff;
-      font-size: 14px;
-    }
-  }
+  font-size: 14px;
+  
 }
 </style>
