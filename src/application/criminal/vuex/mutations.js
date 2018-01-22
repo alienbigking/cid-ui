@@ -17,7 +17,8 @@ export default {
         state.criminalRecord = criminalRecord;
     },
     [types.UPDATE_CRIMINAL_RECORD](state, criminalRecord) {
-        Object.assign(state.criminalRecord, criminalRecord);
+        // Object.assign(state.criminalRecord, criminalRecord);
+        state.criminalRecord = _.cloneDeep(criminalRecord);
     },
     [types.SET_ALL_CRIMINAL_RECORDS](state, allCriminalRecords) {
         state.allCriminalRecords = allCriminalRecords;
