@@ -118,8 +118,8 @@ export default {
     },
     render() {
       if (!this.criminalForfeitId) {
-        this.criminalForfeit = { criminalId: this.$route.params.id, id: null };
-        this.$store.commit("setCriminalForfeit", this.criminalForfeit);
+        this.$store.commit("setCriminalForfeit", { criminalId: this.$route.params.id });
+        this.criminalForfeit = _.cloneDeep(this.$store.state.criminal.criminalForfeit);
         this.loading = false;
       } else {
         this.getCriminalForfeit(this.criminalForfeitId).then(() => {
