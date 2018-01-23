@@ -39,8 +39,6 @@ export default {
         newPassword: "",
         checkPassword: ""
       },
-      saving: false,
-      isShowPwd: false,
       rules: {
           oldPassword: [
             { required: true, message: "密码不能为空" },
@@ -53,6 +51,8 @@ export default {
           ],
           checkPassword: []
       },
+      saving: false,
+      isShowPwd: false,
       isShowPwd_again: false
     };
   },

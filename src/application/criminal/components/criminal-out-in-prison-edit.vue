@@ -1,19 +1,19 @@
 <template>
   <div v-loading='loading'>
-    <el-form class="form-criminal" :model="criminalOutInPrison" :rules="rules" ref="form" label-position="top">
-        <el-form-item class="w-px180" label="出监日期" prop="outgoingDate">
-          <el-date-picker v-model="criminalOutInPrison.outgoingDate"  value-format="yyyy-MM-dd" type="date"></el-date-picker>
+    <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
+        <el-form-item class="w-px180" label="出监日期" prop="criminalOutInPrison.outgoingDate">
+          <el-date-picker v-model="form.criminalOutInPrison.outgoingDate"  value-format="yyyy-MM-dd" type="date"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w-px180" label="入监日期" prop="entryDate">
-          <el-date-picker v-model="criminalOutInPrison.entryDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
+        <el-form-item class="w-px180" label="入监日期" prop="criminalOutInPrison.entryDate">
+          <el-date-picker v-model="form.criminalOutInPrison.entryDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
         </el-form-item>
-        <el-form-item class="w-px180" label="出监事由" prop="reasonName">
-              <el-select v-model="criminalOutInPrison.reasonName" value-key="name" :loading="initializing" placeholder="请选择出监事由" clearable>
+        <el-form-item class="w-px180" label="出监事由" prop="selectedOutInPrisonReasons">
+              <el-select v-model="form.selectedOutInPrisonReasons" value-key="code" :loading="initializing" placeholder="请选择出监事由" clearable>
                 <el-option v-for="(item, index) in allOutInPrisonReasons" :key="index" :label="item.name" :value="item"></el-option>
               </el-select>
         </el-form-item>
-        <el-form-item class="w100" label="备注" prop="remark" >
-          <el-input type="textarea" resize="none" v-model="criminalOutInPrison.remark"></el-input>
+        <el-form-item class="w100" label="备注" prop="criminalOutInPrison.remark" >
+          <el-input type="textarea" resize="none" v-model="form.criminalOutInPrison.remark"></el-input>
         </el-form-item>
         <div class="el-form-item el-form-item-div">
           <el-button class="button-cancel" @click="onClose">返 回</el-button>
@@ -39,15 +39,21 @@ export default {
   },
   data() {
     return {
-      criminalOutInPrison: _.cloneDeep(this.$store.state.criminal.criminalOutInPrison),
-      rules: {
-        startDate: [{ required: true, message: "请输入开始日期" }],
-        endDate: [{ required: true, message: "请输入结束日期" }]
+      form: {
+        selectedOutInPrisonReasons: null,
+        criminalOutInPrison: _.cloneDeep(
+          this.$store.state.criminal.criminalOutInPrison
+        )
       },
-      loading: true,
-      saving: false,
+      rules: {
+        "criminalOutInPrison.outgoingDate": [{ required: true, message: "请输入出监日期" }],
+        "criminalOutInPrison.entryDate": [{ required: true, message: "请输入入监日期" }],
+        selectedOutInPrisonReasons: [{ required: true, message: "请选择出监事由" }]
+      },
       initializing: true,
-      allOutInPrisonReasons: []
+      allOutInPrisonReasons: [],
+      loading: true,
+      saving: false
     };
   },
   watch: {
@@ -58,7 +64,19 @@ export default {
         this.render();
       }
     },
-    criminalOutInPrison: {
+    "form.selectedOutInPrisonReasons"(val) {
+      this.$set(
+        this.form.criminalOutInPrison,
+        "reasonCode",
+        val.code
+      );
+      this.$set(
+        this.form.criminalOutInPrison,
+        "reasonName",
+        val.name
+      );
+    },
+    "form.criminalOutInPrison": {
       handler: _.debounce(function(criminalOutInPrison) {
         this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
       }, 500),
@@ -66,7 +84,9 @@ export default {
     }
   },
   created() {
-    Promise.all([criminalLookupService.getAllOutInPrisonReasons()]).then(response => {
+    Promise.all([
+      criminalLookupService.getAllOutInPrisonReasons()
+    ]).then(response => {
       this.allOutInPrisonReasons = response[0];
       this.initializing = false;
       this.render();
@@ -85,16 +105,8 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.criminalOutInPrison.id) {
+          if (this.form.criminalOutInPrison.id) {
             // 修改
-            let criminalOutInPrison = Object.assign({}, this.criminalOutInPrison);
-            Object.keys(criminalOutInPrison).map(key => {
-            if (criminalOutInPrison[key] instanceof Object) {
-              let obj = Object.assign({}, criminalOutInPrison[key]);
-              criminalOutInPrison[key] = obj.name;
-            }
-            });
-            this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
             this.saving = true;
             this.updateCriminalOutInPrison()
               .then(res => {
@@ -110,17 +122,7 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            let criminalOutInPrison = Object.assign({}, this.criminalOutInPrison);
-            Object.keys(criminalOutInPrison).map(key => {
-            if (criminalOutInPrison[key] instanceof Object) {
-              let obj = Object.assign({}, criminalOutInPrison[key]);
-              let str = key.substring(0, key.lastIndexOf("Name"));
-              criminalOutInPrison[`${str}Code`] = obj.code;
-              criminalOutInPrison[key] = obj.name;
-            }
-            });
-            this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
-            this.addCriminalOutInPrison(criminalOutInPrison)
+            this.addCriminalOutInPrison()
               .then(res => {
                 this.saving = false;
                 this.getAllCriminalOutInPrisons(this.$route.params.id);
@@ -137,16 +139,21 @@ export default {
     },
     render() {
       if (!this.criminalOutInPrisonId) {
+        this.form.selectedOutInPrisonReasons = {};
         this.$store.commit("setCriminalOutInPrison", { criminalId: this.$route.params.id });
-        this.criminalOutInPrison = _.cloneDeep(
+        this.form.criminalOutInPrison = _.cloneDeep(
             this.$store.state.criminal.criminalOutInPrison
           );
         this.loading = false;
       } else {
         this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
-          this.criminalOutInPrison = _.cloneDeep(
+          this.form.criminalOutInPrison = _.cloneDeep(
             this.$store.state.criminal.criminalOutInPrison
           );
+          this.form.selectedOutInPrisonReasons = {
+            code: this.form.criminalOutInPrison.reasonCode,
+            name: this.form.criminalOutInPrison.reasonName
+          };
           this.loading = false;
         });
       }

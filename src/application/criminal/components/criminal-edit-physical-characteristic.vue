@@ -79,15 +79,14 @@ export default {
       rules: {
         "criminalPhysicalCharacteristic.height": [
           { required: true, message: "请输入身高" },
-          { validator: this.$validators.decimal1i2f, trigger: "change" }
+          { validator: this.$validators.decimal1i2f }
         ],
         "criminalPhysicalCharacteristic.weight": [
           { required: true, message: "请输入体重" },
-          { validator: this.$validators.decimal3i2f, trigger: "change" }
+          { validator: this.$validators.decimal3i2f }
         ],
         "criminalPhysicalCharacteristic.footLength": [
-          { required: true, message: "请输入足长" },
-          { validator: this.$validators.decimal2i2f, trigger: "change" }
+          { validator: this.$validators.decimal2i2f }
         ],
         selectedSomatotype: [{ required: true, message: "请选择血型" }],
         selectedFaceType: [{ required: true, message: "请选择脸型" }]
@@ -192,10 +191,16 @@ export default {
     ]),
     render() {
       this.getCriminalPhysicalCharacteristic(this.$route.params.id).then(() => {
+        this.$refs.form.resetFields();
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );
-        if (this.form.criminalPhysicalCharacteristic.id) {
+        if (!this.form.criminalPhysicalCharacteristic.id) {
+          this.$store.commit("setCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
+          this.form.criminalPhysicalCharacteristic = _.cloneDeep(
+            this.$store.state.criminal.criminalPhysicalCharacteristic
+          );
+        } else {
           this.form.selectedSomatotype = {
             code: this.form.criminalPhysicalCharacteristic.somatotypeCode,
             name: this.form.criminalPhysicalCharacteristic.somatotypeName
@@ -212,13 +217,7 @@ export default {
             code: this.form.criminalPhysicalCharacteristic.accentCode,
             name: this.form.criminalPhysicalCharacteristic.accentName
           };
-        } else {
-          this.$store.commit("setCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
-          this.form.criminalPhysicalCharacteristic = _.cloneDeep(
-            this.$store.state.criminal.criminalPhysicalCharacteristic
-          );
         }
-        // this.$refs["gk-table"].doLayout();
       });
     },
     onSave() {
@@ -231,7 +230,6 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
-                this.render();
                 this.editDialogVisible = false;
               })
               .catch(error => {
@@ -245,7 +243,6 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");
-                this.render();
                 this.editDialogVisible = false;
               })
               .catch(error => {

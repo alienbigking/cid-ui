@@ -153,6 +153,7 @@ export default {
     },
     render() {
       if (!this.criminalSocialRelationId) {
+        this.form.selectedPoliticalStatus = {};
         this.$store.commit("setCriminalSocialRelation", { criminalId: this.$route.params.id });
         this.form.criminalSocialRelation = _.cloneDeep(
             this.$store.state.criminal.criminalSocialRelation
