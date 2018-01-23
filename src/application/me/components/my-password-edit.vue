@@ -27,37 +27,44 @@
 import { mapActions } from "vuex";
 export default {
   data() {
+    let changePassword = (rule, value, callback) => {
+      if (value !== "" && this.userPassword.checkPassword !== "") {
+          this.$refs.form.validateField("checkPassword");
+      }
+      callback();
+    };
     return {
       userPassword: {
         oldPassword: "",
         newPassword: "",
         checkPassword: ""
       },
-      saving: false,
-      isShowPwd: false,
-      isShowPwd_again: false
-    };
-  },
-  computed: {
-    rules() {
-      return {
+      rules: {
         oldPassword: [
           { required: true, message: "密码不能为空" },
           { min: 6, message: "密码必须大于6位" }
         ],
         newPassword: [
           { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码必须大于6位" }
+          { min: 6, message: "密码必须大于6位" },
+          { validator: changePassword }
         ],
-        checkPassword: [
-          {
-            validator: this.$validators.equalTo,
-            compareTo: this.userPassword.newPassword,
-            message: "密码不匹配"
-          }
-        ]
-      };
-    }
+        checkPassword: []
+      },
+      saving: false,
+      isShowPwd: false,
+      isShowPwd_again: false
+    };
+  },
+  created() {
+    this.rules.checkPassword = [
+      {
+        validator: this.$validators.equalTo,
+        compareTo: this.userPassword,
+        attr: "newPassword",
+        message: "密码不匹配"
+      }
+    ];
   },
   methods: {
     ...mapActions(["updateMyPassword"]),
