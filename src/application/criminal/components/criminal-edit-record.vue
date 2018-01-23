@@ -23,7 +23,7 @@
         </el-table>
       </template>
     </div>
-    <el-dialog title="犯罪记录" width="950px" :visible.sync="editDialogVisible">
+    <el-dialog title="犯罪记录" class="dialog" width="950px" :visible.sync="editDialogVisible">
       <criminal-record-edit :criminalRecordId="criminalRecordId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-record-edit>
     </el-dialog>
 
