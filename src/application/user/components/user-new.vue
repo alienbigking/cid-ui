@@ -9,7 +9,7 @@
                 <el-input v-model="user.name"></el-input>
             </el-form-item>
             <el-form-item class="w50" label="密码" prop="password">
-                <el-input v-model="user.password"></el-input>
+                <el-input v-model="user.password" type="password"></el-input>
             </el-form-item>
             <el-form-item class="w50" label="状态" prop="status">
             <el-select v-model="user.status"   clearable placeholder="请选择使用状态">
@@ -45,7 +45,7 @@ export default {
         ],
         password: [
           { required: true, message: "请输入密码" },
-          { max: 100, message: "长度在 6 个字符" }
+          { min: 7, message: "长度必须大于 6 个字符" }
         ],
         status: ["required"],
         description: [{ max: 255, message: "255 个字符以内" }]
