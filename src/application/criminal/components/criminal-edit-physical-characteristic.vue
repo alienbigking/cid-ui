@@ -230,7 +230,6 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
-                this.render();
                 this.editDialogVisible = false;
               })
               .catch(error => {
@@ -244,7 +243,6 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");
-                this.render();
                 this.editDialogVisible = false;
               })
               .catch(error => {
