@@ -3,7 +3,7 @@
     <the-login-header></the-login-header>
     <el-main class="login-box">
       <div>
-          <i class="iconfont icon-yunshujukuRDS"></i>
+          <i class="iconfont icon-RDS"></i>
           <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
               <el-form-item prop="username">
                   <el-input type="text" placeholder="请输入用户名" v-model="user.username" @keyup.enter.native="onSubmit">
@@ -79,7 +79,7 @@ export default {
   font-size: 18px;
   color: #999999;
 }
-.icon-yunshujukuRDS {
+.icon-RDS {
   color: #37474f;
   font-size: 72px;
   display: block;

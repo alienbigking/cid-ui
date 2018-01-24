@@ -7,14 +7,14 @@
     overflow: hidden;
     &>[class^="el-"]{
       vertical-align: top;
-      margin-top: 10px;
+      margin-top: $margin-top;
       &:not(.el-button) {
-        width: 176px;
-        margin-right: 20px;
+        width: $width-input-filter;
+        margin-right: 15px;
       }
-      &.button-addInList{
-        float: right;
-      }
+    }
+    .button-addInList{
+      float: right;
     }
 }
 .detail-card{ // 卡片
@@ -22,9 +22,9 @@
   background: $white;
   border-radius: $radius;
   font-size: 14px;
-  color: #333;
+  color: $color-default;
   .card-title{
-    color: #333;
+    color: $color-default;
     border-bottom: $border;
     padding: $padding-default;
     font-weight: bold;
@@ -36,7 +36,7 @@
     overflow: hidden;
     &:last-child{ border: 0;}
     label{
-      font-size: 12px;
+      font-size: $font-size;
       color: #666;//新改的字体颜色
       font-weight: bold;
       display: inline-block;
@@ -54,7 +54,7 @@
       padding-top: 16px;
       padding-bottom: 6px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: $font-size;
       line-height: 20px;
     }
   }
@@ -66,7 +66,7 @@
   .detail{
       margin-top: 20px;
       font-weight: bold;
-      font-size: 12px;
+      font-size: $font-size;
       & + .el-button{
           float: right;
           margin-top: 20px;
@@ -75,23 +75,23 @@
         margin-top: 0;
       }
   }
-  & + .detail-card { margin-top: 10px; }
+  & + .detail-card { margin-top: $margin-top; }
 }
 
 .card{
-    border:1px solid #ddd;
+    border: $border;
     border-radius:5px;
     background:#fff;
     .um-title{
         display: block;
-        padding:20px;
-        border-bottom:1px solid #DDD;
-        color: #333;
+        padding: $padding-default;
+        border-bottom: $border;
+        color: $color-default;
         font-size:14px;
         font-weight: bold;
     }
     &+.card{
-        margin-top: 10px;
+        margin-top: $margin-top;
     }
 }
 
@@ -102,7 +102,7 @@
 // 修改密码页面的输入框
 .gray-inner{
   .el-input__inner {
-    background: #f5f5f5;
+    background: $background;
     &:focus {
       background: #ffffff;
     }
@@ -112,13 +112,13 @@
     .el-form-item{
         &.w50{ // 并排的表单
             margin-right: 0;
-            padding-right: 20px;
+            padding-right: $padding-default;
             width: 50%;
             box-sizing: border-box;
         }
         &.w100{ // 独占一行的表单
             margin-right: 0;
-            padding-right: 20px;
+            padding-right: $padding-default;
             width: 100%;
             box-sizing: border-box;
         }
@@ -135,7 +135,7 @@
         }
         &.hasButton{ // 有两个按钮且按钮位于右侧，按钮为76px宽的表单
             width: 100%;
-            padding-right: 20px;
+            padding-right: $padding-default;
             .el-form-item__content{
                 display: flex;
                 justify-content: flex-end;
@@ -147,10 +147,10 @@
         &.the-disabled{ // 不可修改的表单
             .el-input__inner{
                 background: #F2F2F2;
-                border: 1px solid #DDDDDD;
+                border: $border;
                 cursor: not-allowed;
                 color: #999;
-                height: 36px;
+                height: $height-input;
                 vertical-align: top;
                 line-height: 34px;
                 margin-top: 2px;
@@ -186,7 +186,7 @@
 }
 .form-criminal{
     .form-box{
-      border-bottom: 1px solid #ddd;
+      border-bottom: $border;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
@@ -205,7 +205,7 @@
     }
     .form-box:last-child{
       border-bottom: 0;
-      padding-bottom: 20px;
+      padding-bottom: $padding-default;
       &:after{
         display: none;
       }
@@ -213,51 +213,51 @@
     .w25{
       width: 25%;
       box-sizing: border-box;
-      padding-right: 20px;
-      padding-left: 20px;
+      padding-right: $padding-default;
+      padding-left: $padding-default;
       flex-shrink: 0;
     }
     .w50{
       .el-form-item__label{
-        padding-left: 20px;
+        padding-left: $padding-default;
       }
       .el-form-item__content>[class^="el-"]:not(.el-textarea):not(.el-cascader):not(.el-date-editor):nth-child(1){
-        padding-left: 20px;
+        padding-left: $padding-default;
         .el-input__prefix{
-          left: 20px;
+          left: $padding-default;
         }
-        &+.el-form-item__error{ left: 20px; }
+        &+.el-form-item__error{ left: $padding-default; }
       }
       .el-form-item__content>.el-textarea{
-        padding: 0 0 0 20px;
+        padding: 0 0 0 $padding-default;
         height: 130px;
         width: 100%;
         box-sizing: border-box;
         &+.el-form-item__error{
-            left: 20px;
+            left: $padding-default;
         }
       }
       .el-form-item__content>.el-cascader{
-        height: 36px;
+        height: $height-input;
         padding: 0;
         box-sizing: border-box;
         margin-left: 20px;
         width: calc(100% - 20px);
         &+.el-form-item__error{
-            left: 20px;
+            left: $padding-default;
         }
       }
       .el-form-item__content>.el-date-editor{
-        height: 36px;
+        height: $height-input;
         padding: 0;
         box-sizing: border-box;
         margin-left: 20px;
         width: calc(100% - 20px);
         &+.el-form-item__error{
-            left: 20px;
+            left: $padding-default;
         }
         .el-input__icon{ margin-left: 0px; width: 36px; }
-        .el-range-input{ width: calc(39% - 12px); font-size: 12px; vertical-align: top; }
+        .el-range-input{ width: calc(39% - 12px); font-size: $font-size; vertical-align: top; }
         .el-range-separator{ line-height: 34px;}
       }
     }
@@ -283,7 +283,7 @@
     }
     .w100{
         padding: 0;
-        padding-left: 20px;
+        padding-left: $padding-default;
         flex-shrink: 0;
         .el-form-item__content>.el-textarea{
           height: 130px;
@@ -297,22 +297,22 @@
 }
 .el-table{
     tr,th,td{
-        color: #333;
-        font-size: 12px;
+        color: $color-default;
+        font-size: $font-size;
         padding: 0;
         height: 40px;
         line-height: 40px;
     }
     .tableHeader{
         height: 50px;
-        font-size: 12px;
+        font-size: $font-size;
         font-weight: bold;
         th.is-leaf{
             border-bottom-color: #bbb;
         }
     }
     .tableHeader40{
-      background: #F5F5F5;
+      background: $background;
       height: 40px;
       font-weight: bold;
       th,td{ background: transparent; }
@@ -331,14 +331,14 @@
 .my_table{
     &.el-table--border, &.el-table--group{
         border: 0;
-        border-top: 1px solid #ddd;
+        border-top: $border;
     }
     &.el-table--border td, &.el-table--border th{
-        border-color: #ddd;
+        border-color: $color-border;
     }
     .cell{
         line-height: 50px;
-        font-size: 12px;
+        font-size: $font-size;
         padding: 0 20px !important;
     }
     .caret-wrapper{
@@ -362,13 +362,13 @@
     }
 }
 .list-box{ // 罪犯编辑模块的表格的父元素
-  border-top: 1px solid #ddd;
+  border-top: $border;
   margin-left: 20px;
   padding: 30px 20px 0 0;
   overflow: hidden;
 }
 .table40{ // 行高40px的表格
-  border: 1px solid #ddd;
+  border: $border;
   border-bottom: 0;
   margin-bottom: 30px;
   &+button{
@@ -380,40 +380,33 @@
 }
 .deleteDialog{
   .el-dialog__body{
-    color: #333;
-    text-align: center;
-    padding-bottom: 0;
+    color: $color-default;
+    padding-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
-  b {
-    font-weight: bold;
-  }
-  .icon-tishishuoming {
+  .icon-jinggao {
     color: #e82e21;
     font-size: 80px;
-    display: block;
     line-height: 80px;
     margin-bottom: 27px;
     & + span {
       line-height: 1;
     }
   }
+  b {
+    font-weight: bold;
+    margin: 0 10px;
+  }
   .el-dialog__footer {
-    padding-top: 30px;
-    button {
-      width: 76px;
-      background: #fcfcfc;
-      color: #666;
-      & + button {
-        margin-left: 20px;
-        color: #fff;
-        background: #085eb5;
-        border-color: #085eb5;
-      }
-    }
+    padding-bottom: 30px;
+    display: flex;
+    justify-content: center;
   }
 }
 .user-checkbox-group{
-  border-bottom: 1px solid #ddd;
+  border-bottom: $border;
   padding: 5px 0;
   .el-checkbox{
     display:flex;

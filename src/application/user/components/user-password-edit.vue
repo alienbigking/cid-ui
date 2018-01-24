@@ -7,12 +7,12 @@
         </el-form-item>
         <el-form-item prop="newPassword">
             <el-input class="gray-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
-                <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
+                <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-bukejian'" @click="isShow"></span>
             </el-input>
         </el-form-item>
         <el-form-item prop="checkPassword">
             <el-input class="gray-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
-              <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
+              <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-bukejian'" @click="isShow_again"></span>
             </el-input>
         </el-form-item>
         <div class="form-btn">

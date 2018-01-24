@@ -19,11 +19,13 @@ const prisonMenus = [
         index: '3',
         name: '工作台',
         path: '/dashboard',
+        icon: 'icon-dashboard',
         collapse: true
     },
     {
         index: '7',
         name: '部门',
+        icon: 'icon-department',
         collapse: true,
         children: [
             {
@@ -43,6 +45,7 @@ const prisonMenus = [
     {
         index: '1',
         name: '监区',
+        icon: 'icon-prisonArea',
         collapse: true,
         children: [
             {
@@ -62,6 +65,7 @@ const prisonMenus = [
     {
         index: '2',
         name: '监舍',
+        icon: 'icon-prisonHouse',
         collapse: true,
         children: [
             {
@@ -81,6 +85,7 @@ const prisonMenus = [
     {
         index: '4',
         name: '罪犯',
+        icon: 'icon-criminal',
         collapse: true,
         children: [
             {
@@ -100,6 +105,7 @@ const prisonMenus = [
     {
         index: '6',
         name: '用户',
+        icon: 'icon-user',
         collapse: true,
         children: [
             {
@@ -119,6 +125,7 @@ const prisonMenus = [
     {
         index: '5',
         name: '角色',
+        icon: 'icon-role',
         collapse: true,
         children: [
             {
@@ -138,6 +145,7 @@ const prisonMenus = [
     {
         index: '10',
         name: '日志',
+        icon: 'icon-log',
         collapse: true,
         children: [
             {
@@ -155,11 +163,13 @@ const prisonBureauMenus = [
         index: '8',
         name: '工作台',
         path: '/dashboard',
+        icon: 'icon-dashboard',
         collapse: true
     },
     {
         index: '9',
         name: '部门',
+        icon: 'icon-department',
         collapse: true,
         children: [
             {
@@ -179,6 +189,7 @@ const prisonBureauMenus = [
     {
         index: '6',
         name: '用户',
+        icon: 'icon-user',
         collapse: true,
         children: [
             {
@@ -198,6 +209,7 @@ const prisonBureauMenus = [
     {
         index: '5',
         name: '角色',
+        icon: 'icon-role',
         collapse: true,
         children: [
             {
@@ -217,6 +229,7 @@ const prisonBureauMenus = [
     {
         index: '10',
         name: '日志',
+        icon: 'icon-log',
         collapse: true,
         children: [
             {
@@ -234,11 +247,13 @@ const platformMenus = [
         index: '2',
         name: '工作台',
         path: '/dashboard',
+        icon: 'icon-dashboard',
         collapse: true
     },
     {
         index: '3',
         name: '租户',
+        icon: 'icon-tenant',
         collapse: true,
         children: [
             {
@@ -258,6 +273,7 @@ const platformMenus = [
     {
         index: '6',
         name: '用户',
+        icon: 'icon-user',
         collapse: true,
         children: [
             {
@@ -277,6 +293,7 @@ const platformMenus = [
     {
         index: '5',
         name: '角色',
+        icon: 'icon-role',
         collapse: true,
         children: [
             {
@@ -296,6 +313,7 @@ const platformMenus = [
     {
         index: '10',
         name: '日志',
+        icon: 'icon-log',
         collapse: true,
         children: [
             {

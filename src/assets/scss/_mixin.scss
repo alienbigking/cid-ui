@@ -1,33 +1,29 @@
 // 按钮样式
 @mixin button($type) {
   color: #FFFFFF;
+  border: 0;
   @if $type == search { // 查询
     background: #29B0A3;
-    border: 0;
     width: 100px;
   } @else if $type == confirm { // 编辑确认
     background: #2196F3;
-    border: 0;
     min-width: 76px;
   } @else if $type == cancel { // 删除对话框中取消
     background: $white;
     color: #666;
     width: 76px;
+    border: $border;
   } @else if $type == sure { // 删除对话框中确定
     background: #085EB5;
     width: 76px;
-    border: 0;
   } @else if $type == addInList { // 列表页中新增
     background: #2196F3;
-    border: 0;
     min-width: 100px;
   } @else if $type == addInEdit { // 编辑页中新增
     background: #009588;
-    border: 0;
     width: 76px;
   } @else if $type == addInNew { // 新增页中新增
     background: #2196F3;
-    border: 0;
     width: 76px;
   }
 }

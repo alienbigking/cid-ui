@@ -4,7 +4,7 @@
           separator="/"
           separator-class="separatorClass">
             <el-breadcrumb-item>
-              <i class="iconfont icon-home" style="margin-right:5px;"></i>主页
+              <i class="iconfont icon-zhuye" style="margin-right:5px;"></i>主页
             </el-breadcrumb-item>
             <el-breadcrumb-item
               :key="index"
@@ -39,7 +39,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.icon-home {
+.icon-zhuye {
   font-size: 14px;
 }
 </style>
