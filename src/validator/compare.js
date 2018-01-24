@@ -1,10 +1,12 @@
-function equalTo(rule, value, callback, source, options) {
-    if (value !== rule.compareTo[rule.attr]) {
+function equalTo(rule, value, callback) {
+    const compareTo = rule.model[rule.compareTo];
+    if (compareTo && value !== compareTo) {
         callback(new Error(rule.message));
     } else {
         callback();
     }
 };
+
 export {
     equalTo
 };

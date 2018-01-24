@@ -47,13 +47,22 @@ export default {
         ],
         newPassword: [
           { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码必须大于6位" }
+          { min: 6, message: "密码必须大于6位" },
+          {
+            validator: this.$validators.checkOtherField,
+            form: "form",
+            otherField: "checkPassword",
+            model: this.userPassword,
+            refs: this.$refs
+          }
         ],
         checkPassword: [
+          { required: true, message: "确认密码不能为空" },
           {
             validator: this.$validators.equalTo,
-            compareTo: this.userPassword.newPassword,
-            message: "密码不匹配"
+            compareTo: "newPassword",
+            message: "密码不匹配",
+            model: this.userPassword
           }
         ]
       };
@@ -94,7 +103,9 @@ export default {
 .w340 {
   width: 340px;
   margin: 30px auto;
-  &>div{ width: 100%;}
+  & > div {
+    width: 100%;
+  }
   .form-btn {
     display: flex;
     justify-content: space-between;
