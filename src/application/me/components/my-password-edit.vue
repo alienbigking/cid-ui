@@ -6,17 +6,17 @@
               <el-input type="password" class="gray-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
           </el-form-item>
           <el-form-item prop="newPassword">
-              <el-input class="gray-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
-                  <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-attentionforbid'" @click="isShow"></span>
+              <el-input class="gray-inner" :type="showNewPassword?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
+                  <span slot="suffix" class="iconfont" :class="showNewPassword?'icon-kejian':'icon-attentionforbid'" @click="onSwitchShowNewPassword"></span>
               </el-input>
           </el-form-item>
           <el-form-item prop="checkPassword">
-              <el-input class="gray-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
-                <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-attentionforbid'" @click="isShow_again"></span>
+              <el-input class="gray-inner" :type="showCheckPassword?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
+                <span slot="suffix" class="iconfont" :class="showCheckPassword?'icon-kejian':'icon-attentionforbid'" @click="onSwitchShowCheckPassword"></span>
               </el-input>
           </el-form-item>
           <div class="form-btn">
-              <el-button @click="goBack">返 回</el-button>
+              <el-button @click="onBack">返 回</el-button>
               <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
           </div>
       </el-form>
@@ -34,8 +34,8 @@ export default {
         checkPassword: ""
       },
       saving: false,
-      isShowPwd: false,
-      isShowPwd_again: false
+      showNewPassword: false,
+      showCheckPassword: false
     };
   },
   computed: {
@@ -86,13 +86,13 @@ export default {
         }
       });
     },
-    isShow() {
-      this.isShowPwd = !this.isShowPwd;
+    onSwitchShowNewPassword() {
+      this.showNewPassword = !this.showNewPassword;
     },
-    isShow_again() {
-      this.isShowPwd_again = !this.isShowPwd_again;
+    onSwitchShowCheckPassword() {
+      this.showCheckPassword = !this.showCheckPassword;
     },
-    goBack() {
+    onBack() {
       this.$router.go(-1);
     }
   }
