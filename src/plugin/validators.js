@@ -8,7 +8,8 @@ export default {
             decimal3i2f: validators.decimal3i2f,
             decimal8i2f: validators.decimal8i2f,
             dataRange1t10d: validators.dataRange1t10d,
-            equalTo: validators.equalTo
+            equalTo: validators.equalTo,
+            checkOtherField: validators.checkOtherField
         };
     }
 };

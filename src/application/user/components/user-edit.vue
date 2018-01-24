@@ -17,7 +17,7 @@
           </el-form-item>
 
           <div class="el-form-item-div">
-            <el-button @click="goBack">返 回</el-button>
+            <el-button @click="onBack">返 回</el-button>
             <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
           </div>
       </el-form>
@@ -78,7 +78,7 @@ export default {
       let params = this.$route.params.id;
       this.$router.push(`/user/password-edit/${params}`);
     },
-    goBack() {
+    onBack() {
       this.$router.go(-1);
     }
   }

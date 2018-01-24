@@ -6,17 +6,17 @@
             <el-input class="gray-inner" type="password" placeholder="原始密码" v-model="userPassword.oldPassword" />
         </el-form-item>
         <el-form-item prop="newPassword">
-            <el-input class="gray-inner" :type="isShowPwd?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
-                <span slot="suffix" class="iconfont" :class="isShowPwd?'icon-kejian':'icon-bukejian'" @click="isShow"></span>
+            <el-input class="gray-inner" :type="showNewPassword?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
+                <span slot="suffix" class="iconfont" :class="showNewPassword?'icon-kejian':'icon-bukejian'" @click="onSwitchShowNewPassword"></span>
             </el-input>
         </el-form-item>
         <el-form-item prop="checkPassword">
-            <el-input class="gray-inner" :type="isShowPwd_again?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
-              <span slot="suffix" class="iconfont" :class="isShowPwd_again?'icon-kejian':'icon-bukejian'" @click="isShow_again"></span>
+            <el-input class="gray-inner" :type="showCheckPassword?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
+              <span slot="suffix" class="iconfont" :class="showCheckPassword?'icon-kejian':'icon-bukejian'" @click="onSwitchShowCheckPassword"></span>
             </el-input>
         </el-form-item>
         <div class="form-btn">
-            <el-button @click="goBack">返 回</el-button>
+            <el-button @click="onBack">返 回</el-button>
             <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
         </div>
     </el-form>
@@ -27,44 +27,46 @@
 import { mapActions } from "vuex";
 export default {
   data() {
-    let changePassword = (rule, value, callback) => {
-      if (value !== "" && this.userPassword.checkPassword !== "") {
-          this.$refs.form.validateField("checkPassword");
-      }
-      callback();
-    };
     return {
       userPassword: {
         oldPassword: "",
         newPassword: "",
         checkPassword: ""
       },
-      rules: {
-          oldPassword: [
-            { required: true, message: "密码不能为空" },
-            { min: 6, message: "密码必须大于6位" }
-          ],
-          newPassword: [
-            { required: true, message: "密码不能为空" },
-            { min: 6, message: "密码必须大于6位" },
-            { validator: changePassword }
-          ],
-          checkPassword: []
-      },
       saving: false,
-      isShowPwd: false,
-      isShowPwd_again: false
+      showNewPassword: false,
+      showCheckPassword: false
     };
   },
-  created() {
-    this.rules.checkPassword = [
-      {
-        validator: this.$validators.equalTo,
-        compareTo: this.userPassword,
-        attr: "newPassword",
-        message: "密码不匹配"
-      }
-    ];
+  computed: {
+    rules() {
+      return {
+        oldPassword: [
+          { required: true, message: "密码不能为空" },
+          { min: 6, message: "密码必须大于6位" }
+        ],
+        newPassword: [
+          { required: true, message: "密码不能为空" },
+          { min: 6, message: "密码必须大于6位" },
+          {
+            validator: this.$validators.checkOtherField,
+            form: "form",
+            otherField: "checkPassword",
+            model: this.userPassword,
+            refs: this.$refs
+          }
+        ],
+        checkPassword: [
+          { required: true, message: "确认密码不能为空" },
+          {
+            validator: this.$validators.equalTo,
+            compareTo: "newPassword",
+            message: "密码不匹配",
+            model: this.userPassword
+          }
+        ]
+      };
+    }
   },
   methods: {
     ...mapActions(["updatePassword"]),
@@ -88,13 +90,13 @@ export default {
         }
       });
     },
-    isShow() {
-      this.isShowPwd = !this.isShowPwd;
+    onSwitchShowNewPassword() {
+      this.showNewPassword = !this.showNewPassword;
     },
-    isShow_again() {
-      this.isShowPwd_again = !this.isShowPwd_again;
+    onSwitchShowCheckPassword() {
+      this.showCheckPassword = !this.showCheckPassword;
     },
-    goBack() {
+    onBack() {
       this.$router.go(-1);
     }
   }
@@ -105,7 +107,9 @@ export default {
 .w340 {
   width: 340px;
   margin: 30px auto;
-  &>div{ width: 100%;}
+  & > div {
+    width: 100%;
+  }
   .form-btn {
     display: flex;
     justify-content: space-between;
