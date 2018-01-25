@@ -14,6 +14,7 @@ import { default as responseInterceptor } from '@/utils/interceptor/response-int
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/style.scss';
 import './assets/fonts/iconfont.css';
+import 'babel-polyfill';
 
 Vue.config.productionTip = false;
 
