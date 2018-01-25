@@ -26,14 +26,13 @@
     <el-dialog title="犯罪记录" class="dialog" width="950px" :visible.sync="editDialogVisible">
       <criminal-record-edit :criminalRecordId="criminalRecordId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-record-edit>
     </el-dialog>
-
-    <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
-        <i class="iconfont icon-tishishuoming"></i>
+    <el-dialog class="deleteDialog" width="400px" :visible.sync="deleteDialogVisible">
+        <i class="iconfont icon-jinggao"></i>
         <span>确认删除吗</span>
-        <span slot="footer" class="dialog-footer">
+        <template slot="footer">
             <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
             <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-        </span>
+        </template>
     </el-dialog>
   </div>
 </template>

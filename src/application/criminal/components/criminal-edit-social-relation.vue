@@ -32,14 +32,13 @@
     <el-dialog class="dialog" title="社会关系" width="950px" :visible.sync="editDialogVisible">
       <criminal-social-relation-edit :criminalSocialRelationId="criminalSocialRelationId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-social-relation-edit>
     </el-dialog>
-
-    <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
-        <i class="iconfont icon-tishishuoming"></i>
+    <el-dialog class="deleteDialog" width="400px" :visible.sync="deleteDialogVisible">
+        <i class="iconfont icon-jinggao"></i>
         <span>确认删除吗</span>
-        <span slot="footer" class="dialog-footer">
+        <template slot="footer">
             <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
             <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-        </span>
+        </template>
     </el-dialog>
   </div>
 </template>

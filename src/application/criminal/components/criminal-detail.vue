@@ -4,7 +4,7 @@
   <div class="detail-card">
     <div class="card-title" @click="isShowInformation">
         基本信息
-        <span class="iconfont" :class="informationShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="informationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
     </div>
     <div v-if="informationShow">
           <div class="card-body">
@@ -119,7 +119,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowRecord">
         犯罪记录
-        <span class="iconfont" :class="recordShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <criminal-detail-record :recordShow="recordShow"></criminal-detail-record>
   </div>
@@ -127,7 +127,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowResume">
         简历
-        <span class="iconfont" :class="resumeShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <criminal-detail-resume :resumeShow="resumeShow"></criminal-detail-resume>
   </div>
@@ -135,7 +135,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowFeature">
         体貌特征
-        <span class="iconfont" :class="featureShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="featureShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <div class="card-body" v-if="featureShow">
             <el-row>
@@ -181,7 +181,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowSocialRelation">
         社会关系
-        <span class="iconfont" :class="socialRelationShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="socialRelationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <criminal-detail-social-relation :socialRelationShow="socialRelationShow"></criminal-detail-social-relation>
   </div>
@@ -189,7 +189,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowForfeit">
         罚金
-        <span class="iconfont" :class="forfeitShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="forfeitShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <criminal-detail-forfeit :forfeitShow="forfeitShow"></criminal-detail-forfeit>
   </div>
@@ -197,7 +197,7 @@
   <div class="detail-card">
       <div class="card-title" @click="isShowOutInPrison">
         出入监
-        <span class="iconfont" :class="outInPrisonShow?'icon-unfold':'icon-enter'"></span>
+        <span :class="outInPrisonShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"></span>
       </div>
       <criminal-detail-outInPrison :outInPrisonShow="outInPrisonShow"></criminal-detail-outInPrison>
   </div>
@@ -271,8 +271,9 @@ export default {
 .detail-card{
   .card-title{
     border-bottom: 0;
-    .iconfont{
+    [class^="el-icon"]{
       float: right;
+      font-weight: bold;
     }
     &+div:not(.list-box){ border-top: 1px solid #DDD; }
   }

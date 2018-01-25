@@ -31,13 +31,13 @@
     <el-dialog title="简历" class="dialog" width="730px" :visible.sync="editDialogVisible">
       <criminal-resume-edit :criminalResumeId="criminalResumeId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-resume-edit>
     </el-dialog>
-    <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="deleteDialogVisible">
-      <i class="iconfont icon-tishishuoming"></i>
-      <span>确认删除吗</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
-        <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-      </span>
+    <el-dialog class="deleteDialog" width="400px" :visible.sync="deleteDialogVisible">
+        <i class="iconfont icon-jinggao"></i>
+        <span>确认删除吗</span>
+        <template slot="footer">
+            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
+        </template>
     </el-dialog>
   </div>
 </template>

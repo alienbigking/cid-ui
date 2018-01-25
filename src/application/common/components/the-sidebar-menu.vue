@@ -3,7 +3,7 @@
     <template v-for="(first, idx1) in menus">
       <el-submenu v-if="first.children" :index="first.index" :key="idx1" class="first">
         <template slot="title">
-          <i class="iconfont icon-shezhi"></i>
+          <i class="iconfont" :class="first.icon"></i>
           <span slot="title">{{ first.name }}</span>
         </template>
         <li class="el-menu-item first"
@@ -13,7 +13,7 @@
         <el-menu-item v-for="(second, idx2) in first.children" :key="idx2" :index="second.index" class="second" @click="onNavigate(second.path)">{{ second.name }}</el-menu-item>
       </el-submenu>
       <el-menu-item v-else :index="first.index" :key="idx1" :route="first" class="first" @click="onNavigate(first.path)">
-        <i class="iconfont icon-shezhi"></i>
+        <i class="iconfont" :class="first.icon"></i>
         <span slot="title">{{ first.name }}</span>
       </el-menu-item>
     </template>
