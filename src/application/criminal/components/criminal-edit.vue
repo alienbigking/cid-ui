@@ -1,5 +1,5 @@
 <template>
-    <div class="card">
+    <div class="detail-card">
       <el-tabs v-model="activeName">
         <el-tab-pane v-for="(tab, index) in tabs" :key="index" :label="tab.name" :name="tab.component">
           <keep-alive>

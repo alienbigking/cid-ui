@@ -23,6 +23,8 @@
   border-radius: $radius;
   font-size: 14px;
   color: $color-default;
+  min-width: 600px;
+  overflow-x: auto;
   .card-title{
     color: $color-default;
     border-bottom: $border;
