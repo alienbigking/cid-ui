@@ -1,11 +1,13 @@
 import axios from 'axios';
+import qs from 'qs';
 
 export default {
     login(user) {
-        var params = new URLSearchParams();
-        params.append('grant_type', 'password');
-        params.append('username', user.username);
-        params.append('password', user.password);
+        var params = qs.stringify({
+            'grant_type': 'password',
+            'username': user.username,
+            'password': user.password
+        });
         return axios.post('oauth/token', params, {
             auth: {
                 username: 'cid',
