@@ -101,15 +101,6 @@
     height: 100%;
     width: 100%;
 }
-// 修改密码页面的输入框
-.gray-inner{
-  .el-input__inner {
-    background: $background;
-    &:focus {
-      background: #ffffff;
-    }
-  }
-}
 .el-form{
     .el-form-item{
         &.w50{ // 并排的表单

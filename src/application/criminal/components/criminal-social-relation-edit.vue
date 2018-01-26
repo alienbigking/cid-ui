@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       form: {
-        selectedPoliticalStatus: null,
+        selectedPoliticalStatus: {},
         criminalSocialRelation: _.cloneDeep(
           this.$store.state.criminal.criminalSocialRelation
         )

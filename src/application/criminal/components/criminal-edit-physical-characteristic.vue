@@ -72,9 +72,7 @@ export default {
         selectedFaceType: {},
         selectedBloodType: {},
         selectedAccent: {},
-        criminalPhysicalCharacteristic: _.cloneDeep(
-          this.$store.state.criminal.criminalPhysicalCharacteristic
-        )
+        criminalPhysicalCharacteristic: {}
       },
       rules: {
         "criminalPhysicalCharacteristic.height": [
@@ -191,7 +189,7 @@ export default {
     ]),
     render() {
       this.getCriminalPhysicalCharacteristic(this.$route.params.id).then(() => {
-        this.$refs.form.resetFields();
+        this.$refs.form.clearValidate();
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.criminal.criminalPhysicalCharacteristic
         );

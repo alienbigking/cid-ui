@@ -101,11 +101,11 @@ export default {
   data() {
     return {
       form: {
-        selectedArrestOrgan: null,
-        selectedProsecutionOrgan: null,
-        selectedFirstTrialOrgan: null,
-        selectedFinalTrialOrgan: null,
-        selectedDecisionOrgan: null,
+        selectedArrestOrgan: {},
+        selectedProsecutionOrgan: {},
+        selectedFirstTrialOrgan: {},
+        selectedFinalTrialOrgan: {},
+        selectedDecisionOrgan: {},
         startEndTime: [],
         criminalRecord: _.cloneDeep(
           this.$store.state.criminal.criminalRecord

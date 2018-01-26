@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       form: {
-        selectedOutInPrisonReasons: null,
+        selectedOutInPrisonReasons: {},
         criminalOutInPrison: _.cloneDeep(
           this.$store.state.criminal.criminalOutInPrison
         )
