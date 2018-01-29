@@ -1,21 +1,42 @@
 <template>
-    <div class="detail-card">
-        <div class="card-title">新增租户</div>
-        <el-form class="formPadding" :model="tenant" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="编号" prop="code">
-                <el-input v-model="tenant.code"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="名称" prop="name">
-                <el-input v-model="tenant.name"></el-input>
-            </el-form-item>
-            <el-form-item class="w100 textarea" label="描述" prop="description">
-                <el-input :maxlength="255" v-model="tenant.description" type="textarea" resize="none"></el-input>
-            </el-form-item>
-            <div class="el-form-item-div">
-                <el-button class="button-addInNew" :loading="saving" @click="onSubmit(tenant)">新 增</el-button>
-            </div>
-        </el-form>
-    </div>
+  <div class="detail-card">
+    <div class="card-title">新增租户</div>
+    <el-form
+      class="formPadding"
+      :model="tenant"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w50"
+        label="编号"
+        prop="code">
+        <el-input v-model="tenant.code"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
+        label="名称"
+        prop="name">
+        <el-input v-model="tenant.name"/>
+      </el-form-item>
+      <el-form-item
+        class="w100 textarea"
+        label="描述"
+        prop="description">
+        <el-input
+          :maxlength="255"
+          v-model="tenant.description"
+          type="textarea"
+          resize="none"/>
+      </el-form-item>
+      <div class="el-form-item-div">
+        <el-button
+          class="button-addInNew"
+          :loading="saving"
+          @click="onSubmit(tenant)">新 增</el-button>
+      </div>
+    </el-form>
+  </div>
 </template>
 
 <script>

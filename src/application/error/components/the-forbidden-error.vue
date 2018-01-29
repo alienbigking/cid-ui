@@ -1,15 +1,18 @@
 <template>
   <el-container class="flex-column">
-    <the-error-header></the-error-header>
+    <the-error-header/>
     <el-main class="error-box">
       <div class="error-left">
-        <div class="error-number"></div>
+        <div class="error-number"/>
         <p class="error-reason">对不起，您无权访问该页面！</p>
-        <el-button type="text" class="error-button" @click="onHome">回到主页 >></el-button>
+        <el-button
+          type="text"
+          class="error-button"
+          @click="onHome">回到主页 >></el-button>
       </div>
-      <div class="error-right"></div>
+      <div class="error-right"/>
     </el-main>
-    <the-error-footer></the-error-footer>
+    <the-error-footer/>
   </el-container>
 </template>
 

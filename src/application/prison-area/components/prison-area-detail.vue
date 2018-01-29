@@ -1,31 +1,31 @@
 <template>
   <div class="detail-card">
-      <h3 class="card-title">{{prisonArea.name}} - 明细</h3>
-      <div class="card-body">
-          <el-row>
-              <el-col :span="12">
-                  <label>上级监区：</label><span>{{prisonArea.parentPrisonAreaName}}</span>
-              </el-col>
-              <el-col :span="12">
-                  <label>编号：</label><span> {{prisonArea.code}}</span>
-              </el-col>
-          </el-row>
-          <el-row>
-              <el-col :span="12">
-                  <label>创建时间：</label><span>{{prisonArea.createdTime | moment}}</span>
-              </el-col>
-              <el-col :span="12">
-                  <label>最后更新时间：</label><span>{{prisonArea.lastUpdatedTime | moment}}</span>
-              </el-col>
-          </el-row>
+    <h3 class="card-title">{{ prisonArea.name }} - 明细</h3>
+    <div class="card-body">
+      <el-row>
+        <el-col :span="12">
+          <label>上级监区：</label><span>{{ prisonArea.parentPrisonAreaName }}</span>
+        </el-col>
+        <el-col :span="12">
+          <label>编号：</label><span> {{ prisonArea.code }}</span>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <label>创建时间：</label><span>{{ prisonArea.createdTime | moment }}</span>
+        </el-col>
+        <el-col :span="12">
+          <label>最后更新时间：</label><span>{{ prisonArea.lastUpdatedTime | moment }}</span>
+        </el-col>
+      </el-row>
+    </div>
+    <div class="card-body">
+      <label>监区描述：</label>
+      <div class="detail">
+        {{ prisonArea.description }}
       </div>
-      <div class="card-body">
-          <label>监区描述：</label>
-          <div class="detail">
-              {{prisonArea.description}}
-          </div>
-          <el-button @click="onBack">返 回</el-button>
-      </div>
+      <el-button @click="onBack">返 回</el-button>
+    </div>
   </div>
 </template>
 <script>

@@ -1,8 +1,10 @@
 <template>
   <el-header style="height: 47px; position: fixed; z-index: 100;">
     <div class="header-left">
-        <i class="iconfont icon-RDS" style="font-size: 22px;"></i>
-        <span class="fs-16">罪犯数据库</span>
+      <i
+        class="iconfont icon-RDS"
+        style="font-size: 22px;"/>
+      <span class="fs-16">罪犯数据库</span>
     </div>
     <div class="header-right">您好，请登录！</div>
   </el-header>

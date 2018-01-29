@@ -1,13 +1,19 @@
 <template>
-    <div class="detail-card">
-      <el-tabs v-model="activeName">
-        <el-tab-pane v-for="(tab, index) in tabs" :key="index" :label="tab.name" :name="tab.component">
-          <keep-alive>
-              <component v-if='activeName == tab.component' :is="activeName"></component>
-          </keep-alive>
-        </el-tab-pane>
-      </el-tabs>
-    </div>
+  <div class="detail-card">
+    <el-tabs v-model="activeName">
+      <el-tab-pane
+        v-for="(tab, index) in tabs"
+        :key="index"
+        :label="tab.name"
+        :name="tab.component">
+        <keep-alive>
+          <component
+            v-if='activeName == tab.component'
+            :is="activeName"/>
+        </keep-alive>
+      </el-tab-pane>
+    </el-tabs>
+  </div>
 </template>
 <script>
 import CriminalEditBasicInformation from "./criminal-edit-basic-information";

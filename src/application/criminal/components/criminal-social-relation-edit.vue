@@ -1,29 +1,68 @@
 <template>
   <div v-loading="loading">
-    <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
-      <el-form-item class="w25" label="称谓" prop="criminalSocialRelation.appellation">
-        <el-input v-model="form.criminalSocialRelation.appellation"></el-input>
+    <el-form
+      class="form-criminal"
+      :model="form"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w25"
+        label="称谓"
+        prop="criminalSocialRelation.appellation">
+        <el-input
+        v-model="form.criminalSocialRelation.appellation"/>
       </el-form-item>
-      <el-form-item class="w25" label="姓名" prop="criminalSocialRelation.name">
-        <el-input v-model="form.criminalSocialRelation.name"></el-input>
+      <el-form-item
+        class="w25"
+        label="姓名"
+        prop="criminalSocialRelation.name">
+        <el-input v-model="form.criminalSocialRelation.name"/>
       </el-form-item>
-      <el-form-item class="w25" label="年龄" prop="criminalSocialRelation.age">
-        <el-input v-model="form.criminalSocialRelation.age" type="number"></el-input>
+      <el-form-item
+        class="w25"
+        label="年龄"
+        prop="criminalSocialRelation.age">
+        <el-input
+          v-model="form.criminalSocialRelation.age"
+          type="number"/>
       </el-form-item>
-      <el-form-item class="w25" label="公司" prop="criminalSocialRelation.company">
-        <el-input v-model="form.criminalSocialRelation.company"></el-input>
+      <el-form-item
+        class="w25"
+        label="公司"
+        prop="criminalSocialRelation.company">
+        <el-input v-model="form.criminalSocialRelation.company"/>
       </el-form-item>
-      <el-form-item class="w25" label="职业" prop="criminalSocialRelation.occupation">
-        <el-input v-model="form.criminalSocialRelation.occupation"></el-input>
+      <el-form-item
+        class="w25"
+        label="职业"
+        prop="criminalSocialRelation.occupation">
+        <el-input v-model="form.criminalSocialRelation.occupation"/>
       </el-form-item>
-      <el-form-item class="w25" label="政治面貌" prop="criminalSocialRelation.selectedPoliticalStatus">
-        <el-select v-model="form.selectedPoliticalStatus" value-key="code" :loading="initializing" clearable>
-          <el-option v-for="(item, index) in allPoliticalStatuses" :key="index" :label="item.name" :value="item"></el-option>
+      <el-form-item
+        class="w25"
+        label="政治面貌"
+        prop="criminalSocialRelation.selectedPoliticalStatus">
+        <el-select
+          v-model="form.selectedPoliticalStatus"
+          value-key="code"
+          :loading="initializing"
+          clearable>
+          <el-option
+            v-for="(item, index) in allPoliticalStatuses"
+            :key="index"
+            :label="item.name"
+            :value="item"/>
         </el-select>
       </el-form-item>
       <div class="el-form-item el-form-item-div">
-        <el-button class="button-cancel" @click="onClose">返 回</el-button>
-        <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
+        <el-button
+          class="button-cancel"
+          @click="onClose">返 回</el-button>
+        <el-button
+          class="button-confirm"
+          :loading="saving"
+          @click="onSave">保 存</el-button>
       </div>
     </el-form>
   </div>
@@ -37,10 +76,12 @@ import _ from "lodash";
 export default {
     props: {
         criminalSocialRelationId: {
-            type: String
+            type: String,
+            default: ""
         },
         editDialogVisible: {
-            type: Boolean
+            type: Boolean,
+            default: false
         }
     },
     data() {

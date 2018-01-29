@@ -2,14 +2,28 @@
   <div v-loading="loading">
     <div class="user-role-title user-checkbox-group">
       <span class="user-name">十一监区</span>
-      <el-checkbox class="all-select" v-model="checkAll" @change="handleCheckAllChange">全选</el-checkbox>
+      <el-checkbox
+        class="all-select"
+        v-model="checkAll"
+        @change="handleCheckAllChange">全选</el-checkbox>
     </div>
-    <el-checkbox-group v-model="checkedRoles" @change="handleCheckedRolesChange" class="user-checkbox-group">
-      <el-checkbox v-for="(item, index) in roles" :label="item.id" :key="index">{{item.name}}</el-checkbox>
+    <el-checkbox-group
+      v-model="checkedRoles"
+      @change="handleCheckedRolesChange"
+      class="user-checkbox-group">
+      <el-checkbox
+        v-for="(item, index) in roles"
+        :label="item.id"
+        :key="index">{{ item.name }}</el-checkbox>
     </el-checkbox-group>
     <div class="user-role-button">
-      <el-button class="button-cancel" @click="onClose">取 消</el-button>
-      <el-button class="button-confirm" @click="onSave" :loading="saving">确 认</el-button>
+      <el-button
+        class="button-cancel"
+        @click="onClose">取 消</el-button>
+      <el-button
+        class="button-confirm"
+        @click="onSave"
+        :loading="saving">确 认</el-button>
     </div>
   </div>
 </template>
@@ -21,11 +35,12 @@ import _ from "lodash";
 export default {
   props: {
     editDialogVisible: {
-      type: Boolean
+      type: Boolean,
+      default: false
     },
     userId: {
-      default: '',
-      type: String
+      type: String,
+      default: ""
     }
   },
   data() {

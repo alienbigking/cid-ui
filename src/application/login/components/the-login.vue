@@ -1,28 +1,45 @@
 <template>
   <el-container class="flex-column">
-    <the-login-header></the-login-header>
+    <the-login-header/>
     <el-main class="login-box">
       <div>
-          <i class="iconfont icon-RDS"></i>
-          <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-              <el-form-item prop="username">
-                  <el-input type="text" placeholder="请输入用户名" v-model="user.username" @keyup.enter.native="onSubmit">
-                      <span slot="prefix" class="iconfont icon-people_fill"></span>
-                  </el-input>
-              </el-form-item>
-              <el-form-item prop="password">
-                  <el-input type="password" placeholder="请输入密码" v-model="user.password"  @keyup.enter.native="onSubmit">
-                      <span slot="prefix" class="iconfont icon-lock_fill"></span>
-                  </el-input>
-              </el-form-item>
-              <div class="form-input-submit">
-                <el-button @click="onSubmit">登 录</el-button>
-              </div>
-          </el-form>
+        <i class="iconfont icon-RDS"/>
+        <el-form
+          class="formPadding"
+          :model="user"
+          :rules="rules"
+          ref="form"
+          label-position="top">
+          <el-form-item prop="username">
+            <el-input
+              type="text"
+              placeholder="请输入用户名"
+              v-model="user.username"
+              @keyup.enter.native="onSubmit">
+              <span
+                slot="prefix"
+                class="iconfont icon-people_fill"/>
+            </el-input>
+          </el-form-item>
+          <el-form-item prop="password">
+            <el-input
+              type="password"
+              placeholder="请输入密码"
+              v-model="user.password"
+              @keyup.enter.native="onSubmit">
+              <span
+                slot="prefix"
+                class="iconfont icon-lock_fill"/>
+            </el-input>
+          </el-form-item>
+          <div class="form-input-submit">
+            <el-button @click="onSubmit">登 录</el-button>
+          </div>
+        </el-form>
       </div>
     </el-main>
-    <the-login-footer></the-login-footer>
-</el-container>
+    <the-login-footer/>
+  </el-container>
 </template>
 <script>
 import TheLoginFooter from "./the-login-footer";

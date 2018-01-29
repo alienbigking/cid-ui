@@ -1,62 +1,151 @@
 <template>
-<div>
-  <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
-    <div class="form-box">
-      <el-form-item class="w25" label="身高(m)" prop="criminalPhysicalCharacteristic.height">
-        <el-input v-model.number="form.criminalPhysicalCharacteristic.height"></el-input>
-      </el-form-item>
-      <el-form-item class="w25" label="体重(kg)" prop="criminalPhysicalCharacteristic.weight">
-        <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"></el-input>
-      </el-form-item>
-      <el-form-item class="w25" label="体型" prop="selectedSomatotype">
-        <el-select v-model="form.selectedSomatotype" value-key="code" :loading="initializing" clearable placeholder="请选择体型">
-          <el-option v-for="(item, index) in allSomatotypes" :key="index" :label="item.name" :value="item"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item class="w25" label="脸型" prop="selectedFaceType">
-        <el-select v-model="form.selectedFaceType" value-key="code" :loading="initializing" clearable placeholder="请选择脸型">
-          <el-option v-for="(item, index) in allFaceTypes" :key="index" :label="item.name" :value="item"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item class="w25" label="血型" prop="selectedBloodType">
-        <el-select v-model="form.selectedBloodType" value-key="code" :loading="initializing" clearable placeholder="请选择血型">
-          <el-option v-for="(item, index) in allBloodTypes" :key="index" :label="item.name" :value="item"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item class="w25" label="口音" prop="selectedAccent">
-        <el-select v-model="form.selectedAccent" value-key="code" :loading="initializing" clearable placeholder="请选择口音">
-          <el-option v-for="(item, index) in allAccents" :key="index" :label="item.name" :value="item"></el-option>
-        </el-select>
-      </el-form-item>
-      <el-form-item class="w25" label="足长(cm)" prop="criminalPhysicalCharacteristic.footLength">
-        <el-input v-model.number="form.criminalPhysicalCharacteristic.footLength"></el-input>
-      </el-form-item>
-      <el-form-item class="w25" label="鞋号" prop="criminalPhysicalCharacteristic.shoeSize">
-        <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"></el-input>
-      </el-form-item>
-      <el-form-item class="w100" prop="criminalPhysicalCharacteristic.otherFeatures">
-        <el-button size="mini" class="mini" @click="addPhysicalCharacteristic">新增</el-button>
-        <el-table ref="gk-table" class="table40" :data="form.criminalPhysicalCharacteristic.otherFeatures" header-row-class-name="tableHeader40">
-          <el-table-column align="center" label="其它特征" prop="description" :show-overflow-tooltip="true">
-            <template slot-scope="scope">
-              <el-form-item :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'" :key="scope.row.key" :rules="{ required: true, message: '不能为空'}">
-                <el-input v-model="scope.row.description"></el-input>
-              </el-form-item>
-            </template>
-          </el-table-column>
-          <el-table-column align="center" label="操作" width="200px">
-            <template slot-scope="scope">
-              <el-button type="text" @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-      </el-form-item>
-      <div class="el-form-item-div">
-          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
+  <div>
+    <el-form
+      class="form-criminal"
+      :model="form"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <div class="form-box">
+        <el-form-item
+          class="w25"
+          label="身高(m)"
+          prop="criminalPhysicalCharacteristic.height">
+          <el-input v-model.number="form.criminalPhysicalCharacteristic.height"/>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="体重(kg)"
+          prop="criminalPhysicalCharacteristic.weight">
+          <el-input v-model.number="form.criminalPhysicalCharacteristic.weight"/>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="体型"
+          prop="selectedSomatotype">
+          <el-select
+            v-model="form.selectedSomatotype"
+            value-key="code"
+            :loading="initializing"
+            clearable
+            placeholder="请选择体型">
+            <el-option
+              v-for="(item, index) in allSomatotypes"
+              :key="index"
+              :label="item.name"
+              :value="item"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="脸型"
+          prop="selectedFaceType">
+          <el-select
+            v-model="form.selectedFaceType"
+            value-key="code"
+            :loading="initializing"
+            clearable
+            placeholder="请选择脸型">
+            <el-option
+              v-for="(item, index) in allFaceTypes"
+              :key="index"
+              :label="item.name"
+              :value="item"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="血型"
+          prop="selectedBloodType">
+          <el-select
+            v-model="form.selectedBloodType"
+            value-key="code"
+            :loading="initializing"
+            clearable
+            placeholder="请选择血型">
+            <el-option
+              v-for="(item, index) in allBloodTypes"
+              :key="index"
+              :label="item.name"
+              :value="item"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="口音"
+          prop="selectedAccent">
+          <el-select
+            v-model="form.selectedAccent"
+            value-key="code"
+            :loading="initializing"
+            clearable
+            placeholder="请选择口音">
+            <el-option
+              v-for="(item, index) in allAccents"
+              :key="index"
+              :label="item.name"
+              :value="item"/>
+          </el-select>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="足长(cm)"
+          prop="criminalPhysicalCharacteristic.footLength">
+          <el-input v-model.number="form.criminalPhysicalCharacteristic.footLength"/>
+        </el-form-item>
+        <el-form-item
+          class="w25"
+          label="鞋号"
+          prop="criminalPhysicalCharacteristic.shoeSize">
+          <el-input v-model.number="form.criminalPhysicalCharacteristic.shoeSize"/>
+        </el-form-item>
+        <el-form-item
+          class="w100"
+          prop="criminalPhysicalCharacteristic.otherFeatures">
+          <el-button
+            size="mini"
+            class="mini"
+            @click="addPhysicalCharacteristic">新增</el-button>
+          <el-table
+            ref="gk-table"
+            class="table40"
+            :data="form.criminalPhysicalCharacteristic.otherFeatures"
+            header-row-class-name="tableHeader40">
+            <el-table-column
+              align="center"
+              label="其它特征"
+              prop="description"
+              :show-overflow-tooltip="true">
+              <template slot-scope="scope">
+                <el-form-item
+                  :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'"
+                  :key="scope.row.key"
+                  :rules="{ required: true, message: '不能为空'}">
+                  <el-input v-model="scope.row.description"/>
+                </el-form-item>
+              </template>
+            </el-table-column>
+            <el-table-column
+              align="center"
+              label="操作"
+              width="200px">
+              <template slot-scope="scope">
+                <el-button
+                  type="text"
+                  @click.prevent="removePhysicalCharacteristic(scope.row)">删除</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-form-item>
+        <div class="el-form-item-div">
+          <el-button
+            class="button-confirm"
+            :loading="saving"
+            @click="onSave">保 存</el-button>
+        </div>
       </div>
-    </div>
-  </el-form>
-</div>
+    </el-form>
+  </div>
 </template>
 
 <script>

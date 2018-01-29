@@ -1,27 +1,57 @@
 <template>
-  <!-- <div> -->
-    <el-form class="form-criminal" v-loading='loading' :model="criminalResume" :rules="rules" ref="form" label-position="top">
-        <el-form-item class="w-px180" label="开始日期" prop="startDate">
-          <el-date-picker v-model="criminalResume.startDate" type="date" :picker-options="pickerBeginDateBefore"></el-date-picker>
-        </el-form-item>
-        <el-form-item class="w-px180 margin-left40" label="结束日期" prop="endDate">
-          <el-date-picker v-model="criminalResume.endDate" type="date" :picker-options="pickerBeginDateAfter"></el-date-picker>
-        </el-form-item>
-        <el-form-item class="w-px180 margin-left40" label="公司" prop="company">
-          <el-input v-model="criminalResume.company"></el-input>
-        </el-form-item>
-        <el-form-item class="w-px180" label="职业" prop="occupation">
-          <el-input v-model="criminalResume.occupation"></el-input>
-        </el-form-item>
-        <el-form-item class="w-px180 margin-left40" label="职位" prop="duty">
-          <el-input v-model="criminalResume.duty"></el-input>
-        </el-form-item>
-        <div class="el-form-item el-form-item-div">
-          <el-button class="button-cancel" @click="onClose">返 回</el-button>
-          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
-        </div>
-    </el-form>
-  <!-- </div> -->
+  <el-form
+    class="form-criminal"
+    v-loading='loading'
+    :model="criminalResume"
+    :rules="rules"
+    ef="form"
+    label-position="top">
+    <el-form-item
+      class="w-px180"
+      label="开始日期"
+      prop="startDate">
+      <el-date-picker
+        v-model="criminalResume.startDate"
+        type="date"
+        :picker-options="pickerBeginDateBefore"/>
+    </el-form-item>
+    <el-form-item
+      class="w-px180 margin-left40"
+      label="结束日期"
+      prop="endDate">
+      <el-date-picker
+        v-model="criminalResume.endDate"
+        type="date"
+        :picker-options="pickerBeginDateAfter"/>
+    </el-form-item>
+    <el-form-item
+      class="w-px180 margin-left40"
+      label="公司"
+      prop="company">
+      <el-input v-model="criminalResume.company"/>
+    </el-form-item>
+    <el-form-item
+      class="w-px180"
+      label="职业"
+      prop="occupation">
+      <el-input v-model="criminalResume.occupation"/>
+    </el-form-item>
+    <el-form-item
+      class="w-px180 margin-left40"
+      label="职位"
+      prop="duty">
+      <el-input v-model="criminalResume.duty"/>
+    </el-form-item>
+    <div class="el-form-item el-form-item-div">
+      <el-button
+        class="button-cancel"
+        @click="onClose">返 回</el-button>
+      <el-button
+        class="button-confirm"
+        :loading="saving"
+        @click="onSave">保 存</el-button>
+    </div>
+  </el-form>
 </template>
 
 <script>
@@ -31,10 +61,12 @@ import _ from "lodash";
 export default {
   props: {
     criminalResumeId: {
-      type: String
+      type: String,
+      default: ""
     },
     editDialogVisible: {
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
   data() {
