@@ -1,27 +1,56 @@
 <template>
-    <div class="detail-card">
-        <h3 class="card-title">新增用户</h3>
-        <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-            <el-form-item class="w50" label="账号" prop="username">
-                <el-input v-model="user.username"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="名称" prop="name">
-                <el-input v-model="user.name"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="密码" prop="password">
-                <el-input v-model="user.password" type="password"></el-input>
-            </el-form-item>
-            <el-form-item class="w50" label="状态" prop="status">
-            <el-select v-model="user.status"   clearable placeholder="请选择使用状态">
-                <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
-            </el-select>
-            </el-form-item>
-            <div class="el-form-item-div">
-                <el-button @click="onBack">返 回</el-button>
-                <el-button class="button-addInNew" :loading="saving" @click="onSubmit(user)">新 增</el-button>
-            </div>
-        </el-form>
-    </div>
+  <div class="detail-card">
+    <h3 class="card-title">新增用户</h3>
+    <el-form
+      class="formPadding"
+      :model="user"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w50"
+        label="账号"
+        prop="username">
+        <el-input v-model="user.username"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
+        label="名称"
+        prop="name">
+        <el-input v-model="user.name"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
+        label="密码"
+        prop="password">
+        <el-input
+          v-model="user.password"
+          type="password"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
+        label="状态"
+        prop="status">
+        <el-select
+          v-model="user.status"
+          clearable
+          placeholder="请选择使用状态">
+          <el-option
+            v-for="item in userStatuses"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"/>
+        </el-select>
+      </el-form-item>
+      <div class="el-form-item-div">
+        <el-button @click="onBack">返 回</el-button>
+        <el-button
+          class="button-addInNew"
+          :loading="saving"
+          @click="onSubmit(user)">新 增</el-button>
+      </div>
+    </el-form>
+  </div>
 </template>
 
 <script>

@@ -1,38 +1,86 @@
 <template>
   <div class="container">
     <div class="filters">
-      <el-button class="button-addInEdit" @click="onNew">新 增</el-button>
+      <el-button
+        class="button-addInEdit"
+        @click="onNew">新 增</el-button>
     </div>
     <div class="list-box">
       <template>
-        <el-table class="table40" :data="allCriminalRecords" v-loading="loading" header-row-class-name="tableHeader40">
-          <el-table-column  prop="decisionAccusation" label="罪名" width="80px"> </el-table-column>
-          <el-table-column  prop="prosecutionOrganName" label="起诉机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column  prop="firstTrialOrganName" label="一审机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column  prop="finalTrialOrganName" label="终审机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column  prop="decisionOrganName" label="判决机关" :show-overflow-tooltip="true"> </el-table-column>
-          <el-table-column  prop="decisionDate" label="判决日期"> </el-table-column>
-          <el-table-column  prop="decisionPrisonTermStartDate" label="刑期开始日期"> </el-table-column>
-          <el-table-column  prop="decisionPrisonTermEndDate" label="刑期结束日期"> </el-table-column>
-          <el-table-column  label="操作" width="141px">
+        <el-table
+          class="table40"
+          :data="allCriminalRecords"
+          v-loading="loading"
+          header-row-class-name="tableHeader40">
+          <el-table-column
+            prop="decisionAccusation"
+            label="罪名"
+            width="80px"/>
+          <el-table-column
+            prop="prosecutionOrganName"
+            label="起诉机关"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="firstTrialOrganName"
+            label="一审机关"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="finalTrialOrganName"
+            label="终审机关"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="decisionOrganName"
+            label="判决机关"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="decisionDate"
+            label="判决日期"/>
+          <el-table-column
+            prop="decisionPrisonTermStartDate"
+            label="刑期开始日期"/>
+          <el-table-column
+            prop="decisionPrisonTermEndDate"
+            label="刑期结束日期"/>
+          <el-table-column
+            label="操作"
+            width="141px">
             <template slot-scope="scope">
-              <el-button type="text" @click="onEdit(scope.row.id)">编辑</el-button>
-              <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
+              <el-button
+                type="text"
+                @click="onEdit(scope.row.id)">编辑</el-button>
+              <el-button
+                type="text"
+                @click="onDelete(scope.row)">删除</el-button>
             </template>
           </el-table-column>
         </el-table>
       </template>
     </div>
-    <el-dialog title="犯罪记录" class="dialog" width="950px" :visible.sync="editDialogVisible">
-      <criminal-record-edit :criminalRecordId="criminalRecordId" :editDialogVisible="editDialogVisible" @on-close="editDialogVisible = false"></criminal-record-edit>
+    <el-dialog
+      title="犯罪记录"
+      class="dialog"
+      width="950px"
+      :visible.sync="editDialogVisible">
+      <criminal-record-edit
+        :criminal-record-id="criminalRecordId"
+        :edit-dialog-visible="editDialogVisible"
+        @on-close="editDialogVisible = false"/>
     </el-dialog>
-    <el-dialog class="deleteDialog" width="400px" :visible.sync="deleteDialogVisible">
-        <i class="iconfont icon-jinggao"></i>
-        <span>确认删除吗</span>
-        <template slot="footer">
-            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-        </template>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :visible.sync="deleteDialogVisible">
+      <i class="iconfont icon-jinggao"/>
+      <span>确认删除吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="deleting"
+          @click="onDeleteConfirm">确 定</el-button>
+      </template>
     </el-dialog>
   </div>
 </template>

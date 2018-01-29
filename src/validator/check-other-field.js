@@ -4,8 +4,6 @@ function checkOtherField(rule, value, callback) {
         rule.refs[rule.form].validateField(rule.otherField);
     }
     callback();
-};
+}
 
-export {
-    checkOtherField
-};
+export { checkOtherField };

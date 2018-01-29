@@ -1,26 +1,51 @@
 <template>
-    <div class="detail-card">
-      <h3 class="card-title">修改密码</h3>
-      <el-form class="w340" :model="userPassword" :rules="rules" ref="form" label-position="top">
-          <el-form-item prop="oldPassword">
-              <el-input type="password" class="gray-inner" placeholder="原始密码" v-model="userPassword.oldPassword" />
-          </el-form-item>
-          <el-form-item prop="newPassword">
-              <el-input class="gray-inner" :type="showNewPassword?'text':'password'" placeholder="请输入新密码" v-model="userPassword.newPassword">
-                  <span slot="suffix" class="iconfont" :class="showNewPassword?'icon-kejian':'icon-bukejian'" @click="onSwitchShowNewPassword"></span>
-              </el-input>
-          </el-form-item>
-          <el-form-item prop="checkPassword">
-              <el-input class="gray-inner" :type="showCheckPassword?'text':'password'" placeholder="请再次输入新密码" v-model="userPassword.checkPassword">
-                <span slot="suffix" class="iconfont" :class="showCheckPassword?'icon-kejian':'icon-bukejian'" @click="onSwitchShowCheckPassword"></span>
-              </el-input>
-          </el-form-item>
-          <div class="form-btn">
-              <el-button @click="onBack">返 回</el-button>
-              <el-button class="button-confirm" :loading="saving" @click="onSubmit">确 认</el-button>
-          </div>
-      </el-form>
-    </div>
+  <div class="detail-card">
+    <h3 class="card-title">修改密码</h3>
+    <el-form
+      class="w340"
+      :model="userPassword"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item prop="oldPassword">
+        <el-input
+          type="password"
+          placeholder="原始密码"
+          v-model="userPassword.oldPassword" />
+      </el-form-item>
+      <el-form-item prop="newPassword">
+        <el-input
+          :type="showNewPassword?'text':'password'"
+          placeholder="请输入新密码"
+          v-model="userPassword.newPassword">
+          <span
+            slot="suffix"
+            class="iconfont"
+            :class="showNewPassword?'icon-kejian':'icon-bukejian'"
+            @click="onSwitchShowNewPassword"/>
+        </el-input>
+      </el-form-item>
+      <el-form-item prop="checkPassword">
+        <el-input
+          :type="showCheckPassword?'text':'password'"
+          placeholder="请再次输入新密码"
+          v-model="userPassword.checkPassword">
+          <span
+            slot="suffix"
+            class="iconfont"
+            :class="showCheckPassword?'icon-kejian':'icon-bukejian'"
+            @click="onSwitchShowCheckPassword"/>
+        </el-input>
+      </el-form-item>
+      <div class="form-btn">
+        <el-button @click="onBack">返 回</el-button>
+        <el-button
+          class="button-confirm"
+          :loading="saving"
+          @click="onSubmit">确 认</el-button>
+      </div>
+    </el-form>
+  </div>
 </template>
 
 <script>

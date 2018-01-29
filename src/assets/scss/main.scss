@@ -77,6 +77,8 @@
     border: $border;
     border-radius:5px;
     background:#fff;
+    min-width: 600px;
+    overflow-x: auto;
     .um-title{
         display: block;
         padding: $padding-default;
@@ -93,15 +95,6 @@
 .box{
     height: 100%;
     width: 100%;
-}
-// 修改密码页面的输入框
-.gray-inner{
-  .el-input__inner {
-    background: $background;
-    &:focus {
-      background: #ffffff;
-    }
-  }
 }
 .el-form{
     .el-form-item{
@@ -315,6 +308,9 @@
     .cell {
       button + button {
         margin-left: 7px; // 需小于20px
+      }
+      button{
+        vertical-align: baseline;
       }
     }
 }

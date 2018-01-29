@@ -1,60 +1,110 @@
 <template>
-    <div class="container">
-        <div class="card">
-            <span class="um-title">查询部门</span>
-            <div class="filters">
-                <el-input placeholder="部门名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                <el-select v-model="filter.parentDepartmentId" clearable :loading="gettingPrisonDepartments">
-                    <el-option v-for="(item, index) in allPrisonDepartments" :key="index" :label="item.name" :value="item.id"></el-option>
-                </el-select>
-                <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-                <el-button class="button-addInList" @click="onNew">新增</el-button>
-            </div>
-            <template>
-                <el-table class="my_table" :data="pagedPrisonDepartments.content" v-loading="loading" border header-row-class-name="tableHeader">
-                  <el-table-column prop="name" label="部门名称" :show-overflow-tooltip="true">
-                  </el-table-column>
-                  <el-table-column prop="parentDepartmentName" label="上级部门名称" :show-overflow-tooltip="true">
-                  </el-table-column>
-                  <el-table-column prop="createdTime" label="创建时间" sortable>
-                    <template slot-scope="scope">
-                      {{scope.row.createdTime | moment}}
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="lastUpdatedTime" label="最后更新时间" sortable>
-                    <template slot-scope="scope">
-                      {{scope.row.lastUpdatedTime | moment}}
-                    </template>
-                  </el-table-column>
-                  <el-table-column align="center" prop="opretion" label="操作" width="141px">
-                    <template slot-scope="scope">
-                      <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
-                      <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
-                      <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-                <div class="pagination-box">
-                    <span>共{{ pagedPrisonDepartments.totalElements }}条信息</span>
-                    <el-pagination
-                      @current-change="onPageChange"
-                      :current-page.sync="currentPage"
-                      :page-size="pagination.size"
-                      layout="prev, pager, next, jumper"
-                      :total="pagedPrisonDepartments.totalElements">
-                    </el-pagination>
-                </div>
+  <div class="container">
+    <div class="card">
+      <span class="um-title">查询部门</span>
+      <div class="filters">
+        <el-input
+          placeholder="部门名称"
+          v-model="filter.name"
+          @keyup.enter.native="onSearch"/>
+        <el-select
+          v-model="filter.parentDepartmentId"
+          clearable
+          :loading="gettingPrisonDepartments">
+          <el-option
+            v-for="(item, index) in allPrisonDepartments"
+            :key="index"
+            :label="item.name"
+            :value="item.id"/>
+        </el-select>
+        <el-button
+          class="button-search"
+          :loading="searching"
+          @click="onSearch">查 询</el-button>
+        <el-button
+          class="button-addInList"
+          @click="onNew">新增</el-button>
+      </div>
+      <template>
+        <el-table
+          class="my_table"
+          :data="pagedPrisonDepartments.content"
+          v-loading="loading"
+          border
+          header-row-class-name="tableHeader">
+          <el-table-column
+            prop="name"
+            label="部门名称"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="parentDepartmentName"
+            label="上级部门名称"
+            :show-overflow-tooltip="true"/>
+          <el-table-column
+            prop="createdTime"
+            label="创建时间"
+            sortable>
+            <template slot-scope="scope">
+              {{ scope.row.createdTime | moment }}
             </template>
+          </el-table-column>
+          <el-table-column
+            prop="lastUpdatedTime"
+            label="最后更新时间"
+            sortable>
+            <template slot-scope="scope">
+              {{ scope.row.lastUpdatedTime | moment }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="opretion"
+            label="操作"
+            width="141px">
+            <template slot-scope="scope">
+              <el-button
+                type="text"
+                @click="onView(scope.row.id)">查看</el-button>
+              <el-button
+                type="text"
+                @click="onEdit(scope.row.id)">修改</el-button>
+              <el-button
+                type="text"
+                @click="onDelete(scope.row)">删除</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="pagination-box">
+          <span>共{{ pagedPrisonDepartments.totalElements }}条信息</span>
+          <el-pagination
+            @current-change="onPageChange"
+            :current-page.sync="currentPage"
+            :page-size="pagination.size"
+            layout="prev, pager, next, jumper"
+            :total="pagedPrisonDepartments.totalElements"/>
         </div>
-        <el-dialog class="deleteDialog" width="400px" :center="true" :visible.sync="deleteDialogVisible">
-          <i class="iconfont icon-jinggao"></i>
-          <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
-          <span slot="footer" class="dialog-footer">
-            <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
-            <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-          </span>
-        </el-dialog>
+      </template>
     </div>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :center="true"
+      :visible.sync="deleteDialogVisible">
+      <i class="iconfont icon-jinggao"/>
+      <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
+      <span
+        slot="footer"
+        class="dialog-footer">
+        <el-button
+          class="button-cancel"
+          @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="deleting"
+          @click="onDeleteConfirm">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";

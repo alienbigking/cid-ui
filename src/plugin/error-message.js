@@ -11,6 +11,9 @@ function show(error, message) {
 
 export default {
     install: (Vue, Option) => {
-        Vue.prototype.$errorMessage = { show, $message: Vue.prototype.$message };
+        Vue.prototype.$errorMessage = {
+            show,
+            $message: Vue.prototype.$message
+        };
     }
 };

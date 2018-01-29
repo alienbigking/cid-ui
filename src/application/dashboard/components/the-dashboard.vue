@@ -1,7 +1,7 @@
 <template>
-    <div>
-        dashboard
-    </div>
+  <div>
+    dashboard
+  </div>
 </template>
 <script>
 // import { mapActions } from "vuex";

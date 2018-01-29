@@ -1,24 +1,52 @@
 <template>
-    <div class="detail-card">
-        <h3 class="card-title">新增部门</h3>
-        <el-form class="formPadding" :model="prisonDepartment" :rules="rules" ref="form" label-position="top">
-          <el-form-item class="w50" label="名称" prop="name">
-            <el-input v-model="prisonDepartment.name"></el-input>
-          </el-form-item>
-          <el-form-item class="w50" label="上级部门" prop="parentDepartmentId">
-            <el-select v-model="prisonDepartment.parentDepartmentId" clearable :loading="gettingAllPrisonDepartments">
-              <el-option v-for="(item, index) in allPrisonDepartments" :key="index" :label="item.name" :value="item.id"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item class="w100 textarea" label="描述" prop="description">
-            <el-input v-model="prisonDepartment.description" type="textarea" :maxlength="255" resize="none"></el-input>
-          </el-form-item>
-          <div class="el-form-item-div">
-            <el-button @click="onBack">返 回</el-button>
-            <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
-          </div>
-        </el-form>
-    </div>
+  <div class="detail-card">
+    <h3 class="card-title">新增部门</h3>
+    <el-form
+      class="formPadding"
+      :model="prisonDepartment"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w50"
+        label="名称"
+        prop="name">
+        <el-input v-model="prisonDepartment.name"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
+        label="上级部门"
+        prop="parentDepartmentId">
+        <el-select
+          v-model="prisonDepartment.parentDepartmentId"
+          clearable
+          :loading="gettingAllPrisonDepartments">
+          <el-option
+            v-for="(item, index) in allPrisonDepartments"
+            :key="index"
+            :label="item.name"
+            :value="item.id"/>
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        class="w100 textarea"
+        label="描述"
+        prop="description">
+        <el-input
+          v-model="prisonDepartment.description"
+          type="textarea"
+          :maxlength="255"
+          resize="none"/>
+      </el-form-item>
+      <div class="el-form-item-div">
+        <el-button @click="onBack">返 回</el-button>
+        <el-button
+          class="button-addInNew"
+          :loading="saving"
+          @click="onSubmit">新 增</el-button>
+      </div>
+    </el-form>
+  </div>
 </template>
 
 <script>

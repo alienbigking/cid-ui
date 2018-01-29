@@ -1,59 +1,94 @@
 <template>
-    <div class="container">
-        <div class="card">
-            <span class="um-title">查询日志</span>
-            <div class="filters">
-                <el-input placeholder="操作人" v-model="filter.operator" @keyup.enter.native="onSearch"></el-input>
-                <el-select v-model="filter.type" @keyup.enter.native="onSearch" clearable placeholder="请选择类别">
-                    <el-option v-for="item in logTypes" :key="item.value" :label="item.text" :value="item.value"></el-option>
-                </el-select>
-                <el-input placeholder="动作" v-model="filter.action" @keyup.enter.native="onSearch"></el-input>
-                <el-date-picker
-                  v-model="filter.createdStartDate"
-                  type="date" value-format="yyyy-MM-dd"
-                  placeholder="创建开始日期" @keyup.enter.native="onSearch">
-                </el-date-picker>
-                <el-date-picker
-                  v-model="filter.createdEndDate"
-                  type="date" value-format="yyyy-MM-dd"
-                  placeholder="创建结束日期" @keyup.enter.native="onSearch">
-                </el-date-picker>
-                <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-            </div>
-            <template>
-                <el-table class="my_table" :data="pagedLogs.content" v-loading='gettingLogs' border header-row-class-name="tableHeader">
-                  <el-table-column prop="operator" label="操作人"> </el-table-column>
-                  <el-table-column label="类别">
-                    <template slot-scope="scope">
-                      {{scope.row.type | enumText(logTypes)}}
-                    </template>
-                  </el-table-column>
-                  <el-table-column prop="action" label="动作"> </el-table-column>
-                  <el-table-column prop="detail" label="详情" :show-overflow-tooltip="true"> </el-table-column>
-                  <el-table-column label="创建时间">
-                    <template slot-scope="scope">
-                      {{scope.row.createdTime | moment}}
-                    </template>
-                  </el-table-column>
-                  <el-table-column align="center" label="操作" width="141px">
-                    <template slot-scope="scope">
-                      <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-                <div class="pagination-box">
-                    <span>共{{ pagedLogs.totalElements }}条信息</span>
-                    <el-pagination
-                      @current-change="onPageChange"
-                      :current-page.sync="currentPage"
-                      :page-size="pagination.size"
-                      layout="prev, pager, next, jumper"
-                      :total="pagedLogs.totalElements">
-                    </el-pagination>
-                </div>
+  <div class="container">
+    <div class="card">
+      <span class="um-title">查询日志</span>
+      <div class="filters">
+        <el-input
+          placeholder="操作人"
+          v-model="filter.operator"
+          @keyup.enter.native="onSearch"/>
+        <el-select
+          v-model="filter.type"
+          @keyup.enter.native="onSearch"
+          clearable
+          placeholder="请选择类别">
+          <el-option
+            v-for="item in logTypes"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"/>
+        </el-select>
+        <el-input
+          placeholder="动作"
+          v-model="filter.action"
+          @keyup.enter.native="onSearch"/>
+        <el-date-picker
+          v-model="filter.createdStartDate"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="创建开始日期"
+          @keyup.enter.native="onSearch"/>
+        <el-date-picker
+          v-model="filter.createdEndDate"
+          type="date"
+          value-format="yyyy-MM-dd"
+          placeholder="创建结束日期"
+          @keyup.enter.native="onSearch"/>
+        <el-button
+          class="button-search"
+          :loading="searching"
+          @click="onSearch">查 询</el-button>
+      </div>
+      <template>
+        <el-table
+          class="my_table"
+          :data="pagedLogs.content"
+          v-loading='gettingLogs'
+          border
+          header-row-class-name="tableHeader">
+          <el-table-column
+            prop="operator"
+            label="操作人"/>
+          <el-table-column label="类别">
+            <template slot-scope="scope">
+              {{ scope.row.type | enumText(logTypes) }}
             </template>
+          </el-table-column>
+          <el-table-column
+            prop="action"
+            label="动作"/>
+          <el-table-column
+            prop="detail"
+            label="详情"
+            :show-overflow-tooltip="true"/>
+          <el-table-column label="创建时间">
+            <template slot-scope="scope">
+              {{ scope.row.createdTime | moment }}
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            label="操作"
+            width="141px">
+            <template slot-scope="scope">
+              <el-button
+                type="text"
+                @click="onView(scope.row.id)">查看</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+        <div class="pagination-box">
+          <span>共{{ pagedLogs.totalElements }}条信息</span>
+          <el-pagination
+            @current-change="onPageChange"
+            :current-page.sync="currentPage"
+            :page-size="pagination.size"
+            layout="prev, pager, next, jumper"
+            :total="pagedLogs.totalElements"/>
         </div>
+      </template>
     </div>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";

@@ -5,13 +5,13 @@ import jwtDecode from "jwt-decode";
 
 export default {
     getMenus({ commit, rootState }, params) {
-        let tenantType;
+        let tenantPlatform;
         const token = tokenStorage.getToken();
         if (token) {
             const accessToken = jwtDecode(token.access_token);
-            tenantType = accessToken.tenant_type;
+            tenantPlatform = accessToken.tenant_platform;
         }
-        return menuService.getMenus(tenantType).then(menus => {
+        return menuService.getMenus(tenantPlatform).then(menus => {
             commit(types.SET_MENUS, menus);
         });
     },

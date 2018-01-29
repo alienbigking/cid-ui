@@ -1,24 +1,64 @@
 <template>
   <div v-loading='loading'>
-    <el-form class="form-criminal" :model="form" :rules="rules" ref="form" label-position="top">
-        <el-form-item class="w-px180" label="出监日期" prop="criminalOutInPrison.outgoingDate">
-          <el-date-picker v-model="form.criminalOutInPrison.outgoingDate"  value-format="yyyy-MM-dd" type="date"></el-date-picker>
-        </el-form-item>
-        <el-form-item class="w-px180" label="入监日期" prop="criminalOutInPrison.entryDate">
-          <el-date-picker v-model="form.criminalOutInPrison.entryDate" value-format="yyyy-MM-dd" type="date"></el-date-picker>
-        </el-form-item>
-        <el-form-item class="w-px180" label="出监事由" prop="selectedOutInPrisonReasons">
-              <el-select v-model="form.selectedOutInPrisonReasons" value-key="code" :loading="initializing" placeholder="请选择出监事由" clearable>
-                <el-option v-for="(item, index) in allOutInPrisonReasons" :key="index" :label="item.name" :value="item"></el-option>
-              </el-select>
-        </el-form-item>
-        <el-form-item class="w100" label="备注" prop="criminalOutInPrison.remark" >
-          <el-input type="textarea" resize="none" v-model="form.criminalOutInPrison.remark"></el-input>
-        </el-form-item>
-        <div class="el-form-item el-form-item-div">
-          <el-button class="button-cancel" @click="onClose">返 回</el-button>
-          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
-        </div>
+    <el-form
+      class="form-criminal"
+      :model="form"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w-px180"
+        label="出监日期"
+        prop="criminalOutInPrison.outgoingDate">
+        <el-date-picker
+          v-model="form.criminalOutInPrison.outgoingDate"
+          value-format="yyyy-MM-dd"
+          type="date"/>
+      </el-form-item>
+      <el-form-item
+        class="w-px180"
+        label="入监日期"
+        prop="criminalOutInPrison.entryDate">
+        <el-date-picker
+          v-model="form.criminalOutInPrison.entryDate"
+          value-format="yyyy-MM-dd"
+          type="date"/>
+      </el-form-item>
+      <el-form-item
+        class="w-px180"
+        label="出监事由"
+        prop="selectedOutInPrisonReasons">
+        <el-select
+          v-model="form.selectedOutInPrisonReasons"
+          value-key="code"
+          :loading="initializing"
+          placeholder="请选择出监事由"
+          clearable>
+          <el-option
+            v-for="(item, index) in allOutInPrisonReasons"
+            :key="index"
+            :label="item.name"
+            :value="item"/>
+        </el-select>
+      </el-form-item>
+      <el-form-item
+        class="w100"
+        label="备注"
+        prop="criminalOutInPrison.remark" >
+        <el-input
+          type="textarea"
+          resize="none"
+          v-model="form.criminalOutInPrison.remark"/>
+      </el-form-item>
+      <div class="el-form-item el-form-item-div">
+        <el-button
+          class="button-cancel"
+          @click="onClose">返 回</el-button>
+        <el-button
+          class="button-confirm"
+          :loading="saving"
+          @click="onSave">保 存</el-button>
+      </div>
     </el-form>
   </div>
 </template>
@@ -31,16 +71,18 @@ import _ from "lodash";
 export default {
   props: {
     criminalOutInPrisonId: {
-      type: String
+      type: String,
+      default: ""
     },
     editDialogVisible: {
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
   data() {
     return {
       form: {
-        selectedOutInPrisonReasons: null,
+        selectedOutInPrisonReasons: {},
         criminalOutInPrison: _.cloneDeep(
           this.$store.state.criminal.criminalOutInPrison
         )

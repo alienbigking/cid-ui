@@ -1,16 +1,33 @@
 <template>
   <div class="detail-card">
     <h3 class="card-title">新增</h3>
-    <el-form :model="role" :rules="rules" ref="form" class="formPadding" label-position="top">
-      <el-form-item class="w50" label="名称" prop="name" >
-        <el-input v-model="role.name"></el-input>
+    <el-form
+      :model="role"
+      :rules="rules"
+      ref="form"
+      class="formPadding"
+      label-position="top">
+      <el-form-item
+        class="w50"
+        label="名称"
+        prop="name" >
+        <el-input v-model="role.name"/>
       </el-form-item>
-      <el-form-item class="w100 textarea" label="描述" prop="description" >
-        <el-input type="textarea" resize="none" v-model="role.description"></el-input>
+      <el-form-item
+        class="w100 textarea"
+        label="描述"
+        prop="description" >
+        <el-input
+          type="textarea"
+          resize="none"
+          v-model="role.description"/>
       </el-form-item>
       <div class="el-form-item-div">
-          <el-button @click="onBack">返 回</el-button>
-          <el-button class="button-addInNew" :loading="saving" @click="onSubmit">新 增</el-button>
+        <el-button @click="onBack">返 回</el-button>
+        <el-button
+          class="button-addInNew"
+          :loading="saving"
+          @click="onSubmit">新 增</el-button>
       </div>
     </el-form>
   </div>
