@@ -126,6 +126,9 @@
         text-align: right;
     }
 }
+.el-table th, .el-table tr, .el-table td{
+  background-clip: padding-box;
+}
 .el-tabs{
   .el-tabs__header{
     margin: 0;

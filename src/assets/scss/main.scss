@@ -51,18 +51,11 @@
     label + span{
       display: inline-block;
       vertical-align: top;
-      width: calc(100% - 148px);
       min-height: 16px;
-      padding-top: 16px;
-      padding-bottom: 6px;
+      padding: 16px 10px 6px 0;
       font-weight: bold;
       font-size: $font-size;
       line-height: 20px;
-    }
-  }
-  .el-row .el-col-12:first-child{
-    span{
-      width: calc(100% - 198px);
     }
   }
   .detail{

@@ -5,14 +5,24 @@
             <div class="filters">
                 <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
                 <el-input placeholder="租户名称" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
+                <el-select v-model="filter.status"  @keyup.enter.native="onSearch" clearable placeholder="请选择租户状态">
+                  <el-option v-for="item in userStatuses" :key="item.value" :label="item.text" :value="item.value"></el-option>
+                </el-select>
                 <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-                <el-button class="button-addInList" @click="onNew">新增</el-button>
+                <el-button class="button-addInList" @click="onNew">新 增</el-button>
             </div>
             <template>
                 <el-table class="my_table" :data="pagedTenants.content" v-loading="loading" border header-row-class-name="tableHeader">
                   <el-table-column prop="code" label="编号">
                   </el-table-column>
                   <el-table-column prop="name" label="名称">
+                  </el-table-column>
+                  <el-table-column label="状态">
+                    <template slot-scope="scope">
+                      {{scope.row.status | enumText(userStatuses)}}
+                      <el-button class="button-status" type="text" v-if="scope.row.status=='ENABLED'" @click="onDisable(scope.row)">禁用</el-button>
+                      <el-button class="button-status" type="text" v-if="scope.row.status=='DISABLED'" @click="onEnable(scope.row)">启用</el-button>
+                    </template>
                   </el-table-column>
                   <el-table-column prop="createdTime" label="创建时间" sortable>
                     <template slot-scope="scope">
@@ -52,10 +62,27 @@
             <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
           </span>
         </el-dialog>
+        <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="statusDialogVisible">
+          <i class="iconfont icon-jinggao"></i>
+          <span>确认启用<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button class="button-cancel" @click="statusDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="settingStatus" @click="onEnableConfirm">确 定</el-button>
+          </span>
+        </el-dialog>
+        <el-dialog class="deleteDialog" width="400px" :center="true" custom-class="noPadding" :visible.sync="disablledStatusDialogVisible">
+          <i class="iconfont icon-jinggao"></i>
+          <span>确认禁用<b style="margin: 0 10px;">{{ disableItem.name }}</b>吗</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button class="button-cancel" @click="disablledStatusDialogVisible = false">取 消</el-button>
+            <el-button class="button-sure" :loading="settingStatus" @click="onDisableConfirm">确 定</el-button>
+          </span>
+        </el-dialog>
     </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import { default as userStatusService } from "../../user/service/user-status-service";
 import _ from "lodash";
 
 export default {
@@ -71,7 +98,12 @@ export default {
       loading: true,
       searching: false,
       deleting: false,
+      settingStatus: false,
       deleteDialogVisible: false,
+      statusDialogVisible: false,
+      disablledStatusDialogVisible: false,
+      statusItem: {},
+      disableItem: {},
       deleteItem: {}
     };
   },
@@ -81,6 +113,7 @@ export default {
     })
   },
   created() {
+    this.userStatuses = userStatusService.getAll();
     this.search();
   },
   methods: {
@@ -99,6 +132,42 @@ export default {
     },
     onEdit(id) {
       this.$router.push(`/tenant/edit/${id}`);
+    },
+    onEnable(item) {
+      this.statusItem = item;
+      this.statusDialogVisible = true;
+    },
+    onEnableConfirm() {
+      this.settingStatus = true;
+      this.enableUser(this.statusItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.statusDialogVisible = false;
+          this.$message.success("启用成功");
+          this.search();
+        })
+        .catch(error => {
+          this.$errorMessage.show(error, "修改失败");
+          this.statusDialogVisible = false;
+        });
+    },
+    onDisable(item) {
+      this.disableItem = item;
+      this.disablledStatusDialogVisible = true;
+    },
+    onDisableConfirm() {
+      this.settingStatus = true;
+      this.disableUser(this.disableItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.disablledStatusDialogVisible = false;
+          this.$message.success("禁用成功");
+          this.search();
+        })
+        .catch(error => {
+          this.$errorMessage.show(error, "修改失败");
+          this.disablledStatusDialogVisible = false;
+        });
     },
     onDelete(item) {
       this.deleteItem = item;
