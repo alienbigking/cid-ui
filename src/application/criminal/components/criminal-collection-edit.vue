@@ -1,38 +1,64 @@
 <template>
-<div class="showtext">
-  <object classid="CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F"	codebase="mxCapacitiveDriver.ocx" :id="id" ref="abc" height=0 width=0>
-  </object>
-  <object  classid="clsid:BCC0CDFA-676A-43F2-B1D7-B4CD3FF72B6A" id="sy305"  style="width: 347px; height: 265px" >
-  <param name="_Version" value="65536"/>
-  <param name="_ExtentX" value="24262"/>
-  <param name="_ExtentY" value="16219"/>
-  <param name="_StockProps" value="0"/>
- </object>
-  <el-row :gutter="10">
+  <div class="showtext">
+    <object
+      classid="CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F"
+      codebase="mxCapacitiveDriver.ocx"
+      :id="id"
+      ref="abc"
+      height=0
+      width=0 />
+    <object
+      classid="clsid:BCC0CDFA-676A-43F2-B1D7-B4CD3FF72B6A"
+      id="sy305"
+      style="width: 347px; height: 265px">
+      <param
+        name="_Version"
+        value="65536">
+      <param
+        name="_ExtentX"
+        value="24262">
+      <param
+        name="_ExtentY"
+        value="16219">
+      <param
+        name="_StockProps"
+        value="0">
+    </object>
+    <el-row :gutter="10">
       <el-col :span="12">
-          <el-card >
-              <img class="getImage" id="img1" ref="test" src='/static/Img.bmp'>
-              <div>
-                  <el-col>
-                  <el-button class="button-addInEdit" @click="getFingerPrint">录取指纹</el-button>
-                  <el-input type="file" id="img_text">
-                  </el-input>
-                  </el-col>
-              </div>
-          </el-card>
+        <el-card>
+          <img
+            class="getImage"
+            id="img1"
+            ref="test"
+            src='/static/Img.bmp'>
+          <div>
+            <el-col>
+              <el-button
+                class="button-addInEdit"
+                @click="getFingerPrint">录取指纹</el-button>
+              <el-input
+                type="file"
+                id="img_text" />
+            </el-col>
+          </div>
+        </el-card>
       </el-col>
       <el-col :span="12">
-          <el-card >
-              <img class="getImage">
-                <el-col>
-                <el-button class="button-addInEdit" @click="js_enroll">录取虹膜</el-button>
-                <el-input type="file" id="img_text">
-                </el-input>
-                </el-col>
-          </el-card>
+        <el-card >
+          <img class="getImage">
+          <el-col>
+            <el-button
+              class="button-addInEdit"
+              @click="js_enroll">录取虹膜</el-button>
+            <el-input
+              type="file"
+              id="img_text" />
+          </el-col>
+        </el-card>
       </el-col>
-  </el-row>
-</div>
+    </el-row>
+  </div>
 </template>
 
 <script>
@@ -114,8 +140,6 @@ export default {
 };
 </script>
 
-
-
 <style lang="scss" scoped>
 .showtext{
     height: 600px;
@@ -131,5 +155,3 @@ div {
     }
 }
 </style>
-
-

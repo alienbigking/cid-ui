@@ -30,5 +30,10 @@ export default {
         return roleService.getAllPermissions().then(permissions => {
             commit(types.SET_ALL_PERMISSIONS, permissions);
         });
+    },
+    getRolePermissions({ commit, state }, id) {
+        return roleService.getRolePermissions(id).then(permissions => {
+            commit(types.SET_ROLE_PERMISSIONS, permissions);
+        });
     }
 };

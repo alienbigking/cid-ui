@@ -47,9 +47,9 @@
             label="操作"
             width="201px">
             <template slot-scope="scope">
-              <!-- <el-button
+              <el-button
                 type="text"
-                @click="onSelectRoles(scope.row.id)">分配权限</el-button> -->
+                @click="onSelectRoles(scope.row.id)">分配权限</el-button>
               <el-button
                 type="text"
                 @click="onView(scope.row.id)">查看</el-button>
@@ -74,25 +74,12 @@
       </template>
     </div>
     <el-dialog
-      class="dialog"
-      width="450px"
-      :visible.sync="editDialogVisible">
-      <role-list-edit
-        :role-id="roleId"
-        :edit-dialog-visible="editDialogVisible"
-        @on-close="editDialogVisible = false" />
-    </el-dialog>
-    <el-dialog
       class="deleteDialog"
       width="400px"
-      :center="true"
-      custom-class="noPadding"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
-      <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
-      <span
-        slot="footer"
-        class="dialog-footer">
+      <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
+      <template slot="footer">
         <el-button
           class="button-cancel"
           @click="deleteDialogVisible = false">取 消</el-button>
@@ -100,19 +87,15 @@
           class="button-sure"
           :loading="deleting"
           @click="onDeleteConfirm">确 定</el-button>
-      </span>
+      </template>
     </el-dialog>
   </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import RoleListEdit from "./role-list-edit";
 import _ from "lodash";
 
 export default {
-  components: {
-    "role-list-edit": RoleListEdit
-  },
   data() {
     return {
       filter: {},
@@ -122,12 +105,10 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
-      roleId: "",
       loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
-      editDialogVisible: false,
       deleteItem: {}
     };
   },
@@ -151,8 +132,7 @@ export default {
       this.search();
     },
     onSelectRoles(id) {
-      this.roleId = id;
-      this.editDialogVisible = true;
+      this.$router.push(`/role/permission/${id}`);
     },
     onView(id) {
       this.$router.push(`/role/detail/${id}`);

@@ -5,7 +5,8 @@ const state = {
     allRoles: [],
     pagedRoles: { content: [] },
     role: {},
-    allPermissions: []
+    allPermissions: [],
+    rolePermissions: []
 };
 
 export default {
