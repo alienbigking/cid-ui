@@ -45,7 +45,11 @@ const state = {
     // 罪犯出入监
     allCriminalOutInPrisons: [],
     pagedCriminalOutInPrisons: { content: [] },
-    criminalOutInPrison: {}
+    criminalOutInPrison: {},
+    // 罪犯照片指纹采集
+    allCriminalCollection: [],
+    pagedCriminalCollections: { content: [] },
+    criminalCollection: {}
 };
 
 export default {

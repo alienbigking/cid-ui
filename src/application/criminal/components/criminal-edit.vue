@@ -23,9 +23,10 @@ import CriminalEditPhysicalCharacteristic from "./criminal-edit-physical-charact
 import CriminalEditSocialRelation from "./criminal-edit-social-relation";
 import CriminalEditForfeit from "./criminal-edit-forfeit";
 import CriminalOutInPrison from "./criminal-edit-out-in-prison";
+import CriminalEditCollectin from "./criminal-edit-collection";
 
 export default {
-    components: { CriminalEditBasicInformation, CriminalEditRecord, CriminalEditResume, CriminalEditPhysicalCharacteristic, CriminalEditSocialRelation, CriminalEditForfeit, CriminalOutInPrison },
+    components: { CriminalEditBasicInformation, CriminalEditRecord, CriminalEditResume, CriminalEditPhysicalCharacteristic, CriminalEditSocialRelation, CriminalEditForfeit, CriminalOutInPrison, CriminalEditCollectin },
     data() {
       return {
         activeName: 'CriminalEditBasicInformation',
@@ -36,7 +37,8 @@ export default {
           { name: "体貌特征", component: "CriminalEditPhysicalCharacteristic" },
           { name: "社会关系", component: "CriminalEditSocialRelation" },
           { name: "罚金", component: "CriminalEditForfeit" },
-          { name: "出入监记录", component: "CriminalOutInPrison" }
+          { name: "出入监记录", component: "CriminalOutInPrison" },
+          { name: "采集信息", component: "CriminalEditCollectin" }
         ]
       };
     }
