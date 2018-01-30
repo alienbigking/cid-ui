@@ -23,12 +23,12 @@
         <el-form-item
           label="创建时间"
           class="w50 the-disabled">
-          <span class="el-input__inner">{{ user.createdTime }}</span>
+          <span class="el-input__inner">{{ user.createdTime | moment }}</span>
         </el-form-item>
         <el-form-item
           label="最后更新时间"
           class="w50 the-disabled">
-          <span class="el-input__inner">{{ user.lastUpdatedTime }}</span>
+          <span class="el-input__inner">{{ user.lastUpdatedTime | moment }}</span>
         </el-form-item>
 
         <div class="el-form-item-div">
