@@ -21,15 +21,16 @@
   border: $border;
   background: $white;
   border-radius: $radius;
-  font-size: 14px;
   color: $color-default;
   min-width: 600px;
+  font-size: $font-size;
   overflow-x: auto;
   .card-title{
     color: $color-default;
     border-bottom: $border;
     padding: $padding-default;
     font-weight: bold;
+    font-size: 14px;
   }
   .card-body{
     box-sizing: border-box;
@@ -38,7 +39,6 @@
     overflow: hidden;
     &:last-child{ border: 0;}
     label{
-      font-size: $font-size;
       color: #666;//新改的字体颜色
       font-weight: bold;
       display: inline-block;
@@ -54,14 +54,12 @@
       min-height: 16px;
       padding: 16px 10px 6px 0;
       font-weight: bold;
-      font-size: $font-size;
       line-height: 20px;
     }
   }
   .detail{
       margin-top: 20px;
       font-weight: bold;
-      font-size: $font-size;
       & + .el-button{
           float: right;
           margin-top: 20px;

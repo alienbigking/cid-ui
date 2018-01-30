@@ -11,7 +11,6 @@ export default {};
 <style lang="scss" scoped>
 footer {
   line-height: 40px;
-  font-size: 12px;
   color: #a3a6ab;
   text-align: center;
 }

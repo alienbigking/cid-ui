@@ -13,7 +13,7 @@
           @click="onSearch">查 询</el-button>
         <el-button
           class="button-addInList"
-          @click="onNew">新增</el-button>
+          @click="onNew">新 增</el-button>
       </div>
       <template>
         <el-table
@@ -45,8 +45,11 @@
             align="center"
             prop="opretion"
             label="操作"
-            width="141px">
+            width="201px">
             <template slot-scope="scope">
+              <!-- <el-button
+                type="text"
+                @click="onSelectRoles(scope.row.id)">分配权限</el-button> -->
               <el-button
                 type="text"
                 @click="onView(scope.row.id)">查看</el-button>
@@ -71,6 +74,15 @@
       </template>
     </div>
     <el-dialog
+      class="dialog"
+      width="450px"
+      :visible.sync="editDialogVisible">
+      <role-list-edit
+        :role-id="roleId"
+        :edit-dialog-visible="editDialogVisible"
+        @on-close="editDialogVisible = false" />
+    </el-dialog>
+    <el-dialog
       class="deleteDialog"
       width="400px"
       :center="true"
@@ -94,9 +106,13 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import RoleListEdit from "./role-list-edit";
 import _ from "lodash";
 
 export default {
+  components: {
+    "role-list-edit": RoleListEdit
+  },
   data() {
     return {
       filter: {},
@@ -106,10 +122,12 @@ export default {
         sort: "createdTime,asc"
       },
       currentPage: 1,
+      roleId: "",
       loading: true,
       searching: false,
       deleting: false,
       deleteDialogVisible: false,
+      editDialogVisible: false,
       deleteItem: {}
     };
   },
@@ -131,6 +149,10 @@ export default {
     onPageChange(page) {
       this.pagination.page = page - 1;
       this.search();
+    },
+    onSelectRoles(id) {
+      this.roleId = id;
+      this.editDialogVisible = true;
     },
     onView(id) {
       this.$router.push(`/role/detail/${id}`);
