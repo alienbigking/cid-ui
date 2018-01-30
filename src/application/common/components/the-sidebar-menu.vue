@@ -10,7 +10,7 @@
     @select="onSelected">
     <template v-for="(first, idx1) in menus">
       <el-submenu
-        v-if="first.children"
+        v-if="first.children.length>0"
         :index="first.index"
         :key="idx1"
         class="first">
@@ -53,7 +53,7 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      activeItem: ''
+      activeItem: ""
     };
   },
   computed: {
@@ -66,9 +66,10 @@ export default {
     this.getMenus().then(res => {
       if (sessionStorage.getItem("activeItem")) {
         this.activeItem = sessionStorage.getItem("activeItem");
-      } else if (!this.menus[0].children) {
+      } else if (this.menus[0].children.length === 0) {
         this.activeItem = this.menus[0].index;
       } else {
+        console.log(this.menus);
         this.activeItem = this.menus[0].children[0].index;
       }
     });
@@ -85,5 +86,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.iconfont{ color: #D1D1D1; }
+.iconfont {
+  color: #d1d1d1;
+}
 </style>

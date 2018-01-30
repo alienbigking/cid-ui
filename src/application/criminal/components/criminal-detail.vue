@@ -300,10 +300,7 @@ export default {
     padding-left: 20px;
   }
   .card-body{
-    label{
-      width: auto;
-    }
-    span{ width: calc(100% - 100px); }
+    // span{ width: calc(100% - 100px); }
     .label120{
         width: 130px;
     }

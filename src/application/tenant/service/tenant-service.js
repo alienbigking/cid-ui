@@ -16,5 +16,11 @@ export default {
     },
     delete(id) {
         return axios.delete(`api/tenants/${id}`);
+    },
+    enableTenant(id) {
+        return axios.post(`api/tenants/${id}/enable`);
+    },
+    disableTenant(id) {
+        return axios.post(`api/tenants/${id}/disable`);
     }
 };

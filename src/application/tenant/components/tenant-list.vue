@@ -11,71 +11,158 @@
           placeholder="租户名称"
           v-model="filter.name"
           @keyup.enter.native="onSearch"/>
+        <el-select
+          v-model="filter.status"
+          placeholder="请选择使用状态"
+          clearable
+          @keyup.enter.native="onSearch">
+          <el-option
+            v-for="item in userStatuses"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"/>
+        </el-select>
         <el-button
           class="button-search"
           :loading="searching"
           @click="onSearch">查 询</el-button>
         <el-button
           class="button-addInList"
-          @click="onNew">新增</el-button>
+          @click="onNew">新 增</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedTenants.content"
-          v-loading="loading"
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="code"
-            label="编号"/>
-          <el-table-column
-            prop="name"
-            label="名称"/>
-          <el-table-column
-            prop="createdTime"
-            label="创建时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.createdTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="lastUpdatedTime"
-            label="最后更新时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.lastUpdatedTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            align="center"
-            prop="opretion"
-            label="操作"
-            width="141px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-              <el-button
-                type="text"
-                @click="onEdit(scope.row.id)">修改</el-button>
-              <el-button
-                type="text"
-                @click="onDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedTenants.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedTenants.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="my_table"
+        :data="pagedTenants.content"
+        v-loading="loading"
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="code"
+          label="编号"/>
+        <el-table-column
+          prop="name"
+          label="名称"/>
+        <el-table-column
+          label="用户状态"
+          sortable
+          align="center">
+          <template slot-scope="scope">
+            {{ scope.row.status | enumText(userStatuses) }}
+            <el-button
+              class="button-status"
+              type="text"
+              v-if="scope.row.status=='ENABLED'"
+              @click="onDisable(scope.row)">禁用</el-button>
+            <el-button
+              class="button-status"
+              type="text"
+              v-if="scope.row.status=='DISABLED'"
+              @click="onEnable(scope.row)">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="lastUpdatedTime"
+          label="最后更新时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.lastUpdatedTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="opretion"
+          label="操作"
+          width="141px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedTenants.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedTenants.totalElements"/>
+      </div>
+      <el-dialog
+        class="deleteDialog"
+        width="400px"
+        :center="true"
+        custom-class="noPadding"
+        :visible.sync="deleteDialogVisible">
+        <i class="iconfont icon-jinggao" />
+        <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
+        <span
+          slot="footer"
+          class="dialog-footer">
+          <el-button
+            class="button-cancel"
+            @click="deleteDialogVisible = false">取 消</el-button>
+          <el-button
+            class="button-sure"
+            :loading="deleting"
+            @click="onDeleteConfirm">确 定</el-button>
+        </span>
+      </el-dialog>
+      <el-dialog
+        class="deleteDialog"
+        width="400px"
+        :center="true"
+        custom-class="noPadding"
+        :visible.sync="statusDialogVisible">
+        <i class="iconfont icon-jinggao" />
+        <span>确认启用<b style="margin: 0 10px;">{{ statusItem.name }}</b>吗</span>
+        <span
+          slot="footer"
+          class="dialog-footer">
+          <el-button
+            class="button-cancel"
+            @click="statusDialogVisible = false">取 消</el-button>
+          <el-button
+            class="button-sure"
+            :loading="settingStatus"
+            @click="onEnableConfirm">确 定</el-button>
+        </span>
+      </el-dialog>
+      <el-dialog
+        class="deleteDialog"
+        width="400px"
+        :center="true"
+        custom-class="noPadding"
+        :visible.sync="disablledStatusDialogVisible">
+        <i class="iconfont icon-jinggao" />
+        <span>确认禁用<b style="margin: 0 10px;">{{ disableItem.name }}</b>吗</span>
+        <span
+          slot="footer"
+          class="dialog-footer">
+          <el-button
+            class="button-cancel"
+            @click="disablledStatusDialogVisible = false">取 消</el-button>
+          <el-button
+            class="button-sure"
+            :loading="settingStatus"
+            @click="onDisableConfirm">确 定</el-button>
+        </span>
+      </el-dialog>
     </div>
     <el-dialog
       class="deleteDialog"
@@ -101,12 +188,14 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
+import { default as userStatusService } from "../../user/service/user-status-service";
 import _ from "lodash";
 
 export default {
   data() {
     return {
       filter: {},
+      userStatuses: [],
       pagination: {
         page: 0,
         size: 10,
@@ -116,7 +205,12 @@ export default {
       loading: true,
       searching: false,
       deleting: false,
+      settingStatus: false,
       deleteDialogVisible: false,
+      statusDialogVisible: false,
+      disablledStatusDialogVisible: false,
+      statusItem: {},
+      disableItem: {},
       deleteItem: {}
     };
   },
@@ -126,10 +220,11 @@ export default {
     })
   },
   created() {
+    this.userStatuses = userStatusService.getAll();
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedTenants", "deleteTenant"]),
+    ...mapActions(["getPagedTenants", "deleteTenant", "enableTenant", "disableTenant"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -144,6 +239,42 @@ export default {
     },
     onEdit(id) {
       this.$router.push(`/tenant/edit/${id}`);
+    },
+    onEnable(item) {
+      this.statusItem = item;
+      this.statusDialogVisible = true;
+    },
+    onEnableConfirm() {
+      this.settingStatus = true;
+      this.enableTenant(this.statusItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.statusDialogVisible = false;
+          this.$message.success("启用成功");
+          this.search();
+        })
+        .catch(error => {
+          this.$errorMessage.show(error, "修改失败");
+          this.statusDialogVisible = false;
+        });
+    },
+    onDisable(item) {
+      this.disableItem = item;
+      this.disablledStatusDialogVisible = true;
+    },
+    onDisableConfirm() {
+      this.settingStatus = true;
+      this.disableTenant(this.disableItem.id)
+        .then(res => {
+          this.settingStatus = false;
+          this.disablledStatusDialogVisible = false;
+          this.$message.success("禁用成功");
+          this.search();
+        })
+        .catch(error => {
+          this.$errorMessage.show(error, "修改失败");
+          this.disablledStatusDialogVisible = false;
+        });
     },
     onDelete(item) {
       this.deleteItem = item;

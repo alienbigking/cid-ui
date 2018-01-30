@@ -20,6 +20,21 @@
         <el-input v-model="tenant.name"/>
       </el-form-item>
       <el-form-item
+        class="w50"
+        label="状态"
+        prop="status">
+        <el-select
+          v-model="tenant.status"
+          clearable
+          placeholder="请选择使用状态">
+          <el-option
+            v-for="item in userStatuses"
+            :key="item.value"
+            :label="item.text"
+            :value="item.value"/>
+        </el-select>
+      </el-form-item>
+      <el-form-item
         class="w100 textarea"
         label="描述"
         prop="description">
@@ -41,10 +56,12 @@
 
 <script>
 import { mapActions } from "vuex";
+import { default as userStatusService } from "../../user/service/user-status-service";
 import _ from "lodash";
 export default {
   data() {
     return {
+      userStatuses: [],
       tenant: {},
       rules: {
         code: [
@@ -69,6 +86,7 @@ export default {
     }
   },
   created() {
+    this.userStatuses = userStatusService.getAll();
     this.$store.commit("setTenant", {});
   },
   methods: {

@@ -21,5 +21,11 @@ export default {
     },
     deleteTenant({ commit }, id) {
         return tenantService.delete(id);
+    },
+    enableTenant({ commit }, id) {
+        return tenantService.enableTenant(id);
+    },
+    disableTenant({ commit }, id) {
+        return tenantService.disableTenant(id);
     }
 };

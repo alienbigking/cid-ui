@@ -122,9 +122,12 @@
         width: 50px;
     }
     .el-pagination{
-        width: 512px;
+        // width: 512px;
         text-align: right;
     }
+}
+.el-table th, .el-table tr, .el-table td{
+  background-clip: padding-box;
 }
 .el-tabs{
   .el-tabs__header{
