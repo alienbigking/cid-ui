@@ -70,13 +70,11 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-size: 14px;
     margin-top: 2px;
     & > span {
       margin-bottom: 8px;
     }
     .sidebar-name{
-      font-size:12px;
       margin-top: 2px;
       color: rgba(255,255,255,.8);
     }

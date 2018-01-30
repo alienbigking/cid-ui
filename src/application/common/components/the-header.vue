@@ -2,7 +2,7 @@
   <el-header style="height: 47px;">
     <div class="header-left">
       <i
-        class="iconfont icon-RDS"
+        class="iconfont icon-DB"
         style="font-size: 22px;"/>
       <span class="fs-16">罪犯数据库</span>
       <i
@@ -81,7 +81,6 @@ export default {
     margin-left: 20px;
     a {
       color: #fff;
-      font-size: 12px;
     }
     img {
       margin-right: 7px;

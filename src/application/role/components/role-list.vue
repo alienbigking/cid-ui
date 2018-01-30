@@ -47,9 +47,9 @@
             label="操作"
             width="201px">
             <template slot-scope="scope">
-              <el-button
+              <!-- <el-button
                 type="text"
-                @click="onSelectRoles(scope.row.id)">分配权限</el-button>
+                @click="onSelectRoles(scope.row.id)">分配权限</el-button> -->
               <el-button
                 type="text"
                 @click="onView(scope.row.id)">查看</el-button>

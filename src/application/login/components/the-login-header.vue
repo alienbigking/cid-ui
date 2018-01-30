@@ -2,7 +2,7 @@
   <el-header style="height: 47px; position: fixed; z-index: 100;">
     <div class="header-left">
       <i
-        class="iconfont icon-RDS"
+        class="iconfont icon-DB"
         style="font-size: 22px;"/>
       <span class="fs-16">罪犯数据库</span>
     </div>
@@ -22,8 +22,5 @@ export default {};
         font-size: 16px;
         margin-left: 10px;
     }
-}
-.header-right {
-    font-size: 14px;
 }
 </style>
