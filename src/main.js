@@ -14,7 +14,6 @@ import { default as responseInterceptor } from '@/utils/interceptor/response-int
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/scss/style.scss';
 import './assets/fonts/iconfont.css';
-// require('//at.alicdn.com/t/font_552504_mfgn2oj0743zyqfr.css');
 
 Vue.config.productionTip = false;
 

@@ -23,6 +23,8 @@
   border-radius: $radius;
   font-size: 14px;
   color: $color-default;
+  min-width: 600px;
+  overflow-x: auto;
   .card-title{
     color: $color-default;
     border-bottom: $border;
@@ -49,18 +51,11 @@
     label + span{
       display: inline-block;
       vertical-align: top;
-      width: calc(100% - 148px);
       min-height: 16px;
-      padding-top: 16px;
-      padding-bottom: 6px;
+      padding: 16px 10px 6px 0;
       font-weight: bold;
       font-size: $font-size;
       line-height: 20px;
-    }
-  }
-  .el-row .el-col-12:first-child{
-    span{
-      width: calc(100% - 198px);
     }
   }
   .detail{
@@ -82,6 +77,8 @@
     border: $border;
     border-radius:5px;
     background:#fff;
+    min-width: 600px;
+    overflow-x: auto;
     .um-title{
         display: block;
         padding: $padding-default;
@@ -98,15 +95,6 @@
 .box{
     height: 100%;
     width: 100%;
-}
-// 修改密码页面的输入框
-.gray-inner{
-  .el-input__inner {
-    background: $background;
-    &:focus {
-      background: #ffffff;
-    }
-  }
 }
 .el-form{
     .el-form-item{
@@ -320,6 +308,9 @@
     .cell {
       button + button {
         margin-left: 7px; // 需小于20px
+      }
+      button{
+        vertical-align: baseline;
       }
     }
 }

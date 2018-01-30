@@ -1,15 +1,13 @@
 <template>
-    <div>
-        dashboard
-    </div>
+  <div>
+    dashboard
+  </div>
 </template>
 <script>
 // import { mapActions } from "vuex";
 
 export default {
-  created() {
-    sessionStorage.setItem("activeItem", "3");
-  }
+  created() {}
 };
 </script>
 <style lang="scss" scoped>

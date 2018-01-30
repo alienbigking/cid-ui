@@ -122,9 +122,12 @@
         width: 50px;
     }
     .el-pagination{
-        width: 512px;
+        // width: 512px;
         text-align: right;
     }
+}
+.el-table th, .el-table tr, .el-table td{
+  background-clip: padding-box;
 }
 .el-tabs{
   .el-tabs__header{
@@ -146,6 +149,9 @@
     &.is-active{ color: $color-default; }
   }
   .el-tabs__active-bar{ background-color: $color-default; }
+  .el-tabs__nav-next, .el-tabs__nav-prev{
+    line-height: 60px;
+  }
 }
 .el-button{ font-size: $font-size; }
 .el-button:not(.el-button--text){
@@ -153,7 +159,9 @@
   display: inline-flex;
   height: $height-input;
   justify-content: center;
-  line-height: 0;
+  // line-height: 0;
+  padding: 0 20px;
+  align-items: center;
   background: $white;
   color: $color-default;
   &+button{ margin-left: 20px; }

@@ -5,8 +5,6 @@ function equalTo(rule, value, callback) {
     } else {
         callback();
     }
-};
+}
 
-export {
-    equalTo
-};
+export { equalTo };

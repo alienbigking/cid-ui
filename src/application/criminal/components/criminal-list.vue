@@ -1,58 +1,97 @@
 <template>
-    <div class="container">
-        <div class="card">
-            <span class="um-title">查询罪犯</span>
-            <div class="filters">
-                <el-input placeholder="编号" v-model="filter.code" @keyup.enter.native="onSearch"></el-input>
-                <el-input placeholder="姓名" v-model="filter.name" @keyup.enter.native="onSearch"></el-input>
-                <el-button class="button-search" :loading="searching" @click="onSearch">查 询</el-button>
-                <el-button class="button-addInList" @click="onNew">新增</el-button>
-            </div>
-            <template>
-                <el-table class="my_table" :data="pagedCriminals.content" v-loading="loading" border header-row-class-name="tableHeader">
-                  <el-table-column prop="code" label="编号">
-                  </el-table-column>
-                  <el-table-column prop="name" label="姓名">
-                  </el-table-column>
-                   <el-table-column prop="alias" label="别名">
-                  </el-table-column>
-                  <el-table-column prop="genderName" label="性别">
-                  </el-table-column>
-                  <el-table-column prop="ethnicityName" label="民族">
-                  </el-table-column>
-                  <el-table-column prop="birthday" label="出生日期">
-                  </el-table-column>
-                  <el-table-column prop="prisonAreaName" label="隶属监区">
-                  </el-table-column>
-                  <el-table-column align="center" label="操作" width="141px">
-                    <template slot-scope="scope">
-                      <el-button type="text" @click="onView(scope.row.id)">查看</el-button>
-                      <el-button type="text" @click="onEdit(scope.row.id)">修改</el-button>
-                      <el-button type="text" @click="onDelete(scope.row)">删除</el-button>
-                    </template>
-                  </el-table-column>
-                </el-table>
-                <div class="pagination-box">
-                    <span>共{{ pagedCriminals.totalElements }}条信息</span>
-                    <el-pagination
-                      @current-change="onPageChange"
-                      :current-page.sync="currentPage"
-                      :page-size="pagination.size"
-                      layout="prev, pager, next, jumper"
-                      :total="pagedCriminals.totalElements">
-                    </el-pagination>
-                </div>
+  <div class="container">
+    <div class="card">
+      <span class="um-title">查询罪犯</span>
+      <div class="filters">
+        <el-input
+          placeholder="编号"
+          v-model="filter.code"
+          @keyup.enter.native="onSearch"/>
+        <el-input
+          placeholder="姓名"
+          v-model="filter.name"
+          @keyup.enter.native="onSearch"/>
+        <el-button
+          class="button-search"
+          :loading="searching"
+          @click="onSearch">查 询</el-button>
+        <el-button
+          class="button-addInList"
+          @click="onNew">新增</el-button>
+      </div>
+      <template>
+        <el-table
+          class="my_table"
+          :data="pagedCriminals.content"
+          v-loading="loading"
+          border
+          header-row-class-name="tableHeader">
+          <el-table-column
+            prop="code"
+            label="编号"/>
+          <el-table-column
+            prop="name"
+            label="姓名"/>
+          <el-table-column
+            prop="alias"
+            label="别名"/>
+          <el-table-column
+            prop="genderName"
+            label="性别"/>
+          <el-table-column
+            prop="ethnicityName"
+            label="民族"/>
+          <el-table-column
+            prop="birthday"
+            label="出生日期"/>
+          <el-table-column
+            prop="prisonAreaName"
+            label="隶属监区"/>
+          <el-table-column
+            align="center"
+            label="操作"
+            width="141px">
+            <template slot-scope="scope">
+              <el-button
+                type="text"
+                @click="onView(scope.row.id)">查看</el-button>
+              <el-button
+                type="text"
+                @click="onEdit(scope.row.id)">修改</el-button>
+              <el-button
+                type="text"
+                @click="onDelete(scope.row)">删除</el-button>
             </template>
+          </el-table-column>
+        </el-table>
+        <div class="pagination-box">
+          <span>共{{ pagedCriminals.totalElements }}条信息</span>
+          <el-pagination
+            @current-change="onPageChange"
+            :current-page.sync="currentPage"
+            :page-size="pagination.size"
+            layout="prev, pager, next, jumper"
+            :total="pagedCriminals.totalElements"/>
         </div>
-        <el-dialog class="deleteDialog" width="400px" :visible.sync="deleteDialogVisible">
-            <i class="iconfont icon-jinggao"></i>
-            <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
-            <template slot="footer">
-                <el-button class="button-cancel" @click="deleteDialogVisible = false">取 消</el-button>
-                <el-button class="button-sure" :loading="deleting" @click="onDeleteConfirm">确 定</el-button>
-            </template>
-        </el-dialog>
+      </template>
     </div>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :visible.sync="deleteDialogVisible">
+      <i class="iconfont icon-jinggao"/>
+      <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="deleting"
+          @click="onDeleteConfirm">确 定</el-button>
+      </template>
+    </el-dialog>
+  </div>
 </template>
 <script>
 import { mapState, mapActions } from "vuex";

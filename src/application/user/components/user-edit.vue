@@ -2,29 +2,49 @@
   <div>
     <div class="detail-card">
       <h3 class="card-title">修改用户信息</h3>
-      <el-form class="formPadding" :model="user" :rules="rules" ref="form" label-position="top">
-          <el-form-item label="账号名称" class="w50 the-disabled" prop="username">
-              <span class="el-input__inner">{{user.username}}</span>
-          </el-form-item>
-          <el-form-item label="姓名" class="w50" prop="name">
-              <el-input v-model="user.name"></el-input>
-          </el-form-item>
-          <el-form-item label="创建时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ user.createdTime }}</span>
-          </el-form-item>
-          <el-form-item label="最后更新时间" class="w50 the-disabled">
-              <span class="el-input__inner">{{ user.lastUpdatedTime }}</span>
-          </el-form-item>
+      <el-form
+        class="formPadding"
+        :model="user"
+        :rules="rules"
+        ref="form"
+        label-position="top">
+        <el-form-item
+          label="账号名称"
+          class="w50 the-disabled"
+          prop="username">
+          <span class="el-input__inner">{{ user.username }}</span>
+        </el-form-item>
+        <el-form-item
+          label="姓名"
+          class="w50"
+          prop="name">
+          <el-input v-model="user.name"/>
+        </el-form-item>
+        <el-form-item
+          label="创建时间"
+          class="w50 the-disabled">
+          <span class="el-input__inner">{{ user.createdTime | moment }}</span>
+        </el-form-item>
+        <el-form-item
+          label="最后更新时间"
+          class="w50 the-disabled">
+          <span class="el-input__inner">{{ user.lastUpdatedTime | moment }}</span>
+        </el-form-item>
 
-          <div class="el-form-item-div">
-            <el-button @click="onBack">返 回</el-button>
-            <el-button class="button-confirm" :loading="saving" @click="onSubmit">保 存</el-button>
-          </div>
+        <div class="el-form-item-div">
+          <el-button @click="onBack">返 回</el-button>
+          <el-button
+            class="button-confirm"
+            :loading="saving"
+            @click="onSubmit">保 存</el-button>
+        </div>
       </el-form>
     </div>
     <div class="detail-card">修改密码
       <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
-      <span class="modififyPassword" @click="updatePassword">修改</span>
+      <span
+        class="modififyPassword"
+        @click="updatePassword">修改</span>
     </div>
   </div>
 </template>

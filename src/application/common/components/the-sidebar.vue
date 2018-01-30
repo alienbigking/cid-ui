@@ -1,19 +1,21 @@
 <template>
-    <el-aside :width="collapsed ? '64px' : '260px'" class="aside"
-      :class="collapsed ? 'menu-collapsed' : ''">
-        <router-link to="/dashboard">
-          <div
-            class="avatar"
-            :class="collapsed ? 'avatar-collapsed' : ''">
-              <img src="../../../assets/images/face11.jpg" alt="">
-                <div class="avatar-right">
-                    <span>{{userName}}</span>
-                    <span class="sidebar-name">{{name}}</span>
-                </div>
-          </div>
-        </router-link>
-        <the-sidebar-menu></the-sidebar-menu>
-    </el-aside>
+  <el-aside
+    :width="collapsed ? '64px' : '260px'"
+    class="aside"
+    :class="collapsed ? 'menu-collapsed' : ''">
+    <router-link to="/dashboard">
+      <div
+        class="avatar"
+        :class="collapsed ? 'avatar-collapsed' : ''">
+        <img src="../../../assets/images/face11.jpg">
+        <div class="avatar-right">
+          <span>{{ userName }}</span>
+          <span class="sidebar-name">{{ name }}</span>
+        </div>
+      </div>
+    </router-link>
+    <the-sidebar-menu/>
+  </el-aside>
 </template>
 <script>
 import { default as TheSidebarMenu } from "./the-sidebar-menu";

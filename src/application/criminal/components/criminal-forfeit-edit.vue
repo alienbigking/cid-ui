@@ -1,25 +1,58 @@
 <template>
   <div v-loading='loading'>
-    <el-form class="form-criminal" :model="criminalForfeit" :rules="rules" ref="form" label-position="top">
-        <el-form-item class="w-px180" label="罚金单据" prop="receiptNumber">
-          <el-input v-model="criminalForfeit.receiptNumber" ></el-input>
-        </el-form-item>
-        <el-form-item class="w-px180" label="缴纳罚金(元)" prop="amount">
-          <el-input v-model="criminalForfeit.amount" placeholder="请输入数字，不能带汉字" ></el-input>
-        </el-form-item>
-        <el-form-item class="w-px180" label="收款单位" prop="payee">
-          <el-input v-model="criminalForfeit.payee"></el-input>
-        </el-form-item>
-        <el-form-item class="w-px180" label="缴纳日期" prop="paymentDate">
-          <el-date-picker v-model="criminalForfeit.paymentDate" type="date"></el-date-picker>
-        </el-form-item>
-        <el-form-item class="w100" label="备注" prop="remark" >
-          <el-input type="textarea" resize="none" v-model="criminalForfeit.remark"></el-input>
-        </el-form-item>
-        <div class="el-form-item el-form-item-div">
-          <el-button class="button-cancel" @click="onClose">返 回</el-button>
-          <el-button class="button-confirm" :loading="saving" @click="onSave">保 存</el-button>
-        </div>
+    <el-form
+      class="form-criminal"
+      :model="criminalForfeit"
+      :rules="rules"
+      ref="form"
+      label-position="top">
+      <el-form-item
+        class="w-px180"
+        label="罚金单据"
+        prop="receiptNumber">
+        <el-input
+        v-model="criminalForfeit.receiptNumber" />
+      </el-form-item>
+      <el-form-item
+        class="w-px180"
+        label="缴纳罚金(元)"
+        prop="amount">
+        <el-input
+          v-model="criminalForfeit.amount"
+          placeholder="请输入数字，不能带汉字" />
+      </el-form-item>
+      <el-form-item
+        class="w-px180"
+        label="收款单位"
+        prop="payee">
+        <el-input v-model="criminalForfeit.payee"/>
+      </el-form-item>
+      <el-form-item
+        class="w-px180"
+        label="缴纳日期"
+        prop="paymentDate">
+        <el-date-picker
+          v-model="criminalForfeit.paymentDate"
+          type="date"/>
+      </el-form-item>
+      <el-form-item
+        class="w100"
+        label="备注"
+        prop="remark" >
+        <el-input
+          type="textarea"
+          resize="none"
+          v-model="criminalForfeit.remark"/>
+      </el-form-item>
+      <div class="el-form-item el-form-item-div">
+        <el-button
+          class="button-cancel"
+          @click="onClose">返 回</el-button>
+        <el-button
+          class="button-confirm"
+          :loading="saving"
+          @click="onSave">保 存</el-button>
+      </div>
     </el-form>
   </div>
 </template>
@@ -31,10 +64,12 @@ import _ from "lodash";
 export default {
   props: {
     criminalForfeitId: {
-      type: String
+      type: String,
+      default: ""
     },
     editDialogVisible: {
-      type: Boolean
+      type: Boolean,
+      default: false
     }
   },
   data() {
