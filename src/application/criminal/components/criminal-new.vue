@@ -291,7 +291,7 @@
           </el-select>
         </el-form-item>
         <el-form-item
-          lass="w25"
+          class="w25"
           label="分押类型"
           prop="separateCustodyTypeCode">
           <el-select

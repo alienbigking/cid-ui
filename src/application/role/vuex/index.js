@@ -4,7 +4,8 @@ import mutations from './mutations';
 const state = {
     allRoles: [],
     pagedRoles: { content: [] },
-    role: {}
+    role: {},
+    allPermissions: []
 };
 
 export default {

@@ -28,7 +28,7 @@
           @click="onSearch">查 询</el-button>
         <el-button
           class="button-addInList"
-          @click="onNew">新增</el-button>
+          @click="onNew">新 增</el-button>
       </div>
       <template>
         <el-table

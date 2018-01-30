@@ -1,6 +1,6 @@
 <template>
   <el-aside
-    :width="collapsed ? '64px' : '260px'"
+    :width="collapsed ? '64px' : '230px'"
     class="aside"
     :class="collapsed ? 'menu-collapsed' : ''">
     <router-link to="/dashboard">
