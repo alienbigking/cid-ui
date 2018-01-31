@@ -1,10 +1,12 @@
 <template>
   <el-header style="height: 47px;">
     <div class="header-left">
-      <i
-        class="iconfont icon-DB"
-        style="font-size: 22px;"/>
-      <span class="fs-16">罪犯数据库</span>
+      <router-link to="/dashboard">
+        <i
+          class="iconfont icon-DB"
+          style="font-size: 22px;"/>
+        <span class="fs-16">罪犯数据库</span>
+      </router-link>
       <i
         class="iconfont icon-caidan"
         @click="onCollapse"/>
@@ -51,6 +53,9 @@ export default {
     onCollapse() {
       this.handleCollapse();
     },
+    onHome() {
+      this.$router.push("/dashboard");
+    },
     logout() {
       window.localStorage.clear();
       window.sessionStorage.clear();
@@ -66,6 +71,9 @@ export default {
 .header-left {
   display: flex;
   align-items: center;
+  a{
+    color: #fff;
+  }
   .fs-16 {
     font-size: 16px;
     margin: 0 112px 0 10px;
