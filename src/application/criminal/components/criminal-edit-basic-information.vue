@@ -397,9 +397,7 @@ export default {
         selectedSeparateCustodyType: {},
         selectedCommutationScale: {},
         selectedBirthplace: [],
-        criminal: _.cloneDeep(
-          this.$store.state.criminal.criminal
-        )
+        criminal: _.cloneDeep(this.$store.state.criminal.criminal)
       },
       rules: {
         "criminal.code": [
@@ -412,13 +410,19 @@ export default {
         ],
         selectedGender: [{ required: true, message: "请选择性别" }],
         "criminal.birthday": [{ required: true, message: "请选择出生日期" }],
-        "criminal.identityCardNumber": [{ required: true, message: "请输入身份证号" }],
+        "criminal.identityCardNumber": [
+          { required: true, message: "请输入身份证号" }
+        ],
         "criminal.married": [{ required: true, message: "请选择是否婚否" }],
         selectedEthnicity: [{ required: true, message: "请选择民族" }],
         selectedNationality: [{ required: true, message: "请选择国籍" }],
-        selectedHouseholdRegisterType: [{ required: true, message: "请选择户籍类型" }],
+        selectedHouseholdRegisterType: [
+          { required: true, message: "请选择户籍类型" }
+        ],
         selectedBirthplace: [{ required: true, message: "请选择出生地" }],
-        "criminal.householdRegisterAddress": [{ required: true, message: "请选择户籍地址" }],
+        "criminal.householdRegisterAddress": [
+          { required: true, message: "请选择户籍地址" }
+        ],
         "criminal.householdRegisterAddressStreetDetail": [
           { required: true, message: "请输入户籍街道详情" },
           { max: 50, message: "长度在 50 个字符以内" }
@@ -434,7 +438,9 @@ export default {
           { required: true, message: "请选择职业" },
           { max: 50, message: "长度在 50 个字符以内" }
         ],
-        "criminal.recidivisted": [{ required: true, message: "请选择是否惯犯" }],
+        "criminal.recidivisted": [
+          { required: true, message: "请选择是否惯犯" }
+        ],
         "criminal.involvingFour": [
           { required: true, message: "请输入四涉" },
           { max: 50, message: "长度在 50 个字符以内" }
@@ -444,10 +450,18 @@ export default {
           { max: 50, message: "长度在 50 个字符以内" }
         ],
         selectedFledType: [{ required: true, message: "请选择流窜类别" }],
-        selectedSeparateManagementLevel: [{ required: true, message: "请选择分管等级" }],
-        selectedSeparateCustodyType: [{ required: true, message: "请选择分押类型" }],
-        selectedCommutationScale: [{ required: true, message: "请选择减刑尺度" }],
-        "criminal.prisonAreaId": [{ required: true, message: "请选择所属监区" }],
+        selectedSeparateManagementLevel: [
+          { required: true, message: "请选择分管等级" }
+        ],
+        selectedSeparateCustodyType: [
+          { required: true, message: "请选择分押类型" }
+        ],
+        selectedCommutationScale: [
+          { required: true, message: "请选择减刑尺度" }
+        ],
+        "criminal.prisonAreaId": [
+          { required: true, message: "请选择所属监区" }
+        ],
         "criminal.prisonHouseId": [{ required: true, message: "请选择监舍号" }]
       },
       saving: false,
@@ -473,124 +487,44 @@ export default {
   },
   watch: {
     "form.selectGender"(val) {
-      this.$set(
-        this.form.criminal,
-        "genderCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "genderName",
-        val.name
-      );
+      this.$set(this.form.criminal, "genderCode", val.code);
+      this.$set(this.form.criminal, "genderName", val.name);
     },
     "form.selectedEthnicity"(val) {
-      this.$set(
-        this.form.criminal,
-        "ethnicityCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "ethnicityName",
-        val.name
-      );
+      this.$set(this.form.criminal, "ethnicityCode", val.code);
+      this.$set(this.form.criminal, "ethnicityName", val.name);
     },
     "form.selectedNationality"(val) {
-      this.$set(
-        this.form.criminal,
-        "nationalityCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "nationalityName",
-        val.name
-      );
+      this.$set(this.form.criminal, "nationalityCode", val.code);
+      this.$set(this.form.criminal, "nationalityName", val.name);
     },
     "form.selectedHouseholdRegisterType"(val) {
-      this.$set(
-        this.form.criminal,
-        "householdRegisterTypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "householdRegisterTypeName",
-        val.name
-      );
+      this.$set(this.form.criminal, "householdRegisterTypeCode", val.code);
+      this.$set(this.form.criminal, "householdRegisterTypeName", val.name);
     },
     "form.selectPoliticalStatus"(val) {
-      this.$set(
-        this.form.criminal,
-        "politicalStatusCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "politicalStatusName",
-        val.name
-      );
+      this.$set(this.form.criminal, "politicalStatusCode", val.code);
+      this.$set(this.form.criminal, "politicalStatusName", val.name);
     },
     "form.selectEducationDegree"(val) {
-      this.$set(
-        this.form.criminal,
-        "educationDegreeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "educationDegreeName",
-        val.name
-      );
+      this.$set(this.form.criminal, "educationDegreeCode", val.code);
+      this.$set(this.form.criminal, "educationDegreeName", val.name);
     },
     "form.selectedFledType"(val) {
-      this.$set(
-        this.form.criminal,
-        "fledTypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "fledTypeName",
-        val.name
-      );
+      this.$set(this.form.criminal, "fledTypeCode", val.code);
+      this.$set(this.form.criminal, "fledTypeName", val.name);
     },
     "form.selectedSeparateManagementLevel"(val) {
-      this.$set(
-        this.form.criminal,
-        "separateManagementLevelCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "separateManagementLevelName",
-        val.name
-      );
+      this.$set(this.form.criminal, "separateManagementLevelCode", val.code);
+      this.$set(this.form.criminal, "separateManagementLevelName", val.name);
     },
     "form.selectedSeparateCustodyType"(val) {
-      this.$set(
-        this.form.criminal,
-        "separateCustodyTypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "separateCustodyTypeName",
-        val.name
-      );
+      this.$set(this.form.criminal, "separateCustodyTypeCode", val.code);
+      this.$set(this.form.criminal, "separateCustodyTypeName", val.name);
     },
     "form.selectedCommutationScale"(val) {
-      this.$set(
-        this.form.criminal,
-        "commutationScaleCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminal,
-        "commutationScaleName",
-        val.name
-      );
+      this.$set(this.form.criminal, "commutationScaleCode", val.code);
+      this.$set(this.form.criminal, "commutationScaleName", val.name);
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
@@ -624,16 +558,16 @@ export default {
       this.allSeparateManagementLevels = response[6];
       this.allSeparateCustodyTypes = response[7];
       this.allCommutationScales = response[8];
-      // this.allCountries = response[9];
-      response[9].map(item => { item.children = []; });
-      this.allSelectedBirthplace = response[9];
+      this.allCountries = response[9];
+      response[9].map(item => {
+        item.children = [];
+      });
+      this.allSelectedBirthplace = _.cloneDeep(response[9]);
       console.log(this.allSelectedBirthplace);
       this.initializing = false;
 
       this.getCriminal(this.$route.params.id).then(() => {
-        this.form.criminal = _.cloneDeep(
-            this.$store.state.criminal.criminal
-          );
+        this.form.criminal = _.cloneDeep(this.$store.state.criminal.criminal);
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
           name: this.form.criminal.genderName
@@ -715,7 +649,12 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getCriminal", "getAllPrisonAreas", "getAllPrisonHouses", "updateCriminal"]),
+    ...mapActions([
+      "getCriminal",
+      "getAllPrisonAreas",
+      "getAllPrisonHouses",
+      "updateCriminal"
+    ]),
     onChangeBirthplaceAddress(value) {
       console.log(value);
       const selectedCountryCode = value[0];
@@ -723,48 +662,68 @@ export default {
       const selectedCityCode = value[2];
       console.log(selectedCountryCode, selectedProvinceCode, selectedCityCode);
       if (selectedCityCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
-        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
-        const selectedCity = selectedProvince.children.find(c => c.code === selectedCityCode);
+        const selectedCountry = this.allSelectedBirthplace.find(
+          b => b.code === selectedCountryCode
+        );
+        const selectedProvince = selectedCountry.children.find(
+          p => p.code === selectedProvinceCode
+        );
+        const selectedCity = selectedProvince.children.find(
+          c => c.code === selectedCityCode
+        );
         regionLookupService.getAllCounties(selectedCityCode).then(response => {
           selectedCity.children = _.cloneDeep(response);
-          // this.$set(selectedCity, "children", _.cloneDeep(response));
         });
       } else if (selectedProvinceCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
-        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
-        regionLookupService.getAllCities(selectedProvinceCode).then(response => {
-          response.map(item => { item.children = []; });
-          selectedProvince.children = _.cloneDeep(response);
-          // this.$set(selectedProvince, "children", _.cloneDeep(response));
-        });
+        const selectedCountry = this.allSelectedBirthplace.find(
+          b => b.code === selectedCountryCode
+        );
+        const selectedProvince = selectedCountry.children.find(
+          p => p.code === selectedProvinceCode
+        );
+        regionLookupService
+          .getAllCities(selectedProvinceCode)
+          .then(response => {
+            response.map(item => {
+              item.children = [];
+            });
+            selectedProvince.children = _.cloneDeep(response);
+          });
       } else if (selectedCountryCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
-        regionLookupService.getAllProvinces(selectedCountryCode).then(response => {
-          response.map(item => { item.children = []; });
-          selectedCountry.children = _.cloneDeep(response);
-          // this.$set(selectedCountry, "children", _.cloneDeep(response));
-        });
-      };
+        const selectedCountry = this.allSelectedBirthplace.find(
+          b => b.code === selectedCountryCode
+        );
+        regionLookupService
+          .getAllProvinces(selectedCountryCode)
+          .then(response => {
+            response.map(item => {
+              item.children = [];
+            });
+            selectedCountry.children = _.cloneDeep(response);
+          });
+      }
     },
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updateCriminal().then(response => {
-            this.saving = false;
-            this.$message.success("修改成功");
-            this.$router.push(`/criminal/list`);
-          }).catch(error => {
-            this.saving = false;
-            this.$errorMessage.show(error, "修改失败");
-          });
+          this.updateCriminal()
+            .then(response => {
+              this.saving = false;
+              this.$message.success("修改成功");
+              this.$router.push(`/criminal/list`);
+            })
+            .catch(error => {
+              this.saving = false;
+              this.$errorMessage.show(error, "修改失败");
+            });
         }
       });
     }
   }
-  };
+};
 </script>
 
 <style lang="scss" scoped>
+
 </style>
