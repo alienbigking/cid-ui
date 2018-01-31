@@ -1,6 +1,8 @@
 <template>
   <el-header style="height: 47px;">
-    <div class="header-left">
+    <div
+      class="header-left"
+      @click="onHome">
       <i
         class="iconfont icon-RDS"
         style="font-size: 22px;"/>
@@ -50,6 +52,9 @@ export default {
     ...mapActions(["handleCollapse"]),
     onCollapse() {
       this.handleCollapse();
+    },
+    onHome() {
+      this.$router.push("/dashboard");
     },
     logout() {
       window.localStorage.clear();
