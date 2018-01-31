@@ -718,45 +718,32 @@ export default {
     ...mapActions(["getCriminal", "getAllPrisonAreas", "getAllPrisonHouses", "updateCriminal"]),
     onChangeBirthplaceAddress(value) {
       console.log(value);
-      if (!value[0]) return;
-      regionLookupService.getAllProvinces(value[0]).then(response => {
-        response.map(item => { item.children = []; });
-        this.allSelectedBirthplace[0].children = _.cloneDeep(response);
-      });
-      if (!value[1]) return;
-      regionLookupService.getAllCities(value[1]).then(response => {
-        response.map(item => { item.children = []; });
-        console.log(value);
-        this.allSelectedBirthplace[0].children[0].children = _.cloneDeep(response);
-      });
-      if (!value[2]) return;
-      regionLookupService.getAllCounties(value[2]).then(response => {
-        this.allSelectedBirthplace[0].children[0].children[0].children = _.cloneDeep(response);
-        console.log(value);
-      });
-      // if (!arr[0]) return;
-      // this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === arr[0]; });
-      // if (!this.allCountries[this[type].countryIndex].children.length) {
-      //   regionLookupService.getAllProvinces(arr[0]).then(response => {
-      //     response.map(item => { item.children = []; });
-      //     this.allCountries[this[type].countryIndex].children = _.cloneDeep(response);
-      //   });
-      // }
-      // if (!arr[1]) return;
-      // this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => { return item.code === arr[1]; });
-      // if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
-      //   regionLookupService.getAllCities(arr[1]).then(response => {
-      //     response.map(item => { item.children = []; });
-      //     this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(response);
-      //   });
-      // }
-      // if (!arr[2]) return;
-      // this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => { return item.code === arr[2]; });
-      // if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].length) {
-      //   regionLookupService.getAllCounties(arr[2]).then(response => {
-      //     this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(response);
-      //   });
-      // }
+      const selectedCountryCode = value[0];
+      const selectedProvinceCode = value[1];
+      const selectedCityCode = value[2];
+      console.log(selectedCountryCode, selectedProvinceCode, selectedCityCode);
+      if (selectedCityCode) {
+        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
+        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
+        const selectedCity = selectedProvince.children.find(c => c.code === selectedCityCode);
+        regionLookupService.getAllCounties(selectedCityCode).then(response => {
+          // selectedCity.children = _.cloneDeep(response);
+          this.$set(selectedCity, "children", _.cloneDeep(response));
+        });
+      } else if (selectedProvinceCode) {
+        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
+        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
+        regionLookupService.getAllCities(selectedProvinceCode).then(response => {
+          // selectedProvince.children = _.cloneDeep(response);
+          this.$set(selectedProvince, "children", _.cloneDeep(response));
+        });
+      } else if (selectedCountryCode) {
+        const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
+        regionLookupService.getAllProvinces(selectedCountryCode).then(response => {
+          // selectedCountry.children = _.cloneDeep(response);
+          this.$set(selectedCountry, "children", _.cloneDeep(response));
+        });
+      };
     },
     onSave() {
       this.$refs["form"].validate(valid => {
