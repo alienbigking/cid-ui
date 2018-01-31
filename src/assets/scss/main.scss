@@ -38,7 +38,7 @@
     border-bottom: $border;
     overflow: hidden;
     &:last-child{ border: 0;}
-    label{
+    label:not([class^="el-"]){
       color: #666;//新改的字体颜色
       font-weight: bold;
       display: inline-block;
@@ -48,7 +48,7 @@
       box-sizing: border-box;
       line-height: 20px;
     }
-    label + span{
+    label:not([class^="el-"]) + span{
       display: inline-block;
       vertical-align: top;
       min-height: 16px;
@@ -144,15 +144,17 @@
         }
     }
     .el-form-item-div{ // 有两个按钮的表单，按钮位于右侧，按钮间相隔20px
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
         width: 100%;
         button{
             margin-right: $padding-default;
             margin-left: 0;
         }
     }
+}
+.el-form-item-div{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .formPadding{
     padding: 20px 0 20px 20px;

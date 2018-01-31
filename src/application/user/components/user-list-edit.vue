@@ -16,7 +16,7 @@
         :label="item.id"
         :key="index">{{ item.name }}</el-checkbox>
     </el-checkbox-group>
-    <div class="user-role-button">
+    <div class="el-form-item-div">
       <el-button
         class="button-cancel"
         @click="onClose">取 消</el-button>
@@ -158,9 +158,7 @@ export default {
     float:right;
   }
 }
-.user-role-button{
+.el-form-item-div{
   margin-top:15px;
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

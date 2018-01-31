@@ -24,5 +24,11 @@ export default [
         component: components.RoleDetail,
         name: '角色明细',
         meta: { requireAuth: true }
+    },
+    {
+        path: '/role/permission/:id',
+        component: components.RolePermission,
+        name: '分配权限',
+        meta: { requireAuth: true }
     }
 ];

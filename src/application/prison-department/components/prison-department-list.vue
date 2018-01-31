@@ -88,13 +88,10 @@
     <el-dialog
       class="deleteDialog"
       width="400px"
-      :center="true"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
-      <span>确认删除<b style="margin: 0 10px;">{{ deleteItem.name }}</b>吗</span>
-      <span
-        slot="footer"
-        class="dialog-footer">
+      <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
+      <template slot="footer">
         <el-button
           class="button-cancel"
           @click="deleteDialogVisible = false">取 消</el-button>
@@ -102,7 +99,7 @@
           class="button-sure"
           :loading="deleting"
           @click="onDeleteConfirm">确 定</el-button>
-      </span>
+      </template>
     </el-dialog>
   </div>
 </template>

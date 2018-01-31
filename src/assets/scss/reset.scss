@@ -70,7 +70,7 @@
   &.el-menu-item, & > .el-submenu__title {
     line-height: 38px;
     height: 38px;
-    padding-left: 54px !important;
+    padding-left: 51px !important;
   }
   &.is-active, &.is-active > .el-submenu__title {
     background: #182125 !important;
@@ -79,7 +79,6 @@
 }
 .el-breadcrumb {
     height: 41px;
-    background: $white;
     line-height: 40px;
     font-size: $font-size;
     border-bottom: $border;
@@ -252,3 +251,4 @@
 /******************************** 表单结束 ********************************/
 .el-submenu__title, .el-menu-item{ font-size: $font-size; }
 .iconfont{ font-size: 14px; }
+.el-breadcrumb, .el-tree{ background: $white; }
