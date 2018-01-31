@@ -12,8 +12,8 @@ import { default as requestInterceptor } from '@/utils/interceptor/request-inter
 import { default as responseInterceptor } from '@/utils/interceptor/response-interceptor';
 
 import 'element-ui/lib/theme-chalk/index.css';
-import './assets/scss/style.scss';
 import './assets/fonts/iconfont.css';
+import './assets/scss/style.scss';
 
 Vue.config.productionTip = false;
 

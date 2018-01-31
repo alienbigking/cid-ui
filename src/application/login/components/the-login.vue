@@ -3,7 +3,7 @@
     <the-login-header/>
     <el-main class="login-box">
       <div>
-        <i class="iconfont icon-RDS"/>
+        <i class="iconfont icon-DB"/>
         <el-form
           class="formPadding"
           :model="user"
@@ -96,7 +96,7 @@ export default {
   font-size: 18px;
   color: #999999;
 }
-.icon-RDS {
+.icon-DB {
   color: #37474f;
   font-size: 72px;
   display: block;

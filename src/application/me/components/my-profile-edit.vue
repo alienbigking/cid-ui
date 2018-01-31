@@ -103,17 +103,14 @@ export default {
 <style lang="scss" scoped>
 .detail-card + .detail-card {
   padding: 20px;
-  font-size: 14px;
   color: #333;
   line-height: 1;
   span {
     margin-left: 40px;
-    font-size: 12px;
     color: #999;
   }
   .modififyPassword {
     float: right;
-    font-size: 12px;
     color: #2196f3;
   }
 }

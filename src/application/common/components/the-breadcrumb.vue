@@ -41,7 +41,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.icon-zhuye {
-  font-size: 14px;
-}
 </style>

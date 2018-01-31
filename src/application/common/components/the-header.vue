@@ -4,7 +4,7 @@
       class="header-left"
       @click="onHome">
       <i
-        class="iconfont icon-RDS"
+        class="iconfont icon-DB"
         style="font-size: 22px;"/>
       <span class="fs-16">罪犯数据库</span>
       <i
@@ -73,7 +73,7 @@ export default {
   align-items: center;
   .fs-16 {
     font-size: 16px;
-    margin: 0 142px 0 10px;
+    margin: 0 112px 0 10px;
   }
   .icon-caidan {
     font-size: 20px;
@@ -86,7 +86,6 @@ export default {
     margin-left: 20px;
     a {
       color: #fff;
-      font-size: 12px;
     }
     img {
       margin-right: 7px;

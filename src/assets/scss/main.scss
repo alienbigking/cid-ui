@@ -21,15 +21,16 @@
   border: $border;
   background: $white;
   border-radius: $radius;
-  font-size: 14px;
   color: $color-default;
   min-width: 600px;
+  font-size: $font-size;
   overflow-x: auto;
   .card-title{
     color: $color-default;
     border-bottom: $border;
     padding: $padding-default;
     font-weight: bold;
+    font-size: 14px;
   }
   .card-body{
     box-sizing: border-box;
@@ -37,8 +38,7 @@
     border-bottom: $border;
     overflow: hidden;
     &:last-child{ border: 0;}
-    label{
-      font-size: $font-size;
+    label:not([class^="el-"]){
       color: #666;//新改的字体颜色
       font-weight: bold;
       display: inline-block;
@@ -48,20 +48,18 @@
       box-sizing: border-box;
       line-height: 20px;
     }
-    label + span{
+    label:not([class^="el-"]) + span{
       display: inline-block;
       vertical-align: top;
       min-height: 16px;
       padding: 16px 10px 6px 0;
       font-weight: bold;
-      font-size: $font-size;
       line-height: 20px;
     }
   }
   .detail{
       margin-top: 20px;
       font-weight: bold;
-      font-size: $font-size;
       & + .el-button{
           float: right;
           margin-top: 20px;
@@ -146,15 +144,17 @@
         }
     }
     .el-form-item-div{ // 有两个按钮的表单，按钮位于右侧，按钮间相隔20px
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
         width: 100%;
         button{
             margin-right: $padding-default;
             margin-left: 0;
         }
     }
+}
+.el-form-item-div{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 .formPadding{
     padding: 20px 0 20px 20px;

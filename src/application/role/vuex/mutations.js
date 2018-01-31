@@ -13,5 +13,11 @@ export default {
     },
     [types.SET_PAGED_ROLES](state, pagedRoles) {
         state.pagedRoles = pagedRoles;
+    },
+    [types.SET_ALL_PERMISSIONS](state, allPermissions) {
+        state.allPermissions = allPermissions;
+    },
+    [types.SET_ROLE_PERMISSIONS](state, permissions) {
+        state.rolePermissions = _.cloneDeep(permissions);
     }
 };
