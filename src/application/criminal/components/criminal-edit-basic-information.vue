@@ -624,7 +624,7 @@ export default {
       this.allSeparateManagementLevels = response[6];
       this.allSeparateCustodyTypes = response[7];
       this.allCommutationScales = response[8];
-      this.allCountries = response[9];
+      // this.allCountries = response[9];
       response[9].map(item => { item.children = []; });
       this.allSelectedBirthplace = response[9];
       console.log(this.allSelectedBirthplace);
@@ -727,21 +727,23 @@ export default {
         const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
         const selectedCity = selectedProvince.children.find(c => c.code === selectedCityCode);
         regionLookupService.getAllCounties(selectedCityCode).then(response => {
-          // selectedCity.children = _.cloneDeep(response);
-          this.$set(selectedCity, "children", _.cloneDeep(response));
+          selectedCity.children = _.cloneDeep(response);
+          // this.$set(selectedCity, "children", _.cloneDeep(response));
         });
       } else if (selectedProvinceCode) {
         const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
         const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
         regionLookupService.getAllCities(selectedProvinceCode).then(response => {
-          // selectedProvince.children = _.cloneDeep(response);
-          this.$set(selectedProvince, "children", _.cloneDeep(response));
+          response.map(item => { item.children = []; });
+          selectedProvince.children = _.cloneDeep(response);
+          // this.$set(selectedProvince, "children", _.cloneDeep(response));
         });
       } else if (selectedCountryCode) {
         const selectedCountry = this.allSelectedBirthplace.find(b => b.code === selectedCountryCode);
         regionLookupService.getAllProvinces(selectedCountryCode).then(response => {
-          // selectedCountry.children = _.cloneDeep(response);
-          this.$set(selectedCountry, "children", _.cloneDeep(response));
+          response.map(item => { item.children = []; });
+          selectedCountry.children = _.cloneDeep(response);
+          // this.$set(selectedCountry, "children", _.cloneDeep(response));
         });
       };
     },
