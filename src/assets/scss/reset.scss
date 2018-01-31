@@ -179,6 +179,15 @@
 //      font-size: $font-size;
 //   }
 // }
+// .el-tree-node__expand-icon{
+//   font-family: "iconfont" !important;
+//   &:before{
+//     content: "\E61D";
+//   }
+//   &.expanded{
+//     transform: none;
+//   }
+// }
 /******************************** 表单开始 ********************************/
 .el-form{
     box-sizing: border-box;
