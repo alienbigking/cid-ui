@@ -68,7 +68,7 @@ export default {
   align-items: center;
   .fs-16 {
     font-size: 16px;
-    margin: 0 142px 0 10px;
+    margin: 0 112px 0 10px;
   }
   .icon-caidan {
     font-size: 20px;
