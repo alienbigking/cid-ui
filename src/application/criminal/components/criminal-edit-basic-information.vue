@@ -10,8 +10,7 @@
         class="w25"
         label="编号"
         prop="criminal.code">
-        <el-input
-        v-model="form.criminal.code"/>
+        <el-input v-model="form.criminal.code"/>
       </el-form-item>
       <el-form-item
         class="w25"
@@ -526,6 +525,16 @@ export default {
       this.$set(this.form.criminal, "commutationScaleCode", val.code);
       this.$set(this.form.criminal, "commutationScaleName", val.name);
     },
+    "this.form.selectedBirthplace"(val) {
+      this.$set(this.form.criminal, "birthplaceCountryCode", val[0].code);
+      this.$set(this.form.criminal, "birthplaceCountryName", val[0].name);
+      this.$set(this.form.criminal, "birthplaceProvinceCode", val[0].children[0].code);
+      this.$set(this.form.criminal, "birthplaceProvinceName", val[0].children[0].name);
+      this.$set(this.form.criminal, "birthplaceCityCode", val[0].children[0].children[0].code);
+      this.$set(this.form.criminal, "birthplaceCityName", val[0].children[0].children[0].name);
+      this.$set(this.form.criminal, "birthplaceCountyCode", val[0].children[0].children[0].children[0].code);
+      this.$set(this.form.criminal, "birthplaceCountyName", val[0].children[0].children[0].children[0].name);
+    },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
         this.$store.commit("updateCriminal", criminal);
@@ -563,7 +572,6 @@ export default {
         item.children = [];
       });
       this.allSelectedBirthplace = _.cloneDeep(response[9]);
-      console.log(this.allSelectedBirthplace);
       this.initializing = false;
 
       this.getCriminal(this.$route.params.id).then(() => {
@@ -608,6 +616,31 @@ export default {
           code: this.form.criminal.commutationScaleCode,
           name: this.form.criminal.commutationScaleName
         };
+        this.form.selectedBirthplace = [
+          {
+            code: this.form.criminal.birthplaceCountryCode,
+            name: this.form.criminal.birthplaceCountryName,
+            children: [
+              {
+                code: this.form.criminal.birthplaceProvinceCode,
+                name: this.form.criminal.birthplaceProvinceName,
+                children: [
+                  {
+                    code: this.form.criminal.birthplaceCityCode,
+                    name: this.form.criminal.birthplaceCityName,
+                    children: [
+                      {
+                        code: this.form.criminal.birthplaceCountyCode,
+                        name: this.form.criminal.birthplaceCountyName
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ];
+        console.log(this.form.selectedBirthplace);
         // Object.keys(this.form.criminal).map(key => {
         //   let arr = key.split("Code");
         //   if (arr.length === 2 && arr[1] === "") {
@@ -656,7 +689,6 @@ export default {
       "updateCriminal"
     ]),
     onChangeBirthplaceAddress(value) {
-      console.log(value);
       const selectedCountryCode = value[0];
       const selectedProvinceCode = value[1];
       const selectedCityCode = value[2];
