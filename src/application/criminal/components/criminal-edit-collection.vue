@@ -22,18 +22,18 @@
 import CriminalCollection from "./criminal-collection-edit";
 
 export default {
-    components: {
-        "criminal-collection-edit": CriminalCollection
-    },
+  components: {
+    "criminal-collection-edit": CriminalCollection
+  },
   data() {
     return {
-          editDialogVisible: false
+      editDialogVisible: false
     };
   },
   methods: {
-      onNew() {
-          this.editDialogVisible = true;
-      }
+    onNew() {
+      this.editDialogVisible = true;
+    }
   }
 };
 </script>
