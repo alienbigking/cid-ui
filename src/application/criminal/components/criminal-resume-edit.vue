@@ -4,7 +4,7 @@
     v-loading='loading'
     :model="criminalResume"
     :rules="rules"
-    ef="form"
+    ref="form"
     label-position="top">
     <el-form-item
       class="w-px180"
@@ -57,7 +57,6 @@
 <script>
 import { mapActions } from "vuex";
 import _ from "lodash";
-
 export default {
   props: {
     criminalResumeId: {

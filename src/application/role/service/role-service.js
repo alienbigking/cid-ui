@@ -28,7 +28,13 @@ export default {
     getAllPermissions() {
       return axios.get('api/permissions').then(response => response.data);
     },
-    getRolePermissions(id) {
-      return axios.get(`api/roles/${id}/role-permissions`).then(response => response.data);
+    getRolePermissions(roleId) {
+      return axios.get(`api/roles/${roleId}/role-permissions`).then(response => response.data);
+    },
+    updateRolePermissions(roleId, permissions) {
+      return axios.put(`api/roles/${roleId}/role-permissions`, permissions);
+    },
+    deleteRolePermissions(roleId) {
+      return axios.delete(`api/roles/${roleId}/role-permissions`);
     }
 };

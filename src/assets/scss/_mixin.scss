@@ -21,7 +21,7 @@
     min-width: 100px;
   } @else if $type == addInEdit { // 编辑页中新增
     background: #009588;
-    width: 76px;
+    min-width: 76px;
   } @else if $type == addInNew { // 新增页中新增
     background: #2196F3;
     width: 76px;
