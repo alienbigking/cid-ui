@@ -526,14 +526,34 @@ export default {
       this.$set(this.form.criminal, "commutationScaleName", val.name);
     },
     "this.form.selectedBirthplace"(val) {
-      this.$set(this.form.criminal, "birthplaceCountryCode", val[0].code);
-      this.$set(this.form.criminal, "birthplaceCountryName", val[0].name);
-      this.$set(this.form.criminal, "birthplaceProvinceCode", val[0].children[0].code);
-      this.$set(this.form.criminal, "birthplaceProvinceName", val[0].children[0].name);
-      this.$set(this.form.criminal, "birthplaceCityCode", val[0].children[0].children[0].code);
-      this.$set(this.form.criminal, "birthplaceCityName", val[0].children[0].children[0].name);
-      this.$set(this.form.criminal, "birthplaceCountyCode", val[0].children[0].children[0].children[0].code);
-      this.$set(this.form.criminal, "birthplaceCountyName", val[0].children[0].children[0].children[0].name);
+      this.$set(this.form.criminal, "birthplaceCountryCode", val[0]);
+      this.$set(
+        this.form.criminal,
+        "birthplaceCountryName",
+        regionLookupService.getAllProvinces(val[0]).then(response => {
+          return response[0].countryName;
+        }));
+      this.$set(this.form.criminal, "birthplaceProvinceCode", val[1]);
+      this.$set(
+        this.form.criminal,
+        "birthplaceProvinceName",
+        regionLookupService.getAllProvinces(val[0]).then(response => {
+          return response[0].name;
+        }));
+      this.$set(this.form.criminal, "birthplaceCityCode", val[2]);
+      this.$set(
+        this.form.criminal,
+        "birthplaceCityName",
+        regionLookupService.getAllCounties(val[1]).then(response => {
+          return response[0].name;
+        }));
+      this.$set(this.form.criminal, "birthplaceCountyCode", val[3]);
+      this.$set(
+        this.form.criminal,
+        "birthplaceCountyName",
+        regionLookupService.getAllCounties(val[2]).then(response => {
+          return response[0].name;
+        }));
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
@@ -616,51 +636,51 @@ export default {
           code: this.form.criminal.commutationScaleCode,
           name: this.form.criminal.commutationScaleName
         };
+        const selectedCountry = this.allSelectedBirthplace.find(
+          b => b.code === this.form.criminal.birthplaceCountryCode
+        );
+        regionLookupService
+          .getAllProvinces(this.form.criminal.birthplaceCountryCode)
+          .then(response => {
+            response.map(item => {
+              item.children = [];
+            });
+            selectedCountry.children = _.cloneDeep(response);
+          }).then(() => {
+            const selectedCountry = this.allSelectedBirthplace.find(
+              b => b.code === this.form.criminal.birthplaceCountryCode
+            );
+            const selectedProvince = selectedCountry.children.find(
+              p => p.code === this.form.criminal.birthplaceProvinceCode
+            );
+            regionLookupService
+              .getAllCities(this.form.criminal.birthplaceProvinceCode)
+              .then(response => {
+                response.map(item => {
+                  item.children = [];
+                });
+                selectedProvince.children = _.cloneDeep(response);
+              }).then(() => {
+                const selectedCountry = this.allSelectedBirthplace.find(
+                  b => b.code === this.form.criminal.birthplaceCountryCode
+                );
+                const selectedProvince = selectedCountry.children.find(
+                  p => p.code === this.form.criminal.birthplaceProvinceCode
+                );
+                const selectedCity = selectedProvince.children.find(
+                  c => c.code === this.form.criminal.birthplaceCityCode
+                );
+                regionLookupService.getAllCounties(this.form.criminal.birthplaceCityCode).then(response => {
+                  selectedCity.children = _.cloneDeep(response);
+                });
+              });
+          });
         this.form.selectedBirthplace = [
           this.form.criminal.birthplaceCountryCode,
           this.form.criminal.birthplaceProvinceCode,
           this.form.criminal.birthplaceCityCode,
           this.form.criminal.birthplaceCountyCode
         ];
-        console.log(this.form.selectedBirthplace);
-        this.allSelectedBirthplace = [];
-        // Object.keys(this.form.criminal).map(key => {
-        //   let arr = key.split("Code");
-        //   if (arr.length === 2 && arr[1] === "") {
-        //     if (arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)) {
-        //       let str = arr[0].match(/(birthplace)|(householdRegisterAddress)|(homeAddress)/g)[0];
-        //       this.form.criminal[str] = [this.form.criminal[`${str}CountryCode`], this.form.criminal[`${str}ProvinceCode`], this.form.criminal[`${str}CityCode`], this.form.criminal[`${str}CountyCode`]];
-        //     }
-        //   }
-        // });
-        // ["birthplace", "householdRegisterAddress", "homeAddress"].map(type => {
-        //   console.log(this.allCountries);
-        //   this[type].countryIndex = this.allCountries.findIndex(item => { return item.code === this.form.criminal[type][0]; });
-        //   if (!this.allCountries[this[type].countryIndex].children.length) {
-        //     regionLookupService.getAllProvinces(this.form.criminal[type][0]).then(provinces => {
-        //       provinces.map(item => { item.children = []; });
-        //       this.allCountries[this[type].countryIndex].children = _.cloneDeep(provinces);
-        //       this[type].provinceIndex = this.allCountries[this[type].countryIndex].children.findIndex(item => {
-        //         return item.code === this.form.criminal[type][1];
-        //       });
-        //       if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.length) {
-        //         regionLookupService.getAllCities(this.form.criminal[type][1]).then(cities => {
-        //           cities.map(item => { item.children = []; });
-        //           this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children = _.cloneDeep(cities);
-        //           this[type].cityIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children.findIndex(item => {
-        //             return item.code === this.form.criminal[type][2];
-        //           });
-        //           if (!this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.length) {
-        //             regionLookupService.getAllCounties(this.form.criminal[type][2]).then(counties => {
-        //               this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children = _.cloneDeep(counties);
-        //               this[type].countyIndex = this.allCountries[this[type].countryIndex].children[this[type].provinceIndex].children[this[type].cityIndex].children.findIndex(item => { return item.code === this.criminal[type][3]; });
-        //             });
-        //           }
-        //         });
-        //       }
-        //     });
-        //   }
-        // });
       });
     });
   },
