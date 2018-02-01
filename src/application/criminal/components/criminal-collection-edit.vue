@@ -3,7 +3,6 @@
     <object
       classid="CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F"
       codebase="mxCapacitiveDriver.ocx"
-      :id="id"
       ref="abc"
       height=0
       width=0 />
@@ -61,6 +60,12 @@
 import {default as collectionService} from '../service/criminal-collection-service';
 
 export default {
+    props: {
+      editDialogVisible: {
+        type: Boolean,
+        default: false
+    }
+    },
     data() {
         return {
              id: "asd",
@@ -78,7 +83,7 @@ export default {
             this.imgUrl = '';
             if (this.imgUrl === '') {
                 let iDevIndex = 0;
-                console.log(this.$el.querySelector('#' + this.id));
+                alert('123');
                 console.log(this.$refs.abc);
                 var img1 = this.$el.querySelector('#' + this.id).GetImage(iDevIndex, 1000);
                 if (collectionService.IsSuccess(img1) === 0) {
@@ -86,7 +91,7 @@ export default {
                     var curPath = "c:\\1234\\";
                     alert(img1);
                     console.log(curPath);
-                    this.$el.querySelector('#' + this.id).ImageToBmpFile(curPath + "54321.bmp", img1);
+                    // this.$el.querySelector('#' + this.id).ImageToBmpFile(curPath + "54321.bmp", img1);
                 }
             }
         },
