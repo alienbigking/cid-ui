@@ -617,30 +617,13 @@ export default {
           name: this.form.criminal.commutationScaleName
         };
         this.form.selectedBirthplace = [
-          {
-            code: this.form.criminal.birthplaceCountryCode,
-            name: this.form.criminal.birthplaceCountryName,
-            children: [
-              {
-                code: this.form.criminal.birthplaceProvinceCode,
-                name: this.form.criminal.birthplaceProvinceName,
-                children: [
-                  {
-                    code: this.form.criminal.birthplaceCityCode,
-                    name: this.form.criminal.birthplaceCityName,
-                    children: [
-                      {
-                        code: this.form.criminal.birthplaceCountyCode,
-                        name: this.form.criminal.birthplaceCountyName
-                      }
-                    ]
-                  }
-                ]
-              }
-            ]
-          }
+          this.form.criminal.birthplaceCountryCode,
+          this.form.criminal.birthplaceProvinceCode,
+          this.form.criminal.birthplaceCityCode,
+          this.form.criminal.birthplaceCountyCode
         ];
         console.log(this.form.selectedBirthplace);
+        this.allSelectedBirthplace = [];
         // Object.keys(this.form.criminal).map(key => {
         //   let arr = key.split("Code");
         //   if (arr.length === 2 && arr[1] === "") {
