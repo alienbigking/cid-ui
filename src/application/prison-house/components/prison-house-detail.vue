@@ -4,7 +4,7 @@
     <div class="card-body">
       <el-row>
         <el-col :span="12">
-          <label>编号：</label><span> {{ prisonHouse.id }}</span>
+          <label>编号：</label><span> {{ prisonHouse.code }}</span>
         </el-col>
         <el-col :span="12">
           <label>创建时间：</label><span> {{ prisonHouse.createdTime | moment }}</span>
