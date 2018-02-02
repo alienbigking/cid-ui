@@ -70,9 +70,9 @@ export default {
         ],
         name: [
           { required: true, message: "请输入租户名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
+          { max: 100, message: "长度在 100 个字符内" }
         ],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        description: [{ max: 1000, message: "长度在 1000 个字符内" }]
       },
       saving: false
     };

@@ -45,10 +45,10 @@ export default {
       rules: {
         name: [
           { required: true, message: "请输入角色名称" },
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符" }
+          { max: 100, message: "长度在 100 个字符内" }
         ],
         description: [
-          { min: 5, max: 255, message: "长度在 5 到 255 个字符" }
+          { max: 1000, message: "长度在 1000 个字符内" }
         ]
       },
       saving: false

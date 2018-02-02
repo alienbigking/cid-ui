@@ -4,15 +4,15 @@
     <div class="card-body">
       <el-row>
         <el-col :span="12">
-          <label>姓名：</label><span>{{ user.name }}</span>
+          <label>账号：</label><span>{{ user.username }}</span>
         </el-col>
         <el-col :span="12">
-          <label>用户账号：</label><span>{{ user.username }}</span>
+          <label>名称：</label><span>{{ user.name }}</span>
         </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
-          <label>用户状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
+          <label>状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
         </el-col>
       </el-row>
       <el-row>

@@ -5,8 +5,9 @@
       codebase="mxCapacitiveDriver.ocx"
       ref="abc"
       height=0
+      :id="id"
       width=0 />
-    <!-- <object
+    <object
       classid="clsid:BCC0CDFA-676A-43F2-B1D7-B4CD3FF72B6A"
       id="sy305"
       height=0
@@ -24,7 +25,7 @@
       <param
         name="_StockProps"
         value="0">
-    </object> -->
+    </object>
     <el-row :gutter="10">
       <el-col :span="12">
         <el-card>
@@ -56,7 +57,13 @@
   </div>
 </template>
 
+<script language="JavaScript" type="text/javascript" for="sy305" event="PhotoCaptureEvent(CaptureKind, ImageFile)">
+</script>
+
 <script>
+window.onload = function() {
+  document.getElementById('#sy305').Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
+};
 import {default as collectionService} from '../service/criminal-collection-service';
 
 export default {
@@ -83,15 +90,15 @@ export default {
             this.imgUrl = '';
             if (this.imgUrl === '') {
                 let iDevIndex = 0;
-                alert('123');
                 console.log(this.$refs.abc);
                 var img1 = this.$el.querySelector('#' + this.id).GetImage(iDevIndex, 1000);
+                console.log(img1);
                 if (collectionService.IsSuccess(img1) === 0) {
                     console.log(img1);
                     var curPath = "c:\\1234\\";
                     alert(img1);
                     console.log(curPath);
-                    // this.$el.querySelector('#' + this.id).ImageToBmpFile(curPath + "54321.bmp", img1);
+                    this.$el.querySelector('#' + this.id).ImageToBmpFile(curPath + "54321.bmp", img1);
                 }
             }
         },
@@ -101,23 +108,20 @@ export default {
             console.log(r);
         },
         Photoing() {
-            let sy306 = this.$refs.photo;
+            let sy306 = this.$el.querySelector('#sy305');
             console.log('拍照成功');
-            let r = sy306.PhotoCapture(0, "test.bmp");
-            if (r === 1) {
+            console.log(sy306);
+            let curpath = "c:\\123\\test.bmp";
+            let r = sy306.PhotoCapture(0, curpath);
+            alert(r);
+                alert(1234);
                 let info = sy306.GetExtraInfo("capture_base64");
-                console.log(info);
+                alert(info);
                 this.picture = "data:image/bmp;base64," + info;
-            }
         }
     }
 };
-window.onload = function() {
-  document.getElementById('#sy305').Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
-};
-</script>
 
-<script language="JavaScript" type="text/javascript" for="sy305" event="PhotoCaptureEvent(CaptureKind, ImageFile)">
 </script>
 
 <style lang="scss" scoped>

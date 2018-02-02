@@ -66,18 +66,18 @@ export default {
       rules: {
         username: [
           { required: true, message: "请输入用户账号" },
-          { max: 50, message: "长度在 1 到 50 个字符" }
+          { max: 100, message: "长度在 100 个字符内" }
         ],
         name: [
           { required: true, message: "请输入租户名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
+          { max: 100, message: "长度在 100 个字符内" }
         ],
         password: [
           { required: true, message: "请输入密码" },
           { min: 7, message: "长度必须大于 6 个字符" }
         ],
-        status: ["required"],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        status: [ { required: true, message: "请选择状态" } ],
+        description: [{ max: 1000, message: "长度在 1000 个字符内" }]
       },
       saving: false
     };
