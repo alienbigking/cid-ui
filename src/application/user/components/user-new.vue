@@ -74,7 +74,7 @@ export default {
         ],
         password: [
           { required: true, message: "请输入密码" },
-          { min: 7, message: "长度必须大于 6 个字符" }
+          { min: 7, message: "密码长度最少6位" }
         ],
         status: [ { required: true, message: "请选择状态" } ],
         description: [{ max: 1000, message: "长度在 1000 个字符内" }]

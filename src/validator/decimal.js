@@ -43,4 +43,13 @@ function dataRange1t10d(rule, value, callback) {
     }
 }
 
-export { decimal1i2f, decimal2i2f, decimal3i2f, decimal8i2f, dataRange1t10d };
+function IDCardRange15a18d(rule, value, callback) {
+    let regExp = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
+    if (regExp.test(value) === false) {
+        callback(new Error("请输入正确的格式"));
+    } else {
+        callback();
+    }
+}
+
+export { decimal1i2f, decimal2i2f, decimal3i2f, decimal8i2f, dataRange1t10d, IDCardRange15a18d };

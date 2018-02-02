@@ -62,7 +62,7 @@
           <el-table-column
             label="用户状态"
             sortable
-            align="center">
+            width="141px">
             <template slot-scope="scope">
               {{ scope.row.status | enumText(userStatuses) }}
               <el-button

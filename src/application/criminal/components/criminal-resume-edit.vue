@@ -42,7 +42,7 @@
       prop="duty">
       <el-input v-model="criminalResume.duty"/>
     </el-form-item>
-    <div class="el-form-item el-form-item-div">
+    <div class="el-form-item-div">
       <el-button
         class="button-cancel"
         @click="onClose">返 回</el-button>
@@ -73,7 +73,8 @@ export default {
       criminalResume: _.cloneDeep(this.$store.state.criminal.criminalResume),
       rules: {
         startDate: [{ required: true, message: "请输入开始日期" }],
-        endDate: [{ required: true, message: "请输入结束日期" }]
+        endDate: [{ required: true, message: "请输入结束日期" }],
+        company: [{ required: true, message: "请输入公司" }]
       },
       pickerBeginDateBefore: {
         disabledDate: (time) => {
