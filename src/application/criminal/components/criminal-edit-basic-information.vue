@@ -360,7 +360,7 @@
         prop="criminal.remark">
         <el-input
           v-model="form.criminal.remark"
-          :maxlength="255"
+          :maxlength="1000"
           type="textarea"
           resize="none"/>
       </el-form-item>
