@@ -19,61 +19,59 @@
           class="button-addInList"
           @click="onNew">新 增</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedCriminals.content"
-          v-loading="loading"
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="code"
-            label="编号"/>
-          <el-table-column
-            prop="name"
-            label="姓名"/>
-          <el-table-column
-            prop="alias"
-            label="别名"/>
-          <el-table-column
-            prop="genderName"
-            label="性别"/>
-          <el-table-column
-            prop="ethnicityName"
-            label="民族"/>
-          <el-table-column
-            prop="birthday"
-            label="出生日期"/>
-          <el-table-column
-            prop="prisonAreaName"
-            label="隶属监区"/>
-          <el-table-column
-            align="center"
-            label="操作"
-            width="141px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-              <el-button
-                type="text"
-                @click="onEdit(scope.row.id)">修改</el-button>
-              <el-button
-                type="text"
-                @click="onDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedCriminals.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedCriminals.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="my_table"
+        :data="pagedCriminals.content"
+        v-loading="loading"
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="code"
+          label="编号"/>
+        <el-table-column
+          prop="name"
+          label="姓名"/>
+        <el-table-column
+          prop="alias"
+          label="别名"/>
+        <el-table-column
+          prop="genderName"
+          label="性别"/>
+        <el-table-column
+          prop="ethnicityName"
+          label="民族"/>
+        <el-table-column
+          prop="birthday"
+          label="出生日期"/>
+        <el-table-column
+          prop="prisonAreaName"
+          label="隶属监区"/>
+        <el-table-column
+          align="center"
+          label="操作"
+          width="141px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedCriminals.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedCriminals.totalElements"/>
+      </div>
     </div>
     <el-dialog
       class="deleteDialog"
