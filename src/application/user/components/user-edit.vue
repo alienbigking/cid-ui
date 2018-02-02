@@ -9,13 +9,13 @@
         ref="form"
         label-position="top">
         <el-form-item
-          label="账号名称"
+          label="账号"
           class="w50 the-disabled"
           prop="username">
           <span class="el-input__inner">{{ user.username }}</span>
         </el-form-item>
         <el-form-item
-          label="姓名"
+          label="名称"
           class="w50"
           prop="name">
           <el-input v-model="user.name"/>
@@ -58,7 +58,9 @@ export default {
     return {
       user: _.cloneDeep(this.$store.state.user.user),
       rules: {
-        name: [{ required: true, message: "姓名不能为空" }]
+        name: [
+          { required: true, message: "姓名不能为空" },
+          { max: 100, message: "长度在 100 个字符内" } ]
       },
       saving: false
     };
