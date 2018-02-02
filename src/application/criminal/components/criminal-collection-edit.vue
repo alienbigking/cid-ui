@@ -61,9 +61,9 @@
 </script>
 
 <script>
-window.onload = function() {
-  document.getElementById('#sy305').Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
-};
+// window.onload = function() {
+//   document.getElementById('#sy305').Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
+// };
 import {default as collectionService} from '../service/criminal-collection-service';
 
 export default {
