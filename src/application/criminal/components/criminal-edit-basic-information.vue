@@ -134,40 +134,38 @@
           :loading="initializing"
           clearable/>
       </el-form-item>
-      <!-- <el-form-item
+      <el-form-item
         class="w50"
         label="户籍地址"
-        prop="criminal.householdRegisterAddress">
+        prop="selectedHouseholdRegister">
         <el-cascader
-          :options="allCountries"
-          @change="onChange($event, 'householdRegisterAddress')"
-          @active-item-change="onChangeAddress($event, 'householdRegisterAddress')"
+          :options="allHouseholdRegister"
+          @active-item-change="onChangeHouseholdRegisterAddress"
           :props="{ value: 'code', label: 'name', children: 'children' }"
           separator="-"
-          v-model="form.criminal.householdRegisterAddress"
+          v-model="form.selectedHouseholdRegister"
           :loading="initializing"
           clearable/>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item
         class="w50"
         label="街道详情(户籍地址)"
         prop="criminal.householdRegisterAddressStreetDetail">
         <el-input v-model="form.criminal.householdRegisterAddressStreetDetail"/>
       </el-form-item>
-      <!-- <el-form-item
+      <el-form-item
         class="w50"
         label="家庭地址"
-        prop="criminal.homeAddress">
+        prop="selectedHomeAddress">
         <el-cascader
-          :options="allCountries"
-          @change="onChange($event, 'homeAddress')"
-          @active-item-change="onChangeAddress($event, 'homeAddress')"
+          :options="allHomeAddress"
+          @active-item-change="onChangeHomeAddress"
           :props="{ value: 'code', label: 'name', children: 'children' }"
           separator="-"
-          v-model="form.criminal.homeAddress"
+          v-model="form.selectedHomeAddress"
           :loading="initializing"
           clearable/>
-      </el-form-item> -->
+      </el-form-item>
       <el-form-item
         class="w50"
         label="街道详情(家庭地址)"
@@ -396,7 +394,11 @@ export default {
         selectedSeparateCustodyType: {},
         selectedCommutationScale: {},
         selectedBirthplace: [],
-        criminal: _.cloneDeep(this.$store.state.criminal.criminal)
+        selectedHouseholdRegister: [],
+        selectedHomeAddress: [],
+        criminal: _.cloneDeep(
+            this.$store.state.criminal.criminal
+        )
       },
       rules: {
         "criminal.code": [
@@ -410,7 +412,8 @@ export default {
         selectedGender: [{ required: true, message: "请选择性别" }],
         "criminal.birthday": [{ required: true, message: "请选择出生日期" }],
         "criminal.identityCardNumber": [
-          { required: true, message: "请输入身份证号" }
+          { required: true, message: "请输入身份证号" },
+          { validator: this.$validators.IDCardRange15a18d }
         ],
         "criminal.married": [{ required: true, message: "请选择是否婚否" }],
         selectedEthnicity: [{ required: true, message: "请选择民族" }],
@@ -419,14 +422,14 @@ export default {
           { required: true, message: "请选择户籍类型" }
         ],
         selectedBirthplace: [{ required: true, message: "请选择出生地" }],
-        "criminal.householdRegisterAddress": [
+        selectedHouseholdRegister: [
           { required: true, message: "请选择户籍地址" }
         ],
         "criminal.householdRegisterAddressStreetDetail": [
           { required: true, message: "请输入户籍街道详情" },
           { max: 50, message: "长度在 50 个字符以内" }
         ],
-        "criminal.homeAddress": [{ required: true, message: "请选择家庭住址" }],
+        selectedHomeAddress: [{ required: true, message: "请选择家庭住址" }],
         "criminal.homeAddressStreetDetail": [
           { required: true, message: "请输入家庭街道详情" },
           { max: 50, message: "长度在 50 个字符以内" }
@@ -475,7 +478,9 @@ export default {
       allSeparateManagementLevels: [],
       allSeparateCustodyTypes: [],
       allCommutationScales: [],
-      allSelectedBirthplace: []
+      allSelectedBirthplace: [],
+      allHouseholdRegister: [],
+      allHomeAddress: []
     };
   },
   computed: {
@@ -485,7 +490,7 @@ export default {
     })
   },
   watch: {
-    "form.selectGender"(val) {
+    "form.selectedGender"(val) {
       this.$set(this.form.criminal, "genderCode", val.code);
       this.$set(this.form.criminal, "genderName", val.name);
     },
@@ -525,35 +530,95 @@ export default {
       this.$set(this.form.criminal, "commutationScaleCode", val.code);
       this.$set(this.form.criminal, "commutationScaleName", val.name);
     },
-    "this.form.selectedBirthplace"(val) {
+    "form.selectedBirthplace"(val) {
       this.$set(this.form.criminal, "birthplaceCountryCode", val[0]);
+      let country = this.allSelectedBirthplace.find(item => item.code === val[0]);
       this.$set(
         this.form.criminal,
         "birthplaceCountryName",
-        regionLookupService.getAllProvinces(val[0]).then(response => {
-          return response[0].countryName;
-        }));
+        country.name
+      );
       this.$set(this.form.criminal, "birthplaceProvinceCode", val[1]);
+      let province = country.children.find(item => item.code === val[1]);
       this.$set(
         this.form.criminal,
         "birthplaceProvinceName",
-        regionLookupService.getAllProvinces(val[0]).then(response => {
-          return response[0].name;
-        }));
+        province.name
+      );
       this.$set(this.form.criminal, "birthplaceCityCode", val[2]);
+      let city = province.children.find(item => item.code === val[2]);
       this.$set(
         this.form.criminal,
         "birthplaceCityName",
-        regionLookupService.getAllCounties(val[1]).then(response => {
-          return response[0].name;
-        }));
+        city.name
+      );
       this.$set(this.form.criminal, "birthplaceCountyCode", val[3]);
+      let County = city.children.find(item => item.code === val[3]);
       this.$set(
         this.form.criminal,
         "birthplaceCountyName",
-        regionLookupService.getAllCounties(val[2]).then(response => {
-          return response[0].name;
-        }));
+        County.name
+      );
+    },
+    "form.selectedHouseholdRegister"(val) {
+      this.$set(this.form.criminal, "householdRegisterAddressCountryCode", val[0]);
+      let country = this.allHouseholdRegister.find(item => item.code === val[0]);
+      this.$set(
+        this.form.criminal,
+        "householdRegisterAddressCountryName",
+        country.name
+      );
+      this.$set(this.form.criminal, "householdRegisterAddressProvinceCode", val[1]);
+      let province = country.children.find(item => item.code === val[1]);
+      this.$set(
+        this.form.criminal,
+        "householdRegisterAddressProvinceName",
+        province.name
+      );
+      this.$set(this.form.criminal, "householdRegisterAddressCityCode", val[2]);
+      let city = province.children.find(item => item.code === val[2]);
+      this.$set(
+        this.form.criminal,
+        "householdRegisterAddressCityName",
+        city.name
+      );
+      this.$set(this.form.criminal, "householdRegisterAddressCountyCode", val[3]);
+      let County = city.children.find(item => item.code === val[3]);
+      this.$set(
+        this.form.criminal,
+        "householdRegisterAddressCountyName",
+        County.name
+      );
+    },
+    "form.selectedHomeAddress"(val) {
+      this.$set(this.form.criminal, "homeAddressCountryCode", val[0]);
+      let country = this.allHomeAddress.find(item => item.code === val[0]);
+      this.$set(
+        this.form.criminal,
+        "homeAddressCountryName",
+        country.name
+      );
+      this.$set(this.form.criminal, "homeAddressProvinceCode", val[1]);
+      let province = country.children.find(item => item.code === val[1]);
+      this.$set(
+        this.form.criminal,
+        "homeAddressProvinceName",
+        province.name
+      );
+      this.$set(this.form.criminal, "homeAddressCityCode", val[2]);
+      let city = province.children.find(item => item.code === val[2]);
+      this.$set(
+        this.form.criminal,
+        "homeAddressCityName",
+        city.name
+      );
+      this.$set(this.form.criminal, "homeAddressCountyCode", val[3]);
+      let County = city.children.find(item => item.code === val[3]);
+      this.$set(
+        this.form.criminal,
+        "homeAddressCountyName",
+        County.name
+      );
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
@@ -562,8 +627,11 @@ export default {
       deep: true
     }
   },
-  activated() {
-    this.form.criminal = { id: this.$route.params.id };
+  created() {
+    this.$store.commit("setCriminal", { id: this.$route.params.id });
+    this.form.criminal = _.cloneDeep(
+        this.$store.state.criminal.criminal
+      );
     Promise.all([
       criminalLookupService.getAllGenders(),
       criminalLookupService.getAllEthnicities(),
@@ -592,9 +660,11 @@ export default {
         item.children = [];
       });
       this.allSelectedBirthplace = _.cloneDeep(response[9]);
+      this.allHouseholdRegister = _.cloneDeep(response[9]);
+      this.allHomeAddress = _.cloneDeep(response[9]);
       this.initializing = false;
-
       this.getCriminal(this.$route.params.id).then(() => {
+        this.$refs.form.clearValidate();
         this.form.criminal = _.cloneDeep(this.$store.state.criminal.criminal);
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
@@ -636,51 +706,33 @@ export default {
           code: this.form.criminal.commutationScaleCode,
           name: this.form.criminal.commutationScaleName
         };
-        const selectedCountry = this.allSelectedBirthplace.find(
-          b => b.code === this.form.criminal.birthplaceCountryCode
-        );
-        regionLookupService
-          .getAllProvinces(this.form.criminal.birthplaceCountryCode)
-          .then(response => {
-            response.map(item => {
-              item.children = [];
-            });
-            selectedCountry.children = _.cloneDeep(response);
-          }).then(() => {
-            const selectedCountry = this.allSelectedBirthplace.find(
-              b => b.code === this.form.criminal.birthplaceCountryCode
-            );
-            const selectedProvince = selectedCountry.children.find(
-              p => p.code === this.form.criminal.birthplaceProvinceCode
-            );
-            regionLookupService
-              .getAllCities(this.form.criminal.birthplaceProvinceCode)
-              .then(response => {
-                response.map(item => {
-                  item.children = [];
-                });
-                selectedProvince.children = _.cloneDeep(response);
-              }).then(() => {
-                const selectedCountry = this.allSelectedBirthplace.find(
-                  b => b.code === this.form.criminal.birthplaceCountryCode
-                );
-                const selectedProvince = selectedCountry.children.find(
-                  p => p.code === this.form.criminal.birthplaceProvinceCode
-                );
-                const selectedCity = selectedProvince.children.find(
-                  c => c.code === this.form.criminal.birthplaceCityCode
-                );
-                regionLookupService.getAllCounties(this.form.criminal.birthplaceCityCode).then(response => {
-                  selectedCity.children = _.cloneDeep(response);
-                });
-              });
-          });
-        this.form.selectedBirthplace = [
+        this.loadingData(
+          this.allSelectedBirthplace,
           this.form.criminal.birthplaceCountryCode,
           this.form.criminal.birthplaceProvinceCode,
           this.form.criminal.birthplaceCityCode,
-          this.form.criminal.birthplaceCountyCode
-        ];
+          this.form.criminal.birthplaceCountyCode,
+          this.form,
+          "selectedBirthplace"
+        );
+        this.loadingData(
+          this.allHouseholdRegister,
+          this.form.criminal.householdRegisterAddressCountryCode,
+          this.form.criminal.householdRegisterAddressProvinceCode,
+          this.form.criminal.householdRegisterAddressCityCode,
+          this.form.criminal.householdRegisterAddressCountyCode,
+          this.form,
+          "selectedHouseholdRegister"
+        );
+        this.loadingData(
+          this.allHomeAddress,
+          this.form.criminal.homeAddressCountryCode,
+          this.form.criminal.homeAddressProvinceCode,
+          this.form.criminal.homeAddressCityCode,
+          this.form.criminal.homeAddressCountyCode,
+          this.form,
+          "selectedHomeAddress"
+        );
       });
     });
   },
@@ -691,13 +743,60 @@ export default {
       "getAllPrisonHouses",
       "updateCriminal"
     ]),
-    onChangeBirthplaceAddress(value) {
+    loadingData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
+      const selectedCountry = allData.find(
+        b => b.code === CountryCode
+      );
+      regionLookupService
+        .getAllProvinces(CountryCode)
+        .then(response => {
+          response.map(item => {
+            item.children = [];
+          });
+          selectedCountry.children = _.cloneDeep(response);
+        }).then(() => {
+          const selectedCountry = allData.find(
+            b => b.code === CountryCode
+          );
+          const selectedProvince = selectedCountry.children.find(
+            p => p.code === ProvinceCode
+          );
+          regionLookupService
+            .getAllCities(ProvinceCode)
+            .then(response => {
+              response.map(item => {
+                item.children = [];
+              });
+              selectedProvince.children = _.cloneDeep(response);
+            }).then(() => {
+              const selectedCountry = allData.find(
+                b => b.code === CountryCode
+              );
+              const selectedProvince = selectedCountry.children.find(
+                p => p.code === ProvinceCode
+              );
+              const selectedCity = selectedProvince.children.find(
+                c => c.code === CityCode
+              );
+              regionLookupService.getAllCounties(CityCode).then(response => {
+                selectedCity.children = _.cloneDeep(response);
+              }).then(() => {
+                form[tpyeName] = [
+                  CountryCode,
+                  ProvinceCode,
+                  CityCode,
+                  CountyCode
+                ];
+              });
+            });
+        });
+    },
+    onLoadingNext(value, allData) {
       const selectedCountryCode = value[0];
       const selectedProvinceCode = value[1];
       const selectedCityCode = value[2];
-      console.log(selectedCountryCode, selectedProvinceCode, selectedCityCode);
       if (selectedCityCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(
+        const selectedCountry = allData.find(
           b => b.code === selectedCountryCode
         );
         const selectedProvince = selectedCountry.children.find(
@@ -710,7 +809,7 @@ export default {
           selectedCity.children = _.cloneDeep(response);
         });
       } else if (selectedProvinceCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(
+        const selectedCountry = allData.find(
           b => b.code === selectedCountryCode
         );
         const selectedProvince = selectedCountry.children.find(
@@ -725,7 +824,7 @@ export default {
             selectedProvince.children = _.cloneDeep(response);
           });
       } else if (selectedCountryCode) {
-        const selectedCountry = this.allSelectedBirthplace.find(
+        const selectedCountry = allData.find(
           b => b.code === selectedCountryCode
         );
         regionLookupService
@@ -737,6 +836,15 @@ export default {
             selectedCountry.children = _.cloneDeep(response);
           });
       }
+    },
+    onChangeBirthplaceAddress(value) {
+      this.onLoadingNext(value, this.allSelectedBirthplace);
+    },
+    onChangeHouseholdRegisterAddress(value) {
+      this.onLoadingNext(value, this.allHouseholdRegister);
+    },
+    onChangeHomeAddress(value) {
+      this.onLoadingNext(value, this.allHomeAddress);
     },
     onSave() {
       this.$refs["form"].validate(valid => {

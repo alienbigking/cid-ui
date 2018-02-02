@@ -4,7 +4,7 @@
     <div class="card-body">
       <el-row>
         <el-col :span="12">
-          <label>角色名称：</label><span> {{ role.name }}</span>
+          <label>名称：</label><span> {{ role.name }}</span>
         </el-col>
         <el-col :span="12">
           <label>创建时间：</label><span> {{ role.createdTime | moment }}</span>

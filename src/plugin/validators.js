@@ -9,7 +9,8 @@ export default {
             decimal8i2f: validators.decimal8i2f,
             dataRange1t10d: validators.dataRange1t10d,
             equalTo: validators.equalTo,
-            checkOtherField: validators.checkOtherField
+            checkOtherField: validators.checkOtherField,
+            IDCardRange15a18d: validators.IDCardRange15a18d
         };
     }
 };
