@@ -22,9 +22,8 @@
   background: $white;
   border-radius: $radius;
   color: $color-default;
-  min-width: 600px;
   font-size: $font-size;
-  overflow-x: auto;
+  min-width: 600px;
   .card-title{
     color: $color-default;
     border-bottom: $border;
@@ -55,11 +54,13 @@
       padding: 16px 10px 6px 0;
       font-weight: bold;
       line-height: 20px;
+      max-width: calc(100% - 46px);
     }
   }
   .detail{
       margin-top: 20px;
       font-weight: bold;
+      line-height: 20px;
       & + .el-button{
           float: right;
           margin-top: 20px;

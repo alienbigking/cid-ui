@@ -61,7 +61,7 @@ export default {
         username: [{ required: true, message: "用户名不能为空" }],
         password: [
           { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码必须大于6位" }
+          { min: 6, message: "密码长度最少6位" }
         ]
       }
     };

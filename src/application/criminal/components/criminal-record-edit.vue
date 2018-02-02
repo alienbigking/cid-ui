@@ -199,7 +199,7 @@
           resize="none"
           v-model="form.criminalRecord.decisionDetail"/>
       </el-form-item>
-      <div class="el-form-item el-form-item-div">
+      <div class="el-form-item-div">
         <el-button
           class="button-cancel"
           @click="onClose">返 回</el-button>

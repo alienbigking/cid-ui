@@ -68,11 +68,11 @@ export default {
       return {
         oldPassword: [
           { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码必须大于6位" }
+          { min: 6, message: "密码长度最少6位" }
         ],
         newPassword: [
           { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码必须大于6位" },
+          { min: 6, message: "密码长度最少6位" },
           {
             validator: this.$validators.checkOtherField,
             form: "form",

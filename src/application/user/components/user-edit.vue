@@ -41,7 +41,7 @@
       </el-form>
     </div>
     <div class="detail-card">修改密码
-      <span>安全性高的密码可以使账号更安全，密码长度要求超过6位以上的密码。</span>
+      <span>安全性高的密码可以使账号更安全，密码长度要求至少6位。</span>
       <span
         class="modififyPassword"
         @click="updatePassword">修改</span>
