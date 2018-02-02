@@ -396,9 +396,10 @@ export default {
         selectedBirthplace: [],
         selectedHouseholdRegister: [],
         selectedHomeAddress: [],
-        criminal: _.cloneDeep(
-            this.$store.state.criminal.criminal
-        )
+        criminal: {}
+        // criminal: _.cloneDeep(
+        //     this.$store.state.criminal.criminal
+        // )
       },
       rules: {
         "criminal.code": [
@@ -663,77 +664,7 @@ export default {
       this.allHouseholdRegister = _.cloneDeep(response[9]);
       this.allHomeAddress = _.cloneDeep(response[9]);
       this.initializing = false;
-      this.getCriminal(this.$route.params.id).then(() => {
-        this.$refs.form.clearValidate();
-        this.form.criminal = _.cloneDeep(this.$store.state.criminal.criminal);
-        this.form.selectedGender = {
-          code: this.form.criminal.genderCode,
-          name: this.form.criminal.genderName
-        };
-        this.form.selectedEthnicity = {
-          code: this.form.criminal.ethnicityCode,
-          name: this.form.criminal.ethnicityName
-        };
-        this.form.selectedNationality = {
-          code: this.form.criminal.nationalityCode,
-          name: this.form.criminal.nationalityName
-        };
-        this.form.selectedHouseholdRegisterType = {
-          code: this.form.criminal.householdRegisterTypeCode,
-          name: this.form.criminal.householdRegisterTypeName
-        };
-        this.form.selectPoliticalStatus = {
-          code: this.form.criminal.politicalStatusCode,
-          name: this.form.criminal.politicalStatusName
-        };
-        this.form.selectEducationDegree = {
-          code: this.form.criminal.educationDegreeCode,
-          name: this.form.criminal.educationDegreeName
-        };
-        this.form.selectedFledType = {
-          code: this.form.criminal.fledTypeCode,
-          name: this.form.criminal.fledTypeName
-        };
-        this.form.selectedSeparateManagementLevel = {
-          code: this.form.criminal.separateManagementLevelCode,
-          name: this.form.criminal.separateManagementLevelName
-        };
-        this.form.selectedSeparateCustodyType = {
-          code: this.form.criminal.separateCustodyTypeCode,
-          name: this.form.criminal.separateCustodyTypeName
-        };
-        this.form.selectedCommutationScale = {
-          code: this.form.criminal.commutationScaleCode,
-          name: this.form.criminal.commutationScaleName
-        };
-        this.loadingData(
-          this.allSelectedBirthplace,
-          this.form.criminal.birthplaceCountryCode,
-          this.form.criminal.birthplaceProvinceCode,
-          this.form.criminal.birthplaceCityCode,
-          this.form.criminal.birthplaceCountyCode,
-          this.form,
-          "selectedBirthplace"
-        );
-        this.loadingData(
-          this.allHouseholdRegister,
-          this.form.criminal.householdRegisterAddressCountryCode,
-          this.form.criminal.householdRegisterAddressProvinceCode,
-          this.form.criminal.householdRegisterAddressCityCode,
-          this.form.criminal.householdRegisterAddressCountyCode,
-          this.form,
-          "selectedHouseholdRegister"
-        );
-        this.loadingData(
-          this.allHomeAddress,
-          this.form.criminal.homeAddressCountryCode,
-          this.form.criminal.homeAddressProvinceCode,
-          this.form.criminal.homeAddressCityCode,
-          this.form.criminal.homeAddressCountyCode,
-          this.form,
-          "selectedHomeAddress"
-        );
-      });
+      this.render();
     });
   },
   methods: {
@@ -845,6 +776,79 @@ export default {
     },
     onChangeHomeAddress(value) {
       this.onLoadingNext(value, this.allHomeAddress);
+    },
+    render() {
+      this.getCriminal(this.$route.params.id).then(() => {
+        this.$refs.form.clearValidate();
+        this.form.criminal = _.cloneDeep(this.$store.state.criminal.criminal);
+        this.form.selectedGender = {
+          code: this.form.criminal.genderCode,
+          name: this.form.criminal.genderName
+        };
+        this.form.selectedEthnicity = {
+          code: this.form.criminal.ethnicityCode,
+          name: this.form.criminal.ethnicityName
+        };
+        this.form.selectedNationality = {
+          code: this.form.criminal.nationalityCode,
+          name: this.form.criminal.nationalityName
+        };
+        this.form.selectedHouseholdRegisterType = {
+          code: this.form.criminal.householdRegisterTypeCode,
+          name: this.form.criminal.householdRegisterTypeName
+        };
+        this.form.selectPoliticalStatus = {
+          code: this.form.criminal.politicalStatusCode,
+          name: this.form.criminal.politicalStatusName
+        };
+        this.form.selectEducationDegree = {
+          code: this.form.criminal.educationDegreeCode,
+          name: this.form.criminal.educationDegreeName
+        };
+        this.form.selectedFledType = {
+          code: this.form.criminal.fledTypeCode,
+          name: this.form.criminal.fledTypeName
+        };
+        this.form.selectedSeparateManagementLevel = {
+          code: this.form.criminal.separateManagementLevelCode,
+          name: this.form.criminal.separateManagementLevelName
+        };
+        this.form.selectedSeparateCustodyType = {
+          code: this.form.criminal.separateCustodyTypeCode,
+          name: this.form.criminal.separateCustodyTypeName
+        };
+        this.form.selectedCommutationScale = {
+          code: this.form.criminal.commutationScaleCode,
+          name: this.form.criminal.commutationScaleName
+        };
+        this.loadingData(
+          this.allSelectedBirthplace,
+          this.form.criminal.birthplaceCountryCode,
+          this.form.criminal.birthplaceProvinceCode,
+          this.form.criminal.birthplaceCityCode,
+          this.form.criminal.birthplaceCountyCode,
+          this.form,
+          "selectedBirthplace"
+        );
+        this.loadingData(
+          this.allHouseholdRegister,
+          this.form.criminal.householdRegisterAddressCountryCode,
+          this.form.criminal.householdRegisterAddressProvinceCode,
+          this.form.criminal.householdRegisterAddressCityCode,
+          this.form.criminal.householdRegisterAddressCountyCode,
+          this.form,
+          "selectedHouseholdRegister"
+        );
+        this.loadingData(
+          this.allHomeAddress,
+          this.form.criminal.homeAddressCountryCode,
+          this.form.criminal.homeAddressProvinceCode,
+          this.form.criminal.homeAddressCityCode,
+          this.form.criminal.homeAddressCountyCode,
+          this.form,
+          "selectedHomeAddress"
+        );
+      });
     },
     onSave() {
       this.$refs["form"].validate(valid => {
