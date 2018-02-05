@@ -11,7 +11,7 @@
     <template v-for="(first, idx1) in menus">
       <el-submenu
         v-if="first.children.length>0"
-        :index="first.index"
+        :index="first.id"
         :key="idx1"
         class="first">
         <template slot="title">
@@ -28,15 +28,14 @@
         <el-menu-item
           v-for="(second, idx2) in first.children"
           :key="idx2"
-          :index="second.index"
+          :index="second.id"
           class="second"
           @click="onNavigate(second.path)">{{ second.name }}</el-menu-item>
       </el-submenu>
       <el-menu-item
         v-else
-        :index="first.index"
+        :index="first.id"
         :key="idx1"
-        :route="first"
         class="first"
         @click="onNavigate(first.path)">
         <i
@@ -53,34 +52,38 @@ import { mapState, mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      activeItem: ""
+      // activeItem: ""
     };
   },
   computed: {
     ...mapState({
-      menus: state => state.common.menus
+      menus: state => state.common.menus,
+      activeItem: state => state.common.activeItem
     }),
     ...mapGetters(["collapsed"])
   },
   created() {
+    let activeItem = "";
     this.getMenus().then(res => {
-      if (sessionStorage.getItem("activeItem")) {
-        this.activeItem = sessionStorage.getItem("activeItem");
+      if (this.$route.path === "/dashboard") {
+        activeItem = this.menus[0].id;
+      } else if (sessionStorage.getItem("activeItem")) {
+        activeItem = sessionStorage.getItem("activeItem");
       } else if (this.menus[0].children.length === 0) {
-        this.activeItem = this.menus[0].index;
+        activeItem = this.menus[0].id;
       } else {
-        console.log(this.menus);
-        this.activeItem = this.menus[0].children[0].index;
+        activeItem = this.menus[0].children[0].id;
       }
+      this.setActiveItem(activeItem);
     });
   },
   methods: {
-    ...mapActions(["getMenus"]),
+    ...mapActions(["getMenus", "setActiveItem"]),
     onNavigate(path) {
       this.$router.push(path);
     },
-    onSelected(a) {
-      sessionStorage.setItem("activeItem", a);
+    onSelected(activeItem) {
+      this.setActiveItem(activeItem);
     }
   }
 };

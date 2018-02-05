@@ -17,5 +17,8 @@ export default {
     },
     handleCollapse({ commit }) {
         commit(types.SET_COLLAPSED);
+    },
+    setActiveItem({ commit }, activeItem) {
+        commit(types.SET_ACTIVEITEM, activeItem);
     }
 };
