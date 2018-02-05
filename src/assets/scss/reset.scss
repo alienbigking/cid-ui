@@ -27,7 +27,7 @@
   width: 100% !important;
   transition: width 0;
   border-right: 0;
-  .el-submenu__title .el-submenu__icon-arrow { color: #FFFFFF; }
+  .el-submenu__icon-arrow{ color: #FFFFFF; }
   .el-submenu {
     .el-menu{ border-bottom: 1px solid #303B40; }
   }
@@ -38,16 +38,14 @@
     transform: rotate(90deg);
   }
 }
-.el-menu--collapse{
-  .el-submenu {
-    .el-menu {
-      margin-left: 0;
-      border: 0;
-      box-shadow: none;
-    }
-    .first{
-      background: #29B0A3; color: #fff;
-    }
+.el-menu--vertical{
+  .el-menu--popup-right-start{
+    margin-left: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+  .first{
+    background: #29B0A3; color: #fff;
   }
 }
 .first{
