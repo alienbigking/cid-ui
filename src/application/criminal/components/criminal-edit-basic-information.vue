@@ -396,10 +396,9 @@ export default {
         selectedBirthplace: [],
         selectedHouseholdRegister: [],
         selectedHomeAddress: [],
-        criminal: {}
-        // criminal: _.cloneDeep(
-        //     this.$store.state.criminal.criminal
-        // )
+        criminal: _.cloneDeep(
+            this.$store.state.criminal.criminal
+        )
       },
       rules: {
         "criminal.code": [
