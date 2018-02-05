@@ -39,5 +39,10 @@ export default {
     },
     deleteRole(id) {
         return axios.delete(`api/users/${id}/user-roles`);
+    },
+    getPermissions(userId) {
+        return axios.get(`api/users/${userId}/permissions `).then(response => {
+            return response.data;
+        });
     }
 };

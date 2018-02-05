@@ -40,5 +40,10 @@ export default {
     },
     deleteUserRole({ commit, state }, id) {
         return userService.deleteRole(id);
+    },
+    getPermissions({ commit, state }, userId) {
+        return userService.getPermissions(userId).then(permissions => {
+            commit(types.SET_PERMISSIONS, permissions);
+        });
     }
 };
