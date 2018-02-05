@@ -257,8 +257,7 @@ export default {
                     { required: true, message: "请选择起诉机关" }
                 ],
                 "criminalRecord.prosecutionLetterNumber": [
-                    { required: true, message: "请输入起诉字号" },
-                    { type: "number", message: "必须为数字值" }
+                    { required: true, message: "请输入起诉字号" }
                 ],
                 "criminalRecord.prosecutionAccusation": [
                     { required: true, message: "请输入起诉罪名" }
@@ -267,8 +266,7 @@ export default {
                     { required: true, message: "请选择一审机关" }
                 ],
                 "criminalRecord.firstTrialLetterNumber": [
-                    { required: true, message: "请输入一审字号" },
-                    { type: "number", message: "必须为数字值" }
+                    { required: true, message: "请输入一审字号" }
                 ],
                 "criminalRecord.finalTrialLetterNumber": [
                     { type: "number", message: "必须为数字值" }
@@ -277,8 +275,7 @@ export default {
                     { required: true, message: "请选择判决机关" }
                 ],
                 "criminalRecord.decisionLetterNumber": [
-                    { required: true, message: "请输入判决字号" },
-                    { type: "number", message: "必须为数字值" }
+                    { required: true, message: "请输入判决字号" }
                 ],
                 "criminalRecord.decisionDate": [
                     { required: true, message: "请选择判决日期" }
