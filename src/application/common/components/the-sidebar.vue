@@ -7,7 +7,7 @@
       <div
         class="avatar"
         :class="collapsed ? 'avatar-collapsed' : ''">
-        <img src="../../../assets/images/face11.jpg">
+        <img src="../../../assets/images/avatar.jpg">
         <div class="avatar-right">
           <span>{{ userName }}</span>
           <span class="sidebar-name">{{ name }}</span>

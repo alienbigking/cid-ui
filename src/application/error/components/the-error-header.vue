@@ -21,11 +21,11 @@
       </li>
       <li class="hasImg">
         <router-link to="/me">
-          <img src="../../../assets/images/face11.jpg">
+          <img src="../../../assets/images/avatar.jpg">
           <span>管理员</span>
         </router-link>
       </li>
-      <li @click="logout">
+      <li @click="logouting">
         <i class="iconfont icon-tuichu"/>
       </li>
     </ul>
@@ -39,12 +39,13 @@ export default {
   },
   computed: {},
   methods: {
-    ...mapActions(["handleCollapse"]),
+    ...mapActions(["handleCollapse", "logout", "removeProfile"]),
     test() {
       this.handleCollapse();
     },
-    logout() {
-      window.localStorage.removeItem("TOKEN");
+    logouting() {
+      this.removeProfile();
+      this.logout();
       this.$router.push("/login");
     }
   }

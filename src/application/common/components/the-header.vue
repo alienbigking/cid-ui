@@ -26,11 +26,11 @@
       </li>
       <li class="hasImg">
         <router-link to="/me">
-          <img src="../../../assets/images/face11.jpg">
+          <img src="../../../assets/images/avatar.jpg">
           <span>{{ userName }}</span>
         </router-link>
       </li>
-      <li @click="logout">
+      <li @click="logouting">
         <i class="iconfont icon-tuichu"/>
       </li>
     </ul>
@@ -49,10 +49,10 @@ export default {
     this.userName = profileStorage.getMyProfile().username;
   },
   methods: {
-    ...mapActions(["handleCollapse", "setActiveItem"]),
-    logout() {
-      window.localStorage.clear();
-      window.sessionStorage.clear();
+    ...mapActions(["handleCollapse", "setActiveItem", "logout", "removeProfile"]),
+    logouting() {
+      this.removeProfile();
+      this.logout();
       this.$router.push("/login");
     },
     onNavigate(path) {
