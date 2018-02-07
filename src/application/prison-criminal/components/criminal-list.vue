@@ -142,7 +142,7 @@ export default {
       this.deleteDialogVisible = true;
     },
     onNew() {
-      this.$router.push(`/criminal/new`);
+      this.$router.push(`/prison-criminal/new`);
     },
     onDeleteConfirm() {
       this.deleting = true;
