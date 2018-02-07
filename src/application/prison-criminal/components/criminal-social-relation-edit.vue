@@ -70,7 +70,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as criminalLookupService } from "@/application/common/service/lookup/criminal-lookup-service";
+import { default as criminalLookupService } from "@/application/common/service/lookup/criminal/criminal-lookup-service";
 import _ from "lodash";
 
 export default {

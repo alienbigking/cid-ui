@@ -150,7 +150,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal-physical-characteristic-lookup-service";
+import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal/criminal-physical-characteristic/criminal-physical-characteristic-lookup-service";
 import _ from "lodash";
 
 export default {

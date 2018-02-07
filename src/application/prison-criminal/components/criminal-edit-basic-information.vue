@@ -376,8 +376,8 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { default as criminalLookupService } from "@/application/common/service/lookup/criminal-lookup-service";
-import { default as regionLookupService } from "@/application/common/service/lookup/region-lookup-service";
+import { default as criminalLookupService } from "@/application/common/service/lookup/criminal/criminal-lookup-service";
+import { default as regionLookupService } from "@/application/common/service/lookup/region/region-lookup-service";
 import _ from "lodash";
 export default {
   data() {
