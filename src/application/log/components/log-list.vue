@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询日志</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询日志</h3>
       <div class="filters">
         <el-input
           placeholder="操作人"
@@ -39,54 +39,52 @@
           :loading="searching"
           @click="onSearch">查 询</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedLogs.content"
-          v-loading='gettingLogs'
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="operator"
-            label="操作人"/>
-          <el-table-column label="类别">
-            <template slot-scope="scope">
-              {{ scope.row.type | enumText(logTypes) }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="action"
-            label="动作"/>
-          <el-table-column
-            prop="detail"
-            label="详情"
-            :show-overflow-tooltip="true"/>
-          <el-table-column label="创建时间">
-            <template slot-scope="scope">
-              {{ scope.row.createdTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            align="center"
-            label="操作"
-            width="141px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedLogs.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedLogs.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="table45"
+        :data="pagedLogs.content"
+        v-loading='gettingLogs'
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="operator"
+          label="操作人"/>
+        <el-table-column label="类别">
+          <template slot-scope="scope">
+            {{ scope.row.type | enumText(logTypes) }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="action"
+          label="动作"/>
+        <el-table-column
+          prop="detail"
+          label="详情"
+          :show-overflow-tooltip="true"/>
+        <el-table-column label="创建时间">
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          label="操作"
+          width="141px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedLogs.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedLogs.totalElements"/>
+      </div>
     </div>
   </div>
 </template>

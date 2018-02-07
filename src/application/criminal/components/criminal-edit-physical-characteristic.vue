@@ -110,7 +110,7 @@
             ref="gk-table"
             class="table40"
             :data="form.criminalPhysicalCharacteristic.otherFeatures"
-            header-row-class-name="tableHeader40">
+            header-row-class-name="tableHeader">
             <el-table-column
               align="center"
               label="其它特征"

@@ -10,7 +10,7 @@
         class="table40"
         :data="allCriminalResumes"
         v-loading="loading"
-        header-row-class-name="tableHeader40">
+        header-row-class-name="tableHeader">
         <el-table-column
           prop="startDate"
           label="开始日期"/>
@@ -48,7 +48,7 @@
         <el-table-column
           align="center"
           label="操作"
-          width="141px">
+          width="86px">
           <template slot-scope="scope">
             <el-button
               type="text"

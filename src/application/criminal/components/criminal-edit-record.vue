@@ -11,7 +11,7 @@
           class="table40"
           :data="allCriminalRecords"
           v-loading="loading"
-          header-row-class-name="tableHeader40">
+          header-row-class-name="tableHeader">
           <el-table-column
             prop="decisionAccusation"
             label="罪名"
@@ -43,7 +43,8 @@
             label="刑期结束日期"/>
           <el-table-column
             label="操作"
-            width="141px">
+            align="center"
+            width="86px">
             <template slot-scope="scope">
               <el-button
                 type="text"

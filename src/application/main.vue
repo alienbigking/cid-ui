@@ -1,23 +1,21 @@
 <template>
-  <div class="box">
-    <el-container class="flex-column">
-      <the-header/>
-      <el-container>
-        <the-sidebar v-if="!$route.meta||!$route.meta.noSide"/>
-        <el-container class="flex-column">
-          <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
-          <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
-            <transition
-              name="router-fade"
-              mode="out-in">
-              <router-view/>
-            </transition>
-          </el-main>
-          <the-footer v-if="!$route.meta||!$route.meta.noSide"/>
-        </el-container>
+  <el-container class="flex-column">
+    <the-header/>
+    <el-container>
+      <the-sidebar v-if="!$route.meta||!$route.meta.noSide"/>
+      <el-container class="flex-column">
+        <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
+        <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
+          <transition
+            name="router-fade"
+            mode="out-in">
+            <router-view/>
+          </transition>
+        </el-main>
+        <the-footer v-if="!$route.meta||!$route.meta.noSide"/>
       </el-container>
     </el-container>
-  </div>
+  </el-container>
 </template>
 <script>
 import * as commonComponents from "./common/components";

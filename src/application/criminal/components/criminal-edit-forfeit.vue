@@ -10,7 +10,7 @@
         class="table40"
         :data="allCriminalForfeits"
         v-loading="loading"
-        header-row-class-name="tableHeader40">
+        header-row-class-name="tableHeader">
         <el-table-column
           prop="receiptNumber"
           label="罚金单据号"
@@ -47,7 +47,7 @@
         <el-table-column
           align="center"
           label="操作"
-          width="141px">
+          width="86px">
           <template slot-scope="scope">
             <el-button
               type="text"
