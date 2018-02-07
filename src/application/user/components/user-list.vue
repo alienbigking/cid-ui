@@ -63,20 +63,24 @@
             label="用户状态"
             sortable
             width="141px">
-            <template
-              v-if="!scope.row.isAdministrator"
-              slot-scope="scope">
-              {{ scope.row.status | enumText(userStatuses) }}
-              <el-button
-                class="button-status"
-                type="text"
-                v-if="scope.row.status=='ENABLED'"
-                @click="onDisable(scope.row)">禁用</el-button>
-              <el-button
-                class="button-status"
-                type="text"
-                v-if="scope.row.status=='DISABLED'"
-                @click="onEnable(scope.row)">启用</el-button>
+            <template slot-scope="scope">
+              <div v-if="!scope.row.isAdministrator">
+                {{ scope.row.status | enumText(userStatuses) }}
+                <el-button
+                  class="button-status"
+                  type="text"
+                  v-if="scope.row.status=='ENABLED'"
+                  @click="onDisable(scope.row)">禁用</el-button>
+                <el-button
+                  class="button-status"
+                  type="text"
+                  v-if="scope.row.status=='DISABLED'"
+                  @click="onEnable(scope.row)">启用</el-button>
+              </div>
+              <div v-else>
+                <span v-if="scope.row.status=='ENABLED'">启用</span>
+                <span v-if="scope.row.status=='DISABLED'">禁用</span>
+              </div>
             </template>
           </el-table-column>
           <el-table-column
