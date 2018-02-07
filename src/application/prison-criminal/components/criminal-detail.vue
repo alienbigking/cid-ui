@@ -288,7 +288,6 @@ export default {
 <style lang="scss" scoped>
 .detail-card{
   .card-title{
-    border-bottom: 0;
     [class^="el-icon"]{
       float: right;
       font-weight: bold;
