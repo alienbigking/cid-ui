@@ -294,23 +294,17 @@
   }
 }
 .table45{
+  tr,th,td{ height: 45px;}
   .tableHeader{
     th { border-bottom-color: #bbb; }
-  }
-  .cell{
-    height: 45px;
-    line-height: 45px;
   }
 }
 .table40{
   border: $border;
   border-bottom: 0;
+  tr,th,td{ height: 40px;}
   .tableHeader{
     th{ background: $background; }
-  }
-  .cell{
-    height: 40px;
-    line-height: 40px;
   }
 }
 
