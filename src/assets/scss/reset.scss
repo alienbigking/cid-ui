@@ -127,9 +127,12 @@
   &:focus.is-active.is-focus:not(:active) { box-shadow: none; }
   &.is-active{ color: $color-default; }
 }
-.el-tabs__nav-wrap::after{
-  height: 1px;
-  background-color: $color-border;
+.el-tabs__nav-wrap{
+  padding-left: $padding-default;
+  &:after{
+    height: 1px;
+    background-color: $color-border;
+  }
 }
 .el-tree-node__label{
   font-size: 12px;
