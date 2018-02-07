@@ -16,5 +16,8 @@ export default {
     },
     [types.UPDATE_USER_ROLE](state, role) {
         state.role = role;
+    },
+    [types.SET_PERMISSIONS](state, permissions) {
+        state.permissions = permissions;
     }
 };

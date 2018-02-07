@@ -1,5 +1,7 @@
 <template>
-  <div class="detail-card">
+  <div
+    class="detail-card"
+    v-loading="loading">
     <h3 class="card-title">{{ user.name }} - 明细</h3>
     <div class="card-body">
       <el-row>
@@ -14,6 +16,9 @@
         <el-col :span="12">
           <label>状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
         </el-col>
+        <el-col :span="12">
+          <label>租户名称：</label><span>{{ user.tenantName }}</span>
+        </el-col>
       </el-row>
       <el-row>
         <el-col :span="12">
@@ -25,12 +30,15 @@
       </el-row>
     </div>
     <div class="card-body">
-      <label class="title">所属租户</label>
-      <el-row class="detail">
-        <el-col :span="12">
-          <label>租户名称：</label><span>{{ user.tenantName }}</span>
-        </el-col>
-      </el-row>
+      <label class="title">权限：</label>
+      <el-tree
+        v-show="!loading"
+        ref="tree"
+        :data="permissions"
+        :props="{ label: 'name' }"
+        default-expand-all
+        class="detail"
+        node-key="id" />
       <el-button @click="onBack">返 回</el-button>
     </div>
   </div>
@@ -40,17 +48,27 @@ import { mapState, mapActions } from "vuex";
 import { default as userStatusService } from "../service/user-status-service";
 
 export default {
+  data() {
+    return {
+      loading: true
+    };
+  },
   computed: {
     ...mapState({
-      user: state => state.user.user
+      user: state => state.user.user,
+      permissions: state => state.user.permissions
     })
   },
   created() {
-    this.getUser(this.$route.params.id);
+    this.getUser(this.$route.params.id).then(() => {
+      this.getPermissions(this.$route.params.id).then(() => {
+        this.loading = false;
+      });
+    });
     this.userStatuses = userStatusService.getAll();
   },
   methods: {
-    ...mapActions(["getUser"]),
+    ...mapActions(["getUser", "getPermissions"]),
     onBack() {
       this.$router.go(-1);
     }

@@ -1,12 +1,12 @@
 <template>
   <el-header style="height: 47px;">
     <div class="header-left">
-      <router-link to="/dashboard">
+      <div @click="onNavigate('/dashboard')">
         <i
           class="iconfont icon-DB"
           style="font-size: 22px;"/>
         <span class="fs-16">罪犯数据库</span>
-      </router-link>
+      </div>
       <i
         class="iconfont icon-caidan"
         @click="onCollapse"/>
@@ -49,17 +49,18 @@ export default {
     this.userName = profileStorage.getMyProfile().username;
   },
   methods: {
-    ...mapActions(["handleCollapse"]),
-    onCollapse() {
-      this.handleCollapse();
-    },
-    onHome() {
-      this.$router.push("/dashboard");
-    },
+    ...mapActions(["handleCollapse", "setActiveItem"]),
     logout() {
       window.localStorage.clear();
       window.sessionStorage.clear();
       this.$router.push("/login");
+    },
+    onNavigate(path) {
+      this.setActiveItem(this.$store.state.common.menus[0].id);
+      this.$router.push(path);
+    },
+    onCollapse() {
+      this.handleCollapse();
     }
   }
 };
@@ -71,8 +72,11 @@ export default {
 .header-left {
   display: flex;
   align-items: center;
-  a{
-    color: #fff;
+  height: 22px;
+  &>div{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
   }
   .fs-16 {
     font-size: 16px;
