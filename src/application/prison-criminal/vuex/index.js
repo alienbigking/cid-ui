@@ -6,7 +6,7 @@ const state = {
     allCriminals: [],
     pagedCriminals: { content: [] },
     criminal: {},
-    // 罪犯查找数据
+    // 罪犯基础数据
     allGenders: [],
     allEthnicities: [],
     allNationalities: [],
