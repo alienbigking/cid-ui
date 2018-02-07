@@ -1,42 +1,20 @@
-/******************************** 布局开始 ********************************/
 .el-container{
     height: 100%;
     font-size: $font-size;
     background: $background;
 }
-.el-main>div{
-    border-radius: $radius;
-    box-sizing: border-box;
-}
 .el-header{
     width: 100%;
+    top: 0;
     background: $background-header;
     border-bottom: 1px solid #4b5960;
-    padding: 0 $padding-default;
     color: #fff;
-    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    top: 0;
     .el-badge__content{
         border: 0;
     }
-}
-.sidebar-menu{
-  width: 100% !important;
-  transition: width 0;
-  border-right: 0;
-  .el-submenu__icon-arrow{ color: #FFFFFF; }
-  .el-submenu {
-    .el-menu{ border-bottom: 1px solid #303B40; }
-  }
-  .el-icon-arrow-down:before{
-    content: "\E604";
-  }
-  .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
-    transform: rotate(90deg);
-  }
 }
 .el-menu--vertical{
   .el-menu--popup-right-start{
@@ -46,6 +24,21 @@
   }
   .first{
     background: #29B0A3; color: #fff;
+  }
+}
+.sidebar-menu{ // 不能改哦，这是侧边栏最外层el-menu的样式
+  width: 100% !important;
+  transition: width 0;
+  border-right: 0;
+  .el-submenu__icon-arrow{ color: #FFFFFF; margin-top: -4px; }
+  .el-submenu {
+    .el-menu{ border-bottom: 1px solid #303B40; }
+  }
+  .el-icon-arrow-down:before{
+    content: "\E604";
+  }
+  .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+    transform: rotate(90deg);
   }
 }
 .first{
@@ -82,74 +75,95 @@
     border-bottom: $border;
     padding: 0 $padding-default;
     box-sizing: border-box;
-    display: flex;
-    align-items: stretch;
-    &__item {
-        overflow: hidden;
-        &:last-child{
-          .el-breadcrumb__inner, .el-breadcrumb__inner a, .el-breadcrumb__inner a:hover, .el-breadcrumb__inner:hover{
-            color: #999;
-          }
-        }
-    }
     &__inner, &__inner a {
         color: $color-default;
         font-weight: normal;
-    }
-    .separatorClass {
-        margin: 0 10px;
-        &:after {
-          content: "/";
+        &:hover{
+          color: $color-default;
         }
     }
 }
-
-/******************************** 布局结束 ********************************/
-/******************************** 其他组件开始 ********************************/
+.el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+  color: #999999;
+}
+.separatorClass {
+    &:after {
+      content: "/";
+    }
+}
 .pagination-box{
     padding: $padding-default;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    &>span{
-        font-size: $font-size;
-        color: #666;
-    }
+    border-radius: 0 0 $radius $radius;
+    border: $border { top: 0 };
     .el-input{
         height: 24px;
-        width: 50px;
     }
     .el-pagination{
-        // width: 512px;
-        text-align: right;
-    }
-}
-.el-table th, .el-table tr, .el-table td{
-  background-clip: padding-box;
-}
-.el-tabs{
-  .el-tabs__header{
-    margin: 0;
-  }
-  .el-tabs__nav{
-    line-height: 60px;
-    &-wrap{
-      padding-left: $padding-default;
-      &:after{
-        background-color: $color-border;
-        height: 1px;
+      [class*="btn-"], .el-pager li{
+        background: transparent;
       }
     }
+}
+.el-tabs__header{
+  margin: 0;
+}
+.el-tabs__nav-next, .el-tabs__nav-prev{
+  line-height: 60px;
+}
+.el-tabs__active-bar{
+  background-color: $color-default;
+}
+.el-tabs__item{
+  color: #999999;
+  font-size: 16px;
+  height: 60px;
+  line-height: 60px;
+  &:hover{
+    color: #999999;
   }
-  .el-tabs__item{
-    color: #999;
-    font-size: 16px;
-    &.is-active{ color: $color-default; }
+  &:focus.is-active.is-focus:not(:active) { box-shadow: none; }
+  &.is-active{ color: $color-default; }
+}
+.el-tabs__nav-wrap{
+  padding-left: $padding-default;
+  &:after{
+    height: 1px;
+    background-color: $color-border;
   }
-  .el-tabs__active-bar{ background-color: $color-default; }
-  .el-tabs__nav-next, .el-tabs__nav-prev{
-    line-height: 60px;
+}
+.el-tree-node__label{
+  font-size: 12px;
+  font-weight: normal;
+}
+.tree{
+  display: inline-block;
+  margin-top: 14px;
+  width: calc(100% - 40px);
+}
+.el-table{
+  border-color: $color-border;
+  background: $white;
+  tr,th,td{
+    background: $white;
+    background-clip: padding-box;
+    border-color: $color-border;
+    padding: 0;
+    color: $color-default;
+    font-size: $font-size;
   }
+  .caret-wrapper{
+    float: right;
+    margin-top: 8px;
+  }
+  .cell {
+    vertical-align: baseline;
+  }
+}
+.el-table--border::after, .el-table--group::after, .el-table::before{
+  background-color: $color-border;
 }
 .el-button{ font-size: $font-size; }
 .el-button:not(.el-button--text){
@@ -157,7 +171,6 @@
   display: inline-flex;
   height: $height-input;
   justify-content: center;
-  // line-height: 0;
   padding: 0 20px;
   align-items: center;
   background: $white;
@@ -170,23 +183,6 @@
 .dialog .el-dialog__body{
   padding-bottom: 20px;
 }
-// .el-date-editor{
-//   .el-range-input, .el-range-separator {
-//      height: 25px;
-//      margin-bottom: 6px;
-//      font-size: $font-size;
-//   }
-// }
-// .el-tree-node__expand-icon{
-//   font-family: "iconfont" !important;
-//   &:before{
-//     content: "\E61D";
-//   }
-//   &.expanded{
-//     transform: none;
-//   }
-// }
-/******************************** 表单开始 ********************************/
 .el-form{
     box-sizing: border-box;
     &.el-form--label-top{
@@ -255,7 +251,6 @@
 .el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus{
   border-color: #dcdfe6;
 }
-/******************************** 表单结束 ********************************/
 .el-submenu__title, .el-menu-item{ font-size: $font-size; }
 .iconfont{ font-size: 14px; }
 .el-breadcrumb, .el-tree{ background: $white; }

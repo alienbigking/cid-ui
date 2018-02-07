@@ -30,15 +30,24 @@
       </el-row>
     </div>
     <div class="card-body">
-      <label class="title">权限：</label>
-      <el-tree
-        v-show="!loading"
-        ref="tree"
-        :data="permissions"
-        :props="{ label: 'name' }"
-        default-expand-all
-        class="detail"
-        node-key="id" />
+      <el-row>
+        <el-col :span="24">
+          <label>角色：</label><span>{{ user.roleNames ? user.roleNames.join("、") : "" }}</span>
+        </el-col>
+      </el-row>
+      <el-row class="detail">
+        <el-col :span="24">
+          <label>权限：</label>
+          <el-tree
+            v-show="!loading"
+            ref="tree"
+            :data="permissions"
+            :props="{ label: 'name' }"
+            default-expand-all
+            class="tree"
+            node-key="id" />
+        </el-col>
+      </el-row>
       <el-button @click="onBack">返 回</el-button>
     </div>
   </div>
@@ -76,7 +85,4 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.detail{
-  margin-top: 0;
-}
 </style>

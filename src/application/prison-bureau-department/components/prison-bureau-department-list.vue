@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询部门</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询部门</h3>
       <div class="filters">
         <el-input
           placeholder="部门名称"
@@ -26,65 +26,63 @@
           class="button-addInList"
           @click="onNew">新 增</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedPrisonBureauDepartments.content"
-          v-loading="loading"
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="name"
-            label="部门名称"
-            :show-overflow-tooltip="true"/>
-          <el-table-column
-            prop="parentDepartmentName"
-            label="上级部门名称"
-            :show-overflow-tooltip="true"/>
-          <el-table-column
-            prop="createdTime"
-            label="创建时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.createdTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="lastUpdatedTime"
-            label="最后更新时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.lastUpdatedTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            align="center"
-            prop="opretion"
-            label="操作"
-            width="141px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-              <el-button
-                type="text"
-                @click="onEdit(scope.row.id)">修改</el-button>
-              <el-button
-                type="text"
-                @click="onDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedPrisonBureauDepartments.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedPrisonBureauDepartments.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="table45"
+        :data="pagedPrisonBureauDepartments.content"
+        v-loading="loading"
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="name"
+          label="部门名称"
+          :show-overflow-tooltip="true"/>
+        <el-table-column
+          prop="parentDepartmentName"
+          label="上级部门名称"
+          :show-overflow-tooltip="true"/>
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="lastUpdatedTime"
+          label="最后更新时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.lastUpdatedTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="opretion"
+          label="操作"
+          width="141px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedPrisonBureauDepartments.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedPrisonBureauDepartments.totalElements"/>
+      </div>
     </div>
     <el-dialog
       class="deleteDialog"

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询角色</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询角色</h3>
       <div class="filters">
         <el-input
           placeholder="名称"
@@ -15,63 +15,61 @@
           class="button-addInList"
           @click="onNew">新 增</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedRoles.content"
-          v-loading="loading"
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="name"
-            label="角色名称"/>
-          <el-table-column
-            prop="createdTime"
-            label="创建时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.createdTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="lastUpdatedTime"
-            label="最后更新时间"
-            sortable>
-            <template slot-scope="scope">
-              {{ scope.row.lastUpdatedTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            align="center"
-            prop="opretion"
-            label="操作"
-            width="201px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onSelectRoles(scope.row.id)">分配权限</el-button>
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-              <el-button
-                type="text"
-                @click="onEdit(scope.row.id)">修改</el-button>
-              <el-button
-                type="text"
-                @click="onDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedRoles.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedRoles.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="table45"
+        :data="pagedRoles.content"
+        v-loading="loading"
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="name"
+          label="角色名称"/>
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="lastUpdatedTime"
+          label="最后更新时间"
+          sortable>
+          <template slot-scope="scope">
+            {{ scope.row.lastUpdatedTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="opretion"
+          label="操作"
+          width="201px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onSelectRoles(scope.row.id)">分配权限</el-button>
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedRoles.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedRoles.totalElements"/>
+      </div>
     </div>
     <el-dialog
       class="deleteDialog"

@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询用户</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询用户</h3>
       <div class="filters">
         <el-input
           placeholder="账号"

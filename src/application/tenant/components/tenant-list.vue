@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询租户</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询租户</h3>
       <div class="filters">
         <el-input
           placeholder="编号"
@@ -31,7 +31,7 @@
           @click="onNew">新 增</el-button>
       </div>
       <el-table
-        class="my_table"
+        class="table45"
         :data="pagedTenants.content"
         v-loading="loading"
         border
@@ -103,55 +103,55 @@
           layout="prev, pager, next, jumper"
           :total="pagedTenants.totalElements"/>
       </div>
-      <el-dialog
-        class="deleteDialog"
-        width="400px"
-        :visible.sync="deleteDialogVisible">
-        <i class="iconfont icon-jinggao"/>
-        <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
-        <template slot="footer">
-          <el-button
-            class="button-cancel"
-            @click="deleteDialogVisible = false">取 消</el-button>
-          <el-button
-            class="button-sure"
-            :loading="deleting"
-            @click="onDeleteConfirm">确 定</el-button>
-        </template>
-      </el-dialog>
-      <el-dialog
-        class="deleteDialog"
-        width="400px"
-        :visible.sync="statusDialogVisible">
-        <i class="iconfont icon-jinggao" />
-        <span>确认启用<b>{{ statusItem.name }}</b>吗</span>
-        <template slot="footer">
-          <el-button
-            class="button-cancel"
-            @click="statusDialogVisible = false">取 消</el-button>
-          <el-button
-            class="button-sure"
-            :loading="settingStatus"
-            @click="onEnableConfirm">确 定</el-button>
-        </template>
-      </el-dialog>
-      <el-dialog
-        class="deleteDialog"
-        width="400px"
-        :visible.sync="disablledStatusDialogVisible">
-        <i class="iconfont icon-jinggao" />
-        <span>确认禁用<b>{{ disableItem.name }}</b>吗</span>
-        <template slot="footer">
-          <el-button
-            class="button-cancel"
-            @click="disablledStatusDialogVisible = false">取 消</el-button>
-          <el-button
-            class="button-sure"
-            :loading="settingStatus"
-            @click="onDisableConfirm">确 定</el-button>
-        </template>
-      </el-dialog>
     </div>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :visible.sync="deleteDialogVisible">
+      <i class="iconfont icon-jinggao"/>
+      <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="deleting"
+          @click="onDeleteConfirm">确 定</el-button>
+      </template>
+    </el-dialog>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :visible.sync="statusDialogVisible">
+      <i class="iconfont icon-jinggao" />
+      <span>确认启用<b>{{ statusItem.name }}</b>吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="statusDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="settingStatus"
+          @click="onEnableConfirm">确 定</el-button>
+      </template>
+    </el-dialog>
+    <el-dialog
+      class="deleteDialog"
+      width="400px"
+      :visible.sync="disablledStatusDialogVisible">
+      <i class="iconfont icon-jinggao" />
+      <span>确认禁用<b>{{ disableItem.name }}</b>吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="disablledStatusDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="settingStatus"
+          @click="onDisableConfirm">确 定</el-button>
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script>

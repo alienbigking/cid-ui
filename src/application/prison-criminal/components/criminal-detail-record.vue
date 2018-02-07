@@ -6,7 +6,7 @@
       class="table40"
       :data="allCriminalRecords"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="tableHeader">
       <el-table-column
         prop="decisionAccusation"
         label="罪名"
