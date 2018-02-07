@@ -63,7 +63,9 @@
             label="用户状态"
             sortable
             width="141px">
-            <template slot-scope="scope">
+            <template
+              v-if="!scope.row.isAdministrator"
+              slot-scope="scope">
               {{ scope.row.status | enumText(userStatuses) }}
               <el-button
                 class="button-status"
@@ -84,6 +86,7 @@
             width="201px">
             <template slot-scope="scope">
               <el-button
+                v-if="!scope.row.isAdministrator"
                 type="text"
                 @click="onSelectRoles(scope.row.id)">分配角色</el-button>
               <el-button
@@ -93,6 +96,7 @@
                 type="text"
                 @click="onEdit(scope.row.id)">修改</el-button>
               <el-button
+                v-if="!scope.row.isAdministrator"
                 type="text"
                 @click="onDelete(scope.row)">删除</el-button>
             </template>

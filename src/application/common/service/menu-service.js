@@ -13,10 +13,18 @@ function populateIndex(menus, prefix) {
 
 export default {
     getMenus(tenantType) {
-        return axios.get(`api/menus`).then(response => {
-            const menus = response.data;
-            populateIndex(menus);
-            return menus;
-        });
+        if (localStorage.getItem('menus')) {
+            const menus = localStorage.getItem('menus');
+            return new Promise((resolve, reject) => {
+                resolve(JSON.parse(menus));
+            });
+        } else {
+            return axios.get(`api/menus`).then(response => {
+                const menus = response.data;
+                populateIndex(menus);
+                localStorage.setItem('menus', JSON.stringify(menus));
+                return menus;
+            });
+        }
     }
 };

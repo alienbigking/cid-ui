@@ -67,13 +67,16 @@ export default {
     };
   },
   methods: {
-    ...mapActions([ "login", "getMyProfile" ]),
+    ...mapActions([ "login", "getMyProfile", "getMenus" ]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.login(this.user)
             .then(() => {
-              this.getMyProfile().then(() => {
+              Promise.all([
+                this.getMyProfile(),
+                this.getMenus()
+              ]).then(() => {
                 logService.addLoginLog();
                 let redirect = this.$route.query.redirect;
                 if (!redirect) {
@@ -81,7 +84,7 @@ export default {
                 }
                 this.$router.push(redirect);
                 });
-            })
+              })
             .catch(error => {
               this.$errorMessage.show(error, "登陆失败");
             });
