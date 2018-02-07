@@ -25,6 +25,13 @@
   } @else if $type == addInNew { // 新增页中新增
     background: #2196F3;
     width: 76px;
+  } @else if $type == addCollection{
+    background: #009588;
+    width: 66px;
+    height: 26px;
+    top: 7px;
+    right: 12.5px;
+    position: relative;
   }
 }
 // 按钮hover样式
@@ -45,7 +52,9 @@
     background: rgba(#009588, 0.9);
   } @else if $type == addInNew {
     background: rgba(#2196F3, 0.9);
-  } @else {
+  } @else if $type == addCollection {
+    background: rgba(#009588, 0.9);
+  }  @else {
     color: $color-default;
     background: rgba($color-border, 0.2);
     border-color: $color-border;

@@ -1,4 +1,4 @@
-@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure {
+@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection {
   .el-button.button-#{$type} { @include button-diy($type); }
 }
 
