@@ -1,4 +1,5 @@
 import axios from 'axios';
+import menuStorage from './menu-storage';
 
 function populateIndex(menus, prefix) {
   menus.forEach((menu, index) => {
@@ -12,17 +13,15 @@ function populateIndex(menus, prefix) {
 }
 
 export default {
-  getMenus(tenantType) {
-    let menus = localStorage.getItem('menus');
+  getMenus() {
+    let menus = menuStorage.getMyMenus();
     if (menus) {
-      return new Promise((resolve, reject) => {
-        resolve(JSON.parse(menus));
-      });
+      return Promise.resolve(menus);
     }
     return axios.get(`api/menus`).then(response => {
       menus = response.data;
       populateIndex(menus);
-      localStorage.setItem('menus', JSON.stringify(menus));
+      menuStorage.setMyMenus(menus);
       return menus;
     });
   }
