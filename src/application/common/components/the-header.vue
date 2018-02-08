@@ -49,7 +49,12 @@ export default {
     this.userName = profileStorage.getMyProfile().username;
   },
   methods: {
-    ...mapActions(["handleCollapse", "setActiveItem", "logout", "removeProfile"]),
+    ...mapActions([
+      "handleCollapse",
+      "setActiveItem",
+      "logout",
+      "removeProfile"
+    ]),
     logouting() {
       this.removeProfile();
       this.logout();
@@ -73,7 +78,7 @@ export default {
   display: flex;
   align-items: center;
   height: 22px;
-  &>div{
+  & > div {
     display: flex;
     align-items: center;
     cursor: pointer;
