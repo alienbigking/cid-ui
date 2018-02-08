@@ -12,7 +12,7 @@ function populateIndex(menus, prefix) {
 }
 
 export default {
-  getMenus(tenantType) {
+  getMenus() {
     let menus = localStorage.getItem('menus');
     if (menus) {
       return new Promise((resolve, reject) => {
