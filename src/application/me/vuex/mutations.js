@@ -9,9 +9,6 @@ export default {
     [types.SET_PROFILE_STORAGE](state, myProfile) {
         profileStorage.setMyProfile(myProfile);
     },
-    [types.REMOVE_PROFILE_STORAGE](state) {
-        localStorage.removeItem('MYPROFILE');
-    },
     [types.UPDATE_MY_PROFILE](state, myProfile) {
         state.myProfile = _.cloneDeep(myProfile);
     }
