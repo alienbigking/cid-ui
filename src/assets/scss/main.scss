@@ -292,12 +292,18 @@
       margin-left: 7px; // 需小于20px
     }
   }
+  .tableHeader {
+    th:not(.is-center) .cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
 }
 .table45{
   tr,th,td{ height: 45px; }
   .tableHeader{
-    height: 100%;
-    th { line-height: 45px; border-bottom-color: #bbb; }
+    .cell { border-bottom-color: #bbb; }
   }
 }
 .table40{
@@ -305,7 +311,6 @@
   border-bottom: 0;
   tr,th,td{ height: 40px; }
   .tableHeader{
-    height: 100%;
     th{ background: $background; }
   }
 }
