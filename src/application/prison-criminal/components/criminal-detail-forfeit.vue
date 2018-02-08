@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="list-box"
-    v-if="forfeitShow">
+  <div class="list-box">
     <el-table
       class="table40"
       :data="allCriminalForfeits"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="tableHeader">
       <el-table-column
         prop="receiptNumber"
         label="罚金单据号"
@@ -48,12 +46,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  props: {
-    forfeitShow: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       loading: true

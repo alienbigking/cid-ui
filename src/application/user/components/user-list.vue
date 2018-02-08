@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询用户</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询用户</h3>
       <div class="filters">
         <el-input
           placeholder="账号"
@@ -30,84 +30,84 @@
           class="button-addInList"
           @click="onNew">新 增</el-button>
       </div>
-      <template>
-        <el-table
-          class="my_table"
-          :data="pagedUsers.content"
-          v-loading="loading"
-          border
-          header-row-class-name="tableHeader">
-          <el-table-column
-            prop="username"
-            label="账号"/>
-          <el-table-column
-            prop="name"
-            label="名称"/>
-          <el-table-column
-            prop="createdTime"
-            label="创建时间"
-            width="180px">
-            <template slot-scope="scope">
-              {{ scope.row.createdTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            prop="lastUpdatedTime"
-            label="最后更新时间"
-            width="180px">
-            <template slot-scope="scope">
-              {{ scope.row.lastUpdatedTime | moment }}
-            </template>
-          </el-table-column>
-          <el-table-column
-            label="用户状态"
-            sortable
-            width="141px">
-            <template slot-scope="scope">
-              {{ scope.row.status | enumText(userStatuses) }}
-              <el-button
-                class="button-status"
-                type="text"
-                v-if="scope.row.status=='ENABLED'"
-                @click="onDisable(scope.row)">禁用</el-button>
-              <el-button
-                class="button-status"
-                type="text"
-                v-if="scope.row.status=='DISABLED'"
-                @click="onEnable(scope.row)">启用</el-button>
-            </template>
-          </el-table-column>
-          <el-table-column
-            align="center"
-            prop="opretion"
-            label="操作"
-            width="201px">
-            <template slot-scope="scope">
-              <el-button
-                type="text"
-                @click="onSelectRoles(scope.row.id)">分配角色</el-button>
-              <el-button
-                type="text"
-                @click="onView(scope.row.id)">查看</el-button>
-              <el-button
-                type="text"
-                @click="onEdit(scope.row.id)">修改</el-button>
-              <el-button
-                type="text"
-                @click="onDelete(scope.row)">删除</el-button>
-            </template>
-          </el-table-column>
-        </el-table>
-        <div class="pagination-box">
-          <span>共{{ pagedUsers.totalElements }}条信息</span>
-          <el-pagination
-            @current-change="onPageChange"
-            :current-page.sync="currentPage"
-            :page-size="pagination.size"
-            layout="prev, pager, next, jumper"
-            :total="pagedUsers.totalElements"/>
-        </div>
-      </template>
+      <el-table
+        class="table45"
+        :data="pagedUsers.content"
+        v-loading="loading"
+        border
+        header-row-class-name="tableHeader">
+        <el-table-column
+          prop="username"
+          label="账号"/>
+        <el-table-column
+          prop="name"
+          label="名称"/>
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          width="180px">
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="lastUpdatedTime"
+          label="最后更新时间"
+          width="180px">
+          <template slot-scope="scope">
+            {{ scope.row.lastUpdatedTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="用户状态"
+          sortable
+          width="141px">
+          <template slot-scope="scope">
+            {{ scope.row.status | enumText(userStatuses) }}
+            <el-button
+              v-if="!scope.row.isAdministrator && scope.row.status=='ENABLED'"
+              class="button-status"
+              type="text"
+              @click="onDisable(scope.row)">禁用</el-button>
+            <el-button
+              v-if="!scope.row.isAdministrator && scope.row.status=='DISABLED'"
+              class="button-status"
+              type="text"
+              @click="onEnable(scope.row)">启用</el-button>
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="opretion"
+          label="操作"
+          width="201px">
+          <template slot-scope="scope">
+            <el-button
+              v-if="!scope.row.isAdministrator"
+              type="text"
+              @click="onSelectRoles(scope.row.id)">分配角色</el-button>
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              v-if="!scope.row.isAdministrator"
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedUsers.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedUsers.totalElements"/>
+      </div>
     </div>
     <el-dialog
       class="dialog"

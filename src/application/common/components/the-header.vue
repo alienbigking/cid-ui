@@ -26,7 +26,7 @@
       </li>
       <li class="hasImg">
         <router-link to="/me">
-          <img src="../../../assets/images/face11.jpg">
+          <img src="../../../assets/images/avatar.jpg">
           <span>{{ userName }}</span>
         </router-link>
       </li>
@@ -39,6 +39,8 @@
 <script>
 import { mapActions } from "vuex";
 import { default as profileStorage } from "../service/profile-storage";
+import { default as tokenStorage } from "@/utils/token/token-storage";
+
 export default {
   data() {
     return {
@@ -51,8 +53,8 @@ export default {
   methods: {
     ...mapActions(["handleCollapse", "setActiveItem"]),
     logout() {
-      window.localStorage.clear();
-      window.sessionStorage.clear();
+      profileStorage.removeMyProfile();
+      tokenStorage.removeToken();
       this.$router.push("/login");
     },
     onNavigate(path) {
@@ -73,7 +75,7 @@ export default {
   display: flex;
   align-items: center;
   height: 22px;
-  &>div{
+  & > div {
     display: flex;
     align-items: center;
     cursor: pointer;

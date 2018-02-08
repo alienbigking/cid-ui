@@ -50,6 +50,7 @@
 
 <script>
 import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
@@ -125,6 +126,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.card-title {
+  border-bottom: 1px solid #ddd;
+  & + form {
+    border-top: 0;
+  }
+}
 .w340 {
   width: 340px;
   margin: 30px auto;

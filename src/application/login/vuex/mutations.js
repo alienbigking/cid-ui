@@ -6,6 +6,6 @@ export default {
         tokenStorage.setToken(token);
     },
     [types.REMOVE_TOKEN](state) {
-        tokenStorage.removeToken();
+        localStorage.removeItem('TOKEN');
     }
 };

@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="list-box"
-    v-if="recordShow">
+  <div class="list-box">
     <el-table
       class="table40"
       :data="allCriminalRecords"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="tableHeader">
       <el-table-column
         prop="decisionAccusation"
         label="罪名"
@@ -55,12 +53,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  props: {
-    recordShow: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       loading: true

@@ -1,21 +1,22 @@
 @each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection, delete {
   .el-button.button-#{$type} { @include button-diy($type); }
 }
-
-.filters{ // 筛选框
-    padding: 10px 20px 20px;
-    overflow: hidden;
-    &>[class^="el-"]{
-      vertical-align: top;
-      margin-top: $margin-top;
-      &:not(.el-button) {
-        width: $width-input-filter;
-        margin-right: 15px;
-      }
-    }
-    .button-addInList{
-      float: right;
-    }
+.list-card {
+  background: $white;
+  border-radius: $radius;
+  min-width: 658px;
+  .title{
+    height: 50px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: $color-default;
+    line-height: 50px;
+    padding: 0 $padding-default;
+    border-radius: $radius $radius 0 0;
+    border: $border;
+    border-bottom: 0;
+    &+div { border: $border; border-bottom: 0; }
+  }
 }
 .detail-card{ // 卡片
   border: $border;
@@ -26,17 +27,16 @@
   min-width: 600px;
   .card-title{
     color: $color-default;
-    border-bottom: $border;
-    padding: $padding-default;
-    font-weight: bold;
+    padding: 0 $padding-default;
     font-size: 14px;
+    line-height: 50px;
+    &+div, &+form{ border-top: $border; }
   }
   .card-body{
     box-sizing: border-box;
     padding: 0 20px 20px 40px;
-    border-bottom: $border;
     overflow: hidden;
-    &:last-child{ border: 0;}
+    &+.card-body{ border-top: $border; }
     label:not([class^="el-"]){
       color: #666;//新改的字体颜色
       font-weight: bold;
@@ -72,29 +72,20 @@
   }
   & + .detail-card { margin-top: $margin-top; }
 }
-
-.card{
-    border: $border;
-    border-radius:5px;
-    background:#fff;
-    min-width: 600px;
-    overflow-x: auto;
-    .um-title{
-        display: block;
-        padding: $padding-default;
-        border-bottom: $border;
-        color: $color-default;
-        font-size:14px;
-        font-weight: bold;
+.filters{ // 筛选框
+    padding: 10px 20px 20px;
+    overflow: hidden;
+    &>[class^="el-"]{
+      vertical-align: top;
+      margin-top: $margin-top;
+      &:not(.el-button) {
+        width: $width-input-filter;
+        margin-right: 15px;
+      }
     }
-    &+.card{
-        margin-top: $margin-top;
+    .button-addInList{
+      float: right;
     }
-}
-
-.box{
-    height: 100%;
-    width: 100%;
 }
 .el-form{
     .el-form-item{
@@ -152,11 +143,6 @@
             margin-left: 0;
         }
     }
-}
-.el-form-item-div{
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
 }
 .formPadding{
     padding: 20px 0 20px 20px;
@@ -291,92 +277,49 @@
       border-radius: 0.5em 0.5em;
     }
 }
-.el-table{
-    tr,th,td{
-        color: $color-default;
-        font-size: $font-size;
-        padding: 0;
-        height: 40px;
-        line-height: 40px;
-    }
-    .tableHeader{
-        height: 50px;
-        font-size: $font-size;
-        font-weight: bold;
-        th.is-leaf{
-            border-bottom-color: #bbb;
-        }
-    }
-    .tableHeader40{
-      background: $background;
-      height: 40px;
-      font-weight: bold;
-      th,td{ background: transparent; }
-    }
-    .cell {
-      button + button {
-        margin-left: 7px; // 需小于20px
-      }
-      button{
-        vertical-align: baseline;
-      }
-    }
+.el-form-item-div{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
-.container {
-  .el-table__body-wrapper {
-    overflow: inherit;
+.el-table{
+  .tableHeader{
+    font-weight: bold;
+    th{ border-color: $color-border; }
+  }
+  .cell {
+    button + button {
+      margin-left: 7px; // 需小于20px
+    }
   }
 }
-.my_table{
-    &.el-table--border, &.el-table--group{
-        border: 0;
-        border-top: $border;
-    }
-    &.el-table--border td, &.el-table--border th{
-        border-color: $color-border;
-    }
-    .cell{
-        line-height: 50px;
-        font-size: $font-size;
-        padding: 0 20px !important;
-    }
-    .caret-wrapper{
-        float: right;
-        width: 10px;
-        height: 50px;
-        position: relative;
-        justify-content: center;
-        .sort-caret{
-            position: relative;
-            &.ascending{
-                top: 0px;
-            }
-            &.descending{
-                bottom: -2px;
-            }
-        }
-    }
-    &.el-table--border::after, &.el-table--group::after{
-        display: none;
-    }
+.table45{
+  tr,th,td{ height: 45px; }
+  .tableHeader{
+    height: 100%;
+    th { line-height: 45px; border-bottom-color: #bbb; }
+  }
 }
-.list-box{ // 罪犯编辑模块的表格的父元素
-  border-top: $border;
-  margin-left: 20px;
-  padding: 30px 20px 0 0;
-  overflow: hidden;
-}
-.table40{ // 行高40px的表格
+.table40{
   border: $border;
   border-bottom: 0;
-  margin-bottom: 30px;
-  &+button{
-    float: right;
-  }
-  &.el-table--border::after, &.el-table--group::after{
-    display: none;
+  tr,th,td{ height: 40px; }
+  .tableHeader{
+    height: 100%;
+    th{ background: $background; }
   }
 }
+
+.list-box{ // 罪犯编辑模块的表格的父元素
+  border-top: $border;
+  padding: 20px;
+  overflow: hidden;
+  .el-tab-pane &{
+    margin-left: $padding-default;
+    padding-left: 0;
+  }
+}
+
 .deleteDialog{
   .el-dialog__body{
     color: $color-default;

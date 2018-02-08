@@ -266,9 +266,6 @@ export default {
                 "criminalRecord.firstTrialLetterNumber": [
                     { required: true, message: "请输入一审字号" }
                 ],
-                "criminalRecord.finalTrialLetterNumber": [
-                    { type: "number", message: "必须为数字值" }
-                ],
                 selectedDecisionOrgan: [
                     { required: true, message: "请选择判决机关" }
                 ],
@@ -281,7 +278,7 @@ export default {
                 "criminalRecord.decisionDeprivationPoliticalRightYears": [
                     { required: true, message: "请输入判决剥政年限" },
                     { type: "number", message: "必须为数字值" },
-                    { validator: this.$validators.dataRange1t10d }
+                    { validator: this.$validators.deprivationPolitical }
                 ],
                 selectedFinalTrialOrgan: [
                     { required: true, message: "请输入终审机关" }

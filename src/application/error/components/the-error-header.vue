@@ -21,7 +21,7 @@
       </li>
       <li class="hasImg">
         <router-link to="/me">
-          <img src="../../../assets/images/face11.jpg">
+          <img src="../../../assets/images/avatar.jpg">
           <span>管理员</span>
         </router-link>
       </li>
@@ -32,7 +32,10 @@
   </el-header>
 </template>
 <script>
+import { default as profileStorage } from "../../common/service/profile-storage";
+import { default as tokenStorage } from "@/utils/token/token-storage";
 import { mapActions } from "vuex";
+
 export default {
   data() {
     return {};
@@ -44,7 +47,8 @@ export default {
       this.handleCollapse();
     },
     logout() {
-      window.localStorage.removeItem("TOKEN");
+      profileStorage.removeMyProfile();
+      tokenStorage.removeToken();
       this.$router.push("/login");
     }
   }

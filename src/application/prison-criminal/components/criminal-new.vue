@@ -381,8 +381,8 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import { default as criminalLookupService } from "@/application/common/service/lookup/criminal-lookup-service";
-import { default as regionLookupService } from "@/application/common/service/lookup/region-lookup-service";
+import { default as criminalLookupService } from "@/application/common/service/lookup/criminal/criminal-lookup-service";
+import { default as regionLookupService } from "@/application/common/service/lookup/region/region-lookup-service";
 import _ from "lodash";
 
 export default {
@@ -417,7 +417,7 @@ export default {
         "criminal.birthday": [{ required: true, message: "请选择出生日期" }],
         "criminal.identityCardNumber": [
           { required: true, message: "请输入身份证号" },
-          { validator: this.$validators.IDCardRange15a18d }
+          { validator: this.$validators.iDCardRange18w }
         ],
         "criminal.married": [{ required: true, message: "请选择是否婚否" }],
         selectedEthnicity: [{ required: true, message: "请选择民族" }],

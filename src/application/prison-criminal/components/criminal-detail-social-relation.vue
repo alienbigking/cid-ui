@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="list-box"
-    v-if="socialRelationShow">
+  <div class="list-box">
     <el-table
       class="table40"
       :data="allCriminalSocialRelations"
       v-loading="loading"
-      header-row-class-name="tableHeader40"
+      header-row-class-name="tableHeader"
       style="width:100%">
       <el-table-column
         prop="appellation"
@@ -62,12 +60,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  props: {
-    socialRelationShow: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       loading: true

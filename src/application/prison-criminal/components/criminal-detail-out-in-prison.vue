@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="list-box"
-    v-if="outInPrisonShow">
+  <div class="list-box">
     <el-table
       class="table40"
       :data="allCriminalOutInPrisons"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="tableHeader">
       <el-table-column
         prop="reasonName"
         label="出入监事由"
@@ -48,12 +46,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  props: {
-    outInPrisonShow: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       loading: true

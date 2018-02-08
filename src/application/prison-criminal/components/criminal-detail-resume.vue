@@ -1,12 +1,10 @@
 <template>
-  <div
-    class="list-box"
-    v-if="resumeShow">
+  <div class="list-box">
     <el-table
       class="table40"
       :data="allCriminalResumes"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="tableHeader">
       <el-table-column
         prop="startDate"
         label="开始日期"/>
@@ -49,12 +47,6 @@
 import { mapState, mapActions } from "vuex";
 
 export default {
-  props: {
-    resumeShow: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
       loading: true

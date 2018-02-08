@@ -110,7 +110,7 @@
             ref="gk-table"
             class="table40"
             :data="form.criminalPhysicalCharacteristic.otherFeatures"
-            header-row-class-name="tableHeader40">
+            header-row-class-name="tableHeader">
             <el-table-column
               align="center"
               label="其它特征"
@@ -150,7 +150,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal-physical-characteristic-lookup-service";
+import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal/criminal-physical-characteristic/criminal-physical-characteristic-lookup-service";
 import _ from "lodash";
 
 export default {

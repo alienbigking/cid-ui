@@ -125,7 +125,7 @@
         犯罪记录
         <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-record :record-show="recordShow"/>
+      <criminal-detail-record v-if="recordShow"/>
     </div>
     <!-- 简历 -->
     <div class="detail-card">
@@ -135,7 +135,7 @@
         简历
         <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-resume :resume-show="resumeShow"/>
+      <criminal-detail-resume v-if="resumeShow"/>
     </div>
     <!-- 体貌特征 -->
     <div class="detail-card">
@@ -197,7 +197,7 @@
         社会关系
         <span :class="socialRelationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-social-relation :social-relation-show="socialRelationShow"/>
+      <criminal-detail-social-relation v-if="socialRelationShow"/>
     </div>
     <!-- 罚金 -->
     <div class="detail-card">
@@ -207,7 +207,7 @@
         罚金
         <span :class="forfeitShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-forfeit :forfeit-show="forfeitShow"/>
+      <criminal-detail-forfeit v-if="forfeitShow"/>
     </div>
     <!-- 出入监 -->
     <div class="detail-card">
@@ -217,7 +217,7 @@
         出入监
         <span :class="outInPrisonShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-outInPrison :out-in-prison-show="outInPrisonShow"/>
+      <criminal-detail-outInPrison v-if="outInPrisonShow"/>
     </div>
   </div>
 
@@ -288,19 +288,13 @@ export default {
 <style lang="scss" scoped>
 .detail-card{
   .card-title{
-    border-bottom: 0;
     [class^="el-icon"]{
       float: right;
       font-weight: bold;
+      line-height: 50px;
     }
-    &+div:not(.list-box){ border-top: 1px solid #DDD; }
-  }
-  .list-box{
-    margin-left: 0;
-    padding-left: 20px;
   }
   .card-body{
-    // span{ width: calc(100% - 100px); }
     .label120{
         width: 130px;
     }
