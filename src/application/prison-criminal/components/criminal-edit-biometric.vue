@@ -272,7 +272,7 @@ export default {
   watch: {
     criminalFaces: {
       handler: _.debounce(function(criminalFaces) {
-        this.$store.commit("updateCriminalFaces", criminalFaces);
+        this.$store.commit("updateCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
       }, 500),
       deep: true
     }
@@ -290,8 +290,9 @@ export default {
       if (r === 1) {
          let curpath = "c:\\123\\frontage.bmp";
          if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.frontage = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.frontage);
+           this.criminalFaces.frontPhoto = sy305.GetExtraInfo("capture_base64");
+           alert(this.criminalFaces.frontPhoto);
+           sy305.ClosePhotoCapture();
          }
       } else {
         this.$errorMessage.show("照相机初始化失败");
@@ -304,8 +305,9 @@ export default {
       if (r === 1) {
          let curpath = "c:\\123\\leftside.bmp";
          if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.leftSide = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.leftSide);
+           this.criminalFaces.leftPhoto = sy305.GetExtraInfo("capture_base64");
+           alert(this.criminalFaces.leftPhoto);
+           sy305.ClosePhotoCapture();
          }
       } else {
         this.$errorMessage.show("照相机初始化失败");
@@ -318,9 +320,10 @@ export default {
       if (r === 1) {
          let curpath = "c:\\123\\rightside.bmp";
          if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.rightSide = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.rightSide);
+           this.criminalFaces.rightPhoto = sy305.GetExtraInfo("capture_base64");
+           alert(this.criminalFaces.rightPhoto);
            console.log(this.criminalFaces);
+           sy305.ClosePhotoCapture();
          }
       } else {
         this.$errorMessage.show("照相机初始化失败");
@@ -328,9 +331,26 @@ export default {
     },
     onSaveFacePicture() {
       this.saving = true;
-      // this.$store.commit("setCriminalFaces", { criminalId: this.$route.params.id });
       this.$store.commit("updateCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
-      console.log(9999, this.$store.state.prisonCriminal.criminalFace);
+       this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.criminalFaces.id) {
+            // 修改
+            this.saving = true;
+            this.updateCriminalFaces()
+              .then(res => {
+                this.saving = false;
+                this.$message.success("修改成功");
+                this.editDialogVisible = false;
+              })
+              .catch(error => {
+                this.saving = false;
+                this.$errorMessage.show(error, "修改失败");
+              });
+          } else {
+            // 新增
+            console.log(this.criminalFaces);
+            this.saving = true;
             this.addCriminalFaces()
               .then(res => {
                 this.saving = false;
@@ -341,38 +361,9 @@ export default {
                 this.saving = false;
                 this.$errorMessage.show(error, "新增失败");
               });
-      //  this.$refs["form"].validate(valid => {
-      //   if (valid) {
-      //     if (this.form.criminalFaces.id) {
-      //       // 修改
-      //       this.saving = true;
-      //       this.updateCriminalFaces()
-      //         .then(res => {
-      //           this.saving = false;
-      //           this.$message.success("修改成功");
-      //           this.editDialogVisible = false;
-      //         })
-      //         .catch(error => {
-      //           this.saving = false;
-      //           this.$errorMessage.show(error, "修改失败");
-      //         });
-      //     } else {
-      //       // 新增
-      //       console.log(this.form.criminalFaces);
-      //       this.saving = true;
-      //       this.addCriminalFaces()
-      //         .then(res => {
-      //           this.saving = false;
-      //           this.$message.success("新增成功");
-      //           this.editDialogVisible = false;
-      //         })
-      //         .catch(error => {
-      //           this.saving = false;
-      //           this.$errorMessage.show(error, "新增失败");
-      //         });
-      //     }
-      //   }
-      // });
+          }
+        }
+      });
     }
   }
 };
