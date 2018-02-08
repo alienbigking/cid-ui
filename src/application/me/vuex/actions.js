@@ -8,9 +8,6 @@ export default {
             commit(types.SET_PROFILE_STORAGE, myProfile);
         });
     },
-    removeProfile({ commit }) {
-        commit(types.REMOVE_PROFILE_STORAGE);
-    },
     updateMyProfile({ commit, state }) {
         return userService.updateMyProfile(state.myProfile);
     },
