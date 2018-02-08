@@ -47,9 +47,17 @@ const state = {
     pagedCriminalOutInPrisons: { content: [] },
     criminalOutInPrison: {},
     // 罪犯照片指纹采集
-    allCriminalCollection: [],
-    pagedCriminalCollections: { content: [] },
-    criminalCollection: {}
+    allCriminalFingerPrints: [],
+    pagedCriminalFingerPrints: { content: [] },
+    criminalFingerPrint: {},
+    // 罪犯面部采集
+    allCriminalFaces: [],
+    pagedCriminalFaces: { content: [] },
+    criminalFace: {},
+    // 罪犯虹膜采集
+    allCriminalIrises: [],
+    pagedCriminalIrises: { content: [] },
+    criminalIris: {}
 };
 
 export default {
