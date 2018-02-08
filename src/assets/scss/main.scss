@@ -293,7 +293,7 @@
     }
   }
   .tableHeader {
-    .cell {
+    th:not(.is-center) .cell {
       display: flex;
       align-items: center;
       justify-content: space-between;
