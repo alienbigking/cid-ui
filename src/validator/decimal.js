@@ -9,12 +9,14 @@ function decimal1i2f(rule, value, callback) {
 
 function decimal2i2f(rule, value, callback) {
   let regExp = /^\d{1,2}(\.\d{1,2})?$/;
-  if (value !== undefined && value !== "") {
+  if (value !== undefined && value !== "" && value !== null) {
     if (regExp.test(value) === false) {
       callback(new Error("最多保留2位整数2位小数"));
     } else {
       callback();
     }
+  } else {
+    callback();
   }
 }
 

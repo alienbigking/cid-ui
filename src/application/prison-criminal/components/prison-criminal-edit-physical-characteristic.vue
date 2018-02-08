@@ -316,6 +316,7 @@ export default {
             this.updateCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
+                this.render();
                 this.$message.success("修改成功");
                 this.editDialogVisible = false;
               })
@@ -329,6 +330,7 @@ export default {
             this.addCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
+                this.render();
                 this.$message.success("新增成功");
                 this.editDialogVisible = false;
               })

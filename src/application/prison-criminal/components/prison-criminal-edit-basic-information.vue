@@ -778,7 +778,6 @@ export default {
     },
     render() {
       this.getCriminal(this.$route.params.id).then(() => {
-        this.$refs.form.clearValidate();
         this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
