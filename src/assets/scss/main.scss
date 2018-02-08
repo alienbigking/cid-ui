@@ -294,16 +294,18 @@
   }
 }
 .table45{
-  tr,th,td{ height: 45px;}
+  tr,th,td{ height: 45px; }
   .tableHeader{
-    th { border-bottom-color: #bbb; }
+    height: 100%;
+    th { line-height: 45px; border-bottom-color: #bbb; }
   }
 }
 .table40{
   border: $border;
   border-bottom: 0;
-  tr,th,td{ height: 40px;}
+  tr,th,td{ height: 40px; }
   .tableHeader{
+    height: 100%;
     th{ background: $background; }
   }
 }

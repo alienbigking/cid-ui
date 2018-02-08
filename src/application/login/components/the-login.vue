@@ -130,7 +130,7 @@ export default {
 }
 .flex-column{
     flex-direction: column;
-    background: url(../../../assets/images/background.png) no-repeat;
+    background: url("../../../assets/images/backgroud.jpg") no-repeat;
     background-position: top center;
     background-size: cover;
 }
