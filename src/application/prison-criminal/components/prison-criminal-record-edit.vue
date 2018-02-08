@@ -469,18 +469,6 @@ export default {
                     this.form.criminalRecord = _.cloneDeep(
                         this.$store.state.prisonCriminal.criminalRecord
                     );
-                    this.form.criminalRecord.decisionLetterNumber = Number(
-                        this.form.criminalRecord.decisionLetterNumber
-                    );
-                    this.form.criminalRecord.finalTrialLetterNumber = Number(
-                        this.form.criminalRecord.finalTrialLetterNumber
-                    );
-                    this.form.criminalRecord.firstTrialLetterNumber = Number(
-                        this.form.criminalRecord.firstTrialLetterNumber
-                    );
-                    this.form.criminalRecord.prosecutionLetterNumber = Number(
-                        this.form.criminalRecord.prosecutionLetterNumber
-                    );
                     this.form.selectedArrestOrgan = {
                         code: this.form.criminalRecord.arrestOrganCode,
                         name: this.form.criminalRecord.arrestOrganName
