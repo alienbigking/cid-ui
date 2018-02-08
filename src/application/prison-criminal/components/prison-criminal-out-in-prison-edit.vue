@@ -120,7 +120,7 @@ export default {
     },
     "form.criminalOutInPrison": {
       handler: _.debounce(function(criminalOutInPrison) {
-        this.$store.commit("updateCriminalOutInPrison", criminalOutInPrison);
+        this.$store.commit("updatePrisonCriminalOutInPrison", criminalOutInPrison);
       }, 500),
       deep: true
     }
@@ -136,10 +136,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminalOutInPrison",
-      "addCriminalOutInPrison",
-      "updateCriminalOutInPrison",
-      "getAllCriminalOutInPrisons"
+      "getPrisonCriminalOutInPrison",
+      "addPrisonCriminalOutInPrison",
+      "updatePrisonCriminalOutInPrison",
+      "getAllPrisonCriminalOutInPrisons"
     ]),
     onClose() {
       this.$emit("on-close");
@@ -150,10 +150,10 @@ export default {
           if (this.form.criminalOutInPrison.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalOutInPrison()
+            this.updatePrisonCriminalOutInPrison()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalOutInPrisons(this.$route.params.id);
+                this.getAllPrisonCriminalOutInPrisons(this.$route.params.id);
                 this.$message.success("修改成功");
                 this.$emit("on-close");
               })
@@ -164,10 +164,10 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            this.addCriminalOutInPrison()
+            this.addPrisonCriminalOutInPrison()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalOutInPrisons(this.$route.params.id);
+                this.getAllPrisonCriminalOutInPrisons(this.$route.params.id);
                 this.$message.success("新增成功");
                 this.$emit("on-close");
               })
@@ -182,13 +182,13 @@ export default {
     render() {
       if (!this.criminalOutInPrisonId) {
         this.form.selectedOutInPrisonReasons = {};
-        this.$store.commit("setCriminalOutInPrison", { criminalId: this.$route.params.id });
+        this.$store.commit("setPrisonCriminalOutInPrison", { criminalId: this.$route.params.id });
         this.form.criminalOutInPrison = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalOutInPrison
           );
         this.loading = false;
       } else {
-        this.getCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
+        this.getPrisonCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
           this.form.criminalOutInPrison = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalOutInPrison
           );

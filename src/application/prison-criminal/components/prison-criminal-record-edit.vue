@@ -380,7 +380,7 @@ export default {
         },
         "form.criminalRecord": {
             handler: _.debounce(function(criminalRecord) {
-                this.$store.commit("updateCriminalRecord", criminalRecord);
+                this.$store.commit("updatePrisonCriminalRecord", criminalRecord);
             }, 500),
             deep: true
         }
@@ -403,10 +403,10 @@ export default {
             "getAllCourts",
             "getAllPoliceStations",
             "getAllProcuratorates",
-            "getCriminalRecord",
-            "addCriminalRecord",
-            "updateCriminalRecord",
-            "getAllCriminalRecords"
+            "getPrisonCriminalRecord",
+            "addPrisonCriminalRecord",
+            "updatePrisonCriminalRecord",
+            "getAllPrisonCriminalRecords"
         ]),
         onClose() {
             this.$emit("on-close");
@@ -417,10 +417,10 @@ export default {
                     if (this.form.criminalRecord.id) {
                         // 修改
                         this.saving = true;
-                        this.updateCriminalRecord()
+                        this.updatePrisonCriminalRecord()
                             .then(res => {
                                 this.saving = false;
-                                this.getAllCriminalRecords(
+                                this.getAllPrisonCriminalRecords(
                                     this.$route.params.id
                                 );
                                 this.$message.success("修改成功");
@@ -433,10 +433,10 @@ export default {
                     } else {
                         // 新增
                         this.saving = true;
-                        this.addCriminalRecord()
+                        this.addPrisonCriminalRecord()
                             .then(res => {
                                 this.saving = false;
-                                this.getAllCriminalRecords(
+                                this.getAllPrisonCriminalRecords(
                                     this.$route.params.id
                                 );
                                 this.$message.success("新增成功");
@@ -457,7 +457,7 @@ export default {
                 this.form.selectedFirstTrialOrgan = null;
                 this.form.selectedFinalTrialOrgan = null;
                 this.form.selectedDecisionOrgan = null;
-                this.$store.commit("setCriminalRecord", {
+                this.$store.commit("setPrisonCriminalRecord", {
                     criminalId: this.$route.params.id
                 });
                 this.form.criminalRecord = _.cloneDeep(
@@ -465,7 +465,7 @@ export default {
                 );
                 this.loading = false;
             } else {
-                this.getCriminalRecord(this.criminalRecordId).then(() => {
+                this.getPrisonCriminalRecord(this.criminalRecordId).then(() => {
                     this.form.criminalRecord = _.cloneDeep(
                         this.$store.state.prisonCriminal.criminalRecord
                     );

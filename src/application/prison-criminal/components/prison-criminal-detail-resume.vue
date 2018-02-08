@@ -58,12 +58,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalResumes(this.$route.params.id)
+    this.getAllPrisonCriminalResumes(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalResumes" ])
+    ...mapActions([ "getAllPrisonCriminalResumes" ])
   }
 };
 </script>

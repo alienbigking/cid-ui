@@ -114,8 +114,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalRecords",
-      "deleteCriminalRecord"
+      "getAllPrisonCriminalRecords",
+      "deletePrisonCriminalRecord"
     ]),
     onNew() {
       this.criminalRecordId = "";
@@ -131,7 +131,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalRecord(this.deleteItem.id)
+      this.deletePrisonCriminalRecord(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -144,7 +144,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalRecords(this.$route.params.id)
+      this.getAllPrisonCriminalRecords(this.$route.params.id)
         .then(() => { this.loading = false; })
         .catch(() => { this.loading = false; });
     }

@@ -116,8 +116,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalOutInPrisons",
-      "deleteCriminalOutInPrison"
+      "getAllPrisonCriminalOutInPrisons",
+      "deletePrisonCriminalOutInPrison"
     ]),
     onNew() {
       this.criminalOutInPrisonId = "";
@@ -133,7 +133,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalOutInPrison(this.deleteItem.id)
+      this.deletePrisonCriminalOutInPrison(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -146,7 +146,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalOutInPrisons(this.$route.params.id).then(() => {
+      this.getAllPrisonCriminalOutInPrisons(this.$route.params.id).then(() => {
         this.criminalOutInPrison = _.cloneDeep(
           this.$store.state.criminal.criminalOutInPrison
         );

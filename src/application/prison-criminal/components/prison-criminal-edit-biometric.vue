@@ -272,16 +272,16 @@ export default {
   watch: {
     criminalFaces: {
       handler: _.debounce(function(criminalFaces) {
-        this.$store.commit("updateCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
+        this.$store.commit("updatePrisonCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
       }, 500),
       deep: true
     }
   },
   methods: {
     ...mapActions([
-      "getCriminalFaces",
-      "addCriminalFaces",
-      "updateCriminalFaces"
+      "getPrisonCriminalFaces",
+      "addPrisonCriminalFaces",
+      "updatePrisonCriminalFaces"
     ]),
     frontagePhoto() {
       let sy305 = this.$refs.photo;
@@ -331,13 +331,13 @@ export default {
     },
     onSaveFacePicture() {
       this.saving = true;
-      this.$store.commit("updateCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
+      this.$store.commit("updatePrisonCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
        this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.criminalFaces.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalFaces()
+            this.updatePrisonCriminalFaces()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
@@ -351,7 +351,7 @@ export default {
             // 新增
             console.log(this.criminalFaces);
             this.saving = true;
-            this.addCriminalFaces()
+            this.addPrisonCriminalFaces()
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");

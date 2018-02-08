@@ -256,11 +256,11 @@ export default {
     })
   },
   created() {
-    this.getCriminal(this.$route.params.id);
-    this.getCriminalPhysicalCharacteristic(this.$route.params.id);
+    this.getPrisonCriminal(this.$route.params.id);
+    this.getPrisonCriminalPhysicalCharacteristic(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getCriminalPhysicalCharacteristic" ]),
+    ...mapActions([ "getPrisonCriminal", "getPrisonCriminalPhysicalCharacteristic" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },

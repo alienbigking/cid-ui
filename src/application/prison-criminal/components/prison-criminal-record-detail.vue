@@ -90,10 +90,10 @@ export default {
     })
   },
   created() {
-    this.getCriminalRecord(this.$route.params.id);
+    this.getPrisonCriminalRecord(this.$route.params.id);
   },
   methods: {
-    ...mapActions(["getCriminalRecord"]),
+    ...mapActions(["getPrisonCriminalRecord"]),
     onBack() {
       this.$router.go(-1);
     }

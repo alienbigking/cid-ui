@@ -1,37 +1,37 @@
 // 罪犯
-export const SET_CRIMINAL = 'setCriminal';
-export const UPDATE_CRIMINAL = 'updateCriminal';
-export const SET_PAGED_CRIMINALS = 'setPagedCriminals';
+export const SET_PRISON_CRIMINAL = 'setPrisonCriminal';
+export const UPDATE_PRISON_CRIMINAL = 'updatePrisonCriminal';
+export const SET_PAGED_PRISON_CRIMINALS = 'setPagedPrisonCriminals';
 // 罪犯犯罪记录
-export const SET_CRIMINAL_RECORD = 'setCriminalRecord';
-export const UPDATE_CRIMINAL_RECORD = 'updateCriminalRecord';
-export const SET_ALL_CRIMINAL_RECORDS = 'setAllCriminalRecords';
-export const SET_PAGED_CRIMINAL_RECORDS = 'setPagedCriminalRecords';
+export const SET_PRISON_CRIMINAL_RECORD = 'setPrisonCriminalRecord';
+export const UPDATE_PRISON_CRIMINAL_RECORD = 'updatePrisonCriminalRecord';
+export const SET_ALL_PRISON_CRIMINAL_RECORDS = 'setAllPrisonCriminalRecords';
+export const SET_PAGED_PRISON_CRIMINAL_RECORDS = 'setPagedPrisonCriminalRecords';
 // 罪犯简历
-export const SET_CRIMINAL_RESUME = 'setCriminalResume';
-export const UPDATE_CRIMINAL_RESUME = 'updateCriminalResume';
-export const SET_ALL_CRIMINAL_RESUMES = 'setAllCriminalResumes';
-export const SET_PAGED_CRIMINAL_RESUMES = 'setPagedCriminalResumes';
+export const SET_PRISON_CRIMINAL_RESUME = 'setPrisonCriminalResume';
+export const UPDATE_PRISON_CRIMINAL_RESUME = 'updatePrisonCriminalResume';
+export const SET_ALL_PRISON_CRIMINAL_RESUMES = 'setAllPrisonCriminalResumes';
+export const SET_PAGED_PRISON_CRIMINAL_RESUMES = 'setPagedPrisonCriminalResumes';
 // 罪犯体貌特征
-export const SET_CRIMINAL_PHYSICAL_CHARACTERISTIC = 'setCriminalPhysicalCharacteristic';
-export const UPDATE_CRIMINAL_PHYSICAL_CHARACTERISTIC = 'updateCriminalPhysicalCharacteristic';
-export const SET_ALL_CRIMINAL_PHYSICAL_CHARACTERISTICS = 'setAllCriminalPhysicalCharacteristics';
-export const SET_PAGED_CRIMINAL_PHYSICAL_CHARACTERISTICS = 'setPagedCriminalPhysicalCharacteristics';
+export const SET_PRISON_CRIMINAL_PHYSICAL_CHARACTERISTIC = 'setPrisonCriminalPhysicalCharacteristic';
+export const UPDATE_PRISON_CRIMINAL_PHYSICAL_CHARACTERISTIC = 'updatePrisonCriminalPhysicalCharacteristic';
+export const SET_ALL_PRISON_CRIMINAL_PHYSICAL_CHARACTERISTICS = 'setAllPrisonCriminalPhysicalCharacteristics';
+export const SET_PAGED_PRISON_CRIMINAL_PHYSICAL_CHARACTERISTICS = 'setPagedPrisonCriminalPhysicalCharacteristics';
 // 罪犯社会关系
-export const SET_CRIMINAL_SOCIAL_RELATION = 'setCriminalSocialRelation';
-export const UPDATE_CRIMINAL_SOCIAL_RELATION = 'updateCriminalSocialRelation';
-export const SET_ALL_CRIMINAL_SOCIAL_RELATIONS = 'setAllCriminalSocialRelations';
-export const SET_PAGED_CRIMINAL_SOCIAL_RELATIONS = 'setPagedCriminalSocialRelations';
+export const SET_PRISON_CRIMINAL_SOCIAL_RELATION = 'setPrisonCriminalSocialRelation';
+export const UPDATE_PRISON_CRIMINAL_SOCIAL_RELATION = 'updatePrisonCriminalSocialRelation';
+export const SET_ALL_PRISON_CRIMINAL_SOCIAL_RELATIONS = 'setAllPrisonCriminalSocialRelations';
+export const SET_PAGED_PRISON_CRIMINAL_SOCIAL_RELATIONS = 'setPagedPrisonCriminalSocialRelations';
 // 罪犯罚金管理
-export const SET_CRIMINAL_FORFEIT = 'setCriminalForfeit';
-export const UPDATE_CRIMINAL_FORFEIT = 'updateCriminalForfeit';
-export const SET_ALL_CRIMINAL_FORFEITS = 'setAllCriminalForfeits';
-export const SET_PAGED_CRIMINAL_FORFEITS = 'setPagedCriminalForfeits';
+export const SET_PRISON_CRIMINAL_FORFEIT = 'setPrisonCriminalForfeit';
+export const UPDATE_PRISON_CRIMINAL_FORFEIT = 'updatePrisonCriminalForfeit';
+export const SET_ALL_PRISON_CRIMINAL_FORFEITS = 'setAllPrisonCriminalForfeits';
+export const SET_PAGED_PRISON_CRIMINAL_FORFEITS = 'setPagedPrisonCriminalForfeits';
 // 罪犯出入监管理
-export const SET_CRIMINAL_OUTINPRISON = 'setCriminalOutInPrison';
-export const UPDATE_CRIMINAL_OUTINPRISON = 'updateCriminalOutInPrison';
-export const SET_ALL_CRIMINAL_OUTINPRISONS = 'setAllCriminalOutInPrisons';
-export const SET_PAGED_CRIMINAL_OUTINPRISONS = 'setPagedCriminalOutInPrisons';
+export const SET_PRISON_CRIMINAL_OUTINPRISON = 'setPrisonCriminalOutInPrison';
+export const UPDATE_PRISON_CRIMINAL_OUTINPRISON = 'updatePrisonCriminalOutInPrison';
+export const SET_ALL_PRISON_CRIMINAL_OUTINPRISONS = 'setAllPrisonCriminalOutInPrisons';
+export const SET_PAGED_PRISON_CRIMINAL_OUTINPRISONS = 'setPagedPrisonCriminalOutInPrisons';
 // 罪犯面部采集
-export const SET_CRIMINAL_FACES = 'setCriminalFaces';
-export const UPDATE_CRIMINAL_FACES = 'updateCriminalFaces';
+export const SET_PRISON_CRIMINAL_FACES = 'setPrisonCriminalFaces';
+export const UPDATE_PRISON_CRIMINAL_FACES = 'updatePrisonCriminalFaces';

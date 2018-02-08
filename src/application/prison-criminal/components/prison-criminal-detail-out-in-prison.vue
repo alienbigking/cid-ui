@@ -57,12 +57,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalOutInPrisons(this.$route.params.id)
+    this.getAllPrisonCriminalOutInPrisons(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalOutInPrisons" ])
+    ...mapActions([ "getAllPrisonCriminalOutInPrisons" ])
   }
 };
 </script>

@@ -117,8 +117,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalForfeits",
-      "deleteCriminalForfeit"
+      "getAllPrisonCriminalForfeits",
+      "deletePrisonCriminalForfeit"
     ]),
     onNew() {
       this.criminalForfeitId = "";
@@ -134,7 +134,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalForfeit(this.deleteItem.id)
+      this.deletePrisonCriminalForfeit(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -147,7 +147,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalForfeits(this.$route.params.id).then(() => {
+      this.getAllPrisonCriminalForfeits(this.$route.params.id).then(() => {
         this.criminalForfeit = _.cloneDeep(
           this.$store.state.criminal.criminalForfeit
         );

@@ -106,7 +106,7 @@ export default {
     },
     criminalResume: {
       handler: _.debounce(function(criminalResume) {
-        this.$store.commit("updateCriminalResume", criminalResume);
+        this.$store.commit("updatePrisonCriminalResume", criminalResume);
       }, 500),
       deep: true
     }
@@ -116,10 +116,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminalResume",
-      "addCriminalResume",
-      "updateCriminalResume",
-      "getAllCriminalResumes"
+      "getPrisonCriminalResume",
+      "addPrisonCriminalResume",
+      "updatePrisonCriminalResume",
+      "getAllPrisonCriminalResumes"
     ]),
     onClose() {
       this.$emit("on-close");
@@ -130,10 +130,10 @@ export default {
           if (this.criminalResume.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalResume()
+            this.updatePrisonCriminalResume()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalResumes(this.$route.params.id);
+                this.getAllPrisonCriminalResumes(this.$route.params.id);
                 this.$message.success("修改成功");
                 this.$emit("on-close");
               })
@@ -144,10 +144,10 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            this.addCriminalResume()
+            this.addPrisonCriminalResume()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalResumes(this.$route.params.id);
+                this.getAllPrisonCriminalResumes(this.$route.params.id);
                 this.$message.success("新增成功");
                 this.$emit("on-close");
               })
@@ -161,13 +161,13 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.$store.commit("setCriminalResume", { criminalId: this.$route.params.id });
+        this.$store.commit("setPrisonCriminalResume", { criminalId: this.$route.params.id });
         this.criminalResume = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalResume
           );
         this.loading = false;
       } else {
-        this.getCriminalResume(this.criminalResumeId).then(() => {
+        this.getPrisonCriminalResume(this.criminalResumeId).then(() => {
           this.criminalResume = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalResume
           );

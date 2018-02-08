@@ -71,12 +71,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalSocialRelations(this.$route.params.id)
+    this.getAllPrisonCriminalSocialRelations(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalSocialRelations" ])
+    ...mapActions([ "getAllPrisonCriminalSocialRelations" ])
   }
 };
 </script>

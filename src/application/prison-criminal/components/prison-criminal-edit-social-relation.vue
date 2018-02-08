@@ -126,8 +126,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalSocialRelations",
-      "deleteCriminalSocialRelation"
+      "getAllPrisonCriminalSocialRelations",
+      "deletePrisonCriminalSocialRelation"
     ]),
     onNew() {
       this.criminalSocialRelationId = "";
@@ -143,7 +143,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalSocialRelation(this.deleteItem.id)
+      this.deletePrisonCriminalSocialRelation(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -156,7 +156,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalSocialRelations(this.$route.params.id)
+      this.getAllPrisonCriminalSocialRelations(this.$route.params.id)
         .then(() => { this.loading = false; })
         .catch(() => { this.loading = false; });
     }
