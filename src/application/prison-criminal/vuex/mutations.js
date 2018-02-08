@@ -90,5 +90,12 @@ export default {
     },
     [types.SET_PAGED_CRIMINAL_OUTINPRISONS](state, pagedCriminalOutInPrisons) {
         state.pagedCriminalOutInPrisons = pagedCriminalOutInPrisons;
+    },
+    // 罪犯面部采集
+    [types.SET_CRIMINAL_FACES](state, criminalFace) {
+        state.criminalFace = criminalFace;
+    },
+    [types.UPDATE_CRIMINAL_FACES](state, criminalFace) {
+        state.criminalFace = _.cloneDeep(criminalFace);
     }
 };

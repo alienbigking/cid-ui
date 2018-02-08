@@ -32,6 +32,14 @@
     top: 7px;
     right: 12.5px;
     position: relative;
+  } @else if $type == delete{
+    color: $color-default;
+    // background: #fff;
+    width: 80px;
+    height: 26px;
+    top: 60px;
+    right: 0px;
+    position: absolute;;
   }
 }
 // 按钮hover样式
@@ -54,7 +62,9 @@
     background: rgba(#2196F3, 0.9);
   } @else if $type == addCollection {
     background: rgba(#009588, 0.9);
-  }  @else {
+  } @else if $type == delete {
+    background: rgba(#666, 0.9); 
+  } @else {
     color: $color-default;
     background: rgba($color-border, 0.2);
     border-color: $color-border;
