@@ -62,7 +62,7 @@
       class="dialog"
       width="950px"
       :visible.sync="editDialogVisible">
-      <criminal-record-edit
+      <prison-criminal-record-edit
         :criminal-record-id="criminalRecordId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
@@ -88,11 +88,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalRecordEdit from "./criminal-record-edit";
+import PrisonCriminalRecordEdit from "./prison-criminal-record-edit";
 
 export default {
   components: {
-    "criminal-record-edit": CriminalRecordEdit
+    "prison-criminal-record-edit": PrisonCriminalRecordEdit
   },
   data() {
     return {

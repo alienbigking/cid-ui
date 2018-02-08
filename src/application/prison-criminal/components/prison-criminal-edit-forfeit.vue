@@ -8,39 +8,38 @@
     <div class="list-box">
       <el-table
         class="table40"
-        :data="allCriminalResumes"
+        :data="allCriminalForfeits"
         v-loading="loading"
         header-row-class-name="tableHeader">
         <el-table-column
-          prop="startDate"
-          label="开始日期"/>
-        <el-table-column
-          prop="endDate"
-          label="结束日期"/>
-        <el-table-column
-          prop="company"
-          label="公司"
+          prop="receiptNumber"
+          label="罚金单据号"
           :show-overflow-tooltip="true"/>
         <el-table-column
-          prop="occupation"
-          label="职业"
-          width="80px"
+          prop="amount"
+          label="缴纳罚金"
           :show-overflow-tooltip="true"/>
         <el-table-column
-          prop="duty"
-          label="职位"
-          width="80px"
+          prop="payee"
+          label="收款单位"
           :show-overflow-tooltip="true"/>
+        <el-table-column
+          prop="paymentDate"
+          label="缴纳日期">
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
         <el-table-column
           prop="createdTime"
-          label="创建时间" >
+          label="创建时间">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
         </el-table-column>
         <el-table-column
           prop="lastUpdatedTime"
-          label="最后更新时间" >
+          label="最后更新时间">
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -61,12 +60,12 @@
       </el-table>
     </div>
     <el-dialog
-      title="简历"
+      title="罚金"
       class="dialog"
       width="730px"
       :visible.sync="editDialogVisible">
-      <criminal-resume-edit
-        :criminal-resume-id="criminalResumeId"
+      <prison-criminal-forfeit-edit
+        :criminal-forfeit-id="criminalForfeitId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
     </el-dialog>
@@ -75,7 +74,7 @@
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
-      <span>确认删除吗</span>
+      <span>确认删除<b>{{ deleteItem.receiptNumber }}</b>吗</span>
       <template slot="footer">
         <el-button
           class="button-cancel"
@@ -91,16 +90,16 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalResumeEdit from "./criminal-resume-edit";
+import PrisonCriminalForfeitEdit from "./prison-criminal-forfeit-edit";
 import _ from "lodash";
 
 export default {
   components: {
-    "criminal-resume-edit": CriminalResumeEdit
+    "prison-criminal-forfeit-edit": PrisonCriminalForfeitEdit
   },
   data() {
     return {
-      criminalResumeId: "",
+      criminalForfeitId: "",
       editDialogVisible: null,
       deleteDialogVisible: false,
       deleting: false,
@@ -110,7 +109,7 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalResumes: state => state.prisonCriminal.allCriminalResumes
+      allCriminalForfeits: state => state.prisonCriminal.allCriminalForfeits
     })
   },
   activated() {
@@ -118,15 +117,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalResumes",
-      "deleteCriminalResume"
+      "getAllCriminalForfeits",
+      "deleteCriminalForfeit"
     ]),
     onNew() {
-      this.criminalResumeId = "";
+      this.criminalForfeitId = "";
       this.editDialogVisible = true;
     },
     onEdit(id) {
-      this.criminalResumeId = id;
+      this.criminalForfeitId = id;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -135,7 +134,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalResume(this.deleteItem.id)
+      this.deleteCriminalForfeit(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -148,9 +147,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalResumes(this.$route.params.id).then(() => {
-        this.criminalResume = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalResume
+      this.getAllCriminalForfeits(this.$route.params.id).then(() => {
+        this.criminalForfeit = _.cloneDeep(
+          this.$store.state.criminal.criminalForfeit
         );
         this.loading = false;
       }).catch(() => { this.loading = false; });
