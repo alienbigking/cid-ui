@@ -64,7 +64,7 @@
 // window.onload = function() {
 //   document.getElementById('#sy305').Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
 // };
-import {default as collectionService} from '../service/criminal-collection-service';
+import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
 
 export default {
     props: {
@@ -93,7 +93,7 @@ export default {
                 console.log(this.$refs.abc);
                 var img1 = this.$el.querySelector('#' + this.id).GetImage(iDevIndex, 1000);
                 console.log(img1);
-                if (collectionService.IsSuccess(img1) === 0) {
+                if (prisonCollectionService.IsSuccess(img1) === 0) {
                     console.log(img1);
                     var curPath = "c:\\1234\\";
                     alert(img1);

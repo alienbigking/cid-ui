@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div class="container">
     <div class="filters">
       <el-button
         class="button-addInEdit"
@@ -8,28 +8,36 @@
     <div class="list-box">
       <el-table
         class="table40"
-        :data="allCriminalForfeits"
+        :data="allCriminalSocialRelations"
         v-loading="loading"
         header-row-class-name="tableHeader">
         <el-table-column
-          prop="receiptNumber"
-          label="罚金单据号"
+          prop="appellation"
+          label="称谓"
+          width="60px"
           :show-overflow-tooltip="true"/>
         <el-table-column
-          prop="amount"
-          label="缴纳罚金"
+          align="center"
+          prop="name"
+          label="姓名"
+          width="80px"/>
+        <el-table-column
+          prop="age"
+          label="年龄"
+          width="50px"/>
+        <el-table-column
+          align="left"
+          prop="company"
+          label="公司"
           :show-overflow-tooltip="true"/>
         <el-table-column
-          prop="payee"
-          label="收款单位"
+          prop="occupation"
+          label="职业"
+          width="120px"
           :show-overflow-tooltip="true"/>
         <el-table-column
-          prop="paymentDate"
-          label="缴纳日期">
-          <template slot-scope="scope">
-            {{ scope.row.createdTime | moment }}
-          </template>
-        </el-table-column>
+          prop="politicalStatusName"
+          label="政治面貌"/>
         <el-table-column
           prop="createdTime"
           label="创建时间">
@@ -60,12 +68,12 @@
       </el-table>
     </div>
     <el-dialog
-      title="罚金"
       class="dialog"
-      width="730px"
+      title="社会关系"
+      width="950px"
       :visible.sync="editDialogVisible">
-      <criminal-forfeit-edit
-        :criminal-forfeit-id="criminalForfeitId"
+      <prison-criminal-social-relation-edit
+        :criminal-social-relation-id="criminalSocialRelationId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
     </el-dialog>
@@ -74,7 +82,7 @@
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
-      <span>确认删除<b>{{ deleteItem.receiptNumber }}</b>吗</span>
+      <span>确认删除吗</span>
       <template slot="footer">
         <el-button
           class="button-cancel"
@@ -90,26 +98,27 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalForfeitEdit from "./criminal-forfeit-edit";
-import _ from "lodash";
+import PrisonCriminalSocialRelationEdit from "./prison-criminal-social-relation-edit";
 
 export default {
   components: {
-    "criminal-forfeit-edit": CriminalForfeitEdit
+    "prison-criminal-social-relation-edit": PrisonCriminalSocialRelationEdit
   },
   data() {
     return {
-      criminalForfeitId: "",
-      editDialogVisible: null,
+      criminalSocialRelationId: "",
+      editDialogVisible: false,
       deleteDialogVisible: false,
-      deleting: false,
       loading: true,
+      deleting: false,
+      saving: false,
       deleteItem: {}
     };
   },
   computed: {
     ...mapState({
-      allCriminalForfeits: state => state.prisonCriminal.allCriminalForfeits
+      allCriminalSocialRelations: state =>
+        state.prisonCriminal.allCriminalSocialRelations
     })
   },
   activated() {
@@ -117,15 +126,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalForfeits",
-      "deleteCriminalForfeit"
+      "getAllCriminalSocialRelations",
+      "deleteCriminalSocialRelation"
     ]),
     onNew() {
-      this.criminalForfeitId = "";
+      this.criminalSocialRelationId = "";
       this.editDialogVisible = true;
     },
     onEdit(id) {
-      this.criminalForfeitId = id;
+      this.criminalSocialRelationId = id;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -134,7 +143,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalForfeit(this.deleteItem.id)
+      this.deleteCriminalSocialRelation(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -147,12 +156,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalForfeits(this.$route.params.id).then(() => {
-        this.criminalForfeit = _.cloneDeep(
-          this.$store.state.criminal.criminalForfeit
-        );
-        this.loading = false;
-      }).catch(() => { this.loading = false; });
+      this.getAllCriminalSocialRelations(this.$route.params.id)
+        .then(() => { this.loading = false; })
+        .catch(() => { this.loading = false; });
     }
   }
 };
