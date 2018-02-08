@@ -45,11 +45,13 @@ export default {
 <style lang="scss" scoped>
 .aside {
   background: #263238;
-  transition: width .3s linear;
+  transition: width 0.3s linear;
 }
-.menu-collapsed{
+.menu-collapsed {
   overflow: visible;
-  .iconfont{margin-right: 30px;}
+  .iconfont {
+    margin-right: 30px;
+  }
 }
 .avatar {
   display: flex;
@@ -74,9 +76,9 @@ export default {
     & > span {
       margin-bottom: 8px;
     }
-    .sidebar-name{
+    .sidebar-name {
       margin-top: 2px;
-      color: rgba(255,255,255,.8);
+      color: rgba(255, 255, 255, 0.8);
     }
   }
   &.avatar-collapsed {

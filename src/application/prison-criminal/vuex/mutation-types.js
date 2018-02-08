@@ -32,3 +32,6 @@ export const SET_CRIMINAL_OUTINPRISON = 'setCriminalOutInPrison';
 export const UPDATE_CRIMINAL_OUTINPRISON = 'updateCriminalOutInPrison';
 export const SET_ALL_CRIMINAL_OUTINPRISONS = 'setAllCriminalOutInPrisons';
 export const SET_PAGED_CRIMINAL_OUTINPRISONS = 'setPagedCriminalOutInPrisons';
+// 罪犯面部采集
+export const SET_CRIMINAL_FACES = 'setCriminalFaces';
+export const UPDATE_CRIMINAL_FACES = 'updateCriminalFaces';

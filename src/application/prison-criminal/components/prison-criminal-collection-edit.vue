@@ -108,12 +108,15 @@ export default {
             console.log(r);
         },
         Photoing() {
+                      console.log(this.$el.querySelector('#sy305'));
+            let r = this.$el.querySelector('#sy305').InitPhotoCapture(1);
+            console.log(r);
             let sy306 = this.$el.querySelector('#sy305');
             console.log('拍照成功');
             console.log(sy306);
             let curpath = "c:\\123\\test.bmp";
-            let r = sy306.PhotoCapture(0, curpath);
-            alert(r);
+            let a = sy306.PhotoCapture(0, curpath);
+            alert(a);
                 alert(1234);
                 let info = sy306.GetExtraInfo("capture_base64");
                 alert(info);

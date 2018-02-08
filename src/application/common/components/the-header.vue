@@ -40,6 +40,7 @@
 import { mapActions } from "vuex";
 import { default as profileStorage } from "../service/profile-storage";
 import { default as tokenStorage } from "@/utils/token/token-storage";
+
 export default {
   data() {
     return {
@@ -74,7 +75,7 @@ export default {
   display: flex;
   align-items: center;
   height: 22px;
-  &>div{
+  & > div {
     display: flex;
     align-items: center;
     cursor: pointer;

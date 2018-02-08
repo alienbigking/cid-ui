@@ -6,6 +6,7 @@ import { default as prisonCriminalPhysicalCharacteristicService } from '../servi
 import { default as prisonCriminalSocialRelationService } from '../service/prison-criminal-social-relation-service';
 import { default as prisonCriminalForfeitService } from '../service/prison-criminal-forfeit-service';
 import { default as prisonCriminalOutInPrisonService } from '../service/prison-criminal-out-in-prison-service';
+import { default as prisonCriminalBiometricService } from '../service/prison-criminal-biometric-service';
 
 export default {
     // 罪犯
@@ -164,5 +165,17 @@ export default {
     },
     deleteCriminalOutInPrison({ commit }, id) {
         return prisonCriminalOutInPrisonService.delete(id);
+    },
+    // 面部采集
+    getCriminalFaces({ commit, state }, id) {
+        return prisonCriminalBiometricService.get(id).then(criminalFaces => {
+            commit(types.SET_CRIMINAL_OUTINPRISON, criminalFaces);
+        });
+    },
+    addCriminalFaces({ commit, state }) {
+        return prisonCriminalBiometricService.add(state.criminalFace);
+    },
+    updateCriminalFaces({ commit, state }) {
+        return prisonCriminalBiometricService.update(state.criminalFace);
     }
 };

@@ -5,12 +5,12 @@ import { iDCardRange18w } from './id-card';
 import { deprivationPolitical } from './deprivation-political';
 
 export {
-    decimal1i2f,
-    decimal2i2f,
-    decimal3i2f,
-    decimal8i2f,
-    equalTo,
-    checkOtherField,
-    iDCardRange18w,
-    deprivationPolitical
+  decimal1i2f,
+  decimal2i2f,
+  decimal3i2f,
+  decimal8i2f,
+  equalTo,
+  checkOtherField,
+  iDCardRange18w,
+  deprivationPolitical
 };
