@@ -36,8 +36,9 @@ export default {
     ...mapGetters(["collapsed"])
   },
   created() {
-    this.userName = profileStorage.getMyProfile().username;
-    this.name = profileStorage.getMyProfile().name;
+    const myProfile = profileStorage.getMyProfile();
+    this.userName = myProfile.username;
+    this.name = myProfile.name;
   },
   methods: {}
 };
