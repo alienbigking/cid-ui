@@ -288,19 +288,13 @@ export default {
 <style lang="scss" scoped>
 .detail-card{
   .card-title{
-    border-bottom: 0;
     [class^="el-icon"]{
       float: right;
       font-weight: bold;
+      line-height: 50px;
     }
-    &+div:not(.list-box){ border-top: 1px solid #DDD; }
-  }
-  .list-box{
-    margin-left: 0;
-    padding-left: 20px;
   }
   .card-body{
-    // span{ width: calc(100% - 100px); }
     .label120{
         width: 130px;
     }
