@@ -34,18 +34,9 @@
 <script>
 import { default as profileStorage } from "../../common/service/profile-storage";
 import { default as tokenStorage } from "@/utils/token/token-storage";
-import { mapActions } from "vuex";
 
 export default {
-  data() {
-    return {};
-  },
-  computed: {},
   methods: {
-    ...mapActions(["handleCollapse"]),
-    test() {
-      this.handleCollapse();
-    },
     logout() {
       profileStorage.removeMyProfile();
       tokenStorage.removeToken();
