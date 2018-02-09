@@ -344,9 +344,6 @@
 .el-table{
   .table-header{
     font-weight: bold;
-    th{
-      border-color: $color-border;
-    }
   }
   .cell {
     button + button {
@@ -373,7 +370,6 @@
     height: 40px;
   }
   .table-header{
-    height: 100%;
     th{
       background: $background;
     }

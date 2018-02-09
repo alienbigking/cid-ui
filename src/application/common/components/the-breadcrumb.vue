@@ -1,8 +1,6 @@
 <template>
   <div>
-    <el-breadcrumb
-      separator="/"
-      separator-class="separator-class">
+    <el-breadcrumb>
       <el-breadcrumb-item>
         <i
           class="iconfont icon-zhuye"
