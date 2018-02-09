@@ -9,7 +9,7 @@
           <label>账号：</label><span>{{ user.username }}</span>
         </el-col>
         <el-col :span="12">
-          <label>名称：</label><span>{{ user.name }}</span>
+          <label>姓名：</label><span>{{ user.name }}</span>
         </el-col>
       </el-row>
       <el-row>
@@ -17,7 +17,7 @@
           <label>状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
         </el-col>
         <el-col :span="12">
-          <label>租户名称：</label><span>{{ user.tenantName }}</span>
+          <label>所属租户：</label><span>{{ user.tenantName }}</span>
         </el-col>
       </el-row>
       <el-row>

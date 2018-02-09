@@ -8,7 +8,7 @@
           v-model="filter.username"
           @keyup.enter.native="onSearch"/>
         <el-input
-          placeholder="名称"
+          placeholder="姓名"
           v-model="filter.name"
           @keyup.enter.native="onSearch"/>
         <el-select
@@ -41,7 +41,7 @@
           label="账号"/>
         <el-table-column
           prop="name"
-          label="名称"/>
+          label="姓名"/>
         <el-table-column
           prop="createdTime"
           label="创建时间"
@@ -59,7 +59,7 @@
           </template>
         </el-table-column>
         <el-table-column
-          label="用户状态"
+          label="状态"
           sortable
           width="141px">
           <template slot-scope="scope">

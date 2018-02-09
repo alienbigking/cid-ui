@@ -15,7 +15,7 @@
           <span class="el-input__inner">{{ user.username }}</span>
         </el-form-item>
         <el-form-item
-          label="名称"
+          label="姓名"
           class="w50"
           prop="name">
           <el-input v-model="user.name"/>
