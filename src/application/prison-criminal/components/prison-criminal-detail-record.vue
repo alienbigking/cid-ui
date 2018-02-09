@@ -64,12 +64,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalRecords(this.$route.params.id)
+    this.getAllPrisonCriminalRecords(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalRecords" ]),
+    ...mapActions([ "getAllPrisonCriminalRecords" ]),
     onView(id) {
       this.$router.push(`/prison-criminal/record-detail/${id}`);
     }

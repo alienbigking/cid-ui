@@ -8,7 +8,6 @@ export default {
         });
     },
     add(criminalFaces) {
-        console.log(687678, criminalFaces);
         return axios.post('api/criminal-faces', criminalFaces);
     },
     update(criminalFaces) {

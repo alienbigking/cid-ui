@@ -1,4 +1,4 @@
-const TOKEN = "TOKEN";
+const TOKEN = "token";
 
 export default {
   getToken() {

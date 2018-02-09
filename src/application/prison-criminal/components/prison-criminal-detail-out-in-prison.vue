@@ -2,24 +2,24 @@
   <div class="list-box">
     <el-table
       class="table40"
-      :data="allCriminalForfeits"
+      :data="allCriminalOutInPrisons"
       v-loading="loading"
       header-row-class-name="tableHeader">
       <el-table-column
-        prop="receiptNumber"
-        label="罚金单据号"
-        :show-overflow-tooltip="true"/>
+        prop="reasonName"
+        label="出入监事由"
+        :show-overflow-tooltip="true"
+        width="100px"/>
       <el-table-column
-        prop="amount"
-        label="缴纳罚金"
-        :show-overflow-tooltip="true"/>
+        prop="outgoingDate"
+        label="出监日期" >
+        <template slot-scope="scope">
+          {{ scope.row.createdTime | moment }}
+        </template>
+      </el-table-column>
       <el-table-column
-        prop="payee"
-        label="收款单位"
-        :show-overflow-tooltip="true"/>
-      <el-table-column
-        prop="paymentDate"
-        label="缴纳日期" >
+        prop="entryDate"
+        label="入监日期" >
         <template slot-scope="scope">
           {{ scope.row.createdTime | moment }}
         </template>
@@ -53,16 +53,16 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalForfeits: state => state.prisonCriminal.allCriminalForfeits
+      allCriminalOutInPrisons: state => state.prisonCriminal.allCriminalOutInPrisons
     })
   },
   created() {
-    this.getAllCriminalForfeits(this.$route.params.id)
+    this.getAllPrisonCriminalOutInPrisons(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalForfeits" ])
+    ...mapActions([ "getAllPrisonCriminalOutInPrisons" ])
   }
 };
 </script>

@@ -626,13 +626,13 @@ export default {
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
-        this.$store.commit("updateCriminal", criminal);
+        this.$store.commit("updatePrisonCriminal", criminal);
       }, 500),
       deep: true
     }
   },
   created() {
-    this.$store.commit("setCriminal", { id: null });
+    this.$store.commit("setPrisonCriminal", { id: null });
     this.form.criminal = _.cloneDeep(
         this.$store.state.prisonCriminal.criminal
       );
@@ -670,7 +670,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getAllPrisonAreas", "getAllPrisonHouses", "addCriminal"]),
+    ...mapActions(["getAllPrisonAreas", "getAllPrisonHouses", "addPrisonCriminal"]),
     onLoadingNext(value, allData) {
       const selectedCountryCode = value[0];
       const selectedProvinceCode = value[1];
@@ -729,7 +729,7 @@ export default {
     onSave() {
       this.$refs["form"].validate(valid => {
         if (valid) {
-          this.addCriminal().then(response => {
+          this.addPrisonCriminal().then(response => {
             this.saving = false;
             this.$message.success("新增成功");
             this.$router.push(`/prison-criminal/list`);

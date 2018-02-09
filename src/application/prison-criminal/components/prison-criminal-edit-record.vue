@@ -62,7 +62,7 @@
       class="dialog"
       width="950px"
       :visible.sync="editDialogVisible">
-      <criminal-record-edit
+      <prison-criminal-record-edit
         :criminal-record-id="criminalRecordId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
@@ -88,11 +88,11 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalRecordEdit from "./criminal-record-edit";
+import PrisonCriminalRecordEdit from "./prison-criminal-record-edit";
 
 export default {
   components: {
-    "criminal-record-edit": CriminalRecordEdit
+    "prison-criminal-record-edit": PrisonCriminalRecordEdit
   },
   data() {
     return {
@@ -114,8 +114,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalRecords",
-      "deleteCriminalRecord"
+      "getAllPrisonCriminalRecords",
+      "deletePrisonCriminalRecord"
     ]),
     onNew() {
       this.criminalRecordId = "";
@@ -131,7 +131,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalRecord(this.deleteItem.id)
+      this.deletePrisonCriminalRecord(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -144,7 +144,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalRecords(this.$route.params.id)
+      this.getAllPrisonCriminalRecords(this.$route.params.id)
         .then(() => { this.loading = false; })
         .catch(() => { this.loading = false; });
     }

@@ -125,7 +125,7 @@
         犯罪记录
         <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-record v-if="recordShow"/>
+      <prison-criminal-detail-record v-if="recordShow"/>
     </div>
     <!-- 简历 -->
     <div class="detail-card">
@@ -135,7 +135,7 @@
         简历
         <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-resume v-if="resumeShow"/>
+      <prison-criminal-detail-resume v-if="resumeShow"/>
     </div>
     <!-- 体貌特征 -->
     <div class="detail-card">
@@ -197,7 +197,7 @@
         社会关系
         <span :class="socialRelationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-social-relation v-if="socialRelationShow"/>
+      <prison-criminal-detail-social-relation v-if="socialRelationShow"/>
     </div>
     <!-- 罚金 -->
     <div class="detail-card">
@@ -207,7 +207,7 @@
         罚金
         <span :class="forfeitShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-forfeit v-if="forfeitShow"/>
+      <prison-criminal-detail-forfeit v-if="forfeitShow"/>
     </div>
     <!-- 出入监 -->
     <div class="detail-card">
@@ -217,26 +217,26 @@
         出入监
         <span :class="outInPrisonShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-outInPrison v-if="outInPrisonShow"/>
+      <prison-criminal-detail-outInPrison v-if="outInPrisonShow"/>
     </div>
   </div>
 
 </template>
 <script>
-import CriminalDetailRecord from './criminal-detail-record';
-import CriminalDetailResume from './criminal-detail-resume';
-import CriminalDetailSocialRelation from './criminal-detail-social-relation';
-import CriminalDetailForfeit from './criminal-detail-forfeit';
-import CriminalDetailOutInPrison from './criminal-detail-out-in-prison';
+import PrisonCriminalDetailRecord from './prison-criminal-detail-record';
+import PrisonCriminalDetailResume from './prison-criminal-detail-resume';
+import PrisonCriminalDetailSocialRelation from './prison-criminal-detail-social-relation';
+import PrisonCriminalDetailForfeit from './prison-criminal-detail-forfeit';
+import PrisonCriminalDetailOutInPrison from './prison-criminal-detail-out-in-prison';
 import { mapState, mapActions } from "vuex";
 
 export default {
   components: {
-    "criminal-detail-record": CriminalDetailRecord,
-    "criminal-detail-resume": CriminalDetailResume,
-    "criminal-detail-social-relation": CriminalDetailSocialRelation,
-    "criminal-detail-forfeit": CriminalDetailForfeit,
-    "criminal-detail-outInPrison": CriminalDetailOutInPrison
+    "prison-criminal-detail-record": PrisonCriminalDetailRecord,
+    "prison-criminal-detail-resume": PrisonCriminalDetailResume,
+    "prison-criminal-detail-social-relation": PrisonCriminalDetailSocialRelation,
+    "prison-criminal-detail-forfeit": PrisonCriminalDetailForfeit,
+    "prison-criminal-detail-outInPrison": PrisonCriminalDetailOutInPrison
   },
   data() {
     return {
@@ -256,11 +256,11 @@ export default {
     })
   },
   created() {
-    this.getCriminal(this.$route.params.id);
-    this.getCriminalPhysicalCharacteristic(this.$route.params.id);
+    this.getPrisonCriminal(this.$route.params.id);
+    this.getPrisonCriminalPhysicalCharacteristic(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getCriminal", "getCriminalPhysicalCharacteristic" ]),
+    ...mapActions([ "getPrisonCriminal", "getPrisonCriminalPhysicalCharacteristic" ]),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },

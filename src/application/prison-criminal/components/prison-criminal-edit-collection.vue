@@ -11,7 +11,7 @@
       class="dialog"
       width="950px"
       :visible.sync="editDialogVisible">
-      <criminal-collection-edit
+      <prison-criminal-collection-edit
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false" />
     </el-dialog>
@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import CriminalCollection from "./criminal-collection-edit";
+import PrisonCriminalCollection from "./prison-criminal-collection-edit";
 
 export default {
   components: {
-    "criminal-collection-edit": CriminalCollection
+    "prison-criminal-collection-edit": PrisonCriminalCollection
   },
   data() {
     return {

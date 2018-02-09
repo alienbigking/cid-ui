@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <div class="card">
-      <span class="um-title">查询罪犯</span>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询罪犯</h3>
       <div class="filters">
         <el-input
           placeholder="编号"
@@ -17,7 +17,7 @@
           @click="onSearch">查 询</el-button>
       </div>
       <el-table
-        class="my_table"
+        class="table45"
         :data="pagedCriminals.content"
         v-loading="loading"
         border

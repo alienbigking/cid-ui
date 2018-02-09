@@ -2,39 +2,52 @@
   <div class="list-box">
     <el-table
       class="table40"
-      :data="allCriminalResumes"
+      :data="allCriminalSocialRelations"
       v-loading="loading"
-      header-row-class-name="tableHeader">
+      header-row-class-name="tableHeader"
+      style="width:100%">
       <el-table-column
-        prop="startDate"
-        label="开始日期"/>
+        prop="appellation"
+        label="称谓"
+        :show-overflow-tooltip="true"
+        width="80px"/>
       <el-table-column
-        prop="endDate"
-        label="截至日期"/>
+        prop="name"
+        label="姓名"
+        :show-overflow-tooltip="true"
+        width="80px"/>
+      <el-table-column
+        prop="age"
+        label="年龄"
+        width="50px"/>
       <el-table-column
         prop="company"
         label="公司"
-        :show-overflow-tooltip="true"/>
+        :show-overflow-tooltip="true"
+        align="center"
+        width="160px"/>
       <el-table-column
         prop="occupation"
         label="职业"
         :show-overflow-tooltip="true"
         width="80px"/>
       <el-table-column
-        prop="duty"
-        label="职位"
+        prop="politicalStatusName"
+        label="政治面貌"
         :show-overflow-tooltip="true"
-        width="80px"/>
+        width="100px"/>
       <el-table-column
         prop="createdTime"
-        label="创建时间">
+        label="创建时间"
+        align="center" >
         <template slot-scope="scope">
           {{ scope.row.createdTime | moment }}
         </template>
       </el-table-column>
       <el-table-column
+        align="center"
         prop="lastUpdatedTime"
-        label="最后更新时间">
+        label="最后更新时间" >
         <template slot-scope="scope">
           {{ scope.row.lastUpdatedTime | moment }}
         </template>
@@ -54,16 +67,16 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalResumes: state => state.prisonCriminal.allCriminalResumes
+      allCriminalSocialRelations: state => state.prisonCriminal.allCriminalSocialRelations
     })
   },
   created() {
-    this.getAllCriminalResumes(this.$route.params.id)
+    this.getAllPrisonCriminalSocialRelations(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalResumes" ])
+    ...mapActions([ "getAllPrisonCriminalSocialRelations" ])
   }
 };
 </script>

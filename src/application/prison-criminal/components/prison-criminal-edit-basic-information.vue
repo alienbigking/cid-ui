@@ -622,13 +622,13 @@ export default {
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
-        this.$store.commit("updateCriminal", criminal);
+        this.$store.commit("updatePrisonCriminal", criminal);
       }, 500),
       deep: true
     }
   },
   created() {
-    this.$store.commit("setCriminal", { id: this.$route.params.id });
+    this.$store.commit("setPrisonCriminal", { id: this.$route.params.id });
     this.form.criminal = _.cloneDeep(
         this.$store.state.prisonCriminal.criminal
       );
@@ -668,10 +668,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminal",
+      "getPrisonCriminal",
       "getAllPrisonAreas",
       "getAllPrisonHouses",
-      "updateCriminal"
+      "updatePrisonCriminal"
     ]),
     loadingData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
       const selectedCountry = allData.find(
@@ -777,8 +777,7 @@ export default {
       this.onLoadingNext(value, this.allHomeAddress);
     },
     render() {
-      this.getCriminal(this.$route.params.id).then(() => {
-        this.$refs.form.clearValidate();
+      this.getPrisonCriminal(this.$route.params.id).then(() => {
         this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
@@ -853,7 +852,7 @@ export default {
       this.$refs["form"].validate(valid => {
         if (valid) {
           this.saving = true;
-          this.updateCriminal()
+          this.updatePrisonCriminal()
             .then(response => {
               this.saving = false;
               this.$message.success("修改成功");

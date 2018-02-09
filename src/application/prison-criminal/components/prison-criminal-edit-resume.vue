@@ -8,37 +8,39 @@
     <div class="list-box">
       <el-table
         class="table40"
-        :data="allCriminalOutInPrisons"
+        :data="allCriminalResumes"
         v-loading="loading"
         header-row-class-name="tableHeader">
         <el-table-column
-          prop="reasonName"
-          label="出入事由"
-          width="100px"/>
+          prop="startDate"
+          label="开始日期"/>
         <el-table-column
-          prop="outgoingDate"
-          label="出监日期">
-          <template slot-scope="scope">
-            {{ scope.row.outgoingDate | moment }}
-          </template>
-        </el-table-column>
+          prop="endDate"
+          label="结束日期"/>
         <el-table-column
-          prop="entryDate"
-          label="入监日期">
-          <template slot-scope="scope">
-            {{ scope.row.entryDate | moment }}
-          </template>
-        </el-table-column>
+          prop="company"
+          label="公司"
+          :show-overflow-tooltip="true"/>
+        <el-table-column
+          prop="occupation"
+          label="职业"
+          width="80px"
+          :show-overflow-tooltip="true"/>
+        <el-table-column
+          prop="duty"
+          label="职位"
+          width="80px"
+          :show-overflow-tooltip="true"/>
         <el-table-column
           prop="createdTime"
-          label="创建时间">
+          label="创建时间" >
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
         </el-table-column>
         <el-table-column
           prop="lastUpdatedTime"
-          label="最后更新时间">
+          label="最后更新时间" >
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -59,12 +61,12 @@
       </el-table>
     </div>
     <el-dialog
-      title="出入监"
+      title="简历"
       class="dialog"
       width="730px"
       :visible.sync="editDialogVisible">
-      <criminal-outinprison-edit
-        :criminal-out-in-prison-id="criminalOutInPrisonId"
+      <prison-criminal-resume-edit
+        :criminal-resume-id="criminalResumeId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
     </el-dialog>
@@ -73,7 +75,7 @@
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
-      <span>确认删除<b>{{ deleteItem.reasonName }}</b>吗</span>
+      <span>确认删除吗</span>
       <template slot="footer">
         <el-button
           class="button-cancel"
@@ -89,16 +91,16 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
-import CriminalOutInPrisonEdit from "./criminal-out-in-prison-edit";
+import PrisonCriminalResumeEdit from "./prison-criminal-resume-edit";
 import _ from "lodash";
 
 export default {
   components: {
-    "criminal-outinprison-edit": CriminalOutInPrisonEdit
+    "prison-criminal-resume-edit": PrisonCriminalResumeEdit
   },
   data() {
     return {
-      criminalOutInPrisonId: "",
+      criminalResumeId: "",
       editDialogVisible: null,
       deleteDialogVisible: false,
       deleting: false,
@@ -108,7 +110,7 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalOutInPrisons: state => state.prisonCriminal.allCriminalOutInPrisons
+      allCriminalResumes: state => state.prisonCriminal.allCriminalResumes
     })
   },
   activated() {
@@ -116,15 +118,15 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalOutInPrisons",
-      "deleteCriminalOutInPrison"
+      "getAllPrisonCriminalResumes",
+      "deletePrisonCriminalResume"
     ]),
     onNew() {
-      this.criminalOutInPrisonId = "";
+      this.criminalResumeId = "";
       this.editDialogVisible = true;
     },
     onEdit(id) {
-      this.criminalOutInPrisonId = id;
+      this.criminalResumeId = id;
       this.editDialogVisible = true;
     },
     onDelete(item) {
@@ -133,7 +135,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalOutInPrison(this.deleteItem.id)
+      this.deletePrisonCriminalResume(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -146,9 +148,9 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalOutInPrisons(this.$route.params.id).then(() => {
-        this.criminalOutInPrison = _.cloneDeep(
-          this.$store.state.criminal.criminalOutInPrison
+      this.getAllPrisonCriminalResumes(this.$route.params.id).then(() => {
+        this.criminalResume = _.cloneDeep(
+          this.$store.state.prisonCriminal.criminalResume
         );
         this.loading = false;
       }).catch(() => { this.loading = false; });

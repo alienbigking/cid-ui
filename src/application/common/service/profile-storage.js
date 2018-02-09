@@ -1,4 +1,4 @@
-const MY_PROFILE = "MY_PROFILE";
+const MY_PROFILE = "myProfile";
 
 export default {
   getMyProfile() {

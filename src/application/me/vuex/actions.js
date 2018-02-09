@@ -5,7 +5,6 @@ export default {
   getMyProfile({ commit, state }) {
     return userService.getMyProfile().then(myProfile => {
       commit(types.SET_MY_PROFILE, myProfile);
-      commit(types.SET_PROFILE_STORAGE, myProfile);
     });
   },
   updateMyProfile({ commit, state }) {

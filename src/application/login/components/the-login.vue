@@ -73,6 +73,8 @@ export default {
         if (valid) {
           this.login(this.user)
             .then(() => {
+              localStorage.removeItem("myMenus");
+              localStorage.removeItem("myProfile");
               Promise.all([
                 this.getMyProfile(),
                 this.getMenus()
