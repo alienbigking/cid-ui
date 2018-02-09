@@ -137,7 +137,7 @@
             </el-table-column>
           </el-table>
         </el-form-item>
-        <div class="el-form-item-div">
+        <div class="has-right-button">
           <el-button
             class="button-confirm"
             :loading="saving"
