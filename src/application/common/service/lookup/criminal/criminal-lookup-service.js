@@ -27,8 +27,5 @@ export default {
   },
   getAllCommutationScales() {
     return axios.get(`api/commutation-scales`).then(response => response.data);
-  },
-  getAllOutInPrisonReasons() {
-    return axios.get('/api/out-in-prison-reasons').then(response => response.data);
   }
 };
