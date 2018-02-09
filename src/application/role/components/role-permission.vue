@@ -1,6 +1,6 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">分配角色权限</h3>
+    <h3 class="title">分配角色权限</h3>
     <div
       class="card-body"
       v-loading="loading">

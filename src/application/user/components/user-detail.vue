@@ -2,7 +2,7 @@
   <div
     class="detail-card"
     v-loading="loading">
-    <h3 class="card-title">{{ user.name }} - 明细</h3>
+    <h3 class="title">{{ user.name }} - 明细</h3>
     <div class="card-body">
       <el-row>
         <el-col :span="12">

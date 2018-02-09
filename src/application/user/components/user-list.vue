@@ -35,7 +35,7 @@
         :data="pagedUsers.content"
         v-loading="loading"
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="username"
           label="账号"/>
@@ -119,7 +119,7 @@
         @on-close="editDialogVisible = false"/>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -135,7 +135,7 @@
       </template>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="statusDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -151,7 +151,7 @@
       </template>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="disablledStatusDialogVisible">
       <i class="iconfont icon-jinggao"/>

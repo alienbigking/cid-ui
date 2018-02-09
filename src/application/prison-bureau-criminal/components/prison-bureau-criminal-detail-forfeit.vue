@@ -6,7 +6,7 @@
       class="table40"
       :data="allCriminalForfeits"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="table-header">
       <el-table-column
         prop="receiptNumber"
         label="罚金单据号"

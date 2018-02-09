@@ -10,7 +10,7 @@
         class="table40"
         :data="allCriminalForfeits"
         v-loading="loading"
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="receiptNumber"
           label="罚金单据号"
@@ -70,7 +70,7 @@
         @on-close="editDialogVisible = false"/>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
