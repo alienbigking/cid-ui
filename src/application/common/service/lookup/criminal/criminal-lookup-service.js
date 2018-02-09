@@ -44,13 +44,13 @@ export default {
     });
   },
   getAllPoliticalStatuses() {
-    let politicalStatuses = politicalStatusStorage.getPoliticalStatus();
+    let politicalStatuses = politicalStatusStorage.getPoliticalStatuses();
     if (politicalStatuses) {
       return Promise.resolve(politicalStatuses);
     }
     return axios.get(`api/political-statuses`).then(response => {
       politicalStatuses = response.data;
-      politicalStatusStorage.setPoliticalStatus(politicalStatuses);
+      politicalStatusStorage.setPoliticalStatuses(politicalStatuses);
       return politicalStatuses;
     });
   },
