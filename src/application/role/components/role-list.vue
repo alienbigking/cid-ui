@@ -130,7 +130,7 @@ export default {
       this.search();
     },
     onSelectRoles(id) {
-      this.$router.push(`/role/permission/${id}`);
+      this.$router.push(`/role/permission-edit/${id}`);
     },
     onView(id) {
       this.$router.push(`/role/detail/${id}`);

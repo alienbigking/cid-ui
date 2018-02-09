@@ -1,18 +1,18 @@
-const POLITICAL_STATUS = "politicalStatus";
+const POLITICAL_STATUSES = "politicalStatuses";
 
 export default {
-  getPoliticalStatus() {
-    const politicalStatus = JSON.parse(localStorage.getItem(POLITICAL_STATUS));
+  getPoliticalStatuses() {
+    const politicalStatuses = JSON.parse(localStorage.getItem(POLITICAL_STATUSES));
     const version = process.env.VERSION;
-    if (politicalStatus && politicalStatus.version === version) {
-      return politicalStatus.value;
+    if (politicalStatuses && politicalStatuses.version === version) {
+      return politicalStatuses.value;
     }
   },
-  setPoliticalStatus(politicalStatus) {
+  setPoliticalStatuses(politicalStatuses) {
     const version = process.env.VERSION;
-    localStorage.setItem(POLITICAL_STATUS, JSON.stringify({ version, value: politicalStatus }));
+    localStorage.setItem(POLITICAL_STATUSES, JSON.stringify({ version, value: politicalStatuses }));
   },
-  removePoliticalStatus() {
-    localStorage.removeItem(POLITICAL_STATUS);
+  removePoliticalStatuses() {
+    localStorage.removeItem(POLITICAL_STATUSES);
   }
 };

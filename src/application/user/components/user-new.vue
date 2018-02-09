@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item
         class="w50"
-        label="名称"
+        label="姓名"
         prop="name">
         <el-input v-model="user.name"/>
       </el-form-item>
@@ -69,7 +69,7 @@ export default {
           { max: 100, message: "长度在 100 个字符内" }
         ],
         name: [
-          { required: true, message: "请输入租户名称" },
+          { required: true, message: "请输入姓名" },
           { max: 100, message: "长度在 100 个字符内" }
         ],
         password: [

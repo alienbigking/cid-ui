@@ -1,18 +1,18 @@
-const SEPARATE_MANAGEMENT_LEVEL = "separateManagementLevel";
+const SEPARATE_MANAGEMENT_LEVELS = "separateManagementLevels";
 
 export default {
-  getSeparateManagementLevel() {
-    const separateManagementLevel = JSON.parse(localStorage.getItem(SEPARATE_MANAGEMENT_LEVEL));
+  getSeparateManagementLevels() {
+    const separateManagementLevels = JSON.parse(localStorage.getItem(SEPARATE_MANAGEMENT_LEVELS));
     const version = process.env.VERSION;
-    if (separateManagementLevel && separateManagementLevel.version === version) {
-      return separateManagementLevel.value;
+    if (separateManagementLevels && separateManagementLevels.version === version) {
+      return separateManagementLevels.value;
     }
   },
-  setSeparateManagementLevel(separateManagementLevel) {
+  setSeparateManagementLevels(separateManagementLevels) {
     const version = process.env.VERSION;
-    localStorage.setItem(SEPARATE_MANAGEMENT_LEVEL, JSON.stringify({ version, value: separateManagementLevel }));
+    localStorage.setItem(SEPARATE_MANAGEMENT_LEVELS, JSON.stringify({ version, value: separateManagementLevels }));
   },
-  removeSeparateManagementLevel() {
-    localStorage.removeItem(SEPARATE_MANAGEMENT_LEVEL);
+  removeSeparateManagementLevels() {
+    localStorage.removeItem(SEPARATE_MANAGEMENT_LEVELS);
   }
 };

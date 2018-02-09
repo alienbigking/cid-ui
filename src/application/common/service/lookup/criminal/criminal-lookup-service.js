@@ -44,24 +44,24 @@ export default {
     });
   },
   getAllPoliticalStatuses() {
-    let politicalStatuses = politicalStatusStorage.getPoliticalStatus();
+    let politicalStatuses = politicalStatusStorage.getPoliticalStatuses();
     if (politicalStatuses) {
       return Promise.resolve(politicalStatuses);
     }
     return axios.get(`api/political-statuses`).then(response => {
       politicalStatuses = response.data;
-      politicalStatusStorage.setPoliticalStatus(politicalStatuses);
+      politicalStatusStorage.setPoliticalStatuses(politicalStatuses);
       return politicalStatuses;
     });
   },
   getAllEducationDegrees() {
-    let educationDegrees = educationDegreeStorage.getEducationDegree();
+    let educationDegrees = educationDegreeStorage.getEducationDegrees();
     if (educationDegrees) {
       return Promise.resolve(educationDegrees);
     }
     return axios.get(`api/education-degrees`).then(response => {
       educationDegrees = response.data;
-      educationDegreeStorage.setEducationDegree(educationDegrees);
+      educationDegreeStorage.setEducationDegrees(educationDegrees);
       return educationDegrees;
     });
   },
@@ -77,13 +77,13 @@ export default {
     });
   },
   getAllSeparateManagementLevels() {
-    let separateManagementLevels = separateManagementLevelStorage.getSeparateManagementLevel();
+    let separateManagementLevels = separateManagementLevelStorage.getSeparateManagementLevels();
     if (separateManagementLevels) {
       return Promise.resolve(separateManagementLevels);
     }
     return axios.get(`api/separate-management-levels`).then(response => {
       separateManagementLevels = response.data;
-      separateManagementLevelStorage.setSeparateManagementLevel(separateManagementLevels);
+      separateManagementLevelStorage.setSeparateManagementLevels(separateManagementLevels);
       return separateManagementLevels;
     });
   },
@@ -99,13 +99,13 @@ export default {
     });
   },
   getAllCommutationScales() {
-    let commutationScales = commutationScaleStorage.getCommutationScale();
+    let commutationScales = commutationScaleStorage.getCommutationScales();
     if (commutationScales) {
       return Promise.resolve(commutationScales);
     }
     return axios.get(`api/commutation-scales`).then(response => {
       commutationScales = response.data;
-      commutationScaleStorage.setCommutationScale(commutationScales);
+      commutationScaleStorage.setCommutationScales(commutationScales);
       return commutationScales;
     });
   }
