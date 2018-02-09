@@ -10,7 +10,6 @@ export default {
   },
   setAllCountries(allCountries) {
     const version = process.env.VERSION;
-    console.log(version);
     localStorage.setItem(ALL_COUNTRIES, JSON.stringify({ version, value: allCountries }));
   },
   removeAllCountries() {
