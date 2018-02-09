@@ -65,7 +65,7 @@
         v-for="(item, index) in faces">
         <span>{{ item }}</span>
       </div>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-confirm"
           :loading="saving"
@@ -102,7 +102,7 @@
         v-for="(item, index) in iris">
         <span>{{ item }}</span>
       </div>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-confirm"
           :loading="saving"
@@ -226,7 +226,7 @@
         v-for="(item, index) in fingers">
         <span>{{ item }}</span>
       </div>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-confirm"
           :loading="saving"
@@ -418,7 +418,7 @@ export default {
         margin-right: 54px;
       }
   }
-  .el-form-item-div{
+  .has-right-button{
       display: flex;
       justify-content: flex-end;
       align-items: center;

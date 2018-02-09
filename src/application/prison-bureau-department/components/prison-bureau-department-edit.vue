@@ -28,7 +28,7 @@
           resize="none"
           v-model="prisonBureauDepartment.description"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-confirm"

@@ -30,7 +30,7 @@
           <span class="el-input__inner">{{ myProfile.lastUpdatedTime | moment }}</span>
         </el-form-item>
 
-        <div class="el-form-item-div">
+        <div class="has-right-button">
           <el-button @click="onBack">返 回</el-button>
           <el-button
             class="button-confirm"
@@ -114,5 +114,5 @@ export default {
     color: #2196f3;
   }
 }
-.el-form-item-div{ margin-bottom: 0; }
+.has-right-button{ margin-bottom: 0; }
 </style>

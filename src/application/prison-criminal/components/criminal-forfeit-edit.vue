@@ -44,7 +44,7 @@
           resize="none"
           v-model="criminalForfeit.remark"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-cancel"
           @click="onClose">返 回</el-button>

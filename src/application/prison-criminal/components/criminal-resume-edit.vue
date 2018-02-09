@@ -42,7 +42,7 @@
       prop="duty">
       <el-input v-model="criminalResume.duty"/>
     </el-form-item>
-    <div class="el-form-item-div">
+    <div class="has-right-button">
       <el-button
         class="button-cancel"
         @click="onClose">返 回</el-button>
@@ -194,7 +194,7 @@ export default {
     margin-left: 20px;
   }
 }
-.el-form .el-form-item.el-form-item-div {
+.el-form .el-form-item.has-right-button {
     justify-content: flex-end;
 }
 </style>
