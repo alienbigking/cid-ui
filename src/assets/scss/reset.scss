@@ -28,11 +28,16 @@
 }
 .el-breadcrumb {
   height: 41px;
-  line-height: 40px;
   font-size: $font-size;
   border-bottom: $border;
   padding: 0 $padding-default;
   box-sizing: border-box;
+  &__item{
+    height: 40px;
+    line-height: 40px;
+    display: inline-flex;
+    align-items: center;
+  }
   &__inner, &__inner a {
     color: $color-default;
     font-weight: normal;
@@ -43,11 +48,6 @@
 }
 .el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
   color: #999999;
-}
-.separator-class {
-  &:after {
-    content: "/";
-  }
 }
 .el-tabs__header{
   margin: 0;
@@ -195,9 +195,6 @@
 }
 .el-submenu__title, .el-menu-item{
   font-size: $font-size;
-}
-.iconfont{
-  font-size: 14px;
 }
 .el-breadcrumb, .el-tree{
   background: $white;
