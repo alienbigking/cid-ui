@@ -113,7 +113,7 @@
       class="dialog"
       width="450px"
       :visible.sync="editDialogVisible">
-      <user-list-edit
+      <user-role-edit
         :user-id="userId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
@@ -172,11 +172,11 @@
 import { mapState, mapActions } from "vuex";
 import _ from "lodash";
 import { default as userStatusService } from "../service/user-status-service";
-import UserListEdit from "./user-list-edit";
+import UserRoleEdit from "./user-role-edit";
 
 export default {
   components: {
-    "user-list-edit": UserListEdit
+    "user-role-edit": UserRoleEdit
   },
   data() {
     return {
