@@ -3,7 +3,7 @@
     <!-- 基本信息 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowInformation">
         基本信息
         <span :class="informationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -120,7 +120,7 @@
     <!-- 犯罪记录 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowRecord">
         犯罪记录
         <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -130,7 +130,7 @@
     <!-- 简历 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowResume">
         简历
         <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -140,7 +140,7 @@
     <!-- 体貌特征 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowFeature">
         体貌特征
         <span :class="featureShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -192,7 +192,7 @@
     <!-- 社会关系 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowSocialRelation">
         社会关系
         <span :class="socialRelationShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -202,7 +202,7 @@
     <!-- 罚金 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowForfeit">
         罚金
         <span :class="forfeitShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -212,7 +212,7 @@
     <!-- 出入监 -->
     <div class="detail-card">
       <div
-        class="card-title"
+        class="title"
         @click="isShowOutInPrison">
         出入监
         <span :class="outInPrisonShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
@@ -287,7 +287,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .detail-card{
-  .card-title{
+  .title{
     [class^="el-icon"]{
       float: right;
       font-weight: bold;

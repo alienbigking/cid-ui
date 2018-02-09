@@ -21,7 +21,7 @@
         :data="pagedCriminals.content"
         v-loading="loading"
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="code"
           label="编号"/>

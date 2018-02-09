@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">修改租户</h3>
+    <h3 class="title">修改租户</h3>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="tenant"
       :rules="rules"
       ref="form"

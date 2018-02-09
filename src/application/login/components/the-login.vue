@@ -5,7 +5,7 @@
       <div>
         <i class="iconfont icon-DB"/>
         <el-form
-          class="formPadding"
+          class="form-padding"
           :model="user"
           :rules="rules"
           ref="form"
@@ -73,8 +73,8 @@ export default {
         if (valid) {
           this.login(this.user)
             .then(() => {
-              localStorage.removeItem("myMenus");
-              localStorage.removeItem("myProfile");
+              sessionStorage.removeItem("myMenus");
+              sessionStorage.removeItem("myProfile");
               Promise.all([
                 this.getMyProfile(),
                 this.getMenus()
@@ -118,7 +118,7 @@ export default {
     box-sizing: border-box;
   }
 }
-.formPadding{
+.form-padding{
   padding-top: 40px;
   &>div{ width: 100%;}
   .form-input-submit {

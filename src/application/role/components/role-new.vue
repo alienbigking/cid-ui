@@ -1,11 +1,11 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">新增</h3>
+    <h3 class="title">新增</h3>
     <el-form
       :model="role"
       :rules="rules"
       ref="form"
-      class="formPadding"
+      class="form-padding"
       label-position="top">
       <el-form-item
         class="w50"

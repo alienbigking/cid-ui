@@ -44,7 +44,7 @@
         :data="pagedLogs.content"
         v-loading='gettingLogs'
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="operator"
           label="操作人"/>

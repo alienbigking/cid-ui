@@ -6,7 +6,7 @@
       class="table40"
       :data="allCriminalSocialRelations"
       v-loading="loading"
-      header-row-class-name="tableHeader40"
+      header-row-class-name="table-header"
       style="width:100%">
       <el-table-column
         prop="appellation"

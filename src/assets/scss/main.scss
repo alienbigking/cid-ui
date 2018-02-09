@@ -1,4 +1,4 @@
-@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection, delete {
+@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection{
   .el-button.button-#{$type} { @include button-diy($type); }
 }
 .sidebar-menu{ // 不能改哦，这是侧边栏最外层el-menu的样式
@@ -91,7 +91,7 @@
   color: $color-default;
   font-size: $font-size;
   min-width: 600px;
-  .card-title{
+  .title{
     color: $color-default;
     padding: 0 $padding-default;
     font-size: 14px;
@@ -167,26 +167,9 @@
             width: 100%;
             box-sizing: border-box;
         }
-        &.noLable{ // 没有label的表单
-            width: 100%;
-            .el-form-item__content{
-                width: 100%;
-            }
-        }
         &.textarea{ // 有文本域的表单
             .el-textarea{
                 height: 134px;
-            }
-        }
-        &.hasButton{ // 有两个按钮且按钮位于右侧，按钮为76px宽的表单
-            width: 100%;
-            padding-right: $padding-default;
-            .el-form-item__content{
-                display: flex;
-                justify-content: flex-end;
-                button{
-                    width: 76px;
-                }
             }
         }
         &.the-disabled{ // 不可修改的表单
@@ -210,7 +193,7 @@
         }
     }
 }
-.formPadding{
+.form-padding{
     padding: 20px 0 20px 20px;
     .el-checkbox__input.is-checked + .el-checkbox__label {
       color: #606266;
@@ -326,12 +309,6 @@
           }
         }
     }
-    .form-biometric{
-      margin: 20px 20px 0px 20px;
-      height: 250px;
-      border: 1px dashed $color-border;
-      border-radius: 0.5em 0.5em;
-    }
 }
 .has-right-button{
   display: flex;
@@ -339,7 +316,7 @@
   align-items: center;
 }
 .el-table{
-  .tableHeader{
+  .table-header{
     font-weight: bold;
     th{ border-color: $color-border; }
   }
@@ -351,7 +328,7 @@
 }
 .table45{
   tr,th,td{ height: 45px; }
-  .tableHeader{
+  .table-header{
     height: 100%;
     th { line-height: 45px; border-bottom-color: #bbb; }
   }
@@ -360,7 +337,7 @@
   border: $border;
   border-bottom: 0;
   tr,th,td{ height: 40px; }
-  .tableHeader{
+  .table-header{
     height: 100%;
     th{ background: $background; }
   }
@@ -376,7 +353,7 @@
   }
 }
 
-.deleteDialog{
+.delete-dialog{
   .el-dialog__body{
     color: $color-default;
     padding-bottom: 20px;

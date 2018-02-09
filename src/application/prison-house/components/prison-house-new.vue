@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <div class="card-title">新增监舍</div>
+    <div class="title">新增监舍</div>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="prisonHouse"
       :rules="rules"
       ref="form"

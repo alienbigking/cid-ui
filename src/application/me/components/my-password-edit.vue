@@ -1,6 +1,6 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">修改密码</h3>
+    <h3 class="title">修改密码</h3>
     <el-form
       class="w340"
       :model="userPassword"
@@ -126,7 +126,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-title {
+.title {
   border-bottom: 1px solid #ddd;
   & + form {
     border-top: 0;

@@ -24,7 +24,7 @@
         :data="pagedPrisonHouses.content"
         v-loading="loading"
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="code"
           label="编号"/>
@@ -76,7 +76,7 @@
       </div>
     </div>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
