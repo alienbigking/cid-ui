@@ -1,12 +1,12 @@
 <template>
   <el-aside
-    :width="collapsed ? '64px' : '230px'"
+    :width="menuCollapsed ? '64px' : '230px'"
     class="aside"
-    :class="collapsed ? 'menu-collapsed' : ''">
+    :class="menuCollapsed ? 'menu-collapsed' : ''">
     <router-link to="/dashboard">
       <div
         class="avatar"
-        :class="collapsed ? 'avatar-collapsed' : ''">
+        :class="menuCollapsed ? 'avatar-collapsed' : ''">
         <img src="../../../assets/images/avatar.jpg">
         <div class="avatar-right">
           <span>{{ userName }}</span>
@@ -20,7 +20,7 @@
 <script>
 import { default as TheSidebarMenu } from "./the-sidebar-menu";
 import { default as profileStorage } from "../service/profile-storage";
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   components: {
@@ -33,11 +33,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["collapsed"])
+    ...mapState({
+      menuCollapsed: state => state.common.menuCollapsed
+    })
   },
   created() {
-    this.userName = profileStorage.getMyProfile().username;
-    this.name = profileStorage.getMyProfile().name;
+    const myProfile = profileStorage.getMyProfile();
+    this.userName = myProfile.username;
+    this.name = myProfile.name;
   },
   methods: {}
 };

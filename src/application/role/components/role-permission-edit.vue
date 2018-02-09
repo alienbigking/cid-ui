@@ -1,6 +1,6 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">分配角色权限</h3>
+    <h3 class="title">分配角色权限</h3>
     <div
       class="card-body"
       v-loading="loading">
@@ -14,7 +14,7 @@
         node-key="id"
         @node-click="nodeClick"
         @check-change="onCheckChange" />
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-sure"

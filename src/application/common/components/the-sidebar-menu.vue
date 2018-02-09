@@ -1,13 +1,12 @@
 <template>
   <el-menu
-    :default-active="activeItem"
+    :default-active="activeMenuId"
     :collapse="collapsed"
     background-color="#263238"
     text-color="#D1D1D1"
     active-text-color="#FFFFFF"
     class="sidebar-menu"
-    unique-opened
-    @select="onSelected">
+    unique-opened>
     <template v-for="(first, idx1) in menus">
       <el-submenu
         v-if="first.children.length>0"
@@ -47,43 +46,49 @@
   </el-menu>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      // activeItem: ""
-    };
-  },
   computed: {
     ...mapState({
       menus: state => state.common.menus,
-      activeItem: state => state.common.activeItem
-    }),
-    ...mapGetters(["collapsed"])
+      activeMenuId: state => state.common.activeMenuId,
+      collapsed: state => state.common.menuCollapsed
+    })
+  },
+  watch: {
+    $route(to, from) {
+      this.changeActiveMenu(to.path);
+    }
   },
   created() {
-    let activeItem = "";
     this.getMenus().then(res => {
-      if (this.$route.path === "/dashboard") {
-        activeItem = this.menus[0].id;
-      } else if (sessionStorage.getItem("activeItem")) {
-        activeItem = sessionStorage.getItem("activeItem");
-      } else if (this.menus[0].children.length === 0) {
-        activeItem = this.menus[0].id;
-      } else {
-        activeItem = this.menus[0].children[0].id;
-      }
-      this.setActiveItem(activeItem);
+      this.changeActiveMenu(this.$route.path);
     });
   },
   methods: {
-    ...mapActions(["getMenus", "setActiveItem"]),
+    ...mapActions(["getMenus", "setActiveMenu"]),
     onNavigate(path) {
       this.$router.push(path);
     },
-    onSelected(activeItem) {
-      this.setActiveItem(activeItem);
+    changeActiveMenu(path) {
+      const menu = this.findMenu(this.menus, path);
+      if (menu) {
+        this.setActiveMenu(menu.id);
+      } else {
+        this.setActiveMenu("");
+      }
+    },
+    findMenu(menus, path) {
+      for (let menu of menus) {
+        if (menu.path === path) {
+          return menu;
+        }
+        const child = this.findMenu(menu.children, path);
+        if (child) {
+          return child;
+        }
+      }
     }
   }
 };

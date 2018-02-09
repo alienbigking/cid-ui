@@ -26,8 +26,8 @@ export default [
         meta: { requireAuth: true }
     },
     {
-        path: '/role/permission/:id',
-        component: components.RolePermission,
+        path: '/role/permission-edit/:id',
+        component: components.RolePermissionEdit,
         name: '分配权限',
         meta: { requireAuth: true }
     }

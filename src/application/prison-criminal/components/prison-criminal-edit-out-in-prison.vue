@@ -10,7 +10,7 @@
         class="table40"
         :data="allCriminalOutInPrisons"
         v-loading="loading"
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="reasonName"
           label="出入事由"
@@ -69,7 +69,7 @@
         @on-close="editDialogVisible = false"/>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -116,8 +116,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalOutInPrisons",
-      "deleteCriminalOutInPrison"
+      "getAllPrisonCriminalOutInPrisons",
+      "deletePrisonCriminalOutInPrison"
     ]),
     onNew() {
       this.criminalOutInPrisonId = "";
@@ -133,7 +133,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalOutInPrison(this.deleteItem.id)
+      this.deletePrisonCriminalOutInPrison(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -146,7 +146,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalOutInPrisons(this.$route.params.id).then(() => {
+      this.getAllPrisonCriminalOutInPrisons(this.$route.params.id).then(() => {
         this.criminalOutInPrison = _.cloneDeep(
           this.$store.state.criminal.criminalOutInPrison
         );

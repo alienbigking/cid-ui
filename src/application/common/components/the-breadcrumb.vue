@@ -2,7 +2,7 @@
   <div>
     <el-breadcrumb
       separator="/"
-      separator-class="separatorClass">
+      separator-class="separator-class">
       <el-breadcrumb-item>
         <i
           class="iconfont icon-zhuye"

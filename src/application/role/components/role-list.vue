@@ -20,7 +20,7 @@
         :data="pagedRoles.content"
         v-loading="loading"
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="name"
           label="角色名称"/>
@@ -72,7 +72,7 @@
       </div>
     </div>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -130,7 +130,7 @@ export default {
       this.search();
     },
     onSelectRoles(id) {
-      this.$router.push(`/role/permission/${id}`);
+      this.$router.push(`/role/permission-edit/${id}`);
     },
     onView(id) {
       this.$router.push(`/role/detail/${id}`);

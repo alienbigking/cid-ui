@@ -1,14 +1,14 @@
-const MY_PROFILE = "MY_PROFILE";
+const MY_PROFILE = "myProfile";
 
 export default {
   getMyProfile() {
-    const myProfile = localStorage.getItem(MY_PROFILE);
+    const myProfile = sessionStorage.getItem(MY_PROFILE);
     return JSON.parse(myProfile);
   },
   setMyProfile(myProfile) {
-    localStorage.setItem(MY_PROFILE, JSON.stringify(myProfile));
+    sessionStorage.setItem(MY_PROFILE, JSON.stringify(myProfile));
   },
   removeMyProfile() {
-    localStorage.removeItem(MY_PROFILE);
+    sessionStorage.removeItem(MY_PROFILE);
   }
 };

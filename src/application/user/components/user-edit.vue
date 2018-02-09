@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="detail-card">
-      <h3 class="card-title">修改用户信息</h3>
+      <h3 class="title">修改用户信息</h3>
       <el-form
-        class="formPadding"
+        class="form-padding"
         :model="user"
         :rules="rules"
         ref="form"
@@ -15,7 +15,7 @@
           <span class="el-input__inner">{{ user.username }}</span>
         </el-form-item>
         <el-form-item
-          label="名称"
+          label="姓名"
           class="w50"
           prop="name">
           <el-input v-model="user.name"/>
@@ -31,7 +31,7 @@
           <span class="el-input__inner">{{ user.lastUpdatedTime | moment }}</span>
         </el-form-item>
 
-        <div class="el-form-item-div">
+        <div class="has-right-button">
           <el-button @click="onBack">返 回</el-button>
           <el-button
             class="button-confirm"

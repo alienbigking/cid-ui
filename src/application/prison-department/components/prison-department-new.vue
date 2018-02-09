@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">新增部门</h3>
+    <h3 class="title">新增部门</h3>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="prisonDepartment"
       :rules="rules"
       ref="form"
@@ -38,7 +38,7 @@
           :maxlength="255"
           resize="none"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-addInNew"

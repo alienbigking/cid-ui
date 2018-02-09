@@ -4,7 +4,7 @@
       class="table40"
       :data="allCriminalOutInPrisons"
       v-loading="loading"
-      header-row-class-name="tableHeader">
+      header-row-class-name="table-header">
       <el-table-column
         prop="reasonName"
         label="出入监事由"
@@ -57,12 +57,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalOutInPrisons(this.$route.params.id)
+    this.getAllPrisonCriminalOutInPrisons(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalOutInPrisons" ])
+    ...mapActions([ "getAllPrisonCriminalOutInPrisons" ])
   }
 };
 </script>

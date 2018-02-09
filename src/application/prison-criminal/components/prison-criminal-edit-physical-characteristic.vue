@@ -110,7 +110,7 @@
             ref="gk-table"
             class="table40"
             :data="form.criminalPhysicalCharacteristic.otherFeatures"
-            header-row-class-name="tableHeader">
+            header-row-class-name="table-header">
             <el-table-column
               align="center"
               label="其它特征"
@@ -137,7 +137,7 @@
             </el-table-column>
           </el-table>
         </el-form-item>
-        <div class="el-form-item-div">
+        <div class="has-right-button">
           <el-button
             class="button-confirm"
             :loading="saving"
@@ -150,7 +150,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal/criminal-physical-characteristic/criminal-physical-characteristic-lookup-service";
+import { default as criminalPhysicalCharacteristicLookupService } from "@/application/common/service/lookup/criminal/physical-characteristic/criminal-physical-characteristic-lookup-service";
 import _ from "lodash";
 
 export default {
@@ -238,7 +238,7 @@ export default {
     "form.criminalPhysicalCharacteristic": {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
         this.$store.commit(
-          "updateCriminalPhysicalCharacteristic",
+          "updatePrisonCriminalPhysicalCharacteristic",
           criminalPhysicalCharacteristic
         );
       }, 500),
@@ -272,18 +272,18 @@ export default {
       });
     },
     ...mapActions([
-      "getCriminalPhysicalCharacteristic",
-      "addCriminalPhysicalCharacteristic",
-      "updateCriminalPhysicalCharacteristic"
+      "getPrisonCriminalPhysicalCharacteristic",
+      "addPrisonCriminalPhysicalCharacteristic",
+      "updatePrisonCriminalPhysicalCharacteristic"
     ]),
     render() {
-      this.getCriminalPhysicalCharacteristic(this.$route.params.id).then(() => {
+      this.getPrisonCriminalPhysicalCharacteristic(this.$route.params.id).then(() => {
         this.$refs.form.clearValidate();
         this.form.criminalPhysicalCharacteristic = _.cloneDeep(
           this.$store.state.prisonCriminal.criminalPhysicalCharacteristic
         );
         if (!this.form.criminalPhysicalCharacteristic.id) {
-          this.$store.commit("setCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
+          this.$store.commit("setPrisonCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
           this.form.criminalPhysicalCharacteristic = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalPhysicalCharacteristic
           );
@@ -313,9 +313,10 @@ export default {
           if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalPhysicalCharacteristic()
+            this.updatePrisonCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
+                this.render();
                 this.$message.success("修改成功");
                 this.editDialogVisible = false;
               })
@@ -326,9 +327,10 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            this.addCriminalPhysicalCharacteristic()
+            this.addPrisonCriminalPhysicalCharacteristic()
               .then(res => {
                 this.saving = false;
+                this.render();
                 this.$message.success("新增成功");
                 this.editDialogVisible = false;
               })

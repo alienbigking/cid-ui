@@ -55,7 +55,7 @@
             :value="item"/>
         </el-select>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-cancel"
           @click="onClose">返 回</el-button>
@@ -131,7 +131,7 @@ export default {
         "form.criminalSocialRelation": {
             handler: _.debounce(function(criminalSocialRelation) {
                 this.$store.commit(
-                    "updateCriminalSocialRelation",
+                    "updatePrisonCriminalSocialRelation",
                     criminalSocialRelation
                 );
             }, 500),
@@ -149,10 +149,10 @@ export default {
     },
     methods: {
         ...mapActions([
-            "getCriminalSocialRelation",
-            "addCriminalSocialRelation",
-            "updateCriminalSocialRelation",
-            "getAllCriminalSocialRelations"
+            "getPrisonCriminalSocialRelation",
+            "addPrisonCriminalSocialRelation",
+            "updatePrisonCriminalSocialRelation",
+            "getAllPrisonCriminalSocialRelations"
         ]),
         onClose() {
             this.$emit("on-close");
@@ -163,10 +163,10 @@ export default {
                     if (this.form.criminalSocialRelation.id) {
                         // 修改
                         this.saving = true;
-                        this.updateCriminalSocialRelation()
+                        this.updatePrisonCriminalSocialRelation()
                             .then(res => {
                                 this.saving = false;
-                                this.getAllCriminalSocialRelations(
+                                this.getAllPrisonCriminalSocialRelations(
                                     this.$route.params.id
                                 );
                                 this.$message.success("修改成功");
@@ -179,10 +179,10 @@ export default {
                     } else {
                         // 新增
                         this.saving = true;
-                        this.addCriminalSocialRelation()
+                        this.addPrisonCriminalSocialRelation()
                             .then(res => {
                                 this.saving = false;
-                                this.getAllCriminalSocialRelations(
+                                this.getAllPrisonCriminalSocialRelations(
                                     this.$route.params.id
                                 );
                                 this.$message.success("新增成功");
@@ -199,7 +199,7 @@ export default {
         render() {
             if (!this.criminalSocialRelationId) {
                 this.form.selectedPoliticalStatus = {};
-                this.$store.commit("setCriminalSocialRelation", {
+                this.$store.commit("setPrisonCriminalSocialRelation", {
                     criminalId: this.$route.params.id
                 });
                 this.form.criminalSocialRelation = _.cloneDeep(
@@ -207,7 +207,7 @@ export default {
                 );
                 this.loading = false;
             } else {
-                this.getCriminalSocialRelation(
+                this.getPrisonCriminalSocialRelation(
                     this.criminalSocialRelationId
                 ).then(() => {
                     this.form.criminalSocialRelation = _.cloneDeep(
@@ -228,7 +228,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.el-form .el-form-item.el-form-item-div {
+.el-form .el-form-item.has-right-button {
     justify-content: flex-end;
 }
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">新增</h3>
+    <h3 class="title">新增</h3>
     <el-form
       :model="role"
       :rules="rules"
       ref="form"
-      class="formPadding"
+      class="form-padding"
       label-position="top">
       <el-form-item
         class="w50"
@@ -22,7 +22,7 @@
           resize="none"
           v-model="role.description"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-addInNew"

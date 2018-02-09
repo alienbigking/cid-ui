@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <div class="card-title">新增租户</div>
+    <div class="title">新增租户</div>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="tenant"
       :rules="rules"
       ref="form"
@@ -44,7 +44,7 @@
           type="textarea"
           resize="none"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-addInNew"
           :loading="saving"

@@ -4,7 +4,7 @@
       class="table40"
       :data="allCriminalSocialRelations"
       v-loading="loading"
-      header-row-class-name="tableHeader"
+      header-row-class-name="table-header"
       style="width:100%">
       <el-table-column
         prop="appellation"
@@ -71,12 +71,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalSocialRelations(this.$route.params.id)
+    this.getAllPrisonCriminalSocialRelations(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalSocialRelations" ])
+    ...mapActions([ "getAllPrisonCriminalSocialRelations" ])
   }
 };
 </script>

@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">修改监舍</h3>
+    <h3 class="title">修改监舍</h3>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="prisonHouse"
       :rules="rules"
       ref="form"
@@ -29,7 +29,7 @@
           resize="none"
           v-model="prisonHouse.description"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-confirm"

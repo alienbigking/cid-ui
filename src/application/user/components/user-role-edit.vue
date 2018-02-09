@@ -16,7 +16,7 @@
         :label="item.id"
         :key="index">{{ item.name }}</el-checkbox>
     </el-checkbox-group>
-    <div class="el-form-item-div">
+    <div class="has-right-button">
       <el-button
         class="button-cancel"
         @click="onClose">取 消</el-button>
@@ -158,7 +158,7 @@ export default {
     float:right;
   }
 }
-.el-form-item-div{
+.has-right-button{
   margin-top:15px;
 }
 </style>

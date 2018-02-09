@@ -24,7 +24,7 @@
         :data="pagedCriminals.content"
         v-loading="loading"
         border
-        header-row-class-name="tableHeader">
+        header-row-class-name="table-header">
         <el-table-column
           prop="code"
           label="编号"/>
@@ -74,7 +74,7 @@
       </div>
     </div>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -121,7 +121,7 @@ export default {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedCriminals", "deleteCriminal"]),
+    ...mapActions(["getPagedPrisonCriminals", "deletePrisonCriminal"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -146,7 +146,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminal(this.deleteItem.id)
+      this.deletePrisonCriminal(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -161,7 +161,7 @@ export default {
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedCriminals(params).then(() => {
+      this.getPagedPrisonCriminals(params).then(() => {
         this.searching = false;
         this.loading = false;
       }).catch(() => { this.searching = false; this.loading = false; });

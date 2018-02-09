@@ -1,7 +1,6 @@
 <template>
   <el-form
-    class="form-criminal"
-    :model="form"
+    class="form-biometric"
     ref="form">
     <object
       classid="clsid:BCC0CDFA-676A-43F2-B1D7-B4CD3FF72B6A"
@@ -22,233 +21,71 @@
         name="_StockProps"
         value="0">
     </object>
-    <object
-      classid="CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F"
-      codebase="mxCapacitiveDriver.ocx"
-      ref="fingerPrint"
-      height=0
-      width=0 />
-    <!-- 照片录入-->
-    <div
-    class="form-biometric">
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="frontagePhoto">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="leftSidePhoto">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="rightSidePhoto">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
+    <div class="biometric-box">
       <div
-        :key="index"
-        class="biometricCardFaceTitle"
-        v-for="(item, index) in faces">
-        <span>{{ item }}</span>
+        class="biometric-card"
+        v-for="(item, index) in fingers"
+        :key="index">
+        <div
+          class="body"
+          :class="criminalFingers[item.type] ? 'setted' : 'iconfont defalut'">
+          <el-button
+            v-if="!criminalFingers[item.type]"
+            class="button-addCollection"
+            @click="getIrisPhoto(item.type)">录 入</el-button>
+          <el-button
+            v-else
+            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+        </div>
+        <span>{{ item.label }}</span>
       </div>
-      <div class="el-form-item-div">
-        <el-button
-          class="button-confirm"
-          :loading="saving"
-          @click="onSaveFacePicture">保 存</el-button>
-      </div>
-    </div>
-    <!-- 虹膜录入-->
-    <div
-    class="form-biometric">
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getleftFeature">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getrightFeature">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <div
-        :key="index"
-        class="biometricCardIrisTitle"
-        v-for="(item, index) in iris">
-        <span>{{ item }}</span>
-      </div>
-      <div class="el-form-item-div">
+      <div class="has-button">
         <el-button
           class="button-confirm"
           :loading="saving"
           @click="onSave">保 存</el-button>
       </div>
     </div>
-    <div
-    class="form-biometric">
-      <!-- 指纹录入-->
-      <el-card class="biometric-card">
-        <el-button
-          class="button-addCollection"
-          @click="getFingerPrint('leftThumbFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('leftForefingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('leftMiddleFingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('leftRingFingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('leftLittleFingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('rightThumbFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('rightForefingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('rightMiddleFingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('rightRingFingerFeature')" >录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
-      <el-card class="biometric-card">
-        <el-button
-          v-if="inputVsible"
-          class="button-addCollection"
-          @click="getFingerPrint('rightLittleFingerFeature')">录入</el-button>
-        <el-button
-          v-if="deleteVsible"
-          class="button-delete">
-          <i
-            class="iconfont icon-shanchu"
-            style=""/></el-button>
-      </el-card>
+    <div class="biometric-box">
       <div
-        :key="index"
-        class="biometricCardTitle"
-        v-for="(item, index) in fingers">
-        <span>{{ item }}</span>
+        class="biometric-card"
+        v-for="(item, index) in faces"
+        :key="index">
+        <div class="body">
+          <el-button
+            v-if="!criminalFaces[item.type]"
+            class="button-addCollection"
+            @click="getFacesPhoto(item.type)">录 入</el-button>
+          <el-button
+            v-else
+            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+        </div>
+        <span>{{ item.label }}</span>
       </div>
-      <div class="el-form-item-div">
+      <div class="has-button">
+        <el-button
+          class="button-confirm"
+          :loading="saving"
+          @click="onSaveFacePicture">保 存</el-button>
+      </div>
+    </div>
+    <div class="biometric-box">
+      <div
+        class="biometric-card"
+        v-for="(item, index) in iris"
+        :key="index">
+        <div class="body">
+          <el-button
+            v-if="inputVsible"
+            class="button-addCollection"
+            @click="getIrisPhoto(item.type)">录 入</el-button>
+          <el-button
+            v-if="deleteVsible"
+            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+        </div>
+        <span>{{ item.label }}</span>
+      </div>
+      <div class="has-button">
         <el-button
           class="button-confirm"
           :loading="saving"
@@ -274,25 +111,25 @@ export default {
   data() {
     return {
       fingers: [
-         '左手母指',
-         '左手食指',
-         '左手中指',
-         '左无名指',
-         '左手小指',
-         '右手母指',
-         '右手食指',
-         '右手中指',
-         '右无名指',
-         '右手小指'
+        { label: '左手母指', type: "leftThumbFeature" },
+        { label: '左手食指', type: "leftForefingerFeature" },
+        { label: '左手中指', type: "leftMiddleFingerFeature" },
+        { label: '左无名指', type: "leftRingFingerFeature" },
+        { label: '左手小指', type: "leftLittleFingerFeature" },
+        { label: '右手母指', type: "rightThumbFeature" },
+        { label: '右手食指', type: "rightForefingerFeature" },
+        { label: '右手中指', type: "rightMiddleFingerFeature" },
+        { label: '右无名指', type: "rightRingFingerFeature" },
+        { label: '右手小指', type: "rightLittleFingerFeature" }
       ],
       faces: [
-        '正脸',
-        '侧脸',
-        '侧脸'
+        { label: '正脸', type: "frontPhoto" },
+        { label: '侧脸', type: "leftPhoto" },
+        { label: '侧脸', type: "rightPhoto" }
       ],
       iris: [
-        '左眼瞳孔',
-        '右眼瞳孔'
+        { label: '左眼瞳孔', type: "leftFeature" },
+        { label: '右眼瞳孔', type: "rightFeature" }
       ],
       inputVsible: true,
       deleteVsible: false,
@@ -328,85 +165,40 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminalFace",
-      "addCriminalFace",
-      "updateCriminalFace",
-      "getCriminalFingerPrint",
-      "addCriminalFingerPrint",
-      "updateCriminalFingerPrint"
+      "getPrisonCriminalFaces",
+      "addPrisonCriminalFaces",
+      "updatePrisonCriminalFaces"
     ]),
-    render() {
-      this.getCriminalFingerPrint(this.$route.params.id).then(() => {
-        this.$refs.form.clearValidate();
-        this.criminalFingerPrint = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalFingerPrint
-        );
-        if (!this.criminalFingerPrint.id) {
-          this.$store.commit("setCriminalFingerPrint", { criminalId: this.$route.params.id});
-          this.criminalFingerPrint = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalFingerPrint
-          );
-        };
-      })
-    },
-    frontagePhoto() {
+    getFacesPhoto(type) {
       let sy305 = this.$refs.photo;
       let r = sy305.InitPhotoCapture(1);
-      alert(r);
       if (r === 1) {
-         let curpath = "c:\\123\\frontage.bmp";
+         let curpath = `c:\\123\\${type}.bmp`;
          if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.frontPhoto = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.frontPhoto);
+           this.criminalFaces[type] = sy305.GetExtraInfo("capture_base64");
+           alert(this.criminalFaces[type]);
            sy305.ClosePhotoCapture();
          }
       } else {
         this.$errorMessage.show("照相机初始化失败");
       }
     },
-    leftSidePhoto() {
-      let sy305 = this.$refs.photo;
-      let r = sy305.InitPhotoCapture(1);
-      alert(r);
-      if (r === 1) {
-         let curpath = "c:\\123\\leftside.bmp";
-         if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.leftPhoto = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.leftPhoto);
-           sy305.ClosePhotoCapture();
-         }
-      } else {
-        this.$errorMessage.show("照相机初始化失败");
-      }
+    getIrisPhoto(type) {
+      console.log(type);
     },
-    rightSidePhoto() {
-      let sy305 = this.$refs.photo;
-      let r = sy305.InitPhotoCapture(1);
-      alert(r);
-      if (r === 1) {
-         let curpath = "c:\\123\\rightside.bmp";
-         if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces.rightPhoto = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces.rightPhoto);
-           console.log(this.criminalFaces);
-           sy305.ClosePhotoCapture();
-         }
-      } else {
-        this.$errorMessage.show("照相机初始化失败");
-      }
+    onSave() {
+      console.log(123);
     },
     onSaveFacePicture() {
-      this.saving = true;
        this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.criminalFaces.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalFaces()
+            this.updatePrisonCriminalFaces()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
-                this.editDialogVisible = false;
               })
               .catch(error => {
                 this.saving = false;
@@ -416,11 +208,10 @@ export default {
             // 新增
             console.log(this.criminalFaces);
             this.saving = true;
-            this.addCriminalFaces()
+            this.addPrisonCriminalFaces()
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");
-                this.editDialogVisible = false;
               })
               .catch(error => {
                 this.saving = false;
@@ -540,50 +331,75 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.form-biometric{
+  // background: red;
+  padding: 20px;
+  .biometric-box{
+    border: 1px dashed #ddd;
+    padding: 25px 18px 20px 38px;
+    border-radius: 4px;
+    display: flex;
+    flex-wrap: wrap;
+    &+.biometric-box{
+      margin-top: 20px;
+    }
     .biometric-card{
-      display:flex;
-      top: 45px;
-      left: 24px;
-      width: 80px;
-      height: 80px;
-      position: relative;
-      display: inline-block;
-        &:not(:first-child){
-         margin-left:15px;
+      margin: 20px 20px 0 0;
+      width: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      .body{
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        height: 100px;
+        width: 100%;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+      }
     }
   }
-  .biometricCardTitle{
-      position: relative;
-      display: inline-block;
-      left: 40px;
-      top: 55px;
-      &:not(first-child){
-        margin-right: 53px;
-      }
+  .button-delete{
+    position: absolute;
+    background: #37474F;
+    bottom: 0;
+    border: 0;
+    width: 100%;
+    height: 26px;
+    color: #fff;
+    border-radius: 0;
+    z-index: 100;
+    &:hover{
+      background: rgba(#37474F, 0.9);
+    }
   }
-  .biometricCardFaceTitle{
-      position: relative;
-      display: inline-block;
-      top: 65px;
-      left:-234px;
-      &:not(first-child){
-        margin-right: 77px;
-      }
+  .has-button{
+    flex-shrink: 0;
+    width: 100%;
+    margin-top: 20px;
+    overflow: hidden;
+    .button-confirm{
+      float: right;
+    }
   }
-  .biometricCardIrisTitle{
-      position: relative;
-      display: inline-block;
-      top: 65px;
-      left: -144px;
-      &:not(first-child){
-        margin-right: 54px;
-      }
+  .defalut:before{
+    content: "\e62b";
+    color: #E0E5EC;
+    font-size: 72px;
+    position: absolute;
+    z-index: 5;
   }
-  .el-form-item-div{
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      position: relative;
-      top: 100px;
+  .setted{
+    background: url("../../../assets/images/avatar.jpg") no-repeat;
+    background-size: 80px 80px;
+    background-position: center center;
   }
+}
 </style>

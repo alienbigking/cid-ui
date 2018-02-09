@@ -11,7 +11,7 @@
           class="table40"
           :data="allCriminalRecords"
           v-loading="loading"
-          header-row-class-name="tableHeader">
+          header-row-class-name="table-header">
           <el-table-column
             prop="decisionAccusation"
             label="罪名"
@@ -68,7 +68,7 @@
         @on-close="editDialogVisible = false"/>
     </el-dialog>
     <el-dialog
-      class="deleteDialog"
+      class="delete-dialog"
       width="400px"
       :visible.sync="deleteDialogVisible">
       <i class="iconfont icon-jinggao"/>
@@ -114,8 +114,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCriminalRecords",
-      "deleteCriminalRecord"
+      "getAllPrisonCriminalRecords",
+      "deletePrisonCriminalRecord"
     ]),
     onNew() {
       this.criminalRecordId = "";
@@ -131,7 +131,7 @@ export default {
     },
     onDeleteConfirm() {
       this.deleting = true;
-      this.deleteCriminalRecord(this.deleteItem.id)
+      this.deletePrisonCriminalRecord(this.deleteItem.id)
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
@@ -144,7 +144,7 @@ export default {
         });
     },
     getList() {
-      this.getAllCriminalRecords(this.$route.params.id)
+      this.getAllPrisonCriminalRecords(this.$route.params.id)
         .then(() => { this.loading = false; })
         .catch(() => { this.loading = false; });
     }

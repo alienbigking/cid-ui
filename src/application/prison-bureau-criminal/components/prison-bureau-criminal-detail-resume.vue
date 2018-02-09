@@ -6,7 +6,7 @@
       class="table40"
       :data="allCriminalResumes"
       v-loading="loading"
-      header-row-class-name="tableHeader40">
+      header-row-class-name="table-header">
       <el-table-column
         prop="startDate"
         label="开始日期"/>

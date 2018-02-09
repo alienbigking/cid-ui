@@ -44,7 +44,7 @@
           resize="none"
           v-model="criminalForfeit.remark"/>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button
           class="button-cancel"
           @click="onClose">返 回</el-button>
@@ -98,7 +98,7 @@ export default {
     },
     criminalForfeit: {
       handler: _.debounce(function(criminalForfeit) {
-        this.$store.commit("updateCriminalForfeit", criminalForfeit);
+        this.$store.commit("updatePrisonCriminalForfeit", criminalForfeit);
       }, 500),
       deep: true
     }
@@ -108,10 +108,10 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminalForfeit",
-      "addCriminalForfeit",
-      "updateCriminalForfeit",
-      "getAllCriminalForfeits"
+      "getPrisonCriminalForfeit",
+      "addPrisonCriminalForfeit",
+      "updatePrisonCriminalForfeit",
+      "getAllPrisonCriminalForfeits"
     ]),
     onClose() {
       this.$emit("on-close");
@@ -122,10 +122,10 @@ export default {
           if (this.criminalForfeit.id) {
             // 修改
             this.saving = true;
-            this.updateCriminalForfeit()
+            this.updatePrisonCriminalForfeit()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalForfeits(this.$route.params.id);
+                this.getAllPrisonCriminalForfeits(this.$route.params.id);
                 this.$message.success("修改成功");
                 this.$emit("on-close");
               })
@@ -136,10 +136,10 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            this.addCriminalForfeit()
+            this.addPrisonCriminalForfeit()
               .then(res => {
                 this.saving = false;
-                this.getAllCriminalForfeits(this.$route.params.id);
+                this.getAllPrisonCriminalForfeits(this.$route.params.id);
                 this.$message.success("新增成功");
                 this.$emit("on-close");
               })
@@ -153,11 +153,11 @@ export default {
     },
     render() {
       if (!this.criminalForfeitId) {
-        this.$store.commit("setCriminalForfeit", { criminalId: this.$route.params.id });
+        this.$store.commit("setPrisonCriminalForfeit", { criminalId: this.$route.params.id });
         this.criminalForfeit = _.cloneDeep(this.$store.state.prisonCriminal.criminalForfeit);
         this.loading = false;
       } else {
-        this.getCriminalForfeit(this.criminalForfeitId).then(() => {
+        this.getPrisonCriminalForfeit(this.criminalForfeitId).then(() => {
           this.criminalForfeit = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalForfeit
           );

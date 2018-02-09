@@ -1,8 +1,8 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">新增用户</h3>
+    <h3 class="title">新增用户</h3>
     <el-form
-      class="formPadding"
+      class="form-padding"
       :model="user"
       :rules="rules"
       ref="form"
@@ -15,7 +15,7 @@
       </el-form-item>
       <el-form-item
         class="w50"
-        label="名称"
+        label="姓名"
         prop="name">
         <el-input v-model="user.name"/>
       </el-form-item>
@@ -42,7 +42,7 @@
             :value="item.value"/>
         </el-select>
       </el-form-item>
-      <div class="el-form-item-div">
+      <div class="has-right-button">
         <el-button @click="onBack">返 回</el-button>
         <el-button
           class="button-addInNew"
@@ -69,7 +69,7 @@ export default {
           { max: 100, message: "长度在 100 个字符内" }
         ],
         name: [
-          { required: true, message: "请输入租户名称" },
+          { required: true, message: "请输入姓名" },
           { max: 100, message: "长度在 100 个字符内" }
         ],
         password: [

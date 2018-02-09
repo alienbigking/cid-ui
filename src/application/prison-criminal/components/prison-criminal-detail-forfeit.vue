@@ -4,7 +4,7 @@
       class="table40"
       :data="allCriminalForfeits"
       v-loading="loading"
-      header-row-class-name="tableHeader">
+      header-row-class-name="table-header">
       <el-table-column
         prop="receiptNumber"
         label="罚金单据号"
@@ -57,12 +57,12 @@ export default {
     })
   },
   created() {
-    this.getAllCriminalForfeits(this.$route.params.id)
+    this.getAllPrisonCriminalForfeits(this.$route.params.id)
       .then(() => { this.loading = false; })
       .catch(() => { this.loading = false; });
   },
   methods: {
-    ...mapActions([ "getAllCriminalForfeits" ])
+    ...mapActions([ "getAllPrisonCriminalForfeits" ])
   }
 };
 </script>
