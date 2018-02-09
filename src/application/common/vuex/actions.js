@@ -7,8 +7,8 @@ export default {
       commit(types.SET_MENUS, menus);
     });
   },
-  setActiveMenu({ commit }, activeMenu) {
-    commit(types.SET_ACTIVE_MENU, activeMenu);
+  setActiveMenu({ commit }, activeMenuId) {
+    commit(types.SET_ACTIVE_MENU, activeMenuId);
   },
   toggleCollapsed({ commit }) {
     commit(types.TOGGLE_MENU_COLLAPSED);
