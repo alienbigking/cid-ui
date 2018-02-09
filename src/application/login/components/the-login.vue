@@ -5,7 +5,7 @@
       <div>
         <i class="iconfont icon-DB"/>
         <el-form
-          class="formPadding"
+          class="form-padding"
           :model="user"
           :rules="rules"
           ref="form"
@@ -118,7 +118,7 @@ export default {
     box-sizing: border-box;
   }
 }
-.formPadding{
+.form-padding{
   padding-top: 40px;
   &>div{ width: 100%;}
   .form-input-submit {

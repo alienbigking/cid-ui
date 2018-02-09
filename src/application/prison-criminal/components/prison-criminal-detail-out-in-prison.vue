@@ -4,7 +4,7 @@
       class="table40"
       :data="allCriminalOutInPrisons"
       v-loading="loading"
-      header-row-class-name="tableHeader">
+      header-row-class-name="table-header">
       <el-table-column
         prop="reasonName"
         label="出入监事由"

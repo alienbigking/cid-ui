@@ -1,7 +1,7 @@
 <template>
   <el-menu
-    :default-active="activeMenu"
-    :collapse="menuCollapsed"
+    :default-active="activeMenuId"
+    :collapse="collapsed"
     background-color="#263238"
     text-color="#D1D1D1"
     active-text-color="#FFFFFF"
@@ -21,7 +21,7 @@
         </template>
         <li
           class="el-menu-item first"
-          :style="menuCollapsed ? 'display: block' : 'display: none'">
+          :style="collapsed ? 'display: block' : 'display: none'">
           {{ first.name }}
         </li>
         <el-menu-item
@@ -52,34 +52,32 @@ export default {
   computed: {
     ...mapState({
       menus: state => state.common.menus,
-      activeMenu: state => state.common.activeMenu,
-      menuCollapsed: state => state.common.menuCollapsed
+      activeMenuId: state => state.common.activeMenuId,
+      collapsed: state => state.common.menuCollapsed
     })
   },
   watch: {
     $route(to, from) {
-      const menu = this.findMenu(this.menus, to.path);
-      if (menu) {
-        this.setActiveMenu(menu.id);
-      } else {
-        this.setActiveMenu("");
-      }
+      this.changeActiveMenu(to.path);
     }
   },
   created() {
     this.getMenus().then(res => {
-      const menu = this.findMenu(this.menus, this.$route.path);
-      if (menu) {
-        this.setActiveMenu(menu.id);
-      } else {
-        this.setActiveMenu("");
-      }
+      this.changeActiveMenu(this.$route.path);
     });
   },
   methods: {
     ...mapActions(["getMenus", "setActiveMenu"]),
     onNavigate(path) {
       this.$router.push(path);
+    },
+    changeActiveMenu(path) {
+      const menu = this.findMenu(this.menus, path);
+      if (menu) {
+        this.setActiveMenu(menu.id);
+      } else {
+        this.setActiveMenu("");
+      }
     },
     findMenu(menus, path) {
       for (let menu of menus) {

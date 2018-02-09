@@ -1,6 +1,6 @@
 <template>
   <div class="detail-card">
-    <h3 class="card-title">犯罪详情</h3>
+    <h3 class="title">犯罪详情</h3>
     <div class="card-body">
       <el-row>
         <el-col :span="12">

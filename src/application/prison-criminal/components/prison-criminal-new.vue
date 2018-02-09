@@ -1,6 +1,6 @@
 <template>
   <div class="detail-card">
-    <div class="card-title">
+    <div class="title">
       新增罪犯
     </div>
     <el-form
