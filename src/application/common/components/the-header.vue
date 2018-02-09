@@ -51,18 +51,17 @@ export default {
     this.userName = profileStorage.getMyProfile().username;
   },
   methods: {
-    ...mapActions(["handleCollapse", "setActiveItem"]),
+    ...mapActions(["toggleCollapsed"]),
     logout() {
       profileStorage.removeMyProfile();
       tokenStorage.removeToken();
       this.$router.push("/login");
     },
     onNavigate(path) {
-      this.setActiveItem(this.$store.state.common.menus[0].id);
       this.$router.push(path);
     },
     onCollapse() {
-      this.handleCollapse();
+      this.toggleCollapsed();
     }
   }
 };

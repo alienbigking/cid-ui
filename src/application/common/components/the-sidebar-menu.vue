@@ -1,13 +1,12 @@
 <template>
   <el-menu
-    :default-active="activeItem"
-    :collapse="collapsed"
+    :default-active="activeMenu"
+    :collapse="menuCollapsed"
     background-color="#263238"
     text-color="#D1D1D1"
     active-text-color="#FFFFFF"
     class="sidebar-menu"
-    unique-opened
-    @select="onSelected">
+    unique-opened>
     <template v-for="(first, idx1) in menus">
       <el-submenu
         v-if="first.children.length>0"
@@ -22,7 +21,7 @@
         </template>
         <li
           class="el-menu-item first"
-          :style="collapsed ? 'display: block' : 'display: none'">
+          :style="menuCollapsed ? 'display: block' : 'display: none'">
           {{ first.name }}
         </li>
         <el-menu-item
@@ -47,43 +46,51 @@
   </el-menu>
 </template>
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
-  data() {
-    return {
-      // activeItem: ""
-    };
-  },
   computed: {
     ...mapState({
       menus: state => state.common.menus,
-      activeItem: state => state.common.activeItem
-    }),
-    ...mapGetters(["collapsed"])
+      activeMenu: state => state.common.activeMenu,
+      menuCollapsed: state => state.common.menuCollapsed
+    })
+  },
+  watch: {
+    $route(to, from) {
+      const menu = this.findMenu(this.menus, to.path);
+      if (menu) {
+        this.setActiveMenu(menu.id);
+      } else {
+        this.setActiveMenu("");
+      }
+    }
   },
   created() {
-    let activeItem = "";
     this.getMenus().then(res => {
-      if (this.$route.path === "/dashboard") {
-        activeItem = this.menus[0].id;
-      } else if (sessionStorage.getItem("activeItem")) {
-        activeItem = sessionStorage.getItem("activeItem");
-      } else if (this.menus[0].children.length === 0) {
-        activeItem = this.menus[0].id;
+      const menu = this.findMenu(this.menus, this.$route.path);
+      if (menu) {
+        this.setActiveMenu(menu.id);
       } else {
-        activeItem = this.menus[0].children[0].id;
+        this.setActiveMenu("");
       }
-      this.setActiveItem(activeItem);
     });
   },
   methods: {
-    ...mapActions(["getMenus", "setActiveItem"]),
+    ...mapActions(["getMenus", "setActiveMenu"]),
     onNavigate(path) {
       this.$router.push(path);
     },
-    onSelected(activeItem) {
-      this.setActiveItem(activeItem);
+    findMenu(menus, path) {
+      for (let menu of menus) {
+        if (menu.path === path) {
+          return menu;
+        }
+        const child = this.findMenu(menu.children, path);
+        if (child) {
+          return child;
+        }
+      }
     }
   }
 };

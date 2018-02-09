@@ -4,12 +4,10 @@ export default {
   [types.SET_MENUS](state, menus) {
     state.menus = menus;
   },
-  [types.SET_COLLAPSED](state) {
-    state.collapsed = !state.collapsed;
-    sessionStorage.setItem("collapsed", state.collapsed);
+  [types.SET_ACTIVE_MENU](state, activeMenu) {
+    state.activeMenu = activeMenu;
   },
-  [types.SET_ACTIVEITEM](state, activeItem) {
-    state.activeItem = activeItem;
-    sessionStorage.setItem("activeItem", activeItem);
+  [types.TOGGLE_MENU_COLLAPSED](state) {
+    state.menuCollapsed = !state.menuCollapsed;
   }
 };
