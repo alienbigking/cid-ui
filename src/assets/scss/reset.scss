@@ -95,12 +95,10 @@
     color: $color-default;
     font-size: $font-size;
   }
-  .caret-wrapper{
-    float: right;
-    margin-top: 8px;
-  }
-  .cell {
-    vertical-align: baseline;
+  .is-sortable .cell{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 .el-table--border::after, .el-table--group::after, .el-table::before{
@@ -183,6 +181,9 @@
 }
 .el-input__prefix{
   left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .el-input--prefix .el-input__inner{
   padding-left: 36px;
