@@ -1,18 +1,18 @@
-const COMMUTATION_SCALE = "commutationScale";
+const COMMUTATION_SCALES = "commutationScales";
 
 export default {
-  getCommutationScale() {
-    const commutationScale = JSON.parse(localStorage.getItem(COMMUTATION_SCALE));
+  getCommutationScales() {
+    const commutationScales = JSON.parse(localStorage.getItem(COMMUTATION_SCALES));
     const version = process.env.VERSION;
-    if (commutationScale && commutationScale.version === version) {
-      return commutationScale.value;
+    if (commutationScales && commutationScales.version === version) {
+      return commutationScales.value;
     }
   },
-  setCommutationScale(commutationScale) {
+  setCommutationScales(commutationScales) {
     const version = process.env.VERSION;
-    localStorage.setItem(COMMUTATION_SCALE, JSON.stringify({ version, value: commutationScale }));
+    localStorage.setItem(COMMUTATION_SCALES, JSON.stringify({ version, value: commutationScales }));
   },
-  removeCommutationScale() {
-    localStorage.removeItem(COMMUTATION_SCALE);
+  removeCommutationScales() {
+    localStorage.removeItem(COMMUTATION_SCALES);
   }
 };

@@ -1,18 +1,18 @@
-const EDUCATION_DEGREE = "educationDegree";
+const EDUCATION_DEGREES = "educationDegrees";
 
 export default {
-  getEducationDegree() {
-    const educationDegree = JSON.parse(localStorage.getItem(EDUCATION_DEGREE));
+  getEducationDegrees() {
+    const educationDegrees = JSON.parse(localStorage.getItem(EDUCATION_DEGREES));
     const version = process.env.VERSION;
-    if (educationDegree && educationDegree.version === version) {
-      return educationDegree.value;
+    if (educationDegrees && educationDegrees.version === version) {
+      return educationDegrees.value;
     }
   },
-  setEducationDegree(educationDegree) {
+  setEducationDegrees(educationDegrees) {
     const version = process.env.VERSION;
-    localStorage.setItem(EDUCATION_DEGREE, JSON.stringify({ version, value: educationDegree }));
+    localStorage.setItem(EDUCATION_DEGREES, JSON.stringify({ version, value: educationDegrees }));
   },
-  removeEducationDegree() {
-    localStorage.removeItem(EDUCATION_DEGREE);
+  removeEducationDegrees() {
+    localStorage.removeItem(EDUCATION_DEGREES);
   }
 };
