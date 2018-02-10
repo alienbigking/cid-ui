@@ -28,21 +28,25 @@
       <el-table
         class="table45"
         :data="pagedPrisonDepartments.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
         v-loading="loading"
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="name"
           label="部门名称"
-          :show-overflow-tooltip="true"/>
+          :show-overflow-tooltip="true"
+          sortable="custom"/>
         <el-table-column
           prop="parentDepartmentName"
           label="上级部门名称"
-          :show-overflow-tooltip="true"/>
+          :show-overflow-tooltip="true"
+          sortable="custom"/>
         <el-table-column
           prop="createdTime"
           label="创建时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
@@ -50,7 +54,7 @@
         <el-table-column
           prop="lastUpdatedTime"
           label="最后更新时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -132,7 +136,6 @@ export default {
   created() {
     this.getAllPrisonDepartments().then(() => {
       this.gettingPrisonDepartments = false;
-      this.search();
     }).catch(() => { this.gettingPrisonDepartments = false; });
   },
   methods: {
@@ -175,6 +178,12 @@ export default {
         .catch(error => {
           this.$errorMessage.show(error, "删除失败");
         });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.loading = true;

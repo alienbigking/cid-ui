@@ -22,19 +22,23 @@
       <el-table
         class="table45"
         :data="pagedPrisonHouses.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
         v-loading="loading"
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="code"
-          label="编号"/>
+          label="编号"
+          sortable="custom"/>
         <el-table-column
           prop="name"
-          label="监舍名称"/>
+          label="监舍名称"
+          sortable="custom"/>
         <el-table-column
           prop="createdTime"
           label="创建时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
@@ -42,7 +46,7 @@
         <el-table-column
           prop="lastUpdatedTime"
           label="最后更新时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -119,9 +123,6 @@ export default {
       pagedPrisonHouses: state => state.prisonHouse.pagedPrisonHouses
     })
   },
-  created() {
-    this.search();
-  },
   methods: {
     ...mapActions(["getPagedPrisonHouses", "deletePrisonHouse"]),
     onSearch() {
@@ -158,6 +159,12 @@ export default {
         .catch(error => {
           this.$errorMessage.show(error, "删除失败");
         });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.loading = true;

@@ -33,18 +33,22 @@
       <el-table
         class="table45"
         :data="pagedTenants.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
         v-loading="loading"
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="code"
-          label="编号"/>
+          label="编号"
+          sortable="custom"/>
         <el-table-column
           prop="name"
-          label="名称"/>
+          label="名称"
+          sortable="custom"/>
         <el-table-column
           label="用户状态"
-          align="center">
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.status | enumText(userStatuses) }}
             <el-button
@@ -62,7 +66,7 @@
         <el-table-column
           prop="createdTime"
           label="创建时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
@@ -70,7 +74,7 @@
         <el-table-column
           prop="lastUpdatedTime"
           label="最后更新时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -188,7 +192,6 @@ export default {
   },
   created() {
     this.userStatuses = userStatusService.getAll();
-    this.search();
   },
   methods: {
     ...mapActions(["getPagedTenants", "deleteTenant", "enableTenant", "disableTenant"]),
@@ -263,6 +266,12 @@ export default {
           this.$errorMessage.show(error, "删除失败");
           this.deleting = false;
         });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.loading = true;
