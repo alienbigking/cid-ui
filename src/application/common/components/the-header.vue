@@ -30,7 +30,7 @@
           <span>{{ userName }}</span>
         </router-link>
       </li>
-      <li @click="logout">
+      <li @click="onLogout">
         <i class="iconfont icon-tuichu"/>
       </li>
     </ul>
@@ -39,7 +39,6 @@
 <script>
 import { mapActions } from "vuex";
 import { default as profileStorage } from "../service/profile-storage";
-import { default as tokenStorage } from "@/utils/token/token-storage";
 
 export default {
   data() {
@@ -48,13 +47,13 @@ export default {
     };
   },
   created() {
-    this.userName = profileStorage.getMyProfile().username;
+    const myProfile = profileStorage.getMyProfile();
+    this.userName = myProfile.username;
   },
   methods: {
-    ...mapActions(["toggleCollapsed"]),
-    logout() {
-      profileStorage.removeMyProfile();
-      tokenStorage.removeToken();
+    ...mapActions(["logout", "toggleCollapsed"]),
+    onLogout() {
+      this.logout();
       this.$router.push("/login");
     },
     onNavigate(path) {

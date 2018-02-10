@@ -1,7 +1,16 @@
 import * as types from "./mutation-types";
+import { default as authService } from '../service/auth-service';
 import { default as menuService } from "../service/menu-service";
 
 export default {
+  login({ commit }, user) {
+    return authService.login(user).then(token => {
+      commit(types.SET_TOKEN, token);
+    });
+  },
+  logout({ commit }) {
+    commit(types.REMOVE_TOKEN);
+  },
   getMenus({ commit, rootState }, params) {
     return menuService.getMenus().then(menus => {
       commit(types.SET_MENUS, menus);

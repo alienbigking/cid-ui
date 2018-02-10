@@ -1,5 +1,4 @@
 import { vuex as common } from './common';
-import { vuex as login } from './login';
 import { vuex as me } from './me';
 import { vuex as tenant } from './tenant';
 import { vuex as prisonArea } from './prison-area';
@@ -17,4 +16,22 @@ import { vuex as prisonBureauDepartment } from './prison-bureau-department';
 import { vuex as log } from './log';
 import { vuex as prisonBureauCriminal } from './prison-bureau-criminal';
 
-export default { common, login, me, tenant, prisonArea, prisonHouse, prisonCriminal, role, user, court, policeStation, procuratorate, prisonDepartment, prison, prisonBureau, prisonBureauDepartment, log, prisonBureauCriminal };
+export default {
+  common,
+  me,
+  tenant,
+  user,
+  role,
+  log,
+  court,
+  policeStation,
+  prison,
+  prisonArea,
+  prisonHouse,
+  prisonCriminal,
+  prisonDepartment,
+  procuratorate,
+  prisonBureau,
+  prisonBureauDepartment,
+  prisonBureauCriminal
+};
