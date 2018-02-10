@@ -115,7 +115,8 @@
               align="center"
               label="其它特征"
               prop="description"
-              :show-overflow-tooltip="true">
+              :show-overflow-tooltip="true"
+              sortable>
               <template slot-scope="scope">
                 <el-form-item
                   :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'"

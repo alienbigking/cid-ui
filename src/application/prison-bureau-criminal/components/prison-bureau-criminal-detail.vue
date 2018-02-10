@@ -292,6 +292,7 @@ export default {
       float: right;
       font-weight: bold;
       line-height: 50px;
+      cursor: pointer;
     }
   }
   .card-body{
