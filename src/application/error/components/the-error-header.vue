@@ -25,21 +25,20 @@
           <span>管理员</span>
         </router-link>
       </li>
-      <li @click="logout">
+      <li @click="onLogout">
         <i class="iconfont icon-tuichu"/>
       </li>
     </ul>
   </el-header>
 </template>
 <script>
-import { default as profileStorage } from "../../common/service/profile-storage";
-import { default as tokenStorage } from "@/utils/token/token-storage";
+import { mapActions } from "vuex";
 
 export default {
   methods: {
-    logout() {
-      profileStorage.removeMyProfile();
-      tokenStorage.removeToken();
+    ...mapActions(["logout"]),
+    onLogout() {
+      this.logout();
       this.$router.push("/login");
     }
   }
