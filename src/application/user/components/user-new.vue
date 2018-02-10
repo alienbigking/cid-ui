@@ -82,6 +82,9 @@ export default {
           { required: true, message: "请输入密码" },
           { min: 6, message: "密码长度最少6位" }
         ],
+        phoneNumber: [
+          { required: true, message: "请输入手机号码" }
+        ],
         status: [{ required: true, message: "请选择状态" }],
         description: [{ max: 1000, message: "长度在 1000 个字符内" }]
       },

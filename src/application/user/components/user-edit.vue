@@ -66,6 +66,9 @@ export default {
         name: [
           { required: true, message: "姓名不能为空" },
           { max: 100, message: "长度在 100 个字符内" }
+        ],
+        phoneNumber: [
+          { required: true, message: "请输入手机号码" }
         ]
       },
       saving: false
