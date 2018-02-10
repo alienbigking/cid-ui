@@ -115,7 +115,8 @@
               align="center"
               label="其它特征"
               prop="description"
-              :show-overflow-tooltip="true">
+              :show-overflow-tooltip="true"
+              sortable>
               <template slot-scope="scope">
                 <el-form-item
                   :prop="'criminalPhysicalCharacteristic.otherFeatures.' + scope.$index + '.description'"
@@ -188,52 +189,16 @@ export default {
   },
   watch: {
     "form.selectedSomatotype"(val) {
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "somatotypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "somatotypeName",
-        val.name
-      );
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { somatotypeCode: val.code, somatotypeName: val.name });
     },
     "form.selectedFaceType"(val) {
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "faceTypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "faceTypeName",
-        val.name
-      );
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { faceTypeCode: val.code, faceTypeName: val.name });
     },
     "form.selectedBloodType"(val) {
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "bloodTypeCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "bloodTypeName",
-        val.name
-      );
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { bloodTypeCode: val.code, bloodTypeName: val.name });
     },
     "form.selectedAccent"(val) {
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "accentCode",
-        val.code
-      );
-      this.$set(
-        this.form.criminalPhysicalCharacteristic,
-        "accentName",
-        val.name
-      );
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { accentCode: val.code, accentName: val.name });
     },
     "form.criminalPhysicalCharacteristic": {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {

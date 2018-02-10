@@ -321,60 +321,22 @@ export default {
             }
         },
         "form.selectedArrestOrgan"(val) {
-            this.$set(this.form.criminalRecord, "arrestOrganCode", val.code);
-            this.$set(this.form.criminalRecord, "arrestOrganName", val.name);
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { arrestOrganCode: val.code, arrestOrganName: val.name });
         },
         "form.selectedProsecutionOrgan"(val) {
-            this.$set(
-                this.form.criminalRecord,
-                "prosecutionOrganCode",
-                val.code
-            );
-            this.$set(
-                this.form.criminalRecord,
-                "prosecutionOrganName",
-                val.name
-            );
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { prosecutionOrganCode: val.code, prosecutionOrganName: val.name });
         },
         "form.selectedFirstTrialOrgan"(val) {
-            this.$set(
-                this.form.criminalRecord,
-                "firstTrialOrganCode",
-                val.code
-            );
-            this.$set(
-                this.form.criminalRecord,
-                "firstTrialOrganName",
-                val.name
-            );
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { firstTrialOrganCode: val.code, firstTrialOrganName: val.name });
         },
         "form.selectedFinalTrialOrgan"(val) {
-            this.$set(
-                this.form.criminalRecord,
-                "finalTrialOrganCode",
-                val.code
-            );
-            this.$set(
-                this.form.criminalRecord,
-                "finalTrialOrganName",
-                val.name
-            );
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { finalTrialOrganCode: val.code, finalTrialOrganName: val.name });
         },
         "form.selectedDecisionOrgan"(val) {
-            this.$set(this.form.criminalRecord, "decisionOrganCode", val.code);
-            this.$set(this.form.criminalRecord, "decisionOrganName", val.name);
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { decisionOrganCode: val.code, decisionOrganName: val.name });
         },
         "form.startEndTime"(val) {
-            this.$set(
-                this.form.criminalRecord,
-                "decisionPrisonTermStartDate",
-                val[0]
-            );
-            this.$set(
-                this.form.criminalRecord,
-                "decisionPrisonTermEndDate",
-                val[1]
-            );
+            this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, { decisionPrisonTermStartDate: val[0], decisionPrisonTermEndDate: val[1] });
         },
         "form.criminalRecord": {
             handler: _.debounce(function(criminalRecord) {

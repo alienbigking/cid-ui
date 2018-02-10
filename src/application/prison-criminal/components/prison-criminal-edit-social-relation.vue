@@ -15,39 +15,47 @@
           prop="appellation"
           label="称谓"
           width="60px"
-          :show-overflow-tooltip="true"/>
+          :show-overflow-tooltip="true"
+          sortable/>
         <el-table-column
           align="center"
           prop="name"
           label="姓名"
-          width="80px"/>
+          width="80px"
+          sortable/>
         <el-table-column
           prop="age"
           label="年龄"
-          width="50px"/>
+          width="50px"
+          sortable/>
         <el-table-column
           align="left"
           prop="company"
           label="公司"
-          :show-overflow-tooltip="true"/>
+          :show-overflow-tooltip="true"
+          sortable/>
         <el-table-column
           prop="occupation"
           label="职业"
           width="120px"
-          :show-overflow-tooltip="true"/>
+          :show-overflow-tooltip="true"
+          sortable/>
         <el-table-column
           prop="politicalStatusName"
-          label="政治面貌"/>
+          label="政治面貌"
+          sortable/>
         <el-table-column
           prop="createdTime"
-          label="创建时间">
+          label="创建时间"
+          sortable>
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
         </el-table-column>
         <el-table-column
           prop="lastUpdatedTime"
-          label="最后更新时间">
+          label="最后更新时间"
+          sortable>
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>

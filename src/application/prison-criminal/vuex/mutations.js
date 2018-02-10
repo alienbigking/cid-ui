@@ -91,10 +91,24 @@ export default {
         state.pagedCriminalOutInPrisons = pagedCriminalOutInPrisons;
     },
     // 罪犯面部采集
-    [types.SET_PRISON_CRIMINAL_FACES](state, criminalFace) {
+    [types.SET_CRIMINAL_FACE](state, criminalFace) {
         state.criminalFace = criminalFace;
     },
-    [types.UPDATE_PRISON_CRIMINAL_FACES](state, criminalFace) {
+    [types.UPDATE_CRIMINAL_FACE](state, criminalFace) {
         state.criminalFace = _.cloneDeep(criminalFace);
+    },
+    // 罪犯虹膜采集
+    [types.SET_CRIMINAL_IRIS](state, criminalIris) {
+        state.criminalFingerPrint = criminalIris;
+    },
+    [types.UPDATE_CRIMINAL_IRIS](state, criminalIris) {
+        state.criminalFingerPrint = _.cloneDeep(criminalIris);
+    },
+    // 罪犯指纹采集
+    [types.SET_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
+        state.criminalFingerPrint = criminalFingerPrint;
+    },
+    [types.UPDATE_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
+        state.criminalFingerPrint = _.cloneDeep(criminalFingerPrint);
     }
 };

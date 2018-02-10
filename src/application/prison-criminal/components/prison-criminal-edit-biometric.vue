@@ -1,6 +1,7 @@
 <template>
   <el-form
     class="form-biometric"
+    :model="form"
     ref="form">
     <object
       classid="clsid:BCC0CDFA-676A-43F2-B1D7-B4CD3FF72B6A"
@@ -21,6 +22,12 @@
         name="_StockProps"
         value="0">
     </object>
+    <object
+      classid="CLSID:0B6CD28F-5650-4FC9-877D-F8398F5A656F"
+      codebase="mxCapacitiveDriver.ocx"
+      ref="fingerPrint"
+      height=0
+      width=0 />
     <div class="biometric-box">
       <div
         class="biometric-card"
@@ -32,7 +39,7 @@
           <el-button
             v-if="!criminalFingers[item.type]"
             class="button-addCollection"
-            @click="getIrisPhoto(item.type)">录 入</el-button>
+            @click="getFingerPrintPhoto(item.type)">录 入</el-button>
           <el-button
             v-else
             class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
@@ -43,7 +50,7 @@
         <el-button
           class="button-confirm"
           :loading="saving"
-          @click="onSave">保 存</el-button>
+          @click="onSaveFingerPrint">保 存</el-button>
       </div>
     </div>
     <div class="biometric-box">
@@ -53,7 +60,7 @@
         :key="index">
         <div class="body">
           <el-button
-            v-if="!criminalFaces[item.type]"
+            v-if="!form.criminalFace[item.type]"
             class="button-addCollection"
             @click="getFacesPhoto(item.type)">录 入</el-button>
           <el-button
@@ -95,8 +102,14 @@
   </el-form>
 </template>
 
+<script type="text/javascript" for="sy305" event="EnrollLeftIrisStrEvent(sIrisLeft_Small, sIrisLeft_Big, sIrisLeft_I8,  EnrollResult)">
+  console.log("ocx调用");
+  // this.IrisInfo(sIrisLeft_Small, sIrisLeft_Big, sIrisLeft_I8, EnrollResult, leftFeature);
+</script>
+
 <script>
 import { mapActions } from "vuex";
+import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
 import _ from "lodash";
 
 export default {
@@ -125,33 +138,77 @@ export default {
       ],
       inputVsible: true,
       deleteVsible: false,
-      criminalFaces: {},
+      criminalFace: {},
       criminalFingers: {},
+      form: {
+      criminalFace: {},
+      criminalFingerPrint: {}
+      },
       saving: false
     };
   },
   watch: {
-    criminalFaces: {
-      handler: _.debounce(function(criminalFaces) {
-        this.$store.commit("updatePrisonCriminalFaces", Object.assign({}, this.criminalFaces, { criminalId: this.$route.params.id }));
+    "form.criminalFace": {
+      handler: _.debounce(function(criminalFace) {
+        this.$store.commit("updateCriminalFace", this.form.criminalFace);
+      }, 500),
+      deep: true
+    },
+    "form.criminalFingerPrint": {
+      handler: _.debounce(function(criminalFingerPrint) {
+        this.$store.commit("updateCriminalFingerPrint", this.form.criminalFingerPrint);
       }, 500),
       deep: true
     }
   },
+  activated() {
+  this.render();
+  },
   methods: {
     ...mapActions([
-      "getPrisonCriminalFaces",
-      "addPrisonCriminalFaces",
-      "updatePrisonCriminalFaces"
+      "getCriminalFace",
+      "addCriminalFace",
+      "updateCriminalFace",
+      "getCriminalFingerPrint",
+      "addCriminalFingerPrint",
+      "updateCriminalFingerPrint"
     ]),
+    render() {
+      this.$refs.photo.Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
+      this.getCriminalFingerPrint(this.$route.params.id).then(() => {
+        this.form.criminalFingerPrint = _.cloneDeep(
+          this.$store.state.prisonCriminal.criminalFingerPrint
+        );
+        if (!this.form.criminalFingerPrint.id) {
+          this.$store.commit("setCriminalFingerPrint", { criminalId: this.$route.params.id });
+          this.form.criminalFingerPrint = _.cloneDeep(
+            this.$store.state.prisonCriminal.criminalFingerPrint
+          );
+          console.log(this.form.criminalFingerPrint);
+        };
+      });
+      this.getCriminalFace(this.$route.params.id).then(() => {
+        // this.$refs.form.clearValidate();
+        this.form.criminalFace = _.cloneDeep(
+          this.$store.state.prisonCriminal.criminalFace
+        );
+        if (!this.form.criminalFace.id) {
+          this.$store.commit("setCriminalFace", { criminalId: this.$route.params.id });
+          this.form.criminalFace = _.cloneDeep(
+            this.$store.state.prisonCriminal.criminalFace
+          );
+          console.log(this.form.criminalFace);
+        };
+      });
+    },
     getFacesPhoto(type) {
       let sy305 = this.$refs.photo;
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
          let curpath = `c:\\123\\${type}.bmp`;
          if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.criminalFaces[type] = sy305.GetExtraInfo("capture_base64");
-           alert(this.criminalFaces[type]);
+           this.form.criminalFace[type] = sy305.GetExtraInfo("capture_base64");
+           alert(this.form.criminalFace[type]);
            sy305.ClosePhotoCapture();
          }
       } else {
@@ -159,18 +216,104 @@ export default {
       }
     },
     getIrisPhoto(type) {
-      console.log(type);
+      let sy305 = this.$refs.photo;
+      sy305.StringMode = 1; // 设置字符串模式，必须
+      if (this.comm_initIris() === 0) {
+        this.$message.show("初始化虹膜库失败");
+      } else if (type === "leftFeature") {
+        console.log("左眼测试");
+        let status = sy305.EnrollLeftIris();
+        console.log(status);
+        if (status !== 1) {
+          this.$errorMessage.show("启动左眼虹膜注册失败" + status);
+        } else {
+          this.$message.success("启动左眼虹膜注册成功");
+        }
+      } else {
+        let status = sy305.EnrollRightIris();
+        if (status !== 1) {
+          this.$errorMessage.show("启动右眼虹膜注册失败" + status);
+        } else {
+          this.$message.success("启动右眼虹膜注册成功");
+        }
+      }
+    },
+    // 初始化虹膜设备
+    comm_initIris() {
+      let status = this.$refs.photo.InitIris();
+      console.log("初始化         " + status);
+      if (status === 2 || status === 3) {
+        this.$errorMessage.show("请等待拍照摄像头关闭或者已经初始化");
+        return 0;
+      } else if (status !== 1) {
+        this.$message.success("初始化虹膜失败：" + String(status));
+        return 0;
+      }
+      return 1;
+    },
+    IrisInfo(sIrisSmall, sIrisBig, sIrisI8, EnrollResult, type) {
+      console.log(sIrisBig);
+      if (EnrollResult === 1) {
+        // this.form.criminaIris.type = sIrisLeft_Big;
+        // console.log(this.criminaIris.leftIrisInfo);
+      } else {
+        this.$errorMessage.show("注册左眼失败");
+      }
+    },
+    // 指纹采集
+    getFingerPrintPhoto(type) {
+      let iDevIndex = 0;
+      let fingerPrint = this.$refs.fingerPrint.GetImage(iDevIndex, 3000);
+      if (prisonCollectionService.IsSuccess(fingerPrint) === 0) {
+      let curPath = "c:\\1234\\";
+      this.$refs.fingerPrint.ImageToBmpFile(curPath + type + ".bmp", fingerPrint);
+      this.$set(this.form.criminalFingerPrint, type, fingerPrint);
+      console.log(this.form.criminalFingerPrint);
+      }
     },
     onSave() {
       console.log(123);
     },
+    onSaveFingerPrint() {
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.form.criminalFingerPrint.id) {
+            this.saving = true;
+            this.updateCriminalFingerPrints()
+              .then(res => {
+                this.saving = false;
+                this.$message.success("修改成功");
+                this.editDialogVisible = false;
+              })
+              .catch(error => {
+                this.saving = false;
+                this.$errorMessage.show(error, "修改失败");
+              });
+          } else {
+            // ÐÂÔö
+            // console.log(this.criminalFingerPrint);
+            this.saving = true;
+            this.addCriminalFingerPrint()
+              .then(res => {
+                this.saving = false;
+                this.$message.success("新增成功");
+                this.editDialogVisible = false;
+              })
+              .catch(error => {
+                this.saving = false;
+                this.$errorMessage.show(error, "新增失败");
+              });
+          }
+        }
+      });
+    },
     onSaveFacePicture() {
        this.$refs["form"].validate(valid => {
         if (valid) {
-          if (this.criminalFaces.id) {
+          if (this.form.criminalFace.id) {
             // 修改
             this.saving = true;
-            this.updatePrisonCriminalFaces()
+            this.updatePrisonCriminalFace()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
@@ -181,9 +324,9 @@ export default {
               });
           } else {
             // 新增
-            console.log(this.criminalFaces);
+            console.log(this.form.criminalFace);
             this.saving = true;
-            this.addPrisonCriminalFaces()
+            this.addPrisonCriminalFace()
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");
