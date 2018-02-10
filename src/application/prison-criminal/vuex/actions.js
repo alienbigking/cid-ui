@@ -185,10 +185,10 @@ export default {
         });
     },
     addCriminalIris({ commit, state }) {
-        return prisonCriminalBiometricService.add(state.criminalIris);
+        return prisonCriminalBiometricService.addIrises(state.criminalIris);
     },
     updateCriminalIris({ commit, state }) {
-        return prisonCriminalBiometricService.update(state.criminalIris);
+        return prisonCriminalBiometricService.updateIrises(state.criminalIris);
     },
     // 指纹采集
     getCriminalFingerPrint({ commit, state }, id) {
@@ -197,9 +197,9 @@ export default {
         });
     },
     addCriminalFingerPrint({ commit, state }) {
-        return prisonCriminalBiometricService.add(state.criminalFingerPrint);
+        return prisonCriminalBiometricService.addFingerPrint(state.criminalFingerPrint);
     },
     updateCriminalFingerPrint({ commit, state }) {
-        return prisonCriminalBiometricService.update(state.criminalFingerPrint);
+        return prisonCriminalBiometricService.updateFingerPrint(state.criminalFingerPrint);
     }
 };

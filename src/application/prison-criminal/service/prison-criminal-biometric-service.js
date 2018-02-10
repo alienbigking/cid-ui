@@ -11,7 +11,7 @@ export default {
         return axios.post('api/criminal-faces', criminalFace);
     },
     update(criminalFace) {
-        return axios.put(`api/criminal-faces/${criminalFaces.id}`, criminalFace);
+        return axios.put(`api/criminal-faces/${criminalFace.id}`, criminalFace);
     },
     // 瞳孔采集
     getIrises(id) {
