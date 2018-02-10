@@ -158,9 +158,9 @@
 
       <el-form-item
         class="w25"
-        label="剥政年限"
-        prop="criminalRecord.decisionDeprivationPoliticalRightYears">
-        <el-input v-model.number="form.criminalRecord.decisionDeprivationPoliticalRightYears"/>
+        label="剥政期限"
+        prop="criminalRecord.decisionDeprivationPoliticalRightTimeLimit">
+        <el-input v-model="form.criminalRecord.decisionDeprivationPoliticalRightTimeLimit"/>
       </el-form-item>
 
       <el-form-item
@@ -275,10 +275,8 @@ export default {
                 "criminalRecord.decisionDate": [
                     { required: true, message: "请选择判决日期" }
                 ],
-                "criminalRecord.decisionDeprivationPoliticalRightYears": [
-                    { required: true, message: "请输入判决剥政年限" },
-                    { type: "number", message: "必须为数字值" },
-                    { validator: this.$validators.deprivationPolitical }
+                "criminalRecord.decisionDeprivationPoliticalRightTimeLimit": [
+                    { required: true, message: "请输入判决剥政年限" }
                 ],
                 selectedFinalTrialOrgan: [
                     { required: true, message: "请输入终审机关" }

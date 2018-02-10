@@ -21,6 +21,12 @@
           <el-input v-model="user.name"/>
         </el-form-item>
         <el-form-item
+          class="w50"
+          label="手机号码"
+          prop="phoneNumber">
+          <el-input v-model="user.phoneNumber"/>
+        </el-form-item>
+        <el-form-item
           label="创建时间"
           class="w50 the-disabled">
           <span class="el-input__inner">{{ user.createdTime | moment }}</span>
@@ -30,7 +36,6 @@
           class="w50 the-disabled">
           <span class="el-input__inner">{{ user.lastUpdatedTime | moment }}</span>
         </el-form-item>
-
         <div class="has-right-button">
           <el-button @click="onBack">返 回</el-button>
           <el-button
@@ -60,7 +65,8 @@ export default {
       rules: {
         name: [
           { required: true, message: "姓名不能为空" },
-          { max: 100, message: "长度在 100 个字符内" } ]
+          { max: 100, message: "长度在 100 个字符内" }
+        ]
       },
       saving: false
     };

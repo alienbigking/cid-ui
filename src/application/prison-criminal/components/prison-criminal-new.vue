@@ -417,7 +417,7 @@ export default {
         "criminal.birthday": [{ required: true, message: "请选择出生日期" }],
         "criminal.identityCardNumber": [
           { required: true, message: "请输入身份证号" },
-          { validator: this.$validators.iDCardRange18w }
+          { validator: this.$validators.idCard }
         ],
         "criminal.married": [{ required: true, message: "请选择是否婚否" }],
         selectedEthnicity: [{ required: true, message: "请选择民族" }],
