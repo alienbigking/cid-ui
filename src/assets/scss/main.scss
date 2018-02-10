@@ -102,11 +102,13 @@
   color: $color-default;
   font-size: $font-size;
   min-width: 600px;
+  cursor: pointer;
   .title{
     color: $color-default;
     padding: 0 $padding-default;
     font-size: 14px;
     line-height: 50px;
+    font-weight: bold;
     &+div, &+form{
       border-top: $border;
     }
@@ -356,9 +358,7 @@
     height: 45px;
   }
   .table-header{
-    height: 100%;
     th {
-      line-height: 45px;
       border-bottom-color: #bbb;
     }
   }

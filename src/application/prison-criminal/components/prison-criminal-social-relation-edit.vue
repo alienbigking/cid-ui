@@ -117,16 +117,7 @@ export default {
             }
         },
         "form.selectedPoliticalStatus"(val) {
-            this.$set(
-                this.form.criminalSocialRelation,
-                "politicalStatusCode",
-                val.code
-            );
-            this.$set(
-                this.form.criminalSocialRelation,
-                "politicalStatusName",
-                val.name
-            );
+            this.form.criminalSocialRelation = Object.assign({}, this.form.criminalSocialRelation, { politicalStatusCode: val.code, politicalStatusName: val.name });
         },
         "form.criminalSocialRelation": {
             handler: _.debounce(function(criminalSocialRelation) {

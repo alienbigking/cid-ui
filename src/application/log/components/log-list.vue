@@ -42,25 +42,36 @@
       <el-table
         class="table45"
         :data="pagedLogs.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
         v-loading='gettingLogs'
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="operator"
-          label="操作人"/>
-        <el-table-column label="类别">
+          label="操作人"
+          sortable="custom"/>
+        <el-table-column
+          prop="type"
+          label="类别"
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.type | enumText(logTypes) }}
           </template>
         </el-table-column>
         <el-table-column
           prop="action"
-          label="动作"/>
+          label="动作"
+          sortable="custom"/>
         <el-table-column
           prop="detail"
           label="详情"
+          sortable="custom"
           :show-overflow-tooltip="true"/>
-        <el-table-column label="创建时间">
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
@@ -114,7 +125,6 @@ export default {
   },
   created() {
       this.logTypes = logTypeService.getAll();
-      this.search();
   },
   methods: {
     ...mapActions([
@@ -133,6 +143,12 @@ export default {
     },
     onView(id) {
       this.$router.push(`/log/detail/${id}`);
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.gettingLogs = true;

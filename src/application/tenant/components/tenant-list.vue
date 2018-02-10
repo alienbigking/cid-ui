@@ -44,7 +44,6 @@
           label="名称"/>
         <el-table-column
           label="用户状态"
-          sortable
           align="center">
           <template slot-scope="scope">
             {{ scope.row.status | enumText(userStatuses) }}
@@ -293,6 +292,9 @@ export default {
   }
   button:nth-child(3) {
     color: #f44336;
+  }
+  .button-status{
+    vertical-align: baseline;
   }
 }
 </style>
