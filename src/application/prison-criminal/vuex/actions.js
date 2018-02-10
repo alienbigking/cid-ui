@@ -167,15 +167,39 @@ export default {
         return prisonCriminalOutInPrisonService.delete(id);
     },
     // 面部采集
-    getPrisonCriminalFaces({ commit, state }, id) {
+    getCriminalFace({ commit, state }, id) {
         return prisonCriminalBiometricService.get(id).then(criminalFaces => {
-            commit(types.SET_PRISON_CRIMINAL_OUTINPRISON, criminalFaces);
+            commit(types.SET_CRIMINAL_FACE, criminalFaces);
         });
     },
-    addPrisonCriminalFaces({ commit, state }) {
+    addCriminalFace({ commit, state }) {
         return prisonCriminalBiometricService.add(state.criminalFace);
     },
-    updatePrisonCriminalFaces({ commit, state }) {
+    updateCriminalFace({ commit, state }) {
         return prisonCriminalBiometricService.update(state.criminalFace);
+    },
+    // 虹膜采集
+    getCriminalIris({ commit, state }, id) {
+        return prisonCriminalBiometricService.getIrises(id).then(criminalIris => {
+            commit(types.SET_CRIMINAL_IRIS, criminalIris);
+        });
+    },
+    addCriminalIris({ commit, state }) {
+        return prisonCriminalBiometricService.addIrises(state.criminalIris);
+    },
+    updateCriminalIris({ commit, state }) {
+        return prisonCriminalBiometricService.updateIrises(state.criminalIris);
+    },
+    // 指纹采集
+    getCriminalFingerPrint({ commit, state }, id) {
+        return prisonCriminalBiometricService.getFingerPrint(id).then(criminalFingerPrint => {
+            commit(types.SET_CRIMINAL_FINGERPRINT, criminalFingerPrint);
+        });
+    },
+    addCriminalFingerPrint({ commit, state }) {
+        return prisonCriminalBiometricService.addFingerPrint(state.criminalFingerPrint);
+    },
+    updateCriminalFingerPrint({ commit, state }) {
+        return prisonCriminalBiometricService.updateFingerPrint(state.criminalFingerPrint);
     }
 };

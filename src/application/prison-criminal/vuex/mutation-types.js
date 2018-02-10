@@ -33,5 +33,12 @@ export const UPDATE_PRISON_CRIMINAL_OUTINPRISON = 'updatePrisonCriminalOutInPris
 export const SET_ALL_PRISON_CRIMINAL_OUTINPRISONS = 'setAllPrisonCriminalOutInPrisons';
 export const SET_PAGED_PRISON_CRIMINAL_OUTINPRISONS = 'setPagedPrisonCriminalOutInPrisons';
 // 罪犯面部采集
-export const SET_PRISON_CRIMINAL_FACES = 'setPrisonCriminalFaces';
-export const UPDATE_PRISON_CRIMINAL_FACES = 'updatePrisonCriminalFaces';
+export const SET_CRIMINAL_FACE = 'setCriminalFace';
+export const UPDATE_CRIMINAL_FACE = 'updateCriminalFace';
+// 虹膜采集
+export const SET_CRIMINAL_IRIS = 'setCriminalIrise';
+export const UPDATE_CRIMINAL_IRIS = 'updateCriminalIrise';
+
+// 罪犯指纹采集
+export const SET_CRIMINAL_FINGERPRINT = 'setCriminalFingerPrint';
+export const UPDATE_CRIMINAL_FINGERPRINT = 'updateCriminalFingerPrint';
