@@ -35,7 +35,7 @@
         :key="index">
         <div
           class="body"
-          :class="criminalFingers[item.type] ? 'setted' : 'iconfont defalut'">
+          :class="criminalFingers[item.type] ? 'setted' : 'iconfont icon-zhiwenjiesuo'">
           <el-button
             v-if="!criminalFingers[item.type]"
             class="button-addCollection"
@@ -111,7 +111,23 @@
 import { mapActions } from "vuex";
 import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
 import _ from "lodash";
+let a = document.createElement("script");
+a.type = "text/javascript";
+a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
+a.setAttribute("for", "sy305");
+a.innerHTML = `console.log("ocx调用");`;
+console.log(a);
+document.body.appendChild(a);
 
+// function addEvent(obj, name, func) {
+//   if (window.attachEvent && obj.attachEvent) {
+//     obj.attachEvent("on"+name, func);
+//   } else {
+//     obj.addEventListener(name, func, false);
+//   }
+// }
+// function hhhhh(a, b, c) { console.log(a, b, c); }
+// addEvent(document.getElementById("sy305"), EnrollLeftIrisStrEvent, hhhhh);
 export default {
   data() {
     return {
@@ -162,7 +178,7 @@ export default {
     }
   },
   activated() {
-  this.render();
+    this.render();
   },
   methods: {
     ...mapActions([
@@ -383,6 +399,7 @@ export default {
     position: absolute;
     background: #37474F;
     bottom: 0;
+    left: 0;
     border: 0;
     width: 100%;
     height: 26px;
@@ -402,12 +419,18 @@ export default {
       float: right;
     }
   }
-  .defalut:before{
-    content: "\e62b";
+  .icon-zhiwenjiesuo{
     color: #E0E5EC;
     font-size: 72px;
-    position: absolute;
     z-index: 5;
+    &:before{
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      line-height: 100px;
+    }
   }
   .setted{
     background: url("../../../assets/images/avatar.jpg") no-repeat;
