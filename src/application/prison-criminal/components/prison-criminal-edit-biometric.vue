@@ -162,6 +162,13 @@ export default {
     }
   },
   activated() {
+  let a = document.createElement("script");
+  a.type = "text/javascript";
+  a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
+  a.setAttribute("for", "sy305");
+  a.innerHTML = `console.log("ocx调用");`;
+  console.log(a);
+  document.body.appendChild(a);
   this.render();
   },
   methods: {
