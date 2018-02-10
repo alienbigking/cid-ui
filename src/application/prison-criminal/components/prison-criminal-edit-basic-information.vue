@@ -126,7 +126,7 @@
         label="出生地"
         prop="selectedBirthplace">
         <el-cascader
-          :options="allSelectedBirthplace"
+          :options="allBirthplaces"
           @active-item-change="onChangeBirthplaceAddress"
           :props="{ value: 'code', label: 'name', children: 'children' }"
           separator="-"
@@ -139,7 +139,7 @@
         label="户籍地址"
         prop="selectedHouseholdRegister">
         <el-cascader
-          :options="allHouseholdRegister"
+          :options="allHouseholdRegisters"
           @active-item-change="onChangeHouseholdRegisterAddress"
           :props="{ value: 'code', label: 'name', children: 'children' }"
           separator="-"
@@ -478,8 +478,8 @@ export default {
       allSeparateManagementLevels: [],
       allSeparateCustodyTypes: [],
       allCommutationScales: [],
-      allSelectedBirthplace: [],
-      allHouseholdRegister: [],
+      allBirthplaces: [],
+      allHouseholdRegisters: [],
       allHomeAddress: []
     };
   },
@@ -491,134 +491,82 @@ export default {
   },
   watch: {
     "form.selectedGender"(val) {
-      this.$set(this.form.criminal, "genderCode", val.code);
-      this.$set(this.form.criminal, "genderName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { genderCode: val.code, genderName: val.name });
     },
     "form.selectedEthnicity"(val) {
-      this.$set(this.form.criminal, "ethnicityCode", val.code);
-      this.$set(this.form.criminal, "ethnicityName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { ethnicityCode: val.code, ethnicityName: val.name });
     },
     "form.selectedNationality"(val) {
-      this.$set(this.form.criminal, "nationalityCode", val.code);
-      this.$set(this.form.criminal, "nationalityName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { nationalityCode: val.code, nationalityName: val.name });
     },
     "form.selectedHouseholdRegisterType"(val) {
-      this.$set(this.form.criminal, "householdRegisterTypeCode", val.code);
-      this.$set(this.form.criminal, "householdRegisterTypeName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { householdRegisterTypeCode: val.code, householdRegisterTypeName: val.name });
     },
     "form.selectPoliticalStatus"(val) {
-      this.$set(this.form.criminal, "politicalStatusCode", val.code);
-      this.$set(this.form.criminal, "politicalStatusName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { politicalStatusCode: val.code, politicalStatusName: val.name });
     },
     "form.selectEducationDegree"(val) {
-      this.$set(this.form.criminal, "educationDegreeCode", val.code);
-      this.$set(this.form.criminal, "educationDegreeName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { educationDegreeCode: val.code, educationDegreeName: val.name });
     },
     "form.selectedFledType"(val) {
-      this.$set(this.form.criminal, "fledTypeCode", val.code);
-      this.$set(this.form.criminal, "fledTypeName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { fledTypeCode: val.code, fledTypeName: val.name });
     },
     "form.selectedSeparateManagementLevel"(val) {
-      this.$set(this.form.criminal, "separateManagementLevelCode", val.code);
-      this.$set(this.form.criminal, "separateManagementLevelName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { separateManagementLevelCode: val.code, separateManagementLevelName: val.name });
     },
     "form.selectedSeparateCustodyType"(val) {
-      this.$set(this.form.criminal, "separateCustodyTypeCode", val.code);
-      this.$set(this.form.criminal, "separateCustodyTypeName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { separateCustodyTypeCode: val.code, separateCustodyTypeName: val.name });
     },
     "form.selectedCommutationScale"(val) {
-      this.$set(this.form.criminal, "commutationScaleCode", val.code);
-      this.$set(this.form.criminal, "commutationScaleName", val.name);
+      this.form.criminal = Object.assign({}, this.form.criminal, { commutationScaleCode: val.code, commutationScaleName: val.name });
     },
     "form.selectedBirthplace"(val) {
-      this.$set(this.form.criminal, "birthplaceCountryCode", val[0]);
-      let country = this.allSelectedBirthplace.find(item => item.code === val[0]);
-      this.$set(
-        this.form.criminal,
-        "birthplaceCountryName",
-        country.name
-      );
-      this.$set(this.form.criminal, "birthplaceProvinceCode", val[1]);
+      let country = this.allBirthplaces.find(item => item.code === val[0]);
       let province = country.children.find(item => item.code === val[1]);
-      this.$set(
-        this.form.criminal,
-        "birthplaceProvinceName",
-        province.name
-      );
-      this.$set(this.form.criminal, "birthplaceCityCode", val[2]);
       let city = province.children.find(item => item.code === val[2]);
-      this.$set(
-        this.form.criminal,
-        "birthplaceCityName",
-        city.name
-      );
-      this.$set(this.form.criminal, "birthplaceCountyCode", val[3]);
       let County = city.children.find(item => item.code === val[3]);
-      this.$set(
-        this.form.criminal,
-        "birthplaceCountyName",
-        County.name
-      );
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        birthplaceCountryCode: val[0],
+        birthplaceCountryName: country.name,
+        birthplaceProvinceCode: val[1],
+        birthplaceProvinceName: province.name,
+        birthplaceCityCode: val[2],
+        birthplaceCityName: city.name,
+        birthplaceCountyCode: val[3],
+        birthplaceCountyName: County.name
+      });
     },
     "form.selectedHouseholdRegister"(val) {
-      this.$set(this.form.criminal, "householdRegisterAddressCountryCode", val[0]);
-      let country = this.allHouseholdRegister.find(item => item.code === val[0]);
-      this.$set(
-        this.form.criminal,
-        "householdRegisterAddressCountryName",
-        country.name
-      );
-      this.$set(this.form.criminal, "householdRegisterAddressProvinceCode", val[1]);
+      let country = this.allHouseholdRegisters.find(item => item.code === val[0]);
       let province = country.children.find(item => item.code === val[1]);
-      this.$set(
-        this.form.criminal,
-        "householdRegisterAddressProvinceName",
-        province.name
-      );
-      this.$set(this.form.criminal, "householdRegisterAddressCityCode", val[2]);
       let city = province.children.find(item => item.code === val[2]);
-      this.$set(
-        this.form.criminal,
-        "householdRegisterAddressCityName",
-        city.name
-      );
-      this.$set(this.form.criminal, "householdRegisterAddressCountyCode", val[3]);
       let County = city.children.find(item => item.code === val[3]);
-      this.$set(
-        this.form.criminal,
-        "householdRegisterAddressCountyName",
-        County.name
-      );
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        householdRegisterAddressCountryCode: val[0],
+        householdRegisterAddressCountryName: country.name,
+        householdRegisterAddressProvinceCode: val[1],
+        householdRegisterAddressProvinceName: province.name,
+        householdRegisterAddressCityCode: val[2],
+        householdRegisterAddressCityName: city.name,
+        householdRegisterAddressCountyCode: val[3],
+        householdRegisterAddressCountyName: County.name
+      });
     },
     "form.selectedHomeAddress"(val) {
-      this.$set(this.form.criminal, "homeAddressCountryCode", val[0]);
       let country = this.allHomeAddress.find(item => item.code === val[0]);
-      this.$set(
-        this.form.criminal,
-        "homeAddressCountryName",
-        country.name
-      );
-      this.$set(this.form.criminal, "homeAddressProvinceCode", val[1]);
       let province = country.children.find(item => item.code === val[1]);
-      this.$set(
-        this.form.criminal,
-        "homeAddressProvinceName",
-        province.name
-      );
-      this.$set(this.form.criminal, "homeAddressCityCode", val[2]);
       let city = province.children.find(item => item.code === val[2]);
-      this.$set(
-        this.form.criminal,
-        "homeAddressCityName",
-        city.name
-      );
-      this.$set(this.form.criminal, "homeAddressCountyCode", val[3]);
       let County = city.children.find(item => item.code === val[3]);
-      this.$set(
-        this.form.criminal,
-        "homeAddressCountyName",
-        County.name
-      );
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        homeAddressCountryCode: val[0],
+        homeAddressCountryName: country.name,
+        homeAddressProvinceCode: val[1],
+        homeAddressProvinceName: province.name,
+        homeAddressCityCode: val[2],
+        homeAddressCityName: city.name,
+        homeAddressCountyCode: val[3],
+        homeAddressCountyName: County.name
+      });
     },
     "form.criminal": {
       handler: _.debounce(function(criminal) {
@@ -659,8 +607,8 @@ export default {
       response[9].map(item => {
         item.children = [];
       });
-      this.allSelectedBirthplace = _.cloneDeep(response[9]);
-      this.allHouseholdRegister = _.cloneDeep(response[9]);
+      this.allBirthplaces = _.cloneDeep(response[9]);
+      this.allHouseholdRegisters = _.cloneDeep(response[9]);
       this.allHomeAddress = _.cloneDeep(response[9]);
       this.initializing = false;
       this.render();
@@ -673,7 +621,7 @@ export default {
       "getAllPrisonHouses",
       "updatePrisonCriminal"
     ]),
-    loadingData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
+    loadingRegionData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
       const selectedCountry = allData.find(
         b => b.code === CountryCode
       );
@@ -721,7 +669,7 @@ export default {
             });
         });
     },
-    onLoadingNext(value, allData) {
+    onLoadingNextRegion(value, allData) {
       const selectedCountryCode = value[0];
       const selectedProvinceCode = value[1];
       const selectedCityCode = value[2];
@@ -768,13 +716,13 @@ export default {
       }
     },
     onChangeBirthplaceAddress(value) {
-      this.onLoadingNext(value, this.allSelectedBirthplace);
+      this.onLoadingNextRegion(value, this.allBirthplaces);
     },
     onChangeHouseholdRegisterAddress(value) {
-      this.onLoadingNext(value, this.allHouseholdRegister);
+      this.onLoadingNextRegion(value, this.allHouseholdRegisters);
     },
     onChangeHomeAddress(value) {
-      this.onLoadingNext(value, this.allHomeAddress);
+      this.onLoadingNextRegion(value, this.allHomeAddress);
     },
     render() {
       this.getPrisonCriminal(this.$route.params.id).then(() => {
@@ -819,8 +767,8 @@ export default {
           code: this.form.criminal.commutationScaleCode,
           name: this.form.criminal.commutationScaleName
         };
-        this.loadingData(
-          this.allSelectedBirthplace,
+        this.loadingRegionData(
+          this.allBirthplaces,
           this.form.criminal.birthplaceCountryCode,
           this.form.criminal.birthplaceProvinceCode,
           this.form.criminal.birthplaceCityCode,
@@ -828,8 +776,8 @@ export default {
           this.form,
           "selectedBirthplace"
         );
-        this.loadingData(
-          this.allHouseholdRegister,
+        this.loadingRegionData(
+          this.allHouseholdRegisters,
           this.form.criminal.householdRegisterAddressCountryCode,
           this.form.criminal.householdRegisterAddressProvinceCode,
           this.form.criminal.householdRegisterAddressCityCode,
@@ -837,7 +785,7 @@ export default {
           this.form,
           "selectedHouseholdRegister"
         );
-        this.loadingData(
+        this.loadingRegionData(
           this.allHomeAddress,
           this.form.criminal.homeAddressCountryCode,
           this.form.criminal.homeAddressProvinceCode,

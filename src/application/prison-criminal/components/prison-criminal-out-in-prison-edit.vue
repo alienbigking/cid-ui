@@ -113,8 +113,7 @@ export default {
       }
     },
     "form.selectedOutInPrisonReasons"(val) {
-      this.$set(this.form.criminalOutInPrison, "reasonCode", val.code);
-      this.$set(this.form.criminalOutInPrison, "reasonName", val.name);
+      this.form.criminalOutInPrison = Object.assign({}, this.form.criminalOutInPrison, { reasonCode: val.code, reasonName: val.name });
     },
     "form.criminalOutInPrison": {
       handler: _.debounce(function(criminalOutInPrison) {
