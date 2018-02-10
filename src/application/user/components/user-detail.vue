@@ -14,10 +14,18 @@
       </el-row>
       <el-row>
         <el-col :span="12">
-          <label>状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
+          <label>手机号码：</label><span>{{ user.phoneNumber }}</span>
         </el-col>
         <el-col :span="12">
-          <label>所属租户：</label><span>{{ user.tenantName }}</span>
+          <label>状态：</label><span>{{ user.status | enumText(userStatuses) }}</span>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="12">
+          <label>角色：</label><span>{{ user.roleNames ? user.roleNames.join("，") : "" }}</span>
+        </el-col>
+        <el-col :span="12">
+          <label>租户：</label><span>{{ user.tenantName }}</span>
         </el-col>
       </el-row>
       <el-row>
@@ -30,11 +38,6 @@
       </el-row>
     </div>
     <div class="card-body">
-      <el-row>
-        <el-col :span="24">
-          <label>角色：</label><span>{{ user.roleNames ? user.roleNames.join("、") : "" }}</span>
-        </el-col>
-      </el-row>
       <el-row class="detail">
         <el-col :span="24">
           <label>权限：</label>
@@ -85,4 +88,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 </style>

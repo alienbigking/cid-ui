@@ -15,17 +15,23 @@
       </el-form-item>
       <el-form-item
         class="w50"
+        label="密码"
+        prop="password">
+        <el-input
+          v-model="user.password"
+          type="password"/>
+      </el-form-item>
+      <el-form-item
+        class="w50"
         label="姓名"
         prop="name">
         <el-input v-model="user.name"/>
       </el-form-item>
       <el-form-item
         class="w50"
-        label="密码"
-        prop="password">
-        <el-input
-          v-model="user.password"
-          type="password"/>
+        label="手机号码"
+        prop="phoneNumber">
+        <el-input v-model="user.phoneNumber"/>
       </el-form-item>
       <el-form-item
         class="w50"
@@ -76,7 +82,10 @@ export default {
           { required: true, message: "请输入密码" },
           { min: 6, message: "密码长度最少6位" }
         ],
-        status: [ { required: true, message: "请选择状态" } ],
+        phoneNumber: [
+          { required: true, message: "请输入手机号码" }
+        ],
+        status: [{ required: true, message: "请选择状态" }],
         description: [{ max: 1000, message: "长度在 1000 个字符内" }]
       },
       saving: false
@@ -121,4 +130,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

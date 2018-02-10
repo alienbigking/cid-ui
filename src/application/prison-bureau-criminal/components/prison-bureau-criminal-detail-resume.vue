@@ -9,34 +9,41 @@
       header-row-class-name="table-header">
       <el-table-column
         prop="startDate"
-        label="开始日期"/>
+        label="开始日期"
+        sortable/>
       <el-table-column
         prop="endDate"
-        label="截至日期"/>
+        label="截至日期"
+        sortable/>
       <el-table-column
         prop="company"
         label="公司"
-        :show-overflow-tooltip="true"/>
+        :show-overflow-tooltip="true"
+        sortable/>
       <el-table-column
         prop="occupation"
         label="职业"
         :show-overflow-tooltip="true"
-        width="80px"/>
+        width="80px"
+        sortable/>
       <el-table-column
         prop="duty"
         label="职位"
         :show-overflow-tooltip="true"
-        width="80px"/>
+        width="80px"
+        sortable/>
       <el-table-column
         prop="createdTime"
-        label="创建时间">
+        label="创建时间"
+        sortable>
         <template slot-scope="scope">
           {{ scope.row.createdTime | moment }}
         </template>
       </el-table-column>
       <el-table-column
         prop="lastUpdatedTime"
-        label="最后更新时间">
+        label="最后更新时间"
+        sortable>
         <template slot-scope="scope">
           {{ scope.row.lastUpdatedTime | moment }}
         </template>

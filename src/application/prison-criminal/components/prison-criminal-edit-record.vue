@@ -15,32 +15,40 @@
           <el-table-column
             prop="decisionAccusation"
             label="罪名"
-            width="80px"/>
+            width="80px"
+            sortable/>
           <el-table-column
             prop="prosecutionOrganName"
             label="起诉机关"
-            :show-overflow-tooltip="true"/>
+            :show-overflow-tooltip="true"
+            sortable/>
           <el-table-column
             prop="firstTrialOrganName"
             label="一审机关"
-            :show-overflow-tooltip="true"/>
+            :show-overflow-tooltip="true"
+            sortable/>
           <el-table-column
             prop="finalTrialOrganName"
             label="终审机关"
-            :show-overflow-tooltip="true"/>
+            :show-overflow-tooltip="true"
+            sortable/>
           <el-table-column
             prop="decisionOrganName"
             label="判决机关"
-            :show-overflow-tooltip="true"/>
+            :show-overflow-tooltip="true"
+            sortable/>
           <el-table-column
             prop="decisionDate"
-            label="判决日期"/>
+            label="判决日期"
+            sortable/>
           <el-table-column
             prop="decisionPrisonTermStartDate"
-            label="刑期开始日期"/>
+            label="刑期开始日期"
+            sortable/>
           <el-table-column
             prop="decisionPrisonTermEndDate"
-            label="刑期结束日期"/>
+            label="刑期结束日期"
+            sortable/>
           <el-table-column
             label="操作"
             align="center"

@@ -43,6 +43,9 @@
           prop="name"
           label="姓名"/>
         <el-table-column
+          prop="phoneNumber"
+          label="手机号码"/>
+        <el-table-column
           prop="createdTime"
           label="创建时间"
           width="180px">
@@ -291,10 +294,15 @@ export default {
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedUsers(params).then(() => {
-        this.searching = false;
-        this.loading = false;
-      }).catch(() => { this.searching = false; this.loading = false; });
+      this.getPagedUsers(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {
@@ -308,8 +316,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .container {
-  .dialog{
-    div div:nth-child(1){
+  .dialog {
+    div div:nth-child(1) {
       margin-top: -30px;
       padding-bottom: 15px;
     }
@@ -329,7 +337,7 @@ export default {
   button:nth-child(4) {
     color: #f44336;
   }
-  .button-status{
+  .button-status {
     vertical-align: baseline;
   }
 }
