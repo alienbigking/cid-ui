@@ -42,7 +42,8 @@
             @click="getFingerPrintPhoto(item.type)">录 入</el-button>
           <el-button
             v-else
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -65,7 +66,8 @@
             @click="getFacesPhoto(item.type)">录 入</el-button>
           <el-button
             v-else
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -83,12 +85,13 @@
         :key="index">
         <div class="body">
           <el-button
-            v-if="inputVsible"
+            v-if="!form.criminalIris[item.type]"
             class="button-addCollection"
             @click="getIrisPhoto(item.type)">录 入</el-button>
           <el-button
-            v-if="deleteVsible"
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            v-else
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -96,12 +99,14 @@
         <el-button
           class="button-confirm"
           :loading="saving"
-          @click="onSave">保 存</el-button>
+          @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-      id="leftFeature"/>
+        v-if="false"
+        id="leftFeature"/>
       <el-input
-    id="rightFeature"/></div>
+        v-if="false"
+        id="rightFeature"/></div>
   </el-form>
 </template>
 
@@ -130,25 +135,25 @@ export default {
   data() {
     return {
       fingers: [
-        { label: '左手母指', type: "leftThumbFeature" },
-        { label: '左手食指', type: "leftForefingerFeature" },
-        { label: '左手中指', type: "leftMiddleFingerFeature" },
-        { label: '左无名指', type: "leftRingFingerFeature" },
-        { label: '左手小指', type: "leftLittleFingerFeature" },
-        { label: '右手母指', type: "rightThumbFeature" },
-        { label: '右手食指', type: "rightForefingerFeature" },
-        { label: '右手中指', type: "rightMiddleFingerFeature" },
-        { label: '右无名指', type: "rightRingFingerFeature" },
-        { label: '右手小指', type: "rightLittleFingerFeature" }
+        { label: '左手母指', type: "leftThumbFeature", attribute: "criminalFingerPrint" },
+        { label: '左手食指', type: "leftForefingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左手中指', type: "leftMiddleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左无名指', type: "leftRingFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左手小指', type: "leftLittleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手母指', type: "rightThumbFeature", attribute: "criminalFingerPrint" },
+        { label: '右手食指', type: "rightForefingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手中指', type: "rightMiddleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右无名指', type: "rightRingFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手小指', type: "rightLittleFingerFeature", attribute: "criminalFingerPrint" }
       ],
       faces: [
-        { label: '正脸', type: "frontPhoto" },
-        { label: '侧脸', type: "leftPhoto" },
-        { label: '侧脸', type: "rightPhoto" }
+        { label: '正脸', type: "frontPhoto", attribute: "criminalFace" },
+        { label: '侧脸', type: "leftPhoto", attribute: "criminalFace" },
+        { label: '侧脸', type: "rightPhoto", attribute: "criminalFace" }
       ],
       iris: [
-        { label: '左眼瞳孔', type: "leftFeature" },
-        { label: '右眼瞳孔', type: "rightFeature" }
+        { label: '左眼瞳孔', type: "leftFeature", attribute: "criminalIris" },
+        { label: '右眼瞳孔', type: "rightFeature", attribute: "criminalIris" }
       ],
       inputVsible: true,
       deleteVsible: false,
@@ -175,12 +180,6 @@ export default {
       }, 500),
       deep: true
     }
-    // "form.criminalIris": {
-    // handler: _.debounce(function(criminalIris) {
-    //   this.$store.commit("updateCriminalIris", this.form.criminalIris);
-    // }, 500),
-    // deep: true
-    // }
   },
   activated() {
   this.createLeftFeatureEventScript();
@@ -309,7 +308,19 @@ export default {
       console.log(this.form.criminalFingerPrint);
       }
     },
-    onSave() {
+    deletePhoto(attribute, type) {
+      if (attribute === "criminalFingerPrint") {
+      this.$delete(this.form.criminalFingerPrint, type);
+      console.log(this.form.criminalFingerPrint);
+      } else if (attribute === "criminalFace") {
+      this.$delete(this.form.criminalFace, type);
+      console.log(this.form.criminalFace);
+      } else {
+      this.$delete(this.form.criminalIris, type);
+      console.log(this.form.criminalIris);
+      }
+    },
+    onSaveIrisPicture() {
       this.updateIrisInfo();
       console.log(this.$store.state.prisonCriminal.criminalIris);
       this.$refs["form"].validate(valid => {
@@ -349,7 +360,7 @@ export default {
         if (valid) {
           if (this.form.criminalFingerPrint.id) {
             this.saving = true;
-            this.updateCriminalFingerPrints()
+            this.updateCriminalFingerPrint()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
@@ -437,7 +448,6 @@ export default {
         leftFeatureInfo = this.form.criminalIris.leftFeature;
         rightFeatureInfo = this.form.criminalIris.rightFeature;
         this.$store.commit("updateCriminalIris", this.form.criminalIris);
-        // this.$store.commit("updateCriminalIris", Object.assign({}, this.form.criminalIris, {rightFeature: rightFeatureInfo}));
       }
     }
   }
@@ -482,7 +492,6 @@ export default {
   }
   .button-delete{
     position: absolute;
-    // right: 50%;
     background: #37474F;
     bottom: 0;
     left: 0;
