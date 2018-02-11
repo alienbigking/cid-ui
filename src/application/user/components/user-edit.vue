@@ -68,7 +68,8 @@ export default {
           { max: 100, message: "长度在 100 个字符内" }
         ],
         phoneNumber: [
-          { required: true, message: "请输入手机号码" }
+          { required: true, message: "请输入手机号码" },
+          { validator: this.$validators.phoneNumber }
         ]
       },
       saving: false

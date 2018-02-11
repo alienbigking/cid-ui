@@ -24,28 +24,36 @@
         :data="pagedCriminals.content"
         v-loading="loading"
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="code"
-          label="编号"/>
+          label="编号"
+          sortable="custom"/>
         <el-table-column
           prop="name"
-          label="姓名"/>
+          label="姓名"
+          sortable="custom"/>
         <el-table-column
           prop="alias"
-          label="别名"/>
+          label="别名"
+          sortable="custom"/>
         <el-table-column
           prop="genderName"
-          label="性别"/>
+          label="性别"
+          sortable="custom"/>
         <el-table-column
           prop="ethnicityName"
-          label="民族"/>
+          label="民族"
+          sortable="custom"/>
         <el-table-column
           prop="birthday"
-          label="出生日期"/>
+          label="出生日期"
+          sortable="custom"/>
         <el-table-column
           prop="prisonAreaName"
-          label="隶属监区"/>
+          label="隶属监区"
+          sortable="custom"/>
         <el-table-column
           align="center"
           label="操作"
@@ -157,6 +165,14 @@ export default {
           this.$errorMessage.show(error, "删除失败");
           this.deleting = false;
         });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      let prop = e.prop;
+      if (e.prop === "prisonAreaName") prop = "prisonArea.name";
+      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.loading = true;

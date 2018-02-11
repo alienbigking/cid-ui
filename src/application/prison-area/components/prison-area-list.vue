@@ -32,22 +32,27 @@
       <el-table
         class="table45"
         :data="pagedPrisonAreas.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
         v-loading="loading"
         border
-        header-row-class-name="table-header">
+        header-row-class-name="table-header"
+        @sort-change="onSort">
         <el-table-column
           prop="code"
-          label="编号"/>
+          label="编号"
+          sortable="custom"/>
         <el-table-column
           prop="name"
-          label="监区名称"/>
+          label="监区名称"
+          sortable="custom"/>
         <el-table-column
           prop="parentPrisonAreaName"
-          label="上级监区"/>
+          label="上级监区"
+          sortable="custom"/>
         <el-table-column
           prop="createdTime"
           label="创建时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.createdTime | moment }}
           </template>
@@ -55,7 +60,7 @@
         <el-table-column
           prop="lastUpdatedTime"
           label="最后更新时间"
-          sortable>
+          sortable="custom">
           <template slot-scope="scope">
             {{ scope.row.lastUpdatedTime | moment }}
           </template>
@@ -137,7 +142,6 @@ export default {
   created() {
     this.getAllPrisonAreas().then(() => {
       this.gettingPrisonAreas = false;
-      this.search();
     });
   },
   methods: {
@@ -178,6 +182,14 @@ export default {
           this.deleting = false;
           this.$errorMessage.show(error, "删除失败");
         });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      let prop = e.prop;
+      if (e.prop === "parentPrisonAreaName") prop = "parentPrisonArea.name";
+      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
+      this.search();
     },
     search() {
       this.loading = true;
