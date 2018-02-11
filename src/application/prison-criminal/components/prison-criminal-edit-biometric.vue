@@ -310,14 +310,15 @@ export default {
     },
     deletePhoto(attribute, type) {
       if (attribute === "criminalFingerPrint") {
-      this.$delete(this.form.criminalFingerPrint, type);
-      console.log(this.form.criminalFingerPrint);
+        // this.$set(this.form.criminalFingerPrint, type, null);
+        this.$delete(this.form.criminalFingerPrint, type);
+        console.log(this.form.criminalFingerPrint);
       } else if (attribute === "criminalFace") {
-      this.$delete(this.form.criminalFace, type);
-      console.log(this.form.criminalFace);
+        this.$delete(this.form.criminalFace, type);
+        console.log(this.form.criminalFace);
       } else {
-      this.$delete(this.form.criminalIris, type);
-      console.log(this.form.criminalIris);
+        this.$delete(this.form.criminalIris, type);
+        console.log(this.form.criminalIris);
       }
     },
     onSaveIrisPicture() {
