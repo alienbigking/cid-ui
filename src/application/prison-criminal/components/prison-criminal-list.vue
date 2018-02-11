@@ -170,7 +170,6 @@ export default {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
       let prop = e.prop;
-      if (e.prop === "prisonAreaName") prop = "prisonArea.name";
       this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
       this.search();
     },
