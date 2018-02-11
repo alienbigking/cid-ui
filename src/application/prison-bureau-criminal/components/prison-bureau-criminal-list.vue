@@ -121,7 +121,9 @@ export default {
     onSort(e) {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
-      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      let prop = e.prop;
+      if (e.prop === "prisonName") prop = "prison.name";
+      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
       this.search();
     },
     search() {
