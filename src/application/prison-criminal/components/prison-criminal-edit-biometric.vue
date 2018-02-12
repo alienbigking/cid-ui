@@ -114,23 +114,7 @@
 import { mapActions } from "vuex";
 import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
 import _ from "lodash";
-let a = document.createElement("script");
-a.type = "text/javascript";
-a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
-a.setAttribute("for", "sy305");
-a.innerHTML = `console.log("ocx调用");`;
-console.log(a);
-document.body.appendChild(a);
 
-// function addEvent(obj, name, func) {
-//   if (window.attachEvent && obj.attachEvent) {
-//     obj.attachEvent("on"+name, func);
-//   } else {
-//     obj.addEventListener(name, func, false);
-//   }
-// }
-// function hhhhh(a, b, c) { console.log(a, b, c); }
-// addEvent(document.getElementById("sy305"), EnrollLeftIrisStrEvent, hhhhh);
 export default {
   data() {
     return {
@@ -157,8 +141,6 @@ export default {
       ],
       inputVsible: true,
       deleteVsible: false,
-      criminalFace: {},
-      criminalFingers: {},
       form: {
       criminalFace: {},
       criminalIris: {},
@@ -420,6 +402,9 @@ export default {
       });
     },
     createLeftFeatureEventScript() {
+      let num = this.$store.state.prisonCriminal.scriptNumber;
+      console.log(num);
+      if (num <= 1) {
       let a = document.createElement("script");
       a.type = "text/javascript";
       a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
@@ -427,8 +412,13 @@ export default {
       a.innerHTML = "document.getElementById('leftFeature').value=sIrisLeft_Big";
       console.log(a);
       document.body.appendChild(a);
+      num++;
+      this.$store.commit("setCriminalBiomenticScript", num);
+      }
     },
     createRightFeatureEventScript() {
+      let num = this.$store.state.prisonCriminal.scriptNumber;
+      if (num <= 1) {
       let a = document.createElement("script");
       a.type = "text/javascript";
       a.event = "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
@@ -436,6 +426,7 @@ export default {
       a.innerHTML = "document.getElementById('rightFeature').value=sIrisRight_Big";
       console.log(a);
       document.body.appendChild(a);
+      }
     },
     updateIrisInfo() {
       let leftFeatureInfo = document.getElementById("leftFeature").value;

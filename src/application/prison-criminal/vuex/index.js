@@ -57,7 +57,8 @@ const state = {
     // 罪犯虹膜采集
     allCriminalIrises: [],
     pagedCriminalIrises: { content: [] },
-    criminalIris: {}
+    criminalIris: {},
+    scriptNumber: 0
 };
 
 export default {

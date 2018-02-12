@@ -42,3 +42,5 @@ export const UPDATE_CRIMINAL_IRIS = 'updateCriminalIris';
 // 罪犯指纹采集
 export const SET_CRIMINAL_FINGERPRINT = 'setCriminalFingerPrint';
 export const UPDATE_CRIMINAL_FINGERPRINT = 'updateCriminalFingerPrint';
+// 限制动态生成SCRIPT标签
+export const SET_CRIMINAL_BIOMETIRC_SCRIPT = 'setCriminalBiomenticScript';
