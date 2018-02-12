@@ -1,19 +1,17 @@
 <template>
-  <div>
-    <el-breadcrumb>
-      <el-breadcrumb-item>
-        <i
-          class="iconfont icon-zhuye"
-          style="margin-right:5px;"/>主页
-      </el-breadcrumb-item>
-      <el-breadcrumb-item
-        :key="index"
-        v-for="(item, index) in breadcrumbs"
-        v-if="item.name">
-        {{ item.name }}
-      </el-breadcrumb-item>
-    </el-breadcrumb>
-  </div>
+  <el-breadcrumb>
+    <el-breadcrumb-item>
+      <i
+        class="iconfont icon-zhuye"
+        style="margin-right:5px;"/>主页
+    </el-breadcrumb-item>
+    <el-breadcrumb-item
+      :key="index"
+      v-for="(item, index) in breadcrumbs"
+      v-if="item.name">
+      {{ item.name }}
+    </el-breadcrumb-item>
+  </el-breadcrumb>
 </template>
 <script>
 export default {

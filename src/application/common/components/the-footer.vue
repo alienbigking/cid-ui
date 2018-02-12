@@ -14,5 +14,6 @@ export default {
 footer {
   line-height: 40px;
   color: #a3a6ab;
+  flex-shrink: 0;
 }
 </style>
