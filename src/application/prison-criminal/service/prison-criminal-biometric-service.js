@@ -23,6 +23,7 @@ export default {
         return axios.post('api/criminal-irises', criminalIris);
     },
     updateIrises(criminalIris) {
+        console.log(criminalIris);
         return axios.put(`api/criminal-irises/${criminalIris.id}`, criminalIris);
     },
     // 指纹采集

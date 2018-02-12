@@ -35,14 +35,15 @@
         :key="index">
         <div
           class="body"
-          :class="criminalFingers[item.type] ? 'setted' : 'iconfont icon-zhiwenjiesuo'">
+          :class="form.criminalFingerPrint[item.type] ? 'setted' : 'iconfont defalut'">
           <el-button
-            v-if="!criminalFingers[item.type]"
+            v-if="!form.criminalFingerPrint[item.type]"
             class="button-addCollection"
             @click="getFingerPrintPhoto(item.type)">录 入</el-button>
           <el-button
             v-else
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -65,7 +66,8 @@
             @click="getFacesPhoto(item.type)">录 入</el-button>
           <el-button
             v-else
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -83,12 +85,13 @@
         :key="index">
         <div class="body">
           <el-button
-            v-if="inputVsible"
+            v-if="!form.criminalIris[item.type]"
             class="button-addCollection"
             @click="getIrisPhoto(item.type)">录 入</el-button>
           <el-button
-            v-if="deleteVsible"
-            class="button-delete"><i class="iconfont icon-shanchu" /></el-button>
+            v-else
+            class="button-delete"
+            @click="deletePhoto(item.attribute,item.type)"><i class="iconfont icon-shanchu" /></el-button>
         </div>
         <span>{{ item.label }}</span>
       </div>
@@ -96,68 +99,51 @@
         <el-button
           class="button-confirm"
           :loading="saving"
-          @click="onSave">保 存</el-button>
+          @click="onSaveIrisPicture">保 存</el-button>
       </div>
-    </div>
+      <el-input
+        v-if="false"
+        id="leftFeature"/>
+      <el-input
+        v-if="false"
+        id="rightFeature"/></div>
   </el-form>
 </template>
-
-<script type="text/javascript" for="sy305" event="EnrollLeftIrisStrEvent(sIrisLeft_Small, sIrisLeft_Big, sIrisLeft_I8,  EnrollResult)">
-  console.log("ocx调用");
-  // this.IrisInfo(sIrisLeft_Small, sIrisLeft_Big, sIrisLeft_I8, EnrollResult, leftFeature);
-</script>
 
 <script>
 import { mapActions } from "vuex";
 import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
 import _ from "lodash";
-let a = document.createElement("script");
-a.type = "text/javascript";
-a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
-a.setAttribute("for", "sy305");
-a.innerHTML = `console.log("ocx调用");`;
-console.log(a);
-document.body.appendChild(a);
 
-// function addEvent(obj, name, func) {
-//   if (window.attachEvent && obj.attachEvent) {
-//     obj.attachEvent("on"+name, func);
-//   } else {
-//     obj.addEventListener(name, func, false);
-//   }
-// }
-// function hhhhh(a, b, c) { console.log(a, b, c); }
-// addEvent(document.getElementById("sy305"), EnrollLeftIrisStrEvent, hhhhh);
 export default {
   data() {
     return {
       fingers: [
-        { label: '左手母指', type: "leftThumbFeature" },
-        { label: '左手食指', type: "leftForefingerFeature" },
-        { label: '左手中指', type: "leftMiddleFingerFeature" },
-        { label: '左无名指', type: "leftRingFingerFeature" },
-        { label: '左手小指', type: "leftLittleFingerFeature" },
-        { label: '右手母指', type: "rightThumbFeature" },
-        { label: '右手食指', type: "rightForefingerFeature" },
-        { label: '右手中指', type: "rightMiddleFingerFeature" },
-        { label: '右无名指', type: "rightRingFingerFeature" },
-        { label: '右手小指', type: "rightLittleFingerFeature" }
+        { label: '左手母指', type: "leftThumbFeature", attribute: "criminalFingerPrint" },
+        { label: '左手食指', type: "leftForefingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左手中指', type: "leftMiddleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左无名指', type: "leftRingFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '左手小指', type: "leftLittleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手母指', type: "rightThumbFeature", attribute: "criminalFingerPrint" },
+        { label: '右手食指', type: "rightForefingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手中指', type: "rightMiddleFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右无名指', type: "rightRingFingerFeature", attribute: "criminalFingerPrint" },
+        { label: '右手小指', type: "rightLittleFingerFeature", attribute: "criminalFingerPrint" }
       ],
       faces: [
-        { label: '正脸', type: "frontPhoto" },
-        { label: '侧脸', type: "leftPhoto" },
-        { label: '侧脸', type: "rightPhoto" }
+        { label: '正脸', type: "frontPhoto", attribute: "criminalFace" },
+        { label: '侧脸', type: "leftPhoto", attribute: "criminalFace" },
+        { label: '侧脸', type: "rightPhoto", attribute: "criminalFace" }
       ],
       iris: [
-        { label: '左眼瞳孔', type: "leftFeature" },
-        { label: '右眼瞳孔', type: "rightFeature" }
+        { label: '左眼瞳孔', type: "leftFeature", attribute: "criminalIris" },
+        { label: '右眼瞳孔', type: "rightFeature", attribute: "criminalIris" }
       ],
       inputVsible: true,
       deleteVsible: false,
-      criminalFace: {},
-      criminalFingers: {},
       form: {
       criminalFace: {},
+      criminalIris: {},
       criminalFingerPrint: {}
       },
       saving: false
@@ -178,13 +164,18 @@ export default {
     }
   },
   activated() {
-    this.render();
+  this.createLeftFeatureEventScript();
+  this.createRightFeatureEventScript();
+  this.render();
   },
   methods: {
     ...mapActions([
       "getCriminalFace",
       "addCriminalFace",
       "updateCriminalFace",
+      "getCriminalIris",
+      "addCriminalIris",
+      "updateCriminalIris",
       "getCriminalFingerPrint",
       "addCriminalFingerPrint",
       "updateCriminalFingerPrint"
@@ -200,11 +191,9 @@ export default {
           this.form.criminalFingerPrint = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFingerPrint
           );
-          console.log(this.form.criminalFingerPrint);
         };
       });
       this.getCriminalFace(this.$route.params.id).then(() => {
-        // this.$refs.form.clearValidate();
         this.form.criminalFace = _.cloneDeep(
           this.$store.state.prisonCriminal.criminalFace
         );
@@ -213,8 +202,18 @@ export default {
           this.form.criminalFace = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFace
           );
-          console.log(this.form.criminalFace);
         };
+      });
+      this.getCriminalIris(this.$route.params.id).then(() => {
+        this.form.criminalIris = _.cloneDeep(
+          this.$store.state.prisonCriminal.criminalIris
+        );
+        if (!this.form.criminalIris.id) {
+          this.$store.commit("setCriminalIris", { criminalId: this.$route.params.id });
+          this.form.criminalIris = _.cloneDeep(
+            this.$store.state.prisonCriminal.criminalIris
+          );
+        }
       });
     },
     getFacesPhoto(type) {
@@ -237,9 +236,7 @@ export default {
       if (this.comm_initIris() === 0) {
         this.$message.show("初始化虹膜库失败");
       } else if (type === "leftFeature") {
-        console.log("左眼测试");
         let status = sy305.EnrollLeftIris();
-        console.log(status);
         if (status !== 1) {
           this.$errorMessage.show("启动左眼虹膜注册失败" + status);
         } else {
@@ -257,7 +254,6 @@ export default {
     // 初始化虹膜设备
     comm_initIris() {
       let status = this.$refs.photo.InitIris();
-      console.log("初始化         " + status);
       if (status === 2 || status === 3) {
         this.$errorMessage.show("请等待拍照摄像头关闭或者已经初始化");
         return 0;
@@ -268,10 +264,8 @@ export default {
       return 1;
     },
     IrisInfo(sIrisSmall, sIrisBig, sIrisI8, EnrollResult, type) {
-      console.log(sIrisBig);
       if (EnrollResult === 1) {
-        // this.form.criminaIris.type = sIrisLeft_Big;
-        // console.log(this.criminaIris.leftIrisInfo);
+        this.form.criminaIris.type = sIrisBig;
       } else {
         this.$errorMessage.show("注册左眼失败");
       }
@@ -284,18 +278,55 @@ export default {
       let curPath = "c:\\1234\\";
       this.$refs.fingerPrint.ImageToBmpFile(curPath + type + ".bmp", fingerPrint);
       this.$set(this.form.criminalFingerPrint, type, fingerPrint);
-      console.log(this.form.criminalFingerPrint);
       }
     },
-    onSave() {
-      console.log(123);
+    deletePhoto(attribute, type) {
+      if (attribute === "criminalFingerPrint") {
+        this.$delete(this.form.criminalFingerPrint, type);
+      } else if (attribute === "criminalFace") {
+        this.$delete(this.form.criminalFace, type);
+      } else {
+        this.$delete(this.form.criminalIris, type);
+      }
+    },
+    onSaveIrisPicture() {
+      this.updateIrisInfo();
+      this.$refs["form"].validate(valid => {
+        if (valid) {
+          if (this.form.criminalIris.id) {
+            // 修改
+            this.saving = true;
+            this.updateCriminalIris()
+              .then(res => {
+                this.saving = false;
+                this.$message.success("修改成功");
+              })
+              .catch(error => {
+                this.saving = false;
+                this.$errorMessage.show(error, "修改失败");
+              });
+          } else {
+            // 新增
+            this.saving = true;
+            this.addCriminalIris()
+              .then(res => {
+                this.saving = false;
+                this.$message.success("新增成功");
+              })
+              .catch(error => {
+                this.saving = false;
+                this.$errorMessage.show(error, "新增失败");
+              });
+          }
+        }
+      });
     },
     onSaveFingerPrint() {
       this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.criminalFingerPrint.id) {
             this.saving = true;
-            this.updateCriminalFingerPrints()
+            this.updateCriminalFingerPrint()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
@@ -306,8 +337,6 @@ export default {
                 this.$errorMessage.show(error, "修改失败");
               });
           } else {
-            // ÐÂÔö
-            // console.log(this.criminalFingerPrint);
             this.saving = true;
             this.addCriminalFingerPrint()
               .then(res => {
@@ -340,7 +369,6 @@ export default {
               });
           } else {
             // 新增
-            console.log(this.form.criminalFace);
             this.saving = true;
             this.addPrisonCriminalFace()
               .then(res => {
@@ -354,6 +382,43 @@ export default {
           }
         }
       });
+    },
+    createLeftFeatureEventScript() {
+      let num = this.$store.state.prisonCriminal.scriptNumber;
+      if (num < 1) {
+      let a = document.createElement("script");
+      a.type = "text/javascript";
+      a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
+      a.setAttribute("for", "sy305");
+      a.innerHTML = "document.getElementById('leftFeature').value=sIrisLeft_Big";
+      document.body.appendChild(a);
+      num++;
+      this.$store.commit("setCriminalBiomenticScript", num);
+      }
+    },
+    createRightFeatureEventScript() {
+      let num = this.$store.state.prisonCriminal.scriptNumber;
+      if (num <= 1) {
+      let a = document.createElement("script");
+      a.type = "text/javascript";
+      a.event = "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
+      a.setAttribute("for", "sy305");
+      a.innerHTML = "document.getElementById('rightFeature').value=sIrisRight_Big";
+      document.body.appendChild(a);
+      }
+    },
+    updateIrisInfo() {
+      let leftFeatureInfo = document.getElementById("leftFeature").value;
+      let rightFeatureInfo = document.getElementById("rightFeature").value;
+      this.$set(this.form.criminalIris, "leftFeature", leftFeatureInfo);
+      this.$set(this.form.criminalIris, "rightFeature", rightFeatureInfo);
+      if (!this.form.criminalIris.id) {
+      this.$store.commit("updateCriminalIris", this.form.criminalIris);
+      } else {
+        leftFeatureInfo = this.form.criminalIris.leftFeature;
+        rightFeatureInfo = this.form.criminalIris.rightFeature;
+        this.$store.commit("updateCriminalIris", this.form.criminalIris);
+      }
     }
   }
 };

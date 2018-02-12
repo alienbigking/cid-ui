@@ -99,10 +99,10 @@ export default {
     },
     // 罪犯虹膜采集
     [types.SET_CRIMINAL_IRIS](state, criminalIris) {
-        state.criminalFingerPrint = criminalIris;
+        state.criminalIris = criminalIris;
     },
     [types.UPDATE_CRIMINAL_IRIS](state, criminalIris) {
-        state.criminalFingerPrint = _.cloneDeep(criminalIris);
+        state.criminalIris = _.cloneDeep(criminalIris);
     },
     // 罪犯指纹采集
     [types.SET_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
@@ -110,5 +110,8 @@ export default {
     },
     [types.UPDATE_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
         state.criminalFingerPrint = _.cloneDeep(criminalFingerPrint);
+    },
+    [types.SET_CRIMINAL_BIOMETIRC_SCRIPT](state, scriptNumber) {
+        state.scriptNumber = scriptNumber;
     }
 };

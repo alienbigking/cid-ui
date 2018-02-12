@@ -27,7 +27,6 @@ module.exports = {
     "space-before-function-paren": ["error", "never"],
     // indent: ["error", 2]
     indent: "off",
-    quotes: "off",
-    "no-undef": 1
+    quotes: "off"
   }
 };
