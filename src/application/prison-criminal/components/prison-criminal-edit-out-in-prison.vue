@@ -14,7 +14,7 @@
         <el-table-column
           prop="reasonName"
           label="出入事由"
-          width="100px"
+          width="110px"
           sortable/>
         <el-table-column
           prop="outgoingDate"
