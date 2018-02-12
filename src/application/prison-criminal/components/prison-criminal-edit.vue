@@ -30,7 +30,7 @@ export default {
     components: { PrisonCriminalEditBasicInformation, PrisonCriminalEditRecord, PrisonCriminalEditResume, PrisonCriminalEditPhysicalCharacteristic, PrisonCriminalEditSocialRelation, PrisonCriminalEditForfeit, PrisonCriminalOutInPrison, PrisonCriminalEditCollectin, PrisonCriminalBiometric },
     data() {
       return {
-        activeName: 'PrisonCriminalBiometric',
+        activeName: 'PrisonCriminalEditBasicInformation',
         tabs: [
           { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
           { name: "犯罪记录", component: "PrisonCriminalEditRecord" },
