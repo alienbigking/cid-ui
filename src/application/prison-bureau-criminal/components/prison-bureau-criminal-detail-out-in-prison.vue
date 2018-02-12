@@ -11,7 +11,7 @@
         prop="reasonName"
         label="出入监事由"
         :show-overflow-tooltip="true"
-        width="100px"
+        width="110px"
         sortable/>
       <el-table-column
         prop="outgoingDate"
