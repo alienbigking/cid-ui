@@ -2,11 +2,11 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    allCourts: []
+  allCourts: []
 };
 
 export default {
-    state,
-    actions,
-    mutations
+  state,
+  actions,
+  mutations
 };

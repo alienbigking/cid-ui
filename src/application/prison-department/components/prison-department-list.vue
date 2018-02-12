@@ -129,21 +129,27 @@ export default {
   },
   computed: {
     ...mapState({
-      allPrisonDepartments: state => state.prisonDepartment.allPrisonDepartments,
-      pagedPrisonDepartments: state => state.prisonDepartment.pagedPrisonDepartments
+      allPrisonDepartments: state =>
+        state.prisonDepartment.allPrisonDepartments,
+      pagedPrisonDepartments: state =>
+        state.prisonDepartment.pagedPrisonDepartments
     })
   },
   created() {
-    this.getAllPrisonDepartments().then(() => {
-      this.gettingPrisonDepartments = false;
-    }).catch(() => { this.gettingPrisonDepartments = false; });
+    this.getAllPrisonDepartments()
+      .then(() => {
+        this.gettingPrisonDepartments = false;
+      })
+      .catch(() => {
+        this.gettingPrisonDepartments = false;
+      });
   },
   methods: {
     ...mapActions([
       "getAllPrisonDepartments",
       "getPagedPrisonDepartments",
       "deletePrisonDepartment"
-      ]),
+    ]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -189,10 +195,15 @@ export default {
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedPrisonDepartments(params).then(() => {
-        this.searching = false;
-        this.loading = false;
-      }).catch(() => { this.searching = false; this.loading = false; });
+      this.getPagedPrisonDepartments(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

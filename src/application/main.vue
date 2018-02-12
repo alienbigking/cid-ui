@@ -4,8 +4,8 @@
     <el-container>
       <the-sidebar v-if="!$route.meta||!$route.meta.noSide"/>
       <el-container class="flex-column">
-        <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
         <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
+          <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
           <transition
             name="router-fade"
             mode="out-in">

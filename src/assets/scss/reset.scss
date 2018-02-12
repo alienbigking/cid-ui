@@ -9,6 +9,7 @@
   background: $background-header;
   border-bottom: 1px solid #4b5960;
   color: #fff;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -32,6 +33,9 @@
   border-bottom: $border;
   padding: 0 $padding-default;
   box-sizing: border-box;
+  &+div{
+    padding: $padding-default;
+  }
   &__item{
     height: 40px;
     line-height: 40px;
@@ -48,6 +52,9 @@
 }
 .el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
   color: #999999;
+}
+.el-main{
+  padding: 0;
 }
 .el-tabs__header{
   margin: 0;
@@ -167,6 +174,7 @@
 }
 .el-input__inner, .el-textarea__inner {
   background: transparent;
+  box-shadow: none;
 }
 .el-input__prefix, .el-input__suffix{
   width: 36px;
