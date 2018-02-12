@@ -384,27 +384,25 @@ export default {
       });
     },
     createLeftFeatureEventScript() {
-      let num = this.$store.state.prisonCriminal.scriptNumber;
-      if (num < 1) {
-      let a = document.createElement("script");
-      a.type = "text/javascript";
-      a.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
-      a.setAttribute("for", "sy305");
-      a.innerHTML = "document.getElementById('leftFeature').value=sIrisLeft_Big";
-      document.body.appendChild(a);
-      num++;
-      this.$store.commit("setCriminalBiomenticScript", num);
+      if (!document.getElementById("leftIrisScript")) {
+      let leftIrisScript = document.createElement("script");
+      leftIrisScript.id = "leftIrisScript";
+      leftIrisScript.type = "text/javascript";
+      leftIrisScript.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
+      leftIrisScript.setAttribute("for", "sy305");
+      leftIrisScript.innerHTML = "document.getElementById('leftFeature').value=sIrisLeft_Big";
+      document.body.appendChild(leftIrisScript);
       }
     },
     createRightFeatureEventScript() {
-      let num = this.$store.state.prisonCriminal.scriptNumber;
-      if (num <= 1) {
-      let a = document.createElement("script");
-      a.type = "text/javascript";
-      a.event = "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
-      a.setAttribute("for", "sy305");
-      a.innerHTML = "document.getElementById('rightFeature').value=sIrisRight_Big";
-      document.body.appendChild(a);
+      if (!document.getElementById("rightIrisScript")) {
+      let rightIrisScript = document.createElement("script");
+      rightIrisScript.id = "rightIrisScript";
+      rightIrisScript.type = "text/javascript";
+      rightIrisScript.event = "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
+      rightIrisScript.setAttribute("for", "sy305");
+      rightIrisScript.innerHTML = "document.getElementById('rightFeature').value=sIrisRight_Big";
+      document.body.appendChild(rightIrisScript);
       }
     },
     updateIrisInfo() {
@@ -412,6 +410,7 @@ export default {
       let rightFeatureInfo = document.getElementById("rightFeature").value;
       this.$set(this.form.criminalIris, "leftFeature", leftFeatureInfo);
       this.$set(this.form.criminalIris, "rightFeature", rightFeatureInfo);
+      console.log("更新瞳孔信息" + this.form.criminalIris);
       if (!this.form.criminalIris.id) {
       this.$store.commit("updateCriminalIris", this.form.criminalIris);
       } else {

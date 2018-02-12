@@ -110,8 +110,5 @@ export default {
     },
     [types.UPDATE_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
         state.criminalFingerPrint = _.cloneDeep(criminalFingerPrint);
-    },
-    [types.SET_CRIMINAL_BIOMETIRC_SCRIPT](state, scriptNumber) {
-        state.scriptNumber = scriptNumber;
     }
 };
