@@ -117,25 +117,15 @@
         <!-- </div> -->
       </div>
     </div>
-    <!-- 犯罪记录 -->
+    <!-- 生物识别 -->
     <div class="detail-card">
       <div
         class="title"
-        @click="isShowRecord">
-        犯罪记录
-        <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
+        @click="isShowBiometric">
+        生物识别信息
+        <span :class="biometricShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
       </div>
-      <criminal-detail-record :record-show="recordShow"/>
-    </div>
-    <!-- 简历 -->
-    <div class="detail-card">
-      <div
-        class="title"
-        @click="isShowResume">
-        简历
-        <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
-      </div>
-      <criminal-detail-resume :resume-show="resumeShow"/>
+      <criminal-detail-biometirc v-if="biometricShow"/>
     </div>
     <!-- 体貌特征 -->
     <div class="detail-card">
@@ -189,6 +179,26 @@
         </el-row>
       </div>
     </div>
+    <!-- 犯罪记录 -->
+    <div class="detail-card">
+      <div
+        class="title"
+        @click="isShowRecord">
+        犯罪记录
+        <span :class="recordShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
+      </div>
+      <criminal-detail-record :record-show="recordShow"/>
+    </div>
+    <!-- 简历 -->
+    <div class="detail-card">
+      <div
+        class="title"
+        @click="isShowResume">
+        简历
+        <span :class="resumeShow ? 'el-icon-arrow-down' : 'el-icon-arrow-right'"/>
+      </div>
+      <criminal-detail-resume :resume-show="resumeShow"/>
+    </div>
     <!-- 社会关系 -->
     <div class="detail-card">
       <div
@@ -228,6 +238,7 @@ import PrisonBureauCriminalDetailResume from './prison-bureau-criminal-detail-re
 import PrisonBureauCriminalDetailSocialRelation from './prison-bureau-criminal-detail-social-relation';
 import PrisonBureauCriminalDetailForfeit from './prison-bureau-criminal-detail-forfeit';
 import PrisonBureauCriminalDetailOutInPrison from './prison-bureau-criminal-detail-out-in-prison';
+import PrisonBureauCriminalDetailBiometric from './prison-bureau-criminal-detail-biometric';
 import { mapState, mapActions } from "vuex";
 
 export default {
@@ -236,7 +247,8 @@ export default {
     "criminal-detail-resume": PrisonBureauCriminalDetailResume,
     "criminal-detail-social-relation": PrisonBureauCriminalDetailSocialRelation,
     "criminal-detail-forfeit": PrisonBureauCriminalDetailForfeit,
-    "criminal-detail-outInPrison": PrisonBureauCriminalDetailOutInPrison
+    "criminal-detail-outInPrison": PrisonBureauCriminalDetailOutInPrison,
+    "criminal-detail-biometirc": PrisonBureauCriminalDetailBiometric
   },
   data() {
     return {
@@ -246,7 +258,8 @@ export default {
       featureShow: false,
       socialRelationShow: false,
       forfeitShow: false,
-      outInPrisonShow: false
+      outInPrisonShow: false,
+      biometricShow: false
     };
   },
   computed: {
@@ -281,6 +294,9 @@ export default {
     },
     isShowOutInPrison() {
       this.outInPrisonShow = !this.outInPrisonShow;
+    },
+    isShowBiometric() {
+      this.biometricShow = !this.biometricShow;
     }
   }
 };
