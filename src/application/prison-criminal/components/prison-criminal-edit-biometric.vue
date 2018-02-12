@@ -112,39 +112,79 @@
 
 <script>
 import { mapActions } from "vuex";
-import {default as prisonCollectionService} from '../service/prison-criminal-collection-service';
+import { default as prisonCollectionService } from "../service/prison-criminal-collection-service";
 import _ from "lodash";
 
 export default {
   data() {
     return {
       fingers: [
-        { label: '左手母指', type: "leftThumbFeature", attribute: "criminalFingerPrint" },
-        { label: '左手食指', type: "leftForefingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左手中指', type: "leftMiddleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左无名指', type: "leftRingFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左手小指', type: "leftLittleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手母指', type: "rightThumbFeature", attribute: "criminalFingerPrint" },
-        { label: '右手食指', type: "rightForefingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手中指', type: "rightMiddleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右无名指', type: "rightRingFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手小指', type: "rightLittleFingerFeature", attribute: "criminalFingerPrint" }
+        {
+          label: "左手母指",
+          type: "leftThumbFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手食指",
+          type: "leftForefingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手中指",
+          type: "leftMiddleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左无名指",
+          type: "leftRingFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手小指",
+          type: "leftLittleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手母指",
+          type: "rightThumbFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手食指",
+          type: "rightForefingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手中指",
+          type: "rightMiddleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右无名指",
+          type: "rightRingFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手小指",
+          type: "rightLittleFingerFeature",
+          attribute: "criminalFingerPrint"
+        }
       ],
       faces: [
-        { label: '正脸', type: "frontPhoto", attribute: "criminalFace" },
-        { label: '侧脸', type: "leftPhoto", attribute: "criminalFace" },
-        { label: '侧脸', type: "rightPhoto", attribute: "criminalFace" }
+        { label: "正脸", type: "frontPhoto", attribute: "criminalFace" },
+        { label: "侧脸", type: "leftPhoto", attribute: "criminalFace" },
+        { label: "侧脸", type: "rightPhoto", attribute: "criminalFace" }
       ],
       iris: [
-        { label: '左眼瞳孔', type: "leftFeature", attribute: "criminalIris" },
-        { label: '右眼瞳孔', type: "rightFeature", attribute: "criminalIris" }
+        { label: "左眼瞳孔", type: "leftFeature", attribute: "criminalIris" },
+        { label: "右眼瞳孔", type: "rightFeature", attribute: "criminalIris" }
       ],
       inputVsible: true,
       deleteVsible: false,
       form: {
-      criminalFace: {},
-      criminalIris: {},
-      criminalFingerPrint: {}
+        criminalFace: {},
+        criminalIris: {},
+        criminalFingerPrint: {}
       },
       saving: false
     };
@@ -158,15 +198,18 @@ export default {
     },
     "form.criminalFingerPrint": {
       handler: _.debounce(function(criminalFingerPrint) {
-        this.$store.commit("updateCriminalFingerPrint", this.form.criminalFingerPrint);
+        this.$store.commit(
+          "updateCriminalFingerPrint",
+          this.form.criminalFingerPrint
+        );
       }, 500),
       deep: true
     }
   },
   activated() {
-  this.createLeftFeatureEventScript();
-  this.createRightFeatureEventScript();
-  this.render();
+    this.createLeftFeatureEventScript();
+    this.createRightFeatureEventScript();
+    this.render();
   },
   methods: {
     ...mapActions([
@@ -181,35 +224,42 @@ export default {
       "updateCriminalFingerPrint"
     ]),
     render() {
-      this.$refs.photo.Burger = "{\"client_id\":\"gkzx\",\"capture_realtime_iris\":\"0\",\"with_big_iris\":\"1\",\"iris_with_bkcapture\":\"1\",\"iris_bkcapture_camera\":\"2\",\"capture_path\":\"d:\\\\sy305photoB\",\"bkcapture_path\":\"d:\\\\sy305photoA\"}";
+      this.$refs.photo.Burger =
+        '{"client_id":"gkzx","capture_realtime_iris":"0","with_big_iris":"1","iris_with_bkcapture":"1","iris_bkcapture_camera":"2","capture_path":"d:\\\\sy305photoB","bkcapture_path":"d:\\\\sy305photoA"}';
       this.getCriminalFingerPrint(this.$route.params.id).then(() => {
         this.form.criminalFingerPrint = _.cloneDeep(
           this.$store.state.prisonCriminal.criminalFingerPrint
         );
         if (!this.form.criminalFingerPrint.id) {
-          this.$store.commit("setCriminalFingerPrint", { criminalId: this.$route.params.id });
+          this.$store.commit("setCriminalFingerPrint", {
+            criminalId: this.$route.params.id
+          });
           this.form.criminalFingerPrint = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFingerPrint
           );
-        };
+        }
       });
       this.getCriminalFace(this.$route.params.id).then(() => {
         this.form.criminalFace = _.cloneDeep(
           this.$store.state.prisonCriminal.criminalFace
         );
         if (!this.form.criminalFace.id) {
-          this.$store.commit("setCriminalFace", { criminalId: this.$route.params.id });
+          this.$store.commit("setCriminalFace", {
+            criminalId: this.$route.params.id
+          });
           this.form.criminalFace = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFace
           );
-        };
+        }
       });
       this.getCriminalIris(this.$route.params.id).then(() => {
         this.form.criminalIris = _.cloneDeep(
           this.$store.state.prisonCriminal.criminalIris
         );
         if (!this.form.criminalIris.id) {
-          this.$store.commit("setCriminalIris", { criminalId: this.$route.params.id });
+          this.$store.commit("setCriminalIris", {
+            criminalId: this.$route.params.id
+          });
           this.form.criminalIris = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalIris
           );
@@ -220,12 +270,12 @@ export default {
       let sy305 = this.$refs.photo;
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
-         let curpath = `c:\\123\\${type}.bmp`;
-         if (sy305.PhotoCapture(0, curpath) === 1) {
-           this.form.criminalFace[type] = sy305.GetExtraInfo("capture_base64");
-           alert(this.form.criminalFace[type]);
-           sy305.ClosePhotoCapture();
-         }
+        let curpath = `c:\\123\\${type}.bmp`;
+        if (sy305.PhotoCapture(0, curpath) === 1) {
+          this.form.criminalFace[type] = sy305.GetExtraInfo("capture_base64");
+          alert(this.form.criminalFace[type]);
+          sy305.ClosePhotoCapture();
+        }
       } else {
         this.$errorMessage.show("照相机初始化失败");
       }
@@ -275,9 +325,12 @@ export default {
       let iDevIndex = 0;
       let fingerPrint = this.$refs.fingerPrint.GetImage(iDevIndex, 3000);
       if (prisonCollectionService.IsSuccess(fingerPrint) === 0) {
-      let curPath = "c:\\1234\\";
-      this.$refs.fingerPrint.ImageToBmpFile(curPath + type + ".bmp", fingerPrint);
-      this.$set(this.form.criminalFingerPrint, type, fingerPrint);
+        let curPath = "c:\\1234\\";
+        this.$refs.fingerPrint.ImageToBmpFile(
+          curPath + type + ".bmp",
+          fingerPrint
+        );
+        this.$set(this.form.criminalFingerPrint, type, fingerPrint);
       }
     },
     deletePhoto(attribute, type) {
@@ -353,7 +406,7 @@ export default {
       });
     },
     onSaveFacePicture() {
-       this.$refs["form"].validate(valid => {
+      this.$refs["form"].validate(valid => {
         if (valid) {
           if (this.form.criminalFace.id) {
             // 修改
@@ -385,24 +438,28 @@ export default {
     },
     createLeftFeatureEventScript() {
       if (!document.getElementById("leftIrisScript")) {
-      let leftIrisScript = document.createElement("script");
-      leftIrisScript.id = "leftIrisScript";
-      leftIrisScript.type = "text/javascript";
-      leftIrisScript.event = "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
-      leftIrisScript.setAttribute("for", "sy305");
-      leftIrisScript.innerHTML = "document.getElementById('leftFeature').value=sIrisLeft_Big";
-      document.body.appendChild(leftIrisScript);
+        let leftIrisScript = document.createElement("script");
+        leftIrisScript.id = "leftIrisScript";
+        leftIrisScript.type = "text/javascript";
+        leftIrisScript.event =
+          "EnrollLeftIrisStrEvent(sIrisLeft_Small,sIrisLeft_Big,sIrisLeft_I8, EnrollResult)";
+        leftIrisScript.setAttribute("for", "sy305");
+        leftIrisScript.innerHTML =
+          "document.getElementById('leftFeature').value=sIrisLeft_Big";
+        document.body.appendChild(leftIrisScript);
       }
     },
     createRightFeatureEventScript() {
       if (!document.getElementById("rightIrisScript")) {
-      let rightIrisScript = document.createElement("script");
-      rightIrisScript.id = "rightIrisScript";
-      rightIrisScript.type = "text/javascript";
-      rightIrisScript.event = "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
-      rightIrisScript.setAttribute("for", "sy305");
-      rightIrisScript.innerHTML = "document.getElementById('rightFeature').value=sIrisRight_Big";
-      document.body.appendChild(rightIrisScript);
+        let rightIrisScript = document.createElement("script");
+        rightIrisScript.id = "rightIrisScript";
+        rightIrisScript.type = "text/javascript";
+        rightIrisScript.event =
+          "EnrollRightIrisStrEvent(sIrisRight_Small,sIrisRight_Big,sIrisRight_I8, EnrollResult)";
+        rightIrisScript.setAttribute("for", "sy305");
+        rightIrisScript.innerHTML =
+          "document.getElementById('rightFeature').value=sIrisRight_Big";
+        document.body.appendChild(rightIrisScript);
       }
     },
     updateIrisInfo() {
@@ -412,7 +469,7 @@ export default {
       this.$set(this.form.criminalIris, "rightFeature", rightFeatureInfo);
       console.log("更新瞳孔信息" + this.form.criminalIris);
       if (!this.form.criminalIris.id) {
-      this.$store.commit("updateCriminalIris", this.form.criminalIris);
+        this.$store.commit("updateCriminalIris", this.form.criminalIris);
       } else {
         leftFeatureInfo = this.form.criminalIris.leftFeature;
         rightFeatureInfo = this.form.criminalIris.rightFeature;
@@ -424,19 +481,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form-biometric{
+.form-biometric {
   // background: red;
   padding: 20px;
-  .biometric-box{
+  .biometric-box {
     border: 1px dashed #ddd;
     padding: 25px 18px 20px 38px;
     border-radius: 4px;
     display: flex;
     flex-wrap: wrap;
-    &+.biometric-box{
+    & + .biometric-box {
       margin-top: 20px;
     }
-    .biometric-card{
+    .biometric-card {
       margin: 20px 20px 0 0;
       width: 100px;
       display: flex;
@@ -445,7 +502,7 @@ export default {
       text-align: center;
       flex-shrink: 0;
       box-sizing: border-box;
-      .body{
+      .body {
         border: 1px solid #ddd;
         border-radius: 4px;
         height: 100px;
@@ -459,9 +516,9 @@ export default {
       }
     }
   }
-  .button-delete{
+  .button-delete {
     position: absolute;
-    background: #37474F;
+    background: #37474f;
     bottom: 0;
     left: 0;
     border: 0;
@@ -470,24 +527,24 @@ export default {
     color: #fff;
     border-radius: 0;
     z-index: 100;
-    &:hover{
-      background: rgba(#37474F, 0.9);
+    &:hover {
+      background: rgba(#37474f, 0.9);
     }
   }
-  .has-button{
+  .has-button {
     flex-shrink: 0;
     width: 100%;
     margin-top: 20px;
     overflow: hidden;
-    .button-confirm{
+    .button-confirm {
       float: right;
     }
   }
-  .icon-zhiwenjiesuo{
-    color: #E0E5EC;
+  .icon-zhiwenjiesuo {
+    color: #e0e5ec;
     font-size: 72px;
     z-index: 5;
-    &:before{
+    &:before {
       position: absolute;
       top: 0;
       right: 0;
@@ -496,7 +553,7 @@ export default {
       line-height: 100px;
     }
   }
-  .setted{
+  .setted {
     background: url("../../../assets/images/avatar.jpg") no-repeat;
     background-size: 80px 80px;
     background-position: center center;

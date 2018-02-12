@@ -26,22 +26,34 @@ import PrisonCriminalOutInPrison from "./prison-criminal-edit-out-in-prison";
 import PrisonCriminalBiometric from "./prison-criminal-edit-biometric";
 
 export default {
-    components: { PrisonCriminalEditBasicInformation, PrisonCriminalEditRecord, PrisonCriminalEditResume, PrisonCriminalEditPhysicalCharacteristic, PrisonCriminalEditSocialRelation, PrisonCriminalEditForfeit, PrisonCriminalOutInPrison, PrisonCriminalBiometric },
-    data() {
-      return {
-        activeName: 'PrisonCriminalBiometric',
-        tabs: [
-          { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
-          { name: "生物识别", component: "PrisonCriminalBiometric" },
-          { name: "体貌特征", component: "PrisonCriminalEditPhysicalCharacteristic" },
-          { name: "犯罪记录", component: "PrisonCriminalEditRecord" },
-          { name: "简历", component: "PrisonCriminalEditResume" },
-          { name: "社会关系", component: "PrisonCriminalEditSocialRelation" },
-          { name: "罚金", component: "PrisonCriminalEditForfeit" },
-          { name: "出入监记录", component: "PrisonCriminalOutInPrison" }
-        ]
-      };
-    }
+  components: {
+    PrisonCriminalEditBasicInformation,
+    PrisonCriminalEditRecord,
+    PrisonCriminalEditResume,
+    PrisonCriminalEditPhysicalCharacteristic,
+    PrisonCriminalEditSocialRelation,
+    PrisonCriminalEditForfeit,
+    PrisonCriminalOutInPrison,
+    PrisonCriminalBiometric
+  },
+  data() {
+    return {
+      activeName: "PrisonCriminalBiometric",
+      tabs: [
+        { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
+        { name: "生物识别", component: "PrisonCriminalBiometric" },
+        {
+          name: "体貌特征",
+          component: "PrisonCriminalEditPhysicalCharacteristic"
+        },
+        { name: "犯罪记录", component: "PrisonCriminalEditRecord" },
+        { name: "简历", component: "PrisonCriminalEditResume" },
+        { name: "社会关系", component: "PrisonCriminalEditSocialRelation" },
+        { name: "罚金", component: "PrisonCriminalEditForfeit" },
+        { name: "出入监记录", component: "PrisonCriminalOutInPrison" }
+      ]
+    };
+  }
 };
 </script>
 <style lang="scss" scoped>

@@ -42,25 +42,65 @@ export default {
   data() {
     return {
       fingers: [
-        { label: '左手母指', type: "leftThumbFeature", attribute: "criminalFingerPrint" },
-        { label: '左手食指', type: "leftForefingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左手中指', type: "leftMiddleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左无名指', type: "leftRingFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '左手小指', type: "leftLittleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手母指', type: "rightThumbFeature", attribute: "criminalFingerPrint" },
-        { label: '右手食指', type: "rightForefingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手中指', type: "rightMiddleFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右无名指', type: "rightRingFingerFeature", attribute: "criminalFingerPrint" },
-        { label: '右手小指', type: "rightLittleFingerFeature", attribute: "criminalFingerPrint" }
+        {
+          label: "左手母指",
+          type: "leftThumbFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手食指",
+          type: "leftForefingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手中指",
+          type: "leftMiddleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左无名指",
+          type: "leftRingFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "左手小指",
+          type: "leftLittleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手母指",
+          type: "rightThumbFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手食指",
+          type: "rightForefingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手中指",
+          type: "rightMiddleFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右无名指",
+          type: "rightRingFingerFeature",
+          attribute: "criminalFingerPrint"
+        },
+        {
+          label: "右手小指",
+          type: "rightLittleFingerFeature",
+          attribute: "criminalFingerPrint"
+        }
       ],
       faces: [
-        { label: '正脸', type: "frontPhoto", attribute: "criminalFace" },
-        { label: '侧脸', type: "leftPhoto", attribute: "criminalFace" },
-        { label: '侧脸', type: "rightPhoto", attribute: "criminalFace" }
+        { label: "正脸", type: "frontPhoto", attribute: "criminalFace" },
+        { label: "侧脸", type: "leftPhoto", attribute: "criminalFace" },
+        { label: "侧脸", type: "rightPhoto", attribute: "criminalFace" }
       ],
       iris: [
-        { label: '左眼瞳孔', type: "leftFeature", attribute: "criminalIris" },
-        { label: '右眼瞳孔', type: "rightFeature", attribute: "criminalIris" }
+        { label: "左眼瞳孔", type: "leftFeature", attribute: "criminalIris" },
+        { label: "右眼瞳孔", type: "rightFeature", attribute: "criminalIris" }
       ],
       loading: true,
       criminalFingerPrint: {},
@@ -69,7 +109,7 @@ export default {
     };
   },
   created() {
-  this.render();
+    this.render();
   },
   methods: {
     ...mapActions([
@@ -80,47 +120,53 @@ export default {
     render() {
       this.getCriminalFingerPrint(this.$route.params.id)
         .then(() => {
-            this.loading = false;
-            this.criminalFingerPrint = _.cloneDeep(
+          this.loading = false;
+          this.criminalFingerPrint = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFingerPrint
-        );
+          );
         })
-        .catch(() => { this.loading = false; });
+        .catch(() => {
+          this.loading = false;
+        });
       this.getCriminalFace(this.$route.params.id)
         .then(() => {
-            this.loading = false;
-            this.criminalFace = _.cloneDeep(
+          this.loading = false;
+          this.criminalFace = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalFace
-            );
+          );
         })
-        .catch(() => { this.loading = false; });
+        .catch(() => {
+          this.loading = false;
+        });
       this.getCriminalIris(this.$route.params.id)
         .then(() => {
-            this.loading = false;
-            this.criminalIris = _.cloneDeep(
+          this.loading = false;
+          this.criminalIris = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalIris
-            );
+          );
         })
-        .catch(() => { this.loading = false; });
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.form-biometric{
+.form-biometric {
   // background: red;
   padding: 20px;
-  .biometric-box{
+  .biometric-box {
     border: 1px dashed #ddd;
     padding: 25px 18px 20px 38px;
     border-radius: 4px;
     display: flex;
     flex-wrap: wrap;
-    &+.biometric-box{
+    & + .biometric-box {
       margin-top: 20px;
     }
-    .biometric-card{
+    .biometric-card {
       margin: 20px 20px 0 0;
       width: 100px;
       display: flex;
@@ -129,7 +175,7 @@ export default {
       text-align: center;
       flex-shrink: 0;
       box-sizing: border-box;
-      .body{
+      .body {
         border: 1px solid #ddd;
         border-radius: 4px;
         height: 100px;
@@ -143,9 +189,9 @@ export default {
       }
     }
   }
-  .button-delete{
+  .button-delete {
     position: absolute;
-    background: #37474F;
+    background: #37474f;
     bottom: 0;
     left: 0;
     border: 0;
@@ -154,24 +200,24 @@ export default {
     color: #fff;
     border-radius: 0;
     z-index: 100;
-    &:hover{
-      background: rgba(#37474F, 0.9);
+    &:hover {
+      background: rgba(#37474f, 0.9);
     }
   }
-  .has-button{
+  .has-button {
     flex-shrink: 0;
     width: 100%;
     margin-top: 20px;
     overflow: hidden;
-    .button-confirm{
+    .button-confirm {
       float: right;
     }
   }
-  .icon-zhiwenjiesuo{
-    color: #E0E5EC;
+  .icon-zhiwenjiesuo {
+    color: #e0e5ec;
     font-size: 72px;
     z-index: 5;
-    &:before{
+    &:before {
       position: absolute;
       top: 0;
       right: 0;
@@ -180,7 +226,7 @@ export default {
       line-height: 100px;
     }
   }
-  .setted{
+  .setted {
     background: url("../../../assets/images/avatar.jpg") no-repeat;
     background-size: 80px 80px;
     background-position: center center;
