@@ -70,25 +70,27 @@ export default {
   },
   data() {
     return {
-      criminalResume: _.cloneDeep(this.$store.state.prisonCriminal.criminalResume),
+      criminalResume: _.cloneDeep(
+        this.$store.state.prisonCriminal.criminalResume
+      ),
       rules: {
         startDate: [{ required: true, message: "请输入开始日期" }],
         endDate: [{ required: true, message: "请输入结束日期" }],
         company: [{ required: true, message: "请输入公司" }]
       },
       pickerBeginDateBefore: {
-        disabledDate: (time) => {
+        disabledDate: time => {
           let beginDateVal = this.criminalResume.endDate;
           if (beginDateVal) {
-              return time.getTime() > beginDateVal;
+            return time.getTime() > beginDateVal;
           }
         }
       },
       pickerBeginDateAfter: {
-        disabledDate: (time) => {
+        disabledDate: time => {
           let beginDateVal = this.criminalResume.startDate;
           if (beginDateVal) {
-              return time.getTime() < beginDateVal;
+            return time.getTime() < beginDateVal;
           }
         }
       },
@@ -161,10 +163,12 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.$store.commit("setPrisonCriminalResume", { criminalId: this.$route.params.id });
+        this.$store.commit("setPrisonCriminalResume", {
+          criminalId: this.$route.params.id
+        });
         this.criminalResume = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalResume
-          );
+          this.$store.state.prisonCriminal.criminalResume
+        );
         this.loading = false;
       } else {
         this.getPrisonCriminalResume(this.criminalResumeId).then(() => {
@@ -195,6 +199,6 @@ export default {
   }
 }
 .el-form .el-form-item.has-right-button {
-    justify-content: flex-end;
+  justify-content: flex-end;
 }
 </style>

@@ -67,7 +67,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions([ "login", "getMyProfile", "getMenus" ]),
+    ...mapActions(["login", "getMyProfile", "getMenus"]),
     onSubmit() {
       this.$refs["form"].validate(valid => {
         if (valid) {
@@ -75,18 +75,15 @@ export default {
             .then(() => {
               sessionStorage.removeItem("myMenus");
               sessionStorage.removeItem("myProfile");
-              Promise.all([
-                this.getMyProfile(),
-                this.getMenus()
-              ]).then(() => {
+              Promise.all([this.getMyProfile(), this.getMenus()]).then(() => {
                 logService.addLoginLog();
                 let redirect = this.$route.query.redirect;
                 if (!redirect) {
                   redirect = "/dashboard";
                 }
                 this.$router.push(redirect);
-                });
-              })
+              });
+            })
             .catch(error => {
               this.$errorMessage.show(error, "登陆失败");
             });
@@ -107,20 +104,22 @@ export default {
   display: block;
   text-align: center;
 }
-.login-box{
-  &>div{
+.login-box {
+  & > div {
     width: 322px;
     border: 1px solid #ddd;
     border-radius: 4px;
-    background: #FCFCFC;
+    background: #fcfcfc;
     margin: 168px auto;
     padding: 36px 20px 16px 0;
     box-sizing: border-box;
   }
 }
-.form-padding{
+.form-padding {
   padding-top: 40px;
-  &>div{ width: 100%;}
+  & > div {
+    width: 100%;
+  }
   .form-input-submit {
     button {
       width: 100%;
@@ -130,10 +129,10 @@ export default {
     }
   }
 }
-.flex-column{
-    flex-direction: column;
-    background: url("../../../assets/images/backgroud.jpg") no-repeat;
-    background-position: top center;
-    background-size: cover;
+.flex-column {
+  flex-direction: column;
+  background: url("../../../assets/images/backgroud.jpg") no-repeat;
+  background-position: top center;
+  background-size: cover;
 }
 </style>

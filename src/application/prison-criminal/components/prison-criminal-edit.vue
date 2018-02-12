@@ -27,24 +27,38 @@ import PrisonCriminalEditCollectin from "./prison-criminal-edit-collection";
 import PrisonCriminalBiometric from "./prison-criminal-edit-biometric";
 
 export default {
-    components: { PrisonCriminalEditBasicInformation, PrisonCriminalEditRecord, PrisonCriminalEditResume, PrisonCriminalEditPhysicalCharacteristic, PrisonCriminalEditSocialRelation, PrisonCriminalEditForfeit, PrisonCriminalOutInPrison, PrisonCriminalEditCollectin, PrisonCriminalBiometric },
-    data() {
-      return {
-        activeName: 'PrisonCriminalEditBasicInformation',
-        tabs: [
-          { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
-          { name: "犯罪记录", component: "PrisonCriminalEditRecord" },
-          { name: "简历", component: "PrisonCriminalEditResume" },
-          { name: "体貌特征", component: "PrisonCriminalEditPhysicalCharacteristic" },
-          { name: "社会关系", component: "PrisonCriminalEditSocialRelation" },
-          { name: "罚金", component: "PrisonCriminalEditForfeit" },
-          { name: "出入监记录", component: "PrisonCriminalOutInPrison" },
-          { name: "采集信息", component: "PrisonCriminalEditCollectin" },
-          { name: "生物识别", component: "PrisonCriminalBiometric" }
-        ]
-      };
-    }
+  components: {
+    PrisonCriminalEditBasicInformation,
+    PrisonCriminalEditRecord,
+    PrisonCriminalEditResume,
+    PrisonCriminalEditPhysicalCharacteristic,
+    PrisonCriminalEditSocialRelation,
+    PrisonCriminalEditForfeit,
+    PrisonCriminalOutInPrison,
+    PrisonCriminalEditCollectin,
+    PrisonCriminalBiometric
+  },
+  data() {
+    return {
+      activeName: "PrisonCriminalEditBasicInformation",
+      tabs: [
+        { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
+        { name: "犯罪记录", component: "PrisonCriminalEditRecord" },
+        { name: "简历", component: "PrisonCriminalEditResume" },
+        {
+          name: "体貌特征",
+          component: "PrisonCriminalEditPhysicalCharacteristic"
+        },
+        { name: "社会关系", component: "PrisonCriminalEditSocialRelation" },
+        { name: "罚金", component: "PrisonCriminalEditForfeit" },
+        { name: "出入监记录", component: "PrisonCriminalOutInPrison" },
+        { name: "采集信息", component: "PrisonCriminalEditCollectin" },
+        { name: "生物识别", component: "PrisonCriminalBiometric" }
+      ]
+    };
+  }
 };
 </script>
 <style lang="scss" scoped>
+
 </style>
