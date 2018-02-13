@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { default as roleService } from '../service/role-service';
+import roleService from '../service/role-service';
 
 export default {
   getRole({ commit, state }, id) {

@@ -44,7 +44,7 @@
 <script>
 import TheLoginFooter from "./the-login-footer";
 import TheLoginHeader from "./the-login-header";
-import { default as logService } from "../../log/service/log-service";
+import logService from "../../log/service/log-service";
 import { mapActions } from "vuex";
 export default {
   components: {

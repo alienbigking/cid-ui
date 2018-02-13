@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { default as userService } from '../service/user-service';
+import userService from '../service/user-service';
 
 export default {
   getMyProfile({ commit, state }) {

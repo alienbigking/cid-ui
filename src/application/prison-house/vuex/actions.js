@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { default as prisonHouseService } from '../service/prison-house-service';
+import prisonHouseService from '../service/prison-house-service';
 
 export default {
   getPrisonHouse({ commit, state }, id) {

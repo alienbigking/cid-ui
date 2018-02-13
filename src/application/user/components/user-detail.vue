@@ -57,7 +57,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import { default as userStatusService } from "../service/user-status-service";
+import userStatusService from "../service/user-status-service";
 
 export default {
   data() {

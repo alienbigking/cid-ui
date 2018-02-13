@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { default as prisonAreaService } from '../service/prison-area-service';
+import prisonAreaService from '../service/prison-area-service';
 
 export default {
   getPrisonArea({ commit, state }, params) {

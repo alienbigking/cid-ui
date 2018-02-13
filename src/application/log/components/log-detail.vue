@@ -30,7 +30,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import { default as logTypeService } from "../service/log-type-service";
+import logTypeService from "../service/log-type-service";
 
 export default {
   computed: {
@@ -51,4 +51,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 </style>

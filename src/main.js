@@ -8,8 +8,8 @@ import filters from '@/plugin/filters';
 import validators from '@/plugin/validators';
 import errorMessage from '@/plugin/error-message';
 import tokenStorage from '@/utils/token/token-storage';
-import { default as requestInterceptor } from '@/utils/interceptor/request-interceptor';
-import { default as responseInterceptor } from '@/utils/interceptor/response-interceptor';
+import requestInterceptor from '@/utils/interceptor/request-interceptor';
+import responseInterceptor from '@/utils/interceptor/response-interceptor';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/fonts/iconfont.css';

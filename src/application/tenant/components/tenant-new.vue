@@ -56,7 +56,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as userStatusService } from "../../user/service/user-status-service";
+import userStatusService from "../../user/service/user-status-service";
 import _ from "lodash";
 export default {
   data() {

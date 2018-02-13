@@ -18,8 +18,8 @@
   </el-aside>
 </template>
 <script>
-import { default as TheSidebarMenu } from "./the-sidebar-menu";
-import { default as profileStorage } from "../service/profile-storage";
+import TheSidebarMenu from "./the-sidebar-menu";
+import profileStorage from "../service/profile-storage";
 import { mapState } from "vuex";
 
 export default {

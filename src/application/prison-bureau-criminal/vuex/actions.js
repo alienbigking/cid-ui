@@ -1,11 +1,11 @@
 import * as types from './mutation-types';
-import { default as criminalService } from '../service/prison-bureau-criminal-service';
-import { default as criminalRecordService } from '../service/prison-bureau-criminal-record-service';
-import { default as criminalResumeService } from '../service/prison-bureau-criminal-resume-service';
-import { default as criminalPhysicalCharacteristicService } from '../service/prison-bureau-criminal-physical-characteristic-service';
-import { default as prisonBureaucriminalSocialRelationService } from '../service/prison-bureau-criminal-social-relation-service';
-import { default as prisonBureaucriminalForfeitService } from '../service/prison-bureau-criminal-forfeit-service';
-import { default as prisonBureauCriminalOutInPrisonService } from '../service/prison-bureau-criminal-out-in-prison-service';
+import criminalService from '../service/prison-bureau-criminal-service';
+import criminalRecordService from '../service/prison-bureau-criminal-record-service';
+import criminalResumeService from '../service/prison-bureau-criminal-resume-service';
+import criminalPhysicalCharacteristicService from '../service/prison-bureau-criminal-physical-characteristic-service';
+import prisonBureaucriminalSocialRelationService from '../service/prison-bureau-criminal-social-relation-service';
+import prisonBureaucriminalForfeitService from '../service/prison-bureau-criminal-forfeit-service';
+import prisonBureauCriminalOutInPrisonService from '../service/prison-bureau-criminal-out-in-prison-service';
 
 export default {
   // 罪犯
