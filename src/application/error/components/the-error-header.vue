@@ -1,5 +1,5 @@
 <template>
-  <el-header style="height: 47px;">
+  <el-header height="47px">
     <div class="header-left">
       <i
         class="iconfont icon-DB"
