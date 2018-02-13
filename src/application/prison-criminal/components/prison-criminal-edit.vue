@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      activeName: "PrisonCriminalBiometric",
+      activeName: "PrisonCriminalEditBasicInformation",
       tabs: [
         { name: "基本信息", component: "PrisonCriminalEditBasicInformation" },
         { name: "生物识别", component: "PrisonCriminalBiometric" },

@@ -19,3 +19,9 @@ export const SET_ALL_PRISON_BUREAU_CRIMINAL_FORFEITS = 'setAllPrisonBureauCrimin
 // 罪犯出入监管理
 export const SET_PRISON_BUREAU_CRIMINAL_OUTINPRISON = 'setPrisonBureauCriminalOutInPrison';
 export const SET_ALL_PRISON_BUREAU_CRIMINAL_OUTINPRISONS = 'setAllPrisonBureauCriminalOutInPrisons';
+// 罪犯面部采集
+export const SET_PRISON_BUREAU_CRIMINAL_FACE = 'setPrisonBureauCriminalCriminaFace';
+// 罪犯指纹采集
+export const SET_PRISON_BUREAU_CRIMINAL_FINGERPRINT = 'setPrisonBureauCriminalFingerPrint';
+// 罪犯虹膜采集
+export const SET_PRISON_BUREAU_CRIMINAL_IRIS = 'setPrisonBureauCriminalIris';

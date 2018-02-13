@@ -6,6 +6,7 @@ import { default as criminalPhysicalCharacteristicService } from '../service/pri
 import { default as prisonBureaucriminalSocialRelationService } from '../service/prison-bureau-criminal-social-relation-service';
 import { default as prisonBureaucriminalForfeitService } from '../service/prison-bureau-criminal-forfeit-service';
 import { default as prisonBureauCriminalOutInPrisonService } from '../service/prison-bureau-criminal-out-in-prison-service';
+import { default as prisonBureauCriminalBiometricService } from '../service/prison-bureau-criminal-biometric-service';
 
 export default {
   // 罪犯
@@ -78,6 +79,24 @@ export default {
   getAllPrisonBureauCriminalOutInPrisons({ commit, state }, id) {
     return prisonBureauCriminalOutInPrisonService.getAll(id).then(criminalOutInPrisons => {
       commit(types.SET_ALL_PRISON_BUREAU_CRIMINAL_OUTINPRISONS, criminalOutInPrisons);
+    });
+  },
+  // 面部采集
+  getPrisonBureauCriminalFace({ commit, state }, id) {
+    return prisonBureauCriminalBiometricService.get(id).then(criminalFaces => {
+      commit(types.SET_PRISON_BUREAU_CRIMINAL_FACE, criminalFaces);
+    });
+  },
+  // 虹膜采集
+  getPrisonBureauCriminalIris({ commit, state }, id) {
+    return prisonBureauCriminalBiometricService.getIrises(id).then(criminalIris => {
+      commit(types.SET_PRISON_BUREAU_CRIMINAL_IRIS, criminalIris);
+    });
+  },
+  // 指纹采集
+  getPrisonBureauCriminalFingerPrint({ commit, state }, id) {
+    return prisonBureauCriminalBiometricService.getFingerPrint(id).then(criminalFingerPrint => {
+      commit(types.SET_PRISON_BUREAU_CRIMINAL_FINGERPRINT, criminalFingerPrint);
     });
   }
 };

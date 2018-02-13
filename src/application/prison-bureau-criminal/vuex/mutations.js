@@ -49,5 +49,18 @@ export default {
   },
   [types.SET_ALL_PRISON_BUREAU_CRIMINAL_OUTINPRISONS](state, allCriminalOutInPrisons) {
     state.allCriminalOutInPrisons = allCriminalOutInPrisons;
+  },
+  // 罪犯面部采集
+  [types.SET_PRISON_BUREAU_CRIMINAL_FACE](state, criminalFace) {
+    state.criminalFace = criminalFace;
+  },
+  // 罪犯虹膜采集
+  [types.SET_PRISON_BUREAU_CRIMINAL_IRIS](state, criminalIris) {
+    state.criminalIris = criminalIris;
+  },
+  // 罪犯指纹采集
+  [types.SET_PRISON_BUREAU_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
+    state.criminalFingerPrint = criminalFingerPrint;
   }
+
 };

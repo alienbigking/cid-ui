@@ -35,7 +35,7 @@
         :key="index">
         <div
           class="body"
-          :class="form.criminalFingerPrint[item.type] ? 'setted' : 'iconfont defalut'">
+          :class="form.criminalFingerPrint[item.type] ? 'setted' : 'iconfont icon-zhiwenjiesuo'">
           <el-button
             v-if="!form.criminalFingerPrint[item.type]"
             class="button-addCollection"
@@ -59,7 +59,9 @@
         class="biometric-card"
         v-for="(item, index) in faces"
         :key="index">
-        <div class="body">
+        <div
+          class="body"
+          :class="form.criminalFace[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'">
           <el-button
             v-if="!form.criminalFace[item.type]"
             class="button-addCollection"
@@ -83,7 +85,9 @@
         class="biometric-card"
         v-for="(item, index) in iris"
         :key="index">
-        <div class="body">
+        <div
+          class="body"
+          :class="form.criminalIris[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'">
           <el-button
             v-if="!form.criminalIris[item.type]"
             class="button-addCollection"
@@ -102,10 +106,10 @@
           @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-        v-if="false"
+        v-if="true"
         id="leftFeature"/>
       <el-input
-        v-if="false"
+        v-if="true"
         id="rightFeature"/></div>
   </el-form>
 </template>
@@ -271,8 +275,12 @@ export default {
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
         let curpath = `c:\\123\\${type}.bmp`;
-        if (sy305.PhotoCapture(0, curpath) === 1) {
+        let status = sy305.PhotoCapture(0, curpath);
+        this.$message.success("初始化摄像头成功");
+        alert("拍照成功");
+        if (status === 1) {
           this.form.criminalFace[type] = sy305.GetExtraInfo("capture_base64");
+          console.log(this.form.criminalFace[type]);
           alert(this.form.criminalFace[type]);
           sy305.ClosePhotoCapture();
         }
@@ -411,7 +419,7 @@ export default {
           if (this.form.criminalFace.id) {
             // 修改
             this.saving = true;
-            this.updatePrisonCriminalFace()
+            this.updateCriminalFace()
               .then(res => {
                 this.saving = false;
                 this.$message.success("修改成功");
@@ -423,7 +431,7 @@ export default {
           } else {
             // 新增
             this.saving = true;
-            this.addPrisonCriminalFace()
+            this.addCriminalFace()
               .then(res => {
                 this.saving = false;
                 this.$message.success("新增成功");
@@ -463,11 +471,16 @@ export default {
       }
     },
     updateIrisInfo() {
-      let leftFeatureInfo = document.getElementById("leftFeature").value;
-      let rightFeatureInfo = document.getElementById("rightFeature").value;
+      let leftFeatureInfo, rightFeatureInfo;
+      if (!this.form.criminalIris.id) {
+        leftFeatureInfo = document.getElementById("leftFeature").value;
+        rightFeatureInfo = document.getElementById("rightFeature").value;
+      } else {
+        leftFeatureInfo = this.form.criminalIris.leftFeature;
+        rightFeatureInfo = this.form.criminalIris.rightFeature;
+      }
       this.$set(this.form.criminalIris, "leftFeature", leftFeatureInfo);
       this.$set(this.form.criminalIris, "rightFeature", rightFeatureInfo);
-      console.log("更新瞳孔信息" + this.form.criminalIris);
       if (!this.form.criminalIris.id) {
         this.$store.commit("updateCriminalIris", this.form.criminalIris);
       } else {
@@ -541,6 +554,19 @@ export default {
     }
   }
   .icon-zhiwenjiesuo {
+    color: #e0e5ec;
+    font-size: 72px;
+    z-index: 5;
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      line-height: 100px;
+    }
+  }
+  .icon-hongmoshibie {
     color: #e0e5ec;
     font-size: 72px;
     z-index: 5;

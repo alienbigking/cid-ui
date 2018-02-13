@@ -9,7 +9,7 @@
         :key="index">
         <div
           class="body"
-          :class="criminalFingerPrint[item.type] ? 'setted' : 'iconfont defalut'"/>
+          :class="criminalFingerPrint[item.type] ? 'setted' : 'iconfont icon-zhiwenjiesuo'"/>
         <span>{{ item.label }}</span>
       </div>
     </div>
@@ -18,7 +18,9 @@
         class="biometric-card"
         v-for="(item, index) in faces"
         :key="index">
-        <div class="body"/>
+        <div
+          class="body"
+          :class="criminalFace[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'"/>
         <span>{{ item.label }}</span>
       </div>
     </div>
@@ -27,7 +29,9 @@
         class="biometric-card"
         v-for="(item, index) in iris"
         :key="index">
-        <div class="body"/>
+        <div
+          class="body"
+          :class="criminalIris[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'"/>
         <span>{{ item.label }}</span>
       </div>
     </div>
@@ -113,36 +117,36 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getCriminalFace",
-      "getCriminalIris",
-      "getCriminalFingerPrint"
+      "getPrisonBureauCriminalFace",
+      "getPrisonBureauCriminalIris",
+      "getPrisonBureauCriminalFingerPrint"
     ]),
     render() {
-      this.getCriminalFingerPrint(this.$route.params.id)
+      this.getPrisonBureauCriminalFingerPrint(this.$route.params.id)
         .then(() => {
           this.loading = false;
           this.criminalFingerPrint = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalFingerPrint
+            this.$store.state.prisonBureauCriminal.criminalFingerPrint
           );
         })
         .catch(() => {
           this.loading = false;
         });
-      this.getCriminalFace(this.$route.params.id)
+      this.getPrisonBureauCriminalFace(this.$route.params.id)
         .then(() => {
           this.loading = false;
           this.criminalFace = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalFace
+            this.$store.state.prisonBureauCriminal.criminalFace
           );
         })
         .catch(() => {
           this.loading = false;
         });
-      this.getCriminalIris(this.$route.params.id)
+      this.getPrisonBureauCriminalIris(this.$route.params.id)
         .then(() => {
           this.loading = false;
           this.criminalIris = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalIris
+            this.$store.state.prisonBureauCriminal.criminalIris
           );
         })
         .catch(() => {
@@ -214,6 +218,19 @@ export default {
     }
   }
   .icon-zhiwenjiesuo {
+    color: #e0e5ec;
+    font-size: 72px;
+    z-index: 5;
+    &:before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      line-height: 100px;
+    }
+  }
+  .icon-hongmoshibie {
     color: #e0e5ec;
     font-size: 72px;
     z-index: 5;
