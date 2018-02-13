@@ -2,16 +2,11 @@
   <el-container class="flex-column">
     <the-error-header/>
     <el-main class="error-box">
-      <div class="error-contianer">
-        <div class="error-number"/>
-        <div class="error-message">
-          <div>
-            <span>ERROR 404 -</span>
-            <span class="error-message-right">您访问的页面不存在</span>
-            <a
-              class="error-link"
-              @click="onHome">回到主页 >></a>
-          </div>
+      <div class="error-content">
+        <img src="../../../assets/images/404.png">
+        <div>
+          <p>ERROR 404 - 您访问的页面不存在</p>
+          <a @click.prevent="onHome">回到主页 >></a>
         </div>
       </div>
     </el-main>
@@ -37,8 +32,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "./error";
-.error-number{
-  background: url(../../../assets/images/404.png) 0 0 no-repeat;
-  background-size: 585px 318px;
-}
 </style>

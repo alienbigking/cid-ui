@@ -6,11 +6,13 @@
       <el-container class="flex-column">
         <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
           <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
-          <transition
-            name="router-fade"
-            mode="out-in">
-            <router-view/>
-          </transition>
+          <div class="hhhhh">
+            <transition
+              name="router-fade"
+              mode="out-in">
+              <router-view/>
+            </transition>
+          </div>
         </el-main>
         <the-footer v-if="!$route.meta||!$route.meta.noSide"/>
       </el-container>
