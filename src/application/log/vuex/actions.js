@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import { default as logService } from '../service/log-service';
+import logService from '../service/log-service';
 
 export default {
   getLog({ commit, state }, params) {

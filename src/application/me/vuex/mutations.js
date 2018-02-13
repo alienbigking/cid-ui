@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import profileStorage from './../../common/service/profile-storage';
+import profileStorage from '@/utils/profile/profile-storage';
 import _ from "lodash";
 
 export default {

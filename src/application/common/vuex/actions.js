@@ -1,6 +1,6 @@
 import * as types from "./mutation-types";
-import { default as authService } from '../service/auth-service';
-import { default as menuService } from "../service/menu-service";
+import authService from '../service/auth-service';
+import menuService from "../service/menu-service";
 
 export default {
   login({ commit }, user) {

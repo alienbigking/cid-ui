@@ -1,10 +1,10 @@
 .icon-tuichu {
   cursor: pointer;
 }
-
 .header-left {
   display: flex;
   align-items: center;
+  height: 22px;
   .fs-16 {
     font-size: 16px;
     margin-left: 10px;
@@ -15,15 +15,8 @@
   align-items: center;
   li {
     margin-left: 20px;
-    i {
-      display: block;
-      height: 16px;
-      width: 16px;
-      font-size: 16px;
-    }
     a {
       color: #fff;
-      font-size: 12px;
     }
     img {
       margin-right: 7px;
@@ -43,46 +36,41 @@ footer {
   color: #a3a6ab;
   text-align: center;
   background: #f5f5f5;
+  width: 100%;
 }
 .flex-column {
   flex-direction: column;
-  align-items: stretch;
-  padding-top: 47px;
-  .error-box{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      background-color: #f5f5f5;
-      min-height: 249px;
-      margin-top: 20px;
-  }
+  align-items: center;
 }
-.error-contianer{
-  width:585px;
+.error-box{
+  height: calc(100% - 87px);
+  width: 100%;
   flex-shrink: 0;
-}
-.error-number{
-  width:585px;
-  height: 318px;
-}
-.error-message{
-  font-size:26px;
-  margin-top:25px;
-  color: #4196FF;
-  div{
-    margin-left: 114px;
+  display: flex;
+  align-items: center;
+  img{
+    height: 318px;
+    width: 585px;
+    flex-shrink: 0;
   }
-  .error-message-right{
-    font-size:22px;
-    vertical-align: top;
+  .error-content{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div{
+      margin-top: 25px;
+      text-align: left;
+    }
   }
-}
-.error-link{
-  display: block;
-  width: 100px;
-  margin-top: 14px;
-  color: #D7312E;
-  font-size: 14px;
-  cursor: pointer;
+  p{
+    font-size: 22px;
+    color: #4196FF;
+    font-weight: bold;
+    margin-bottom: 14px;
+  }
+  a{
+    font-size: 14px;
+    color: #D7312E;
+  }
 }

@@ -101,7 +101,7 @@
 </template>
 <script>
 import { mapState, mapActions } from "vuex";
-import { default as logTypeService } from "../service/log-type-service";
+import logTypeService from "../service/log-type-service";
 import _ from "lodash";
 
 export default {

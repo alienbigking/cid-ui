@@ -181,7 +181,7 @@
 <script>
 import { mapState, mapActions } from "vuex";
 import _ from "lodash";
-import { default as userStatusService } from "../service/user-status-service";
+import userStatusService from "../service/user-status-service";
 import UserRoleEdit from "./user-role-edit";
 
 export default {

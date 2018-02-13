@@ -1,12 +1,12 @@
 import * as types from './mutation-types';
-import { default as prisonCriminalService } from '../service/prison-criminal-service';
-import { default as prisonCriminalRecordService } from '../service/prison-criminal-record-service';
-import { default as prisonCriminalResumeService } from '../service/prison-criminal-resume-service';
-import { default as prisonCriminalPhysicalCharacteristicService } from '../service/prison-criminal-physical-characteristic-service';
-import { default as prisonCriminalSocialRelationService } from '../service/prison-criminal-social-relation-service';
-import { default as prisonCriminalForfeitService } from '../service/prison-criminal-forfeit-service';
-import { default as prisonCriminalOutInPrisonService } from '../service/prison-criminal-out-in-prison-service';
-import { default as prisonCriminalBiometricService } from '../service/prison-criminal-biometric-service';
+import prisonCriminalService from '../service/prison-criminal-service';
+import prisonCriminalRecordService from '../service/prison-criminal-record-service';
+import prisonCriminalResumeService from '../service/prison-criminal-resume-service';
+import prisonCriminalPhysicalCharacteristicService from '../service/prison-criminal-physical-characteristic-service';
+import prisonCriminalSocialRelationService from '../service/prison-criminal-social-relation-service';
+import prisonCriminalForfeitService from '../service/prison-criminal-forfeit-service';
+import prisonCriminalOutInPrisonService from '../service/prison-criminal-out-in-prison-service';
+import prisonCriminalBiometricService from '../service/prison-criminal-biometric-service';
 
 export default {
   // 罪犯

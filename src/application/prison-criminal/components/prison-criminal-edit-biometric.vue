@@ -116,7 +116,7 @@
 
 <script>
 import { mapActions } from "vuex";
-import { default as prisonCollectionService } from "../service/prison-criminal-collection-service";
+import prisonCollectionService from "../service/prison-criminal-collection-service";
 import _ from "lodash";
 
 export default {
