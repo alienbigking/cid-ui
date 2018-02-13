@@ -38,7 +38,7 @@
 </template>
 <script>
 import { mapActions } from "vuex";
-import profileStorage from "../service/profile-storage";
+import profileStorage from "@/utils/profile/profile-storage";
 
 export default {
   data() {

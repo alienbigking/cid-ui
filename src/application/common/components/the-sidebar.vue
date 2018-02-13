@@ -19,7 +19,7 @@
 </template>
 <script>
 import TheSidebarMenu from "./the-sidebar-menu";
-import profileStorage from "../service/profile-storage";
+import profileStorage from "@/utils/profile/profile-storage";
 import { mapState } from "vuex";
 
 export default {
