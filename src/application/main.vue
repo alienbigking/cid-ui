@@ -1,7 +1,7 @@
 <template>
   <el-container class="flex-column">
     <the-header/>
-    <el-container>
+    <el-container class="content-box">
       <the-sidebar v-if="!$route.meta||!$route.meta.noSide"/>
       <el-container class="flex-column">
         <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
@@ -32,5 +32,10 @@ export default {
 <style lang="scss" scoped>
 .flex-column{
     flex-direction: column;
+}
+.content-box{
+  height: calc(100% - 47px);
+  flex-shrink: 0;
+  overflow: auto;
 }
 </style>
