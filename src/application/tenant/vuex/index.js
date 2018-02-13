@@ -2,12 +2,12 @@ import actions from './actions';
 import mutations from './mutations';
 
 const state = {
-    pagedTenants: { content: [] },
-    tenant: {}
+  pagedTenants: { content: [] },
+  tenant: {}
 };
 
 export default {
-    state,
-    actions,
-    mutations
+  state,
+  actions,
+  mutations
 };

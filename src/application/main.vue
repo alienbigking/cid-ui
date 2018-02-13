@@ -17,6 +17,7 @@
     </el-container>
   </el-container>
 </template>
+
 <script>
 import * as commonComponents from "./common/components";
 
@@ -30,8 +31,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.flex-column{
-    flex-direction: column;
+.flex-column {
+  flex-direction: column;
 }
 .content-box{
   height: calc(100% - 47px);

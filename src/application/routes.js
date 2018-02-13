@@ -15,28 +15,28 @@ import { routes as error } from './error';
 import main from './main';
 
 export default [
-    {
+  {
+    path: '/',
+    component: main,
+    children: [
+      {
         path: '/',
-        component: main,
-        children: [
-            {
-                path: '/',
-                redirect: '/dashboard'
-            },
-            ...dashboard,
-            ...me,
-            ...user,
-            ...role,
-            ...log,
-            ...tenant,
-            ...prisonArea,
-            ...prisonHouse,
-            ...prisonCriminal,
-            ...prisonDepartment,
-            ...prisonBureauCriminal,
-            ...prisonBureauDepartment
-        ]
-    },
-    ...login,
-    ...error
+        redirect: '/dashboard'
+      },
+      ...dashboard,
+      ...me,
+      ...user,
+      ...role,
+      ...log,
+      ...tenant,
+      ...prisonArea,
+      ...prisonHouse,
+      ...prisonCriminal,
+      ...prisonDepartment,
+      ...prisonBureauCriminal,
+      ...prisonBureauDepartment
+    ]
+  },
+  ...login,
+  ...error
 ];

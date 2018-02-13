@@ -396,9 +396,7 @@ export default {
         selectedBirthplace: [],
         selectedHouseholdRegister: [],
         selectedHomeAddress: [],
-        criminal: _.cloneDeep(
-            this.$store.state.prisonCriminal.criminal
-        )
+        criminal: _.cloneDeep(this.$store.state.prisonCriminal.criminal)
       },
       rules: {
         "criminal.code": [
@@ -491,34 +489,64 @@ export default {
   },
   watch: {
     "form.selectedGender"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { genderCode: val.code, genderName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        genderCode: val.code,
+        genderName: val.name
+      });
     },
     "form.selectedEthnicity"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { ethnicityCode: val.code, ethnicityName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        ethnicityCode: val.code,
+        ethnicityName: val.name
+      });
     },
     "form.selectedNationality"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { nationalityCode: val.code, nationalityName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        nationalityCode: val.code,
+        nationalityName: val.name
+      });
     },
     "form.selectedHouseholdRegisterType"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { householdRegisterTypeCode: val.code, householdRegisterTypeName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        householdRegisterTypeCode: val.code,
+        householdRegisterTypeName: val.name
+      });
     },
     "form.selectPoliticalStatus"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { politicalStatusCode: val.code, politicalStatusName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        politicalStatusCode: val.code,
+        politicalStatusName: val.name
+      });
     },
     "form.selectEducationDegree"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { educationDegreeCode: val.code, educationDegreeName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        educationDegreeCode: val.code,
+        educationDegreeName: val.name
+      });
     },
     "form.selectedFledType"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { fledTypeCode: val.code, fledTypeName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        fledTypeCode: val.code,
+        fledTypeName: val.name
+      });
     },
     "form.selectedSeparateManagementLevel"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { separateManagementLevelCode: val.code, separateManagementLevelName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        separateManagementLevelCode: val.code,
+        separateManagementLevelName: val.name
+      });
     },
     "form.selectedSeparateCustodyType"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { separateCustodyTypeCode: val.code, separateCustodyTypeName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        separateCustodyTypeCode: val.code,
+        separateCustodyTypeName: val.name
+      });
     },
     "form.selectedCommutationScale"(val) {
-      this.form.criminal = Object.assign({}, this.form.criminal, { commutationScaleCode: val.code, commutationScaleName: val.name });
+      this.form.criminal = Object.assign({}, this.form.criminal, {
+        commutationScaleCode: val.code,
+        commutationScaleName: val.name
+      });
     },
     "form.selectedBirthplace"(val) {
       let country = this.allBirthplaces.find(item => item.code === val[0]);
@@ -537,7 +565,9 @@ export default {
       });
     },
     "form.selectedHouseholdRegister"(val) {
-      let country = this.allHouseholdRegisters.find(item => item.code === val[0]);
+      let country = this.allHouseholdRegisters.find(
+        item => item.code === val[0]
+      );
       let province = country.children.find(item => item.code === val[1]);
       let city = province.children.find(item => item.code === val[2]);
       let County = city.children.find(item => item.code === val[3]);
@@ -577,9 +607,7 @@ export default {
   },
   created() {
     this.$store.commit("setPrisonCriminal", { id: this.$route.params.id });
-    this.form.criminal = _.cloneDeep(
-        this.$store.state.prisonCriminal.criminal
-      );
+    this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
     Promise.all([
       criminalLookupService.getAllGenders(),
       criminalLookupService.getAllEthnicities(),
@@ -621,10 +649,16 @@ export default {
       "getAllPrisonHouses",
       "updatePrisonCriminal"
     ]),
-    loadingRegionData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
-      const selectedCountry = allData.find(
-        b => b.code === CountryCode
-      );
+    loadingRegionData(
+      allData,
+      CountryCode,
+      ProvinceCode,
+      CityCode,
+      CountyCode,
+      form,
+      tpyeName
+    ) {
+      const selectedCountry = allData.find(b => b.code === CountryCode);
       regionLookupService
         .getAllProvinces(CountryCode)
         .then(response => {
@@ -632,10 +666,9 @@ export default {
             item.children = [];
           });
           selectedCountry.children = _.cloneDeep(response);
-        }).then(() => {
-          const selectedCountry = allData.find(
-            b => b.code === CountryCode
-          );
+        })
+        .then(() => {
+          const selectedCountry = allData.find(b => b.code === CountryCode);
           const selectedProvince = selectedCountry.children.find(
             p => p.code === ProvinceCode
           );
@@ -646,26 +679,28 @@ export default {
                 item.children = [];
               });
               selectedProvince.children = _.cloneDeep(response);
-            }).then(() => {
-              const selectedCountry = allData.find(
-                b => b.code === CountryCode
-              );
+            })
+            .then(() => {
+              const selectedCountry = allData.find(b => b.code === CountryCode);
               const selectedProvince = selectedCountry.children.find(
                 p => p.code === ProvinceCode
               );
               const selectedCity = selectedProvince.children.find(
                 c => c.code === CityCode
               );
-              regionLookupService.getAllCounties(CityCode).then(response => {
-                selectedCity.children = _.cloneDeep(response);
-              }).then(() => {
-                form[tpyeName] = [
-                  CountryCode,
-                  ProvinceCode,
-                  CityCode,
-                  CountyCode
-                ];
-              });
+              regionLookupService
+                .getAllCounties(CityCode)
+                .then(response => {
+                  selectedCity.children = _.cloneDeep(response);
+                })
+                .then(() => {
+                  form[tpyeName] = [
+                    CountryCode,
+                    ProvinceCode,
+                    CityCode,
+                    CountyCode
+                  ];
+                });
             });
         });
     },
@@ -726,7 +761,9 @@ export default {
     },
     render() {
       this.getPrisonCriminal(this.$route.params.id).then(() => {
-        this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
+        this.form.criminal = _.cloneDeep(
+          this.$store.state.prisonCriminal.criminal
+        );
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
           name: this.form.criminal.genderName

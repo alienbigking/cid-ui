@@ -124,13 +124,10 @@ export default {
     })
   },
   created() {
-      this.logTypes = logTypeService.getAll();
+    this.logTypes = logTypeService.getAll();
   },
   methods: {
-    ...mapActions([
-      "getPagedLogs",
-      "deleteLog"
-    ]),
+    ...mapActions(["getPagedLogs", "deleteLog"]),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -153,10 +150,15 @@ export default {
     search() {
       this.gettingLogs = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedLogs(params).then(() => {
-        this.searching = false;
-        this.gettingLogs = false;
-      }).catch(() => { this.searching = false; this.gettingLogs = false; });
+      this.getPagedLogs(params)
+        .then(() => {
+          this.searching = false;
+          this.gettingLogs = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.gettingLogs = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {
