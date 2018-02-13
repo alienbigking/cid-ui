@@ -1,0 +1,69 @@
+// 按钮样式
+@mixin button($type) {
+  color: #FFFFFF;
+  border: 0;
+  @if $type == search { // 查询
+    background: #29B0A3;
+    width: 100px;
+  } @else if $type == confirm { // 编辑确认
+    background: #2196F3;
+    min-width: 76px;
+  } @else if $type == cancel { // 删除对话框中取消
+    background: $white;
+    color: #666;
+    width: 76px;
+    border: $border;
+  } @else if $type == sure { // 删除对话框中确定
+    background: #085EB5;
+    width: 76px;
+  } @else if $type == addInList { // 列表页中新增
+    background: #2196F3;
+    min-width: 100px;
+  } @else if $type == addInEdit { // 编辑页中新增
+    background: #009588;
+    min-width: 76px;
+  } @else if $type == addInNew { // 新增页中新增
+    background: #2196F3;
+    width: 76px;
+  } @else if $type == addCollection{
+    background: #009588;
+    width: 66px;
+    height: 26px;
+    z-index: 10;
+  }
+}
+// 按钮hover样式
+@mixin button-hover($type: default) {
+  color: #fff;
+  @if $type == search {
+    background: rgba(#29B0A3, 0.9);
+  } @else if $type == confirm {
+    background: rgba(#2196F3, 0.9);
+  } @else if $type == cancel {
+    color: #666;
+    background: rgba($color-border, 0.2);
+  } @else if $type == sure {
+    background: rgba(#085EB5, 0.9);
+  } @else if $type == addInList {
+    background: rgba(#2196F3, 0.9);
+  } @else if $type == addInEdit {
+    background: rgba(#009588, 0.9);
+  } @else if $type == addInNew {
+    background: rgba(#2196F3, 0.9);
+  } @else if $type == addCollection {
+    background: rgba(#009588, 0.9);
+  } @else {
+    color: $color-default;
+    background: rgba($color-border, 0.2);
+    border-color: $color-border;
+  }
+}
+// 其他按钮
+@mixin button-diy($type: default) {
+    @include button($type);
+    &:hover{ @include button-hover($type); }
+    &:active{ @include button-hover($type); }
+    &:focus{ @include button-hover($type); }
+    &:visited{ @include button-hover($type); }
+}
+// 复选框

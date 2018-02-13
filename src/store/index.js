@@ -1,13 +1,12 @@
-import mutations from './mutations'
-import actions from './actions'
-import Vuex from 'vuex'
-import Vue from 'vue'
-Vue.use(Vuex)
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { vuex } from '@/application';
 
-let store = new Vuex.Store({
-    modules: {
-        mutations
-    },
-    actions
-})
-export default store
+Vue.use(Vuex);
+
+const debug = process.env.NODE_ENV !== 'production';
+
+export default new Vuex.Store({
+  modules: vuex,
+  strict: debug
+});

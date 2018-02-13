@@ -1,110 +1,19 @@
-import main from '@/app/common/main'
-// 导入第三级菜单
-import third from '@/app/common/third'
+import Vue from 'vue';
+import Router from 'vue-router';
+import { routes } from '@/application';
 
-let routes = [
-    {
-        path: '/',
-        component: main,
-        hidden: true,
-        children: [
-            {
-                path: '/',
-                name: '登录',
-                component: resolve => require(['@/app/user/login'], resolve),
-                alias: '/index'
-            }
-        ]
-    },
-    {
-        path: '/punishmentExcution',
-        // hidden: true
-        component: main,
-        name: '刑罚执行',
-        icon: 'menu-icon setting',
-        children: [
-            {
-                path: '/punishmentExcution/reciver-management',
-                name: '收监管理',
-                meta: {
-                    deep: true
-                },
-                component: resolve => require(['@/app/punishment-excution/reciver-management'], resolve)
-            },
-            {
-                path: '/punishmentExcution/jianxing',
-                name: '减刑假释',
-                component: third,
-                children: [
-                    {
-                        path: '/punishmentExcution/jianxing/add1',
-                        name: '刑罚变动',
-                        component: resolve => require(['@/app/test/test'], resolve)
-                    },
-                    {
-                        path: '/punishmentExcution/jianxing/add2',
-                        name: '监区办理',
-                        component: resolve => require(['@/app/test/test'], resolve)
-                    },
-                    {
-                        path: '/punishmentExcution/jianxing/add3',
-                        name: '其他处理',
-                        component: resolve => require(['@/app/test/test'], resolve)
-                    }
-                ]
-            },
-            {
-                path: '/punishmentExcution/outer',
-                name: '监外执行',
-                meta: {
-                    deep: true
-                },
-                component: resolve => require(['@/app/test/test'], resolve)
-            },
-            {
-                path: '/punishmentExcution/goout',
-                name: '出监管理',
-                meta: {
-                    deep: true
-                },
-                component: resolve => require(['@/app/test/test'], resolve)
-            }
-        ]
-    },
-    {
-        path: '/punishmentExcution1',
-        // hidden: true
-        component: main,
-        name: '办公助理',
-        icon: 'menu-icon setting',
-        children: [
-            {
-                path: '/punishmentExcution1/reciver-management1',
-                name: '收监管理1',
-                meta: {
-                    deep: true
-                },
-                component: resolve => require(['@/app/test/test'], resolve)
-            }
-        ]
-    },
-    {
-        path: '/punishmentExcution2',
-        // hidden: true
-        component: main,
-        name: '档案管理',
-        icon: 'menu-icon setting',
-        children: [
-            {
-                path: '/punishmentExcution2/reciver-management1',
-                name: '收监管理2',
-                meta: {
-                    deep: true
-                },
-                component: resolve => require(['@/app/test/test'], resolve)
-            }
-        ]
+Vue.use(Router);
+
+export default new Router({
+  mode: 'history',
+  routes: routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition;
+    } else if (to.hash) {
+      return { selector: to.hash };
+    } else {
+      return { x: 0, y: 0 };
     }
-]
-
-export default routes
+  }
+});

@@ -1,0 +1,230 @@
+<template>
+  <div class="self-box">
+    <div class="list-card">
+      <h3 class="title">查询部门</h3>
+      <div class="filters">
+        <el-input
+          placeholder="部门名称"
+          v-model="filter.name"
+          @keyup.enter.native="onSearch"/>
+        <el-select
+          v-model="filter.parentDepartmentId"
+          clearable
+          :loading="gettingPrisonDepartments">
+          <el-option
+            v-for="(item, index) in allPrisonDepartments"
+            :key="index"
+            :label="item.name"
+            :value="item.id"/>
+        </el-select>
+        <el-button
+          class="button-search"
+          :loading="searching"
+          @click="onSearch">查 询</el-button>
+        <el-button
+          class="button-addInList"
+          @click="onNew">新 增</el-button>
+      </div>
+      <el-table
+        class="table45"
+        :data="pagedPrisonDepartments.content"
+        :default-sort="{ prop: 'createdTime', order: 'descending' }"
+        v-loading="loading"
+        border
+        header-row-class-name="table-header"
+        @sort-change="onSort">
+        <el-table-column
+          prop="name"
+          label="部门名称"
+          :show-overflow-tooltip="true"
+          sortable="custom"/>
+        <el-table-column
+          prop="parentDepartmentName"
+          label="上级部门名称"
+          :show-overflow-tooltip="true"
+          sortable="custom"/>
+        <el-table-column
+          prop="createdTime"
+          label="创建时间"
+          sortable="custom">
+          <template slot-scope="scope">
+            {{ scope.row.createdTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          prop="lastUpdatedTime"
+          label="最后更新时间"
+          sortable="custom">
+          <template slot-scope="scope">
+            {{ scope.row.lastUpdatedTime | moment }}
+          </template>
+        </el-table-column>
+        <el-table-column
+          align="center"
+          prop="opretion"
+          label="操作"
+          width="141px">
+          <template slot-scope="scope">
+            <el-button
+              type="text"
+              @click="onView(scope.row.id)">查看</el-button>
+            <el-button
+              type="text"
+              @click="onEdit(scope.row.id)">修改</el-button>
+            <el-button
+              type="text"
+              @click="onDelete(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div class="pagination-box">
+        <span>共{{ pagedPrisonDepartments.totalElements }}条信息</span>
+        <el-pagination
+          @current-change="onPageChange"
+          :current-page.sync="currentPage"
+          :page-size="pagination.size"
+          layout="prev, pager, next, jumper"
+          :total="pagedPrisonDepartments.totalElements"/>
+      </div>
+    </div>
+    <el-dialog
+      class="delete-dialog"
+      width="400px"
+      :visible.sync="deleteDialogVisible">
+      <i class="iconfont icon-jinggao"/>
+      <span>确认删除<b>{{ deleteItem.name }}</b>吗</span>
+      <template slot="footer">
+        <el-button
+          class="button-cancel"
+          @click="deleteDialogVisible = false">取 消</el-button>
+        <el-button
+          class="button-sure"
+          :loading="deleting"
+          @click="onDeleteConfirm">确 定</el-button>
+      </template>
+    </el-dialog>
+  </div>
+</template>
+<script>
+import { mapState, mapActions } from "vuex";
+import _ from "lodash";
+
+export default {
+  data() {
+    return {
+      filter: {},
+      pagination: {
+        page: 0,
+        size: 10,
+        sort: "createdTime,desc"
+      },
+      currentPage: 1,
+      gettingPrisonDepartments: true,
+      loading: true,
+      searching: false,
+      deleting: false,
+      deleteDialogVisible: false,
+      deleteItem: {}
+    };
+  },
+  computed: {
+    ...mapState({
+      allPrisonDepartments: state =>
+        state.prisonDepartment.allPrisonDepartments,
+      pagedPrisonDepartments: state =>
+        state.prisonDepartment.pagedPrisonDepartments
+    })
+  },
+  created() {
+    this.getAllPrisonDepartments()
+      .then(() => {
+        this.gettingPrisonDepartments = false;
+      })
+      .catch(() => {
+        this.gettingPrisonDepartments = false;
+      });
+  },
+  methods: {
+    ...mapActions([
+      "getAllPrisonDepartments",
+      "getPagedPrisonDepartments",
+      "deletePrisonDepartment"
+    ]),
+    onSearch() {
+      this.searching = true;
+      this.pagination.page = 0;
+      this.search();
+    },
+    onPageChange(page) {
+      this.pagination.page = page - 1;
+      this.search();
+    },
+    onView(id) {
+      this.$router.push(`/prison-department/detail/${id}`);
+    },
+    onEdit(id) {
+      this.$router.push(`/prison-department/edit/${id}`);
+    },
+    onDelete(item) {
+      this.deleteItem = item;
+      this.deleteDialogVisible = true;
+    },
+    onNew() {
+      this.$router.push(`/prison-department/new`);
+    },
+    onDeleteConfirm() {
+      this.deleting = true;
+      this.deletePrisonDepartment(this.deleteItem.id)
+        .then(res => {
+          this.deleting = false;
+          this.deleteDialogVisible = false;
+          this.$message.success("删除成功");
+          this.search();
+        })
+        .catch(error => {
+          this.$errorMessage.show(error, "删除失败");
+        });
+    },
+    onSort(e) {
+      if (!e.prop || !e.order) return;
+      this.pagination.page = 0;
+      let prop = e.prop;
+      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
+      this.search();
+    },
+    search() {
+      this.loading = true;
+      let params = Object.assign({}, this.getFilter(), this.pagination);
+      this.getPagedPrisonDepartments(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
+    },
+    getFilter() {
+      return _.transform(this.filter, (result, value, key) => {
+        if (value) {
+          result[key] = value;
+        }
+      });
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.cell {
+  button:nth-child(1) {
+    color: #2196f3;
+  }
+  button:nth-child(2) {
+    color: #29b0a3;
+  }
+  button:nth-child(3) {
+    color: #f44336;
+  }
+}
+</style>

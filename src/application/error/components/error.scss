@@ -1,0 +1,76 @@
+.icon-tuichu {
+  cursor: pointer;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  .fs-16 {
+    font-size: 16px;
+    margin-left: 10px;
+  }
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  li {
+    margin-left: 20px;
+    a {
+      color: #fff;
+    }
+    img {
+      margin-right: 7px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+    }
+  }
+  li.hasImg a {
+    display: flex;
+    align-items: center;
+  }
+}
+footer {
+  line-height: 40px;
+  font-size: 12px;
+  color: #a3a6ab;
+  text-align: center;
+  background: #f5f5f5;
+  width: 100%;
+}
+.flex-column {
+  flex-direction: column;
+  align-items: center;
+}
+.error-box{
+  height: calc(100% - 87px);
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  img{
+    height: 318px;
+    width: 585px;
+    flex-shrink: 0;
+  }
+  .error-content{
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    div{
+      margin-top: 25px;
+      text-align: left;
+    }
+  }
+  p{
+    font-size: 22px;
+    color: #4196FF;
+    font-weight: bold;
+    margin-bottom: 14px;
+  }
+  a{
+    font-size: 14px;
+    color: #D7312E;
+  }
+}
