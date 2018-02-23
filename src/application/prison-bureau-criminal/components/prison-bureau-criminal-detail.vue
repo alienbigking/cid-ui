@@ -239,16 +239,16 @@ import PrisonBureauCriminalDetailSocialRelation from './prison-bureau-criminal-d
 import PrisonBureauCriminalDetailForfeit from './prison-bureau-criminal-detail-forfeit';
 import PrisonBureauCriminalDetailOutInPrison from './prison-bureau-criminal-detail-out-in-prison';
 import PrisonBureauCriminalDetailBiometric from './prison-bureau-criminal-detail-biometric';
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   components: {
-    "criminal-detail-record": PrisonBureauCriminalDetailRecord,
-    "criminal-detail-resume": PrisonBureauCriminalDetailResume,
-    "criminal-detail-social-relation": PrisonBureauCriminalDetailSocialRelation,
-    "criminal-detail-forfeit": PrisonBureauCriminalDetailForfeit,
-    "criminal-detail-outInPrison": PrisonBureauCriminalDetailOutInPrison,
-    "criminal-detail-biometirc": PrisonBureauCriminalDetailBiometric
+    'criminal-detail-record': PrisonBureauCriminalDetailRecord,
+    'criminal-detail-resume': PrisonBureauCriminalDetailResume,
+    'criminal-detail-social-relation': PrisonBureauCriminalDetailSocialRelation,
+    'criminal-detail-forfeit': PrisonBureauCriminalDetailForfeit,
+    'criminal-detail-outInPrison': PrisonBureauCriminalDetailOutInPrison,
+    'criminal-detail-biometirc': PrisonBureauCriminalDetailBiometric
   },
   data() {
     return {
@@ -273,7 +273,7 @@ export default {
     this.getPrisonBureauCriminalPhysicalCharacteristic(this.$route.params.id);
   },
   methods: {
-    ...mapActions([ "getPrisonBureauCriminal", "getPrisonBureauCriminalPhysicalCharacteristic" ]),
+    ...mapActions(['getPrisonBureauCriminal', 'getPrisonBureauCriminalPhysicalCharacteristic']),
     isShowInformation() {
       this.informationShow = !this.informationShow;
     },
@@ -302,21 +302,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.detail-card{
-  .title{
-    [class^="el-icon"]{
+.detail-card {
+  .title {
+    [class^='el-icon'] {
       float: right;
       font-weight: bold;
       line-height: 50px;
       cursor: pointer;
     }
   }
-  .card-body{
-    .label120{
-        width: 130px;
+  .card-body {
+    .label120 {
+      width: 130px;
     }
-    .span120{
-        width: calc(100% - 150px);
+    .span120 {
+      width: calc(100% - 150px);
     }
   }
 }

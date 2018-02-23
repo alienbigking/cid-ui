@@ -55,13 +55,13 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 export default {
   props: {
     criminalResumeId: {
       type: String,
-      default: ""
+      default: ''
     },
     editDialogVisible: {
       type: Boolean,
@@ -70,13 +70,11 @@ export default {
   },
   data() {
     return {
-      criminalResume: _.cloneDeep(
-        this.$store.state.prisonCriminal.criminalResume
-      ),
+      criminalResume: _.cloneDeep(this.$store.state.prisonCriminal.criminalResume),
       rules: {
-        startDate: [{ required: true, message: "请输入开始日期" }],
-        endDate: [{ required: true, message: "请输入结束日期" }],
-        company: [{ required: true, message: "请输入公司" }]
+        startDate: [{ required: true, message: '请输入开始日期' }],
+        endDate: [{ required: true, message: '请输入结束日期' }],
+        company: [{ required: true, message: '请输入公司' }]
       },
       pickerBeginDateBefore: {
         disabledDate: time => {
@@ -108,7 +106,7 @@ export default {
     },
     criminalResume: {
       handler: _.debounce(function(criminalResume) {
-        this.$store.commit("updatePrisonCriminalResume", criminalResume);
+        this.$store.commit('updatePrisonCriminalResume', criminalResume);
       }, 500),
       deep: true
     }
@@ -118,16 +116,16 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getPrisonCriminalResume",
-      "addPrisonCriminalResume",
-      "updatePrisonCriminalResume",
-      "getAllPrisonCriminalResumes"
+      'getPrisonCriminalResume',
+      'addPrisonCriminalResume',
+      'updatePrisonCriminalResume',
+      'getAllPrisonCriminalResumes'
     ]),
     onClose() {
-      this.$emit("on-close");
+      this.$emit('on-close');
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.criminalResume.id) {
             // 修改
@@ -136,12 +134,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalResumes(this.$route.params.id);
-                this.$message.success("修改成功");
-                this.$emit("on-close");
+                this.$message.success('修改成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$message.error('修改失败');
               });
           } else {
             // 新增
@@ -150,12 +148,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalResumes(this.$route.params.id);
-                this.$message.success("新增成功");
-                this.$emit("on-close");
+                this.$message.success('新增成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$message.error('新增失败');
               });
           }
         }
@@ -163,18 +161,14 @@ export default {
     },
     render() {
       if (!this.criminalResumeId) {
-        this.$store.commit("setPrisonCriminalResume", {
+        this.$store.commit('setPrisonCriminalResume', {
           criminalId: this.$route.params.id
         });
-        this.criminalResume = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalResume
-        );
+        this.criminalResume = _.cloneDeep(this.$store.state.prisonCriminal.criminalResume);
         this.loading = false;
       } else {
         this.getPrisonCriminalResume(this.criminalResumeId).then(() => {
-          this.criminalResume = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalResume
-          );
+          this.criminalResume = _.cloneDeep(this.$store.state.prisonCriminal.criminalResume);
           this.loading = false;
         });
       }

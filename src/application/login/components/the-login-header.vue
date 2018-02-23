@@ -16,11 +16,11 @@ export default {};
 
 <style lang="scss" scoped>
 .header-left {
-    display: flex;
-    align-items: center;
-    .fs-16 {
-        font-size: 16px;
-        margin-left: 10px;
-    }
+  display: flex;
+  align-items: center;
+  .fs-16 {
+    font-size: 16px;
+    margin-left: 10px;
+  }
 }
 </style>

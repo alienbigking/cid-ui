@@ -55,24 +55,18 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import userStatusService from "../../user/service/user-status-service";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import userStatusService from '../../user/service/user-status-service';
+import _ from 'lodash';
 export default {
   data() {
     return {
       userStatuses: [],
       tenant: {},
       rules: {
-        code: [
-          { required: true, message: "请输入编号" },
-          { max: 50, message: "长度在 1 到 50 个字符" }
-        ],
-        name: [
-          { required: true, message: "请输入租户名称" },
-          { max: 100, message: "长度在 100 个字符内" }
-        ],
-        description: [{ max: 1000, message: "长度在 1000 个字符内" }]
+        code: [{ required: true, message: '请输入编号' }, { max: 50, message: '长度在 1 到 50 个字符' }],
+        name: [{ required: true, message: '请输入租户名称' }, { max: 100, message: '长度在 100 个字符内' }],
+        description: [{ max: 1000, message: '长度在 1000 个字符内' }]
       },
       saving: false
     };
@@ -80,29 +74,29 @@ export default {
   watch: {
     tenant: {
       handler: _.debounce(function(tenant) {
-        this.$store.commit("updateTenant", tenant);
+        this.$store.commit('updateTenant', tenant);
       }, 500),
       deep: true
     }
   },
   created() {
     this.userStatuses = userStatusService.getAll();
-    this.$store.commit("setTenant", {});
+    this.$store.commit('setTenant', {});
   },
   methods: {
-    ...mapActions(["addPrisonTenant"]),
+    ...mapActions(['addPrisonTenant']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.addPrisonTenant()
             .then(res => {
               this.saving = false;
-              this.$message.success("新增成功");
+              this.$message.success('新增成功');
               this.$router.push(`/tenant/list`);
             })
             .catch(error => {
-              this.$errorMessage.show(error, "新增失败");
+              this.$errorMessage.show(error, '新增失败');
               this.saving = false;
             });
         }
@@ -113,4 +107,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

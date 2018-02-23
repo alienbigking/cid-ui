@@ -375,10 +375,10 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import criminalLookupService from "@/application/common/service/lookup/criminal/criminal-lookup-service";
-import regionLookupService from "@/application/common/service/lookup/region/region-lookup-service";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import criminalLookupService from '@/application/common/service/lookup/criminal/criminal-lookup-service';
+import regionLookupService from '@/application/common/service/lookup/region/region-lookup-service';
+import _ from 'lodash';
 export default {
   data() {
     return {
@@ -399,70 +399,50 @@ export default {
         criminal: _.cloneDeep(this.$store.state.prisonCriminal.criminal)
       },
       rules: {
-        "criminal.code": [
-          { required: true, message: "请输入编号" },
-          { max: 50, message: "长度在 50 个字符以内" }
-        ],
-        "criminal.name": [
-          { required: true, message: "请输入姓名" },
-          { max: 50, message: "长度在 50 个字符以内" }
-        ],
-        selectedGender: [{ required: true, message: "请选择性别" }],
-        "criminal.birthday": [{ required: true, message: "请选择出生日期" }],
-        "criminal.identityCardNumber": [
-          { required: true, message: "请输入身份证号" },
+        'criminal.code': [{ required: true, message: '请输入编号' }, { max: 50, message: '长度在 50 个字符以内' }],
+        'criminal.name': [{ required: true, message: '请输入姓名' }, { max: 50, message: '长度在 50 个字符以内' }],
+        selectedGender: [{ required: true, message: '请选择性别' }],
+        'criminal.birthday': [{ required: true, message: '请选择出生日期' }],
+        'criminal.identityCardNumber': [
+          { required: true, message: '请输入身份证号' },
           { validator: this.$validators.idCard }
         ],
-        "criminal.married": [{ required: true, message: "请选择是否婚否" }],
-        selectedEthnicity: [{ required: true, message: "请选择民族" }],
-        selectedNationality: [{ required: true, message: "请选择国籍" }],
-        selectedHouseholdRegisterType: [
-          { required: true, message: "请选择户籍类型" }
+        'criminal.married': [{ required: true, message: '请选择是否婚否' }],
+        selectedEthnicity: [{ required: true, message: '请选择民族' }],
+        selectedNationality: [{ required: true, message: '请选择国籍' }],
+        selectedHouseholdRegisterType: [{ required: true, message: '请选择户籍类型' }],
+        selectedBirthplace: [{ required: true, message: '请选择出生地' }],
+        selectedHouseholdRegister: [{ required: true, message: '请选择户籍地址' }],
+        'criminal.householdRegisterAddressStreetDetail': [
+          { required: true, message: '请输入户籍街道详情' },
+          { max: 50, message: '长度在 50 个字符以内' }
         ],
-        selectedBirthplace: [{ required: true, message: "请选择出生地" }],
-        selectedHouseholdRegister: [
-          { required: true, message: "请选择户籍地址" }
+        selectedHomeAddress: [{ required: true, message: '请选择家庭住址' }],
+        'criminal.homeAddressStreetDetail': [
+          { required: true, message: '请输入家庭街道详情' },
+          { max: 50, message: '长度在 50 个字符以内' }
         ],
-        "criminal.householdRegisterAddressStreetDetail": [
-          { required: true, message: "请输入户籍街道详情" },
-          { max: 50, message: "长度在 50 个字符以内" }
+        selectPoliticalStatus: [{ required: true, message: '请选择政治面貌' }],
+        selectEducationDegree: [{ required: true, message: '请选择文化程度' }],
+        'criminal.occupation': [
+          { required: true, message: '请选择职业' },
+          { max: 50, message: '长度在 50 个字符以内' }
         ],
-        selectedHomeAddress: [{ required: true, message: "请选择家庭住址" }],
-        "criminal.homeAddressStreetDetail": [
-          { required: true, message: "请输入家庭街道详情" },
-          { max: 50, message: "长度在 50 个字符以内" }
+        'criminal.recidivisted': [{ required: true, message: '请选择是否惯犯' }],
+        'criminal.involvingFour': [
+          { required: true, message: '请输入四涉' },
+          { max: 50, message: '长度在 50 个字符以内' }
         ],
-        selectPoliticalStatus: [{ required: true, message: "请选择政治面貌" }],
-        selectEducationDegree: [{ required: true, message: "请选择文化程度" }],
-        "criminal.occupation": [
-          { required: true, message: "请选择职业" },
-          { max: 50, message: "长度在 50 个字符以内" }
+        'criminal.fourHistory': [
+          { required: true, message: '请输入四史' },
+          { max: 50, message: '长度在 50 个字符以内' }
         ],
-        "criminal.recidivisted": [
-          { required: true, message: "请选择是否惯犯" }
-        ],
-        "criminal.involvingFour": [
-          { required: true, message: "请输入四涉" },
-          { max: 50, message: "长度在 50 个字符以内" }
-        ],
-        "criminal.fourHistory": [
-          { required: true, message: "请输入四史" },
-          { max: 50, message: "长度在 50 个字符以内" }
-        ],
-        selectedFledType: [{ required: true, message: "请选择流窜类别" }],
-        selectedSeparateManagementLevel: [
-          { required: true, message: "请选择分管等级" }
-        ],
-        selectedSeparateCustodyType: [
-          { required: true, message: "请选择分押类型" }
-        ],
-        selectedCommutationScale: [
-          { required: true, message: "请选择减刑尺度" }
-        ],
-        "criminal.prisonAreaId": [
-          { required: true, message: "请选择所属监区" }
-        ],
-        "criminal.prisonHouseId": [{ required: true, message: "请选择监舍号" }]
+        selectedFledType: [{ required: true, message: '请选择流窜类别' }],
+        selectedSeparateManagementLevel: [{ required: true, message: '请选择分管等级' }],
+        selectedSeparateCustodyType: [{ required: true, message: '请选择分押类型' }],
+        selectedCommutationScale: [{ required: true, message: '请选择减刑尺度' }],
+        'criminal.prisonAreaId': [{ required: true, message: '请选择所属监区' }],
+        'criminal.prisonHouseId': [{ required: true, message: '请选择监舍号' }]
       },
       saving: false,
       initializing: true,
@@ -488,67 +468,67 @@ export default {
     })
   },
   watch: {
-    "form.selectedGender"(val) {
+    'form.selectedGender'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         genderCode: val.code,
         genderName: val.name
       });
     },
-    "form.selectedEthnicity"(val) {
+    'form.selectedEthnicity'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         ethnicityCode: val.code,
         ethnicityName: val.name
       });
     },
-    "form.selectedNationality"(val) {
+    'form.selectedNationality'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         nationalityCode: val.code,
         nationalityName: val.name
       });
     },
-    "form.selectedHouseholdRegisterType"(val) {
+    'form.selectedHouseholdRegisterType'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         householdRegisterTypeCode: val.code,
         householdRegisterTypeName: val.name
       });
     },
-    "form.selectPoliticalStatus"(val) {
+    'form.selectPoliticalStatus'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         politicalStatusCode: val.code,
         politicalStatusName: val.name
       });
     },
-    "form.selectEducationDegree"(val) {
+    'form.selectEducationDegree'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         educationDegreeCode: val.code,
         educationDegreeName: val.name
       });
     },
-    "form.selectedFledType"(val) {
+    'form.selectedFledType'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         fledTypeCode: val.code,
         fledTypeName: val.name
       });
     },
-    "form.selectedSeparateManagementLevel"(val) {
+    'form.selectedSeparateManagementLevel'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         separateManagementLevelCode: val.code,
         separateManagementLevelName: val.name
       });
     },
-    "form.selectedSeparateCustodyType"(val) {
+    'form.selectedSeparateCustodyType'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         separateCustodyTypeCode: val.code,
         separateCustodyTypeName: val.name
       });
     },
-    "form.selectedCommutationScale"(val) {
+    'form.selectedCommutationScale'(val) {
       this.form.criminal = Object.assign({}, this.form.criminal, {
         commutationScaleCode: val.code,
         commutationScaleName: val.name
       });
     },
-    "form.selectedBirthplace"(val) {
+    'form.selectedBirthplace'(val) {
       let country = this.allBirthplaces.find(item => item.code === val[0]);
       let province = country.children.find(item => item.code === val[1]);
       let city = province.children.find(item => item.code === val[2]);
@@ -564,10 +544,8 @@ export default {
         birthplaceCountyName: County.name
       });
     },
-    "form.selectedHouseholdRegister"(val) {
-      let country = this.allHouseholdRegisters.find(
-        item => item.code === val[0]
-      );
+    'form.selectedHouseholdRegister'(val) {
+      let country = this.allHouseholdRegisters.find(item => item.code === val[0]);
       let province = country.children.find(item => item.code === val[1]);
       let city = province.children.find(item => item.code === val[2]);
       let County = city.children.find(item => item.code === val[3]);
@@ -582,7 +560,7 @@ export default {
         householdRegisterAddressCountyName: County.name
       });
     },
-    "form.selectedHomeAddress"(val) {
+    'form.selectedHomeAddress'(val) {
       let country = this.allHomeAddress.find(item => item.code === val[0]);
       let province = country.children.find(item => item.code === val[1]);
       let city = province.children.find(item => item.code === val[2]);
@@ -598,15 +576,15 @@ export default {
         homeAddressCountyName: County.name
       });
     },
-    "form.criminal": {
+    'form.criminal': {
       handler: _.debounce(function(criminal) {
-        this.$store.commit("updatePrisonCriminal", criminal);
+        this.$store.commit('updatePrisonCriminal', criminal);
       }, 500),
       deep: true
     }
   },
   created() {
-    this.$store.commit("setPrisonCriminal", { id: this.$route.params.id });
+    this.$store.commit('setPrisonCriminal', { id: this.$route.params.id });
     this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
     Promise.all([
       criminalLookupService.getAllGenders(),
@@ -643,21 +621,8 @@ export default {
     });
   },
   methods: {
-    ...mapActions([
-      "getPrisonCriminal",
-      "getAllPrisonAreas",
-      "getAllPrisonHouses",
-      "updatePrisonCriminal"
-    ]),
-    loadingRegionData(
-      allData,
-      CountryCode,
-      ProvinceCode,
-      CityCode,
-      CountyCode,
-      form,
-      tpyeName
-    ) {
+    ...mapActions(['getPrisonCriminal', 'getAllPrisonAreas', 'getAllPrisonHouses', 'updatePrisonCriminal']),
+    loadingRegionData(allData, CountryCode, ProvinceCode, CityCode, CountyCode, form, tpyeName) {
       const selectedCountry = allData.find(b => b.code === CountryCode);
       regionLookupService
         .getAllProvinces(CountryCode)
@@ -669,9 +634,7 @@ export default {
         })
         .then(() => {
           const selectedCountry = allData.find(b => b.code === CountryCode);
-          const selectedProvince = selectedCountry.children.find(
-            p => p.code === ProvinceCode
-          );
+          const selectedProvince = selectedCountry.children.find(p => p.code === ProvinceCode);
           regionLookupService
             .getAllCities(ProvinceCode)
             .then(response => {
@@ -682,24 +645,15 @@ export default {
             })
             .then(() => {
               const selectedCountry = allData.find(b => b.code === CountryCode);
-              const selectedProvince = selectedCountry.children.find(
-                p => p.code === ProvinceCode
-              );
-              const selectedCity = selectedProvince.children.find(
-                c => c.code === CityCode
-              );
+              const selectedProvince = selectedCountry.children.find(p => p.code === ProvinceCode);
+              const selectedCity = selectedProvince.children.find(c => c.code === CityCode);
               regionLookupService
                 .getAllCounties(CityCode)
                 .then(response => {
                   selectedCity.children = _.cloneDeep(response);
                 })
                 .then(() => {
-                  form[tpyeName] = [
-                    CountryCode,
-                    ProvinceCode,
-                    CityCode,
-                    CountyCode
-                  ];
+                  form[tpyeName] = [CountryCode, ProvinceCode, CityCode, CountyCode];
                 });
             });
         });
@@ -709,45 +663,29 @@ export default {
       const selectedProvinceCode = value[1];
       const selectedCityCode = value[2];
       if (selectedCityCode) {
-        const selectedCountry = allData.find(
-          b => b.code === selectedCountryCode
-        );
-        const selectedProvince = selectedCountry.children.find(
-          p => p.code === selectedProvinceCode
-        );
-        const selectedCity = selectedProvince.children.find(
-          c => c.code === selectedCityCode
-        );
+        const selectedCountry = allData.find(b => b.code === selectedCountryCode);
+        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
+        const selectedCity = selectedProvince.children.find(c => c.code === selectedCityCode);
         regionLookupService.getAllCounties(selectedCityCode).then(response => {
           selectedCity.children = _.cloneDeep(response);
         });
       } else if (selectedProvinceCode) {
-        const selectedCountry = allData.find(
-          b => b.code === selectedCountryCode
-        );
-        const selectedProvince = selectedCountry.children.find(
-          p => p.code === selectedProvinceCode
-        );
-        regionLookupService
-          .getAllCities(selectedProvinceCode)
-          .then(response => {
-            response.map(item => {
-              item.children = [];
-            });
-            selectedProvince.children = _.cloneDeep(response);
+        const selectedCountry = allData.find(b => b.code === selectedCountryCode);
+        const selectedProvince = selectedCountry.children.find(p => p.code === selectedProvinceCode);
+        regionLookupService.getAllCities(selectedProvinceCode).then(response => {
+          response.map(item => {
+            item.children = [];
           });
+          selectedProvince.children = _.cloneDeep(response);
+        });
       } else if (selectedCountryCode) {
-        const selectedCountry = allData.find(
-          b => b.code === selectedCountryCode
-        );
-        regionLookupService
-          .getAllProvinces(selectedCountryCode)
-          .then(response => {
-            response.map(item => {
-              item.children = [];
-            });
-            selectedCountry.children = _.cloneDeep(response);
+        const selectedCountry = allData.find(b => b.code === selectedCountryCode);
+        regionLookupService.getAllProvinces(selectedCountryCode).then(response => {
+          response.map(item => {
+            item.children = [];
           });
+          selectedCountry.children = _.cloneDeep(response);
+        });
       }
     },
     onChangeBirthplaceAddress(value) {
@@ -761,9 +699,7 @@ export default {
     },
     render() {
       this.getPrisonCriminal(this.$route.params.id).then(() => {
-        this.form.criminal = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminal
-        );
+        this.form.criminal = _.cloneDeep(this.$store.state.prisonCriminal.criminal);
         this.form.selectedGender = {
           code: this.form.criminal.genderCode,
           name: this.form.criminal.genderName
@@ -811,7 +747,7 @@ export default {
           this.form.criminal.birthplaceCityCode,
           this.form.criminal.birthplaceCountyCode,
           this.form,
-          "selectedBirthplace"
+          'selectedBirthplace'
         );
         this.loadingRegionData(
           this.allHouseholdRegisters,
@@ -820,7 +756,7 @@ export default {
           this.form.criminal.householdRegisterAddressCityCode,
           this.form.criminal.householdRegisterAddressCountyCode,
           this.form,
-          "selectedHouseholdRegister"
+          'selectedHouseholdRegister'
         );
         this.loadingRegionData(
           this.allHomeAddress,
@@ -829,23 +765,23 @@ export default {
           this.form.criminal.homeAddressCityCode,
           this.form.criminal.homeAddressCountyCode,
           this.form,
-          "selectedHomeAddress"
+          'selectedHomeAddress'
         );
       });
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.updatePrisonCriminal()
             .then(response => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
               this.$router.push(`/prison-criminal/list`);
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });

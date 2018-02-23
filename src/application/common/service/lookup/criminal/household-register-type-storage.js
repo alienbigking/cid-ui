@@ -1,4 +1,4 @@
-const HOUSEHOLD_REGISTER_TYPES = "householdRegisterTypes";
+const HOUSEHOLD_REGISTER_TYPES = 'householdRegisterTypes';
 
 export default {
   getHouseholdRegisterTypes() {

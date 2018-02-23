@@ -50,5 +50,4 @@ new Vue({
   store,
   template: '<app/>',
   components: { app }
-
 });

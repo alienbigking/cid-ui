@@ -1,4 +1,4 @@
-const BLOOD_TYPES = "bloodTypes";
+const BLOOD_TYPES = 'bloodTypes';
 
 export default {
   getBloodTypes() {

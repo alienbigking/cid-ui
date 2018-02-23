@@ -19,8 +19,8 @@ import TheErrorHeader from './the-error-header';
 import TheErrorFooter from './the-error-footer';
 export default {
   components: {
-    "the-error-header": TheErrorHeader,
-    "the-error-footer": TheErrorFooter
+    'the-error-header': TheErrorHeader,
+    'the-error-footer': TheErrorFooter
   },
   methods: {
     onHome() {
@@ -31,5 +31,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "./error";
+@import './error';
 </style>

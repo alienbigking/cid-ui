@@ -58,14 +58,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   props: {
     criminalForfeitId: {
       type: String,
-      default: ""
+      default: ''
     },
     editDialogVisible: {
       type: Boolean,
@@ -76,13 +76,10 @@ export default {
     return {
       criminalForfeit: _.cloneDeep(this.$store.state.prisonCriminal.criminalForfeit),
       rules: {
-        amount: [
-          {required: true, message: "此项不能为空"},
-          { validator: this.$validators.decimal8i2f }
-        ],
-        paymentDate: [{ required: true, message: "请输入缴纳日期" }],
-        receiptNumber: [{ required: true, message: "请输入收款单据" }],
-        payee: [{ required: true, message: "请输入接收单位" }]
+        amount: [{ required: true, message: '此项不能为空' }, { validator: this.$validators.decimal8i2f }],
+        paymentDate: [{ required: true, message: '请输入缴纳日期' }],
+        receiptNumber: [{ required: true, message: '请输入收款单据' }],
+        payee: [{ required: true, message: '请输入接收单位' }]
       },
       loading: true,
       saving: false
@@ -98,7 +95,7 @@ export default {
     },
     criminalForfeit: {
       handler: _.debounce(function(criminalForfeit) {
-        this.$store.commit("updatePrisonCriminalForfeit", criminalForfeit);
+        this.$store.commit('updatePrisonCriminalForfeit', criminalForfeit);
       }, 500),
       deep: true
     }
@@ -108,16 +105,16 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getPrisonCriminalForfeit",
-      "addPrisonCriminalForfeit",
-      "updatePrisonCriminalForfeit",
-      "getAllPrisonCriminalForfeits"
+      'getPrisonCriminalForfeit',
+      'addPrisonCriminalForfeit',
+      'updatePrisonCriminalForfeit',
+      'getAllPrisonCriminalForfeits'
     ]),
     onClose() {
-      this.$emit("on-close");
+      this.$emit('on-close');
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.criminalForfeit.id) {
             // 修改
@@ -126,12 +123,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalForfeits(this.$route.params.id);
-                this.$message.success("修改成功");
-                this.$emit("on-close");
+                this.$message.success('修改成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$message.error('修改失败');
               });
           } else {
             // 新增
@@ -140,12 +137,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalForfeits(this.$route.params.id);
-                this.$message.success("新增成功");
-                this.$emit("on-close");
+                this.$message.success('新增成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$message.error('新增失败');
               });
           }
         }
@@ -153,14 +150,14 @@ export default {
     },
     render() {
       if (!this.criminalForfeitId) {
-        this.$store.commit("setPrisonCriminalForfeit", { criminalId: this.$route.params.id });
+        this.$store.commit('setPrisonCriminalForfeit', {
+          criminalId: this.$route.params.id
+        });
         this.criminalForfeit = _.cloneDeep(this.$store.state.prisonCriminal.criminalForfeit);
         this.loading = false;
       } else {
         this.getPrisonCriminalForfeit(this.criminalForfeitId).then(() => {
-          this.criminalForfeit = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalForfeit
-          );
+          this.criminalForfeit = _.cloneDeep(this.$store.state.prisonCriminal.criminalForfeit);
           this.loading = false;
         });
       }

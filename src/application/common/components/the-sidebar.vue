@@ -18,18 +18,18 @@
   </el-aside>
 </template>
 <script>
-import TheSidebarMenu from "./the-sidebar-menu";
-import profileStorage from "@/utils/profile/profile-storage";
-import { mapState } from "vuex";
+import TheSidebarMenu from './the-sidebar-menu';
+import profileStorage from '@/utils/profile/profile-storage';
+import { mapState } from 'vuex';
 
 export default {
   components: {
-    "the-sidebar-menu": TheSidebarMenu
+    'the-sidebar-menu': TheSidebarMenu
   },
   data() {
     return {
-      userName: "",
-      name: ""
+      userName: '',
+      name: ''
     };
   },
   computed: {

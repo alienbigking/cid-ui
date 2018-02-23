@@ -9,7 +9,8 @@ export const SET_PRISON_BUREAU_CRIMINAL_RESUME = 'setPrisonBureauCriminalResume'
 export const SET_ALL_PRISON_BUREAU_CRIMINAL_RESUMES = 'setAllPrisonBureauCriminalResumes';
 // 罪犯体貌特征
 export const SET_PRISON_BUREAU_CRIMINAL_PHYSICAL_CHARACTERISTIC = 'setPrisonBureauCriminalPhysicalCharacteristic';
-export const SET_ALL_PRISON_BUREAU_CRIMINAL_PHYSICAL_CHARACTERISTICS = 'setAllPrisonBureauCriminalPhysicalCharacteristics';
+export const SET_ALL_PRISON_BUREAU_CRIMINAL_PHYSICAL_CHARACTERISTICS =
+  'setAllPrisonBureauCriminalPhysicalCharacteristics';
 // 罪犯社会关系
 export const SET_PRISON_BUREAU_CRIMINAL_SOCIAL_RELATION = 'setPrisonBureauCriminalSocialRelation';
 export const SET_ALL_PRISON_BUREAU_CRIMINAL_SOCIAL_RELATIONS = 'setAllPrisonBureauCriminalSocialRelations';

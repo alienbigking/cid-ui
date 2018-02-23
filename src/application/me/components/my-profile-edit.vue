@@ -49,15 +49,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       myProfile: _.cloneDeep(this.$store.state.me.myProfile),
       rules: {
-        name: [{ required: true, message: "姓名不能为空" }]
+        name: [{ required: true, message: '姓名不能为空' }]
       },
       saving: false
     };
@@ -65,7 +65,7 @@ export default {
   watch: {
     myProfile: {
       handler: _.debounce(function(myProfile) {
-        this.$store.commit("updateMyProfile", myProfile);
+        this.$store.commit('updateMyProfile', myProfile);
       }, 500),
       deep: true
     }
@@ -76,19 +76,19 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getMyProfile", "updateMyProfile"]),
+    ...mapActions(['getMyProfile', 'updateMyProfile']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.updateMyProfile()
             .then(() => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });
@@ -114,5 +114,7 @@ export default {
     color: #2196f3;
   }
 }
-.has-right-button{ margin-bottom: 0; }
+.has-right-button {
+  margin-bottom: 0;
+}
 </style>

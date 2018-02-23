@@ -1,4 +1,4 @@
-const EDUCATION_DEGREES = "educationDegrees";
+const EDUCATION_DEGREES = 'educationDegrees';
 
 export default {
   getEducationDegrees() {

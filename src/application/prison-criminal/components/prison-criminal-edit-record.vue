@@ -95,16 +95,16 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import PrisonCriminalRecordEdit from "./prison-criminal-record-edit";
+import { mapState, mapActions } from 'vuex';
+import PrisonCriminalRecordEdit from './prison-criminal-record-edit';
 
 export default {
   components: {
-    "prison-criminal-record-edit": PrisonCriminalRecordEdit
+    'prison-criminal-record-edit': PrisonCriminalRecordEdit
   },
   data() {
     return {
-      criminalRecordId: "",
+      criminalRecordId: '',
       editDialogVisible: false,
       deleteDialogVisible: false,
       loading: true,
@@ -121,12 +121,9 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([
-      "getAllPrisonCriminalRecords",
-      "deletePrisonCriminalRecord"
-    ]),
+    ...mapActions(['getAllPrisonCriminalRecords', 'deletePrisonCriminalRecord']),
     onNew() {
-      this.criminalRecordId = "";
+      this.criminalRecordId = '';
       this.editDialogVisible = true;
     },
     onEdit(id) {
@@ -143,18 +140,22 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.getList();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
           this.deleting = false;
         });
     },
     getList() {
       this.getAllPrisonCriminalRecords(this.$route.params.id)
-        .then(() => { this.loading = false; })
-        .catch(() => { this.loading = false; });
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

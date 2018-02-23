@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   props: {
@@ -40,7 +40,7 @@ export default {
     },
     userId: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   data() {
@@ -69,7 +69,7 @@ export default {
         checkedRoles.forEach(item => {
           arr.push({ roleId: item });
         });
-        this.$store.commit("updateUserRole", arr);
+        this.$store.commit('updateUserRole', arr);
       }, 500),
       deep: true
     }
@@ -80,12 +80,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions([
-      "getRoles",
-      "getUserRoles",
-      "updateUserRole",
-      "deleteUserRole"
-    ]),
+    ...mapActions(['getRoles', 'getUserRoles', 'updateUserRole', 'deleteUserRole']),
     handleCheckAllChange(val) {
       this.checkedRoles = [];
       if (val) {
@@ -99,7 +94,7 @@ export default {
       this.checkAll = checkedCount === this.roles.length;
     },
     onClose() {
-      this.$emit("on-close");
+      this.$emit('on-close');
     },
     onSave() {
       if (this.checkedRoles.length) {
@@ -108,12 +103,12 @@ export default {
         this.updateUserRole(this.userId)
           .then(res => {
             this.saving = false;
-            this.$message.success("添加成功");
-            this.$emit("on-close");
+            this.$message.success('添加成功');
+            this.$emit('on-close');
           })
           .catch(() => {
             this.saving = false;
-            this.$message.error("添加失败");
+            this.$message.error('添加失败');
           });
       } else {
         // 删除
@@ -121,12 +116,12 @@ export default {
         this.deleteUserRole(this.userId)
           .then(res => {
             this.saving = false;
-            this.$message.success("删除成功");
-            this.$emit("on-close");
+            this.$message.success('删除成功');
+            this.$emit('on-close');
           })
           .catch(() => {
             this.saving = false;
-            this.$message.error("删除失败");
+            this.$message.error('删除失败');
           });
       }
     },
@@ -146,19 +141,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.user-name{
+.user-name {
   font-weight: bold;
-  color:#333;
+  color: #333;
 }
-.user-role-title{
+.user-role-title {
   width: 100%;
   border-bottom: 1px dashed #ddd;
   padding: 15px 0;
-  .all-select{
-    float:right;
+  .all-select {
+    float: right;
   }
 }
-.has-right-button{
-  margin-top:15px;
+.has-right-button {
+  margin-top: 15px;
 }
 </style>

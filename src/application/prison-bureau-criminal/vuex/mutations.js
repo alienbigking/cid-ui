@@ -62,5 +62,4 @@ export default {
   [types.SET_PRISON_BUREAU_CRIMINAL_FINGERPRINT](state, criminalFingerPrint) {
     state.criminalFingerPrint = criminalFingerPrint;
   }
-
 };

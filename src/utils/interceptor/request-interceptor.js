@@ -14,6 +14,7 @@ export default {
       },
       error => {
         return Promise.reject(error);
-      });
+      }
+    );
   }
 };

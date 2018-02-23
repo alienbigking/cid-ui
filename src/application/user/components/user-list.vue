@@ -183,14 +183,14 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import _ from "lodash";
-import userStatusService from "../service/user-status-service";
-import UserRoleEdit from "./user-role-edit";
+import { mapState, mapActions } from 'vuex';
+import _ from 'lodash';
+import userStatusService from '../service/user-status-service';
+import UserRoleEdit from './user-role-edit';
 
 export default {
   components: {
-    "user-role-edit": UserRoleEdit
+    'user-role-edit': UserRoleEdit
   },
   data() {
     return {
@@ -199,7 +199,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,desc"
+        sort: 'createdTime,desc'
       },
       currentPage: 1,
       loading: true,
@@ -270,11 +270,11 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.statusDialogVisible = false;
-          this.$message.success("启用成功");
+          this.$message.success('启用成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "修改失败");
+          this.$errorMessage.show(error, '修改失败');
           this.statusDialogVisible = false;
         });
     },
@@ -284,11 +284,11 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.disablledStatusDialogVisible = false;
-          this.$message.success("禁用成功");
+          this.$message.success('禁用成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "修改失败");
+          this.$errorMessage.show(error, '修改失败');
           this.disablledStatusDialogVisible = false;
         });
     },
@@ -298,18 +298,18 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
           this.deleting = false;
         });
     },
     onSort(e) {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
-      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.pagination.sort = `${e.prop},${e.order.replace('ending', '')}`;
       this.search();
     },
     search() {

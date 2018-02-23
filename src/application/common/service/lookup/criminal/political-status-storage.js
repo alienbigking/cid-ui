@@ -1,4 +1,4 @@
-const POLITICAL_STATUSES = "politicalStatuses";
+const POLITICAL_STATUSES = 'politicalStatuses';
 
 export default {
   getPoliticalStatuses() {

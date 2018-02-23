@@ -1,4 +1,4 @@
-const ACCENTS = "accents";
+const ACCENTS = 'accents';
 
 export default {
   getAccents() {

@@ -27,8 +27,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import userStatusService from "../../user/service/user-status-service";
+import { mapState, mapActions } from 'vuex';
+import userStatusService from '../../user/service/user-status-service';
 
 export default {
   data() {
@@ -46,7 +46,7 @@ export default {
     this.getTenant(this.$route.params.id);
   },
   methods: {
-    ...mapActions(["getTenant"]),
+    ...mapActions(['getTenant']),
     onBack() {
       this.$router.go(-1);
     }
@@ -54,4 +54,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 </style>

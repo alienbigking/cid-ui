@@ -39,72 +39,72 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       fingers: [
         {
-          label: "左手母指",
-          type: "leftThumbFeature",
-          attribute: "criminalFingerPrint"
+          label: '左手母指',
+          type: 'leftThumbFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "左手食指",
-          type: "leftForefingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '左手食指',
+          type: 'leftForefingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "左手中指",
-          type: "leftMiddleFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '左手中指',
+          type: 'leftMiddleFingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "左无名指",
-          type: "leftRingFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '左无名指',
+          type: 'leftRingFingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "左手小指",
-          type: "leftLittleFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '左手小指',
+          type: 'leftLittleFingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "右手母指",
-          type: "rightThumbFeature",
-          attribute: "criminalFingerPrint"
+          label: '右手母指',
+          type: 'rightThumbFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "右手食指",
-          type: "rightForefingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '右手食指',
+          type: 'rightForefingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "右手中指",
-          type: "rightMiddleFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '右手中指',
+          type: 'rightMiddleFingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "右无名指",
-          type: "rightRingFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '右无名指',
+          type: 'rightRingFingerFeature',
+          attribute: 'criminalFingerPrint'
         },
         {
-          label: "右手小指",
-          type: "rightLittleFingerFeature",
-          attribute: "criminalFingerPrint"
+          label: '右手小指',
+          type: 'rightLittleFingerFeature',
+          attribute: 'criminalFingerPrint'
         }
       ],
       faces: [
-        { label: "正脸", type: "frontPhoto", attribute: "criminalFace" },
-        { label: "侧脸", type: "leftPhoto", attribute: "criminalFace" },
-        { label: "侧脸", type: "rightPhoto", attribute: "criminalFace" }
+        { label: '正脸', type: 'frontPhoto', attribute: 'criminalFace' },
+        { label: '侧脸', type: 'leftPhoto', attribute: 'criminalFace' },
+        { label: '侧脸', type: 'rightPhoto', attribute: 'criminalFace' }
       ],
       iris: [
-        { label: "左眼瞳孔", type: "leftFeature", attribute: "criminalIris" },
-        { label: "右眼瞳孔", type: "rightFeature", attribute: "criminalIris" }
+        { label: '左眼瞳孔', type: 'leftFeature', attribute: 'criminalIris' },
+        { label: '右眼瞳孔', type: 'rightFeature', attribute: 'criminalIris' }
       ],
       loading: true,
       criminalFingerPrint: {},
@@ -116,18 +116,12 @@ export default {
     this.render();
   },
   methods: {
-    ...mapActions([
-      "getPrisonBureauCriminalFace",
-      "getPrisonBureauCriminalIris",
-      "getPrisonBureauCriminalFingerPrint"
-    ]),
+    ...mapActions(['getPrisonBureauCriminalFace', 'getPrisonBureauCriminalIris', 'getPrisonBureauCriminalFingerPrint']),
     render() {
       this.getPrisonBureauCriminalFingerPrint(this.$route.params.id)
         .then(() => {
           this.loading = false;
-          this.criminalFingerPrint = _.cloneDeep(
-            this.$store.state.prisonBureauCriminal.criminalFingerPrint
-          );
+          this.criminalFingerPrint = _.cloneDeep(this.$store.state.prisonBureauCriminal.criminalFingerPrint);
         })
         .catch(() => {
           this.loading = false;
@@ -135,9 +129,7 @@ export default {
       this.getPrisonBureauCriminalFace(this.$route.params.id)
         .then(() => {
           this.loading = false;
-          this.criminalFace = _.cloneDeep(
-            this.$store.state.prisonBureauCriminal.criminalFace
-          );
+          this.criminalFace = _.cloneDeep(this.$store.state.prisonBureauCriminal.criminalFace);
         })
         .catch(() => {
           this.loading = false;
@@ -145,9 +137,7 @@ export default {
       this.getPrisonBureauCriminalIris(this.$route.params.id)
         .then(() => {
           this.loading = false;
-          this.criminalIris = _.cloneDeep(
-            this.$store.state.prisonBureauCriminal.criminalIris
-          );
+          this.criminalIris = _.cloneDeep(this.$store.state.prisonBureauCriminal.criminalIris);
         })
         .catch(() => {
           this.loading = false;
@@ -244,7 +234,7 @@ export default {
     }
   }
   .setted {
-    background: url("../../../assets/images/avatar.jpg") no-repeat;
+    background: url('../../../assets/images/avatar.jpg') no-repeat;
     background-size: 80px 80px;
     background-position: center center;
   }

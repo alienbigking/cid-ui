@@ -1,4 +1,4 @@
-const FLED_TYPES = "fledTypes";
+const FLED_TYPES = 'fledTypes';
 
 export default {
   getFledTypes() {

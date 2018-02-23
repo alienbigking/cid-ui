@@ -10,6 +10,9 @@ export default {
     return axios.post('api/criminal-physical-characteristics', criminalPhysicalCharacteristic);
   },
   update(criminalPhysicalCharacteristic) {
-    return axios.put(`api/criminal-physical-characteristics/${criminalPhysicalCharacteristic.id}`, criminalPhysicalCharacteristic);
+    return axios.put(
+      `api/criminal-physical-characteristics/${criminalPhysicalCharacteristic.id}`,
+      criminalPhysicalCharacteristic
+    );
   }
 };

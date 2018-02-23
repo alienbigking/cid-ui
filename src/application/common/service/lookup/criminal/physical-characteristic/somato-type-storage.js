@@ -1,4 +1,4 @@
-const SOMATO_TYPES = "somatoTypes";
+const SOMATO_TYPES = 'somatoTypes';
 
 export default {
   getSomatoTypes() {

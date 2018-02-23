@@ -79,8 +79,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -89,7 +89,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,desc"
+        sort: 'createdTime,desc'
       },
       currentPage: 1,
       loading: true,
@@ -105,7 +105,7 @@ export default {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedPrisonBureauCriminals"]),
+    ...mapActions(['getPagedPrisonBureauCriminals']),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -122,16 +122,21 @@ export default {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
       let prop = e.prop;
-      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
+      this.pagination.sort = `${prop},${e.order.replace('ending', '')}`;
       this.search();
     },
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedPrisonBureauCriminals(params).then(() => {
-        this.searching = false;
-        this.loading = false;
-      }).catch(() => { this.searching = false; this.loading = false; });
+      this.getPagedPrisonBureauCriminals(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

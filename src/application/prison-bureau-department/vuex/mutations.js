@@ -1,5 +1,5 @@
 import * as types from './mutation-types';
-import _ from "lodash";
+import _ from 'lodash';
 
 export default {
   [types.SET_PRISON_BUREAU_DEPARTMENT](state, prisonBureauDepartment) {

@@ -60,9 +60,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
-import userStatusService from "../service/user-status-service";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
+import userStatusService from '../service/user-status-service';
 
 export default {
   data() {
@@ -70,24 +70,12 @@ export default {
       userStatuses: [],
       user: {},
       rules: {
-        username: [
-          { required: true, message: "请输入用户账号" },
-          { max: 100, message: "长度在 100 个字符内" }
-        ],
-        name: [
-          { required: true, message: "请输入姓名" },
-          { max: 100, message: "长度在 100 个字符内" }
-        ],
-        password: [
-          { required: true, message: "请输入密码" },
-          { min: 6, message: "密码长度最少6位" }
-        ],
-        phoneNumber: [
-          { required: true, message: "请输入手机号码" },
-          { validator: this.$validators.phoneNumber }
-        ],
-        status: [{ required: true, message: "请选择状态" }],
-        description: [{ max: 1000, message: "长度在 1000 个字符内" }]
+        username: [{ required: true, message: '请输入用户账号' }, { max: 100, message: '长度在 100 个字符内' }],
+        name: [{ required: true, message: '请输入姓名' }, { max: 100, message: '长度在 100 个字符内' }],
+        password: [{ required: true, message: '请输入密码' }, { min: 6, message: '密码长度最少6位' }],
+        phoneNumber: [{ required: true, message: '请输入手机号码' }, { validator: this.$validators.phoneNumber }],
+        status: [{ required: true, message: '请选择状态' }],
+        description: [{ max: 1000, message: '长度在 1000 个字符内' }]
       },
       saving: false
     };
@@ -95,29 +83,29 @@ export default {
   watch: {
     user: {
       handler: _.debounce(function(user) {
-        this.$store.commit("updateUser", user);
+        this.$store.commit('updateUser', user);
       }, 500),
       deep: true
     }
   },
   created() {
     this.userStatuses = userStatusService.getAll();
-    this.$store.commit("setUser", {});
+    this.$store.commit('setUser', {});
   },
   methods: {
-    ...mapActions(["addUser"]),
+    ...mapActions(['addUser']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.addUser()
             .then(res => {
               this.saving = false;
-              this.$message.success("新增成功");
+              this.$message.success('新增成功');
               this.$router.push(`/user/list`);
             })
             .catch(error => {
-              this.$errorMessage.show(error, "新增失败");
+              this.$errorMessage.show(error, '新增失败');
               this.saving = false;
             });
         }

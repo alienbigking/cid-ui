@@ -1,4 +1,4 @@
-const COUNTIES = "counties";
+const COUNTIES = 'counties';
 
 export default {
   getCounties(cityCode) {

@@ -37,13 +37,13 @@
   </el-header>
 </template>
 <script>
-import { mapActions } from "vuex";
-import profileStorage from "@/utils/profile/profile-storage";
+import { mapActions } from 'vuex';
+import profileStorage from '@/utils/profile/profile-storage';
 
 export default {
   data() {
     return {
-      userName: ""
+      userName: ''
     };
   },
   created() {
@@ -51,10 +51,10 @@ export default {
     this.userName = myProfile.username;
   },
   methods: {
-    ...mapActions(["logout", "toggleCollapsed"]),
+    ...mapActions(['logout', 'toggleCollapsed']),
     onLogout() {
       this.logout();
-      this.$router.push("/login");
+      this.$router.push('/login');
     },
     onNavigate(path) {
       this.$router.push(path);

@@ -29,8 +29,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import logTypeService from "../service/log-type-service";
+import { mapState, mapActions } from 'vuex';
+import logTypeService from '../service/log-type-service';
 
 export default {
   computed: {
@@ -43,7 +43,7 @@ export default {
     this.logTypes = logTypeService.getAll();
   },
   methods: {
-    ...mapActions(["getLog"]),
+    ...mapActions(['getLog']),
     onBack() {
       this.$router.go(-1);
     }
