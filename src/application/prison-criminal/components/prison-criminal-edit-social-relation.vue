@@ -105,16 +105,16 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import PrisonCriminalSocialRelationEdit from "./prison-criminal-social-relation-edit";
+import { mapState, mapActions } from 'vuex';
+import PrisonCriminalSocialRelationEdit from './prison-criminal-social-relation-edit';
 
 export default {
   components: {
-    "prison-criminal-social-relation-edit": PrisonCriminalSocialRelationEdit
+    'prison-criminal-social-relation-edit': PrisonCriminalSocialRelationEdit
   },
   data() {
     return {
-      criminalSocialRelationId: "",
+      criminalSocialRelationId: '',
       editDialogVisible: false,
       deleteDialogVisible: false,
       loading: true,
@@ -125,20 +125,16 @@ export default {
   },
   computed: {
     ...mapState({
-      allCriminalSocialRelations: state =>
-        state.prisonCriminal.allCriminalSocialRelations
+      allCriminalSocialRelations: state => state.prisonCriminal.allCriminalSocialRelations
     })
   },
   activated() {
     this.getList();
   },
   methods: {
-    ...mapActions([
-      "getAllPrisonCriminalSocialRelations",
-      "deletePrisonCriminalSocialRelation"
-    ]),
+    ...mapActions(['getAllPrisonCriminalSocialRelations', 'deletePrisonCriminalSocialRelation']),
     onNew() {
-      this.criminalSocialRelationId = "";
+      this.criminalSocialRelationId = '';
       this.editDialogVisible = true;
     },
     onEdit(id) {
@@ -155,18 +151,22 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.getList();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
           this.deleting = false;
         });
     },
     getList() {
       this.getAllPrisonCriminalSocialRelations(this.$route.params.id)
-        .then(() => { this.loading = false; })
-        .catch(() => { this.loading = false; });
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

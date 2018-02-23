@@ -107,8 +107,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -118,7 +118,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,desc"
+        sort: 'createdTime,desc'
       },
       currentPage: 1,
       loading: true,
@@ -135,12 +135,16 @@ export default {
     })
   },
   created() {
-    this.getAllPrisonBureauDepartments().then(() => {
-      this.gettingAllPrisonBureauDepartments = false;
-    }).catch(() => { this.gettingAllPrisonBureauDepartments = false; });
+    this.getAllPrisonBureauDepartments()
+      .then(() => {
+        this.gettingAllPrisonBureauDepartments = false;
+      })
+      .catch(() => {
+        this.gettingAllPrisonBureauDepartments = false;
+      });
   },
   methods: {
-    ...mapActions(["getAllPrisonBureauDepartments", "getPagedPrisonBureauDepartments", "deletePrisonBureauDepartment"]),
+    ...mapActions(['getAllPrisonBureauDepartments', 'getPagedPrisonBureauDepartments', 'deletePrisonBureauDepartment']),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -169,28 +173,33 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.search();
         })
         .catch(error => {
           this.deleting = false;
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
         });
     },
     onSort(e) {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
       let prop = e.prop;
-      this.pagination.sort = `${prop},${e.order.replace("ending", "")}`;
+      this.pagination.sort = `${prop},${e.order.replace('ending', '')}`;
       this.search();
     },
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedPrisonBureauDepartments(params).then(() => {
-        this.searching = false;
-        this.loading = false;
-      }).catch(() => { this.searching = false; this.loading = false; });
+      this.getPagedPrisonBureauDepartments(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {

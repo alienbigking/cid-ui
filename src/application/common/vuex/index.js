@@ -5,7 +5,7 @@ const state = {
   token: {},
   menus: [],
   menuCollapsed: false,
-  activeMenuId: ""
+  activeMenuId: ''
 };
 
 export default {

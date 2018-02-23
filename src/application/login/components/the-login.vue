@@ -42,50 +42,47 @@
   </el-container>
 </template>
 <script>
-import TheLoginFooter from "./the-login-footer";
-import TheLoginHeader from "./the-login-header";
-import logService from "../../log/service/log-service";
-import { mapActions } from "vuex";
+import TheLoginFooter from './the-login-footer';
+import TheLoginHeader from './the-login-header';
+import logService from '../../log/service/log-service';
+import { mapActions } from 'vuex';
 export default {
   components: {
-    "the-login-header": TheLoginHeader,
-    "the-login-footer": TheLoginFooter
+    'the-login-header': TheLoginHeader,
+    'the-login-footer': TheLoginFooter
   },
   data() {
     return {
       user: {
-        username: "prs0001",
-        password: "Password@1"
+        username: 'prs0001',
+        password: 'Password@1'
       },
       rules: {
-        username: [{ required: true, message: "用户名不能为空" }],
-        password: [
-          { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码长度最少6位" }
-        ]
+        username: [{ required: true, message: '用户名不能为空' }],
+        password: [{ required: true, message: '密码不能为空' }, { min: 6, message: '密码长度最少6位' }]
       }
     };
   },
   methods: {
-    ...mapActions(["login", "getMyProfile", "getMenus"]),
+    ...mapActions(['login', 'getMyProfile', 'getMenus']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.login(this.user)
             .then(() => {
-              sessionStorage.removeItem("myMenus");
-              sessionStorage.removeItem("myProfile");
+              sessionStorage.removeItem('myMenus');
+              sessionStorage.removeItem('myProfile');
               Promise.all([this.getMyProfile(), this.getMenus()]).then(() => {
                 logService.addLoginLog();
                 let redirect = this.$route.query.redirect;
                 if (!redirect) {
-                  redirect = "/dashboard";
+                  redirect = '/dashboard';
                 }
                 this.$router.push(redirect);
               });
             })
             .catch(error => {
-              this.$errorMessage.show(error, "登陆失败");
+              this.$errorMessage.show(error, '登陆失败');
             });
         }
       });
@@ -131,7 +128,7 @@ export default {
 }
 .flex-column {
   flex-direction: column;
-  background: url("../../../assets/images/backgroud.jpg") no-repeat;
+  background: url('../../../assets/images/backgroud.jpg') no-repeat;
   background-position: top center;
   background-size: cover;
 }

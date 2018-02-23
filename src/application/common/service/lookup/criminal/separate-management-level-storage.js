@@ -1,4 +1,4 @@
-const SEPARATE_MANAGEMENT_LEVELS = "separateManagementLevels";
+const SEPARATE_MANAGEMENT_LEVELS = 'separateManagementLevels';
 
 export default {
   getSeparateManagementLevels() {

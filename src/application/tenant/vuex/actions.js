@@ -1,6 +1,6 @@
-import * as types from "./mutation-types";
-import tenantRegisterService from "../service/tenant-register-service";
-import tenantService from "../service/tenant-service";
+import * as types from './mutation-types';
+import tenantRegisterService from '../service/tenant-register-service';
+import tenantService from '../service/tenant-service';
 
 export default {
   addPrisonTenant({ commit, state }) {

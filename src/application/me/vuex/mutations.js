@@ -1,6 +1,6 @@
 import * as types from './mutation-types';
 import profileStorage from '@/utils/profile/profile-storage';
-import _ from "lodash";
+import _ from 'lodash';
 
 export default {
   [types.SET_MY_PROFILE](state, myProfile) {

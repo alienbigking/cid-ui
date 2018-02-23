@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import _ from "lodash";
+import { mapActions, mapState } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -60,11 +60,8 @@ export default {
       gettingAllPrisonBureauDepartments: true,
       saving: false,
       rules: {
-        name: [
-          { required: true, message: "请输入监狱局部门名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        name: [{ required: true, message: '请输入监狱局部门名称' }, { max: 100, message: '长度在 1 到 100 个字符' }],
+        description: [{ max: 255, message: '255 个字符以内' }]
       }
     };
   },
@@ -76,7 +73,7 @@ export default {
   watch: {
     prisonBureauDepartment: {
       handler: _.debounce(function(prisonBureauDepartment) {
-        this.$store.commit("updatePrisonBureauDepartment", prisonBureauDepartment);
+        this.$store.commit('updatePrisonBureauDepartment', prisonBureauDepartment);
       }, 500),
       deep: true
     }
@@ -85,26 +82,26 @@ export default {
     this.getAllPrisonBureauDepartments().then(() => {
       this.gettingAllPrisonBureauDepartments = false;
     });
-    this.$store.commit("setPrisonBureauDepartment", {});
+    this.$store.commit('setPrisonBureauDepartment', {});
   },
   methods: {
-    ...mapActions(["addPrisonBureauDepartment", "getAllPrisonBureauDepartments"]),
+    ...mapActions(['addPrisonBureauDepartment', 'getAllPrisonBureauDepartments']),
     onBack() {
       this.$router.go(-1);
     },
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.addPrisonBureauDepartment()
             .then(res => {
-              this.$message.success("新增成功");
+              this.$message.success('新增成功');
               this.$router.push(`/prison-bureau-department/list`);
               this.saving = false;
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "新增失败");
+              this.$errorMessage.show(error, '新增失败');
             });
         }
       });

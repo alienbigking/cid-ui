@@ -1,4 +1,4 @@
-const SEPARATE_CUSTODY_TPYES = "separateCustodyTypes";
+const SEPARATE_CUSTODY_TPYES = 'separateCustodyTypes';
 
 export default {
   getSeparateCustodyTypes() {

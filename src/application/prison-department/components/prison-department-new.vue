@@ -50,8 +50,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import _ from "lodash";
+import { mapActions, mapState } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -60,11 +60,8 @@ export default {
       gettingAllPrisonDepartments: true,
       saving: false,
       rules: {
-        name: [
-          { required: true, message: "请输入监狱部门名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        name: [{ required: true, message: '请输入监狱部门名称' }, { max: 100, message: '长度在 1 到 100 个字符' }],
+        description: [{ max: 255, message: '255 个字符以内' }]
       }
     };
   },
@@ -76,7 +73,7 @@ export default {
   watch: {
     prisonDepartment: {
       handler: _.debounce(function(prisonDepartment) {
-        this.$store.commit("updatePrisonDepartment", prisonDepartment);
+        this.$store.commit('updatePrisonDepartment', prisonDepartment);
       }, 500),
       deep: true
     }
@@ -85,26 +82,26 @@ export default {
     this.getAllPrisonDepartments().then(() => {
       this.gettingAllPrisonDepartments = false;
     });
-    this.$store.commit("setPrisonDepartment", {});
+    this.$store.commit('setPrisonDepartment', {});
   },
   methods: {
-    ...mapActions(["addPrisonDepartment", "getAllPrisonDepartments"]),
+    ...mapActions(['addPrisonDepartment', 'getAllPrisonDepartments']),
     onBack() {
       this.$router.go(-1);
     },
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.addPrisonDepartment()
             .then(res => {
-              this.$message.success("新增成功");
+              this.$message.success('新增成功');
               this.$router.push(`/prison-department/list`);
               this.saving = false;
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "新增失败");
+              this.$errorMessage.show(error, '新增失败');
             });
         }
       });

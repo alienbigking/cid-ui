@@ -1,4 +1,4 @@
-const MY_MENUS = "myMenus";
+const MY_MENUS = 'myMenus';
 
 export default {
   getMyMenus() {

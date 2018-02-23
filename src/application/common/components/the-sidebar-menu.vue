@@ -46,7 +46,7 @@
   </el-menu>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -67,7 +67,7 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getMenus", "setActiveMenu"]),
+    ...mapActions(['getMenus', 'setActiveMenu']),
     onNavigate(path) {
       this.$router.push(path);
     },
@@ -76,7 +76,7 @@ export default {
       if (menu) {
         this.setActiveMenu(menu.id);
       } else {
-        this.setActiveMenu("");
+        this.setActiveMenu('');
       }
     },
     findMenu(menus, path) {

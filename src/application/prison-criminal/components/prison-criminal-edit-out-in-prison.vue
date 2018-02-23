@@ -93,17 +93,17 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import PrisonCriminalOutInPrisonEdit from "./prison-criminal-out-in-prison-edit";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import PrisonCriminalOutInPrisonEdit from './prison-criminal-out-in-prison-edit';
+import _ from 'lodash';
 
 export default {
   components: {
-    "prison-criminal-outinprison-edit": PrisonCriminalOutInPrisonEdit
+    'prison-criminal-outinprison-edit': PrisonCriminalOutInPrisonEdit
   },
   data() {
     return {
-      criminalOutInPrisonId: "",
+      criminalOutInPrisonId: '',
       editDialogVisible: null,
       deleteDialogVisible: false,
       deleting: false,
@@ -120,12 +120,9 @@ export default {
     this.getList();
   },
   methods: {
-    ...mapActions([
-      "getAllPrisonCriminalOutInPrisons",
-      "deletePrisonCriminalOutInPrison"
-    ]),
+    ...mapActions(['getAllPrisonCriminalOutInPrisons', 'deletePrisonCriminalOutInPrison']),
     onNew() {
-      this.criminalOutInPrisonId = "";
+      this.criminalOutInPrisonId = '';
       this.editDialogVisible = true;
     },
     onEdit(id) {
@@ -142,21 +139,23 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.getList();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
           this.deleting = false;
         });
     },
     getList() {
-      this.getAllPrisonCriminalOutInPrisons(this.$route.params.id).then(() => {
-        this.criminalOutInPrison = _.cloneDeep(
-          this.$store.state.criminal.criminalOutInPrison
-        );
-        this.loading = false;
-      }).catch(() => { this.loading = false; });
+      this.getAllPrisonCriminalOutInPrisons(this.$route.params.id)
+        .then(() => {
+          this.criminalOutInPrison = _.cloneDeep(this.$store.state.criminal.criminalOutInPrison);
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

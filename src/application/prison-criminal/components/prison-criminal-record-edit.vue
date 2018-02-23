@@ -213,14 +213,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   props: {
     criminalRecordId: {
       type: String,
-      default: ""
+      default: ''
     },
     editDialogVisible: {
       type: Boolean,
@@ -239,48 +239,24 @@ export default {
         criminalRecord: {}
       },
       rules: {
-        "criminalRecord.decisionAccusation": [
-          { required: true, message: "请输入判决罪名" }
+        'criminalRecord.decisionAccusation': [{ required: true, message: '请输入判决罪名' }],
+        'criminalRecord.arrestDate': [{ required: true, message: '请选择逮捕日期' }],
+        'criminalRecord.detentionDate': [{ required: true, message: '请输入羁押日期' }],
+        selectedArrestOrgan: [{ required: true, message: '请选择逮捕机关' }],
+        selectedProsecutionOrgan: [{ required: true, message: '请选择起诉机关' }],
+        'criminalRecord.prosecutionLetterNumber': [{ required: true, message: '请输入起诉字号' }],
+        'criminalRecord.prosecutionAccusation': [{ required: true, message: '请输入起诉罪名' }],
+        selectedFirstTrialOrgan: [{ required: true, message: '请选择一审机关' }],
+        'criminalRecord.firstTrialLetterNumber': [{ required: true, message: '请输入一审字号' }],
+        selectedDecisionOrgan: [{ required: true, message: '请选择判决机关' }],
+        'criminalRecord.decisionLetterNumber': [{ required: true, message: '请输入判决字号' }],
+        'criminalRecord.decisionDate': [{ required: true, message: '请选择判决日期' }],
+        'criminalRecord.decisionDeprivationPoliticalRightTimeLimit': [
+          { required: true, message: '请输入判决剥政年限' }
         ],
-        "criminalRecord.arrestDate": [
-          { required: true, message: "请选择逮捕日期" }
-        ],
-        "criminalRecord.detentionDate": [
-          { required: true, message: "请输入羁押日期" }
-        ],
-        selectedArrestOrgan: [{ required: true, message: "请选择逮捕机关" }],
-        selectedProsecutionOrgan: [
-          { required: true, message: "请选择起诉机关" }
-        ],
-        "criminalRecord.prosecutionLetterNumber": [
-          { required: true, message: "请输入起诉字号" }
-        ],
-        "criminalRecord.prosecutionAccusation": [
-          { required: true, message: "请输入起诉罪名" }
-        ],
-        selectedFirstTrialOrgan: [
-          { required: true, message: "请选择一审机关" }
-        ],
-        "criminalRecord.firstTrialLetterNumber": [
-          { required: true, message: "请输入一审字号" }
-        ],
-        selectedDecisionOrgan: [{ required: true, message: "请选择判决机关" }],
-        "criminalRecord.decisionLetterNumber": [
-          { required: true, message: "请输入判决字号" }
-        ],
-        "criminalRecord.decisionDate": [
-          { required: true, message: "请选择判决日期" }
-        ],
-        "criminalRecord.decisionDeprivationPoliticalRightTimeLimit": [
-          { required: true, message: "请输入判决剥政年限" }
-        ],
-        selectedFinalTrialOrgan: [
-          { required: true, message: "请输入终审机关" }
-        ],
-        startEndTime: [{ required: true, message: "请选择刑期日期" }],
-        "criminalRecord.appealed": [
-          { required: true, message: "请选择有否上诉" }
-        ]
+        selectedFinalTrialOrgan: [{ required: true, message: '请输入终审机关' }],
+        startEndTime: [{ required: true, message: '请选择刑期日期' }],
+        'criminalRecord.appealed': [{ required: true, message: '请选择有否上诉' }]
       },
       pickerBeginDateBefore: {
         disabledDate: time => {
@@ -292,8 +268,7 @@ export default {
       },
       pickerBeginDateAfter: {
         disabledDate: time => {
-          let beginDateVal = this.form.criminalRecord
-            .decisionPrisonTermStartDate;
+          let beginDateVal = this.form.criminalRecord.decisionPrisonTermStartDate;
           if (beginDateVal) {
             return time.getTime() < beginDateVal;
           }
@@ -315,55 +290,51 @@ export default {
         this.render();
       }
     },
-    "form.selectedArrestOrgan"(val) {
+    'form.selectedArrestOrgan'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         arrestOrganCode: val.code,
         arrestOrganName: val.name
       });
     },
-    "form.selectedProsecutionOrgan"(val) {
+    'form.selectedProsecutionOrgan'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         prosecutionOrganCode: val.code,
         prosecutionOrganName: val.name
       });
     },
-    "form.selectedFirstTrialOrgan"(val) {
+    'form.selectedFirstTrialOrgan'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         firstTrialOrganCode: val.code,
         firstTrialOrganName: val.name
       });
     },
-    "form.selectedFinalTrialOrgan"(val) {
+    'form.selectedFinalTrialOrgan'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         finalTrialOrganCode: val.code,
         finalTrialOrganName: val.name
       });
     },
-    "form.selectedDecisionOrgan"(val) {
+    'form.selectedDecisionOrgan'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         decisionOrganCode: val.code,
         decisionOrganName: val.name
       });
     },
-    "form.startEndTime"(val) {
+    'form.startEndTime'(val) {
       this.form.criminalRecord = Object.assign({}, this.form.criminalRecord, {
         decisionPrisonTermStartDate: val[0],
         decisionPrisonTermEndDate: val[1]
       });
     },
-    "form.criminalRecord": {
+    'form.criminalRecord': {
       handler: _.debounce(function(criminalRecord) {
-        this.$store.commit("updatePrisonCriminalRecord", criminalRecord);
+        this.$store.commit('updatePrisonCriminalRecord', criminalRecord);
       }, 500),
       deep: true
     }
   },
   created() {
-    Promise.all([
-      this.getAllCourts(),
-      this.getAllPoliceStations(),
-      this.getAllProcuratorates()
-    ]).then(() => {
+    Promise.all([this.getAllCourts(), this.getAllPoliceStations(), this.getAllProcuratorates()]).then(() => {
       this.allCourts = this.$store.state.court.allCourts;
       this.allPoliceStations = this.$store.state.policeStation.allPoliceStations;
       this.allProcuratorates = this.$store.state.procuratorate.allProcuratorates;
@@ -373,19 +344,19 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getAllCourts",
-      "getAllPoliceStations",
-      "getAllProcuratorates",
-      "getPrisonCriminalRecord",
-      "addPrisonCriminalRecord",
-      "updatePrisonCriminalRecord",
-      "getAllPrisonCriminalRecords"
+      'getAllCourts',
+      'getAllPoliceStations',
+      'getAllProcuratorates',
+      'getPrisonCriminalRecord',
+      'addPrisonCriminalRecord',
+      'updatePrisonCriminalRecord',
+      'getAllPrisonCriminalRecords'
     ]),
     onClose() {
-      this.$emit("on-close");
+      this.$emit('on-close');
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.criminalRecord.id) {
             // 修改
@@ -394,12 +365,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalRecords(this.$route.params.id);
-                this.$message.success("修改成功");
-                this.$emit("on-close");
+                this.$message.success('修改成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$message.error('修改失败');
               });
           } else {
             // 新增
@@ -408,12 +379,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalRecords(this.$route.params.id);
-                this.$message.success("新增成功");
-                this.$emit("on-close");
+                this.$message.success('新增成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$message.error('新增失败');
               });
           }
         }
@@ -426,18 +397,14 @@ export default {
         this.form.selectedFirstTrialOrgan = null;
         this.form.selectedFinalTrialOrgan = null;
         this.form.selectedDecisionOrgan = null;
-        this.$store.commit("setPrisonCriminalRecord", {
+        this.$store.commit('setPrisonCriminalRecord', {
           criminalId: this.$route.params.id
         });
-        this.form.criminalRecord = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalRecord
-        );
+        this.form.criminalRecord = _.cloneDeep(this.$store.state.prisonCriminal.criminalRecord);
         this.loading = false;
       } else {
         this.getPrisonCriminalRecord(this.criminalRecordId).then(() => {
-          this.form.criminalRecord = _.cloneDeep(
-            this.$store.state.prisonCriminal.criminalRecord
-          );
+          this.form.criminalRecord = _.cloneDeep(this.$store.state.prisonCriminal.criminalRecord);
           this.form.selectedArrestOrgan = {
             code: this.form.criminalRecord.arrestOrganCode,
             name: this.form.criminalRecord.arrestOrganName

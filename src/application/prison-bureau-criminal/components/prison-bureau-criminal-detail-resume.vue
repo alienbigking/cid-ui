@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   props: {
@@ -74,11 +74,15 @@ export default {
   },
   created() {
     this.getAllPrisonBureauCriminalResumes(this.$route.params.id)
-      .then(() => { this.loading = false; })
-      .catch(() => { this.loading = false; });
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
   methods: {
-    ...mapActions([ "getAllPrisonBureauCriminalResumes" ])
+    ...mapActions(['getAllPrisonBureauCriminalResumes'])
   }
 };
 </script>

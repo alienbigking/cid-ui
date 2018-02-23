@@ -55,22 +55,16 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       user: _.cloneDeep(this.$store.state.user.user),
       rules: {
-        name: [
-          { required: true, message: "姓名不能为空" },
-          { max: 100, message: "长度在 100 个字符内" }
-        ],
-        phoneNumber: [
-          { required: true, message: "请输入手机号码" },
-          { validator: this.$validators.phoneNumber }
-        ]
+        name: [{ required: true, message: '姓名不能为空' }, { max: 100, message: '长度在 100 个字符内' }],
+        phoneNumber: [{ required: true, message: '请输入手机号码' }, { validator: this.$validators.phoneNumber }]
       },
       saving: false
     };
@@ -78,7 +72,7 @@ export default {
   watch: {
     user: {
       handler: _.debounce(function(user) {
-        this.$store.commit("updateUser", user);
+        this.$store.commit('updateUser', user);
       }, 500),
       deep: true
     }
@@ -89,19 +83,19 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getUser", "updateUser"]),
+    ...mapActions(['getUser', 'updateUser']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.updateUser()
             .then(() => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });

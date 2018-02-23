@@ -49,14 +49,14 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 export default {
   data() {
     return {
       userPassword: {
-        oldPassword: "",
-        newPassword: "",
-        checkPassword: ""
+        oldPassword: '',
+        newPassword: '',
+        checkPassword: ''
       },
       saving: false,
       showNewPassword: false,
@@ -66,27 +66,24 @@ export default {
   computed: {
     rules() {
       return {
-        oldPassword: [
-          { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码长度最少6位" }
-        ],
+        oldPassword: [{ required: true, message: '密码不能为空' }, { min: 6, message: '密码长度最少6位' }],
         newPassword: [
-          { required: true, message: "密码不能为空" },
-          { min: 6, message: "密码长度最少6位" },
+          { required: true, message: '密码不能为空' },
+          { min: 6, message: '密码长度最少6位' },
           {
             validator: this.$validators.checkOtherField,
-            form: "form",
-            otherField: "checkPassword",
+            form: 'form',
+            otherField: 'checkPassword',
             model: this.userPassword,
             refs: this.$refs
           }
         ],
         checkPassword: [
-          { required: true, message: "确认密码不能为空" },
+          { required: true, message: '确认密码不能为空' },
           {
             validator: this.$validators.equalTo,
-            compareTo: "newPassword",
-            message: "密码不匹配",
+            compareTo: 'newPassword',
+            message: '密码不匹配',
             model: this.userPassword
           }
         ]
@@ -94,9 +91,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(["updatePassword"]),
+    ...mapActions(['updatePassword']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           const params = {
@@ -106,11 +103,11 @@ export default {
           this.updatePassword(params)
             .then(() => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });
@@ -144,7 +141,7 @@ export default {
   .form-btn {
     display: flex;
     justify-content: space-between;
-    [class*="button-"] {
+    [class*='button-'] {
       width: 160px;
     }
   }

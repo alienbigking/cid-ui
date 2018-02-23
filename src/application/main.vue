@@ -21,14 +21,14 @@
 </template>
 
 <script>
-import * as commonComponents from "./common/components";
+import * as commonComponents from './common/components';
 
 export default {
   components: {
-    "the-header": commonComponents.TheHeader,
-    "the-sidebar": commonComponents.TheSidebar,
-    "the-breadcrumb": commonComponents.TheBreadcrumb,
-    "the-footer": commonComponents.TheFooter
+    'the-header': commonComponents.TheHeader,
+    'the-sidebar': commonComponents.TheSidebar,
+    'the-breadcrumb': commonComponents.TheBreadcrumb,
+    'the-footer': commonComponents.TheFooter
   }
 };
 </script>
@@ -36,7 +36,7 @@ export default {
 .flex-column {
   flex-direction: column;
 }
-.content-box{
+.content-box {
   height: calc(100% - 47px);
   flex-shrink: 0;
   overflow: auto;

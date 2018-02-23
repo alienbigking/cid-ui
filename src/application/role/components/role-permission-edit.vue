@@ -26,8 +26,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import _ from 'lodash';
 export default {
   props: {
     editDialogVisible: {
@@ -36,7 +36,7 @@ export default {
     },
     roleId: {
       type: String,
-      default: ""
+      default: ''
     }
   },
   data() {
@@ -54,7 +54,7 @@ export default {
   watch: {
     checkedPermissions: {
       handler: function(val) {
-        this.$store.commit("setRolePermissions", val);
+        this.$store.commit('setRolePermissions', val);
       },
       deep: true
     }
@@ -65,13 +65,11 @@ export default {
     });
   },
   methods: {
-    ...mapActions([
-      "getAllPermissions",
-      "getRolePermissions",
-      "updateRolePermissions"
-    ]),
+    ...mapActions(['getAllPermissions', 'getRolePermissions', 'updateRolePermissions']),
     nodeClick(data, node) {
-      if (!node.childNodes.length) this.$refs.tree.setChecked(data.id, !node.checked);
+      if (!node.childNodes.length) {
+        this.$refs.tree.setChecked(data.id, !node.checked);
+      }
     },
     onCheckChange() {
       let checkedPermissions = [];
@@ -83,21 +81,25 @@ export default {
     onSaving() {
       this.saving = true;
       if (this.checkedPermissions.length) {
-        this.updateRolePermissions(this.$route.params.id).then(() => {
-          this.$message.success("设置成功");
-          this.saving = false;
-        }).catch(() => {
-          this.$message.error("设置失败");
-          this.saving = false;
-        });
+        this.updateRolePermissions(this.$route.params.id)
+          .then(() => {
+            this.$message.success('设置成功');
+            this.saving = false;
+          })
+          .catch(() => {
+            this.$message.error('设置失败');
+            this.saving = false;
+          });
       } else {
-        this.deleteRolePermissions(this.$route.params.id).then(() => {
-          this.$message.success("设置成功");
-          this.saving = false;
-        }).catch(() => {
-          this.$message.error("设置失败");
-          this.saving = false;
-        });
+        this.deleteRolePermissions(this.$route.params.id)
+          .then(() => {
+            this.$message.success('设置成功');
+            this.saving = false;
+          })
+          .catch(() => {
+            this.$message.error('设置失败');
+            this.saving = false;
+          });
       }
     },
     onBack() {
@@ -121,7 +123,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-body{
+.card-body {
   padding: 30px 20px 20px;
   border: 0;
 }

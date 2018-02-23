@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   data() {
@@ -63,11 +63,15 @@ export default {
   },
   created() {
     this.getAllPrisonCriminalOutInPrisons(this.$route.params.id)
-      .then(() => { this.loading = false; })
-      .catch(() => { this.loading = false; });
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
   methods: {
-    ...mapActions([ "getAllPrisonCriminalOutInPrisons" ])
+    ...mapActions(['getAllPrisonCriminalOutInPrisons'])
   }
 };
 </script>

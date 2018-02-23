@@ -1,4 +1,4 @@
-const FACE_TYPES = "faceTypes";
+const FACE_TYPES = 'faceTypes';
 
 export default {
   getFaceTypes() {

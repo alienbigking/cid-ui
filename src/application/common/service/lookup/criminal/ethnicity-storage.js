@@ -1,4 +1,4 @@
-const ETHNICITIES = "ethnicities";
+const ETHNICITIES = 'ethnicities';
 
 export default {
   getEthnicities() {

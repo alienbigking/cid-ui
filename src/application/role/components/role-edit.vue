@@ -35,21 +35,16 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       role: _.cloneDeep(this.$store.state.role.role),
       rules: {
-        name: [
-          { required: true, message: "请输入角色名称" },
-          { max: 100, message: "长度在 100 个字符内" }
-        ],
-        description: [
-          { max: 1000, message: "长度在 1000 个字符内" }
-        ]
+        name: [{ required: true, message: '请输入角色名称' }, { max: 100, message: '长度在 100 个字符内' }],
+        description: [{ max: 1000, message: '长度在 1000 个字符内' }]
       },
       saving: false
     };
@@ -57,7 +52,7 @@ export default {
   watch: {
     role: {
       handler: _.debounce(function(role) {
-        this.$store.commit("updateRole", role);
+        this.$store.commit('updateRole', role);
       }, 500),
       deep: true
     }
@@ -68,20 +63,20 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getRole", "updateRole"]),
+    ...mapActions(['getRole', 'updateRole']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.updateRole()
             .then(res => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
               this.$router.push(`/role/list`);
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });
@@ -94,4 +89,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 </style>

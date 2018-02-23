@@ -1,4 +1,4 @@
-const OUT_IN_PRISON_REASONS = "outInPrisonReasons";
+const OUT_IN_PRISON_REASONS = 'outInPrisonReasons';
 
 export default {
   getOutInPrisonReasons() {

@@ -1,4 +1,4 @@
-const ALL_COUNTRIES = "allCountries";
+const ALL_COUNTRIES = 'allCountries';
 
 export default {
   getAllCountries() {

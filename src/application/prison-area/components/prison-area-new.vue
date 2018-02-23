@@ -56,8 +56,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import _ from "lodash";
+import { mapActions, mapState } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -66,15 +66,9 @@ export default {
       gettingAllPrisonAreas: true,
       saving: false,
       rules: {
-        code: [
-          { required: true, message: "请输入组织机构代码" },
-          { max: 50, message: "长度在 1 到 50 个字符" }
-        ],
-        name: [
-          { required: true, message: "请输入监区名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        code: [{ required: true, message: '请输入组织机构代码' }, { max: 50, message: '长度在 1 到 50 个字符' }],
+        name: [{ required: true, message: '请输入监区名称' }, { max: 100, message: '长度在 1 到 100 个字符' }],
+        description: [{ max: 255, message: '255 个字符以内' }]
       }
     };
   },
@@ -86,7 +80,7 @@ export default {
   watch: {
     prisonArea: {
       handler: _.debounce(function(prisonArea) {
-        this.$store.commit("updatePrisonArea", prisonArea);
+        this.$store.commit('updatePrisonArea', prisonArea);
       }, 500),
       deep: true
     }
@@ -95,26 +89,26 @@ export default {
     this.getAllPrisonAreas().then(() => {
       this.gettingAllPrisonAreas = false;
     });
-    this.$store.commit("setPrisonArea", {});
+    this.$store.commit('setPrisonArea', {});
   },
   methods: {
-    ...mapActions(["addPrisonArea", "getAllPrisonAreas"]),
+    ...mapActions(['addPrisonArea', 'getAllPrisonAreas']),
     onBack() {
       this.$router.go(-1);
     },
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.addPrisonArea()
             .then(res => {
-              this.$message.success("新增成功");
+              this.$message.success('新增成功');
               this.$router.push(`/prison-area/list`);
               this.saving = false;
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "新增失败");
+              this.$errorMessage.show(error, '新增失败');
             });
         }
       });

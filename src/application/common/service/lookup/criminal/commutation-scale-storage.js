@@ -1,4 +1,4 @@
-const COMMUTATION_SCALES = "commutationScales";
+const COMMUTATION_SCALES = 'commutationScales';
 
 export default {
   getCommutationScales() {

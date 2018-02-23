@@ -1,4 +1,4 @@
-const CITIES = "cities";
+const CITIES = 'cities';
 
 export default {
   getCities(provinceCode) {

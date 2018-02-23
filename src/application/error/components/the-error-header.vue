@@ -32,18 +32,18 @@
   </el-header>
 </template>
 <script>
-import { mapActions } from "vuex";
+import { mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions(["logout"]),
+    ...mapActions(['logout']),
     onLogout() {
       this.logout();
-      this.$router.push("/login");
+      this.$router.push('/login');
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-@import "./error";
+@import './error';
 </style>

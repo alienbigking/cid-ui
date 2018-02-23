@@ -1,4 +1,4 @@
-const GENDERS = "genders";
+const GENDERS = 'genders';
 
 export default {
   getGenders() {

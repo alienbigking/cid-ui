@@ -100,9 +100,9 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import logTypeService from "../service/log-type-service";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import logTypeService from '../service/log-type-service';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -111,7 +111,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,desc"
+        sort: 'createdTime,desc'
       },
       currentPage: 1,
       gettingLogs: true,
@@ -127,7 +127,7 @@ export default {
     this.logTypes = logTypeService.getAll();
   },
   methods: {
-    ...mapActions(["getPagedLogs", "deleteLog"]),
+    ...mapActions(['getPagedLogs', 'deleteLog']),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -144,7 +144,7 @@ export default {
     onSort(e) {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
-      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.pagination.sort = `${e.prop},${e.order.replace('ending', '')}`;
       this.search();
     },
     search() {

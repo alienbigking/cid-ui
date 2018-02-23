@@ -158,9 +158,9 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import userStatusService from "../../user/service/user-status-service";
-import _ from "lodash";
+import { mapState, mapActions } from 'vuex';
+import userStatusService from '../../user/service/user-status-service';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -170,7 +170,7 @@ export default {
       pagination: {
         page: 0,
         size: 10,
-        sort: "createdTime,desc"
+        sort: 'createdTime,desc'
       },
       currentPage: 1,
       loading: true,
@@ -194,7 +194,7 @@ export default {
     this.userStatuses = userStatusService.getAll();
   },
   methods: {
-    ...mapActions(["getPagedTenants", "deleteTenant", "enableTenant", "disableTenant"]),
+    ...mapActions(['getPagedTenants', 'deleteTenant', 'enableTenant', 'disableTenant']),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -220,11 +220,11 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.statusDialogVisible = false;
-          this.$message.success("启用成功");
+          this.$message.success('启用成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "修改失败");
+          this.$errorMessage.show(error, '修改失败');
           this.statusDialogVisible = false;
         });
     },
@@ -238,11 +238,11 @@ export default {
         .then(res => {
           this.settingStatus = false;
           this.disablledStatusDialogVisible = false;
-          this.$message.success("禁用成功");
+          this.$message.success('禁用成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "修改失败");
+          this.$errorMessage.show(error, '修改失败');
           this.disablledStatusDialogVisible = false;
         });
     },
@@ -259,27 +259,32 @@ export default {
         .then(res => {
           this.deleting = false;
           this.deleteDialogVisible = false;
-          this.$message.success("删除成功");
+          this.$message.success('删除成功');
           this.search();
         })
         .catch(error => {
-          this.$errorMessage.show(error, "删除失败");
+          this.$errorMessage.show(error, '删除失败');
           this.deleting = false;
         });
     },
     onSort(e) {
       if (!e.prop || !e.order) return;
       this.pagination.page = 0;
-      this.pagination.sort = `${e.prop},${e.order.replace("ending", "")}`;
+      this.pagination.sort = `${e.prop},${e.order.replace('ending', '')}`;
       this.search();
     },
     search() {
       this.loading = true;
       let params = Object.assign({}, this.getFilter(), this.pagination);
-      this.getPagedTenants(params).then(() => {
-        this.searching = false;
-        this.loading = false;
-      }).catch(() => { this.searching = false; this.loading = false; });
+      this.getPagedTenants(params)
+        .then(() => {
+          this.searching = false;
+          this.loading = false;
+        })
+        .catch(() => {
+          this.searching = false;
+          this.loading = false;
+        });
     },
     getFilter() {
       return _.transform(this.filter, (result, value, key) => {
@@ -302,7 +307,7 @@ export default {
   button:nth-child(3) {
     color: #f44336;
   }
-  .button-status{
+  .button-status {
     vertical-align: baseline;
   }
 }

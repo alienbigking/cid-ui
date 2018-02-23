@@ -56,8 +56,8 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
-import userStatusService from "../service/user-status-service";
+import { mapState, mapActions } from 'vuex';
+import userStatusService from '../service/user-status-service';
 
 export default {
   data() {
@@ -80,7 +80,7 @@ export default {
     this.userStatuses = userStatusService.getAll();
   },
   methods: {
-    ...mapActions(["getUser", "getPermissions"]),
+    ...mapActions(['getUser', 'getPermissions']),
     onBack() {
       this.$router.go(-1);
     }

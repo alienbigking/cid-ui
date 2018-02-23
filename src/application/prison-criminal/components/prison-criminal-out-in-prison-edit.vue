@@ -64,15 +64,15 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import criminalOutInPrisonLookupService from "@/application/common/service/lookup/criminal/out-in-prison/criminal-out-in-prison-lookup-service";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import criminalOutInPrisonLookupService from '@/application/common/service/lookup/criminal/out-in-prison/criminal-out-in-prison-lookup-service';
+import _ from 'lodash';
 
 export default {
   props: {
     criminalOutInPrisonId: {
       type: String,
-      default: ""
+      default: ''
     },
     editDialogVisible: {
       type: Boolean,
@@ -83,20 +83,12 @@ export default {
     return {
       form: {
         selectedOutInPrisonReasons: {},
-        criminalOutInPrison: _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalOutInPrison
-        )
+        criminalOutInPrison: _.cloneDeep(this.$store.state.prisonCriminal.criminalOutInPrison)
       },
       rules: {
-        "criminalOutInPrison.outgoingDate": [
-          { required: true, message: "请输入出监日期" }
-        ],
-        "criminalOutInPrison.entryDate": [
-          { required: true, message: "请输入入监日期" }
-        ],
-        selectedOutInPrisonReasons: [
-          { required: true, message: "请选择出监事由" }
-        ]
+        'criminalOutInPrison.outgoingDate': [{ required: true, message: '请输入出监日期' }],
+        'criminalOutInPrison.entryDate': [{ required: true, message: '请输入入监日期' }],
+        selectedOutInPrisonReasons: [{ required: true, message: '请选择出监事由' }]
       },
       initializing: true,
       allOutInPrisonReasons: [],
@@ -112,23 +104,21 @@ export default {
         this.render();
       }
     },
-    "form.selectedOutInPrisonReasons"(val) {
-      this.form.criminalOutInPrison = Object.assign({}, this.form.criminalOutInPrison, { reasonCode: val.code, reasonName: val.name });
+    'form.selectedOutInPrisonReasons'(val) {
+      this.form.criminalOutInPrison = Object.assign({}, this.form.criminalOutInPrison, {
+        reasonCode: val.code,
+        reasonName: val.name
+      });
     },
-    "form.criminalOutInPrison": {
+    'form.criminalOutInPrison': {
       handler: _.debounce(function(criminalOutInPrison) {
-        this.$store.commit(
-          "updatePrisonCriminalOutInPrison",
-          criminalOutInPrison
-        );
+        this.$store.commit('updatePrisonCriminalOutInPrison', criminalOutInPrison);
       }, 500),
       deep: true
     }
   },
   created() {
-    Promise.all([
-      criminalOutInPrisonLookupService.getAllOutInPrisonReasons()
-    ]).then(response => {
+    Promise.all([criminalOutInPrisonLookupService.getAllOutInPrisonReasons()]).then(response => {
       this.allOutInPrisonReasons = response[0];
       this.initializing = false;
       this.render();
@@ -136,16 +126,16 @@ export default {
   },
   methods: {
     ...mapActions([
-      "getPrisonCriminalOutInPrison",
-      "addPrisonCriminalOutInPrison",
-      "updatePrisonCriminalOutInPrison",
-      "getAllPrisonCriminalOutInPrisons"
+      'getPrisonCriminalOutInPrison',
+      'addPrisonCriminalOutInPrison',
+      'updatePrisonCriminalOutInPrison',
+      'getAllPrisonCriminalOutInPrisons'
     ]),
     onClose() {
-      this.$emit("on-close");
+      this.$emit('on-close');
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.criminalOutInPrison.id) {
             // 修改
@@ -154,12 +144,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalOutInPrisons(this.$route.params.id);
-                this.$message.success("修改成功");
-                this.$emit("on-close");
+                this.$message.success('修改成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("修改失败");
+                this.$message.error('修改失败');
               });
           } else {
             // 新增
@@ -168,12 +158,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.getAllPrisonCriminalOutInPrisons(this.$route.params.id);
-                this.$message.success("新增成功");
-                this.$emit("on-close");
+                this.$message.success('新增成功');
+                this.$emit('on-close');
               })
               .catch(() => {
                 this.saving = false;
-                this.$message.error("新增失败");
+                this.$message.error('新增失败');
               });
           }
         }
@@ -182,26 +172,20 @@ export default {
     render() {
       if (!this.criminalOutInPrisonId) {
         this.form.selectedOutInPrisonReasons = {};
-        this.$store.commit("setPrisonCriminalOutInPrison", {
+        this.$store.commit('setPrisonCriminalOutInPrison', {
           criminalId: this.$route.params.id
         });
-        this.form.criminalOutInPrison = _.cloneDeep(
-          this.$store.state.prisonCriminal.criminalOutInPrison
-        );
+        this.form.criminalOutInPrison = _.cloneDeep(this.$store.state.prisonCriminal.criminalOutInPrison);
         this.loading = false;
       } else {
-        this.getPrisonCriminalOutInPrison(this.criminalOutInPrisonId).then(
-          () => {
-            this.form.criminalOutInPrison = _.cloneDeep(
-              this.$store.state.prisonCriminal.criminalOutInPrison
-            );
-            this.form.selectedOutInPrisonReasons = {
-              code: this.form.criminalOutInPrison.reasonCode,
-              name: this.form.criminalOutInPrison.reasonName
-            };
-            this.loading = false;
-          }
-        );
+        this.getPrisonCriminalOutInPrison(this.criminalOutInPrisonId).then(() => {
+          this.form.criminalOutInPrison = _.cloneDeep(this.$store.state.prisonCriminal.criminalOutInPrison);
+          this.form.selectedOutInPrisonReasons = {
+            code: this.form.criminalOutInPrison.reasonCode,
+            name: this.form.criminalOutInPrison.reasonName
+          };
+          this.loading = false;
+        });
       }
     }
   }

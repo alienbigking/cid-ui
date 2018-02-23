@@ -150,9 +150,9 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import criminalPhysicalCharacteristicLookupService from "@/application/common/service/lookup/criminal/physical-characteristic/criminal-physical-characteristic-lookup-service";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import criminalPhysicalCharacteristicLookupService from '@/application/common/service/lookup/criminal/physical-characteristic/criminal-physical-characteristic-lookup-service';
+import _ from 'lodash';
 
 export default {
   data() {
@@ -165,19 +165,17 @@ export default {
         criminalPhysicalCharacteristic: {}
       },
       rules: {
-        "criminalPhysicalCharacteristic.height": [
-          { required: true, message: "请输入身高" },
+        'criminalPhysicalCharacteristic.height': [
+          { required: true, message: '请输入身高' },
           { validator: this.$validators.decimal1i2f }
         ],
-        "criminalPhysicalCharacteristic.weight": [
-          { required: true, message: "请输入体重" },
+        'criminalPhysicalCharacteristic.weight': [
+          { required: true, message: '请输入体重' },
           { validator: this.$validators.decimal3i2f }
         ],
-        "criminalPhysicalCharacteristic.footLength": [
-          { validator: this.$validators.decimal2i2f }
-        ],
-        selectedSomatotype: [{ required: true, message: "请选择血型" }],
-        selectedFaceType: [{ required: true, message: "请选择脸型" }]
+        'criminalPhysicalCharacteristic.footLength': [{ validator: this.$validators.decimal2i2f }],
+        selectedSomatotype: [{ required: true, message: '请选择血型' }],
+        selectedFaceType: [{ required: true, message: '请选择脸型' }]
       },
       initializing: true,
       allSomatotypes: [],
@@ -188,24 +186,33 @@ export default {
     };
   },
   watch: {
-    "form.selectedSomatotype"(val) {
-      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { somatotypeCode: val.code, somatotypeName: val.name });
+    'form.selectedSomatotype'(val) {
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, {
+        somatotypeCode: val.code,
+        somatotypeName: val.name
+      });
     },
-    "form.selectedFaceType"(val) {
-      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { faceTypeCode: val.code, faceTypeName: val.name });
+    'form.selectedFaceType'(val) {
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, {
+        faceTypeCode: val.code,
+        faceTypeName: val.name
+      });
     },
-    "form.selectedBloodType"(val) {
-      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { bloodTypeCode: val.code, bloodTypeName: val.name });
+    'form.selectedBloodType'(val) {
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, {
+        bloodTypeCode: val.code,
+        bloodTypeName: val.name
+      });
     },
-    "form.selectedAccent"(val) {
-      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, { accentCode: val.code, accentName: val.name });
+    'form.selectedAccent'(val) {
+      this.form.criminalPhysicalCharacteristic = Object.assign({}, this.form.criminalPhysicalCharacteristic, {
+        accentCode: val.code,
+        accentName: val.name
+      });
     },
-    "form.criminalPhysicalCharacteristic": {
+    'form.criminalPhysicalCharacteristic': {
       handler: _.debounce(function(criminalPhysicalCharacteristic) {
-        this.$store.commit(
-          "updatePrisonCriminalPhysicalCharacteristic",
-          criminalPhysicalCharacteristic
-        );
+        this.$store.commit('updatePrisonCriminalPhysicalCharacteristic', criminalPhysicalCharacteristic);
       }, 500),
       deep: true
     }
@@ -233,13 +240,13 @@ export default {
     },
     addPhysicalCharacteristic() {
       this.form.criminalPhysicalCharacteristic.otherFeatures.push({
-        description: ""
+        description: ''
       });
     },
     ...mapActions([
-      "getPrisonCriminalPhysicalCharacteristic",
-      "addPrisonCriminalPhysicalCharacteristic",
-      "updatePrisonCriminalPhysicalCharacteristic"
+      'getPrisonCriminalPhysicalCharacteristic',
+      'addPrisonCriminalPhysicalCharacteristic',
+      'updatePrisonCriminalPhysicalCharacteristic'
     ]),
     render() {
       this.getPrisonCriminalPhysicalCharacteristic(this.$route.params.id).then(() => {
@@ -248,7 +255,10 @@ export default {
           this.$store.state.prisonCriminal.criminalPhysicalCharacteristic
         );
         if (!this.form.criminalPhysicalCharacteristic.id) {
-          this.$store.commit("setPrisonCriminalPhysicalCharacteristic", { criminalId: this.$route.params.id, otherFeatures: [] });
+          this.$store.commit('setPrisonCriminalPhysicalCharacteristic', {
+            criminalId: this.$route.params.id,
+            otherFeatures: []
+          });
           this.form.criminalPhysicalCharacteristic = _.cloneDeep(
             this.$store.state.prisonCriminal.criminalPhysicalCharacteristic
           );
@@ -273,7 +283,7 @@ export default {
       });
     },
     onSave() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           if (this.form.criminalPhysicalCharacteristic.id) {
             // 修改
@@ -282,12 +292,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.render();
-                this.$message.success("修改成功");
+                this.$message.success('修改成功');
                 this.editDialogVisible = false;
               })
               .catch(error => {
                 this.saving = false;
-                this.$errorMessage.show(error, "修改失败");
+                this.$errorMessage.show(error, '修改失败');
               });
           } else {
             // 新增
@@ -296,12 +306,12 @@ export default {
               .then(res => {
                 this.saving = false;
                 this.render();
-                this.$message.success("新增成功");
+                this.$message.success('新增成功');
                 this.editDialogVisible = false;
               })
               .catch(error => {
                 this.saving = false;
-                this.$errorMessage.show(error, "新增失败");
+                this.$errorMessage.show(error, '新增失败');
               });
           }
         }
@@ -312,13 +322,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table40{ margin-bottom: 0; }
+.table40 {
+  margin-bottom: 0;
+}
 .cell {
   button {
     color: #f44336;
   }
 }
-.mini{
+.mini {
   float: right;
   margin-bottom: 5px;
   height: 31px;

@@ -46,23 +46,17 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
-import _ from "lodash";
+import { mapActions } from 'vuex';
+import _ from 'lodash';
 
 export default {
   data() {
     return {
       prisonArea: _.cloneDeep(this.$store.state.prisonArea.prisonArea),
       rules: {
-        code: [
-          { required: true, message: "请输入组织结构代码" },
-          { max: 50, message: "长度在 1 到 50 个字符" }
-        ],
-        name: [
-          { required: true, message: "请输入监区名称" },
-          { max: 100, message: "长度在 1 到 100 个字符" }
-        ],
-        description: [{ max: 255, message: "255 个字符以内" }]
+        code: [{ required: true, message: '请输入组织结构代码' }, { max: 50, message: '长度在 1 到 50 个字符' }],
+        name: [{ required: true, message: '请输入监区名称' }, { max: 100, message: '长度在 1 到 100 个字符' }],
+        description: [{ max: 255, message: '255 个字符以内' }]
       },
       saving: false
     };
@@ -70,7 +64,7 @@ export default {
   watch: {
     prisonArea: {
       handler: _.debounce(function(prisonArea) {
-        this.$store.commit("updatePrisonArea", prisonArea);
+        this.$store.commit('updatePrisonArea', prisonArea);
       }, 500),
       deep: true
     }
@@ -81,20 +75,20 @@ export default {
     });
   },
   methods: {
-    ...mapActions(["getPrisonArea", "updatePrisonArea"]),
+    ...mapActions(['getPrisonArea', 'updatePrisonArea']),
     onSubmit() {
-      this.$refs["form"].validate(valid => {
+      this.$refs['form'].validate(valid => {
         if (valid) {
           this.saving = true;
           this.updatePrisonArea()
             .then(res => {
               this.saving = false;
-              this.$message.success("修改成功");
+              this.$message.success('修改成功');
               this.$router.push(`/prison-area/list`);
             })
             .catch(error => {
               this.saving = false;
-              this.$errorMessage.show(error, "修改失败");
+              this.$errorMessage.show(error, '修改失败');
             });
         }
       });

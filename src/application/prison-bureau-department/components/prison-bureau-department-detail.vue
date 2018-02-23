@@ -26,7 +26,7 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "vuex";
+import { mapState, mapActions } from 'vuex';
 
 export default {
   computed: {
@@ -38,7 +38,7 @@ export default {
     this.getPrisonBureauDepartment(this.$route.params.id);
   },
   methods: {
-    ...mapActions(["getPrisonBureauDepartment"]),
+    ...mapActions(['getPrisonBureauDepartment']),
     onBack() {
       this.$router.go(-1);
     }
@@ -46,4 +46,5 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+
 </style>
