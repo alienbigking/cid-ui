@@ -6,7 +6,7 @@
       <el-container class="flex-column">
         <el-main :style="!$route.meta||!$route.meta.noSide?'':'padding:0'">
           <the-breadcrumb v-if="!$route.meta||!$route.meta.noSide"/>
-          <div class="hhhhh">
+          <div>
             <transition
               name="router-fade"
               mode="out-in">

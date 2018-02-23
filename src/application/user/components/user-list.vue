@@ -106,6 +106,10 @@
               v-if="!scope.row.isAdministrator"
               type="text"
               @click="onDelete(scope.row)">删除</el-button>
+            <opt-button
+              type="text"
+              text="分配角色"
+              @onClick="log(scope.row.id)" />
           </template>
         </el-table-column>
       </el-table>
@@ -223,6 +227,9 @@ export default {
   },
   methods: {
     ...mapActions(["getPagedUsers", "deleteUser", "enableUser", "disableUser"]),
+    log(e) {
+      console.log(e);
+    },
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
