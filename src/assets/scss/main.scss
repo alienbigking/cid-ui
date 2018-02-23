@@ -1,55 +1,63 @@
-@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection{
+@each $type in search, addInList, addInEdit, addInNew, confirm, cancel, sure, addCollection {
   .el-button.button-#{$type} {
     @include button-diy($type);
   }
 }
-.sidebar-menu{ // 不能改哦，这是侧边栏最外层el-menu的样式
+.sidebar-menu {
+  // 不能改哦，这是侧边栏最外层el-menu的样式
   width: 100% !important;
   transition: width 0;
   border-right: 0;
-  .el-submenu__icon-arrow{
-    color: #FFFFFF; margin-top: -4px;
+  .el-submenu__icon-arrow {
+    color: #ffffff;
+    margin-top: -4px;
   }
   .el-submenu {
-    .el-menu{
-      border-bottom: 1px solid #303B40;
+    .el-menu {
+      border-bottom: 1px solid #303b40;
     }
   }
-  .el-icon-arrow-down:before{
-    content: "\E604";
+  .el-icon-arrow-down:before {
+    content: '\E604';
   }
-  .el-submenu.is-opened>.el-submenu__title .el-submenu__icon-arrow {
+  .el-submenu.is-opened > .el-submenu__title .el-submenu__icon-arrow {
     transform: rotate(90deg);
   }
 }
-.first{
-  &.el-menu-item, & > .el-submenu__title {
+.first {
+  &.el-menu-item,
+  & > .el-submenu__title {
     line-height: 44px;
     height: 44px;
     padding-left: 20px;
   }
-  .iconfont{
+  .iconfont {
     margin-right: 10px;
     margin-left: 4px;
   }
-  &.is-active, &.is-active > .el-submenu__title {
-    background: #29B0A3 !important;
-    color: #FFFFFF !important;
-    & > i { color: #FFFFFF; }
+  &.is-active,
+  &.is-active > .el-submenu__title {
+    background: #29b0a3 !important;
+    color: #ffffff !important;
+    & > i {
+      color: #ffffff;
+    }
   }
 }
-.second{
-  &.el-menu-item, & > .el-submenu__title {
+.second {
+  &.el-menu-item,
+  & > .el-submenu__title {
     line-height: 38px;
     height: 38px;
     padding-left: 54px !important;
   }
-  &.is-active, &.is-active > .el-submenu__title {
+  &.is-active,
+  &.is-active > .el-submenu__title {
     background: #182125 !important;
-    color: #FFFFFF !important;
+    color: #ffffff !important;
   }
 }
-.pagination-box{
+.pagination-box {
   padding: $padding-default;
   display: flex;
   align-items: center;
@@ -57,29 +65,30 @@
   border-radius: 0 0 $radius $radius;
   border: $border {
     top: 0;
-  };
-  .el-input{
-      height: 24px;
   }
-  .el-pagination{
-    [class*="btn-"], .el-pager li{
+  .el-input {
+    height: 24px;
+  }
+  .el-pagination {
+    [class*='btn-'],
+    .el-pager li {
       background: transparent;
     }
   }
 }
-.tree{
+.tree {
   display: inline-block;
   margin-top: 14px;
   width: calc(100% - 40px);
 }
-.dialog .el-dialog__body{
+.dialog .el-dialog__body {
   padding-bottom: 20px;
 }
 .list-card {
   background: $white;
   border-radius: $radius;
   min-width: 658px;
-  .title{
+  .title {
     height: 50px;
     box-sizing: border-box;
     font-size: 14px;
@@ -89,38 +98,40 @@
     border-radius: $radius $radius 0 0;
     border: $border;
     border-bottom: 0;
-    &+div {
+    & + div {
       border: $border;
       border-bottom: 0;
     }
   }
 }
-.detail-card{ // 卡片
+.detail-card {
+  // 卡片
   border: $border;
   background: $white;
   border-radius: $radius;
   color: $color-default;
   font-size: $font-size;
   min-width: 600px;
-  .title{
+  .title {
     color: $color-default;
     padding: 0 $padding-default;
     font-size: 14px;
     line-height: 50px;
     font-weight: bold;
-    &+div, &+form{
+    & + div,
+    & + form {
       border-top: $border;
     }
   }
-  .card-body{
+  .card-body {
     box-sizing: border-box;
     padding: 0 20px 20px 40px;
     overflow: hidden;
-    &+.card-body{
+    & + .card-body {
       border-top: $border;
     }
-    label:not([class^="el-"]){
-      color: #666;//新改的字体颜色
+    label:not([class^='el-']) {
+      color: #666; //新改的字体颜色
       font-weight: bold;
       display: inline-block;
       vertical-align: top;
@@ -129,7 +140,7 @@
       box-sizing: border-box;
       line-height: 20px;
     }
-    label:not([class^="el-"]) + span{
+    label:not([class^='el-']) + span {
       display: inline-block;
       vertical-align: top;
       min-height: 16px;
@@ -140,15 +151,15 @@
       word-wrap: break-word;
     }
   }
-  .detail{
+  .detail {
     margin-top: 20px;
     font-weight: bold;
     line-height: 20px;
-    & + .el-button{
-        float: right;
-        margin-top: 20px;
+    & + .el-button {
+      float: right;
+      margin-top: 20px;
     }
-    &.el-row{
+    &.el-row {
       margin-top: 0;
     }
   }
@@ -156,10 +167,11 @@
     margin-top: $margin-top;
   }
 }
-.filters{ // 筛选框
+.filters {
+  // 筛选框
   padding: 10px 20px 20px;
   overflow: hidden;
-  &>[class^="el-"]{
+  & > [class^='el-'] {
     vertical-align: top;
     margin-top: $margin-top;
     &:not(.el-button) {
@@ -167,32 +179,36 @@
       margin-right: 15px;
     }
   }
-  .button-addInList{
+  .button-addInList {
     float: right;
   }
 }
-.el-form{
-  .el-form-item{
-    &.w50{ // 并排的表单
+.el-form {
+  .el-form-item {
+    &.w50 {
+      // 并排的表单
       margin-right: 0;
       padding-right: $padding-default;
       width: 50%;
       box-sizing: border-box;
     }
-    &.w100{ // 独占一行的表单
+    &.w100 {
+      // 独占一行的表单
       margin-right: 0;
       padding-right: $padding-default;
       width: 100%;
       box-sizing: border-box;
     }
-    &.textarea{ // 有文本域的表单
-      .el-textarea{
+    &.textarea {
+      // 有文本域的表单
+      .el-textarea {
         height: 134px;
       }
     }
-    &.the-disabled{ // 不可修改的表单
-      .el-input__inner{
-        background: #F2F2F2;
+    &.the-disabled {
+      // 不可修改的表单
+      .el-input__inner {
+        background: #f2f2f2;
         border: $border;
         cursor: not-allowed;
         color: #999;
@@ -203,15 +219,16 @@
       }
     }
   }
-  .has-right-button{ // 有两个按钮的表单，按钮位于右侧，按钮间相隔20px
+  .has-right-button {
+    // 有两个按钮的表单，按钮位于右侧，按钮间相隔20px
     width: 100%;
-    button{
+    button {
       margin-right: $padding-default;
       margin-left: 0;
     }
   }
 }
-.form-padding{
+.form-padding {
   padding: 20px 0 20px 20px;
   .el-checkbox__input.is-checked + .el-checkbox__label {
     color: #606266;
@@ -223,12 +240,12 @@
     background: #999;
     border-color: #999;
   }
-  .el-checkbox__input.is-focus .el-checkbox__inner{
+  .el-checkbox__input.is-focus .el-checkbox__inner {
     border-color: #999;
   }
 }
-.form-criminal{
-  .form-box{
+.form-criminal {
+  .form-box {
     border-bottom: $border;
     width: 100%;
     display: flex;
@@ -236,114 +253,114 @@
     align-items: center;
     padding: 30px 0 10px;
   }
-  .form-box:last-child{
+  .form-box:last-child {
     border-bottom: 0;
     padding-bottom: $padding-default;
-    &:after{
+    &:after {
       display: none;
     }
   }
-  .w25{
+  .w25 {
     width: 25%;
     box-sizing: border-box;
     padding-right: $padding-default;
     padding-left: $padding-default;
     flex-shrink: 0;
   }
-  .w50{
-    .el-form-item__label{
+  .w50 {
+    .el-form-item__label {
       padding-left: $padding-default;
     }
-    .el-form-item__content>[class^="el-"]:not(.el-textarea):not(.el-cascader):not(.el-date-editor):nth-child(1){
+    .el-form-item__content > [class^='el-']:not(.el-textarea):not(.el-cascader):not(.el-date-editor):nth-child(1) {
       padding-left: $padding-default;
-      .el-input__prefix{
+      .el-input__prefix {
         left: $padding-default;
       }
-      &+.el-form-item__error{
+      & + .el-form-item__error {
         left: $padding-default;
       }
     }
-    .el-form-item__content>.el-textarea{
+    .el-form-item__content > .el-textarea {
       padding: 0 0 0 $padding-default;
       height: 130px;
       width: 100%;
       box-sizing: border-box;
-      &+.el-form-item__error{
+      & + .el-form-item__error {
         left: $padding-default;
       }
     }
-    .el-form-item__content>.el-cascader{
+    .el-form-item__content > .el-cascader {
       height: $height-input;
       padding: 0;
       box-sizing: border-box;
       margin-left: 20px;
       width: calc(100% - 20px);
-      &+.el-form-item__error{
+      & + .el-form-item__error {
         left: $padding-default;
       }
     }
-    .el-form-item__content>.el-date-editor{
+    .el-form-item__content > .el-date-editor {
       height: $height-input;
       padding: 0;
       box-sizing: border-box;
       margin-left: 20px;
       width: calc(100% - 20px);
-      &+.el-form-item__error{
+      & + .el-form-item__error {
         left: $padding-default;
       }
-      .el-input__icon{
+      .el-input__icon {
         margin-left: 0px;
         width: 36px;
       }
-      .el-range-input{
+      .el-range-input {
         width: calc(39% - 12px);
         font-size: $font-size;
         vertical-align: top;
       }
-      .el-range-separator{
+      .el-range-separator {
         line-height: 34px;
       }
     }
   }
-  .w75{
+  .w75 {
     width: 100%;
     box-sizing: border-box;
     flex-shrink: 0;
-    .el-form-item:nth-child(1){
+    .el-form-item:nth-child(1) {
       width: calc(50% - 40px);
       margin-left: 20px;
       float: left;
     }
-    .el-form-item:nth-child(2){
+    .el-form-item:nth-child(2) {
       width: calc(50% - 40px);
       margin-left: 40px;
       float: left;
     }
-    .el-cascader{
+    .el-cascader {
       width: 100%;
     }
   }
-  .w100{
+  .w100 {
     padding: 0;
     padding-left: $padding-default;
     flex-shrink: 0;
-    .el-form-item__content>.el-textarea{
+    .el-form-item__content > .el-textarea {
       height: 130px;
       width: 100%;
       box-sizing: border-box;
-      &+.el-form-item__error{
-          left: 20px;
+      & + .el-form-item__error {
+        left: 20px;
       }
     }
   }
 }
-.has-right-button{
+.has-right-button {
   display: flex;
   justify-content: flex-end;
   align-items: center;
 }
-.el-table{
-  .table-header{
+.el-table {
+  .table-header {
     font-weight: bold;
   }
   .cell {
@@ -352,39 +369,44 @@
     }
   }
 }
-.table45{
-  tr,th,td{
+.table45 {
+  tr,
+  th,
+  td {
     height: 45px;
   }
-  .table-header{
+  .table-header {
     th {
       border-bottom-color: #bbb;
     }
   }
 }
-.table40{
+.table40 {
   border: $border;
   border-bottom: 0;
-  tr,th,td{
+  tr,
+  th,
+  td {
     height: 40px;
   }
-  .table-header{
-    th{
+  .table-header {
+    th {
       background: $background;
     }
   }
 }
-.list-box{ // 罪犯编辑模块的表格的父元素
+.list-box {
+  // 罪犯编辑模块的表格的父元素
   border-top: $border;
   padding: 20px;
   overflow: hidden;
-  .el-tab-pane &{
+  .el-tab-pane & {
     margin-left: $padding-default;
     padding-left: 0;
   }
 }
-.delete-dialog{
-  .el-dialog__body{
+.delete-dialog {
+  .el-dialog__body {
     color: $color-default;
     padding-bottom: 20px;
     display: flex;
@@ -410,23 +432,23 @@
     justify-content: center;
   }
 }
-.user-checkbox-group{
+.user-checkbox-group {
   border-bottom: $border;
   padding: 5px 0;
-  .el-checkbox{
-    display:flex;
+  .el-checkbox {
+    display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
     height: 24px;
-    &+.el-checkbox{
+    & + .el-checkbox {
       margin-left: 0;
     }
-    .el-checkbox__inner{
+    .el-checkbox__inner {
       margin-top: 2px;
     }
   }
-  .el-checkbox__label{
+  .el-checkbox__label {
     padding-left: 0;
     padding-right: 10px;
   }
