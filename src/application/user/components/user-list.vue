@@ -22,13 +22,15 @@
             :label="item.text"
             :value="item.value"/>
         </el-select>
-        <el-button
-          class="button-search"
+        <opt-button
+          class-name="button-search"
+          text="查 询"
           :loading="searching"
-          @click="onSearch">查 询</el-button>
-        <el-button
-          class="button-addInList"
-          @click="onNew">新 增</el-button>
+          @onClick="onSearch" />
+        <opt-button
+          class-name="button-addInList"
+          text="新 增"
+          @onClick="onNew" />
       </div>
       <el-table
         class="table45"
