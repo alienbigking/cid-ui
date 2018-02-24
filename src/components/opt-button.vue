@@ -2,10 +2,17 @@
   <span>
     <template>
       <el-button
-        :class="className"
+        :class="[
+          className,
+          {
+            'delete': text === '删除',
+            'edit': text === '修改',
+            'view': text === '查看'
+          }
+        ]"
         :type="type"
         :loading="loading"
-        @click="onClick">{{ text }}</el-button>
+        @click="handleClick">{{ text }}</el-button>
     </template>
   </span>
 </template>
@@ -14,7 +21,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: ""
+      default: ''
     },
     loading: {
       type: Boolean,
@@ -22,24 +29,34 @@ export default {
     },
     className: {
       type: String,
-      default: ""
+      default: ''
     },
     text: {
       type: String,
-      default: ""
+      default: ''
+    },
+    value: {
+      type: Object,
+      default: function() {
+        return {};
+      }
     }
   },
-  data() {
-    return {
-    };
-  },
   methods: {
-    onClick() {
-      this.$emit("onClick");
+    handleClick() {
+      this.$emit('onClick');
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-
+.view{
+  color: #29b0a3;
+}
+.edit{
+  color: #2196f3;
+}
+.delete{
+  color: #f44336;
+}
 </style>

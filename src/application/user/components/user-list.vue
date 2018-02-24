@@ -92,24 +92,24 @@
           label="操作"
           width="201px">
           <template slot-scope="scope">
-            <el-button
-              v-if="!scope.row.isAdministrator"
-              type="text"
-              @click="onSelectRoles(scope.row.id)">分配角色</el-button>
-            <el-button
-              type="text"
-              @click="onView(scope.row.id)">查看</el-button>
-            <el-button
-              type="text"
-              @click="onEdit(scope.row.id)">修改</el-button>
-            <el-button
-              v-if="!scope.row.isAdministrator"
-              type="text"
-              @click="onDelete(scope.row)">删除</el-button>
             <opt-button
+              v-if="!scope.row.isAdministrator"
               type="text"
               text="分配角色"
-              @onClick="log(scope.row.id)" />
+              @onClick="onSelectRoles(scope.row.id)" />
+            <opt-button
+              type="text"
+              text="查看"
+              @onClick="onView(scope.row.id)" />
+            <opt-button
+              type="text"
+              text="修改"
+              @onClick="onEdit(scope.row.id)" />
+            <opt-button
+              v-if="!scope.row.isAdministrator"
+              type="text"
+              text="删除"
+              @onClick="onDelete(scope.row)" />
           </template>
         </el-table-column>
       </el-table>
@@ -226,10 +226,7 @@ export default {
     this.search();
   },
   methods: {
-    ...mapActions(["getPagedUsers", "deleteUser", "enableUser", "disableUser"]),
-    log(e) {
-      console.log(e);
-    },
+    ...mapActions(['getPagedUsers', 'deleteUser', 'enableUser', 'disableUser']),
     onSearch() {
       this.searching = true;
       this.pagination.page = 0;
@@ -346,18 +343,6 @@ export default {
 }
 
 .cell {
-  button:nth-child(1) {
-    color: #2196f3;
-  }
-  button:nth-child(2) {
-    color: #29b0a3;
-  }
-  button:nth-child(3) {
-    color: #29b0a3;
-  }
-  button:nth-child(4) {
-    color: #f44336;
-  }
   .button-status {
     vertical-align: baseline;
   }
