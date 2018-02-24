@@ -1,9 +1,9 @@
-.el-container{
+.el-container {
   height: 100%;
   font-size: $font-size;
   background: $background;
 }
-.el-header{
+.el-header {
   width: 100%;
   background: $background-header;
   border-bottom: 1px solid #4b5960;
@@ -12,18 +12,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  .el-badge__content{
-      border: 0;
+  .el-badge__content {
+    border: 0;
   }
 }
-.el-menu--vertical{
-  .el-menu--popup-right-start{
+.el-menu--vertical {
+  .el-menu--popup-right-start {
     margin-left: 0;
     padding: 0;
     box-shadow: none;
   }
-  .first{
-    background: #29B0A3; color: #fff;
+  .first {
+    background: #29b0a3;
+    color: #fff;
   }
 }
 .el-breadcrumb {
@@ -32,68 +33,75 @@
   border-bottom: $border;
   padding: 0 $padding-default;
   box-sizing: border-box;
-  &+div{
+  & + div {
     padding: $padding-default;
   }
-  &__item{
+  &__item {
     height: 40px;
     line-height: 40px;
     display: inline-flex;
     align-items: center;
   }
-  &__inner, &__inner a {
+  &__inner,
+  &__inner a {
     color: $color-default;
     font-weight: normal;
-    &:hover{
+    &:hover {
       color: $color-default;
     }
   }
 }
-.el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+.el-breadcrumb__item:last-child .el-breadcrumb__inner,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner a,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover,
+.el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
   color: #999999;
 }
-.el-main{
+.el-main {
   padding: 0;
 }
-.el-tabs__header{
+.el-tabs__header {
   margin: 0;
 }
-.el-tabs__nav-next, .el-tabs__nav-prev{
+.el-tabs__nav-next,
+.el-tabs__nav-prev {
   line-height: 60px;
 }
-.el-tabs__active-bar{
+.el-tabs__active-bar {
   background-color: $color-default;
 }
-.el-tabs__item{
+.el-tabs__item {
   color: #999999;
   font-size: 16px;
   height: 60px;
   line-height: 60px;
-  &:hover{
+  &:hover {
     color: #999999;
   }
-  &:focus.is-active.is-focus:not(:active){
+  &:focus.is-active.is-focus:not(:active) {
     box-shadow: none;
   }
-  &.is-active{
+  &.is-active {
     color: $color-default;
   }
 }
-.el-tabs__nav-wrap{
+.el-tabs__nav-wrap {
   padding-left: $padding-default;
-  &:after{
+  &:after {
     height: 1px;
     background-color: $color-border;
   }
 }
-.el-tree-node__label{
+.el-tree-node__label {
   font-size: 12px;
   font-weight: normal;
 }
-.el-table{
+.el-table {
   border-color: $color-border;
   background: $white;
-  tr,th,td{
+  tr,
+  th,
+  td {
     background: $white;
     background-clip: padding-box;
     border-color: $color-border;
@@ -101,19 +109,21 @@
     color: $color-default;
     font-size: $font-size;
   }
-  .is-sortable .cell{
+  .is-sortable .cell {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
-.el-table--border::after, .el-table--group::after, .el-table::before{
+.el-table--border::after,
+.el-table--group::after,
+.el-table::before {
   background-color: $color-border;
 }
-.el-button{
+.el-button {
   font-size: $font-size;
 }
-.el-button:not(.el-button--text){
+.el-button:not(.el-button--text) {
   border-color: $color-border;
   display: inline-flex;
   height: $height-input;
@@ -122,88 +132,101 @@
   align-items: center;
   background: $white;
   color: $color-default;
-  &+button{
+  & + button {
     margin-left: 20px;
   }
-  &:hover, &:active, &:focus, &:visited{
+  &:hover,
+  &:active,
+  &:focus,
+  &:visited {
     @include button-hover;
   }
 }
-.el-form{
+.el-form {
   box-sizing: border-box;
-  &.el-form--label-top{
+  &.el-form--label-top {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    .el-form-item__label{
+    .el-form-item__label {
       line-height: 1;
       font-size: $font-size;
-      color:#666;
+      color: #666;
     }
-    .el-form-item__content{
-        width: 100%;
+    .el-form-item__content {
+      width: 100%;
     }
   }
-  .el-input__inner{
+  .el-input__inner {
     font-size: $font-size;
     color: $color-default;
   }
-  .el-textarea{
-    .el-textarea__inner{
-        height: 100%;
+  .el-textarea {
+    .el-textarea__inner {
+      height: 100%;
     }
   }
-  .el-form-item__content{ // 当有标签且标签与输入框在同一行时输入框的宽度
+  .el-form-item__content {
+    // 当有标签且标签与输入框在同一行时输入框的宽度
     width: calc(100% - 120px);
   }
-  .el-date-editor.el-input, .el-date-editor.el-input__inner{
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
     width: 100%;
   }
 }
-.el-input, .el-select{
+.el-input,
+.el-select {
   height: $height-input;
   box-sizing: border-box;
   display: inline-flex;
   align-items: center;
   width: 100%;
-  .el-input__inner{
+  .el-input__inner {
     height: 100%;
     font-size: $font-size;
   }
 }
-.el-input__inner, .el-textarea__inner {
+.el-input__inner,
+.el-textarea__inner {
   background: transparent;
   box-shadow: none;
 }
-.el-input__prefix, .el-input__suffix{
+.el-input__prefix,
+.el-input__suffix {
   width: 36px;
 }
-.el-input__suffix{
+.el-input__suffix {
   right: 0;
 }
-.el-input--suffix{
-  .el-input__inner{
+.el-input--suffix {
+  .el-input__inner {
     padding-right: 36px;
   }
 }
-.el-input__prefix{
+.el-input__prefix {
   left: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.el-input--prefix .el-input__inner{
+.el-input--prefix .el-input__inner {
   padding-left: 36px;
 }
-.el-input__icon{
+.el-input__icon {
   line-height: $height-input;
 }
-.el-form-item.is-success .el-input__inner, .el-form-item.is-success .el-input__inner:focus, .el-form-item.is-success .el-textarea__inner, .el-form-item.is-success .el-textarea__inner:focus{
+.el-form-item.is-success .el-input__inner,
+.el-form-item.is-success .el-input__inner:focus,
+.el-form-item.is-success .el-textarea__inner,
+.el-form-item.is-success .el-textarea__inner:focus {
   border-color: #dcdfe6;
 }
-.el-submenu__title, .el-menu-item{
+.el-submenu__title,
+.el-menu-item {
   font-size: $font-size;
 }
-.el-breadcrumb, .el-tree{
+.el-breadcrumb,
+.el-tree {
   background: $white;
 }
