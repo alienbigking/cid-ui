@@ -1,20 +1,16 @@
 <template>
-  <span>
-    <template>
-      <el-button
-        :class="[
-          className,
-          {
-            'delete': text === '删除',
-            'edit': text === '修改',
-            'view': text === '查看'
-          }
-        ]"
-        :type="type"
-        :loading="loading"
-        @click="handleClick">{{ text }}</el-button>
-    </template>
-  </span>
+  <el-button
+    :class="[
+      className,
+      {
+        'delete': text === '删除',
+        'edit': text === '修改',
+        'view': text === '查看'
+      }
+    ]"
+    :type="type"
+    :loading="loading"
+    @click="handleClick">{{ text }}</el-button>
 </template>
 <script>
 export default {
