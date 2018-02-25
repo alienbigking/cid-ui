@@ -264,14 +264,21 @@ export default {
         this.$message.success('初始化摄像头成功');
         alert('拍照成功');
         if (status === 1) {
-          this.form.criminalFace[type] = sy305.GetExtraInfo('capture_base64');
-          console.log(this.form.criminalFace[type]);
-          alert(this.form.criminalFace[type]);
-          sy305.ClosePhotoCapture();
+          // this.form.criminalFace[type] = sy305.GetExtraInfo('capture_base64');
+          // console.log(this.form.criminalFace[type]);
+          // alert(this.form.criminalFace[type]);
+          // sy305.ClosePhotoCapture();
+          _.debounce(this.setFacesInfo(type), 5000);
         }
       } else {
         this.$errorMessage.show('照相机初始化失败');
       }
+    },
+    setFacesInfo(type) {
+      let sy305 = this.$refs.photo;
+      this.form.criminalFace[type] = sy305.GetExtraInfo('capture_base64');
+      sy305.ClosePhotoCapture();
+      console.log(this.form.criminalFace);
     },
     getIrisPhoto(type) {
       let sy305 = this.$refs.photo;
