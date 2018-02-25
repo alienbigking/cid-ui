@@ -10,6 +10,7 @@ import errorMessage from '@/plugin/error-message';
 import tokenStorage from '@/utils/token/token-storage';
 import requestInterceptor from '@/utils/interceptor/request-interceptor';
 import responseInterceptor from '@/utils/interceptor/response-interceptor';
+import components from '@/components';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import './assets/fonts/iconfont.css';
@@ -22,6 +23,9 @@ Vue.use(filters);
 Vue.use(validators);
 Vue.use(errorMessage);
 
+Object.keys(components).forEach(key => {
+  Vue.component(`${key}`, components[key]);
+});
 requestInterceptor.config(axios);
 responseInterceptor.config(axios, store, router);
 
