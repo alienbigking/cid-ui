@@ -23,14 +23,12 @@
             :value="item.value"/>
         </el-select>
         <opt-button
-          class-name="button-search"
-          text="查 询"
+          class="button-search"
           :loading="searching"
-          @onClick="onSearch" />
+          @click="onSearch">查 询</opt-button>
         <opt-button
-          class-name="button-addInList"
-          text="新 增"
-          @onClick="onNew" />
+          class="button-addInList"
+          @click="onNew">新 增</opt-button>
       </div>
       <el-table
         class="table45"
@@ -78,16 +76,14 @@
             {{ scope.row.status | enumText(userStatuses) }}
             <opt-button
               v-if="!scope.row.isAdministrator && scope.row.status=='ENABLED'"
-              class-name="button-status"
+              class="button-status"
               type="text"
-              text="禁用"
-              @onClick="onDisable(scope.row)" />
+              @click="onDisable(scope.row)">禁用</opt-button>
             <opt-button
               v-if="!scope.row.isAdministrator && scope.row.status=='DISABLED'"
-              class-name="button-status"
+              class="button-status"
               type="text"
-              text="启用"
-              @onClick="onEnable(scope.row)" />
+              @click="onEnable(scope.row)">启用</opt-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -99,21 +95,17 @@
             <opt-button
               v-if="!scope.row.isAdministrator"
               type="text"
-              text="分配角色"
-              @onClick="onSelectRoles(scope.row.id)" />
+              @click="onSelectRoles(scope.row.id)">分配角色</opt-button>
             <opt-button
               type="text"
-              text="查看"
-              @onClick="onView(scope.row.id)" />
+              @click="onView(scope.row.id)">查看</opt-button>
             <opt-button
               type="text"
-              text="修改"
-              @onClick="onEdit(scope.row.id)" />
+              @click="onEdit(scope.row.id)">修改</opt-button>
             <opt-button
               v-if="!scope.row.isAdministrator"
               type="text"
-              text="删除"
-              @onClick="onDelete(scope.row)" />
+              @click="onDelete(scope.row)">删除</opt-button>
           </template>
         </el-table-column>
       </el-table>
