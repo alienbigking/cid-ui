@@ -102,7 +102,7 @@
               @click="onView(scope.row.id)">查看</opt-button>
             <opt-button
               type="text"
-              @click="onEdit(scope.id)">修改</opt-button>
+              @click="onEdit(scope.row.id)">修改</opt-button>
             <opt-button
               class="button-danger"
               v-if="!scope.row.isAdministrator"
