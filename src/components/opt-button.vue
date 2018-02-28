@@ -1,7 +1,6 @@
 <template>
   <el-button
     :class="[
-      className,
       {
         'delete': text === '删除',
         'edit': text === '修改',
@@ -10,7 +9,7 @@
     ]"
     :type="type"
     :loading="loading"
-    @click="handleClick">{{ text }}</el-button>
+    @click="handleClick"><slot /></el-button>
 </template>
 <script>
 export default {
@@ -23,14 +22,6 @@ export default {
       type: Boolean,
       default: false
     },
-    className: {
-      type: String,
-      default: ''
-    },
-    text: {
-      type: String,
-      default: ''
-    },
     value: {
       type: Object,
       default: function() {
@@ -38,9 +29,17 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      text: ''
+    };
+  },
+  mounted() {
+    this.text = this.$el.innerText;
+  },
   methods: {
     handleClick() {
-      this.$emit('onClick');
+      this.$emit('click');
     }
   }
 };
