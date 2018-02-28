@@ -1,12 +1,5 @@
 <template>
   <el-button
-    :class="[
-      {
-        'delete': text === '删除',
-        'edit': text === '修改',
-        'view': text === '查看'
-      }
-    ]"
     :type="type"
     :loading="loading"
     @click="handleClick"><slot /></el-button>
