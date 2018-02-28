@@ -7,7 +7,7 @@ import axios from 'axios';
 import filters from '@/plugin/filters';
 import validators from '@/plugin/validators';
 import errorMessage from '@/plugin/error-message';
-import component from '@/plugin/component';
+import components from '@/plugin/components';
 import tokenStorage from '@/utils/token/token-storage';
 import requestInterceptor from '@/utils/interceptor/request-interceptor';
 import responseInterceptor from '@/utils/interceptor/response-interceptor';
@@ -22,7 +22,7 @@ Vue.use(ElementUI);
 Vue.use(filters);
 Vue.use(validators);
 Vue.use(errorMessage);
-Vue.use(component);
+Vue.use(components);
 
 requestInterceptor.config(axios);
 responseInterceptor.config(axios, store, router);
