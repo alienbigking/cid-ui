@@ -97,15 +97,14 @@
               type="text"
               @click="onSelectRoles(scope.row.id)">分配角色</opt-button>
             <opt-button
-              class="view"
+              class="button-success"
               type="text"
               @click="onView(scope.row.id)">查看</opt-button>
             <opt-button
-              class="edit"
               type="text"
               @click="onEdit(scope.id)">修改</opt-button>
             <opt-button
-              class="delete"
+              class="button-danger"
               v-if="!scope.row.isAdministrator"
               type="text"
               @click="onDelete(scope.row)">删除</opt-button>

@@ -38,13 +38,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.view{
-  color: #29b0a3;
+.button-success{
+  color: #67C23A;
 }
-.edit{
-  color: #2196f3;
-}
-.delete{
-  color: #f44336;
+.button-danger{
+  color: #F56C6C;
 }
 </style>
