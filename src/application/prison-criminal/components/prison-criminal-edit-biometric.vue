@@ -106,10 +106,16 @@
           @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-        v-if="true"
+        v-if="false"
+        id="PhotoCurPath"/>
+      <el-input
+        v-if="false"
+        id="PhotoInfo"/>
+      <el-input
+        v-if="false"
         id="leftFeature"/>
       <el-input
-        v-if="true"
+        v-if="false"
         id="rightFeature"/></div>
   </el-form>
 </template>
@@ -210,7 +216,12 @@ export default {
   activated() {
     this.createLeftFeatureEventScript();
     this.createRightFeatureEventScript();
+    this.createFaceEventScript();
     this.render();
+    window.hhh = this;
+  },
+  destroyed() {
+    delete window.hhh;
   },
   methods: {
     ...mapActions([
@@ -261,24 +272,32 @@ export default {
       if (r === 1) {
         let curpath = `c:\\123\\${type}.bmp`;
         let status = sy305.PhotoCapture(0, curpath);
-        this.$message.success('初始化摄像头成功');
-        alert('拍照成功');
         if (status === 1) {
-          // this.form.criminalFace[type] = sy305.GetExtraInfo('capture_base64');
-          // console.log(this.form.criminalFace[type]);
-          // alert(this.form.criminalFace[type]);
-          // sy305.ClosePhotoCapture();
-          _.debounce(this.setFacesInfo(type), 5000);
+          this.$message.success('初始化摄像头成功');
         }
       } else {
         this.$errorMessage.show('照相机初始化失败');
       }
     },
-    setFacesInfo(type) {
+    createFaceEventScript() {
+      if (!document.getElementById('FaceScript')) {
+        let FaceScript = document.createElement('script');
+        FaceScript.id = 'FaceScript';
+        FaceScript.type = 'text/javascript';
+        FaceScript.event = 'PhotoCaptureEvent(CaptureKind, ImageFile)';
+        FaceScript.setAttribute('for', 'sy305');
+        FaceScript.innerHTML = 'document.getElementById("PhotoCurPath").value = ImageFile;hhh.updateFaceInfo()';
+        document.body.appendChild(FaceScript);
+      }
+    },
+    updateFaceInfo() {
+      let faceType = document.getElementById('PhotoCurPath').value;
       let sy305 = this.$refs.photo;
-      this.form.criminalFace[type] = sy305.GetExtraInfo('capture_base64');
+      document.getElementById('PhotoInfo').value = sy305.GetExtraInfo('capture_base64');
+      let faceInfo = document.getElementById('PhotoInfo').value;
+      let type = faceType.substring(faceType.lastIndexOf('\\') + 1, faceType.lastIndexOf('.'));
+      this.$set(this.form.criminalFace, type, faceInfo);
       sy305.ClosePhotoCapture();
-      console.log(this.form.criminalFace);
     },
     getIrisPhoto(type) {
       let sy305 = this.$refs.photo;
