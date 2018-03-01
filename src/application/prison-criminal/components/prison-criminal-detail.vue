@@ -26,7 +26,7 @@
           </el-row>
           <el-row>
             <el-col :span="6">
-              <label>出生日期:</label><span>{{ criminal.birthday }}</span>
+              <label>出生日期：</label><span>{{ criminal.birthday }}</span>
             </el-col>
 
             <el-col :span="6">
