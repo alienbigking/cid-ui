@@ -102,6 +102,7 @@
               @click="onSelectRoles(scope.row.id)"
               permission="prison.user.assign-role">分配角色</opt-button>
             <opt-button
+              class="button-success"
               type="text"
               @click="onView(scope.row.id)"
               permission="prison.user.view">查看</opt-button>
@@ -110,6 +111,7 @@
               @click="onEdit(scope.row.id)"
               permission="prison.user.update">修改</opt-button>
             <opt-button
+              class="button-danger"
               v-if="!scope.row.isAdministrator"
               type="text"
               @click="onDelete(scope.row)"

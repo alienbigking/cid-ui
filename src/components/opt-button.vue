@@ -1,13 +1,6 @@
 <template>
   <el-button
     v-if="allowed"
-    :class="[
-      {
-        'delete': text === '删除',
-        'edit': text === '修改',
-        'view': text === '查看'
-      }
-    ]"
     :type="type"
     :loading="loading"
     @click="handleClick"><slot /></el-button>
@@ -59,13 +52,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.view {
-  color: #29b0a3;
+.button-success {
+  color: #67c23a;
 }
-.edit {
-  color: #2196f3;
-}
-.delete {
-  color: #f44336;
+.button-danger {
+  color: #f56c6c;
 }
 </style>
