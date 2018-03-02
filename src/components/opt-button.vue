@@ -1,5 +1,6 @@
 <template>
   <el-button
+    v-if="allowed"
     :class="[
       {
         'delete': text === '删除',
@@ -12,8 +13,15 @@
     @click="handleClick"><slot /></el-button>
 </template>
 <script>
+import jwtDecode from 'jwt-decode';
+import tokenStorage from '../utils/token/token-storage';
+
 export default {
   props: {
+    permission: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: ''
@@ -31,11 +39,18 @@ export default {
   },
   data() {
     return {
-      text: ''
+      text: '',
+      allowed: false
     };
   },
   mounted() {
     this.text = this.$el.innerText;
+  },
+  created() {
+    const token = tokenStorage.getToken();
+    let info = jwtDecode(token.access_token).authorities;
+    console.log(info, this.permission);
+    this.allowed = info.indexOf(this.permission) > -1;
   },
   methods: {
     handleClick() {
@@ -45,13 +60,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.view{
+.view {
   color: #29b0a3;
 }
-.edit{
+.edit {
   color: #2196f3;
 }
-.delete{
+.delete {
   color: #f44336;
 }
 </style>

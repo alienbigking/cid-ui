@@ -106,16 +106,16 @@
           @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-        v-if="false"
+        v-show="false"
         id="PhotoCurPath"/>
       <el-input
-        v-if="false"
+        v-show="false"
         id="PhotoInfo"/>
       <el-input
-        v-if="false"
+        v-show="false"
         id="leftFeature"/>
       <el-input
-        v-if="false"
+        v-show="false"
         id="rightFeature"/></div>
   </el-form>
 </template>
@@ -270,7 +270,7 @@ export default {
       let sy305 = this.$refs.photo;
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
-        let curpath = `c:\\123\\${type}.bmp`;
+        let curpath = `c:\\facePhoto\\${type}.bmp`;
         let status = sy305.PhotoCapture(0, curpath);
         if (status === 1) {
           this.$message.success('初始化摄像头成功');
@@ -344,8 +344,8 @@ export default {
       let iDevIndex = 0;
       let fingerPrint = this.$refs.fingerPrint.GetImage(iDevIndex, 3000);
       if (prisonCollectionService.IsSuccess(fingerPrint) === 0) {
-        let curPath = 'c:\\1234\\';
-        this.$refs.fingerPrint.ImageToBmpFile(curPath + type + '.bmp', fingerPrint);
+        // let curPath = 'c:\\fingerPrint\\';
+        // this.$refs.fingerPrint.ImageToBmpFile(curPath + type + '.bmp', fingerPrint);
         this.$set(this.form.criminalFingerPrint, type, fingerPrint);
       }
     },
