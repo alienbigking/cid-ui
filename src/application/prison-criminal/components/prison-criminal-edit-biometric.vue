@@ -106,16 +106,16 @@
           @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-        v-show="false"
+        v-show="true"
         id="PhotoCurPath"/>
       <el-input
-        v-show="false"
+        v-show="true"
         id="PhotoInfo"/>
       <el-input
-        v-show="false"
+        v-show="true"
         id="leftFeature"/>
       <el-input
-        v-show="false"
+        v-show="true"
         id="rightFeature"/></div>
   </el-form>
 </template>
@@ -268,6 +268,7 @@ export default {
     },
     getFacesPhoto(type) {
       let sy305 = this.$refs.photo;
+      console.log(this.form.criminalFace);
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
         let curpath = `c:\\facePhoto\\${type}.bmp`;
@@ -297,6 +298,7 @@ export default {
       let faceInfo = document.getElementById('PhotoInfo').value;
       let type = faceType.substring(faceType.lastIndexOf('\\') + 1, faceType.lastIndexOf('.'));
       this.$set(this.form.criminalFace, type, faceInfo);
+      console.log(1111, faceInfo);
       sy305.ClosePhotoCapture();
     },
     getIrisPhoto(type) {
@@ -344,8 +346,6 @@ export default {
       let iDevIndex = 0;
       let fingerPrint = this.$refs.fingerPrint.GetImage(iDevIndex, 3000);
       if (prisonCollectionService.IsSuccess(fingerPrint) === 0) {
-        // let curPath = 'c:\\fingerPrint\\';
-        // this.$refs.fingerPrint.ImageToBmpFile(curPath + type + '.bmp', fingerPrint);
         this.$set(this.form.criminalFingerPrint, type, fingerPrint);
       }
     },
