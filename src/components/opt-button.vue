@@ -49,7 +49,6 @@ export default {
   created() {
     const token = tokenStorage.getToken();
     let info = jwtDecode(token.access_token).authorities;
-    console.log(info, this.permission);
     this.allowed = info.indexOf(this.permission) > -1;
   },
   methods: {
