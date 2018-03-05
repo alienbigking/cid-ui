@@ -1,13 +1,13 @@
 <template>
   <el-button
-    v-if="allowed"
+    v-if="hasPermission"
     :type="type"
     :loading="loading"
-    @click="handleClick"><slot /></el-button>
+    @click="onClick"><slot /></el-button>
 </template>
 <script>
-import jwtDecode from 'jwt-decode';
 import tokenStorage from '../utils/token/token-storage';
+import jwtDecode from 'jwt-decode';
 
 export default {
   props: {
@@ -22,30 +22,20 @@ export default {
     loading: {
       type: Boolean,
       default: false
-    },
-    value: {
-      type: Object,
-      default: function() {
-        return {};
-      }
     }
   },
   data() {
     return {
-      text: '',
-      allowed: false
+      hasPermission: false
     };
-  },
-  mounted() {
-    this.text = this.$el.innerText;
   },
   created() {
     const token = tokenStorage.getToken();
-    let info = jwtDecode(token.access_token).authorities;
-    this.allowed = info.indexOf(this.permission) > -1;
+    const permissions = jwtDecode(token.access_token).authorities;
+    this.hasPermission = permissions.some(p => p === this.permission);
   },
   methods: {
-    handleClick() {
+    onClick() {
       this.$emit('click');
     }
   }
