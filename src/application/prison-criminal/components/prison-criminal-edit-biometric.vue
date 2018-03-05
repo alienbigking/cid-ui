@@ -35,7 +35,7 @@
         :key="index">
         <div
           class="body"
-          :class="form.criminalFingerPrint[item.type] ? 'setted' : 'iconfont icon-zhiwenjiesuo'">
+          :class="form.criminalFingerPrint[item.type] ? 'settedPrint' : 'iconfont icon-zhiwenjiesuo'">
           <el-button
             v-if="!form.criminalFingerPrint[item.type]"
             class="button-addCollection"
@@ -62,6 +62,11 @@
         <div
           class="body"
           :class="form.criminalFace[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'">
+          <img
+            v-if="form.criminalFace[item.type] ? true : false"
+            :src="imgUrl[item.type]"
+            width="100px"
+            height="100px">
           <el-button
             v-if="!form.criminalFace[item.type]"
             class="button-addCollection"
@@ -87,7 +92,7 @@
         :key="index">
         <div
           class="body"
-          :class="form.criminalIris[item.type] ? 'setted' : 'iconfont icon-hongmoshibie'">
+          :class="form.criminalIris[item.type] ? 'settedIris' : 'iconfont icon-hongmoshibie'">
           <el-button
             v-if="!form.criminalIris[item.type]"
             class="button-addCollection"
@@ -191,6 +196,7 @@ export default {
       ],
       inputVsible: true,
       deleteVsible: false,
+      imgUrl: {},
       form: {
         criminalFace: {},
         criminalIris: {},
@@ -237,7 +243,7 @@ export default {
     ]),
     render() {
       this.$refs.photo.Burger =
-        '{"client_id":"gkzx","capture_realtime_iris":"0","with_big_iris":"1","iris_with_bkcapture":"1","iris_bkcapture_camera":"2","capture_path":"d:\\\\sy305photoB","bkcapture_path":"d:\\\\sy305photoA"}';
+        '{"client_id":"gkzx","capture_realtime_iris":"0","with_big_iris":"1","iris_with_bkcapture":"1","iris_bkcapture_camera":"2","capture_path":"c:\\\\facePhoto","bkcapture_path":"d:\\\\sy305photoA"}';
       this.getCriminalFingerPrint(this.$route.params.id).then(() => {
         this.form.criminalFingerPrint = _.cloneDeep(this.$store.state.prisonCriminal.criminalFingerPrint);
         if (!this.form.criminalFingerPrint.id) {
@@ -249,6 +255,12 @@ export default {
       });
       this.getCriminalFace(this.$route.params.id).then(() => {
         this.form.criminalFace = _.cloneDeep(this.$store.state.prisonCriminal.criminalFace);
+        // console.log(this.form.criminalFace);
+        let type = ['frontPhoto', 'leftPhoto', 'rightPhoto'];
+        for (let i = 0; i < type.length; i++) {
+          let info = type[i];
+          this.imgUrl[info] = 'data:image/bmp;base64,' + this.form.criminalFace[info];
+        }
         if (!this.form.criminalFace.id) {
           this.$store.commit('setCriminalFace', {
             criminalId: this.$route.params.id
@@ -268,11 +280,12 @@ export default {
     },
     getFacesPhoto(type) {
       let sy305 = this.$refs.photo;
-      console.log(this.form.criminalFace);
+      // console.log(this.form.criminalFace);
       let r = sy305.InitPhotoCapture(1);
       if (r === 1) {
-        let curpath = `c:\\facePhoto\\${type}.bmp`;
-        let status = sy305.PhotoCapture(0, curpath);
+        // let curpath = `c:\\\\facePhoto\\${type}.bmp`;
+        // let curpath = type + '.bmp';
+        let status = sy305.PhotoCapture(0, type + '.bmp');
         if (status === 1) {
           this.$message.success('初始化摄像头成功');
         }
@@ -298,7 +311,7 @@ export default {
       let faceInfo = document.getElementById('PhotoInfo').value;
       let type = faceType.substring(faceType.lastIndexOf('\\') + 1, faceType.lastIndexOf('.'));
       this.$set(this.form.criminalFace, type, faceInfo);
-      console.log(1111, faceInfo);
+      this.imgUrl[type] = 'data:image/bmp;base64,' + faceInfo;
       sy305.ClosePhotoCapture();
     },
     getIrisPhoto(type) {
@@ -583,8 +596,18 @@ export default {
       line-height: 100px;
     }
   }
+  .settedPrint {
+    background: url('../../../assets/images/fingerPrint.png') no-repeat;
+    irisphoto: 80px 80px;
+    background-position: center center;
+  }
   .setted {
     background: url('../../../assets/images/avatar.jpg') no-repeat;
+    background-size: 80px 80px;
+    background-position: center center;
+  }
+  .settedIris {
+    background: url('../../../assets/images/irisPhoto.png') no-repeat;
     background-size: 80px 80px;
     background-position: center center;
   }
