@@ -1,12 +1,20 @@
 <template>
   <el-button
+    v-if="hasPermission"
     :type="type"
     :loading="loading"
-    @click="handleClick"><slot /></el-button>
+    @click="onClick"><slot /></el-button>
 </template>
 <script>
+import tokenStorage from '../utils/token/token-storage';
+import jwtDecode from 'jwt-decode';
+
 export default {
   props: {
+    permission: {
+      type: String,
+      default: ''
+    },
     type: {
       type: String,
       default: ''
@@ -14,34 +22,30 @@ export default {
     loading: {
       type: Boolean,
       default: false
-    },
-    value: {
-      type: Object,
-      default: function() {
-        return {};
-      }
     }
   },
   data() {
     return {
-      text: ''
+      hasPermission: false
     };
   },
-  mounted() {
-    this.text = this.$el.innerText;
+  created() {
+    const token = tokenStorage.getToken();
+    const permissions = jwtDecode(token.access_token).authorities;
+    this.hasPermission = permissions.some(p => p === this.permission);
   },
   methods: {
-    handleClick() {
+    onClick() {
       this.$emit('click');
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.button-success{
-  color: #67C23A;
+.button-success {
+  color: #67c23a;
 }
-.button-danger{
-  color: #F56C6C;
+.button-danger {
+  color: #f56c6c;
 }
 </style>

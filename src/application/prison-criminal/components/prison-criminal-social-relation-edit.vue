@@ -11,7 +11,7 @@
         label="称谓"
         prop="criminalSocialRelation.appellation">
         <el-input
-        v-model="form.criminalSocialRelation.appellation"/>
+          v-model="form.criminalSocialRelation.appellation"/>
       </el-form-item>
       <el-form-item
         class="w25"

@@ -24,10 +24,12 @@
         </el-select>
         <opt-button
           class="button-search"
+          permission="prison.user.search"
           :loading="searching"
           @click="onSearch">查 询</opt-button>
         <opt-button
           class="button-addInList"
+          permission="prison.user.add"
           @click="onNew">新 增</opt-button>
       </div>
       <el-table
@@ -78,12 +80,14 @@
               v-if="!scope.row.isAdministrator && scope.row.status=='ENABLED'"
               class="button-status"
               type="text"
-              @click="onDisable(scope.row)">禁用</opt-button>
+              @click="onDisable(scope.row)"
+              permission="prison.user.disable">禁用</opt-button>
             <opt-button
               v-if="!scope.row.isAdministrator && scope.row.status=='DISABLED'"
               class="button-status"
               type="text"
-              @click="onEnable(scope.row)">启用</opt-button>
+              @click="onEnable(scope.row)"
+              perimission="prison.user.enable">启用</opt-button>
           </template>
         </el-table-column>
         <el-table-column
@@ -95,19 +99,23 @@
             <opt-button
               v-if="!scope.row.isAdministrator"
               type="text"
-              @click="onSelectRoles(scope.row.id)">分配角色</opt-button>
+              @click="onSelectRoles(scope.row.id)"
+              permission="prison.user.assign-role">分配角色</opt-button>
             <opt-button
               class="button-success"
               type="text"
-              @click="onView(scope.row.id)">查看</opt-button>
+              @click="onView(scope.row.id)"
+              permission="prison.user.view">查看</opt-button>
             <opt-button
               type="text"
-              @click="onEdit(scope.row.id)">修改</opt-button>
+              @click="onEdit(scope.row.id)"
+              permission="prison.user.update">修改</opt-button>
             <opt-button
               class="button-danger"
               v-if="!scope.row.isAdministrator"
               type="text"
-              @click="onDelete(scope.row)">删除</opt-button>
+              @click="onDelete(scope.row)"
+              permission="prison.user.delete">删除</opt-button>
           </template>
         </el-table-column>
       </el-table>
@@ -327,6 +335,18 @@ export default {
         }
       });
     }
+    // periMissionCheck() {
+    //   const token = tokenStorage.getToken();
+    //   let info = jwtDecode(token.access_token);
+    //   console.log(token);
+    //   console.log(info.authorities);
+    //   exports.perimission = (el, value) => {
+    //     if (info.indexOf(value) < 0) {
+    //       el.parentNode.removeChild(el);
+    //       console.log('123456移除BUTTON');
+    //     }
+    //   };
+    // }
   }
 };
 </script>
