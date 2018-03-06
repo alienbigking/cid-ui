@@ -1,6 +1,6 @@
 <template>
   <el-breadcrumb>
-    <el-breadcrumb-item>
+    <el-breadcrumb-item :to="{ path: '/' }">
       <i
         class="iconfont icon-zhuye"
         style="margin-right:5px;"/>主页
