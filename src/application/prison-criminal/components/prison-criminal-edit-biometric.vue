@@ -111,16 +111,16 @@
           @click="onSaveIrisPicture">保 存</el-button>
       </div>
       <el-input
-        v-show="true"
+        v-show="false"
         id="PhotoCurPath"/>
       <el-input
-        v-show="true"
+        v-show="false"
         id="PhotoInfo"/>
       <el-input
-        v-show="true"
+        v-show="false"
         id="leftFeature"/>
       <el-input
-        v-show="true"
+        v-show="false"
         id="rightFeature"/></div>
   </el-form>
 </template>

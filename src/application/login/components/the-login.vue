@@ -107,9 +107,9 @@ export default {
     border: 1px solid #ddd;
     border-radius: 4px;
     background: #fcfcfc;
-    margin: 168px auto;
+    margin: 168px auto 0;
     padding: 36px 20px 16px 0;
-    box-sizing: border-box;
+    // box-sizing: border-box;
   }
 }
 .form-padding {

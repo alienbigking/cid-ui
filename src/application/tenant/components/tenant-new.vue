@@ -66,6 +66,7 @@ export default {
       rules: {
         code: [{ required: true, message: '请输入编号' }, { max: 50, message: '长度在 1 到 50 个字符' }],
         name: [{ required: true, message: '请输入租户名称' }, { max: 100, message: '长度在 100 个字符内' }],
+        status: [{ required: true, message: '请选择状态' }],
         description: [{ max: 1000, message: '长度在 1000 个字符内' }]
       },
       saving: false
