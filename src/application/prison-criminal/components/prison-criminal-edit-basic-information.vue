@@ -243,8 +243,7 @@
         class="w25"
         label="四涉"
         prop="criminal.involvingFour">
-        <el-input
-          v-model="form.criminal.involvingFour"/>
+        <el-input v-model="form.criminal.involvingFour"/>
       </el-form-item>
       <el-form-item
         class="w25"

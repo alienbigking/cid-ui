@@ -10,8 +10,7 @@
         class="w-px180"
         label="罚金单据"
         prop="receiptNumber">
-        <el-input
-          v-model="criminalForfeit.receiptNumber" />
+        <el-input v-model="criminalForfeit.receiptNumber" />
       </el-form-item>
       <el-form-item
         class="w-px180"
