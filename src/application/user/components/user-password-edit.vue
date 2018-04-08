@@ -7,12 +7,6 @@
       :rules="rules"
       ref="form"
       label-position="top">
-      <el-form-item prop="oldPassword">
-        <el-input
-          type="password"
-          placeholder="原始密码"
-          v-model="userPassword.oldPassword" />
-      </el-form-item>
       <el-form-item prop="newPassword">
         <el-input
           :type="showNewPassword?'text':'password'"
@@ -66,7 +60,6 @@ export default {
   computed: {
     rules() {
       return {
-        oldPassword: [{ required: true, message: '密码不能为空' }, { min: 6, message: '密码长度最少6位' }],
         newPassword: [
           { required: true, message: '密码不能为空' },
           { min: 6, message: '密码长度最少6位' },
