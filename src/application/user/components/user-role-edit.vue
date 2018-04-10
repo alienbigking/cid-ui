@@ -1,7 +1,7 @@
 <template>
   <div v-loading="loading">
     <div class="user-role-title user-checkbox-group">
-      <span class="user-name">十一监区</span>
+      <span class="user-name">{{ userName }}</span>
       <el-checkbox
         class="all-select"
         v-model="checkAll"
@@ -39,6 +39,10 @@ export default {
       default: false
     },
     userId: {
+      type: String,
+      default: ''
+    },
+    userName: {
       type: String,
       default: ''
     }

@@ -99,7 +99,7 @@
             <opt-button
               v-if="!scope.row.isAdministrator"
               type="text"
-              @click="onSelectRoles(scope.row.id)"
+              @click="onSelectRoles(scope.row)"
               permission="prison.user.assign-role">分配角色</opt-button>
             <opt-button
               class="button-success"
@@ -134,6 +134,7 @@
       width="450px"
       :visible.sync="editDialogVisible">
       <user-role-edit
+        :user-name="userName"
         :user-id="userId"
         :edit-dialog-visible="editDialogVisible"
         @on-close="editDialogVisible = false"/>
@@ -211,6 +212,7 @@ export default {
       loading: true,
       searching: false,
       editDialogVisible: false,
+      userName: null,
       userId: null,
       deleting: false,
       deleteDialogVisible: false,
@@ -242,8 +244,9 @@ export default {
       this.pagination.page = page - 1;
       this.search();
     },
-    onSelectRoles(id) {
-      this.userId = id;
+    onSelectRoles(row) {
+      this.userName = row.username;
+      this.userId = row.id;
       this.editDialogVisible = true;
     },
     onView(id) {

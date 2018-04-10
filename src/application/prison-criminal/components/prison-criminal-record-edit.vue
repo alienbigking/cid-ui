@@ -168,6 +168,7 @@
         label="刑期日期"
         prop="startEndTime">
         <el-date-picker
+          :unlink-panels="true"
           v-model="form.startEndTime"
           type="daterange"
           range-separator="至"

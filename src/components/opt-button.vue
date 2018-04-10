@@ -1,6 +1,5 @@
 <template>
   <el-button
-    v-if="hasPermission"
     :type="type"
     :loading="loading"
     @click="onClick"><slot /></el-button>
